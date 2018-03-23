@@ -1,0 +1,46 @@
+# start minimal docker image for gradle
+image: gradle:alpine
+
+# No gradle deamon for CI
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/server/.gradle
+
+server_build:
+  stage: build
+  script: 
+    - cd server
+    - gradle --build-cache assemble
+  cache:
+    key: "$CI_PIPELINE_ID/server"
+    policy: push
+    paths:
+      - build
+      - .gradle
+
+server_tests:
+  stage: test
+  script: 
+    - cd server
+    - gradle test
+  cache:
+    key: "$CI_PIPELINE_ID/server"
+    policy: pull
+    paths:
+      - build
+      - .gradle
+
+server_QA:
+  stage: test
+  script: 
+    - cd server
+    - gradle check
+  cache:
+    key: "$CI_PIPELINE_ID/server"
+    policy: pull
+    paths:
+      - build
+      - .gradle
+
