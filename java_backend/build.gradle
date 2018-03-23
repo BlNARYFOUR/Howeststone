@@ -21,4 +21,3 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'com.mashape.unirest:unirest-java:1.4.9'
 }
-
