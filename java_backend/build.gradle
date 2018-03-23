@@ -1,0 +1,24 @@
+plugins {
+    id 'ru.vyarus.quality' version '2.4.0'
+}
+
+group 'be.howest.TI.project-I.group-XX'
+version '0.1-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile group: 'org.tinylog', name: 'slf4j-binding', version: '1.3.4'
+    compile 'io.javalin:javalin:1.4.1'
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.mashape.unirest:unirest-java:1.4.9'
+}
+
