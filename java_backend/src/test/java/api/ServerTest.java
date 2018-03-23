@@ -11,6 +11,7 @@ public class ServerTest {
     public static void onlyOnce() {
         new Server(4242).start();
     }
+
     @Test
     public void testSomeAppMethod() {
         assertTrue("is this 'true'?", false);

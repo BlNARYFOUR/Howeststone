@@ -36,7 +36,7 @@ server_QA:
   stage: test
   script:
     - cd java_backend
-    - gradle check
+    - gradle check -x test
   cache:
     key: "$CI_PIPELINE_ID-server"
     policy: pull
