@@ -11,10 +11,10 @@ before_script:
 server_build:
   stage: build
   script:
-    - cd server
+    - cd java_backend
     - gradle --build-cache assemble
   cache:
-    key: "$CI_PIPELINE_ID/server"
+    key: "$CI_PIPELINE_ID-server"
     policy: push
     paths:
       - build
@@ -23,10 +23,10 @@ server_build:
 server_tests:
   stage: test
   script:
-    - cd server
+    - cd java_backend
     - gradle test
   cache:
-    key: "$CI_PIPELINE_ID/server"
+    key: "$CI_PIPELINE_ID-server"
     policy: pull
     paths:
       - build
@@ -35,12 +35,12 @@ server_tests:
 server_QA:
   stage: test
   script:
-    - cd server
+    - cd java_backend
     - gradle check
   cache:
-    key: "$CI_PIPELINE_ID/server"
+    key: "$CI_PIPELINE_ID-server"
     policy: pull
     paths:
-      - build
+      - buile
       - .gradle
 
