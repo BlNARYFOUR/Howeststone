@@ -1,11 +1,12 @@
 # start minimal docker image for gradle
-image: gradle:alpine
+image: gradle:latest
 
 # No gradle deamon for CI
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
 before_script:
+  - apt-get update -qy && apt-get upgrade
   - export GRADLE_USER_HOME=`pwd`/java_backend/.gradle
 
 server_build:
@@ -19,6 +20,12 @@ server_build:
     paths:
       - build
       - .gradle
+
+webui_build:
+  stage: test
+  script:
+    - apt-get install curl python-software-properties
+    - curl -sL https://deb.nodesource.com/setup_9.x | bash -
 
 server_tests:
   stage: test
