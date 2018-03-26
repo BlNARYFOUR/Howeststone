@@ -18,9 +18,9 @@ server:build:
     - cd java_backend
     - gradle --build-cache assemble
   cache:
-  key: "$CI_PIPELINE_ID-server"
-  policy: push
-  paths:
+    key: "$CI_PIPELINE_ID-server"
+    policy: push
+    paths:
       - build
       - .gradle
 
@@ -28,7 +28,7 @@ webui:build:
   image: node:alpine
   stage: test
   script:
-    - apk add --update nodejs nodejs-npm
+    - apk add --update nodejs nodejs-npm openjdk8
     - npm install --save vnu-jar
     - cd web_frontend
     - java -jar $(npm root)/vnu-jar/build/dist/vnu.jar index.html
