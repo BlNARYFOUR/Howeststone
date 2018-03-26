@@ -6,15 +6,9 @@ before_script:
  - export GRADLE_USER_HOME=`pwd`/java_backend/.gradle
 
 server:build:
-  image: alpine:latest
+  image: gradle:alpine
   stage: build
   script:
-    - apk update && apk add --update libstdc++
-    - wget  https://services.gradle.org/distributions/gradle-4.6-bin.zip && \
-      unzip gradle-4.6-bin.zip && \
-      rm -f gradle-4.6-bin.zip && \
-      ln -s gradle-4.6 gradle && \
-      echo -ne "- with Gradle 4.6\n" >> /root/.built
     - cd java_backend
     - gradle --build-cache assemble
   cache:
