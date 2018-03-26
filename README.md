@@ -6,7 +6,7 @@
 4. change to your repository:
   * `cd howeststone`
   * `git remote rename origin old-origin`
-  * `git remote add origin git@172.21.22.52:TI/Project-I/2018-Group-<xx>.git`
+  * `git remote add origin https://172.21.22.52/TI/Project-I/2018-Group-<xx>.git`
   * `git push -u origin --all`
   * `git push -u origin --tags`
 4. start add files:
