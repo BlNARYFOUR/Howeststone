@@ -1,15 +1,14 @@
 # start minimal docker image for gradle
-image: gradle:latest
 
 # No gradle deamon for CI
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
 before_script:
-  - apt-get update -qy && apt-get upgrade
   - export GRADLE_USER_HOME=`pwd`/java_backend/.gradle
 
-server_build:
+server:build:
+  image: gradle:alpine
   stage: build
   script:
     - cd java_backend
@@ -21,13 +20,16 @@ server_build:
       - build
       - .gradle
 
-webui_build:
+webui:build:
+  image: node:alpine
   stage: test
   script:
-    - apt-get install curl python-software-properties
-    - curl -sL https://deb.nodesource.com/setup_9.x | bash -
+    - npm install --save vnu-jar
+    - cd web_frontend
+    - java -jar $(npm root)/vnu-jar/build/dist/vnu.jar index.html
 
-server_tests:
+server:tests:
+  image: gradle:alpine
   stage: test
   script:
     - cd java_backend
@@ -39,7 +41,8 @@ server_tests:
       - build
       - .gradle
 
-server_QA:
+server:QA:
+  image: gradle:alpine
   stage: test
   script:
     - cd java_backend
