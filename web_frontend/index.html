@@ -1,7 +1,99 @@
-<html>
-  <head>
-  </head>
-  <body>
-    got it.
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
+  <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
+  <meta name="author" content="3BEES&ME">
+  <title>Title</title>
+</head>
+<body>
+<div id="Deckbuilder">
+  <header>
+    <div id="Hero"><a href="#">Mage</a>
+      <a href="#">Paladin</a>
+    </div>
+    <div id="Quickfilter">
+      <a href="#">Full Deck</a>
+      <a href="#">Minions</a>
+      <a href="#">Spells</a>
+      <a href="#">Weapons</a>
+    </div>
+    <ul id="Deck"><li>*deck*</li></ul>
+    <a id="Firstadd" href="#">+</a>
+    <a id="Save" href="#">SAVE</a>
+    <p id="CardAmount">/30</p>
+  </header>
+  <main>
+    <ul><li>*cards*</li></ul>
+    <ul><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
+  </main>
+  <aside>
+    <form>
+      <input type="text" placeholder="search"/>
+      <label for="sort">sort</label>
+      <select id="sort">
+        <option value="alfaz">Alfabetic (a->z)</option>
+        <option value="alfza">Alfabetic (z->a)</option>
+        <option value="mana07">Mana cost (0->7+)</option>
+        <option value="mana70">Mana cost (7+->0)</option>
+      </select>
+      <fieldset>
+        <legend>filter</legend>
+
+        <label>Hero specific cards</label>
+        <input type="radio" name="specificCards" value="All" id="All" checked/>
+        <label for="All">All Useable Cards</label>
+        <input type="radio" name="specificCards" value="Mage" id="Mage"/>
+        <label for="Mage">Mage</label>
+        <input type="radio" name="specificCards" value="Neutral" id="Paladin"/>
+        <label for="Paladin">Paladin</label>
+        <input type="radio" name="specificCards" value="Neutral" id="Neutral"/>
+        <label for="Neutral">Neutral</label>
+        <br>
+        <label>Card Types</label>
+        <input type="radio" name="cardTypes" value="Minions" id="Minions"/>
+        <label for="Minions">Minions</label>
+        <input type="radio" name="cardTypes" value="Weapons" id="Weapons"/>
+        <label for="Weapons">Weapons</label>
+        <input type="radio" name="cardTypes" value="Spells" id="Spells"/>
+        <label for="Spells">Spells</label>
+        <br>
+        <label>Mana</label>
+        <input type="radio" name="Mana" value="0" id="0"/>
+        <label for="0">0 Mana</label>
+        <input type="radio" name="Mana" value="1" id="1"/>
+        <label for="1">1 Mana</label>
+        <input type="radio" name="Mana" value="2" id="2"/>
+        <label for="2">2 Mana</label>
+        <input type="radio" name="Mana" value="3" id="3"/>
+        <label for="3">3 Mana</label>
+        <input type="radio" name="Mana" value="4" id="4" />
+        <label for="4">4 Mana</label>
+        <input type="radio" name="Mana" value="5" id="5" />
+        <label for="5">5 Mana</label>
+        <input type="radio" name="Mana" value="6" id="6"/>
+        <label for="6">6 Mana</label>
+        <input type="radio" name="Mana" value="7" id="7+"/>
+        <label for="7+">7+ Mana</label>
+        <br>
+
+        <label>Card Rarity</label>
+        <input type="radio" name="cardRarity" value="Free" id="Free"/>
+        <label for="Free">Free</label>
+        <input type="radio" name="cardRarity" value="Common" id="Common"/>
+        <label for="Common">Common</label>
+        <input type="radio" name="cardRarity" value="Rare" id="Rare"/>
+        <label for="Rare">Rare</label>
+        <input type="radio" name="cardRarity" value="Epic" id="Epic"/>
+        <label for="Epic">Epic</label>
+        <input type="radio" name="cardRarity" value="Legendary" id="Legendary"/>
+        <label for="Legendary">Legendary</label>
+      </fieldset>
+    </form>
+  </aside>
+  <a href="#">Back</a>
+  <script src="assets/js/main.js"></script>
+</div>
+</body>
 </html>
