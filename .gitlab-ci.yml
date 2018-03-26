@@ -1,22 +1,26 @@
-# start minimal docker image for gradle
-
 # No gradle deamon for CI
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
 before_script:
-  - export GRADLE_USER_HOME=`pwd`/java_backend/.gradle
+ - export GRADLE_USER_HOME=`pwd`/java_backend/.gradle
 
 server:build:
-  image: gradle:alpine
+  image: alpine:latest
   stage: build
   script:
+    - apk update && apk add --update libstdc++
+    - wget  https://services.gradle.org/distributions/gradle-4.6-bin.zip && \
+      unzip gradle-4.6-bin.zip && \
+      rm -f gradle-4.6-bin.zip && \
+      ln -s gradle-4.6 gradle && \
+      echo -ne "- with Gradle 4.6\n" >> /root/.built
     - cd java_backend
     - gradle --build-cache assemble
   cache:
-    key: "$CI_PIPELINE_ID-server"
-    policy: push
-    paths:
+  key: "$CI_PIPELINE_ID-server"
+  policy: push
+  paths:
       - build
       - .gradle
 
@@ -24,6 +28,7 @@ webui:build:
   image: node:alpine
   stage: test
   script:
+    - apk add --update nodejs nodejs-npm
     - npm install --save vnu-jar
     - cd web_frontend
     - java -jar $(npm root)/vnu-jar/build/dist/vnu.jar index.html
