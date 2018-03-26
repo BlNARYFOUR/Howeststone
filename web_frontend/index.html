@@ -8,21 +8,21 @@
   <title>Title</title>
 </head>
 <body>
-<div id="Deckbuilder">
+<div id="deckbuilder" class="hidden">
   <header>
-    <div id="Hero"><a href="#">Mage</a>
+    <div id="hero"><a href="#">Mage</a>
       <a href="#">Paladin</a>
     </div>
-    <div id="Quickfilter">
+    <div id="quickfilter">
       <a href="#">Full Deck</a>
       <a href="#">Minions</a>
       <a href="#">Spells</a>
       <a href="#">Weapons</a>
     </div>
-    <ul id="Deck"><li>*deck*</li></ul>
-    <a id="Firstadd" href="#">+</a>
-    <a id="Save" href="#">SAVE</a>
-    <p id="CardAmount">/30</p>
+    <ul id="deck"><li>*deck*</li></ul>
+    <a id="firstadd" href="#">+</a>
+    <a id="save" href="#">SAVE</a>
+    <p id="cardAmount">/30</p>
   </header>
   <main>
     <ul><li>*cards*</li></ul>
@@ -42,22 +42,22 @@
         <legend>filter</legend>
 
         <label>Hero specific cards</label>
-        <input type="radio" name="specificCards" value="All" id="All" checked/>
-        <label for="All">All Useable Cards</label>
-        <input type="radio" name="specificCards" value="Mage" id="Mage"/>
-        <label for="Mage">Mage</label>
-        <input type="radio" name="specificCards" value="Neutral" id="Paladin"/>
-        <label for="Paladin">Paladin</label>
-        <input type="radio" name="specificCards" value="Neutral" id="Neutral"/>
-        <label for="Neutral">Neutral</label>
+        <input type="radio" name="specificCards" value="All" id="all" checked/>
+        <label for="all">All Useable Cards</label>
+        <input type="radio" name="specificCards" value="Mage" id="mage"/>
+        <label for="mage">Mage</label>
+        <input type="radio" name="specificCards" value="Neutral" id="paladin"/>
+        <label for="paladin">Paladin</label>
+        <input type="radio" name="specificCards" value="Neutral" id="neutral"/>
+        <label for="neutral">Neutral</label>
         <br>
         <label>Card Types</label>
-        <input type="radio" name="cardTypes" value="Minions" id="Minions"/>
-        <label for="Minions">Minions</label>
-        <input type="radio" name="cardTypes" value="Weapons" id="Weapons"/>
-        <label for="Weapons">Weapons</label>
-        <input type="radio" name="cardTypes" value="Spells" id="Spells"/>
-        <label for="Spells">Spells</label>
+        <input type="radio" name="cardTypes" value="Minions" id="minions"/>
+        <label for="minions">Minions</label>
+        <input type="radio" name="cardTypes" value="Weapons" id="weapons"/>
+        <label for="weapons">Weapons</label>
+        <input type="radio" name="cardTypes" value="Spells" id="spells"/>
+        <label for="spells">Spells</label>
         <br>
         <label>Mana</label>
         <input type="radio" name="Mana" value="0" id="0"/>
@@ -79,16 +79,16 @@
         <br>
 
         <label>Card Rarity</label>
-        <input type="radio" name="cardRarity" value="Free" id="Free"/>
-        <label for="Free">Free</label>
-        <input type="radio" name="cardRarity" value="Common" id="Common"/>
-        <label for="Common">Common</label>
-        <input type="radio" name="cardRarity" value="Rare" id="Rare"/>
-        <label for="Rare">Rare</label>
-        <input type="radio" name="cardRarity" value="Epic" id="Epic"/>
-        <label for="Epic">Epic</label>
-        <input type="radio" name="cardRarity" value="Legendary" id="Legendary"/>
-        <label for="Legendary">Legendary</label>
+        <input type="radio" name="cardRarity" value="Free" id="free"/>
+        <label for="free">Free</label>
+        <input type="radio" name="cardRarity" value="Common" id="common"/>
+        <label for="common">Common</label>
+        <input type="radio" name="cardRarity" value="Rare" id="rare"/>
+        <label for="rare">Rare</label>
+        <input type="radio" name="cardRarity" value="Epic" id="epic"/>
+        <label for="epic">Epic</label>
+        <input type="radio" name="cardRarity" value="Legendary" id="legendary"/>
+        <label for="legendary">Legendary</label>
       </fieldset>
     </form>
   </aside>
