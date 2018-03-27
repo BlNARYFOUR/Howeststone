@@ -33,7 +33,7 @@
 
 }
 
-#deckPicker #decks {
+#deckPicker #yourdecks {
     margin-left: 21.5%;
     margin-top: 10%;
     width: 42.5%;
@@ -44,7 +44,7 @@
     align-content: flex-end;
 }
 
-#deckPicker #decks div {
+#deckPicker #yourdecks div {
     width: 33.33%;
     margin-bottom: 27%;
 }
@@ -67,14 +67,14 @@
 
 }
 
-#heroPicker #continueKnop, #deckPicker #playGame {
+#heroPicker #gotoDeck, #deckPicker #playGame {
    position: absolute;
     bottom: 17%;
     right: 22%;
 
 }
 
-#heroPicker #gotoHome, #deckPicker #backKnop{
+#heroPicker #gotoHome, #deckPicker #gotoHero{
     display: block;
     position: absolute;
     bottom: 0;
@@ -86,13 +86,13 @@ body, html {
     height: 100%;
 }
 
-#deckPicker #decks div a, #heroPicker #heroes div a, #heroPicker img{
+#deckPicker #yourdecks div a, #heroPicker #heroes div a, #heroPicker img{
     width: 74%;
 
 
 }
 
-#heroPicker #gotoHome, #deckPicker #backKnop,#heroPicker #continueKnop, #deckPicker #playGame {
+#heroPicker #gotoHome, #deckPicker #gotoHero,#heroPicker #gotoDeck, #deckPicker #playGame {
     font-family: hearthstoneFont, Serif;
     text-decoration: none;
     color: RGB(80 60 31);
