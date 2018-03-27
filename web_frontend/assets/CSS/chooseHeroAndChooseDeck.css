@@ -1,8 +1,3 @@
-@font-face {
-    font-family: hearthstoneFont;
-    src: url(../fonts/OPTIBelwe-Medium.otf)
-}
-
 #heroPicker {
     background: url("../images/Hero picker zonder knoppen.png");
     background-position: center;
@@ -109,13 +104,7 @@ body, html {
     padding: 3%;
 }
 
-a {
-    background-image: none;
-    font-family: hearthstoneFont, Serif;
-    text-decoration: none;
-    color: #af8829;
 
-}
 
 
 

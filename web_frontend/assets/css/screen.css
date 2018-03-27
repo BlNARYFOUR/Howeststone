@@ -1,3 +1,16 @@
+@font-face {
+    font-family: hearthstoneFont;
+    src: url(../fonts/OPTIBelwe-Medium.otf)
+}
+
 .hidden {
     display: none !important;
+}
+
+a {
+    background-image: none;
+    font-family: hearthstoneFont, serif;
+    text-decoration: none;
+    color: #af8829;
+
 }
