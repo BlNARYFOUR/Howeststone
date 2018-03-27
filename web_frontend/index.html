@@ -6,10 +6,74 @@
   <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/webbuilder.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
+  <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css">
   <meta name="author" content="3BEES&ME">
   <title>Title</title>
 </head>
 <body>
+<div id="heroPicker" class="hidden">
+    <div id="heroes">
+        <div><a href="#">Mage</a></div>
+
+        <div><a href="#">Paladin</a></div>
+
+        <div><a href="#">Warrior</a></div>
+
+        <div><a href="#">Pries</a></div>
+
+        <div><a href="#">Druid</a></div>
+
+        <div><a href="#">Hunter</a></div>
+
+        <div><a href="#">Shaman</a></div>
+
+        <div><a href="#">Rogue</a></div>
+
+        <div><a href="#">Warlock</a></div>
+    </div>
+
+
+    <div id="selectedHero"><img src="images/Jaina_Proudmoore(320).png"/></div>
+
+    <a href="#" id="continueKnop">Continue</a>
+
+    <a href="#" id="backKnop">  Back  </a>
+
+</div>
+<!--
+<div id="deckPicker">
+    <div id="decks">
+
+        <div><a href="#">t t t t t t t t t t </a></div>
+
+        <div><a href="#">Deck 2</a></div>
+
+        <div><a href="#">Deck 3</a></div>
+
+        <div><a href="#">Deck 4</a></div>
+
+        <div><a href="#">Deck 5</a></div>
+
+        <div><a href="#">Deck 6</a></div>
+
+        <div><a href="#">Deck 7</a></div>
+
+        <div><a href="#">Deck 7</a></div>
+
+        <div id="addDeck"><a href="#">Add Deck</a></div>
+    </div>
+
+
+    <div id="SelectedDeck"></div>
+
+    <a href="#" id="playGame">Play</a>
+
+    <a href="#" id="backKnop">Back</a>
+
+</div>
+-->
+    
+    
 <div id="deckbuilder" class="hidden">
   <header>
     <div id="hero"><a href="#">Mage</a>
@@ -103,7 +167,7 @@
   </figure>
 </div>
 
-<div id="mainMenu" class="hidden">
+<div id="mainMenu" class="">
   <ul>
     <li><a href="#" id="playTheGame" class="navItem MainMenu">Play the game</a></li>
     <li><a href="#" id="_deckBuilder" class="navItem MainMenu">Deck builder</a></li>
