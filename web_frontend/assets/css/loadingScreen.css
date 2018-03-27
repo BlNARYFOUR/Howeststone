@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+.hidden {
+    display: none !important;
+}
+
+>>>>>>> HTML_loadingScreen
 #loadingScreen {
     display: block;
     width: 100%;
