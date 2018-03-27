@@ -1,0 +1,190 @@
+body{
+    position: relative;
+    font-family: sans-serif;
+    font-size: 1rem;
+    color: black;
+    background-color: white;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+main {
+    width: 77vw;
+    position: absolute;
+    top: 35vh;
+    right: 0;
+}
+header{
+    height: 33.5vh;
+    width: 77vw;
+    right: 0;
+    position: absolute;
+}
+aside{
+    position: absolute;
+    width: 22.5vw;
+}
+form{
+    width: 22.5vw;
+    position: absolute;
+    top: 10vh;
+}
+#firstadd {
+    text-align: center;
+    line-height: 5vh;
+    position: absolute;
+    top: 3vh;
+    right: 10vw;
+    border: 1px black solid;
+    border-radius: 100%;
+    height: 5vh;
+    width: 5vh;
+}
+#save {
+    text-align: center;
+    line-height: 20vh;
+    position: absolute;
+    top: 14vh;
+    left: 55vw;
+    height: 20vh;
+    width: 22.5vw;
+    border: 1px black solid;
+}
+
+#hero{
+    padding-top: 2vh;
+    line-height: 5vh;
+    text-align: center;
+    word-spacing: 10vh;
+}
+#hero a{
+    font-size: 2rem;
+    border: 1px black solid;
+    border-radius: 100%;
+    padding: 1%;
+}
+#quickfilter{
+    padding-top: 2vh;
+    padding-bottom: 1vh;
+}
+
+#quickfilter a, #cardAmount{
+    display: inline-block;
+    padding: 5px;
+    font-size: 0.7rem;
+    border: 1px black solid;
+}
+#deck{
+    margin-top: 0.1px;
+    width: 55vw;
+    border: 1px black solid;
+    height: 20vh;
+}
+
+#cards {
+    border: 1px black solid;
+    height: 54vh;
+}
+
+#decks{
+    height: 9.5vh;
+    border: 1px black solid;
+    display: flex;
+    line-height: 9.5vh;
+}
+
+#decks li{
+    line-height: 4vh;
+    border: 1px black solid;
+    width: 11vw;
+    text-align: center;
+}
+#search{
+    width: 11vw;
+}
+/* Hero specific cards*/
+#firstFilter{
+    position: absolute;
+    left: 0;
+    width: 16vw;
+}
+#firstFilter>label{
+    display: block;
+}
+#all, #mage, #paladin, #neutral{
+    display: inline;
+}
+#all+label, #mage+label, #paladin+label, #neutral+label{
+    display: inline-block;
+    width: 13vw;
+}
+/* Card Types */
+#secondFilter{
+    position: absolute;
+    top: 13vh;
+    right: 0;
+    width: 10vw;
+}
+#secondFilter>label{
+    display: block;
+}
+#minions, #weapons, #spells{
+    display: inline;
+}
+#minions+label, #weapons+label, #spells+label{
+    display: inline-block;
+    width: 7vw;
+}
+/* Mana */
+#thirdFilter{
+    position: absolute;
+    top: 21vh;
+    left: 0;
+    width: 14vw;
+}
+#thirdFilter>label{
+    display: block;
+}
+#zero+label , #one+label, #two+label ,#three+label ,#four+label ,#five+label ,#six+label , #seven+label{
+    display: inline-block;
+    width: 11vw;
+}
+#zero , #one, #two ,#three ,#four ,#five ,#six , #seven{
+    display: inline;
+}
+/* Card Rarity */
+#fourthFilter{
+    position: absolute;
+    right: 0;
+    top: 26vh;
+    width: 10vw;
+}
+#fourthFilter>label{
+    display: block;
+}
+#free, #common, #rare, #epic, #legendary{
+    display: inline;
+}
+#free+label, #common+label, #rare+label, #epic+label, #legendary+label{
+    display: inline-block;
+    width: 7vw;
+}
+
+#sortlabel{
+    position: absolute;
+    top: 10vh;
+    left: 0;
+}
+#sort{
+    width: 17vw;
+    position: absolute;
+    top: 10vh;
+    right: 0;
+}
+fieldset{
+    height: 60vh;
+    width: 22.5vw;
+    position: absolute;
+    top: 25vh;
+}
