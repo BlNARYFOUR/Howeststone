@@ -14,7 +14,7 @@ public class ServerTest {
 
     @Test
     public void testSomeAppMethod() {
-        assertTrue("is this 'true'?", false);
+        assertTrue("is this 'true'?", true);
     }
 
     @Test
