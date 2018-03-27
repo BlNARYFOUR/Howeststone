@@ -1,0 +1,124 @@
+@font-face {
+    font-family: hearthstoneFont;
+    src: url(../fonts/OPTIBelwe-Medium.otf)
+}
+
+#heroPicker {
+    background: url("../images/Hero picker zonder knoppen.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+
+}
+
+#deckPicker {
+    background-image: url("../images/Deck Picker zonder knoppen.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#heroes {
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: flex-end;
+    margin-left: 21.5%;
+    margin-top: 10%;
+    width: 42.5%;
+
+
+}
+
+#decks {
+    margin-left: 21.5%;
+    margin-top: 10%;
+    width: 42.5%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: flex-end;
+}
+
+#decks div {
+    width: 33.33%;
+    margin-bottom: 27%;
+}
+
+
+
+#heroes div {
+    width: 33.33%;
+    margin-bottom: 27%;
+}
+
+#selectedHero {
+    display: block;
+    position: absolute;
+    bottom: 24%;
+    right: 10.5%;
+    width: 25%;
+
+
+
+}
+
+#continueKnop, #playGame {
+   position: absolute;
+    bottom: 17%;
+    right: 22%;
+
+}
+
+#backKnop {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 17%;
+
+}
+
+body, html {
+    height: 100%;
+}
+
+#decks div a, #heroes div a, img{
+    width: 74%;
+
+
+}
+
+#backKnop,#continueKnop, #playGame {
+    font-family: hearthstoneFont, Serif;
+    text-decoration: none;
+    color: RGB(80 60 31);
+    font-weight: bold;
+    background-image: url("../images/Knop.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    padding: 3%;
+}
+
+a {
+    background-image: none;
+    font-family: hearthstoneFont, Serif;
+    text-decoration: none;
+    color: #af8829;
+
+}
+
+
+
+
+
+
