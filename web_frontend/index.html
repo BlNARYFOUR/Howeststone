@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
-  <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
+  <link href="assets/css/webbuilder.css" rel="stylesheet" type="text/css"/>
   <meta name="author" content="3BEES&ME">
   <title>Title</title>
 </head>
@@ -18,20 +18,20 @@
       <a href="#">Minions</a>
       <a href="#">Spells</a>
       <a href="#">Weapons</a>
+      <p id="cardAmount">30/30</p>
     </div>
     <ul id="deck"><li>*deck*</li></ul>
     <a id="firstadd" href="#">+</a>
     <a id="save" href="#">SAVE</a>
-    <p id="cardAmount">/30</p>
   </header>
   <main>
-    <ul><li>*cards*</li></ul>
-    <ul><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
+    <ul id="cards"><li>*cards*</li></ul>
+    <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
   </main>
   <aside>
     <form>
-      <input type="text" placeholder="search"/>
-      <label for="sort">sort</label>
+      <input id="search" type="text" placeholder="search"/>
+      <label id="sortlabel" for="sort">sort</label>
       <select id="sort">
         <option value="alfaz">Alfabetic (a->z)</option>
         <option value="alfza">Alfabetic (z->a)</option>
@@ -41,59 +41,59 @@
       <fieldset>
         <legend>filter</legend>
 
-        <label>Hero specific cards</label>
-        <input type="radio" name="specificCards" value="All" id="all" checked/>
-        <label for="all">All Useable Cards</label>
-        <input type="radio" name="specificCards" value="Mage" id="mage"/>
-        <label for="mage">Mage</label>
-        <input type="radio" name="specificCards" value="Neutral" id="paladin"/>
-        <label for="paladin">Paladin</label>
-        <input type="radio" name="specificCards" value="Neutral" id="neutral"/>
-        <label for="neutral">Neutral</label>
-        <br>
-        <label>Card Types</label>
-        <input type="radio" name="cardTypes" value="Minions" id="minions"/>
-        <label for="minions">Minions</label>
-        <input type="radio" name="cardTypes" value="Weapons" id="weapons"/>
-        <label for="weapons">Weapons</label>
-        <input type="radio" name="cardTypes" value="Spells" id="spells"/>
-        <label for="spells">Spells</label>
-        <br>
-        <label>Mana</label>
-        <input type="radio" name="Mana" value="0" id="0"/>
-        <label for="0">0 Mana</label>
-        <input type="radio" name="Mana" value="1" id="1"/>
-        <label for="1">1 Mana</label>
-        <input type="radio" name="Mana" value="2" id="2"/>
-        <label for="2">2 Mana</label>
-        <input type="radio" name="Mana" value="3" id="3"/>
-        <label for="3">3 Mana</label>
-        <input type="radio" name="Mana" value="4" id="4" />
-        <label for="4">4 Mana</label>
-        <input type="radio" name="Mana" value="5" id="5" />
-        <label for="5">5 Mana</label>
-        <input type="radio" name="Mana" value="6" id="6"/>
-        <label for="6">6 Mana</label>
-        <input type="radio" name="Mana" value="7" id="7+"/>
-        <label for="7+">7+ Mana</label>
-        <br>
+        <div id="firstFilter"><label>Hero specific cards</label>
+          <input type="radio" name="specificCards" value="All" id="all" checked/>
+          <label for="all">All Useable Cards</label>
+          <input type="radio" name="specificCards" value="Mage" id="mage"/>
+          <label for="mage">Mage</label>
+          <input type="radio" name="specificCards" value="Neutral" id="paladin"/>
+          <label for="paladin">Paladin</label>
+          <input type="radio" name="specificCards" value="Neutral" id="neutral"/>
+          <label for="neutral">Neutral</label></div>
 
-        <label>Card Rarity</label>
-        <input type="radio" name="cardRarity" value="Free" id="free"/>
-        <label for="free">Free</label>
-        <input type="radio" name="cardRarity" value="Common" id="common"/>
-        <label for="common">Common</label>
-        <input type="radio" name="cardRarity" value="Rare" id="rare"/>
-        <label for="rare">Rare</label>
-        <input type="radio" name="cardRarity" value="Epic" id="epic"/>
-        <label for="epic">Epic</label>
-        <input type="radio" name="cardRarity" value="Legendary" id="legendary"/>
-        <label for="legendary">Legendary</label>
+        <div id="secondFilter"><label>Card Types</label>
+          <input type="radio" name="cardTypes" value="Minions" id="minions"/>
+          <label for="minions">Minions</label>
+          <input type="radio" name="cardTypes" value="Weapons" id="weapons"/>
+          <label for="weapons">Weapons</label>
+          <input type="radio" name="cardTypes" value="Spells" id="spells"/>
+          <label for="spells">Spells</label></div>
+
+        <div id="thirdFilter"><label>Mana</label>
+          <input type="radio" name="Mana" value="zero" id="zero"/>
+          <label for="zero">0 Mana</label>
+          <input type="radio" name="Mana" value="one" id="one"/>
+          <label for="one">1 Mana</label>
+          <input type="radio" name="Mana" value="two" id="two"/>
+          <label for="two">2 Mana</label>
+          <input type="radio" name="Mana" value="three" id="three"/>
+          <label for="three">3 Mana</label>
+          <input type="radio" name="Mana" value="four" id="four" />
+          <label for="four">4 Mana</label>
+          <input type="radio" name="Mana" value="five" id="five" />
+          <label for="five">5 Mana</label>
+          <input type="radio" name="Mana" value="six" id="six"/>
+          <label for="six">6 Mana</label>
+          <input type="radio" name="Mana" value="seven" id="seven"/>
+          <label for="seven">7+ Mana</label></div>
+
+
+        <div id="fourthFilter"><label>Card Rarity</label>
+          <input type="radio" name="cardRarity" value="Free" id="free"/>
+          <label for="free">Free</label>
+          <input type="radio" name="cardRarity" value="Common" id="common"/>
+          <label for="common">Common</label>
+          <input type="radio" name="cardRarity" value="Rare" id="rare"/>
+          <label for="rare">Rare</label>
+          <input type="radio" name="cardRarity" value="Epic" id="epic"/>
+          <label for="epic">Epic</label>
+          <input type="radio" name="cardRarity" value="Legendary" id="legendary"/>
+          <label for="legendary">Legendary</label></div>
       </fieldset>
     </form>
   </aside>
   <a href="#">Back</a>
-  <script src="assets/js/main.js"></script>
 </div>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
