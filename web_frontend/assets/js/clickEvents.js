@@ -19,7 +19,7 @@ function gotoHome() {
 }
 
 function gotoPlay() {
-    setTimeout(goto, 3000);
+    setTimeout(goto, 4800);     // This should be shown while loading ;)
     startLoadingScreen();
 
     function goto() {
