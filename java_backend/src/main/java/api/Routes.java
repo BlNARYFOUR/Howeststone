@@ -10,7 +10,7 @@ class Routes {
     }
 
     private void handleRoot(final Context context) {
-        context.result("Hey you");
+        context.result("Hello you");
     }
 
 }
