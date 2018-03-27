@@ -25,20 +25,26 @@
 
 #mainMenu li {
     display: block;
-    line-height: 2vh;
+    height: 6vh;
+    line-height: 5.5vh;
     width: 10vw;
     vertical-align: middle;
     margin-top: 6vh;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
-    background-color: rgba(0,0,0,0.4);
+    border: thin hidden;
 }
 
 #mainMenu ul li:first-of-type {
-    margin-top: 4.4vh;
-    width: 33vh;
-    line-height: 6vh;
+    margin-top: 5vh;
+    width: 30vh;
+    border-radius: 17% 17% 0 0 / 100% 100% 0 0;
+}
+
+#mainMenu ul li:first-of-type:hover {
+    background: url("../media/button1Hover.png") right 40% no-repeat;
+    background-size: 98% 65%;
 }
 
 #mainMenu li:nth-of-type(2) {
