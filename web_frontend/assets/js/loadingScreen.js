@@ -7,6 +7,17 @@ function init(e) {
 }
 
 function startLoadingScreen() {
-    document.querySelector("#loadingScreen").classList.toggle("hidden");
-    document.querySelector("#loadingScreen figure").classList.add("fade");
+    document.querySelector("#loadingScreen").classList.remove("hidden");
+    setTimeout(fade, 10);   // Without this, the fade would not activate
+    function fade() {
+        document.querySelector("#loadingScreen figure").classList.add("fade");
+    }
+}
+
+function stopLoadingScreen() {
+    document.querySelector("#loadingScreen").classList.add("hidden");
+    setTimeout(fade, 10);   // Without this, the fade would not activate
+    function fade() {
+        document.querySelector("#loadingScreen figure").classList.remove("fade");
+    }
 }

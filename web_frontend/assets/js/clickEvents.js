@@ -19,8 +19,14 @@ function gotoHome() {
 }
 
 function gotoPlay() {
-    document.getElementById('mainMenu').className = "hidden";
-    document.getElementById('heroPicker').className = "";
+    setTimeout(goto, 3000);
+    startLoadingScreen();
+
+    function goto() {
+        stopLoadingScreen();
+        document.getElementById('mainMenu').className = "hidden";
+        document.getElementById('heroPicker').className = "";
+    }
 }
 
 function gotoDeck() {
