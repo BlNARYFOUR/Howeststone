@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
-  <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css">
+  <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/webbuilder.css" rel="stylesheet" type="text/css"/>
-  <meta name="author" content="3BEESME">
+  <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
+  <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css">
+  <meta name="author" content="3BEES&ME">
   <title>Title</title>
 </head>
 <body>
-<div id="heroPicker">
+<div id="heroPicker" class="hidden">
     <div id="heroes">
         <div><a href="#">Mage</a></div>
 
@@ -159,13 +161,13 @@
   <a href="#">Back</a>
 </div>
 
-<div id="loadingScreen" class="">
+<div id="loadingScreen" class="hidden">
   <figure>
     <img src="images/loadingScreen.gif" alt="loadingScreenIcon" title="loadingScreenIcon"/>
   </figure>
 </div>
 
-<div id="mainMenu" class="hidden">
+<div id="mainMenu" class="">
   <ul>
     <li><a href="#" id="playTheGame" class="navItem MainMenu">Play the game</a></li>
     <li><a href="#" id="_deckBuilder" class="navItem MainMenu">Deck builder</a></li>
