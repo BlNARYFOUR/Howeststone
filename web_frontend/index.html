@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
+  <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/webbuilder.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css">
@@ -161,19 +162,21 @@
   <a href="#">Back</a>
 </div>
 
+<div id="mainMenu" class="">
+  <div class="menuBox">
+    <ul>
+      <li><a href="#" id="gotoPlay" class="navItem MainMenu">Play</a></li>
+      <li><a href="#" id="gotoDeckBuilder" class="navItem MainMenu">Deck Builder</a></li>
+      <li><a href="#" id="gotoOptions" class="navitem MainMenu">Options</a></li>
+      <li><a href="#" id="gotoLogOut" class="navitem MainMenu">Log out</a></li>
+    </ul>
+  </div>
+</div>
+
 <div id="loadingScreen" class="hidden">
   <figure>
     <img src="images/loadingScreen.gif" alt="loadingScreenIcon" title="loadingScreenIcon"/>
   </figure>
-</div>
-
-<div id="mainMenu" class="">
-  <ul>
-    <li><a href="#" id="playTheGame" class="navItem MainMenu">Play the game</a></li>
-    <li><a href="#" id="_deckBuilder" class="navItem MainMenu">Deck builder</a></li>
-    <li><a href="#" id="options" class="navitem MainMenu">Options</a></li>
-    <li><a href="#" id="logOut" class="navitem MainMenu">Log out</a></li>
-  </ul>
 </div>
 
 <script src="assets/js/main.js"></script>

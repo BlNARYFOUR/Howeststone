@@ -1,0 +1,64 @@
+#mainMenu {
+    display: block;
+    background: url("../media/backgroundAnnieOrigin.jpg") no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    position: absolute;
+    width:100vw;
+}
+
+#mainMenu .menuBox {
+    background: url("../media/MainMenuCleanButtons.png") no-repeat center center;
+    background-size: 120vh;
+    height: 100vh;
+    line-height: 100vh;
+    text-align: center;
+}
+
+#mainMenu ul{
+    display: inline-block;
+    width: 100vw;
+    line-height: normal;
+    height: 55vh;
+    margin-top: 30vh;
+}
+
+#mainMenu li {
+    display: block;
+    line-height: 2vh;
+    width: 10vw;
+    vertical-align: middle;
+    margin-top: 6vh;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.4);
+}
+
+#mainMenu ul li:first-of-type {
+    margin-top: 4.4vh;
+    width: 33vh;
+    line-height: 6vh;
+}
+
+#mainMenu li:nth-of-type(2) {
+
+}
+
+#mainMenu li:nth-of-type(3) {
+
+}
+
+#mainMenu li:last-of-type {
+    margin-top: 6.25vh;
+}
+
+#mainMenu a{
+    text-decoration: none;
+    font-weight: bold;
+    color: #513d1f;
+    font-family: heartstoneFront, serif;
+}
+
+
+
