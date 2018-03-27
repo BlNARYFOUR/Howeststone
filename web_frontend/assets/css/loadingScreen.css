@@ -1,0 +1,17 @@
+.hidden {
+    display: none;
+}
+
+#loadingScreen {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    line-height: 100vh;
+    position: absolute;
+}
+
+#loadingScreen img {
+    width: 25%;
+    display: inline-block;
+    vertical-align: middle;
+}
