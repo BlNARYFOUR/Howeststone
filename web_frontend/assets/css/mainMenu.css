@@ -34,6 +34,8 @@
     margin-right: auto;
     cursor: pointer;
     border: thin hidden;
+    background: center 40%;
+    transition: 0.25s;
 }
 
 #mainMenu ul li:first-of-type {
@@ -43,8 +45,8 @@
 }
 
 #mainMenu ul li:first-of-type:hover {
-    background: url("../media/button1Hover.png") right 40% no-repeat;
-    background-size: 98% 65%;
+    background: url("../media/button1Hover.png") center 40% no-repeat;
+    background-size: 98% 66%;
 }
 
 #mainMenu li:nth-of-type(2) {
@@ -53,18 +55,33 @@
     border-radius: 8% 8% 0 0 / 100% 100% 0 0;
 }
 
+#mainMenu ul li:nth-of-type(2):hover {
+    background: url("../media/button2Hover.png") center 40% no-repeat;
+    background-size: 97% 66%;
+}
+
 #mainMenu li:nth-of-type(3) {
-    margin-top: 2.1vh;
+    margin-top: 2.3vh;
     width: 37vh;
     border-radius: 0 0 8% 8% / 0 0 100% 100%;
 }
 
+#mainMenu ul li:nth-of-type(3):hover {
+    background: url("../media/button3Hover.png") center 40% no-repeat;
+    background-size: 97% 75%;
+}
+
 #mainMenu li:last-of-type {
-    margin-top: 2.4vh;
+    margin-top: 2.33vh;
     line-height: 6vh;
     height: 5.6vh;
     width: 30vh;
     border-radius: 0 0 17% 17% / 0 0 100% 100%;
+}
+
+#mainMenu ul li:last-of-type:hover {
+    background: url("../media/button4Hover.png") center 40% no-repeat;
+    background-size: 98% 70%;
 }
 
 #mainMenu a{
