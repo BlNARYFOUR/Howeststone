@@ -11,13 +11,32 @@
     <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/loginAndRegistrationScreen.css" rel="stylesheet" type="text/css"/>
     <!--<link href="assets/css/playingField.css" rel="stylesheet" type="text/css">-->
     <meta name="author" content="3BEESANDME">
     <title>Howeststone</title>
 </head>
 <body>
 
-<div id="mainMenu" class="">
+<div id="loginAndRegistrationScreen" class="">
+    <div class="menuBox">
+        <form id="login" class="">
+            <input type="text" id="loginUser" name="loginUser"  placeholder="Enter username" required="required" />
+            <input type="password" id="loginPass" name="loginPass" placeholder="Enter password" required="required" />
+            <input type="submit" value="Login" id="submitLogin" name="submitLogin" />
+            <a id="gotoRegister">Register</a>
+        </form>
+        <form id="register" class="hidden">
+            <input type="text" id="registerUser" name="registerUser"  placeholder="Enter username" required="required" />
+            <input type="password" id="registerPass" name="registerPass" placeholder="Enter password" required="required" />
+            <input type="password" id="confirmPass" name="confirmPass" placeholder="Confirm password" required="required" />
+            <input type="submit" value="Register" id="submitRegister" name="submitRegister" />
+            <a id="gotoLogin">Back</a>
+        </form>
+    </div>
+</div>
+
+<div id="mainMenu" class="hidden">
     <div class="menuBox">
         <ul>
             <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
@@ -25,22 +44,6 @@
             <li id="gotoOptions"><a href="#" class="navitem MainMenu">Options</a></li>
             <li id="gotoLogOut"><a href="#" class="navitem MainMenu">Log out</a></li>
         </ul>
-    </div>
-</div>
-
-<div id="loginAndRegistrationScreen" class="hidden">
-    <div class="menuBox">
-        <form id="login">
-            <input type="text" id="loginUser" name="loginUser"  placeholder="Enter username" required="required" />
-            <input type="password" id="loginPass" name="loginPass" placeholder="Enter password" required="required" />
-            <input type="submit" value="Login" id="submitLogin" name="submitLogin" />
-        </form>
-        <form id="register" class="hidden">
-            <input type="text" id="registerUser" name="registerUser"  placeholder="Enter username" required="required" />
-            <input type="password" id="registerPass" name="registerPass" placeholder="Enter password" required="required" />
-            <input type="password" id="confirmPass" name="confirmPass" placeholder="Confirm password" required="required" />
-            <input type="submit" value="Login" id="submitRegister" name="submitRegister" />
-        </form>
     </div>
 </div>
 

@@ -15,6 +15,12 @@ function init() {
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('playGame').addEventListener('click', playGame);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
+    document.getElementById('gotoRegister').addEventListener('click', gotoRegister);
+    document.getElementById('gotoLogin').addEventListener('click', gotoLogin);
+    document.getElementById('submitLogin').addEventListener('click', submitLogin);
+    document.getElementById('submitRegister').addEventListener('click', submitRegister);
+    document.getElementById('gotoLogOut').addEventListener('click', gotoLogOut);
+
 }
 
 function toggleFullScreen() {
@@ -41,6 +47,29 @@ function toggleFullScreen() {
             document.webkitExitFullscreen();
         }
     }
+}
+function gotoLogOut() {
+    document.alert('logged out');
+    document.getElementById('mainMenu').className = "hidden";
+    document.getElementById('loginAndRegistrationScreen').className = "";
+}
+function gotoRegister() {
+    document.getElementById('login').className = "hidden";
+    document.getElementById('register').className = "";
+}
+function gotoLogin() {
+    document.getElementById('login').className = "";
+    document.getElementById('register').className = "hidden";
+}
+function submitLogin() {
+    document.getElementById('loginAndRegistrationScreen').className = "hidden";
+    alert('not loged in');
+    document.getElementById('mainMenu').className = "";
+}
+function submitRegister() {
+    document.getElementById('loginAndRegistrationScreen').className = "hidden";
+    alert('not registered');
+    document.getElementById('mainMenu').className = "";
 }
 
 function playGame() {

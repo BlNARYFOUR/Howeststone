@@ -1,0 +1,35 @@
+#loginAndRegistrationScreen {
+    display: block;
+    background: url("../media/backgroundAnnieOrigin.jpg") no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    position: absolute;
+    width:100vw;
+    font-family: heartstoneFront, serif;
+    color: #513d1f;
+}
+#loginAndRegistrationScreen .menuBox {
+    background: url("../media/woodBorderStoneBackground.png") no-repeat center center;
+    background-size: 120vh;
+    height: 100vh;
+    text-align: center;
+}
+
+#loginAndRegistrationScreen #login, #loginAndRegistrationScreen #register{
+    padding-top: 40vh;
+}
+
+#loginAndRegistrationScreen #gotoRegister, #loginAndRegistrationScreen #gotoLogin,
+#loginAndRegistrationScreen #submitLogin, #loginAndRegistrationScreen #submitRegister,
+#loginAndRegistrationScreen #loginUser, #loginAndRegistrationScreen #loginPass,
+#loginAndRegistrationScreen #registerUser, #loginAndRegistrationScreen #registerPass, #loginAndRegistrationScreen #confirmPass{
+    display: block;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 2vh;
+}
+
+#loginAndRegistrationScreen a {
+    padding: 2vh;
+}
