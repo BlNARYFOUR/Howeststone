@@ -93,7 +93,6 @@ body, html {
 }
 
 #heroPicker #gotoHome, #deckPicker #gotoHero,#heroPicker #gotoDeck, #deckPicker #playGame {
-    font-family: hearthstoneFont, Serif;
     text-decoration: none;
     color: RGB(80 60 31);
     font-weight: bold;
@@ -106,7 +105,6 @@ body, html {
 
 #heroPicker a, #deckPicker a{
     background-image: none;
-    font-family: hearthstoneFont, Serif;
     text-decoration: none;
     color: #af8829;
 

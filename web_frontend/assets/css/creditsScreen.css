@@ -5,8 +5,6 @@
     height: 100vh;
     position: absolute;
     width:100vw;
-    font-family: heartstoneFront, serif;
-    color: #513d1f;
 }
 #creditsScreen .menuBox {
     background: url("../media/woodBorderStoneBackground.png") no-repeat center center;
@@ -28,13 +26,14 @@
 
 }
 
-#creditsScreen section {
-
+#creditsScreen * {
+    color: #513d1f;
+    font-size: 0.9rem;
 }
 
 #creditsScreen h1 {
     font-size: 1.8rem;
-    margin-bottom:2vh;
+    margin-bottom: 2vh;
     font-weight: bold;
 }
 
@@ -47,9 +46,29 @@
 
 #creditsScreen p {
     margin-bottom: 0.5vh;
-
 }
 
 #creditsScreen li {
     margin-bottom: 0.5vh;
+}
+
+#creditsScreen .buttonHolder {
+    display: inline-block;
+    bottom: 0;
+    font-weight: bold;
+    background: no-repeat url("../media/button.png") center center;
+    background-size: 20vh;
+    width: 20vh;
+    height: 7vh;
+    line-height: 7.5vh;
+    margin-top: 17.5vh;
+}
+
+#creditsScreen .buttonHolder .insideButton {
+    vertical-align: center;
+    display: inline-block;
+    width: 12vh;
+    line-height: 5.5vh;
+    border: red thin solid;
+    border-radius: 10% / 50%;
 }
