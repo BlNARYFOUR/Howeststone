@@ -1,4 +1,17 @@
+@font-face {
+    font-family: howeststoneFont;
+    src: url(../fonts/OPTIBelwe-Medium.otf)
+}
+
 .hidden {
     display: none !important;
     visibility: hidden;
+}
+
+a {
+    background-image: none;
+    font-family: howeststoneFont, serif;
+    text-decoration: none;
+    color: #af8829;
+
 }

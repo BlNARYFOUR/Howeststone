@@ -1,4 +1,4 @@
-#mainMenu {
+#options {
     display: block;
     background: url("../media/backgroundAnnieOrigin.jpg") no-repeat center center;
     background-size: cover;
@@ -7,7 +7,7 @@
     width:100vw;
 }
 
-#mainMenu .menuBox {
+#options .optionsBox {
     background: url("../media/MainMenuCleanButtons.png") no-repeat center center;
     background-size: 120vh;
     height: 100vh;
@@ -15,7 +15,7 @@
     text-align: center;
 }
 
-#mainMenu ul{
+#options ul{
     display: inline-block;
     width: 100vw;
     line-height: normal;
@@ -23,7 +23,7 @@
     margin-top: 30vh;
 }
 
-#mainMenu li {
+#options li {
     display: block;
     height: 6vh;
     line-height: 5.5vh;
@@ -37,40 +37,40 @@
     background: center 40%;
 }
 
-#mainMenu ul li:first-of-type {
+#options ul li:first-of-type {
     margin-top: 5vh;
     width: 30vh;
     border-radius: 17% 17% 0 0 / 100% 100% 0 0;
 }
 
-#mainMenu ul li:first-of-type:hover {
+#options ul li:first-of-type:hover {
     background: url("../media/button1Hover.png") center 40% no-repeat;
     background-size: 98% 66%;
 }
 
-#mainMenu li:nth-of-type(2) {
+#options li:nth-of-type(2) {
     margin-top: 2.1vh;
     width: 37vh;
     border-radius: 8% 8% 0 0 / 100% 100% 0 0;
 }
 
-#mainMenu ul li:nth-of-type(2):hover {
+#options ul li:nth-of-type(2):hover {
     background: url("../media/button2Hover.png") center 40% no-repeat;
     background-size: 97% 66%;
 }
 
-#mainMenu li:nth-of-type(3) {
+#options li:nth-of-type(3) {
     margin-top: 2.3vh;
     width: 37vh;
     border-radius: 0 0 8% 8% / 0 0 100% 100%;
 }
 
-#mainMenu ul li:nth-of-type(3):hover {
+#options ul li:nth-of-type(3):hover {
     background: url("../media/button3Hover.png") center 40% no-repeat;
     background-size: 97% 75%;
 }
 
-#mainMenu li:last-of-type {
+#options li:last-of-type {
     margin-top: 2.33vh;
     line-height: 6vh;
     height: 5.6vh;
@@ -78,17 +78,15 @@
     border-radius: 0 0 17% 17% / 0 0 100% 100%;
 }
 
-#mainMenu ul li:last-of-type:hover {
+#options ul li:last-of-type:hover {
     background: url("../media/button4Hover.png") center 40% no-repeat;
     background-size: 98% 70%;
 }
 
-#mainMenu a{
+#options a, .titleOptionsMenu{
     text-decoration: none;
     font-weight: bold;
     color: #513d1f;
     font-family: heartstoneFront, serif;
 }
-
-
 
