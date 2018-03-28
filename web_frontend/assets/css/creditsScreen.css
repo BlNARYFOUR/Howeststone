@@ -1,0 +1,39 @@
+#creditsScreen {
+    display: block;
+    background: url("../media/backgroundAnnieOrigin.jpg") no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    position: absolute;
+    width:100vw;
+    font-family: heartstoneFront, serif;
+}
+#creditsScreen .menuBox {
+    background: url("../media/CreditsScreenBorder.png") no-repeat center center;
+    background-size: 120vh;
+    height: 100vh;
+    line-height: 100vh;
+    text-align: center;
+}
+#creditsScreen main{
+    display: inline-block;
+    width: 100vw;
+    line-height: normal;
+    height: 55vh;
+    margin-top: 30vh;
+}
+
+
+#creditsScreen header h1{
+    font-weight: bold;
+    color: #513d1f;
+}
+
+#creditsScreen section{
+    display: block;
+    line-height: 2vh;
+    width: 10vw;
+    vertical-align: middle;
+    margin-top: 6vh;
+    margin-left: auto;
+    margin-right: auto;
+}
