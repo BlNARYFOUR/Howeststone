@@ -1,42 +1,36 @@
 #heroPicker {
-    background: url("../images/Hero picker zonder knoppen.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
+    background: url("../media/Hero picker zonder knoppen.png") no-repeat center center;
+    background-size: contain;
+    height: 100vh;
+    width: 100vw;
     position: absolute;
-
+    background-color: black;
 }
 
 #deckPicker {
-    background-image: url("../images/Deck Picker zonder knoppen.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: url("../media/Deck Picker zonder knoppen.png")  no-repeat center center;
+    background-size: contain;
     position: absolute;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
 }
 
 #heroPicker #heroes {
-
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
     align-content: flex-end;
-    margin-left: 21.5%;
-    margin-top: 10%;
-    width: 42.5%;
-
-
+    margin-left: 26vw;
+    margin-top: 26vh;
+    width: 35vw;
 }
 
 #deckPicker #yourdecks {
-    margin-left: 21.5%;
-    margin-top: 10%;
-    width: 42.5%;
+    margin-left: 26vw;
+    margin-top: 26vh;
+    width: 34vw;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -45,40 +39,51 @@
 }
 
 #deckPicker #yourdecks div {
-    width: 33.33%;
-    margin-bottom: 27%;
+    width: 11vw;
+    margin-bottom: 19.5vh;
 }
 
 
 
 #heroPicker #heroes div {
-    width: 33.33%;
-    margin-bottom: 27%;
+    width: 11vw;
+    margin-bottom: 20vh;
 }
 
-#heroPicker #selectedHero {
+#heroPicker #selectedHero, #deckPicker #selectedDeck {
     display: block;
     position: absolute;
-    bottom: 24%;
-    right: 10.5%;
-    width: 25%;
+    bottom: 38vh;
+    right: 17vw;
+    width: 20vw;
+}
 
-
+#heroPicker #gotoDeck {
+   position: absolute;
+    bottom: 18vh;
+    right: 24.5vw;
 
 }
 
-#heroPicker #gotoDeck, #deckPicker #playGame {
-   position: absolute;
-    bottom: 17%;
-    right: 22%;
-
+#deckPicker #playGame {
+    right: 26.5vw;
+    position: absolute;
+    bottom: 11vh;
+    border: transparent;
+    border-radius: 50vw 50vh;
+    font-family: hearthstoneFont, Serif;
+    text-decoration: none;
+    color: RGB(80 60 31);
+    font-weight: bold;
+    background-position: center;
+    padding: 3vw;
 }
 
 #heroPicker #gotoHome, #deckPicker #gotoHero{
     display: block;
     position: absolute;
     bottom: 0;
-    right: 17%;
+    right: 17vw;
 
 }
 
@@ -86,22 +91,22 @@ body, html {
     height: 100%;
 }
 
-#deckPicker #yourdecks div a, #heroPicker #heroes div a, #heroPicker img{
-    width: 74%;
+#deckPicker #yourdecks div a, #heroPicker #heroes div a, #heroPicker img, #deckPicker img{
+    width: 15vw;
 
 
 }
 
-#heroPicker #gotoHome, #deckPicker #gotoHero,#heroPicker #gotoDeck, #deckPicker #playGame {
+#heroPicker #gotoHome, #deckPicker #gotoHero,#heroPicker #gotoDeck {
     font-family: hearthstoneFont, Serif;
     text-decoration: none;
     color: RGB(80 60 31);
     font-weight: bold;
-    background-image: url("../images/Knop.png");
+    background-image: url("../media/Knop.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100%;
-    padding: 3%;
+    background-size: 8vw;
+    padding: 3vw;
 }
 
 #heroPicker a, #deckPicker a{
@@ -109,7 +114,6 @@ body, html {
     font-family: hearthstoneFont, Serif;
     text-decoration: none;
     color: #af8829;
-
 }
 
 
