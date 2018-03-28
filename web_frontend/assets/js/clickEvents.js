@@ -10,7 +10,14 @@ function init() {
     document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
     document.getElementById('gotoNoDeck').addEventListener('click', gotoNoDeck);
     document.getElementById('addDeck').addEventListener('click', addDeck);
-
+    document.getElementById('gotoOptions').addEventListener('click', gotoOptions);
+    document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
+    document.getElementById('gotoCredits').addEventListener('click', gotoCredits)
+    document.getElementById('playGame').addEventListener('click', playGame);
+}
+function playGame() {
+    document.getElementById('vsScreen').className = "";
+    document.getElementById('deckPicker').className = "hidden";
 }
 
 function gotoHome() {
@@ -46,6 +53,21 @@ function gotoDeckBuilder() {
     document.getElementById('deckbuilder').className = "";
 }
 
+function gotoOptions() {
+    document.getElementById('mainMenu').className = "hidden";
+    document.getElementById('options').className = "";
+}
+
+function gotoCredits() {
+    document.getElementById('options').className = "hidden";
+    document.getElementById('creditsScreen').className = "";
+}
+
+function gotoLeaveOptions() {
+    document.getElementById('mainMenu').className = "";
+    document.getElementById('options').className = "hidden";
+}
+
 function gotoNoDeck() {
     //
     document.getElementById('mainMenu').className = "";
@@ -59,7 +81,7 @@ function addDeck() {
     document.getElementById('gotoNoDeck').setAttribute("id", "gotoChooseDeck");
     document.getElementById('gotoChooseDeck').addEventListener('click', gotoChooseDeck);
 }
-// werkt dit??
+
 function gotoChooseDeck() {
     document.getElementById('gotoChooseDeck').removeEventListener('click', gotoChooseDeck);
     document.getElementById('gotoChooseDeck').setAttribute("id", "gotoNoDeck");
