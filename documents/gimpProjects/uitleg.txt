@@ -1,1 +1,10 @@
 Hier komen alle Gimp 2 Project files
+
+REGELS
+
+***** Verkleuring van buttons *****
+
+Kleuren -> Verkleuren:
+	-Tint: 15
+	-Verzadiging: 50
+	-Lichtheid: 60
