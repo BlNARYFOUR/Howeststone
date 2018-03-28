@@ -10,7 +10,9 @@ function init() {
     document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
     document.getElementById('gotoNoDeck').addEventListener('click', gotoNoDeck);
     document.getElementById('addDeck').addEventListener('click', addDeck);
-
+    document.getElementById('gotoOptions').addEventListener('click', gotoOptions);
+    document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
+    
 }
 
 function gotoHome() {
@@ -44,6 +46,16 @@ function gotoDeckBuilder() {
     // ontbrekende htmlpagina
     document.getElementById('mainMenu').className = "hidden";
     document.getElementById('deckbuilder').className = "";
+}
+
+function gotoOptions() {
+    document.getElementById('mainMenu').className = "hidden";
+    document.getElementById('options').className = "";
+}
+
+function gotoLeaveOptions() {
+    document.getElementById('mainMenu').className = "";
+    document.getElementById('options').className = "hidden";
 }
 
 function gotoNoDeck() {
