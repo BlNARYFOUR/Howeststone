@@ -1,36 +1,30 @@
 #heroPicker {
-    background: url("../images/Hero picker zonder knoppen.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: url("../media/Hero picker zonder knoppen.png") no-repeat center center;
+    background-size: contain;
     height: 100%;
     width: 100%;
     position: absolute;
-
+    background-color: black;
 }
 
 #deckPicker {
-    background-image: url("../images/Deck Picker zonder knoppen.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: url("../media/Deck Picker met play.png") no-repeat center center;
+    background-size: contain;
     position: absolute;
     height: 100%;
     width: 100%;
+    background-color: black;
 }
 
 #heroPicker #heroes {
-
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
     align-content: flex-end;
-    margin-left: 21.5%;
-    margin-top: 10%;
-    width: 42.5%;
-
-
+    margin-left: 25.5%;
+    margin-top: 13%;
+    width: 33.5%;
 }
 
 #deckPicker #yourdecks {
@@ -46,32 +40,40 @@
 
 #deckPicker #yourdecks div {
     width: 33.33%;
-    margin-bottom: 27%;
+    margin-bottom: 29%;
 }
-
-
 
 #heroPicker #heroes div {
     width: 33.33%;
-    margin-bottom: 27%;
+    margin-bottom: 29%;
 }
 
 #heroPicker #selectedHero {
     display: block;
     position: absolute;
-    bottom: 24%;
-    right: 10.5%;
-    width: 25%;
-
-
-
+    bottom: 40%;
+    right: 17.8%;
+    width: 19%;
 }
 
 #heroPicker #gotoDeck, #deckPicker #playGame {
    position: absolute;
     bottom: 17%;
-    right: 22%;
+    right: 24%;
+}
 
+#playGame {
+    right: 24.5%;
+    bottom: 9.5%;
+    border-radius: 50% 50%;
+    border: transparent solid;
+    font-family: hearthstoneFont, Serif;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 3%;
+    font-size: 220%;
+    letter-spacing: 1px;
 }
 
 #heroPicker #gotoHome, #deckPicker #gotoHero{
@@ -95,9 +97,9 @@ body, html {
 #heroPicker #gotoHome, #deckPicker #gotoHero,#heroPicker #gotoDeck, #deckPicker #playGame {
     font-family: hearthstoneFont, Serif;
     text-decoration: none;
-    color: RGB(80 60 31);
+    color: #503c1f;
     font-weight: bold;
-    background-image: url("../images/Knop.png");
+    background-image: url("../media/Knop.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -109,11 +111,8 @@ body, html {
     font-family: hearthstoneFont, Serif;
     text-decoration: none;
     color: #af8829;
-
 }
 
-
-
-
-
-
+#heroes div a {
+    color: #af8829;
+}
