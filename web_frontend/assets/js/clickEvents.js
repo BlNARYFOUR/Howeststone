@@ -12,7 +12,7 @@ function init() {
     document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoOptions').addEventListener('click', gotoOptions);
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
-    
+    document.getElementById('gotoCredits').addEventListener('click', gotoCredits)
 }
 
 function gotoHome() {
@@ -51,6 +51,11 @@ function gotoDeckBuilder() {
 function gotoOptions() {
     document.getElementById('mainMenu').className = "hidden";
     document.getElementById('options').className = "";
+}
+
+function gotoCredits() {
+    document.getElementById('options').className = "hidden";
+    document.getElementById('creditsScreen').className = "";
 }
 
 function gotoLeaveOptions() {
