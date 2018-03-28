@@ -8,10 +8,7 @@
     visibility: hidden;
 }
 
-a {
-    background-image: none;
+* {
     font-family: howeststoneFont, serif;
-    text-decoration: none;
     color: #af8829;
-
 }

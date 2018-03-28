@@ -1,0 +1,50 @@
+#heroPicker {
+    background: url("../media/Hero picker zonder knoppen.png") no-repeat center center;
+    background-size: contain;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    background-color: black;
+}
+
+#heroPicker #heroes {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: flex-end;
+    margin-left: 26vw;
+    margin-top: 26vh;
+    width: 35vw;
+}
+#heroPicker #heroes div {
+    width: 11vw;
+    margin-bottom: 20vh;
+}
+#heroPicker #selectedHero, #deckPicker #selectedDeck {
+    display: block;
+    position: absolute;
+    bottom: 38vh;
+    right: 17vw;
+    width: 20vw;
+}
+#heroPicker #gotoDeck {
+    position: absolute;
+    bottom: 18vh;
+    right: 24.5vw;
+}
+#heroPicker #gotoHome, #deckPicker #gotoHero{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 17vw;
+}
+#heroPicker #gotoHome, #deckPicker #gotoHero,#heroPicker #gotoDeck {
+    font-family: hearthstoneFont, serif;
+    text-decoration: none;
+    color: rgb(80, 60, 31);
+    font-weight: bold;
+    background: no-repeat url("../media/Knop.png") center center;
+    background-size: 8vw;
+    padding: 3vw;
+}
