@@ -12,11 +12,18 @@ function init() {
     document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoOptions').addEventListener('click', gotoOptions);
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
-    document.getElementById('gotoCredits').addEventListener('click', gotoCredits)
+    document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('playGame').addEventListener('click', playGame);
 }
+
+function playrealGame() {
+    document.getElementById('vsScreen').className = "hidden";
+    document.getElementById('playField').className = "";
+}
+
 function playGame() {
     document.getElementById('vsScreen').className = "";
+    setTimeout(playrealGame(), 5000);
     document.getElementById('deckPicker').className = "hidden";
 }
 
