@@ -1,0 +1,21 @@
+#playerHero {
+    right: 15vw;
+    top: 3vw;
+    position: absolute;
+}
+
+#enemyHero {
+    position: absolute;
+    left: 15vw;
+    bottom: 10vh;
+}
+
+#vsScreen img {
+    width: 43vh;
+}
+
+#vs {
+    position: absolute;
+    left: 41vw;
+    top: 31vh;
+}

@@ -11,13 +11,14 @@
     <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
     <!--<link href="assets/css/playingField.css" rel="stylesheet" type="text/css">-->
     <meta name="author" content="3BEESANDME">
     <title>Howeststone</title>
 </head>
 <body>
 
-<div id="mainMenu" class="">
+<div id="mainMenu" class="hidden">
     <div class="menuBox">
         <ul>
             <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
@@ -103,6 +104,16 @@
 
     <a href="#" id="gotoHero">Back</a>
 
+</div>
+
+<div id="vsScreen" class="">
+    <div id="playerHero">
+        <img src="images/schild%20mage.png" alt="playerhero" title="playerhero">
+    </div>
+    <img src="assets/media/vs.png" alt="VS" title="VS" id="vs">
+    <div id="enemyHero">
+        <img src="images/schild%20mage.png" alt="enemyhero" title="enemyhero">
+    </div>
 </div>
 
 <div id="deckbuilder" class="hidden">
