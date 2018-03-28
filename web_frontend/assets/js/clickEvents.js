@@ -10,6 +10,9 @@ function init() {
     document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
     document.getElementById('gotoNoDeck').addEventListener('click', gotoNoDeck);
     document.getElementById('addDeck').addEventListener('click', addDeck);
+    document.getElementById('gotoOptions').addEventListener('click', gotoOptions);
+    document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
+    document.getElementById('gotoCredits').addEventListener('click', gotoCredits)
     document.getElementById('playGame').addEventListener('click', playGame);
 }
 function playGame() {
@@ -48,6 +51,21 @@ function gotoDeckBuilder() {
     // ontbrekende htmlpagina
     document.getElementById('mainMenu').className = "hidden";
     document.getElementById('deckbuilder').className = "";
+}
+
+function gotoOptions() {
+    document.getElementById('mainMenu').className = "hidden";
+    document.getElementById('options').className = "";
+}
+
+function gotoCredits() {
+    document.getElementById('options').className = "hidden";
+    document.getElementById('creditsScreen').className = "";
+}
+
+function gotoLeaveOptions() {
+    document.getElementById('mainMenu').className = "";
+    document.getElementById('options').className = "hidden";
 }
 
 function gotoNoDeck() {
