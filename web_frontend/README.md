@@ -11,11 +11,9 @@ vb <a>back</a>
 
 ECMAscript 6
 
-Choose Your Hero (id="heroPicker")
-Main Menu (id="mainMenu")
-
 clickevents:
 <ul>
+Mattijs:
 <li>gotoPlay: Main Menu => Choose Your Hero</li>
 
 <li>gotoHome: Choose Your Hero => Main Menu</li>
@@ -32,5 +30,20 @@ clickevents:
 <li>gotoDeckBuilder: Main Menu => Deck Builder</li>
 
 <li>gotoNoDeck: Deck Builder => Main Menu</li>
+
+<li>playGame: Choose Your Deck => VS screen</li>
+
+NYI: ------------------------------------
+
+<li>gotoGameOptions: Playing Field => Options in Game</li>
+
+<li>gotoFinishMyGame: Options in Game => Playing Field</li>
+
+<li>gotoLeaveMyGame: Options in Game => Main Menu</li>
+
+Bert:
+<li>gotoOptions: Main Menu => Options</li>
+
+<li>gotoLeaveOptions Options => Main Menu </li>
 </ul>
 
