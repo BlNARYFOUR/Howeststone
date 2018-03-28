@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<div id="mainMenu" class="">
+<div id="mainMenu" class="hidden">
     <div class="menuBox">
         <ul>
             <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
@@ -45,65 +45,46 @@
     </div>
 </div>
 
-<div id="heroPicker" class="hidden">
-    <div id="heroes">
-        <div><a href="#">Mage</a></div>
+<div id="heroPicker" class="">
+    <div class="pickerBox">
+        <ul id="heroes">
+            <li><a href="#">Mage</a></li>
+            <li><a href="#">Paladin</a></li>
+            <li><a href="#">Warrior</a></li>
+            <li><a href="#">Priest</a></li>
+            <li><a href="#">Druid</a></li>
+            <li><a href="#">Hunter</a></li>
+            <li><a href="#">Shaman</a></li>
+            <li><a href="#">Rogue</a></li>
+            <li><a href="#">Warlock</a></li>
+        </ul>
 
-        <div><a href="#">Paladin</a></div>
+        <span id="selectedHero"></span>
 
-        <div><a href="#">Warrior</a></div>
-
-        <div><a href="#">Priest</a></div>
-
-        <div><a href="#">Druid</a></div>
-
-        <div><a href="#">Hunter</a></div>
-
-        <div><a href="#">Shaman</a></div>
-
-        <div><a href="#">Rogue</a></div>
-
-        <div><a href="#">Warlock</a></div>
+        <span><a href="#" id="gotoDeck">Continue</a></span>
+        <span><a href="#" id="gotoHome">  Back  </a></span>
     </div>
-
-
-    <div id="selectedHero"><img src="images/schild%20mage.png" alt="Selected Hero" title="Selected Hero"/></div>
-
-    <a href="#" id="gotoDeck">Continue</a>
-
-    <a href="#" id="gotoHome">  Back  </a>
-
 </div>
 
 <div id="deckPicker" class="hidden">
-    <div id="yourdecks">
+    <div class="pickerBox">
+        <ul id="yourDecks">
+            <li id="deck_0"><a href="#">Some Deck :)</a></li>
+            <li id="deck_1"><a href="#">Deck 2</a></li>
+            <li id="deck_2"><a href="#">Deck 3</a></li>
+            <li id="deck_3"><a href="#">Deck 4</a></li>
+            <li id="deck_4"><a href="#">Deck 5</a></li>
+            <li id="deck_5"><a href="#">Deck 6</a></li>
+            <li id="deck_6"><a href="#">Deck 7</a></li>
+            <li id="deck_7"><a href="#">Deck 7</a></li>
+            <li id="addDeck"><a href="#">Add Deck</a></li>
+        </ul>
 
-        <div><a href="#">t t t t t t t t t t </a></div>
+        <div id="selectedDeck"></div>
 
-        <div><a href="#">Deck 2</a></div>
-
-        <div><a href="#">Deck 3</a></div>
-
-        <div><a href="#">Deck 4</a></div>
-
-        <div><a href="#">Deck 5</a></div>
-
-        <div><a href="#">Deck 6</a></div>
-
-        <div><a href="#">Deck 7</a></div>
-
-        <div><a href="#">Deck 7</a></div>
-
-        <div id="addDeck"><a href="#">Add Deck</a></div>
+        <a href="#" id="playGame"></a>
+        <a href="#" id="gotoHero">Back</a>
     </div>
-
-
-    <div id="selectedDeck"><img src="images/schild%20mage.png" alt="Selected Deck" title="Selected Deck"/></div>
-
-    <a href="#" id="playGame"></a>
-
-    <a href="#" id="gotoHero">Back</a>
-
 </div>
 
 <div id="deckbuilder" class="hidden">
@@ -237,48 +218,48 @@
     </div>
 </div>
 
+<div id="creditsScreen" class="">
+    <div class="menuBox">
+        <header>
+            <h1>Credits</h1>
+            <p>Thank you for playing our game!</p>
+        </header>
+        <main>
+            <h2>Coach</h2>
+            <ul>
+                <li>Koen Cornelis</li>
+            </ul>
+
+            <div id="developerTeamAndFunctions">
+                <section>
+                    <h2>Developer Team</h2>
+                    <ul>
+                        <li>Brend Lambert</li>
+                        <li>Mattijs Step</li>
+                        <li>Bert Van Mulders</li>
+                        <li>Bram Vermeulen</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Function</h2>
+                    <ul>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                    </ul>
+                </section>
+            </div>
+        </main>
+    </div>
+</div>
+
 <!-- LET LOADING SCREEN BE THE LAST DIV!!! -->
 <div id="loadingScreen" class="hidden">
     <figure>
         <img src="images/loadingScreen.gif" alt="loadingScreenIcon" title="loadingScreenIcon"/>
     </figure>
-</div>
-
-<div id="creditsScreen" class="">
-  <div class="menuBox">
-    <header>
-      <h1>Credits</h1>
-      <p>Thank you for playing our game!</p>
-    </header>
-    <main>
-      <h2>Coach</h2>
-      <ul>
-        <li>Koen Cornelis</li>
-      </ul>
-
-      <div id="developerTeamAndFunctions">
-        <section>
-          <h2>Developer Team</h2>
-          <ul>
-            <li>Brend Lambert</li>
-            <li>Mattijs Step</li>
-            <li>Bert Van Mulders</li>
-            <li>Bram Vermeulen</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Function</h2>
-          <ul>
-            <li>Programmer</li>
-            <li>Programmer</li>
-            <li>Programmer</li>
-            <li>Programmer</li>
-          </ul>
-        </section>
-      </div>
-    </main>
-  </div>
 </div>
 
 <script src="assets/js/main.js"></script>

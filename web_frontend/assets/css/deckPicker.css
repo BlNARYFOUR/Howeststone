@@ -1,26 +1,17 @@
-
-
 #deckPicker {
-    background: url("../media/Deck Picker zonder knoppen.png")  no-repeat center center;
+    background: black url("../media/deckPicker.png")  no-repeat center center;
     background-size: contain;
     position: absolute;
     height: 100vh;
     width: 100vw;
-    background-color: black;
 }
 
+#deckPicker .pickerBox {
+    height: 100vh;
+    width: 100vh;
+}
 
-
-
-
-
-
-
-
-
-
-
-#deckPicker #yourdecks {
+#deckPicker #yourDecks {
     margin-left: 26vw;
     margin-top: 26vh;
     width: 34vw;
@@ -31,32 +22,18 @@
     align-content: flex-end;
 }
 
-#deckPicker #yourdecks div {
+#deckPicker #yourDecks div {
     width: 11vw;
     margin-bottom: 19.5vh;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#deckPicker #selectedDeck {
+    display: block;
+    position: absolute;
+    bottom: 38vh;
+    right: 17vw;
+    width: 20vw;
+}
 
 #deckPicker #playGame {
     right: 26.5vw;
@@ -64,36 +41,33 @@
     bottom: 11vh;
     border: transparent;
     border-radius: 50vw 50vh;
-    font-family: hearthstoneFont, Serif;
-    text-decoration: none;
     color: RGB(80 60 31);
     font-weight: bold;
     background-position: center;
     padding: 3vw;
 }
 
-
-
-
-
-
-
-
-
-body, html {
-    height: 100%;
-}
-
-#deckPicker #yourdecks div a, #heroPicker #heroes div a, #heroPicker img, #deckPicker img{
+#deckPicker #yourDecks li a, #deckPicker img{
     width: 15vw;
-
-
 }
 
+#deckPicker .buttonHolder {
+    display: inline-block;
+    bottom: 0;
+    font-weight: bold;
+    background: no-repeat url("../media/button.png") center center;
+    background-size: 20vh;
+    width: 20vh;
+    height: 7vh;
+    line-height: 7.5vh;
+    margin-top: 17.5vh;
+}
 
-
-
-
-
-
-
+#deckPicker .buttonHolder .insideButton {
+    vertical-align: center;
+    display: inline-block;
+    width: 12vh;
+    line-height: 5.5vh;
+    border: red thin solid;
+    border-radius: 10% / 50%;
+}
