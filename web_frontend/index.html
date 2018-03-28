@@ -2,19 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="assets/media/icon2.png">
-  <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
-  <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
-  <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
-  <link href="assets/css/webbuilder.css" rel="stylesheet" type="text/css"/>
-  <link href="assets/css/optionsMenu.css" rel="stylesheet" type="text/css">
-  <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
-  <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="assets/media/icon2.png"/>
+    <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/webbuilder.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/optionsMenu.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="assets/css/playingField.css" rel="stylesheet" type="text/css">-->
 
   <meta name="author" content="3BEES&ME">
   <title>Howeststone</title>
 </head>
 <body>
+
+<div id="mainMenu" class="">
+    <div class="menuBox">
+        <ul>
+            <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
+            <li id="gotoDeckBuilder"><a href="#" class="navItem MainMenu">Deck Builder</a></li>
+            <li id="gotoOptions"><a href="#" class="navitem MainMenu">Options</a></li>
+            <li id="gotoLogOut"><a href="#" class="navitem MainMenu">Log out</a></li>
+        </ul>
+    </div>
+</div>
 
 <div id="loginAndRegistrationScreen" class="">
     <div class="menuBox">
@@ -94,101 +106,123 @@
 </div>
 
 <div id="deckbuilder" class="hidden">
-  <header>
-    <div id="hero"><a href="#">Mage</a>
-      <a href="#">Paladin</a>
-    </div>
-    <div id="quickfilter">
-      <a href="#">Full Deck</a>
-      <a href="#">Minions</a>
-      <a href="#">Spells</a>
-      <a href="#">Weapons</a>
-      <p id="cardAmount">30/30</p>
-    </div>
-    <ul id="deck"><li>*deck*</li></ul>
-    <a id="firstadd" href="#">+</a>
-    <a id="save" href="#">SAVE</a>
-  </header>
-  <main>
-    <ul id="cards"><li>*cards*</li></ul>
-    <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
-  </main>
-  <aside>
-    <form>
-      <input id="search" type="text" placeholder="search"/>
-      <label id="sortlabel" for="sort">sort</label>
-      <select id="sort">
-        <option value="alfaz">Alfabetic (a->z)</option>
-        <option value="alfza">Alfabetic (z->a)</option>
-        <option value="mana07">Mana cost (0->7+)</option>
-        <option value="mana70">Mana cost (7+->0)</option>
-      </select>
-      <fieldset>
-        <legend>filter</legend>
-
-        <div id="firstFilter"><label>Hero specific cards</label>
-          <input type="radio" name="specificCards" value="All" id="all" checked/>
-          <label for="all">All Useable Cards</label>
-          <input type="radio" name="specificCards" value="Mage" id="mage"/>
-          <label for="mage">Mage</label>
-          <input type="radio" name="specificCards" value="Neutral" id="paladin"/>
-          <label for="paladin">Paladin</label>
-          <input type="radio" name="specificCards" value="Neutral" id="neutral"/>
-          <label for="neutral">Neutral</label></div>
-
-        <div id="secondFilter"><label>Card Types</label>
-          <input type="radio" name="cardTypes" value="Minions" id="minions"/>
-          <label for="minions">Minions</label>
-          <input type="radio" name="cardTypes" value="Weapons" id="weapons"/>
-          <label for="weapons">Weapons</label>
-          <input type="radio" name="cardTypes" value="Spells" id="spells"/>
-          <label for="spells">Spells</label></div>
-
-        <div id="thirdFilter"><label>Mana</label>
-          <input type="radio" name="Mana" value="zero" id="zero"/>
-          <label for="zero">0 Mana</label>
-          <input type="radio" name="Mana" value="one" id="one"/>
-          <label for="one">1 Mana</label>
-          <input type="radio" name="Mana" value="two" id="two"/>
-          <label for="two">2 Mana</label>
-          <input type="radio" name="Mana" value="three" id="three"/>
-          <label for="three">3 Mana</label>
-          <input type="radio" name="Mana" value="four" id="four" />
-          <label for="four">4 Mana</label>
-          <input type="radio" name="Mana" value="five" id="five" />
-          <label for="five">5 Mana</label>
-          <input type="radio" name="Mana" value="six" id="six"/>
-          <label for="six">6 Mana</label>
-          <input type="radio" name="Mana" value="seven" id="seven"/>
-          <label for="seven">7+ Mana</label></div>
-
-
-        <div id="fourthFilter"><label>Card Rarity</label>
-          <input type="radio" name="cardRarity" value="Free" id="free"/>
-          <label for="free">Free</label>
-          <input type="radio" name="cardRarity" value="Common" id="common"/>
-          <label for="common">Common</label>
-          <input type="radio" name="cardRarity" value="Rare" id="rare"/>
-          <label for="rare">Rare</label>
-          <input type="radio" name="cardRarity" value="Epic" id="epic"/>
-          <label for="epic">Epic</label>
-          <input type="radio" name="cardRarity" value="Legendary" id="legendary"/>
-          <label for="legendary">Legendary</label></div>
-      </fieldset>
-    </form>
-  </aside>
-  <a id="gotoNoDeck" href="#">Back</a>
+    <header>
+        <div id="hero"><a href="#">Mage</a>
+            <a href="#">Paladin</a>
+        </div>
+        <div id="quickfilter">
+            <a href="#">Full Deck</a>
+            <a href="#">Minions</a>
+            <a href="#">Spells</a>
+            <a href="#">Weapons</a>
+            <p id="cardAmount">30/30</p>
+        </div>
+        <ul id="deck"><li>*deck*</li></ul>
+        <a id="firstadd" href="#">+</a>
+        <a id="save" href="#">SAVE</a>
+    </header>
+    <main>
+        <ul id="cards"><li>*cards*</li></ul>
+        <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
+    </main>
+    <aside>
+        <form>
+            <input id="search" type="text" placeholder="search"/>
+            <label id="sortlabel" for="sort">sort</label>
+            <select id="sort">
+                <option value="alfaz">Alfabetic (a->z)</option>
+                <option value="alfza">Alfabetic (z->a)</option>
+                <option value="mana07">Mana cost (0->7+)</option>
+                <option value="mana70">Mana cost (7+->0)</option>
+            </select>
+            <fieldset>
+                <legend>filter</legend>
+    
+                <div id="firstFilter">
+                    <label>Hero specific cards</label>
+                    <input type="radio" name="specificCards" value="All" id="all" checked/>
+                    <label for="all">All Useable Cards</label>
+                    <input type="radio" name="specificCards" value="Mage" id="mage"/>
+                    <label for="mage">Mage</label>
+                    <input type="radio" name="specificCards" value="Neutral" id="paladin"/>
+                    <label for="paladin">Paladin</label>
+                    <input type="radio" name="specificCards" value="Neutral" id="neutral"/>
+                    <label for="neutral">Neutral</label>
+                </div>
+        
+                <div id="secondFilter">
+                    <label>Card Types</label>
+                    <input type="radio" name="cardTypes" value="Minions" id="minions"/>
+                    <label for="minions">Minions</label>
+                    <input type="radio" name="cardTypes" value="Weapons" id="weapons"/>
+                    <label for="weapons">Weapons</label>
+                    <input type="radio" name="cardTypes" value="Spells" id="spells"/>
+                    <label for="spells">Spells</label>
+                </div>
+        
+                <div id="thirdFilter">
+                    <label>Mana</label>
+                    <input type="radio" name="Mana" value="zero" id="zero"/>
+                    <label for="zero">0 Mana</label>
+                    <input type="radio" name="Mana" value="one" id="one"/>
+                    <label for="one">1 Mana</label>
+                    <input type="radio" name="Mana" value="two" id="two"/>
+                    <label for="two">2 Mana</label>
+                    <input type="radio" name="Mana" value="three" id="three"/>
+                    <label for="three">3 Mana</label>
+                    <input type="radio" name="Mana" value="four" id="four" />
+                    <label for="four">4 Mana</label>
+                    <input type="radio" name="Mana" value="five" id="five" />
+                    <label for="five">5 Mana</label>
+                    <input type="radio" name="Mana" value="six" id="six"/>
+                    <label for="six">6 Mana</label>
+                    <input type="radio" name="Mana" value="seven" id="seven"/>
+                    <label for="seven">7+ Mana</label>
+                </div>
+        
+        
+                <div id="fourthFilter">
+                    <label>Card Rarity</label>
+                    <input type="radio" name="cardRarity" value="Free" id="free"/>
+                    <label for="free">Free</label>
+                    <input type="radio" name="cardRarity" value="Common" id="common"/>
+                    <label for="common">Common</label>
+                    <input type="radio" name="cardRarity" value="Rare" id="rare"/>
+                    <label for="rare">Rare</label>
+                    <input type="radio" name="cardRarity" value="Epic" id="epic"/>
+                    <label for="epic">Epic</label>
+                    <input type="radio" name="cardRarity" value="Legendary" id="legendary"/>
+                    <label for="legendary">Legendary</label>
+                </div>
+            </fieldset>
+        </form>
+    </aside>
+    <a id="gotoNoDeck" href="#">Back</a>
 </div>
 
-<div id="mainMenu" class="hidden">
-  <div class="menuBox">
-    <ul>
-      <li id="gotoPlay"><a href="#" class="navItem mainMenu">Play</a></li>
-      <li id="gotoDeckBuilder"><a href="#" class="navItem mainMenu">Deck Builder</a></li>
-      <li id="gotoOptions"><a href="#" class="navItem mainMenu">Options</a></li>
-      <li id="gotoLogOut"><a href="#" class="navItem mainMenu">Log out</a></li>
-    </ul>
-  </div>
+<div id="playField" class="hidden">
+    <main>
+        <ul class="eCards"><li>*e cards*</li></ul>
+        <div class="eManaTotal">*e mana*</div>
+        <ul><li>*e mana*</li></ul>
+        <div id="eHero">*e hero*</div>
+        <div id="eDeck">*e deck*</div>
+        <ul><li>*g log*</li></ul>
+        <span id="fuse">*g fuse*</span>
+        <span id="spark"></span>
+        <a href="#">*g end turn*</a>
+        <ul>
+            <li>*g field*</li>
+            <li>*e field*</li>
+            <li>*y field*</li>
+        </ul>
+        <div id="ydeck">*y deck**</div>
+        <div id="yhero">*y hero*</div>
+        <div class="eManaTotal">*y mana*</div>
+        <ul><li>*y mana*</li></ul>
+        <ul class="yCards"><li>*y cards*</li></ul>
+        <div id="gotoGameOptions">Options</div>
+    </main>
 </div>
 
 <div id="options" class="hidden">
@@ -202,7 +236,6 @@
     </div>
 </div>
 
-
 <!-- LET LOADING SCREEN BE THE LAST DIV!!! -->
 <div id="loadingScreen" class="hidden">
     <figure>
@@ -213,5 +246,6 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/loadingScreen.js"></script>
 <script src="assets/js/clickEvents.js"></script>
+<!--<script src="assets/js/playingField.js"></script>-->
 </body>
 </html>
