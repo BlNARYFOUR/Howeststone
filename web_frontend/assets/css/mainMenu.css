@@ -1,0 +1,94 @@
+#mainMenu {
+    display: block;
+    background: url("../media/backgroundAnnieOrigin.jpg") no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    position: absolute;
+    width:100vw;
+}
+
+#mainMenu .menuBox {
+    background: url("../media/MainMenuCleanButtons.png") no-repeat center center;
+    background-size: 120vh;
+    height: 100vh;
+    line-height: 100vh;
+    text-align: center;
+}
+
+#mainMenu ul{
+    display: inline-block;
+    width: 100vw;
+    line-height: normal;
+    height: 55vh;
+    margin-top: 30vh;
+}
+
+#mainMenu li {
+    display: block;
+    height: 6vh;
+    line-height: 5.5vh;
+    width: 10vw;
+    vertical-align: middle;
+    margin-top: 6vh;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    border: thin hidden;
+    background: center 40%;
+}
+
+#mainMenu ul li:first-of-type {
+    margin-top: 5vh;
+    width: 30vh;
+    border-radius: 17% 17% 0 0 / 100% 100% 0 0;
+}
+
+#mainMenu ul li:first-of-type:hover {
+    background: url("../media/button1Hover.png") center 40% no-repeat;
+    background-size: 98% 66%;
+}
+
+#mainMenu li:nth-of-type(2) {
+    margin-top: 2.1vh;
+    width: 37vh;
+    border-radius: 8% 8% 0 0 / 100% 100% 0 0;
+}
+
+#mainMenu ul li:nth-of-type(2):hover {
+    background: url("../media/button2Hover.png") center 40% no-repeat;
+    background-size: 97% 66%;
+}
+
+#mainMenu li:nth-of-type(3) {
+    margin-top: 2.3vh;
+    width: 37vh;
+    border-radius: 0 0 8% 8% / 0 0 100% 100%;
+}
+
+#mainMenu ul li:nth-of-type(3):hover {
+    background: url("../media/button3Hover.png") center 40% no-repeat;
+    background-size: 97% 75%;
+}
+
+#mainMenu li:last-of-type {
+    margin-top: 2.33vh;
+    line-height: 6vh;
+    height: 5.6vh;
+    width: 30vh;
+    border-radius: 0 0 17% 17% / 0 0 100% 100%;
+}
+
+#mainMenu ul li:last-of-type:hover {
+    background: url("../media/button4Hover.png") center 40% no-repeat;
+    background-size: 98% 70%;
+}
+
+#mainMenu a{
+    text-decoration: none;
+    font-weight: bold;
+    color: #513d1f;
+    font-family: heartstoneFront, serif;
+}
+
+
+

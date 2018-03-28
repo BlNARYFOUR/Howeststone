@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="assets/media/icon2.png">
   <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
+  <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/webbuilder.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
   <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css">
   <meta name="author" content="3BEES&ME">
-  <title>Title</title>
+  <title>Howeststone</title>
 </head>
 <body>
+
+<div id="">
+
+</div>
+
 <div id="heroPicker" class="hidden">
     <div id="heroes">
         <div><a href="#">Mage</a></div>
@@ -31,49 +38,30 @@
 
         <div><a href="#">Warlock</a></div>
     </div>
-
-
     <div id="selectedHero"><img src="images/schild%20mage.png" alt="Selected Hero" title="Selected Hero"/></div>
-
-    <a href="#" id="continueKnop">Continue</a>
-
-    <a href="#" class="backKnop">  Back  </a>
+    <a href="#" id="gotoDeck">Continue</a>
+    <a href="#" id="gotoHome">  Back  </a>
 
 </div>
 
-<div id="deckPicker">
-    <div id="listOfDecks">
-
+<div id="deckPicker" class="hidden">
+    <div id="yourdecks">
         <div><a href="#">t t t t t t t t t t </a></div>
-
         <div><a href="#">Deck 2</a></div>
-
         <div><a href="#">Deck 3</a></div>
-
         <div><a href="#">Deck 4</a></div>
-
         <div><a href="#">Deck 5</a></div>
-
         <div><a href="#">Deck 6</a></div>
-
         <div><a href="#">Deck 7</a></div>
-
         <div><a href="#">Deck 7</a></div>
-
+        
         <div id="addDeck"><a href="#">Add Deck</a></div>
     </div>
-
-
     <div id="selectedDeck"><img src="images/schild%20mage.png" alt="Selected Deck" title="Selected Deck"/></div>
-
     <a href="#" id="playGame">Play</a>
-
-    <a href="#" class="backKnop">Back</a>
-
+    <a href="#" id="gotoHero">Back</a>
 </div>
 
-    
-    
 <div id="deckbuilder" class="hidden">
   <header>
     <div id="hero"><a href="#">Mage</a>
@@ -158,24 +146,29 @@
       </fieldset>
     </form>
   </aside>
-  <a href="#">Back</a>
+  <a id="gotoNoDeck" href="#">Back</a>
 </div>
 
+<div id="mainMenu" class="">
+  <div class="menuBox">
+    <ul>
+      <li id="gotoPlay"><a href="#" class="navItem mainMenu">Play</a></li>
+      <li id="gotoDeckBuilder"><a href="#" class="navItem mainMenu">Deck Builder</a></li>
+      <li id="gotoOptions"><a href="#" class="navItem mainMenu">Options</a></li>
+      <li id="gotoLogOut"><a href="#" class="navItem mainMenu">Log out</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- LET LOADING SCREEN BE THE LAST DIV!!! -->
 <div id="loadingScreen" class="hidden">
-  <figure>
-    <img src="images/loadingScreen.gif" alt="loadingScreenIcon" title="loadingScreenIcon"/>
-  </figure>
-</div>
-
-<div id="mainMenu" class="hidden">
-  <ul>
-    <li><a href="#" id="playTheGame" class="navItem MainMenu">Play the game</a></li>
-    <li><a href="#" id="_deckBuilder" class="navItem MainMenu">Deck builder</a></li>
-    <li><a href="#" id="options" class="navitem MainMenu">Options</a></li>
-    <li><a href="#" id="logOut" class="navitem MainMenu">Log out</a></li>
-  </ul>
+    <figure>
+        <img src="images/loadingScreen.gif" alt="loadingScreenIcon" title="loadingScreenIcon"/>
+    </figure>
 </div>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/loadingScreen.js"></script>
+<script src="assets/js/clickEvents.js"></script>
 </body>
 </html>

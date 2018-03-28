@@ -1,5 +1,5 @@
 @font-face {
-    font-family: hearthstoneFont;
+    font-family: howeststoneFont;
     src: url(../fonts/OPTIBelwe-Medium.otf)
 }
 
@@ -9,7 +9,7 @@
 
 a {
     background-image: none;
-    font-family: hearthstoneFont, serif;
+    font-family: howeststoneFont, serif;
     text-decoration: none;
     color: #af8829;
 
