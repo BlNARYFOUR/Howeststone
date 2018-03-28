@@ -12,7 +12,40 @@ function init() {
     document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoOptions').addEventListener('click', gotoOptions);
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
-    document.getElementById('gotoCredits').addEventListener('click', gotoCredits)
+    document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
+    document.getElementById('playGame').addEventListener('click', playGame);
+    document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
+}
+
+function toggleFullScreen() {
+    let elem = document.querySelector('html');
+
+    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
+}
+
+function playGame() {
+    document.getElementById('vsScreen').className = "";
+    document.getElementById('deckPicker').className = "hidden";
 }
 
 function gotoHome() {
@@ -40,7 +73,6 @@ function gotoHero() {
     document.getElementById('deckPicker').className = "hidden";
     document.getElementById('heroPicker').className = "";
 }
-
 
 function gotoDeckBuilder() {
     // ontbrekende htmlpagina
@@ -76,7 +108,7 @@ function addDeck() {
     document.getElementById('gotoNoDeck').setAttribute("id", "gotoChooseDeck");
     document.getElementById('gotoChooseDeck').addEventListener('click', gotoChooseDeck);
 }
-// werkt dit??
+
 function gotoChooseDeck() {
     document.getElementById('gotoChooseDeck').removeEventListener('click', gotoChooseDeck);
     document.getElementById('gotoChooseDeck').setAttribute("id", "gotoNoDeck");
