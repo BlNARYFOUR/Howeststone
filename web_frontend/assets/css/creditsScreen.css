@@ -6,34 +6,50 @@
     position: absolute;
     width:100vw;
     font-family: heartstoneFront, serif;
-}
-#creditsScreen .menuBox {
-    background: url("../media/CreditsScreenBorder.png") no-repeat center center;
-    background-size: 120vh;
-    height: 100vh;
-    line-height: 100vh;
-    text-align: center;
-}
-#creditsScreen main{
-    display: inline-block;
-    width: 100vw;
-    line-height: normal;
-    height: 55vh;
-    margin-top: 30vh;
-}
-
-
-#creditsScreen header h1{
-    font-weight: bold;
     color: #513d1f;
 }
+#creditsScreen .menuBox {
+    background: url("../media/woodBorderStoneBackground.png") no-repeat center center;
+    background-size: 120vh;
+    height: 100vh;
+    text-align: center;
+}
 
-#creditsScreen section{
-    display: block;
-    line-height: 2vh;
-    width: 10vw;
-    vertical-align: middle;
-    margin-top: 6vh;
+#creditsScreen header {
+    padding-top: 25vh;
+}
+
+#creditsScreen #developerTeamAndFunctions {
+    display: flex;
+    justify-content: space-between;
+    width: 35vh;
     margin-left: auto;
     margin-right: auto;
+
+}
+
+#creditsScreen section {
+
+}
+
+#creditsScreen h1 {
+    font-size: 1.8rem;
+    margin-bottom:2vh;
+    font-weight: bold;
+}
+
+#creditsScreen h2 {
+    font-size: 1.2rem;
+    margin-top: 1.5vh;
+    margin-bottom: 1.1vh;
+    font-weight: bold;
+}
+
+#creditsScreen p {
+    margin-bottom: 0.5vh;
+
+}
+
+#creditsScreen li {
+    margin-bottom: 0.5vh;
 }
