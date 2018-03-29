@@ -1,11 +1,4 @@
-/*#playField html, #playField {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    box-sizing: border-box;
-}*/
-
-#playField {
+#gameBoard {
     background: url(../media/board_01.jpg) no-repeat center center;
     background-size: 177.77vh 100vh;
     height: 100vh;
@@ -13,9 +6,54 @@
     width: 100vw;
 }
 
-#playingField {
+#gameBoard .main {
+    display: block;
+    position: relative;
+    width: 126vh;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#gameBoard .you {
+    display: block;
+    width: 100%;
+    height: 53.25vh;
+    background-color: rgba(0,0,255,0.4);
+}
+
+#gameBoard .enemy {
+    display: block;
+    width: 100%;
+    height: 46.75vh;
+    vertical-align: middle;
+    background-color: rgba(255,0,0,0.4);
+}
+
+#gameBoard .cards {
 
 }
+
+#gameBoard .you .cards {
+    display: block;
+    width: 45%;
+    height: 14.025vh;
+    padding-top: 32.725vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0,255,0,0.4);
+}
+
+#gameBoard .enemy .cards {
+    display: block;
+    width: 45%;
+    height: 14.025vh;
+    padding-top: 32.725vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0,255,255,0.4);
+}
+
 /*
 #playField .main {
     height: 100%;
