@@ -15,7 +15,18 @@ function init() {
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('playGame').addEventListener('click', playGame);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
-    document.getElementById('gotoMainMenu').addEventListener('click', gotoMainMenu)
+    document.getElementById('gotoMainMenu').addEventListener('click', gotoMainMenu);
+    document.getElementById('tutorial1button').addEventListener('click', gotoTutorial2);
+    document.getElementById('tutorial2button').addEventListener('click', gotoTutorial3);
+    document.getElementById('tutorial3button').addEventListener('click', gotoTutorial4);
+    document.getElementById('tutorial4button').addEventListener('click', gotoTutorial5);
+    document.getElementById('tutorial5button').addEventListener('click', gotoTutorial6);
+    document.getElementById('tutorial6button').addEventListener('click', gotoTutorial7);
+    document.getElementById('tutorial7button').addEventListener('click', gotoTutorial8);
+    document.getElementById('tutorial8button').addEventListener('click', gotoTutorial9);
+    document.getElementById('tutorial9button').addEventListener('click', gotoTutorial10);
+    document.getElementById('tutorial10button').addEventListener('click', gotoTutorial11);
+    document.getElementById('tutorial11button').addEventListener('click', gotoLeaveTutorial);
 }
 
 function toggleFullScreen() {
@@ -88,6 +99,50 @@ function gotoDeckBuilder() {
     // ontbrekende htmlpagina
     document.getElementById('mainMenu').className = "hidden";
     document.getElementById('deckbuilder').className = "";
+}
+
+function gotoTutorial2() {
+    document.getElementById('tutorial1').className = "hidden";
+    document.getElementById('tutorial2').className = "";
+}
+function gotoTutorial3() {
+    document.getElementById('tutorial2').className = "hidden";
+    document.getElementById('tutorial3').className = "";
+}
+function gotoTutorial4() {
+    document.getElementById('tutorial3').className = "hidden";
+    document.getElementById('tutorial4').className = "";
+}
+function gotoTutorial5() {
+    document.getElementById('tutorial4').className = "hidden";
+    document.getElementById('tutorial5').className = "";
+}
+function gotoTutorial6() {
+    document.getElementById('tutorial5').className = "hidden";
+    document.getElementById('tutorial6').className = "";
+}
+function gotoTutorial7() {
+    document.getElementById('tutorial6').className = "hidden";
+    document.getElementById('tutorial7').className = "";
+}
+function gotoTutorial8() {
+    document.getElementById('tutorial7').className = "hidden";
+    document.getElementById('tutorial8').className = "";
+}
+function gotoTutorial9() {
+    document.getElementById('tutorial8').className = "hidden";
+    document.getElementById('tutorial9').className = "";
+}
+function gotoTutorial10() {
+    document.getElementById('tutorial9').className = "hidden";
+    document.getElementById('tutorial10').className = "";
+}
+function gotoTutorial11() {
+    document.getElementById('tutorial10').className = "hidden";
+    document.getElementById('tutorial11').className = "";
+}
+function gotoLeaveTutorial() {
+    document.getElementById('tutorial11').className = "hidden";
 }
 
 function gotoOptions() {
