@@ -2,31 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="assets/media/icon2.png"/>
+    <link rel="icon" type="image/png" href="assets/media/icon.png"/>
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/webbuilder.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/deckPicker.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/heroPicker.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/deckbuilder.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/optionsMenu.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css"/>
     <!--<link href="assets/css/playingField.css" rel="stylesheet" type="text/css">-->
-
-  <meta name="author" content="3BEES&ME">
-  <title>Howeststone</title>
+    <meta name="author" content="3BEESANDME">
+    <title>Howeststone</title>
 </head>
 <body>
-
-<div id="mainMenu" class="">
-    <div class="menuBox">
-        <ul>
-            <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
-            <li id="gotoDeckBuilder"><a href="#" class="navItem MainMenu">Deck Builder</a></li>
-            <li id="gotoOptions"><a href="#" class="navitem MainMenu">Options</a></li>
-            <li id="gotoLogOut"><a href="#" class="navitem MainMenu">Log out</a></li>
-        </ul>
-    </div>
-</div>
 
 <div id="loginAndRegistrationScreen" class="hidden">
     <div class="menuBox">
@@ -44,65 +34,61 @@
     </div>
 </div>
 
-<div id="heroPicker" class="hidden">
-    <div id="heroes">
-        <div><a href="#">Mage</a></div>
-
-        <div><a href="#">Paladin</a></div>
-
-        <div><a href="#">Warrior</a></div>
-
-        <div><a href="#">Pries</a></div>
-
-        <div><a href="#">Druid</a></div>
-
-        <div><a href="#">Hunter</a></div>
-
-        <div><a href="#">Shaman</a></div>
-
-        <div><a href="#">Rogue</a></div>
-
-        <div><a href="#">Warlock</a></div>
+<div id="mainMenu" class="">
+    <div class="menuBox">
+        <ul>
+            <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
+            <li id="gotoDeckBuilder"><a href="#" class="navItem MainMenu">Deck Builder</a></li>
+            <li id="gotoOptions"><a href="#" class="navitem MainMenu">Options</a></li>
+            <li id="gotoLogOut"><a href="#" class="navitem MainMenu">Log out</a></li>
+        </ul>
     </div>
+</div>
 
+<div id="heroPicker" class="hidden">
+    <div class="pickerBox">
+        <ul id="heroes">
+            <li><a href="#">Mage</a></li>
+            <li><a href="#">Paladin</a></li>
+            <li><a href="#">Warrior</a></li>
+            <li><a href="#">Priest</a></li>
+            <li><a href="#">Druid</a></li>
+            <li><a href="#">Hunter</a></li>
+            <li><a href="#">Shaman</a></li>
+            <li><a href="#">Rogue</a></li>
+            <li><a href="#">Warlock</a></li>
+        </ul>
 
-    <div id="selectedHero"><img src="images/Jaina_Proudmoore.png" alt="Jaina Proudmoore" title="Jaina Proudmoore"/></div>
+        <span id="selectedHero"></span>
+        <h1 class="selectedHeroName">Hero name</h1>
 
-    <a href="#" id="gotoDeck">Continue</a>
-
-    <a href="#" id="gotoHome">  Back  </a>
-
+        <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeck">Continue</a></span>
+        <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHome">  Back  </a></span>
+    </div>
 </div>
 
 <div id="deckPicker" class="hidden">
-    <div id="yourdecks">
+    <div class="pickerBox">
+        <ul id="yourDecks">
+            <li id="deck_0"><a href="#">Some Deck :)</a></li>
+            <li id="deck_1"><a href="#">Deck 2</a></li>
+            <li id="deck_2"><a href="#">Deck 3</a></li>
+            <li id="deck_3"><a href="#">Deck 4</a></li>
+            <li id="deck_4"><a href="#">Deck 5</a></li>
+            <li id="deck_5"><a href="#">Deck 6</a></li>
+            <li id="deck_6"><a href="#">Deck 7</a></li>
+            <li id="deck_7"><a href="#">Deck 8</a></li>
+            <li id="deck_9"><a href="#">Deck 9</a></li>
+        </ul>
 
-        <div><a href="#">t t t t t t t t t t </a></div>
+        <span id="addDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="addDeck">Add deck</a></span>
 
-        <div><a href="#">Deck 2</a></div>
+        <div id="selectedDeck"></div>
+        <h1 class="selectedHeroName">Hero name</h1>
 
-        <div><a href="#">Deck 3</a></div>
-
-        <div><a href="#">Deck 4</a></div>
-
-        <div><a href="#">Deck 5</a></div>
-
-        <div><a href="#">Deck 6</a></div>
-
-        <div><a href="#">Deck 7</a></div>
-
-        <div><a href="#">Deck 7</a></div>
-
-        <div id="addDeck"><a href="#">Add Deck</a></div>
+        <a href="#" id="playGame"></a>
+        <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHero">Back</a></span>
     </div>
-
-
-    <div id="SelectedDeck"></div>
-
-    <a href="#" id="playGame">Play</a>
-
-    <a href="#" id="gotoHero">Back</a>
-
 </div>
 
 <div id="deckbuilder" class="hidden">
@@ -228,11 +214,49 @@
 <div id="options" class="hidden">
     <div class="optionsBox">
         <ul>
-            <li class="titleOptionsMenu">OPTIONS</li>
-            <li id="gotoSound"><a href="#" class="navItem OptionsMenu">Sound</a></li>
-            <li id="gotoCredits"><a href="#" class="navItem OptionsMenu">Credits</a></li>
-            <li id="gotoLeaveOptions"><a href="#" class="navitem OptionsMenu">Back</a></li>
+            <li id="toggleFullScreen"><a href="#" class="navItem optionMenu">Toggle full screen</a></li>
+            <li id="gotoSound"><a href="#" class="navItem optionsMenu">Sound</a></li>
+            <li id="gotoCredits"><a href="#" class="navItem optionsMenu">Credits</a></li>
+            <li id="gotoLeaveOptions"><a href="#" class="navItem optionsMenu">Back</a></li>
         </ul>
+    </div>
+</div>
+
+<div id="creditsScreen" class="hidden">
+    <div class="menuBox">
+        <header>
+            <h1>Credits</h1>
+            <p>Thank you for playing our game!</p>
+        </header>
+        <main>
+            <h2>Coach</h2>
+            <ul>
+                <li>Koen Cornelis</li>
+            </ul>
+
+            <div id="developerTeamAndFunctions">
+                <section>
+                    <h2>Developer Team</h2>
+                    <ul>
+                        <li>Brend Lambert</li>
+                        <li>Mattijs Step</li>
+                        <li>Bert Van Mulders</li>
+                        <li>Bram Vermeulen</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Function</h2>
+                    <ul>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                    </ul>
+                </section>
+            </div>
+        </main>
+        <span class="buttonHolder"><a href="#" class="insideButton" id="gotoMainMenu">Back</a></span>
     </div>
 </div>
 

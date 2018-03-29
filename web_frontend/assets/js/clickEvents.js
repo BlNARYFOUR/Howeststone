@@ -14,11 +14,39 @@ function init() {
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('playGame').addEventListener('click', playGame);
+    document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
 }
+
 
 function playrealGame() {
     document.getElementById('vsScreen').className = "hidden";
     document.getElementById('playField').className = "";
+}
+
+function toggleFullScreen() {
+    let elem = document.querySelector('html');
+
+    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
 }
 
 function playGame() {
@@ -52,7 +80,6 @@ function gotoHero() {
     document.getElementById('deckPicker').className = "hidden";
     document.getElementById('heroPicker').className = "";
 }
-
 
 function gotoDeckBuilder() {
     // ontbrekende htmlpagina
