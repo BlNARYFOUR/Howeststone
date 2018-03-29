@@ -11,9 +11,10 @@
     height: 100vh;
     position: absolute;
     width: 100vw;
-    /*
-    background: no-repeat black url("../media/board_01.jpg") center center;
-    background-size: contain;*/
+}
+
+#playingField {
+
 }
 /*
 #playField .main {

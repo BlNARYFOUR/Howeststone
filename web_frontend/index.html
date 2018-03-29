@@ -271,28 +271,93 @@
     <a id="gotoNoDeck" href="#">Back</a>
 </div>
 
-<div id="playField" class="">
+<div id="gameBoard" class="">
     <div class="main">
-        <ul class="eCards"><li>*e cards*</li></ul>
-        <div class="eManaTotal">*e mana*</div>
-        <ul><li>*e mana*</li></ul>
-        <div id="eHero">*e hero*</div>
-        <div id="eDeck">*e deck*</div>
-        <ul><li>*g log*</li></ul>
-        <span id="fuse">*g fuse*</span>
-        <span id="spark"></span>
-        <a href="#">*g end turn*</a>
-        <ul>
-            <li>*g field*</li>
-            <li>*e field*</li>
-            <li>*y field*</li>
+        <ul class="you">
+            <li class="cards">
+                <ul>
+                    <!-- must be generated in JS -->
+                    <li>Card 1</li>
+                    <li>Card 2</li>
+                </ul>
+            </li>
+
+            <li class="manaTotal">
+                <!-- leave empty -->
+            </li>
+
+            <li class="manaHolder">
+                <ul>
+                    <!-- must be generated in JS -->
+                    <li class="mana"></li>
+                    <li class="usedMana"></li>
+                </ul>
+            </li>
+
+            <li class="hero">
+                <!-- leave empty -->
+            </li>
+
+            <li class="deck">
+                <!-- leave empty -->
+            </li>
+
+            <li class="playingField">
+                <ul>
+                    <!-- must be generated in JS -->
+                    <!-- background etc. included! -->
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </li>
         </ul>
-        <div id="ydeck">*y deck**</div>
-        <div id="yhero">*y hero*</div>
-        <div class="eManaTotal">*y mana*</div>
-        <ul><li>*y mana*</li></ul>
-        <ul class="yCards"><li>*y cards*</li></ul>
-        <div id="gotoGameOptions">Options</div>
+
+        <ul class="enemy">
+            <li class="cards">
+                <ul>
+                    <!-- must be generated in JS -->
+                    <li>Card 1</li>
+                    <li>Card 2</li>
+                </ul>
+            </li>
+
+            <li class="manaTotal">
+                <!-- leave empty -->
+            </li>
+
+            <li class="hero">
+                <!-- leave empty -->
+            </li>
+
+            <li class="deck">
+                <!-- leave empty -->
+            </li>
+
+            <li class="playingField">
+                <ul>
+                    <!-- must be generated in JS -->
+                    <!-- background etc. included! -->
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul id="battleLog">
+            <!-- must be generated in JS -->
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <div id="fuse">
+            <span id="rope"></span>
+            <span id="spark"></span>
+        </div>
+
+        <a href="#" class="button" id="endTurn"></a>
     </div>
 </div>
 
