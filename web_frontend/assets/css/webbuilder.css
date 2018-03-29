@@ -9,7 +9,7 @@
     text-decoration: none;
     color: black;
 }
-#deckbuilder main {
+#deckbuilder .main {
     width: 77vw;
     position: absolute;
     top: 35vh;
