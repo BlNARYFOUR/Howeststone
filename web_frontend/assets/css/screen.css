@@ -1,6 +1,10 @@
 @font-face {
-    font-family: howeststoneFont;
-    src: url(../fonts/OPTIBelwe-Medium.otf)
+    font-family: 'howeststoneFont';
+    src: url('../fonts/OPTIBelwe-Medium.otf') format('otf');
+}
+
+body, html {
+    height: 100%;
 }
 
 .hidden {
@@ -8,14 +12,12 @@
     visibility: hidden;
 }
 
-a {
-    background-image: none;
-    font-family: howeststoneFont, serif;
+* {
+    font-family: howeststoneFont, serif !important;
     text-decoration: none;
     color: #af8829;
-
 }
 
-#tutorial1{
-    background-color: cyan;
+.buttonHolder .insideButton {
+    color: #513d1f !important;
 }
