@@ -17,6 +17,12 @@ function init() {
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
 }
 
+
+function playrealGame() {
+    document.getElementById('vsScreen').className = "hidden";
+    document.getElementById('playField').className = "";
+}
+
 function toggleFullScreen() {
     let elem = document.querySelector('html');
 
@@ -45,6 +51,7 @@ function toggleFullScreen() {
 
 function playGame() {
     document.getElementById('vsScreen').className = "";
+    setTimeout(playrealGame(), 5000);
     document.getElementById('deckPicker').className = "hidden";
 }
 

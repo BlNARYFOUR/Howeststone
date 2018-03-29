@@ -1,6 +1,6 @@
 @font-face {
-    font-family: howeststoneFont;
-    src: url(../fonts/OPTIBelwe-Medium.otf)
+    font-family: 'howeststoneFont';
+    src: url('../fonts/OPTIBelwe-Medium.otf') format('otf');
 }
 
 body, html {
