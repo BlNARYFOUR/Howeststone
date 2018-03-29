@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="assets/media/icon.png"/>
+    <meta charset="UTF-8">
+    
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#513d1f">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#513d1f">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#513d1f">
+
+    <!--<link rel="icon" type="image/png" href="assets/media/icon2.png"/>
+    <link rel="icon" type="image/png" href="assets/media/icon.png"/>-->
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
@@ -355,39 +364,41 @@
 </div>
 
 <div id="creditsScreen" class="hidden">
-  <div class="menuBox">
-    <header>
-      <h1>Credits</h1>
-      <p>Thank you for playing our game!</p>
-    </header>
-    <div class="main">
-      <h2>Coach</h2>
-      <ul>
-        <li>Koen Cornelis</li>
-      </ul>
-      <div id="developerTeamAndFunctions">
-        <section>
-          <h2>Developer Team</h2>
-          <ul>
-            <li>Brend Lambert</li>
-            <li>Mattijs Step</li>
-            <li>Bert Van Mulders</li>
-            <li>Bram Vermeulen</li>
-          </ul>
-        </section>
-        <section>
-          <h2>Function</h2>
-          <ul>
-            <li>Programmer</li>
-            <li>Programmer</li>
-            <li>Programmer</li>
-            <li>Programmer</li>
-          </ul>
-        </section>
-      </div>
+    <div class="menuBox">
+        <header>
+            <h1>Credits</h1>
+            <p>Thank you for playing our game!</p>
+        </header>
+        <div class="main">
+            <h2>Coach</h2>
+            <ul>
+                <li>Koen Cornelis</li>
+            </ul>
+
+            <div id="developerTeamAndFunctions">
+                <section>
+                    <h2>Developer Team</h2>
+                    <ul>
+                        <li>Brend Lambert</li>
+                        <li>Mattijs Step</li>
+                        <li>Bert Van Mulders</li>
+                        <li>Bram Vermeulen</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Function</h2>
+                    <ul>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+        <span class="buttonHolder"><a href="#" class="insideButton" id="gotoMainMenu">Back</a></span>
     </div>
-    <span class="buttonHolder"><a href="#" class="insideButton" id="gotoMainMenu">Back</a></span>
-  </div>
 </div>
 
 <!-- LET LOADING SCREEN BE THE LAST DIV!!! -->
