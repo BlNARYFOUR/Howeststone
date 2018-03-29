@@ -14,6 +14,7 @@ body, html {
 
 * {
     font-family: howeststoneFont, serif !important;
+    font-size: 2.06vh !important;
     text-decoration: none;
     color: #af8829;
 }

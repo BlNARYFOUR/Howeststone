@@ -14,22 +14,21 @@
     <link rel="icon" type="image/png" href="assets/media/icon.png"/>-->
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/deckPicker.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/heroPicker.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/deckbuilder.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/optionsMenu.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/playingField.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
-    <!--<link href="assets/css/playingField.css" rel="stylesheet" type="text/css">-->
   <meta name="author" content="3BEESANDME">
   <title>Howeststone</title>
 </head>
 <body>
 
-<div id="mainMenu" class="">
+<div id="mainMenu" class="hidden">
     <div class="menuBox">
         <ul>
             <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
@@ -272,7 +271,7 @@
     <a id="gotoNoDeck" href="#">Back</a>
 </div>
 
-<div id="playField" class="hidden">
+<div id="playField" class="">
     <div class="main">
         <ul class="eCards"><li>*e cards*</li></ul>
         <div class="eManaTotal">*e mana*</div>

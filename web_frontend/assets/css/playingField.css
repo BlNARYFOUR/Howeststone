@@ -7,7 +7,7 @@
 
 #playField {
     background: url(../media/board_01.jpg) no-repeat center center;
-    background-size: cover;
+    background-size: 177.77vh 100vh;
     height: 100vh;
     position: absolute;
     width: 100vw;
