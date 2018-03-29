@@ -12,11 +12,24 @@
     <link href="assets/css/optionsMenu.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/chooseHeroAndChooseDeck.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
     <!--<link href="assets/css/playingField.css" rel="stylesheet" type="text/css">-->
   <meta name="author" content="3BEESANDME">
   <title>Howeststone</title>
 </head>
 <body>
+
+<div id="mainMenu" class="hidden">
+    <div class="menuBox">
+        <ul>
+            <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
+            <li id="gotoDeckBuilder"><a href="#" class="navItem MainMenu">Deck Builder</a></li>
+            <li id="gotoOptions"><a href="#" class="navitem MainMenu">Options</a></li>
+            <li id="gotoLogOut"><a href="#" class="navitem MainMenu">Log out</a></li>
+        </ul>
+    </div>
+</div>
 
 <div id="loginAndRegistrationScreen" class="hidden">
     <div class="menuBox">
@@ -31,17 +44,6 @@
             <input type="password" id="confirmPass" name="confirmPass" placeholder="Confirm password" required="required" />
             <input type="submit" value="Login" id="submitRegister" name="submitRegister" />
         </form>
-    </div>
-</div>
-
-<div id="mainMenu" class="">
-    <div class="menuBox">
-        <ul>
-            <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
-            <li id="gotoDeckBuilder"><a href="#" class="navItem MainMenu">Deck Builder</a></li>
-            <li id="gotoOptions"><a href="#" class="navitem MainMenu">Options</a></li>
-            <li id="gotoLogOut"><a href="#" class="navitem MainMenu">Log out</a></li>
-        </ul>
     </div>
 </div>
 
@@ -91,6 +93,53 @@
     </div>
 </div>
 
+<div id="deckbuilder" class="">
+    <div id="tutorial1">
+        <p>Sort, filter your card and search for cards here.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial2">
+        <p>After filtering, sorting or searching your cards, the results apear here.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial3">
+        <p>Filter on cards in your deck here.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial4">
+        <p>The filtered cards apear here.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial5">
+        <p>Here's your selected hero.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial6">
+        <p>Here's your deck.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial7">
+        <p>Klick here to create a new deck.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial8">
+        <p>Klick here to save your deck.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial9">
+        <p>Card info; mana in the left uppercorner, attack in the left bottom corner and health in the right bottom corner.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial10">
+        <p>Add and remove a card by double klicking or dragging.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial11">
+        <p>Decks of your selected hero apear here, klick 'add deck' to make a new one</p>
+        <button>Next</button>
+    </div>
+</div>
+
 <div id="XXdeckChooser" class="hidden">
     <div id="XXwhoBuild">
         <div><a href="#">Mage</a></div>
@@ -118,10 +167,53 @@
     <a href="#" id="XXgotoDeckBuilderI">Continue</a>
 
     <a href="#" id="XXgotoNoDeckI">Back</a>
-
 </div>
 
-<div id="deckbuilder" class="hidden">
+<div id="deckbuilder" class="">
+    <div id="tutorial1">
+        <p>Sort, filter your card and search for cards here.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial2">
+        <p>After filtering, sorting or searching your cards, the results apear here.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial3">
+        <p>Filter on cards in your deck here.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial4">
+        <p>The filtered cards apear here.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial5">
+        <p>Here's your selected hero.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial6">
+        <p>Here's your deck.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial7">
+        <p>Klick here to create a new deck.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial8">
+        <p>Klick here to save your deck.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial9">
+        <p>Card info; mana in the left uppercorner, attack in the left bottom corner and health in the right bottom corner.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial10">
+        <p>Add and remove a card by double klicking or dragging.</p>
+        <button>Next</button>
+    </div>
+    <div id="tutorial11">
+        <p>Decks of your selected hero apear here, klick 'add deck' to make a new one</p>
+        <button>Next</button>
+    </div>
     <header>
         <div id="hero"><a href="#">Mage</a>
             <a href="#">Paladin</a>
@@ -241,6 +333,16 @@
     </div>
 </div>
 
+<div id="vsScreen" class="hidden">
+    <div id="enemyHero">
+        <img src="images/schild%20mage.png" alt="enemyHero" title="enemyHero">
+    </div>
+    <img src="assets/media/vs.png" alt="VS" title="VS" id="vs">
+    <div id="playerHero">
+        <img src="images/schild%20mage.png" alt="playerHero" title="playerHero">
+    </div>
+</div>
+
 <div id="options" class="hidden">
     <div class="optionsBox">
         <ul>
@@ -253,41 +355,39 @@
 </div>
 
 <div id="creditsScreen" class="hidden">
-    <div class="menuBox">
-        <header>
-            <h1>Credits</h1>
-            <p>Thank you for playing our game!</p>
-        </header>
-        <div class="main">
-            <h2>Coach</h2>
-            <ul>
-                <li>Koen Cornelis</li>
-            </ul>
-
-            <div id="developerTeamAndFunctions">
-                <section>
-                    <h2>Developer Team</h2>
-                    <ul>
-                        <li>Brend Lambert</li>
-                        <li>Mattijs Step</li>
-                        <li>Bert Van Mulders</li>
-                        <li>Bram Vermeulen</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Function</h2>
-                    <ul>
-                        <li>Programmer</li>
-                        <li>Programmer</li>
-                        <li>Programmer</li>
-                        <li>Programmer</li>
-                    </ul>
-                </section>
-            </div>
-        </div>
-        <span class="buttonHolder"><a href="#" class="insideButton" id="gotoMainMenu">Back</a></span>
+  <div class="menuBox">
+    <header>
+      <h1>Credits</h1>
+      <p>Thank you for playing our game!</p>
+    </header>
+    <div class="main">
+      <h2>Coach</h2>
+      <ul>
+        <li>Koen Cornelis</li>
+      </ul>
+      <div id="developerTeamAndFunctions">
+        <section>
+          <h2>Developer Team</h2>
+          <ul>
+            <li>Brend Lambert</li>
+            <li>Mattijs Step</li>
+            <li>Bert Van Mulders</li>
+            <li>Bram Vermeulen</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Function</h2>
+          <ul>
+            <li>Programmer</li>
+            <li>Programmer</li>
+            <li>Programmer</li>
+            <li>Programmer</li>
+          </ul>
+        </section>
+      </div>
     </div>
+    <span class="buttonHolder"><a href="#" class="insideButton" id="gotoMainMenu">Back</a></span>
+  </div>
 </div>
 
 <!-- LET LOADING SCREEN BE THE LAST DIV!!! -->
