@@ -17,3 +17,7 @@ body, html {
     font-family: howeststoneFont, serif;
     color: #af8829;
 }
+
+.buttonHolder .insideButton {
+    color: #513d1f !important;
+}

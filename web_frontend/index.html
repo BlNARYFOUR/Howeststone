@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<div id="mainMenu" class="hidden">
+<div id="mainMenu" class="">
     <div class="menuBox">
         <ul>
             <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<div id="heroPicker" class="">
+<div id="heroPicker" class="hidden">
     <div class="pickerBox">
         <ul id="heroes">
             <li><a href="#">Mage</a></li>
@@ -60,7 +60,7 @@
         </ul>
 
         <span id="selectedHero"></span>
-        <h1 id="selectedHeroName">Hero name</h1>
+        <h1 class="selectedHeroName">Hero name</h1>
 
         <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeck">Continue</a></span>
         <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHome">  Back  </a></span>
@@ -77,14 +77,17 @@
             <li id="deck_4"><a href="#">Deck 5</a></li>
             <li id="deck_5"><a href="#">Deck 6</a></li>
             <li id="deck_6"><a href="#">Deck 7</a></li>
-            <li id="deck_7"><a href="#">Deck 7</a></li>
-            <li id="addDeck"><a href="#">Add Deck</a></li>
+            <li id="deck_7"><a href="#">Deck 8</a></li>
+            <li id="deck_9"><a href="#">Deck 9</a></li>
         </ul>
 
+        <span id="addDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="addDeck">Add deck</a></span>
+
         <div id="selectedDeck"></div>
+        <h1 class="selectedHeroName">Hero name</h1>
 
         <a href="#" id="playGame"></a>
-        <a href="#" id="gotoHero">Back</a>
+        <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHero">Back</a></span>
     </div>
 </div>
 
@@ -219,7 +222,7 @@
     </div>
 </div>
 
-<div id="creditsScreen" class="">
+<div id="creditsScreen" class="hidden">
     <div class="menuBox">
         <header>
             <h1>Credits</h1>
