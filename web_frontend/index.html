@@ -13,8 +13,8 @@
     <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
     <!--<link href="assets/css/playingField.css" rel="stylesheet" type="text/css">-->
-    <meta name="author" content="3BEESANDME">
-    <title>Howeststone</title>
+  <meta name="author" content="3BEESANDME">
+  <title>Howeststone</title>
 </head>
 <body>
 
@@ -91,6 +91,36 @@
     </div>
 </div>
 
+<div id="XXdeckChooser" class="hidden">
+    <div id="XXwhoBuild">
+        <div><a href="#">Mage</a></div>
+
+        <div><a href="#">Paladin</a></div>
+
+        <div><a href="#">Warrior</a></div>
+
+        <div><a href="#">Pries</a></div>
+
+        <div><a href="#">Druid</a></div>
+
+        <div><a href="#">Hunter</a></div>
+
+        <div><a href="#">Shaman</a></div>
+
+        <div><a href="#">Rogue</a></div>
+
+        <div><a href="#">Warlock</a></div>
+    </div>
+
+
+    <div id="XXJaina"><img src="images/Jaina_Proudmoore.png" alt="Jaina Proudmoore" title="Jaina Proudmoore"/></div>
+
+    <a href="#" id="XXgotoDeckBuilderI">Continue</a>
+
+    <a href="#" id="XXgotoNoDeckI">Back</a>
+
+</div>
+
 <div id="deckbuilder" class="hidden">
     <header>
         <div id="hero"><a href="#">Mage</a>
@@ -107,10 +137,10 @@
         <a id="firstadd" href="#">+</a>
         <a id="save" href="#">SAVE</a>
     </header>
-    <main>
+    <div class="main">
         <ul id="cards"><li>*cards*</li></ul>
         <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
-    </main>
+    </div>
     <aside>
         <form>
             <input id="search" type="text" placeholder="search"/>
@@ -187,7 +217,7 @@
 </div>
 
 <div id="playField" class="hidden">
-    <main>
+    <div class="main">
         <ul class="eCards"><li>*e cards*</li></ul>
         <div class="eManaTotal">*e mana*</div>
         <ul><li>*e mana*</li></ul>
@@ -208,7 +238,7 @@
         <ul><li>*y mana*</li></ul>
         <ul class="yCards"><li>*y cards*</li></ul>
         <div id="gotoGameOptions">Options</div>
-    </main>
+    </div>
 </div>
 
 <div id="options" class="hidden">
@@ -228,7 +258,7 @@
             <h1>Credits</h1>
             <p>Thank you for playing our game!</p>
         </header>
-        <main>
+        <div class="main">
             <h2>Coach</h2>
             <ul>
                 <li>Koen Cornelis</li>
@@ -255,7 +285,7 @@
                     </ul>
                 </section>
             </div>
-        </main>
+        </div>
         <span class="buttonHolder"><a href="#" class="insideButton" id="gotoMainMenu">Back</a></span>
     </div>
 </div>
