@@ -15,12 +15,7 @@ function init() {
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('playGame').addEventListener('click', playGame);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
-}
-
-
-function playrealGame() {
-    document.getElementById('vsScreen').className = "hidden";
-    document.getElementById('playField').className = "";
+    document.getElementById('gotoMainMenu').addEventListener('click', gotoMainMenu)
 }
 
 function toggleFullScreen() {
@@ -48,11 +43,19 @@ function toggleFullScreen() {
         }
     }
 }
+function gotoMainMenu() {
+    document.getElementById('options').className = "";
+    document.getElementById('creditsScreen').className = "hidden";
+}
 
 function playGame() {
     document.getElementById('vsScreen').className = "";
-    setTimeout(playrealGame(), 5000);
     document.getElementById('deckPicker').className = "hidden";
+    setTimeout(function playrealGame() {
+        document.getElementById('playField').className = "";
+        document.getElementById('vsScreen').className = "hidden";
+    }, 3000);
+
 }
 
 function gotoHome() {

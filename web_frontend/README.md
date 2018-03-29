@@ -6,7 +6,7 @@ Deck's zijn maximaal 20 chars
 dus maximaal 'T T T T T T T T T T T T T T T T T T T T'
 
 Button zijn a
-vb <a>back</a>
+vb <a href='#'>back</a>
 
 
 ECMAscript 6
