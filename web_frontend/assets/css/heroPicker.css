@@ -68,72 +68,40 @@
 }
 
 #heroPicker .buttonHolder {
+    position: absolute;
     display: inline-block;
-    bottom: 0;
     font-weight: bold;
     background: no-repeat url("../media/button.png") center center;
-    background-size: 20vh;
+    background-size: 100% 100%;
     width: 20vh;
     height: 7vh;
     line-height: 7.5vh;
-    margin-top: 17.5vh;
     text-align: center;
 }
 
 #heroPicker .buttonHolder .insideButton {
     vertical-align: center;
     display: inline-block;
-    width: 12vh;
+    width: 11vh;
     line-height: 5.5vh;
-    border: red thin solid;
     border-radius: 10% / 50%;
 }
 
-/*
-#heroPicker #selectedHero {
-    display: block;
-    position: absolute;
-    bottom: 38vh;
-    right: 17vw;
-    width: 20vw;
-    height: 30vh;
-    background: no-repeat url("../media/mage.png") center center;
-    background-size: contain;
-}
-#heroPicker #gotoDeck {
-    position: absolute;
-    bottom: 18vh;
-    right: 24.5vw;
-}
-#heroPicker #gotoHome, #deckPicker #gotoHero{
-    display: block;
-    position: absolute;
-    bottom: 0;
-    right: 17vw;
+#heroPicker #gotoDeckHolder {
+    bottom: 21vh;
+    right: 15.5vh;
 }
 
-#heroPicker #heroes li a, #heroPicker #selectedHero {
-    width: 15vw;
+#heroPicker #gotoHomeHolder {
+    bottom: 4.75vh;
+    right: -0.5vh;
+    height: 6vh;
+    line-height: 6.2vh;
+    width: 16vh;
+
 }
 
-#heroPicker .buttonHolder {
-    display: inline-block;
-    bottom: 0;
-    font-weight: bold;
-    background: no-repeat url("../media/button.png") center center;
-    background-size: 20vh;
-    width: 20vh;
-    height: 7vh;
-    line-height: 7.5vh;
-    margin-top: 17.5vh;
+#heroPicker #gotoHomeHolder .insideButton {
+    width: 9.4vh;
+    line-height: 5vh;
 }
-
-#heroPicker .buttonHolder .insideButton {
-    vertical-align: center;
-    display: inline-block;
-    width: 12vh;
-    line-height: 5.5vh;
-    border: red thin solid;
-    border-radius: 10% / 50%;
-}
-*/
