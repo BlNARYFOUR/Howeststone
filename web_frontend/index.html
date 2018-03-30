@@ -29,7 +29,7 @@
 </head>
 <body>
 
-<div id="mainMenu" class="">
+<div id="mainMenu" class="hidden">
     <div class="menuBox">
         <ul>
             <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
@@ -131,7 +131,7 @@
     <a href="#" id="XXgotoNoDeckI">Back</a>
 </div>
 
-<div id="deckbuilder" class="hidden">
+<div id="deckbuilder" class="">
     <div id="tutorials" class="hidden">
         <div id="tutorial1">
             <p>Sort, filter your card and search for cards here.</p>
@@ -193,9 +193,16 @@
         <a id="firstadd" href="#">+</a>
         <a id="save" href="#">SAVE</a>
     </header>
-    <div class="main">
+    <div class="main hidden">
         <ul id="cards"><li>*cards*</li></ul>
         <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
+    </div>
+    <div class="save">
+        <label for="deckName">You're deck is not yet complete<br/> would you like to save it?</label>
+        <input type="text" name="deckName" id="deckName" placeholder="Deck 01">
+        <ul><li><a href="#">save</a></li>
+            <li><a href="#">delete</a></li>
+            <li><a href="#">back</a></li></ul>
     </div>
     <aside>
         <form>
@@ -269,7 +276,7 @@
             </fieldset>
         </form>
     </aside>
-    <a id="gotoNoDeck" href="#">Back</a>
+    <a class="buttonHolder gotoMainMenu" href="#">Back</a>
 </div>
 
 <div id="playField" class="hidden">
