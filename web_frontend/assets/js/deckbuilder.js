@@ -13,7 +13,8 @@ function init() {
 
 
     // click event: "kaart verwijderen in deckbuilder"
-    //document.querySelector(".chosenCards").addEventListener('dblclick', removeCardFromDeck);
+
+
     console.log('test');
 }
     /*getAllCards();
@@ -45,14 +46,17 @@ function mockCard(card) {
 }
 
 function addCardToDeck(e) {
-    document.getElementById("deck").innerHTML += "<li class='chosenCards'><a href='#'>"+e.target.parentElement.innerHTML+"</a></li>";
-    // addeventlistener
+    document.getElementById("deck").innerHTML += "<li class='chosenCards'>"+this.innerHTML+"</li>";
+   
+    let chosenCards = document.querySelectorAll(".chosenCards");
+    for(let i = 0 ; i < chosenCards.length; i++){
+        chosenCards[i].addEventListener('dblclick', removeCardFromDeck);
+    }
 }
 
-//function removeCardFromDeck(e) {
-//    document.getElementById("deck").innerHTML -="<li class='chosenCards'><a href='#'>"+e.target.innerHTML+"</a></li>";
-//    document.getElementById("cards").innerHTML +="<li class='cardsInDeck'><a href='#'>"+e.target.innerHTML+"</a></li>";
-//}
+function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zonder)
+    this.parentNode.removeChild(this);
+}
 
 function rightclick(e) {
     e.preventDefault();
@@ -65,4 +69,3 @@ function rightclick(e) {
 
     /*e.target*/
 }
-

@@ -211,6 +211,7 @@
 #deck li {
     display: inline-block;
     width: 11vh;
+    text-align: center;
 }
 
 #deck img{
