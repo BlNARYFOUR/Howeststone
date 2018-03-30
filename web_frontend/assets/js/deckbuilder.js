@@ -8,7 +8,9 @@ function init() {
     let cardInDeck = document.querySelectorAll(".cardInDeck");
     for(let i = 0 ; i < cardInDeck.length; i++){
         cardInDeck[i].addEventListener('dblclick', addCardToDeck);
+        cardInDeck[i].addEventListener('contextmenu', rightclick);
     }
+
 
     // click event: "kaart verwijderen in deckbuilder"
     //document.querySelector(".chosenCards").addEventListener('dblclick', removeCardFromDeck);
@@ -43,13 +45,24 @@ function mockCard(card) {
 }
 
 function addCardToDeck(e) {
-    let target = event.target;
-    let parent = target.parentElement;
-    console.log(parent.innerHTML);
-    document.getElementById("deck").innerHTML += "<li class='chosenCards'><a href='#'>"+parent.innerHTML+"</a></li>";
+    document.getElementById("deck").innerHTML += "<li class='chosenCards'><a href='#'>"+e.target.parentElement.innerHTML+"</a></li>";
+    // addeventlistener
 }
 
 //function removeCardFromDeck(e) {
 //    document.getElementById("deck").innerHTML -="<li class='chosenCards'><a href='#'>"+e.target.innerHTML+"</a></li>";
 //    document.getElementById("cards").innerHTML +="<li class='cardsInDeck'><a href='#'>"+e.target.innerHTML+"</a></li>";
 //}
+
+function rightclick(e) {
+    e.preventDefault();
+
+    document.querySelector('#bigcard').innerHTML += "<li class='chosenCards'><a href='#'>"+e.target.parentElement.innerHTML+"</a></li>";
+    }
+
+    // uitleg kaarten over normale kaarten
+    // left: 40vh;
+
+    /*e.target*/
+}
+
