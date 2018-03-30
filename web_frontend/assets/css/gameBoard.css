@@ -31,7 +31,14 @@
 }
 
 #gameBoard .cards {
+    overflow: hidden;
+    /*padding-left: 36vh;*/
+}
+
+#gameBoard .cards ul {
     text-align: center;
+    margin-left: -1vh;
+    width: 100%;
 }
 
 #gameBoard .you .cards {
