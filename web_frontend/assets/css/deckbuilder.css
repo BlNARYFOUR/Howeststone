@@ -217,3 +217,11 @@
 #deck img{
     width: 5vw;
 }
+
+#deckbuilder #bigcard{
+    position: absolute;
+    top: -5vh;
+}
+#deckbuilder #bigcard img{
+    width: 45vh;
+}
