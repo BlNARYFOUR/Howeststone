@@ -15,7 +15,7 @@ function init() {
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('playGame').addEventListener('click', playGame);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
-    document.getElementById('gotoMainMenu').addEventListener('click', gotoMainMenu)
+    document.getElementById('gotoMainMenu').addEventListener('click', gotoMainMenu);
 }
 
 function toggleFullScreen() {
@@ -89,6 +89,7 @@ function gotoDeckBuilder() {
     document.getElementById('mainMenu').className = "hidden";
     document.getElementById('deckbuilder').className = "";
 }
+
 
 function gotoOptions() {
     document.getElementById('mainMenu').className = "hidden";
