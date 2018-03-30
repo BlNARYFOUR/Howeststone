@@ -46,13 +46,15 @@
     line-height: 20vh;
     position: absolute;
     top: 14vh;
-    left: 55vw;
-    height: 20vh;
-    width: 22.5vw;
+    right: 0;
+    width: 21.5vw;
     border: 1px black solid;
 }
 
 #deckbuilder #hero{
+    position: absolute;
+    width: 30vw;
+    left: 20vw;
     padding-top: 2vh;
     line-height: 5vh;
     text-align: center;
@@ -65,6 +67,8 @@
     padding: 1%;
 }
 #deckbuilder #quickfilter{
+    position: absolute;
+    top: 8vh;
     padding-top: 2vh;
     padding-bottom: 1vh;
 }
@@ -76,7 +80,8 @@
     border: 1px black solid;
 }
 #deckbuilder #deck{
-    margin-top: 0.1px;
+    position: absolute;
+    top: 14vh;
     width: 55vw;
     border: 1px black solid;
     height: 20vh;
@@ -181,7 +186,7 @@
     left: 0;
 }
 #deckbuilder #sort{
-    width: 17vw;
+    width: 14vw;
     position: absolute;
     top: 10vh;
     right: 0;
@@ -191,4 +196,50 @@
     width: 22.5vw;
     position: absolute;
     top: 25vh;
+}
+#deckbuilder .save{
+    width: 77vw;
+    position: absolute;
+    top: 35vh;
+    right: 0;
+}
+#deckbuilder .save>label{
+    text-align: center;
+    width: 30vw;
+    left: 20vw;
+    position: absolute;
+    top: 20vh;
+}
+#deckbuilder .save input{
+    width: 30vw;
+    left: 20vw;
+    position: absolute;
+    top: 25vh;
+}
+#deckbuilder .save ul{
+    display: flex;
+    width: 30vw;
+    left: 20vw;
+    position: absolute;
+    justify-content: space-between;
+    top: 30vh;
+}
+#deckbuilder .save li{
+    padding: 5px;
+    border: 1px solid black;
+}
+
+#deckbuilder .gotoMainMenu {
+    position: absolute;
+    bottom: 5vh;
+    left: 5.5vw;
+}
+
+#deckbuilder .buttonHolder {
+    border: 1px black solid;
+    background-size: 100% 100%;
+    width: 20vh;
+    height: 7vh;
+    line-height: 7.5vh;
+    text-align: center;
 }

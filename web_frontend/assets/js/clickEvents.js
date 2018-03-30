@@ -2,7 +2,13 @@
 
 document.addEventListener('DOMContentLoaded', init);
 
+function main() {
+    /* niet juist*/
+
+}
+
 function init() {
+    document.querySelector('gotoMainMenu').addEventListener(main);
     document.getElementById('gotoPlay').addEventListener('click', gotoPlay);
     document.getElementById('gotoHome').addEventListener('click', gotoHome);
     document.getElementById('gotoDeck').addEventListener('click', gotoDeck);
