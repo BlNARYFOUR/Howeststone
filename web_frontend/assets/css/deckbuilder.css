@@ -198,7 +198,6 @@
 #cards {
     overflow-y:scroll;
 }
-
 .cardInDeck {
     margin-left: 1vw;
     display: inline;
@@ -218,10 +217,4 @@
     width: 5vw;
 }
 
-#deckbuilder #bigcard{
-    position: absolute;
-    top: -5vh;
-}
-#deckbuilder #bigcard img{
-    width: 45vh;
-}
+

@@ -8,7 +8,7 @@ function init() {
     let cardInDeck = document.querySelectorAll(".cardInDeck");
     for(let i = 0 ; i < cardInDeck.length; i++){
         cardInDeck[i].addEventListener('dblclick', addCardToDeck);
-        cardInDeck[i].addEventListener('contextmenu', rightclick);
+        cardInDeck[i].addEventListener('mouseover', detailOfCard);
     }
 
 
@@ -58,11 +58,14 @@ function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zo
     this.parentNode.removeChild(this);
 }
 
-function rightclick(e) {
+function detailOfCard(e) {
     e.preventDefault();
+/*
+    document.querySelector('.cardInDeck:hover').innerHTML += "<li class='chosenCards'><a href='#'>" + e.target.parentElement.innerHTML + "</a></li>";
 
-    document.querySelector('#bigcard').innerHTML += "<li class='chosenCards'><a href='#'>"+e.target.parentElement.innerHTML+"</a></li>";
-    }
+    document.querySelector('.cardInDeck:hover').style.position = 'absolute';
+    document.querySelector('.cardInDeck img:hover').style.width = '45vh';
+*/
 
     // uitleg kaarten over normale kaarten
     // left: 40vh;
