@@ -9,9 +9,9 @@ function init() {
     for(let i = 0 ; i < cardInDeck.length; i++){
         cardInDeck[i].addEventListener('dblclick', addCardToDeck);
     }
-
     // click event: "kaart verwijderen in deckbuilder"
-    //document.querySelector(".chosenCards").addEventListener('dblclick', removeCardFromDeck);
+
+
     console.log('test');
 }
     /*getAllCards();
@@ -43,13 +43,14 @@ function mockCard(card) {
 }
 
 function addCardToDeck(e) {
-    let target = event.target;
-    let parent = target.parentElement;
-    console.log(parent.innerHTML);
-    document.getElementById("deck").innerHTML += "<li class='chosenCards'><a href='#'>"+parent.innerHTML+"</a></li>";
+    document.getElementById("deck").innerHTML += "<li class='chosenCards'>"+this.innerHTML+"</li>";
+
+    let chosenCards = document.querySelectorAll(".chosenCards");
+    for(let i = 0 ; i < chosenCards.length; i++){
+        chosenCards[i].addEventListener('dblclick', removeCardFromDeck);
+    }
 }
 
-//function removeCardFromDeck(e) {
-//    document.getElementById("deck").innerHTML -="<li class='chosenCards'><a href='#'>"+e.target.innerHTML+"</a></li>";
-//    document.getElementById("cards").innerHTML +="<li class='cardsInDeck'><a href='#'>"+e.target.innerHTML+"</a></li>";
-//}
+function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zonder)
+    this.parentNode.removeChild(this);
+}
