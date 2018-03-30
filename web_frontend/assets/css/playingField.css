@@ -31,27 +31,35 @@
 }
 
 #gameBoard .cards {
-
+    text-align: center;
 }
 
 #gameBoard .you .cards {
     display: block;
-    width: 45%;
-    height: 14.025vh;
-    padding-top: 32.725vh;
-    margin-left: auto;
-    margin-right: auto;
+    height: 12vh;
+    padding-top: 41.25vh;
     background-color: rgba(0,255,0,0.4);
 }
 
 #gameBoard .enemy .cards {
     display: block;
-    width: 45%;
-    height: 14.025vh;
-    padding-top: 32.725vh;
-    margin-left: auto;
-    margin-right: auto;
+    height: 8vh;
+    padding-bottom: 38.75vh;
     background-color: rgba(0,255,255,0.4);
+}
+
+#gameBoard .cards li {
+    display: inline-block;
+    width: 11vh;
+    background-color: rgba(0,0,0,0.4);
+}
+
+#gameBoard .you .cards li {
+    height: 12vh;
+}
+
+#gameBoard .enemy .cards li {
+    height: 8vh;
 }
 
 /*
