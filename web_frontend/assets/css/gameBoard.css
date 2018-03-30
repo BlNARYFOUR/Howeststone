@@ -49,17 +49,25 @@
 }
 
 #gameBoard .cards li {
+    box-sizing: border-box;
     display: inline-block;
     width: 11vh;
-    background-color: rgba(0,0,0,0.4);
+    transition: transform 0.25s;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    border: whitesmoke thin solid;
 }
 
 #gameBoard .you .cards li {
     height: 12vh;
+    line-height: 12vh;
+    border-bottom: none;
 }
 
 #gameBoard .enemy .cards li {
     height: 8vh;
+    line-height: 8vh;
+    border-top: none;
 }
 
 /*
