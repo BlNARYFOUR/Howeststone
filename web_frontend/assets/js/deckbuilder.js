@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
+    document.querySelector('#firstadd').addEventListener('click', firstadd);
     mockCards();
     //click event: "kaart toevoegen in deckbuilder"
     let cardInDeck = document.querySelectorAll(".cardInDeck");
@@ -12,7 +13,6 @@ function init() {
         cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
     }
 
-
     // click event: "kaart verwijderen in deckbuilder"
 
 
@@ -20,7 +20,15 @@ function init() {
 }
     /*getAllCards();
 }
+*/
 
+function firstadd() {
+    /* apart scherm dat vraagt of deck moet opgeslaan worden*/
+    document.querySelector('.main').classList.toggle('hidden');
+    document.querySelector('.save').classList.toggle('hidden');
+}
+
+/*
 function getAllCards() {
     console.log('test');
     fetch('/API/getAllCards', {headers: {
