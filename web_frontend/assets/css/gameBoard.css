@@ -68,19 +68,40 @@
 }
 
 #gameBoard .you .cards li {
-    bottom: -3vh;
+    bottom: -0.5vh;
     height: 15vh;
     line-height: 15vh;
+    z-index: 0 !important;
 }
 
-#gameBoard .you .cards li:hover {
-    transform: scale(2.5, 2.5) translateY(-9vh) !important;
+#gameBoard .you .cards li:hover, #gameBoard .you .cards li:active {
+    transform-origin: left center !important;
+    transform: scale(2.5, 2.5) translate(-0.5vh, -5vh) !important;
+    z-index: 1 !important;
+}
+
+#gameBoard .you .cards li.notFanned:hover, #gameBoard .you .cards li.notFanned:active {
+    transform-origin: left center !important;
+    transform: scale(2.5, 2.5) translate(-0.5vh, -5.25vh) !important;
 }
 
 #gameBoard .enemy .cards li {
-    top: -7vh;
+    top: -5vh;
     height: 15vh;
     line-height: 15vh;
+}
+
+#gameBoard #tempButtonAddCard {
+    position: absolute;
+    bottom: 4vh;
+    line-height: 4vh;
+    width: 10vh;
+    text-align: center;
+    vertical-align: middle;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
 }
 
 /*

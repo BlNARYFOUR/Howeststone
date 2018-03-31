@@ -19,6 +19,10 @@ body, html {
     color: #af8829;
 }
 
+*::selection {
+    background-color: transparent;
+}
+
 .buttonHolder .insideButton {
     color: #513d1f !important;
 }
