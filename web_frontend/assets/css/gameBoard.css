@@ -31,20 +31,21 @@
 }
 
 #gameBoard .cards {
+    position: relative;
     overflow: hidden;
     /*padding-left: 36vh;*/
 }
 
 #gameBoard .cards ul {
     text-align: center;
-    margin-left: -1vh;
+    margin-left: -0.5vh;
     width: 100%;
 }
 
 #gameBoard .you .cards {
     display: block;
-    height: 12vh;
-    padding-top: 41.25vh;
+    height: 16vh;
+    padding-top: 37.25vh;
     background-color: rgba(0,255,0,0.4);
 }
 
@@ -56,6 +57,7 @@
 }
 
 #gameBoard .cards li {
+    position: absolute;
     box-sizing: border-box;
     display: inline-block;
     width: 11vh;
@@ -66,15 +68,19 @@
 }
 
 #gameBoard .you .cards li {
-    height: 12vh;
-    line-height: 12vh;
-    border-bottom: none;
+    bottom: -3vh;
+    height: 15vh;
+    line-height: 15vh;
+}
+
+#gameBoard .you .cards li:hover {
+    transform: scale(2.5, 2.5) translateY(-9vh) !important;
 }
 
 #gameBoard .enemy .cards li {
-    height: 8vh;
-    line-height: 8vh;
-    border-top: none;
+    top: -7vh;
+    height: 15vh;
+    line-height: 15vh;
 }
 
 /*

@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", init);
 
 function init() {
     setBackground();
-    overLapCards("you");
+    overLapCards("you", 5);
+    overLapCards("enemy", -5);
 
     /*
     document.getElementById("spark").addEventListener("click", burnFuse);
@@ -18,33 +19,44 @@ function burnFuse(e) {
 }
 */
 
-function overLapCards(parentClass) {
+function overLapCards(parentClass, grad) {
     let parent = document.getElementsByClassName(parentClass);
     let cards = document.querySelectorAll(`.${parentClass} .cards li`);
+    let totalWidth = 126;       // value in vh
     let totalFanWidth = 35;     // value in vh
     let cardWidth = 11;         // value in vh
+    let extraLeft = (totalWidth-totalFanWidth)/2;
     let diff = cardWidth * cards.length - totalFanWidth;
 
-    if(diff < 0)
-        diff = 0;
 
-    let offset = diff / (cards.length-1);
+    let offset = cardWidth - diff / (cards.length-1);
+
+    let minIndex = 0;
+    let amountOfCards = cards.length;
+
+    let gradAddOnPerCard = grad;   // value in grad
+    let currentGrad = -gradAddOnPerCard * Math.floor(amountOfCards/2);
+
+    if(diff > 0) {
+        for(let i = minIndex; i < amountOfCards; i++) {
+            cards[i].style.left = (offset*i + extraLeft) + "vh";
+            cards[i].style.transform = "rotate(" + currentGrad + "grad)";
+            console.log("Card adjusted: " + i);
+
+            currentGrad += gradAddOnPerCard;
+        }
+    }
+    else{
+        for(let i = minIndex; i < amountOfCards; i++) {
+            cards[i].style.position = "relative";
+        }
+    }
 
     console.log(offset);
 
-    let minIndex = 0;
-    let halfAmount =  Math.floor(cards.length/2);
-    let firstHalfIndex = halfAmount-1;
-    let amountOfCards = cards.length;
-    let secondHalfIndex = amountOfCards-(halfAmount);
+    // 177.77vh 100vh
 
-    for(let i = minIndex; i < halfAmount; i++) {
-        cards[i].style.transform = "translateX(" + (offset*(firstHalfIndex-i) + offset/2) + "vh)";
-    }
 
-    for(let i = secondHalfIndex; i < amountOfCards; i++) {
-        cards[i].style.transform = "translateX(-" + (offset*(i-halfAmount) + offset/2) + "vh)";
-    }
 }
 
 function setBackground() {
