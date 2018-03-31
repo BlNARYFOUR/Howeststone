@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", init);
 let cardCounter = 0;
 
 function init() {
-    document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
+    //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
     makeCardsFan("you", 1);
     makeCardsFan("enemy", -1);
