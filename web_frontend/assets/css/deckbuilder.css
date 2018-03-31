@@ -198,6 +198,20 @@
 #cards {
     overflow-y:scroll;
 }
+
+.cardInDeck figure{
+    width: 23vh;
+    display: inline-block;
+}
+.cardInDeck figure img:last-child{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: -23vw;
+    display: none;
+    width: 45vh;
+}
+
 .cardInDeck {
     margin-left: 1vw;
     display: inline;

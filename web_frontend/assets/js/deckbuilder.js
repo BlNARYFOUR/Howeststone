@@ -9,6 +9,7 @@ function init() {
     for(let i = 0 ; i < cardInDeck.length; i++){
         cardInDeck[i].addEventListener('dblclick', addCardToDeck);
         cardInDeck[i].addEventListener('mouseover', detailOfCard);
+        cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
     }
 
 
@@ -42,7 +43,7 @@ function mockCards() {
 }
 
 function mockCard(card) {
-   document.getElementById('cards').innerHTML += "<li class ='cardInDeck'><img src='images/"+card+".png' alt="+card+" title="+card+"></li>";
+   document.getElementById('cards').innerHTML += "<li class ='cardInDeck'><figure><img src='images/"+card+".png' alt="+card+" title="+card+"><img src='images/"+card+".png' alt="+card+" title="+card+"></figure></li>";
 }
 
 function addCardToDeck(e) {
@@ -57,18 +58,12 @@ function addCardToDeck(e) {
 function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zonder)
     this.parentNode.removeChild(this);
 }
+function nodetailOfCard(e){
+
+    this.lastChild.lastChild.style.display = 'none';
+}
 
 function detailOfCard(e) {
-    e.preventDefault();
-/*
-    document.querySelector('.cardInDeck:hover').innerHTML += "<li class='chosenCards'><a href='#'>" + e.target.parentElement.innerHTML + "</a></li>";
 
-    document.querySelector('.cardInDeck:hover').style.position = 'absolute';
-    document.querySelector('.cardInDeck img:hover').style.width = '45vh';
-*/
-
-    // uitleg kaarten over normale kaarten
-    // left: 40vh;
-
-    /*e.target*/
+    this.lastChild.lastChild.style.display = 'block';
 }
