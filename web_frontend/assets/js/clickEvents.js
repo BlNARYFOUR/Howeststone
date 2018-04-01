@@ -43,37 +43,25 @@ function init() {
     document.getElementById('tutorial11button').addEventListener('click', gotoLeaveTutorial);*/
 }
 
-/*
-var elem = document.getElementById("myvideo");
-if (elem.requestFullscreen) {
-  elem.requestFullscreen();
-}
- */
-
 function toggleFullScreen() {
-    let elem = document.querySelector('html');
-    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        } else if (elem.msRequestFullscreen) {
-            elem.msRequestFullscreen();
-        } else if (elem.mozRequestFullScreen) {
-            elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) {
-            elem.webkitRequestFullscreen();
-        }
-    } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
+    if (navigator.userAgent.indexOf('Firefox') !== -1){
+        let fullscreen = document.mozFullScreenElement || null;
+        if (fullscreen === null) {
+            document.querySelector('html').mozRequestFullScreen();
+        } else {
             document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) {
+        }
+        mozRequestFullScreen()
+    } else{
+        let fullscreen = document.webkitFullscreenElement || null;
+        if (fullscreen === null) {
+            document.querySelector('html').webkitRequestFullscreen();
+        } else {
             document.webkitExitFullscreen();
         }
     }
 }
+
 function gotoMainMenu(e) {
     console.log(this.parentElement.parentElement.parentElement);
     document.getElementById('mainMenu').className = "";
