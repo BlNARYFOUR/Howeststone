@@ -8,20 +8,32 @@ function main() {
 }
 
 function init() {
-    document.querySelector('gotoMainMenu').addEventListener(main);
-    document.getElementById('gotoPlay').addEventListener('click', gotoPlay);
-    document.getElementById('gotoHome').addEventListener('click', gotoHome);
-    document.getElementById('gotoDeck').addEventListener('click', gotoDeck);
-    document.getElementById('gotoHero').addEventListener('click', gotoHero);
+    // register
+    // login
+    document.getElementById('gotoHeroSelector').addEventListener('click', gotoHeroSelector);
+    document.getElementById('gotoDeckChooser').addEventListener('click', gotoDeckChooser);
+    document.getElementById('gotoOptions').addEventListener('click', gotoOptions);
+// gotoLogout
+    document.getElementById('gotoDeckSelector').addEventListener('click', gotoDeckSelector);
+    let mainMenugoers = document.querySelectorAll('.gotoMainMenu');
+    for(let i =0; i< mainMenugoers.length; i++){
+        mainMenugoers[i].addEventListener('click', gotoMainMenu);
+    }
     document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
+    document.getElementById('playGame').addEventListener('click', playGame);
+    document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);
+    document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
+    document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
+    /*
+    document.getElementById('gotoHome').addEventListener('click', gotoHome);
+
+    document.getElementById('gotoHero').addEventListener('click', gotoHero);
     document.getElementById('gotoNoDeck').addEventListener('click', gotoNoDeck);
     document.getElementById('addDeck').addEventListener('click', addDeck);
-    document.getElementById('gotoOptions').addEventListener('click', gotoOptions);
-    document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
-    document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
-    document.getElementById('playGame').addEventListener('click', playGame);
+
+
+
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
-    document.getElementById('gotoMainMenu').addEventListener('click', gotoMainMenu);
     document.getElementById('tutorial1button').addEventListener('click', gotoTutorial2);
     document.getElementById('tutorial2button').addEventListener('click', gotoTutorial3);
     document.getElementById('tutorial3button').addEventListener('click', gotoTutorial4);
@@ -32,7 +44,7 @@ function init() {
     document.getElementById('tutorial8button').addEventListener('click', gotoTutorial9);
     document.getElementById('tutorial9button').addEventListener('click', gotoTutorial10);
     document.getElementById('tutorial10button').addEventListener('click', gotoTutorial11);
-    document.getElementById('tutorial11button').addEventListener('click', gotoLeaveTutorial);
+    document.getElementById('tutorial11button').addEventListener('click', gotoLeaveTutorial);*/
 }
 
 function toggleFullScreen() {
@@ -60,16 +72,27 @@ function toggleFullScreen() {
         }
     }
 }
-function gotoMainMenu() {
-    document.getElementById('options').className = "";
-    document.getElementById('creditsScreen').className = "hidden";
+function gotoMainMenu(e) {
+    console.log(this.parentElement.parentElement.parentElement);
+    document.getElementById('mainMenu').className = "";
+    this.parentElement.parentElement.parentElement.className = "hidden";
 }
+function gotoDeckChooser() {
+    document.getElementById('deckChooser').className = "";
+    document.getElementById('mainMenu').className = "hidden";
+}
+
+function gotoGameOptions() {
+    document.getElementById('gameBoard').className = "hidden";
+    document.getElementById('options').className = "";
+}
+
 
 function playGame() {
     document.getElementById('vsScreen').className = "";
     document.getElementById('deckPicker').className = "hidden";
     setTimeout(function playrealGame() {
-        document.getElementById('playField').className = "";
+        document.getElementById('gameBoard').className = "";
         document.getElementById('vsScreen').className = "hidden";
     }, 3000);
 
@@ -80,18 +103,18 @@ function gotoHome() {
     document.getElementById('heroPicker').className = "hidden";
 }
 
-function gotoPlay() {
+function gotoHeroSelector() {
     setTimeout(goto, 4800);     // This should be shown while loading ;)
     startLoadingScreen();
 
-    function goto() {
+     function goto() {
         stopLoadingScreen();
         document.getElementById('mainMenu').className = "hidden";
         document.getElementById('heroPicker').className = "";
     }
 }
 
-function gotoDeck() {
+function gotoDeckSelector() {
     document.getElementById('deckPicker').className = "";
     document.getElementById('heroPicker').className = "hidden";
 }
@@ -102,8 +125,7 @@ function gotoHero() {
 }
 
 function gotoDeckBuilder() {
-    // ontbrekende htmlpagina
-    document.getElementById('mainMenu').className = "hidden";
+    document.getElementById('deckChooser').className = "hidden";
     document.getElementById('deckbuilder').className = "";
 }
 
@@ -162,8 +184,8 @@ function gotoCredits() {
 }
 
 function gotoLeaveOptions() {
-    document.getElementById('mainMenu').className = "";
-    document.getElementById('options').className = "hidden";
+    document.getElementById('options').className = "";
+    document.getElementById('creditsScreen').className = "hidden";
 }
 
 function gotoNoDeck() {

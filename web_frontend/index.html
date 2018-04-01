@@ -28,11 +28,11 @@
 </head>
 <body>
 
-<div id="mainMenu" class="hidden">
+<div id="mainMenu" class="">
     <div class="menuBox">
         <ul>
-            <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
-            <li id="gotoDeckBuilder"><a href="#" class="navItem MainMenu">Deck Builder</a></li>
+            <li id="gotoHeroSelector"><a href="#" class="navItem MainMenu">Play</a></li>
+            <li id="gotoDeckChooser"><a href="#" class="navItem MainMenu">Deck Builder</a></li>
             <li id="gotoOptions"><a href="#" class="navitem MainMenu">Options</a></li>
             <li id="gotoLogOut"><a href="#" class="navitem MainMenu">Log out</a></li>
         </ul>
@@ -72,8 +72,8 @@
         <span id="selectedHero"></span>
         <h1 class="selectedHeroName">Hero name</h1>
 
-        <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeck">Continue</a></span>
-        <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHome">  Back  </a></span>
+        <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckSelector">Continue</a></span>
+        <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">  Back  </a></span>
     </div>
 </div>
 
@@ -101,7 +101,7 @@
     </div>
 </div>
 
-<div id="XXdeckChooser" class="hidden">
+<div id="deckChooser" class="hidden">
     <div id="XXwhoBuild">
         <div><a href="#">Mage</a></div>
 
@@ -125,12 +125,12 @@
 
     <div id="XXJaina"><img src="assets/media/mage.png" alt="Jaina Proudmoore" title="Jaina Proudmoore"/></div>
 
-    <a href="#" id="XXgotoDeckBuilderI">Continue</a>
+    <a href="#" id="gotoDeckBuilder">Continue</a>
 
-    <a href="#" id="XXgotoNoDeckI">Back</a>
+    <div id="XXDitMoetOverAlles"><span><a class="gotoMainMenu" href="#" >Back</a></span></div>
 </div>
 
-<div id="deckbuilder" class="">
+<div id="deckbuilder" class="hidden">
     <div id="tutorials" class="hidden">
         <div id="tutorial1">
 
@@ -197,7 +197,7 @@
         <ul id="cards"></ul>
         <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
     </div>
-    <div class="save">
+    <div class="save hidden">
         <label for="deckName">You're deck is not yet complete<br/> would you like to save it?</label>
         <input type="text" name="deckName" id="deckName" placeholder="Deck 01">
         <ul><li><a href="#">save</a></li>
@@ -276,10 +276,10 @@
             </fieldset>
         </form>
     </aside>
-    <a class="buttonHolder gotoMainMenu" href="#">Back</a>
+    <div><span><a class="buttonHolder gotoMainMenu" href="#">Back</a></span></div>
 </div>
 
-<div id="playField" class="hidden">
+<div id="gameBoard" class="hidden">
     <div class="main">
         <ul class="eCards"><li>*e cards*</li></ul>
         <div class="eManaTotal">*e mana*</div>
@@ -320,7 +320,7 @@
             <li id="toggleFullScreen"><a href="#" class="navItem optionMenu">Toggle full screen</a></li>
             <li id="gotoSound"><a href="#" class="navItem optionsMenu">Sound</a></li>
             <li id="gotoCredits"><a href="#" class="navItem optionsMenu">Credits</a></li>
-            <li id="gotoLeaveOptions"><a href="#" class="navItem optionsMenu">Back</a></li>
+            <li class="gotoMainMenu"><a href="#" class="navItem optionsMenu">Back</a></li>
         </ul>
     </div>
 </div>
@@ -359,7 +359,7 @@
                 </section>
             </div>
         </div>
-        <span class="buttonHolder"><a href="#" class="insideButton" id="gotoMainMenu">Back</a></span>
+        <span class="buttonHolder"><a href="#" class="insideButton" id="gotoLeaveOptions">Back</a></span>
     </div>
 </div>
 

@@ -69,6 +69,7 @@
     display: inline-block;
     width: 12vh;
     line-height: 5.5vh;
-    border: red thin solid;
+    /*
+    border: red thin solid;*/
     border-radius: 10% / 50%;
 }
