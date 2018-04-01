@@ -85,7 +85,6 @@
     width: 55vw;
     border: 1px black solid;
     height: 20vh;
-    padding-left: 3vw;
 }
 
 #deckbuilder #cards {
@@ -231,7 +230,7 @@
     border: 1px solid black;
 }
 
-#deckbuilder .gotoMainMenu {
+#deckbuilder #gotoRechooseDeck {
     position: absolute;
     bottom: 5vh;
     left: 5.5vw;
@@ -254,30 +253,29 @@
     width: 23vh;
     display: inline-block;
 }
+.chosenCards figure{
+    width: 11vh;
+    display: inline-block;
+}
 .cardInDeck figure img:last-child{
     z-index: 1;
     position: absolute;
+    display: none;
     top: 0;
     left: -23vw;
-    display: none;
     width: 45vh;
 }
 
-.cardInDeck {
+.cardInDeck, .chosenCards {
     margin-left: 1vw;
     display: inline;
 }
-
 .cardInDeck img {
     width: 23vh;
 }
-
-#deck li {
-    display: inline-block;
-    width: 11vh;
-    text-align: center;
-}
-
-#deck img{
+.chosenCards img{
     width: 5vw;
 }
+
+
+
