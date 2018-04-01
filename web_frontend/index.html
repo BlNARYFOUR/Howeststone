@@ -15,8 +15,8 @@
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/deckPicker.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/heroPicker.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/deckSelector.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/heroSelector.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/deckbuilder.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/optionsMenu.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
@@ -55,8 +55,8 @@
     </div>
 </div>
 
-<div id="heroPicker" class="hidden">
-    <div class="pickerBox">
+<div id="heroSelector" class="hidden">
+    <div class="SelectorBox">
         <ul id="heroes">
             <li><a href="#">Mage</a></li>
             <li><a href="#">Paladin</a></li>
@@ -77,8 +77,8 @@
     </div>
 </div>
 
-<div id="deckPicker" class="hidden">
-    <div class="pickerBox">
+<div id="deckSelector" class="hidden">
+    <div class="SelectorBox">
         <ul id="yourDecks">
             <li id="deck_0"><a href="#">Some Deck :)</a></li>
             <li id="deck_1"><a href="#">Deck 2</a></li>
@@ -97,7 +97,7 @@
         <h1 class="selectedHeroName">Hero name</h1>
 
         <a href="#" id="playGame"></a>
-        <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHero">Back</a></span>
+        <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHeroChooser">Back</a></span>
     </div>
 </div>
 
@@ -276,7 +276,7 @@
             </fieldset>
         </form>
     </aside>
-    <div><span><a class="buttonHolder gotoMainMenu" href="#">Back</a></span></div>
+    <span><a class="buttonHolder" id="gotoRechooseDeck" href="#">Back</a></span>
 </div>
 
 <div id="gameBoard" class="hidden">
