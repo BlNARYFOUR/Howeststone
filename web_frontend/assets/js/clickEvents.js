@@ -44,16 +44,14 @@ function init() {
 }
 
 function toggleFullScreen() {
+    let fullscreen = document.mozFullScreenElement || document.webkitFullscreenElement || null;
     if (navigator.userAgent.indexOf('Firefox') !== -1){
-        let fullscreen = document.mozFullScreenElement || null;
         if (fullscreen === null) {
             document.querySelector('html').mozRequestFullScreen();
         } else {
             document.mozCancelFullScreen();
         }
-        mozRequestFullScreen()
     } else{
-        let fullscreen = document.webkitFullscreenElement || null;
         if (fullscreen === null) {
             document.querySelector('html').webkitRequestFullscreen();
         } else {
