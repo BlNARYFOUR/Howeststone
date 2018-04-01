@@ -2,52 +2,37 @@
 
 document.addEventListener('DOMContentLoaded', init);
 
-function init() {
-    document.querySelector('#firstadd').addEventListener('click', firstadd);
-    mockCards();
-    //click event: "kaart toevoegen in deckbuilder"
+function checkallcards() {
     let cardInDeck = document.querySelectorAll(".cardInDeck");
     for(let i = 0 ; i < cardInDeck.length; i++){
         cardInDeck[i].addEventListener('dblclick', addCardToDeck);
         cardInDeck[i].addEventListener('mouseover', detailOfCard);
         cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
     }
-
-    // click event: "kaart verwijderen in deckbuilder"
-
-
-    console.log('test');
+    let chosenCards = document.querySelectorAll(".chosenCards");
+    for(let i = 0 ; i < chosenCards.length; i++){
+        chosenCards[i].addEventListener('dblclick', removeCardFromDeck);
+        let noImg = chosenCards[i].lastChild.lastChild;
+        noImg.style.display = 'none';
+    }
 }
-    /*getAllCards();
+
+function init() {
+    document.querySelector('#firstadd').addEventListener('click', firstadd);
+    mockCards();
+    checkallcards();
 }
-*/
 
 function firstadd() {
     /* apart scherm dat vraagt of deck moet opgeslaan worden*/
     document.querySelector('.main').classList.toggle('hidden');
     document.querySelector('.save').classList.toggle('hidden');
 }
-
-/*
-function getAllCards() {
-    console.log('test');
-    fetch('/API/getAllCards', {headers: {
-            'content-type': 'application/json'}})
-        .then(function (response) {
-        if (response === ok) return response
-    }).then(function (text) {
-        console.log(text);
-    })
-}*/
-
-
 function mockCards() {
     let total = 5;
     for (let i = 1; i <= total; i++) {
         mockCard('card'+i);
-        mockCard('card'+i);
     }
-
 }
 
 function mockCard(card) {
@@ -56,22 +41,17 @@ function mockCard(card) {
 
 function addCardToDeck(e) {
     document.getElementById("deck").innerHTML += "<li class='chosenCards'>"+this.innerHTML+"</li>";
-   
-    let chosenCards = document.querySelectorAll(".chosenCards");
-    for(let i = 0 ; i < chosenCards.length; i++){
-        chosenCards[i].addEventListener('dblclick', removeCardFromDeck);
-    }
+    checkallcards();
 }
 
 function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zonder)
     this.parentNode.removeChild(this);
+    checkallcards();
 }
 function nodetailOfCard(e){
-
     this.lastChild.lastChild.style.display = 'none';
 }
 
 function detailOfCard(e) {
-
     this.lastChild.lastChild.style.display = 'block';
 }
