@@ -119,15 +119,21 @@ function gotoHeroChooser() {
 }
 
 function selectClassMage() {
-    document.querySelector('.selectedHeroName').innerHTML = 'Mage Annie';
-    console.log('hey');
+    let selectedHeroName = document.getElementsByClassName("selectedHeroName");
+    for (let i = 0; i < selectedHeroName.length; i++) {
+        selectedHeroName[i].innerHTML = 'Mage Annie';
+    }
     selectedHero.style.backgroundImage = "url('images/portraitAnnie.png')";
+    selectedDeck.style.backgroundImage = "url('images/portraitAnnie.png')";
 }
 
 function selectClassPaladin() {
-    document.querySelector('.selectedHeroName').innerHTML = 'Paladin Azir';
-    console.log('hey');
+    let selectedHeroName = document.getElementsByClassName("selectedHeroName");
+    for (let i = 0; i < selectedHeroName.length; i++) {
+        selectedHeroName[i].innerHTML = 'Paladin Azir';
+    }
     selectedHero.style.backgroundImage = "url('images/portraitAzir.png')";
+    selectedDeck.style.backgroundImage = "url('images/portraitAzir.png')";
 }
 
 function gotoDeckBuilder() {
