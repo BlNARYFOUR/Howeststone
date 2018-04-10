@@ -89,16 +89,24 @@
     top: -5vh;
 }
 
-#gameBoard .you .manaTotal {
+#gameBoard .manaTotal {
     position: absolute;
     height: 5vh;
     line-height: 5vh;
     width: 8vh;
-    bottom: 5.3vh;
-    right: 32.25vh;
     z-index: 0;
     text-align: center;
     color: white;
+}
+
+#gameBoard .you .manaTotal {
+    bottom: 5.3vh;
+    right: 32.25vh;
+}
+
+#gameBoard .enemy .manaTotal {
+    top: 4.75vh;
+    right: 35.7vh;
 }
 
 #gameBoard .you .manaHolder {
@@ -116,7 +124,7 @@
     vertical-align: middle;
     width: 3vh;
     height: 3.5vh;
-    margin-right: -0.5vh;
+    margin-right: -0.6vh;
     /*background-color: rgba(255,0,255,0.5);*/
 }
 
@@ -127,7 +135,6 @@
 
 #gameBoard .you .manaHolder li.usedMana {
     background: no-repeat url("../media/manaSprite.png") -0.25vh bottom;
-    margin-right: -0.6vh;
     margin-top: 0.2vh;
     background-size: 120% 205%;
 }

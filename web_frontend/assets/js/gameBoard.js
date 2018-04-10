@@ -23,6 +23,25 @@ function burnFuse(e) {
 }
 */
 
+function updateEnemyMana(activeMana, totalMana) {
+    document.querySelector("#gameBoard .enemy .manaTotal").innerText = activeMana + "/" + totalMana;
+}
+
+function updateMyMana(activeMana, totalMana) {
+    let manaList = document.querySelector("#gameBoard .you .manaHolder ul");
+    document.querySelector("#gameBoard .you .manaTotal").innerText = activeMana + "/" + totalMana;
+
+    manaList.innerHTML = "";
+
+    for(let i=0; i<activeMana; i++) {
+        manaList.innerHTML += '<li class="mana"></li>\r\n';
+    }
+
+    for(let i=activeMana; i<totalMana; i++) {
+        manaList.innerHTML += '<li class="usedMana"></li>\r\n';
+    }
+}
+
 function setCards(parent, cardUrl) {
     let cardBacks = document.querySelectorAll(`#gameBoard .${parent} .cards li`);
 
@@ -93,7 +112,7 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
     let currentGrad = -gradAddOnPerCard * Math.floor(amountOfCards/2);
     let transformOriginHeight;
 
-    if(amountOfCards%2 === 0) {
+    if(amountOfCards%2 === 0) {                                                         // make the rotation evenly spread
         currentGrad += gradAddOnPerCard/2
     }
 
