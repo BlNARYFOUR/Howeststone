@@ -1,10 +1,12 @@
 "use strict";
 document.addEventListener("DOMContentLoaded", init);
 let cardCounter = 0;
+let cardBackUrl = "";
 
 function init() {
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
+    getRandomCardBack();
     makeCardsFan("you", 1);
     makeCardsFan("enemy", -1);
 
@@ -20,6 +22,41 @@ function burnFuse(e) {
     document.getElementById("fuse").classList.add("burn");
 }
 */
+
+function setCards(parent, cardUrl) {
+    let cardBacks = document.querySelectorAll(`#gameBoard .${parent} .cards li`);
+
+    for(let i=0; i<cardBacks.length; i++) {
+        cardBacks[i].style.background = "no-repeat url(\"" + cardUrl + "\") center 74%";
+        cardBacks[i].style.backgroundSize = "125%";
+        cardBacks[i].style.color = "transparent";
+        cardBacks[i].style.border = "none";
+    }
+}
+
+function getRandomCardBack() {
+    fetch('https://omgvamp-hearthstone-v1.p.mashape.com/cardbacks', {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Mashape-Key': '5KNrLIRnw4mshXnzDqkRdIvkNbIRp12XlNvjsnNAbrHeNB6jcQ'
+        }
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        console.log("card backs fetched");
+        cardBackUrl = result[0]["img"];
+        setCards("enemy", cardBackUrl);
+    })
+    .catch(function(err) {
+        console.log("Error 404: Could not connect to the server");
+    });
+}
 
 function addCard() {
     cardCounter++;
@@ -56,6 +93,10 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
     let currentGrad = -gradAddOnPerCard * Math.floor(amountOfCards/2);
     let transformOriginHeight;
 
+    if(amountOfCards%2 === 0) {
+        currentGrad += gradAddOnPerCard/2
+    }
+
     if(gradDirectionIndex < 0) {
         transformOriginHeight = "top";
     }
@@ -85,6 +126,7 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
         for(let i = minIndex; i < amountOfCards; i++) {
             cards[i].style.position = "relative";
             cards[i].style.bottom = "-2vh";
+            cards[i].style.marginRight = "-0.5vh";
             cards[i].classList.add("notFanned");
         }
         console.log(`cards of ${parentClass} did not need to be fanned...`);
