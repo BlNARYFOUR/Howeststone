@@ -28,6 +28,8 @@ function init() {
     document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoHeroChooser').addEventListener('click', gotoHeroChooser);
     document.getElementById('classMage').addEventListener('click', selectClassMage);
+    document.getElementById('classMageDeckChooser').addEventListener('click', selectClassMageInDeckChooser);
+    document.getElementById('classPaladinDeckChooser').addEventListener('click', selectClassPaladinInDeckChooser);
     document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
 
@@ -123,8 +125,9 @@ function selectClassMage() {
     for (let i = 0; i < selectedHeroName.length; i++) {
         selectedHeroName[i].innerHTML = 'Mage Annie';
     }
-    selectedHero.style.backgroundImage = "url('images/portraitAnnie.png')";
-    selectedDeck.style.backgroundImage = "url('images/portraitAnnie.png')";
+    selectedHero.style.backgroundImage = "url('images/portraitMage.png')";
+    selectedDeck.style.backgroundImage = "url('images/portraitMage.png')";
+    playerHero.innerHTML = "<img src='images/portraitMage.png' alt='playerHero' title='playerhero'>";
 }
 
 function selectClassPaladin() {
@@ -132,9 +135,21 @@ function selectClassPaladin() {
     for (let i = 0; i < selectedHeroName.length; i++) {
         selectedHeroName[i].innerHTML = 'Paladin Azir';
     }
-    selectedHero.style.backgroundImage = "url('images/portraitAzir.png')";
-    selectedDeck.style.backgroundImage = "url('images/portraitAzir.png')";
+    selectedHero.style.backgroundImage = "url('images/portraitPaladin.png')";
+    selectedDeck.style.backgroundImage = "url('images/portraitPaladin.png')";
+    playerHero.innerHTML = "<img src='images/portraitPaladin.png' alt='playerHero' title='playerhero'>"
 }
+
+function selectClassMageInDeckChooser() {
+    document.getElementById("selectedHeroNameInDeckChooser").innerHTML = 'Mage Annie';
+    selectedHeroInDeckChooser.style.backgroundImage = "url('images/portraitMage.png')";
+}
+
+function selectClassPaladinInDeckChooser() {
+    document.getElementById("selectedHeroNameInDeckChooser").innerHTML = 'Paladin Azir';
+    selectedHeroInDeckChooser.style.backgroundImage = "url('images/portraitPaladin.png')";
+}
+
 
 function gotoDeckBuilder() {
     document.getElementById('deckChooser').className = "hidden";

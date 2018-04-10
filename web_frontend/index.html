@@ -59,7 +59,7 @@
 <div id="heroSelector" class="hidden">
     <div class="SelectorBox">
         <ul id="heroes">
-            <li><a href="#" id="classMage">Mage</a></li>
+            <!--<li><a href="#" id="classMage">Mage</a></li>
             <li><a href="#" id="classPaladin">Paladin</a></li>
             <li><a href="#">Warrior</a></li>
             <li><a href="#">Priest</a></li>
@@ -67,7 +67,7 @@
             <li><a href="#">Hunter</a></li>
             <li><a href="#">Shaman</a></li>
             <li><a href="#">Rogue</a></li>
-            <li><a href="#">Warlock</a></li>
+            <li><a href="#">Warlock</a></li>-->
         </ul>
 
         <span id="selectedHero"></span>
@@ -95,7 +95,7 @@
         <span id="addDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="addDeck">Add deck</a></span>
 
         <div id="selectedDeck"></div>
-        <h1 class="selectedHeroName">Hero name</h1>
+        <h1 class="selectedHeroName">Mage Annie</h1>
 
         <a href="#" id="playGame"></a>
         <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHeroChooser">Back</a></span>
@@ -105,8 +105,8 @@
 <div id="deckChooser" class="hidden">
     <div class="SelectorBox">
         <ul id="listOfHeroes">
-            <li><a href="#">Mage</a></li>
-            <li><a href="#">Paladin</a></li>
+            <li><a href="#" id="classMageDeckChooser">Mage</a></li>
+            <li><a href="#" id="classPaladinDeckChooser">Paladin</a></li>
             <li><a href="#">Warrior</a></li>
             <li><a href="#">Priest</a></li>
             <li><a href="#">Druid</a></li>
@@ -117,7 +117,7 @@
         </ul>
 
         <span id="selectedHeroInDeckChooser"></span>
-        <h1 class="selectedHeroName">Hero name</h1>
+        <h1 id="selectedHeroNameInDeckChooser">Mage Annie</h1>
 
         <span id="gotoDeckBuilderHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckBuilder">Continue</a></span>
         <span id="gotoMainMenuHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
@@ -305,11 +305,11 @@
 
 <div id="vsScreen" class="hidden">
     <div id="enemyHero">
-        <img src="images/schild%20mage.png" alt="enemyHero" title="enemyHero">
+        <img src="images/portraitMage.png" alt="enemyHero" title="enemyHero">
     </div>
     <img src="assets/media/vs.png" alt="VS" title="VS" id="vs">
     <div id="playerHero">
-        <img src="images/schild%20mage.png" alt="playerHero" title="playerHero">
+        <img src="images/portraitMage.png" alt="playerHero" title="playerHero">
     </div>
 </div>
 
@@ -371,8 +371,10 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/loadingScreen.js"></script>
-<script src="assets/js/clickEvents.js"></script>
 <script src="assets/js/deckbuilder.js"></script>
+<script src="assets/js/Hero-Deck_selector.js"></script>
+<script src="assets/js/clickEvents.js"></script>
+
 <!--<script src="assets/js/playingField.js"></script>-->
 </body>
 </html>
