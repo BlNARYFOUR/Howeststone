@@ -118,7 +118,7 @@
     vertical-align: middle;
     width: 3vh;
     height: 3.5vh;
-    margin-right: -0.55vh;
+    margin-right: -0.5vh;
     /*background-color: rgba(255,0,255,0.5);*/
 }
 
@@ -128,9 +128,21 @@
 }
 
 #gameBoard .you .manaHolder li.usedMana {
-    background: no-repeat url("../media/manaSprite.png") left bottom;
+    background: no-repeat url("../media/manaSprite.png") -0.25vh bottom;
+    margin-right: -0.6vh;
     margin-top: 0.2vh;
     background-size: 120% 205%;
+}
+
+#gameBoard .you .hero {
+    position: absolute;
+    /*background-color: rgba(0,255,255,0.5);*/
+    width: 15.25vh;
+    height: 17.5vh;
+    bottom: 15.5vh;
+    left: 55vh;
+    background: no-repeat url("../media/mage.png") center right;
+    background-size: contain;
 }
 
 #gameBoard #tempButtonAddCard {
