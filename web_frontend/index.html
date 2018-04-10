@@ -17,6 +17,7 @@
     <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/deckSelector.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/heroSelector.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/deckchooser.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/deckbuilder.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/optionsMenu.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
@@ -73,7 +74,7 @@
         <h1 class="selectedHeroName">Hero name</h1>
 
         <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckSelector">Continue</a></span>
-        <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">  Back  </a></span>
+        <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
     </div>
 </div>
 
@@ -102,32 +103,30 @@
 </div>
 
 <div id="deckChooser" class="hidden">
-    <div id="XXwhoBuild">
-        <div><a href="#">Mage</a></div>
+    <div class="SelectorBox">
+        <ul id="listOfHeroes">
+            <li><a href="#">Mage</a></li>
+            <li><a href="#">Paladin</a></li>
+            <li><a href="#">Warrior</a></li>
+            <li><a href="#">Priest</a></li>
+            <li><a href="#">Druid</a></li>
+            <li><a href="#">Hunter</a></li>
+            <li><a href="#">Shaman</a></li>
+            <li><a href="#">Rogue</a></li>
+            <li><a href="#">Warlock</a></li>
+        </ul>
 
-        <div><a href="#">Paladin</a></div>
+        <span id="selectedHeroInDeckChooser"></span>
+        <h1 class="selectedHeroName">Hero name</h1>
 
-        <div><a href="#">Warrior</a></div>
+        <span id="gotoDeckBuilderHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckBuilder">Continue</a></span>
+        <span id="gotoMainMenuHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
 
-        <div><a href="#">Pries</a></div>
-
-        <div><a href="#">Druid</a></div>
-
-        <div><a href="#">Hunter</a></div>
-
-        <div><a href="#">Shaman</a></div>
-
-        <div><a href="#">Rogue</a></div>
-
-        <div><a href="#">Warlock</a></div>
+        <!--<div id="XXDitMoetOverAlles"><span><a class="gotoMainMenu" href="#" >Back</a></span></div>-->
     </div>
 
 
-    <div id="XXJaina"><img src="assets/media/mage.png" alt="Jaina Proudmoore" title="Jaina Proudmoore"/></div>
 
-    <a href="#" id="gotoDeckBuilder">Continue</a>
-
-    <div id="XXDitMoetOverAlles"><span><a class="gotoMainMenu" href="#" >Back</a></span></div>
 </div>
 
 <div id="deckbuilder" class="hidden">
