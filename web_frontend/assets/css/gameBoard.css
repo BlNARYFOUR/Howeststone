@@ -19,7 +19,7 @@
     display: block;
     width: 100%;
     height: 53.25vh;
-    background-color: rgba(0,0,255,0.4);
+    /*background-color: rgba(0,0,255,0.4);*/
 }
 
 #gameBoard .enemy {
@@ -27,7 +27,7 @@
     width: 100%;
     height: 46.75vh;
     vertical-align: middle;
-    background-color: rgba(255,0,0,0.4);
+    /*background-color: rgba(255,0,0,0.4);*/
 }
 
 #gameBoard .cards {
@@ -46,14 +46,14 @@
     display: block;
     height: 16vh;
     padding-top: 37.25vh;
-    background-color: rgba(0,255,0,0.4);
+    /*background-color: rgba(0,255,0,0.4);*/
 }
 
 #gameBoard .enemy .cards {
     display: block;
     height: 8vh;
     padding-bottom: 38.75vh;
-    background-color: rgba(0,255,255,0.4);
+    /*background-color: rgba(0,255,255,0.4);*/
 }
 
 #gameBoard .cards li {
@@ -71,13 +71,13 @@
     bottom: -0.5vh;
     height: 15vh;
     line-height: 15vh;
-    z-index: 0 !important;
+    z-index: 1 !important;
 }
 
 #gameBoard .you .cards li:hover, #gameBoard .you .cards li:active {
     transform-origin: left center !important;
     transform: scale(2.5, 2.5) translate(-0.5vh, -5vh) !important;
-    z-index: 1 !important;
+    z-index: 2 !important;
 }
 
 #gameBoard .you .cards li.notFanned:hover, #gameBoard .you .cards li.notFanned:active {
@@ -89,6 +89,48 @@
     top: -5vh;
     height: 15vh;
     line-height: 15vh;
+}
+
+#gameBoard .you .manaTotal {
+    position: absolute;
+    height: 5vh;
+    line-height: 5vh;
+    width: 8vh;
+    bottom: 5.3vh;
+    right: 32.25vh;
+    z-index: 0;
+    text-align: center;
+    color: white;
+}
+
+#gameBoard .you .manaHolder {
+    position: absolute;
+    /*background-color: rgba(255,255,0,0.5);*/
+    width: 30.5vh;
+    height: 5vh;
+    line-height: 5vh;
+    bottom: 5.5vh;
+    right: 1vh;
+}
+
+#gameBoard .you .manaHolder li {
+    display: inline-block;
+    vertical-align: middle;
+    width: 3vh;
+    height: 3.5vh;
+    margin-right: -0.55vh;
+    /*background-color: rgba(255,0,255,0.5);*/
+}
+
+#gameBoard .you .manaHolder li.mana {
+    background: no-repeat url("../media/manaSprite.png") left top;
+    background-size: 120% 205%;
+}
+
+#gameBoard .you .manaHolder li.usedMana {
+    background: no-repeat url("../media/manaSprite.png") left bottom;
+    margin-top: 0.2vh;
+    background-size: 120% 205%;
 }
 
 #gameBoard #tempButtonAddCard {
@@ -105,22 +147,6 @@
 }
 
 /*
-#playField .main {
-    height: 100%;
-    width: 60%;
-    margin-left: 20%;
-    position: relative;
-}
-
-#playField span {
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 90%;
-    right: 12.4%;
-    top: 1.9%;
-}
-
 #playField #fuse {
     width: 80%;
     background: repeat-x url("../media/rope.png") center right;
