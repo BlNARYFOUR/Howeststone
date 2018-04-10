@@ -32,7 +32,7 @@ function addCard() {
 
 function makeCardsFan(parentClass, gradDirectionIndex) {                                // gradDirectionIndex: Normally -1 or 1
     let parent = document.getElementsByClassName(parentClass);                          // so 'enemy' or 'you'
-    let cards = document.querySelectorAll(`#gameBoard .${parentClass} .cards li`);     // select all the list items
+    let cards = document.querySelectorAll(`#gameBoard .${parentClass} .cards li`);      // select all the list items
     let totalWidth = document.querySelector(`#gameBoard .main`).offsetWidth;            // value in px ( of #gameboard .main )
     let cardWidth;
 
@@ -74,7 +74,7 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
 
             cards[i].style.position = "absolute";
             cards[i].style.bottom = "-0.5vh";
-            cards[i].style.left = (overlap*i + extraLeft) + "px";
+            cards[i].style.left = (((overlap*i + extraLeft) / window.innerHeight) * 100) + "vh";
             cards[i].style.transform = "rotate(" + currentGrad + "grad)";
             cards[i].classList.remove("notFanned");
             currentGrad += gradAddOnPerCard;
