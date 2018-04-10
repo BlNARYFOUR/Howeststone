@@ -27,6 +27,8 @@ function init() {
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
     document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoHeroChooser').addEventListener('click', gotoHeroChooser);
+    document.getElementById('classMage').addEventListener('click', selectClassMage);
+    document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
 
     /*
@@ -99,7 +101,7 @@ function gotoHeroSelector() {
     setTimeout(goto, 4800);     // This should be shown while loading ;)
     startLoadingScreen();
 
-     function goto() {
+    function goto() {
         stopLoadingScreen();
         document.getElementById('mainMenu').className = "hidden";
         document.getElementById('heroSelector').className = "";
@@ -114,6 +116,24 @@ function gotoDeckSelector() {
 function gotoHeroChooser() {
     document.getElementById('deckSelector').className = "hidden";
     document.getElementById('heroSelector').className = "";
+}
+
+function selectClassMage() {
+    let selectedHeroName = document.getElementsByClassName("selectedHeroName");
+    for (let i = 0; i < selectedHeroName.length; i++) {
+        selectedHeroName[i].innerHTML = 'Mage Annie';
+    }
+    selectedHero.style.backgroundImage = "url('images/portraitAnnie.png')";
+    selectedDeck.style.backgroundImage = "url('images/portraitAnnie.png')";
+}
+
+function selectClassPaladin() {
+    let selectedHeroName = document.getElementsByClassName("selectedHeroName");
+    for (let i = 0; i < selectedHeroName.length; i++) {
+        selectedHeroName[i].innerHTML = 'Paladin Azir';
+    }
+    selectedHero.style.backgroundImage = "url('images/portraitAzir.png')";
+    selectedDeck.style.backgroundImage = "url('images/portraitAzir.png')";
 }
 
 function gotoDeckBuilder() {
