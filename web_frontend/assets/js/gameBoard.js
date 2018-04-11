@@ -8,7 +8,6 @@ function init() {
     setBackground();
     getRandomCardBack();
     makeCardsFan("you", 1);
-    makeCardsFan("enemy", -1);
 
     /*
     document.getElementById("spark").addEventListener("click", burnFuse);
@@ -22,6 +21,18 @@ function burnFuse(e) {
     document.getElementById("fuse").classList.add("burn");
 }
 */
+
+function updateEnemyCards(amountOfCards) {
+    let cards = document.querySelector("#gameBoard .enemy .cards ul");
+    cards.innerHTML = "";
+
+    for(let i=0; i<amountOfCards; i++) {
+        cards.innerHTML += "<li>Card " + (i+1) + "</li>";
+    }
+
+    setCards("enemy", cardBackUrl);
+    makeCardsFan("enemy", -1);
+}
 
 function updateEnemyMana(activeMana, totalMana) {
     document.querySelector("#gameBoard .enemy .manaTotal").innerText = activeMana + "/" + totalMana;
@@ -70,7 +81,6 @@ function getRandomCardBack() {
         let result = text;
         console.log("card backs fetched");
         cardBackUrl = result[0]["img"];
-        setCards("enemy", cardBackUrl);
     })
     .catch(function(err) {
         console.log("Error 404: Could not connect to the server");
@@ -99,7 +109,7 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
         console.log(`No cards of ${parentClass} to fan...`);
     }
 
-    let totalFanWidth = 0.33 * totalWidth;                                              // value in px
+    let totalFanWidth = 0.3 * totalWidth;                                               // value in px
     let extraLeft = (totalWidth-totalFanWidth) / 2;                                     // amount of padding that needs to be added to centre the fan
     let diff = cardWidth * cards.length - totalFanWidth;                                // total amount of width from cards that needs to be divided
                                                                                         // over cards with overlap
@@ -145,7 +155,7 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
         for(let i = minIndex; i < amountOfCards; i++) {
             cards[i].style.position = "relative";
             cards[i].style.bottom = "-2vh";
-            cards[i].style.marginRight = "-0.5vh";
+            cards[i].style.marginRight = "-2vh";
             cards[i].classList.add("notFanned");
         }
         console.log(`cards of ${parentClass} did not need to be fanned...`);

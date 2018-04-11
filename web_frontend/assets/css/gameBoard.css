@@ -67,11 +67,11 @@
     vertical-align: middle;
     background-color: rgba(0,0,0,0.7);
     border: whitesmoke thin solid;
+    z-index: 1 !important;
 }
 
 #gameBoard .you .cards li {
     bottom: -0.5vh;
-    z-index: 1 !important;
 }
 
 #gameBoard .you .cards li:hover, #gameBoard .you .cards li:active {
@@ -139,13 +139,22 @@
     background-size: 120% 205%;
 }
 
-#gameBoard .you .hero {
+#gameBoard .hero {
     position: absolute;
     /*background-color: rgba(0,255,255,0.5);*/
     width: 14.85vh;
     height: 16.25vh;
-    bottom: 16.1vh;
     left: 55.2vh;
+}
+
+#gameBoard .you .hero {
+    bottom: 16.1vh;
+    background: no-repeat url("../media/mage.png") center center;
+    background-size: contain;
+}
+
+#gameBoard .enemy .hero {
+    top: 10.55vh;
     background: no-repeat url("../media/mage.png") center center;
     background-size: contain;
 }
