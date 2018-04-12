@@ -30,7 +30,7 @@
 <body>
 
 <audio id="mainMenuMusic" autoplay loop>
-    <source src="assets/media/tavernAmbienceMusic.mp3" type="audio/mpeg">
+    <source src="assets/media/tavernAmbetantMusic.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
 
@@ -119,53 +119,21 @@
 </div>
 
 <div id="deckbuilder" class="hidden">
-    <div id="tutorials" class="hidden">
-        <div id="tutorial1">
-
-            <p>Sort, filter your card and search for cards here.</p>
-            <a id="tutorial1button" href="#">Next</a>
-        </div>
-        <div id="tutorial2" class="hidden">
-            <p>After filtering, sorting or searching your cards, the results apear here.</p>
-            <a id="tutorial2button" href="#">Next</a>
-        </div>
-        <div id="tutorial3" class="hidden">
-            <p>Filter on cards in your deck here.</p>
-            <a id="tutorial3button" href="#">Next</a>
-        </div>
-        <div id="tutorial4" class="hidden">
-            <p>The filtered cards apear here.</p>
-            <a id="tutorial4button" href="#">Next</a>
-        </div>
-        <div id="tutorial5" class="hidden">
-            <p>Here's your selected hero.</p>
-            <a id="tutorial5button" href="#">Next</a>
-        </div>
-        <div id="tutorial6" class="hidden">
-            <p>Here's your deck.</p>
-            <a id="tutorial6button" href="#">Next</a>
-        </div>
-        <div id="tutorial7" class="hidden">
-            <p>Klick here to create a new deck.</p>
-            <a id="tutorial7button" href="#">Next</a>
-        </div>
-        <div id="tutorial8" class="hidden">
-            <p>Klick here to save your deck.</p>
-            <a id="tutorial8button" href="#">Next</a>
-        </div>
-        <div id="tutorial9" class="hidden">
-            <p>Card info; mana in the left uppercorner, attack in the left bottom corner and health in the right bottom corner.</p>
-            <a id="tutorial9button" href="#">Next</a>
-        </div>
-        <div id="tutorial10" class="hidden">
-            <p>Add and remove a card by double klicking or dragging.</p>
-            <a id="tutorial10button" href="#">Next</a>
-        </div>
-        <div id="tutorial11" class="hidden">
-            <p>Decks of your selected hero apear here, klick 'add deck' to make a new one</p>
-            <a id="tutorial11button" href="#">Next</a>
-        </div>
-    </div>
+    <ul id="tutorials" class="hidden">
+        <li>Sort, filter your card and search for cards here.</li>
+        <li class="hidden">After filtering, sorting or searching your cards, the results apear here.</li>
+        <li class="hidden">Filter on cards in your deck here.</li>
+        <li class="hidden">The filtered cards apear here.</li>
+        <li class="hidden">Here's your selected hero.</li>
+        <li class="hidden">Here's your deck.</li>
+        <li class="hidden">Klick here to create a new deck.</li>
+        <li class="hidden">Klick here to save your deck.</li>
+        <li class="hidden">Card info; mana in the left uppercorner, attack in the left bottom corner and health in the right bottom
+            corner. </li>
+        <li class="hidden">Add and remove a card by double klicking or dragging.</li>
+        <li class="hidden">Decks of your selected hero apear here, klick 'add deck' to make a new one</li>
+        <li><a href="#" id="next">Next</a></li>
+    </ul>
     <header>
         <div id="hero"><a href="#">Mage</a>
             <a href="#">Paladin</a>
