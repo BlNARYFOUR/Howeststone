@@ -230,7 +230,7 @@
     border: 1px solid black;
 }
 
-#deckbuilder #gotoRechooseDeck {
+#deckbuilder #gotoRechooseDeck, #deckbuilder #gotoChooseDeck {
     position: absolute;
     bottom: 5vh;
     left: 5.5vw;

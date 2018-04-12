@@ -17,10 +17,43 @@ function checkallcards() {
     }
 }
 
+function unselectFilter(e) {
+    e.preventDefault();
+    document.getElementById(e.target.getAttribute('for')).checked = document.getElementById(e.target.getAttribute('for')).checked !== true;
+}
+function disableFilter(e) {
+    e.preventDefault();
+    e.target.checked = e.target.checked !== true;
+}
+
 function init() {
     document.querySelector('#firstadd').addEventListener('click', firstadd);
     mockCards();
     checkallcards();
+    let inputs = document.querySelectorAll('#secondFilter input');
+    for (let i = 0 ; i < inputs.length; i++){
+        inputs[i].addEventListener('click', disableFilter)
+    }
+    inputs = document.querySelectorAll('#thirdFilter input');
+    for (let i = 0 ; i < inputs.length; i++){
+        inputs[i].addEventListener('click', disableFilter)
+    }
+    inputs = document.querySelectorAll('#fourthFilter input');
+    for (let i = 0 ; i < inputs.length; i++){
+        inputs[i].addEventListener('click', disableFilter)
+    }
+    inputs = document.querySelectorAll('#secondFilter input+label');
+    for (let i = 0 ; i < inputs.length; i++){
+        inputs[i].addEventListener('click', unselectFilter)
+    }
+    inputs = document.querySelectorAll('#thirdFilter input+label');
+    for (let i = 0 ; i < inputs.length; i++){
+        inputs[i].addEventListener('click', unselectFilter)
+    }
+    inputs = document.querySelectorAll('#fourthFilter input+label');
+    for (let i = 0 ; i < inputs.length; i++){
+        inputs[i].addEventListener('click', unselectFilter)
+    }
 }
 
 function firstadd() {
