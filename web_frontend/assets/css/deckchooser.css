@@ -1,4 +1,4 @@
-#heroSelector {
+#deckChooser {
     background: black url("../media/heroSelector.png") no-repeat center center;
     background-size: 177.77vh 100vh;
     height: 100vh;
@@ -6,7 +6,7 @@
     position: absolute;
 }
 
-#heroSelector .SelectorBox {
+#deckChooser .SelectorBox {
     position: relative;
     height: 100vh;
     width: 132vh;
@@ -14,7 +14,7 @@
     margin-right: auto;
 }
 
-#heroSelector #heroes {
+#deckChooser #listOfHeroes {
     position: absolute;
     left: 10.5vh;
     top: 14.5vh;
@@ -22,7 +22,7 @@
     height: 66vh;
 }
 
-#heroSelector #heroes li{
+#deckChooser #listOfHeroes li{
     display: inline-block;
     width: 21.7vh;
     height: 17.5vh;
@@ -31,7 +31,7 @@
     padding-top: 4vh;
 }
 
-#heroSelector #heroes li a {
+#deckChooser #listOfHeroes li a {
     display: block;
     width: 100%;
     height: 100%;
@@ -40,7 +40,7 @@
     border-radius: 50% 50% 10% 10% / 22% 22% 10% 10%;
 }
 
-#heroSelector #selectedHero {
+#deckChooser #selectedHeroInDeckChooser {
     display: block;
     position: absolute;
     bottom: 40.5vh;
@@ -53,7 +53,7 @@
     border-radius: 50% 50% 0 0 / 60% 60% 0 0;
 }
 
-#heroSelector .selectedHeroName {
+#deckChooser #selectedHeroNameInDeckChooser {
     display: block;
     position: absolute;
     color: white;
@@ -67,7 +67,7 @@
     text-align: center;
 }
 
-#heroSelector .buttonHolder {
+#deckChooser .buttonHolder {
     position: absolute;
     display: inline-block;
     font-weight: bold;
@@ -79,19 +79,19 @@
     text-align: center;
 }
 
-#heroSelector .buttonHolder .insideButton {
+#deckChooser .buttonHolder .insideButton {
     display: inline-block;
     width: 11vh;
     line-height: 5.5vh;
     border-radius: 10% / 50%;
 }
 
-#heroSelector #gotoDeckHolder {
-    bottom: 20vh;
+#deckChooser #gotoDeckBuilderHolder {
+    bottom: 21vh;
     right: 15.5vh;
 }
 
-#heroSelector #gotoHomeHolder {
+#deckChooser #gotoMainMenuHolder {
     bottom: 4.75vh;
     right: -0.5vh;
     height: 6vh;
@@ -99,7 +99,7 @@
     width: 16vh;
 }
 
-#heroSelector #gotoHomeHolder .insideButton {
+#deckChooser #gotoMainMenuHolder .insideButton {
     width: 9.4vh;
     line-height: 5vh;
 }

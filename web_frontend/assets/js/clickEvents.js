@@ -27,6 +27,10 @@ function init() {
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
     document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoHeroChooser').addEventListener('click', gotoHeroChooser);
+    document.getElementById('classMage').addEventListener('click', selectClassMage);
+    document.getElementById('classMageDeckChooser').addEventListener('click', selectClassMageInDeckChooser);
+    document.getElementById('classPaladinDeckChooser').addEventListener('click', selectClassPaladinInDeckChooser);
+    document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
 
     /*
@@ -99,7 +103,7 @@ function gotoHeroSelector() {
     setTimeout(goto, 4800);     // This should be shown while loading ;)
     startLoadingScreen();
 
-     function goto() {
+    function goto() {
         stopLoadingScreen();
         document.getElementById('mainMenu').className = "hidden";
         document.getElementById('heroSelector').className = "";
@@ -115,6 +119,37 @@ function gotoHeroChooser() {
     document.getElementById('deckSelector').className = "hidden";
     document.getElementById('heroSelector').className = "";
 }
+
+function selectClassMage() {
+    let selectedHeroName = document.getElementsByClassName("selectedHeroName");
+    for (let i = 0; i < selectedHeroName.length; i++) {
+        selectedHeroName[i].innerHTML = 'Mage Annie';
+    }
+    selectedHero.style.backgroundImage = "url('images/portraitMage.png')";
+    selectedDeck.style.backgroundImage = "url('images/portraitMage.png')";
+    playerHero.innerHTML = "<img src='images/portraitMage.png' alt='playerHero' title='playerhero'>";
+}
+
+function selectClassPaladin() {
+    let selectedHeroName = document.getElementsByClassName("selectedHeroName");
+    for (let i = 0; i < selectedHeroName.length; i++) {
+        selectedHeroName[i].innerHTML = 'Paladin Azir';
+    }
+    selectedHero.style.backgroundImage = "url('images/portraitPaladin.png')";
+    selectedDeck.style.backgroundImage = "url('images/portraitPaladin.png')";
+    playerHero.innerHTML = "<img src='images/portraitPaladin.png' alt='playerHero' title='playerhero'>"
+}
+
+function selectClassMageInDeckChooser() {
+    document.getElementById("selectedHeroNameInDeckChooser").innerHTML = 'Mage Annie';
+    selectedHeroInDeckChooser.style.backgroundImage = "url('images/portraitMage.png')";
+}
+
+function selectClassPaladinInDeckChooser() {
+    document.getElementById("selectedHeroNameInDeckChooser").innerHTML = 'Paladin Azir';
+    selectedHeroInDeckChooser.style.backgroundImage = "url('images/portraitPaladin.png')";
+}
+
 
 function gotoDeckBuilder() {
     document.getElementById('deckChooser').className = "hidden";
