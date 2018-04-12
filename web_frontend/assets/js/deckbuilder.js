@@ -1,32 +1,29 @@
 "use strict";
 
 document.addEventListener('DOMContentLoaded', init);
+let tutorialli = 1;
 
-function checkallcards() {
-    let cardInDeck = document.querySelectorAll(".cardInDeck");
-    for(let i = 0 ; i < cardInDeck.length; i++){
-        cardInDeck[i].addEventListener('dblclick', addCardToDeck);
-        cardInDeck[i].addEventListener('mouseover', detailOfCard);
-        cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
-    }
-    let chosenCards = document.querySelectorAll(".chosenCards");
-    for(let i = 0 ; i < chosenCards.length; i++){
-        chosenCards[i].addEventListener('dblclick', removeCardFromDeck);
-        let noImg = chosenCards[i].lastChild.lastChild;
-        noImg.style.display = 'none';
+function volgendeTutorial() {
+
+    document.querySelector('#tutorials li:nth-child(' +tutorialli+ ')').className = "hidden";
+    tutorialli += 1;
+    document.querySelector('#tutorials li:nth-child(' + tutorialli + ')').className = "";
+    if (tutorialli > 11){
+        document.getElementById('next').removeEventListener('click', volgendeTutorial);
+        document.querySelector('#tutorials').className = "hidden";
     }
 }
 
-function unselectFilter(e) {
-    e.preventDefault();
-    document.getElementById(e.target.getAttribute('for')).checked = document.getElementById(e.target.getAttribute('for')).checked !== true;
-}
-function disableFilter(e) {
-    e.preventDefault();
-    e.target.checked = e.target.checked !== true;
+function tutorial() {
+    document.querySelector('#tutorials').className = "";
+    document.getElementById('next').addEventListener('click', volgendeTutorial);
+
 }
 
 function init() {
+    tutorial();
+
+
     document.querySelector('#firstadd').addEventListener('click', firstadd);
     mockCards();
     checkallcards();
@@ -55,7 +52,29 @@ function init() {
         inputs[i].addEventListener('click', unselectFilter)
     }
 }
+function checkallcards() {
+    let cardInDeck = document.querySelectorAll(".cardInDeck");
+    for(let i = 0 ; i < cardInDeck.length; i++){
+        cardInDeck[i].addEventListener('dblclick', addCardToDeck);
+        cardInDeck[i].addEventListener('mouseover', detailOfCard);
+        cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
+    }
+    let chosenCards = document.querySelectorAll(".chosenCards");
+    for(let i = 0 ; i < chosenCards.length; i++){
+        chosenCards[i].addEventListener('dblclick', removeCardFromDeck);
+        let noImg = chosenCards[i].lastChild.lastChild;
+        noImg.style.display = 'none';
+    }
+}
 
+function unselectFilter(e) {
+    e.preventDefault();
+    document.getElementById(e.target.getAttribute('for')).checked = document.getElementById(e.target.getAttribute('for')).checked !== true;
+}
+function disableFilter(e) {
+    e.preventDefault();
+    e.target.checked = e.target.checked !== true;
+}
 function firstadd() {
     /* apart scherm dat vraagt of deck moet opgeslaan worden*/
     document.querySelector('.main').classList.toggle('hidden');

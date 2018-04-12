@@ -94,6 +94,7 @@ function playGame() {
 
 }
 
+
 function gotoHome() {
     document.getElementById('mainMenu').className = "";
     document.getElementById('heroSelector').className = "hidden";
@@ -154,50 +155,6 @@ function selectClassPaladinInDeckChooser() {
 function gotoDeckBuilder() {
     document.getElementById('deckChooser').className = "hidden";
     document.getElementById('deckbuilder').className = "";
-}
-
-function gotoTutorial2() {
-    document.getElementById('tutorial1').className = "hidden";
-    document.getElementById('tutorial2').className = "";
-}
-function gotoTutorial3() {
-    document.getElementById('tutorial2').className = "hidden";
-    document.getElementById('tutorial3').className = "";
-}
-function gotoTutorial4() {
-    document.getElementById('tutorial3').className = "hidden";
-    document.getElementById('tutorial4').className = "";
-}
-function gotoTutorial5() {
-    document.getElementById('tutorial4').className = "hidden";
-    document.getElementById('tutorial5').className = "";
-}
-function gotoTutorial6() {
-    document.getElementById('tutorial5').className = "hidden";
-    document.getElementById('tutorial6').className = "";
-}
-function gotoTutorial7() {
-    document.getElementById('tutorial6').className = "hidden";
-    document.getElementById('tutorial7').className = "";
-}
-function gotoTutorial8() {
-    document.getElementById('tutorial7').className = "hidden";
-    document.getElementById('tutorial8').className = "";
-}
-function gotoTutorial9() {
-    document.getElementById('tutorial8').className = "hidden";
-    document.getElementById('tutorial9').className = "";
-}
-function gotoTutorial10() {
-    document.getElementById('tutorial9').className = "hidden";
-    document.getElementById('tutorial10').className = "";
-}
-function gotoTutorial11() {
-    document.getElementById('tutorial10').className = "hidden";
-    document.getElementById('tutorial11').className = "";
-}
-function gotoLeaveTutorial() {
-    document.getElementById('tutorial11').className = "hidden";
 }
 
 function gotoOptions() {
