@@ -21,7 +21,7 @@ function tutorial() {
 }
 
 function init() {
-    tutorial();
+    /*tutorial();*/
 
 
     document.querySelector('#firstadd').addEventListener('click', firstadd);
@@ -60,6 +60,7 @@ function checkallcards() {
         cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
     }
     let chosenCards = document.querySelectorAll(".chosenCards");
+    document.getElementById('cardAmount').innerHTML = chosenCards.length + '/30';
     for(let i = 0 ; i < chosenCards.length; i++){
         chosenCards[i].addEventListener('dblclick', removeCardFromDeck);
         let noImg = chosenCards[i].lastChild.lastChild;
