@@ -80,6 +80,7 @@
     border: 1px black solid;
 }
 #deckbuilder #deck{
+    overflow-y: scroll;
     position: absolute;
     top: 14vh;
     width: 55vw;

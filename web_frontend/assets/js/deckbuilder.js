@@ -77,6 +77,10 @@ function disableFilter(e) {
     e.target.checked = e.target.checked !== true;
 }
 function firstadd() {
+    let chosenCards = document.querySelectorAll(".chosenCards");
+    if (chosenCards.length === 30){
+        document.querySelector('.save').innerHTML = 'full deck';
+    }
     /* apart scherm dat vraagt of deck moet opgeslaan worden*/
     document.querySelector('.main').classList.toggle('hidden');
     document.querySelector('.save').classList.toggle('hidden');
@@ -93,8 +97,14 @@ function mockCard(card) {
 }
 
 function addCardToDeck(e) {
-    document.getElementById("deck").innerHTML += "<li class='chosenCards'>"+this.innerHTML+"</li>";
-    checkallcards();
+    let chosenCards = document.querySelectorAll(".chosenCards");
+    if (chosenCards.length >= 30){
+        console.error('to much cards');
+    }
+    else {
+        document.getElementById("deck").innerHTML += "<li class='chosenCards'>"+this.innerHTML+"</li>";
+        checkallcards();
+    }
 }
 
 function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zonder)
