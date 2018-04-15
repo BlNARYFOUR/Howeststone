@@ -30,6 +30,8 @@
     position: absolute;
     top: 10vh;
 }
+
+
 #deckbuilder #firstadd {
     text-align: center;
     line-height: 5vh;
@@ -79,6 +81,7 @@
     font-size: 0.7rem;
     border: 1px black solid;
 }
+
 #deckbuilder #deck{
     overflow-y: scroll;
     position: absolute;
