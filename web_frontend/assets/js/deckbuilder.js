@@ -20,9 +20,14 @@ function tutorial() {
 
 }
 
+function zoektest(e) {
+    e.preventDefault();
+    console.log(document.getElementById('search').value);
+}
+
 function init() {
     /*tutorial();*/
-
+    document.getElementById('search').addEventListener('change', zoektest);
 
     document.querySelector('#firstadd').addEventListener('click', firstadd);
     mockCards();
