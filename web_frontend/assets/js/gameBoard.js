@@ -4,7 +4,8 @@ let cardCounter = 0;
 let cardBackUrl = "";
 
 function init() {
-    /*document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);*/
+    setupDragging();
+    //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
     getRandomCardBack();
     makeCardsFan("you", 1);
@@ -22,16 +23,57 @@ function burnFuse(e) {
 }
 */
 
+function updateEnemyHero() {
+    updateHero("enemy");
+}
+
+function updateMyHero() {
+    updateHero("you");
+}
+
+function updateHero(parent) {
+    let heroName = "";
+
+    // here will come a fetch to get the hero name
+    heroName = "mage";
+
+    showHero(parent, heroName);
+}
+
+function showHero(parent, heroName) {
+    let hero = document.querySelector(`#gameBoard .${parent} .hero`);
+
+    hero.style.background = `no-repeat url("assets/media/${heroName}.png") center center`;
+    hero.style.backgroundSize = "contain";
+}
+
 function updateEnemyCards(amountOfCards) {
-    let cards = document.querySelector("#gameBoard .enemy .cards ul");
+    updateCards(amountOfCards, "enemy", -1);
+    setCards("enemy", cardBackUrl);
+}
+
+function updateMyCards(amountOfCards) {
+    updateCards(amountOfCards, "you", 1);
+}
+
+function getMyCardDetails() {
+    // This is the function where you will get all card images (in order), names, details, ... (JSON format)
+}
+
+function updateCards(amountOfCards, parent, gradDirectionIndex) {
+    let cards = document.querySelector(`#gameBoard .${parent} .cards ul`);
     cards.innerHTML = "";
 
-    for(let i=0; i<amountOfCards; i++) {
-        cards.innerHTML += "<li>Card " + (i+1) + "</li>";
+    let addOn = "";
+    if(parent === "you") {
+        addOn = 'draggable="true"';
     }
 
-    setCards("enemy", cardBackUrl);
-    makeCardsFan("enemy", -1);
+    for(let i=0; i<amountOfCards; i++) {
+        cards.innerHTML += `<li ${classAddOn}>Card ` + (i+1) + "</li>";
+    }
+
+    makeCardsFan(parent, gradDirectionIndex);
 }
 
 function updateEnemyMana(activeMana, totalMana) {
@@ -176,4 +218,27 @@ function setBackground() {
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
+}
+
+function setupDragging() {
+    let dragged;
+
+    document.addEventListener("dragstart", function( event ) {
+        dragged = event.target;
+    }, false);
+
+    document.addEventListener("dragover", function( event ) {
+        event.preventDefault();
+    }, false);
+
+    document.addEventListener("drop", function( event ) {
+        event.preventDefault();
+        // move dragged elem to the selected drop target
+        if ( event.target.className === "dropZone" ) {
+            event.target.style.background = "";
+            dragged.parentNode.removeChild( dragged );
+            event.target.appendChild( dragged );
+        }
+
+    }, false);
 }

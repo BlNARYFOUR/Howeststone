@@ -16,6 +16,7 @@
 }
 
 #gameBoard .you {
+    position: relative;
     display: block;
     width: 100%;
     height: 53.25vh;
@@ -23,6 +24,7 @@
 }
 
 #gameBoard .enemy {
+    position: relative;
     display: block;
     width: 100%;
     height: 46.75vh;
@@ -91,8 +93,8 @@
 
 #gameBoard .manaTotal {
     position: absolute;
-    height: 5vh;
-    line-height: 5vh;
+    height: 4.5vh;
+    line-height: 4.5vh;
     width: 8vh;
     z-index: 0;
     text-align: center;
@@ -100,7 +102,7 @@
 }
 
 #gameBoard .you .manaTotal {
-    bottom: 5.3vh;
+    bottom: 5.7vh;
     right: 32.25vh;
 }
 
@@ -149,14 +151,28 @@
 
 #gameBoard .you .hero {
     bottom: 16.1vh;
-    background: no-repeat url("../media/mage.png") center center;
+    /*background: no-repeat url("../media/mage.png") center center;*/
     background-size: contain;
 }
 
 #gameBoard .enemy .hero {
     top: 10.55vh;
-    background: no-repeat url("../media/mage.png") center center;
+    /*background: no-repeat url("../media/mage.png") center center;*/
     background-size: contain;
+}
+
+#gameBoard .you .playingField {
+    position: absolute;
+    width: 100%;
+    height: 52.5%;
+    top: 0;
+}
+
+#gameBoard .you .playingField .dropZone {
+    display: block;
+    height: 100%;
+    border: solid thin red;
+    border-radius: 0 0 40% 40% / 0 0 100% 100%;
 }
 
 #gameBoard #tempButtonAddCard {
