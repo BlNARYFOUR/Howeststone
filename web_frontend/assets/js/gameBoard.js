@@ -228,10 +228,13 @@ function setupDragging() {
     }, false);
 
     document.addEventListener("dragover", function( event ) {
+        dragged.style.opacity = 0;
+        // this is the function for where you can drag you item(s) over
         event.preventDefault();
     }, false);
 
     document.addEventListener("drop", function( event ) {
+        dragged.style.opacity = "";
         event.preventDefault();
         // move dragged elem to the selected drop target
         if ( event.target.className === "dropZone" ) {
