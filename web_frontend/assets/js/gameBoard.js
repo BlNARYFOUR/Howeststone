@@ -209,7 +209,6 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
 
             cards[i].style.position = "absolute";
             cards[i].style.bottom = "-2vh";
-            console.log((cardWidth/window.innerHeight*100)/(amountOfCards%2+1));
 
             let buf = (cardWidth/window.innerHeight*100)/(amountOfCards%2+1);               // 50% - cardWith when even, 50% - cardWith/2 when uneven (center aligning)
             buf -= (cardWidth/window.innerHeight*100)*(parseInt(amountOfCards/2)-i);        // align card according to its position
