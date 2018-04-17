@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', init);
 let tutorialli = 1;
+let dragged;
 
 function volgendeTutorial() {
 
@@ -27,11 +28,30 @@ function zoektest(e) {
 
 function init() {
     /*tutorial();*/
-    document.getElementById('search').addEventListener('change', zoektest);
 
+    document.getElementById('search').addEventListener('change', zoektest);
     document.querySelector('#firstadd').addEventListener('click', firstadd);
     mockCards();
     checkallcards();
+
+    let cardInDeck = document.querySelectorAll('#cards li');
+    for (let i = 0; i < cardInDeck.length; i++){
+        cardInDeck[i].addEventListener('dragstart', function () {
+            dragged = this.innerHTML;
+        });
+    }
+    document.querySelector('#deck').addEventListener('dragover', function(e) { e.preventDefault();});
+    document.querySelector('#deck').addEventListener('drop', function () {
+        if ((this.getAttribute('id') === 'deck')){
+            try{
+                if (dragged.indexOf('draggable') !== -1){
+                    addCardToDeck(dragged);
+                    dragged = null;
+                }
+            }catch(error){}
+        }
+    });
+
     let inputs = document.querySelectorAll('#secondFilter input');
     for (let i = 0 ; i < inputs.length; i++){
         inputs[i].addEventListener('click', disableFilter)
@@ -67,10 +87,18 @@ function checkallcards() {
     let chosenCards = document.querySelectorAll(".chosenCards");
     let lenghtAllCards = document.querySelectorAll(".two").length + chosenCards.length;
     document.getElementById('cardAmount').innerHTML = lenghtAllCards + '/30';
+    document.querySelector('#cards').addEventListener('dragover', function( event ) { event.preventDefault();});
+    document.querySelector('#cards').addEventListener('drop', function () {
+        if ((this.getAttribute('id') === 'cards') && (dragged !== null)){
+            removeCardFromDeck(dragged);
+            dragged = null;
+        }
+    });
     for(let i = 0 ; i < chosenCards.length; i++){
         chosenCards[i].addEventListener('dblclick', removeCardFromDeck);
-        //let noImg = chosenCards[i].lastChild.lastChild;
-        //noImg.style.display = 'none';
+        chosenCards[i].addEventListener('dragstart', function () {
+            dragged = this
+        });
     }
 }
 
@@ -99,15 +127,21 @@ function mockCards() {
 }
 
 function mockCard(card) {
-   document.getElementById('cards').innerHTML += "<li class ='cardInDeck'><figure><img src='images/"+card+".png' alt="+card+" title="+card+">"+"</figure></li>"
+   document.getElementById('cards').innerHTML += "<li class ='cardInDeck'><figure draggable='true'><img src='images/"+card+".png' alt="+card+" title="+card+">"+"</figure></li>"
        //"<img src='images/"+card+".png' alt="+card+" title="+card+"></figure></li>";
 }
 
 function addCardToDeck(e) {
+    let dit;
+    try {
+        dit = this.innerHTML;
+    }catch(error) {
+        dit = e;
+    }
     let chosenCards = document.querySelectorAll(".chosenCards");
     let sameCard = 0;
     for(let i = 0; i < chosenCards.length; i++){
-        if (this.innerHTML === chosenCards[i].innerHTML){
+        if (dit === chosenCards[i].innerHTML){
             sameCard += 1;
         }
     }
@@ -117,22 +151,19 @@ function addCardToDeck(e) {
     }
     else {
         if (sameCard === 0){
-
-            document.getElementById("deck").innerHTML += "<li class='chosenCards'>"+this.innerHTML+"</li>";
+            document.getElementById("deck").innerHTML += "<li class='chosenCards'>"+dit+"</li>";
             checkallcards();
-
         } else {
             let cardType = "normal";
             if (sameCard === 1 && cardType !== "legendary"){
                 for(let i = 0; i < chosenCards.length; i++){
-                    if (this.innerHTML === chosenCards[i].innerHTML){
+                    if (dit === chosenCards[i].innerHTML){
                         chosenCards[i].classList.add("two");
                     }
                 }
                 // change the old one
                 checkallcards();
-            }
-            else {
+            } else {
                 console.error('cannot add more');
             }
         }
@@ -140,10 +171,17 @@ function addCardToDeck(e) {
 }
 
 function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zonder)
-    if (this.classList.contains('two')){
-        this.classList.remove('two');
+    let dit;
+    try {
+        let nouse = this.classList;
+        dit = this;
+    }catch(error) {
+        dit = e;
+    }
+    if (dit.classList.contains('two')){
+        dit.classList.remove('two');
     } else {
-        this.parentNode.removeChild(this);
+        dit.parentNode.removeChild(dit);
     }
     checkallcards();
 }
