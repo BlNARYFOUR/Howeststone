@@ -65,7 +65,8 @@ function checkallcards() {
         //cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
     }
     let chosenCards = document.querySelectorAll(".chosenCards");
-    document.getElementById('cardAmount').innerHTML = chosenCards.length + '/30';
+    let lenghtAllCards = document.querySelectorAll(".two").length + chosenCards.length;
+    document.getElementById('cardAmount').innerHTML = lenghtAllCards + '/30';
     for(let i = 0 ; i < chosenCards.length; i++){
         chosenCards[i].addEventListener('dblclick', removeCardFromDeck);
         //let noImg = chosenCards[i].lastChild.lastChild;
@@ -125,7 +126,7 @@ function addCardToDeck(e) {
             if (sameCard === 1 && cardType !== "legendary"){
                 for(let i = 0; i < chosenCards.length; i++){
                     if (this.innerHTML === chosenCards[i].innerHTML){
-                        chosenCards[i].innerHTML += '2';
+                        chosenCards[i].classList.add("two");
                     }
                 }
                 // change the old one
@@ -139,7 +140,11 @@ function addCardToDeck(e) {
 }
 
 function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zonder)
-    this.parentNode.removeChild(this);
+    if (this.classList.contains('two')){
+        this.classList.remove('two');
+    } else {
+        this.parentNode.removeChild(this);
+    }
     checkallcards();
 }
 function nodetailOfCard(e){

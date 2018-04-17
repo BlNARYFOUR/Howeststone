@@ -269,6 +269,9 @@
     left: -23vw;
     width: 45vh;
 }*/
+.two{
+    background-color: blue;
+}
 
 .cardInDeck, .chosenCards {
     margin-left: 1vw;
