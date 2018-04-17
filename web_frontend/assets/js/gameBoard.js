@@ -19,12 +19,9 @@ function init() {
     */
 }
 
-/*
 function burnFuse(e) {
-    document.getElementById("spark").classList.add("burn");
     document.getElementById("fuse").classList.add("burn");
 }
-*/
 
 function updateEnemyHero() {
     updateHero("enemy");
