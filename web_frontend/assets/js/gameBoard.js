@@ -65,6 +65,10 @@ function setCards(parent, cardUrl) {
 }
 
 function getRandomCardBack() {
+	cardBackUrl = "assets/media/cardBackDefault.png";
+	
+	// WORKED, but API has broken (?)
+	/*
     fetch('https://omgvamp-hearthstone-v1.p.mashape.com/cardbacks', {
         method: 'GET',
         credentials: 'include',
@@ -85,6 +89,7 @@ function getRandomCardBack() {
     .catch(function(err) {
         console.log("Error 404: Could not connect to the server");
     });
+	*/
 }
 
 function addCard() {
