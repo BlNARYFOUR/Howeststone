@@ -54,6 +54,7 @@ function updateEnemyCards(amountOfCards) {
 
 function updateMyCards(amountOfCards) {
     updateCards(amountOfCards, "you", 1);
+    setupDraggingOfCards();
 }
 
 function getMyCardDetails() {
@@ -141,6 +142,8 @@ function addCard() {
         document.querySelector('#gameBoard .you .cards ul').innerHTML += "<li>Card " + cardCounter + "</li>";
         makeCardsFan("you", 1);
     }
+
+    setupDraggingOfCards();
 }
 
 function makeCardsFan(parentClass, gradDirectionIndex) {                                // gradDirectionIndex: Normally -1 or 1
@@ -233,17 +236,23 @@ function setupDraggingOfCards() {
 
     let cards = document.querySelectorAll("#gameBoard .you .cards ul li");
 
+    document.draggable = false;
+
     for(let i=0; i<cards.length; i++) {
         cards[i].addEventListener("dragstart", handleDragStart, false);
         cards[i].addEventListener("drag", handleDrag, false);
         cards[i].addEventListener("dragend", handleDragEnd, false);
         cards[i].addEventListener("dragover", handleDragOver, false);
-        cards[i].addEventListener("drop", handleDrop, false);
+        cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);
     }
+
+    document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
+    document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("drop", handleDrop, false);
 
 }
 
 function handleDragStart(e) {
+    e.stopImmediatePropagation();
     dragSrcEl = e.target;
 
     e.dataTransfer.effectAllowed = 'move';
@@ -255,6 +264,7 @@ function handleDragStart(e) {
 }
 
 function handleDrag(e) {
+    e.stopImmediatePropagation();
     e.target.classList.add("hide");
 }
 
@@ -276,9 +286,13 @@ function handleDrop(e) {
     }
 }
 
+function handleDoubleClickAsDrop(e) {
+    dropInDropZone(e.target, document.querySelector("#gameBoard .you .playingField .dropZone"));
+}
+
 function dropInDropZone(dragSrcElement, dropZoneElement) {
+    dragSrcElement.draggable = false;
     dragSrcElement.style = "";
-    dragSrcElement.classList.remove("draggable");
     dragSrcElement.parentNode.removeChild(dragSrcElement);
     dropZoneElement.appendChild(dragSrcElement);
 }

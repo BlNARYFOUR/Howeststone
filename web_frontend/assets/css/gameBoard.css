@@ -74,6 +74,7 @@
 
 #gameBoard .you .cards li {
     bottom: -0.5vh;
+    -webkit-user-drag: element;
 }
 
 #gameBoard .you .cards li:hover {
