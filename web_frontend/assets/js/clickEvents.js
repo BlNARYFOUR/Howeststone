@@ -90,6 +90,7 @@ function playGame() {
     document.getElementById('deckSelector').className = "hidden";
     setTimeout(function playrealGame() {
         document.getElementById('vsScreen').className = "hidden";
+        document.getElementById('replaceCardScreen').className = "";
     }, 3000);
 
 }
