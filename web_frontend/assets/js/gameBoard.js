@@ -23,15 +23,27 @@ function burnFuse(e) {
 */
 
 function updateEnemyCards(amountOfCards) {
-    let cards = document.querySelector("#gameBoard .enemy .cards ul");
+    updateCards(amountOfCards, "enemy", -1);
+    setCards("enemy", cardBackUrl);
+}
+
+function updateMyCards(amountOfCards) {
+    updateCards(amountOfCards, "you", 1);
+}
+
+function getMyCardDetails() {
+    // This is the function where you will get all card images (in order), names, details, ... (JSON format)
+}
+
+function updateCards(amountOfCards, parent, gradDirectionIndex) {
+    let cards = document.querySelector(`#gameBoard .${parent} .cards ul`);
     cards.innerHTML = "";
 
     for(let i=0; i<amountOfCards; i++) {
         cards.innerHTML += "<li>Card " + (i+1) + "</li>";
     }
 
-    setCards("enemy", cardBackUrl);
-    makeCardsFan("enemy", -1);
+    makeCardsFan(parent, gradDirectionIndex);
 }
 
 function updateEnemyMana(activeMana, totalMana) {
