@@ -61,15 +61,15 @@ function checkallcards() {
     let cardInDeck = document.querySelectorAll(".cardInDeck");
     for(let i = 0 ; i < cardInDeck.length; i++){
         cardInDeck[i].addEventListener('dblclick', addCardToDeck);
-        cardInDeck[i].addEventListener('mouseover', detailOfCard);
-        cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
+        //cardInDeck[i].addEventListener('mouseover', detailOfCard);
+        //cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
     }
     let chosenCards = document.querySelectorAll(".chosenCards");
     document.getElementById('cardAmount').innerHTML = chosenCards.length + '/30';
     for(let i = 0 ; i < chosenCards.length; i++){
         chosenCards[i].addEventListener('dblclick', removeCardFromDeck);
-        let noImg = chosenCards[i].lastChild.lastChild;
-        noImg.style.display = 'none';
+        //let noImg = chosenCards[i].lastChild.lastChild;
+        //noImg.style.display = 'none';
     }
 }
 
@@ -98,17 +98,43 @@ function mockCards() {
 }
 
 function mockCard(card) {
-   document.getElementById('cards').innerHTML += "<li class ='cardInDeck'><figure><img src='images/"+card+".png' alt="+card+" title="+card+"><img src='images/"+card+".png' alt="+card+" title="+card+"></figure></li>";
+   document.getElementById('cards').innerHTML += "<li class ='cardInDeck'><figure><img src='images/"+card+".png' alt="+card+" title="+card+">"+"</figure></li>"
+       //"<img src='images/"+card+".png' alt="+card+" title="+card+"></figure></li>";
 }
 
 function addCardToDeck(e) {
     let chosenCards = document.querySelectorAll(".chosenCards");
+    let sameCard = 0;
+    for(let i = 0; i < chosenCards.length; i++){
+        if (this.innerHTML === chosenCards[i].innerHTML){
+            sameCard += 1;
+        }
+    }
+
     if (chosenCards.length >= 30){
         console.error('to much cards');
     }
     else {
-        document.getElementById("deck").innerHTML += "<li class='chosenCards'>"+this.innerHTML+"</li>";
-        checkallcards();
+        if (sameCard === 0){
+
+            document.getElementById("deck").innerHTML += "<li class='chosenCards'>"+this.innerHTML+"</li>";
+            checkallcards();
+
+        } else {
+            let cardType = "normal";
+            if (sameCard === 1 && cardType !== "legendary"){
+                for(let i = 0; i < chosenCards.length; i++){
+                    if (this.innerHTML === chosenCards[i].innerHTML){
+                        chosenCards[i].innerHTML += '2';
+                    }
+                }
+                // change the old one
+                checkallcards();
+            }
+            else {
+                console.error('cannot add more');
+            }
+        }
     }
 }
 

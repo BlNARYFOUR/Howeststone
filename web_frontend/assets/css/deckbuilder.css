@@ -261,14 +261,14 @@
     width: 11vh;
     display: inline-block;
 }
-.cardInDeck figure img:last-child{
+/*.cardInDeck figure img:last-child{
     z-index: 1;
     position: absolute;
     display: none;
     top: 0;
     left: -23vw;
     width: 45vh;
-}
+}*/
 
 .cardInDeck, .chosenCards {
     margin-left: 1vw;
