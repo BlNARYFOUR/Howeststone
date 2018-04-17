@@ -86,9 +86,9 @@ function gotoRechooseDeck() {
 
 function playGame() {
     document.getElementById('vsScreen').className = "";
+    document.getElementById('gameBoard').className = "";
     document.getElementById('deckSelector').className = "hidden";
     setTimeout(function playrealGame() {
-        document.getElementById('gameBoard').className = "";
         document.getElementById('vsScreen').className = "hidden";
     }, 3000);
 
