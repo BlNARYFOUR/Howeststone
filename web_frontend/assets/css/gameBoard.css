@@ -166,7 +166,11 @@
     width: 100%;
     height: 52.5%;
     top: 0;
+}
 
+#gameBoard .you .playingField .dropZone {
+    display: block;
+    height: 100%;
     border: solid thin red;
     border-radius: 0 0 40% 40% / 0 0 100% 100%;
 }

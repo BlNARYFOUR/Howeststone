@@ -4,6 +4,7 @@ let cardCounter = 0;
 let cardBackUrl = "";
 
 function init() {
+    setupDragging();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
     getRandomCardBack();
@@ -63,9 +64,9 @@ function updateCards(amountOfCards, parent, gradDirectionIndex) {
     let cards = document.querySelector(`#gameBoard .${parent} .cards ul`);
     cards.innerHTML = "";
 
-    let classAddOn = "";
+    let addOn = "";
     if(parent === "you") {
-        classAddOn = 'class="draggable"';
+        addOn = 'draggable="true"';
     }
 
     for(let i=0; i<amountOfCards; i++) {
@@ -217,4 +218,27 @@ function setBackground() {
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
+}
+
+function setupDragging() {
+    let dragged;
+
+    document.addEventListener("dragstart", function( event ) {
+        dragged = event.target;
+    }, false);
+
+    document.addEventListener("dragover", function( event ) {
+        event.preventDefault();
+    }, false);
+
+    document.addEventListener("drop", function( event ) {
+        event.preventDefault();
+        // move dragged elem to the selected drop target
+        if ( event.target.className === "dropZone" ) {
+            event.target.style.background = "";
+            dragged.parentNode.removeChild( dragged );
+            event.target.appendChild( dragged );
+        }
+
+    }, false);
 }
