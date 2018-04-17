@@ -172,28 +172,49 @@
     z-index: 2;
 }
 
-/*
-#playField #fuse {
-    width: 80%;
+#gameBoard #fuse {
+    position: absolute;
+    right: 18vh;
+    width: 103vh;
+    height: 10vh;
+    top: 42vh;
+    opacity: 0;
+}
+
+#gameBoard #fuse.burn {
+    opacity: 1;
+    -webkit-transition: ease-in all 20s; /* Safari */
+    transition: ease-in all 200ms;
+}
+
+#gameBoard #rope {
+    position: absolute;
+    display: block;
+    right: 0;
+    width: 92.5%;
+    height: 100%;
     background: repeat-x url("../media/rope.png") center right;
-    background-size: 700px 300px;
+    background-size: 89.1vh 38.2vh;
 }
 
-#playField #spark {
-    top: 1.4%;
-    width: 85%;
+#gameBoard #spark {
+    position: absolute;
+    display: block;
+    right: 0;
+    height: 95%;
+    width: 100%;
     background: no-repeat url("../media/sparkles.gif") center left;
-    background-size: 110px;
+    background-size: 14vh;
 }
 
-#playField #fuse.burn {
+#gameBoard #fuse.burn #rope {
     width: 4%;
-    -webkit-transition: ease-in width 20s; /* Safari */
-    /*transition: ease-in width 20s;
+    -webkit-transition: ease-in all 20s; /* Safari */
+    transition: ease-in all 20s;
 }
 
-#playField #spark.burn {
+#gameBoard #fuse.burn #spark {
     width: 10%;
-    -webkit-transition: ease-in width 20s; /* Safari */
-/*transition: ease-in width 20s;
+    -webkit-transition: ease-in all 20s; /* Safari */
+    transition: ease-in all 20s;
 }

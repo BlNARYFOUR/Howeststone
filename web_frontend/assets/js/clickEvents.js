@@ -52,7 +52,7 @@ function playGame() {
     document.getElementById('vsScreen').className = "";
     document.getElementById('deckPicker').className = "hidden";
     setTimeout(function playrealGame() {
-        document.getElementById('playField').className = "";
+        document.getElementById('gameBoard').className = "";
         document.getElementById('vsScreen').className = "hidden";
     }, 3000);
 
