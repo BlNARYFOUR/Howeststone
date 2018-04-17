@@ -91,8 +91,8 @@
 
 #gameBoard .manaTotal {
     position: absolute;
-    height: 5vh;
-    line-height: 5vh;
+    height: 4.5vh;
+    line-height: 4.5vh;
     width: 8vh;
     z-index: 0;
     text-align: center;
@@ -100,7 +100,7 @@
 }
 
 #gameBoard .you .manaTotal {
-    bottom: 5.3vh;
+    bottom: 5.7vh;
     right: 32.25vh;
 }
 
@@ -149,13 +149,13 @@
 
 #gameBoard .you .hero {
     bottom: 16.1vh;
-    background: no-repeat url("../media/mage.png") center center;
+    /*background: no-repeat url("../media/mage.png") center center;*/
     background-size: contain;
 }
 
 #gameBoard .enemy .hero {
     top: 10.55vh;
-    background: no-repeat url("../media/mage.png") center center;
+    /*background: no-repeat url("../media/mage.png") center center;*/
     background-size: contain;
 }
 

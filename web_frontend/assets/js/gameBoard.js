@@ -22,6 +22,30 @@ function burnFuse(e) {
 }
 */
 
+function updateEnemyHero() {
+    updateHero("enemy");
+}
+
+function updateMyHero() {
+    updateHero("you");
+}
+
+function updateHero(parent) {
+    let heroName = "";
+
+    // here will come a fetch to get the hero name
+    heroName = "mage";
+
+    showHero(parent, heroName);
+}
+
+function showHero(parent, heroName) {
+    let hero = document.querySelector(`#gameBoard .${parent} .hero`);
+
+    hero.style.background = `no-repeat url("assets/media/${heroName}.png") center center`;
+    hero.style.backgroundSize = "contain";
+}
+
 function updateEnemyCards(amountOfCards) {
     updateCards(amountOfCards, "enemy", -1);
     setCards("enemy", cardBackUrl);
