@@ -7,6 +7,23 @@ body, html {
     height: 100%;
 }
 
+footer{
+    position: absolute;
+    background-color: rgba(0, 0, 0,0.6);
+    width: 100%;
+    bottom: 0;
+    height: 2.5vh;
+    line-height: 2.5vh;
+}
+
+footer ul{}
+
+footer ul li{}
+
+footer ul li:first-of-type{}
+
+footer ul li:last-of-type{}
+
 .hidden {
     display: none !important;
     visibility: hidden;
@@ -25,4 +42,34 @@ body, html {
 
 .buttonHolder .insideButton {
     color: #513d1f !important;
+}
+
+#gameBoard .you .manaHolder {
+    position: absolute;
+    background-color: rgba(0,0,0,0.5);
+    width: 30.5vh;
+    height: 5vh;
+    line-height: 5vh;
+    bottom: 5.5vh;
+    right: 1vh;
+}
+
+#gameBoard .you .manaHolder li {
+    display: inline-block;
+    vertical-align: middle;
+    width: 3vh;
+    height: 3.5vh;
+    margin-right: -0.6vh;
+    /*background-color: rgba(255,0,255,0.5);*/
+}
+
+#gameBoard .you .manaHolder li.mana {
+    background: no-repeat url("../media/manaSprite.png") left top;
+    background-size: 120% 205%;
+}
+
+#gameBoard .you .manaHolder li.usedMana {
+    background: no-repeat url("../media/manaSprite.png") -0.25vh bottom;
+    margin-top: 0.2vh;
+    background-size: 120% 205%;
 }
