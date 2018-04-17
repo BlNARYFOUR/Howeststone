@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
+
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="#513d1f">
     <!-- Windows Phone -->
@@ -16,23 +16,34 @@
     <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/deckPicker.css" rel="stylesheet" type="text/css"/>
-    <link href="assets/css/heroPicker.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/deckSelector.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/heroSelector.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/deckchooser.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/deckbuilder.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/optionsMenu.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/gameBoard.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
-  <meta name="author" content="3BEESANDME">
-  <title>Howeststone</title>
+    
+    <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="assets/css/playingField.css" rel="stylesheet" type="text/css">-->
+    <meta name="author" content="3BEESANDME">
+    <title>Howeststone</title>
 </head>
 <body>
 
-<div id="mainMenu" class="hidden">
+<audio id="mainMenuMusic" autoplay loop>
+    <source src="assets/media/tavernAmbetantMusic.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<a id="playMainMenuMusic" class="hidden" href="#">Play</a>
+
+<div id="mainMenu" class="">
     <div class="menuBox">
         <ul>
-            <li id="gotoPlay"><a href="#" class="navItem MainMenu">Play</a></li>
-            <li id="gotoDeckBuilder"><a href="#" class="navItem MainMenu">Deck Builder</a></li>
+            <li id="gotoHeroSelector"><a href="#" class="navItem MainMenu">Play</a></li>
+            <li id="gotoDeckChooser"><a href="#" class="navItem MainMenu">Deck Builder</a></li>
             <li id="gotoOptions"><a href="#" class="navitem MainMenu">Options</a></li>
             <li id="gotoLogOut"><a href="#" class="navitem MainMenu">Log out</a></li>
         </ul>
@@ -55,30 +66,21 @@
     </div>
 </div>
 
-<div id="heroPicker" class="hidden">
-    <div class="pickerBox">
+<div id="heroSelector" class="hidden">
+    <div class="SelectorBox">
         <ul id="heroes">
-            <li><a href="#">Mage</a></li>
-            <li><a href="#">Paladin</a></li>
-            <li><a href="#">Warrior</a></li>
-            <li><a href="#">Priest</a></li>
-            <li><a href="#">Druid</a></li>
-            <li><a href="#">Hunter</a></li>
-            <li><a href="#">Shaman</a></li>
-            <li><a href="#">Rogue</a></li>
-            <li><a href="#">Warlock</a></li>
         </ul>
 
         <span id="selectedHero"></span>
-        <h1 class="selectedHeroName">Hero name</h1>
+        <h1 class="selectedHeroName">Mage Annie</h1>
 
-        <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeck">Continue</a></span>
-        <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHome">  Back  </a></span>
+        <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckSelector">Continue</a></span>
+        <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
     </div>
 </div>
 
-<div id="deckPicker" class="hidden">
-    <div class="pickerBox">
+<div id="deckSelector" class="hidden">
+    <div class="SelectorBox">
         <ul id="yourDecks">
             <li id="deck_0"><a href="#">Some Deck :)</a></li>
             <li id="deck_1"><a href="#">Deck 2</a></li>
@@ -94,89 +96,47 @@
         <span id="addDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="addDeck">Add deck</a></span>
 
         <div id="selectedDeck"></div>
-        <h1 class="selectedHeroName">Hero name</h1>
+        <h1 class="selectedHeroName">Mage Annie</h1>
 
         <a href="#" id="playGame"></a>
-        <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHero">Back</a></span>
+        <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHeroChooser">Back</a></span>
     </div>
 </div>
 
-<div id="XXdeckChooser" class="hidden">
-    <div id="XXwhoBuild">
-        <div><a href="#">Mage</a></div>
+<div id="deckChooser" class="hidden">
+    <div class="SelectorBox">
+        <ul id="listOfHeroes">
+        </ul>
 
-        <div><a href="#">Paladin</a></div>
+        <span id="selectedHeroInDeckChooser"></span>
+        <h1 id="selectedHeroNameInDeckChooser">Mage Annie</h1>
 
-        <div><a href="#">Warrior</a></div>
+        <span id="gotoDeckBuilderHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckBuilder">Continue</a></span>
+        <span id="gotoMainMenuHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
 
-        <div><a href="#">Pries</a></div>
-
-        <div><a href="#">Druid</a></div>
-
-        <div><a href="#">Hunter</a></div>
-
-        <div><a href="#">Shaman</a></div>
-
-        <div><a href="#">Rogue</a></div>
-
-        <div><a href="#">Warlock</a></div>
+        <!--<div id="XXDitMoetOverAlles"><span><a class="gotoMainMenu" href="#" >Back</a></span></div>-->
     </div>
 
 
-    <div id="XXJaina"><img src="images/Jaina_Proudmoore.png" alt="Jaina Proudmoore" title="Jaina Proudmoore"/></div>
 
-    <a href="#" id="XXgotoDeckBuilderI">Continue</a>
-
-    <a href="#" id="XXgotoNoDeckI">Back</a>
 </div>
 
 <div id="deckbuilder" class="hidden">
-    <div id="tutorials" class="hidden">
-        <div id="tutorial1">
-            <p>Sort, filter your card and search for cards here.</p>
-            <button>Next</button>
-        </div>
-        <div id="tutorial2">
-            <p>After filtering, sorting or searching your cards, the results apear here.</p>
-            <button>Next</button>
-        </div>
-        <div id="tutorial3">
-            <p>Filter on cards in your deck here.</p>
-            <button>Next</button>
-        </div>
-        <div id="tutorial4">
-            <p>The filtered cards apear here.</p>
-            <button>Next</button>
-        </div>
-        <div id="tutorial5">
-            <p>Here's your selected hero.</p>
-            <button>Next</button>
-        </div>
-        <div id="tutorial6">
-            <p>Here's your deck.</p>
-            <button>Next</button>
-        </div>
-        <div id="tutorial7">
-            <p>Klick here to create a new deck.</p>
-            <button>Next</button>
-        </div>
-        <div id="tutorial8">
-            <p>Klick here to save your deck.</p>
-            <button>Next</button>
-        </div>
-        <div id="tutorial9">
-            <p>Card info; mana in the left uppercorner, attack in the left bottom corner and health in the right bottom corner.</p>
-            <button>Next</button>
-        </div>
-        <div id="tutorial10">
-            <p>Add and remove a card by double klicking or dragging.</p>
-            <button>Next</button>
-        </div>
-        <div id="tutorial11">
-            <p>Decks of your selected hero apear here, klick 'add deck' to make a new one</p>
-            <button>Next</button>
-        </div>
-    </div>
+    <ul id="tutorials" class="hidden">
+        <li>Sort, filter your card and search for cards here.</li>
+        <li class="hidden">After filtering, sorting or searching your cards, the results apear here.</li>
+        <li class="hidden">Filter on cards in your deck here.</li>
+        <li class="hidden">The filtered cards apear here.</li>
+        <li class="hidden">Here's your selected hero.</li>
+        <li class="hidden">Here's your deck.</li>
+        <li class="hidden">Klick here to create a new deck.</li>
+        <li class="hidden">Klick here to save your deck.</li>
+        <li class="hidden">Card info; mana in the left uppercorner, attack in the left bottom corner and health in the right bottom
+            corner. </li>
+        <li class="hidden">Add and remove a card by double klicking or dragging.</li>
+        <li class="hidden">Decks of your selected hero apear here, klick 'add deck' to make a new one</li>
+        <li><a href="#" id="next">Next</a></li>
+    </ul>
     <header>
         <div id="hero"><a href="#">Mage</a>
             <a href="#">Paladin</a>
@@ -188,13 +148,20 @@
             <a href="#">Weapons</a>
             <p id="cardAmount">30/30</p>
         </div>
-        <ul id="deck"><li>*deck*</li></ul>
+        <ul id="deck"></ul>
         <a id="firstadd" href="#">+</a>
         <a id="save" href="#">SAVE</a>
     </header>
     <div class="main">
-        <ul id="cards"><li>*cards*</li></ul>
+        <ul id="cards"></ul>
         <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
+    </div>
+    <div class="save hidden">
+        <label for="deckName">You're deck is not yet complete<br/> would you like to save it?</label>
+        <input type="text" name="deckName" id="deckName" placeholder="Deck 01">
+        <ul><li><a href="#">save</a></li>
+            <li><a href="#">delete</a></li>
+            <li><a href="#">back</a></li></ul>
     </div>
     <aside>
         <form>
@@ -208,7 +175,7 @@
             </select>
             <fieldset>
                 <legend>filter</legend>
-    
+
                 <div id="firstFilter">
                     <label>Hero specific cards</label>
                     <input type="radio" name="specificCards" value="All" id="all" checked/>
@@ -220,7 +187,7 @@
                     <input type="radio" name="specificCards" value="Neutral" id="neutral"/>
                     <label for="neutral">Neutral</label>
                 </div>
-        
+
                 <div id="secondFilter">
                     <label>Card Types</label>
                     <input type="radio" name="cardTypes" value="Minions" id="minions"/>
@@ -230,7 +197,7 @@
                     <input type="radio" name="cardTypes" value="Spells" id="spells"/>
                     <label for="spells">Spells</label>
                 </div>
-        
+
                 <div id="thirdFilter">
                     <label>Mana</label>
                     <input type="radio" name="Mana" value="zero" id="zero"/>
@@ -250,8 +217,8 @@
                     <input type="radio" name="Mana" value="seven" id="seven"/>
                     <label for="seven">7+ Mana</label>
                 </div>
-        
-        
+
+
                 <div id="fourthFilter">
                     <label>Card Rarity</label>
                     <input type="radio" name="cardRarity" value="Free" id="free"/>
@@ -268,10 +235,10 @@
             </fieldset>
         </form>
     </aside>
-    <a id="gotoNoDeck" href="#">Back</a>
+    <span><a class="buttonHolder" id="gotoRechooseDeck" href="#">Back</a></span>
 </div>
 
-<div id="gameBoard" class="">
+<div id="gameBoard" class="hidden">
     <div class="main">
         <!--<a href="#" id="tempButtonAddCard">Add card</a>-->
 
@@ -368,11 +335,11 @@
 
 <div id="vsScreen" class="hidden">
     <div id="enemyHero">
-        <img src="images/schild%20mage.png" alt="enemyHero" title="enemyHero">
+        <img src="images/portraitMage.png" alt="enemyHero" title="enemyHero">
     </div>
     <img src="assets/media/vs.png" alt="VS" title="VS" id="vs">
     <div id="playerHero">
-        <img src="images/schild%20mage.png" alt="playerHero" title="playerHero">
+        <img src="images/portraitMage.png" alt="playerHero" title="playerHero">
     </div>
 </div>
 
@@ -382,7 +349,7 @@
             <li id="toggleFullScreen"><a href="#" class="navItem optionMenu">Toggle full screen</a></li>
             <li id="gotoSound"><a href="#" class="navItem optionsMenu">Sound</a></li>
             <li id="gotoCredits"><a href="#" class="navItem optionsMenu">Credits</a></li>
-            <li id="gotoLeaveOptions"><a href="#" class="navItem optionsMenu">Back</a></li>
+            <li class="gotoMainMenu"><a href="#" class="navItem optionsMenu">Back</a></li>
         </ul>
     </div>
 </div>
@@ -421,7 +388,7 @@
                 </section>
             </div>
         </div>
-        <span class="buttonHolder"><a href="#" class="insideButton" id="gotoMainMenu">Back</a></span>
+        <span class="buttonHolder"><a href="#" class="insideButton" id="gotoLeaveOptions">Back</a></span>
     </div>
 </div>
 
@@ -431,11 +398,15 @@
         <img src="images/loadingScreen.gif" alt="loadingScreenIcon" title="loadingScreenIcon"/>
     </figure>
 </div>
-
+<script src="assets/js/sound.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/js/clickEvents.js"></script>
-<script src="assets/js/deckbuilder.js"></script>
-<script src="assets/js/gameBoard.js"></script>
 <script src="assets/js/loadingScreen.js"></script>
+<script src="assets/js/deckbuilder.js"></script>
+<script src="assets/js/Hero-Deck_selector.js"></script>
+<script src="assets/js/deckChooser.js"></script>
+<script src="assets/js/clickEvents.js"></script>
+<script src="assets/js/gameBoard.js"></script>
+<!--<script src="assets/js/playingField.js"></script>-->
+
 </body>
 </html>
