@@ -1,7 +1,10 @@
 "use strict";
+
 document.addEventListener("DOMContentLoaded", init);
+
 let cardCounter = 0;
 let cardBackUrl = "";
+let dragSrcEl = null;
 
 function init() {
     setupDragging();
@@ -70,7 +73,7 @@ function updateCards(amountOfCards, parent, gradDirectionIndex) {
     }
 
     for(let i=0; i<amountOfCards; i++) {
-        cards.innerHTML += `<li ${classAddOn}>Card ` + (i+1) + "</li>";
+        cards.innerHTML += `<li ${addOn}>Card ` + (i+1) + "</li>";
     }
 
     makeCardsFan(parent, gradDirectionIndex);
@@ -182,6 +185,8 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
 
     if(diff > 0) {
         for(let i = minIndex; i < amountOfCards; i++) {
+            cards[i].style = "";
+
             if(gradDirectionIndex*currentGrad < 0) {
                 cards[i].style.transformOrigin = "right " + transformOriginHeight;
             }
@@ -200,10 +205,16 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
     }
     else {
         for(let i = minIndex; i < amountOfCards; i++) {
-            cards[i].style.position = "relative";
+            cards[i].style = "";
+
+            cards[i].style.position = "absolute";
             cards[i].style.bottom = "-2vh";
-            cards[i].style.marginRight = "-2vh";
-            cards[i].classList.add("notFanned");
+            console.log((cardWidth/window.innerHeight*100)/(amountOfCards%2+1));
+
+            let buf = (cardWidth/window.innerHeight*100)/(amountOfCards%2+1);               // 50% - cardWith when even, 50% - cardWith/2 when uneven (center aligning)
+            buf -= (cardWidth/window.innerHeight*100)*(parseInt(amountOfCards/2)-i);        // align card according to its position
+
+            cards[i].style.left ="calc(50% - " + buf + "vh)";
         }
         console.log(`cards of ${parentClass} did not need to be fanned...`);
     }
@@ -222,23 +233,50 @@ function getRandomInt(max) {
 
 function setupDragging() {
     let dragged;
+    let copyOfDragged;
 
-    document.addEventListener("dragstart", function( event ) {
-        dragged = event.target;
-    }, false);
+    document.addEventListener("dragstart", handleDragStart, false);
+    document.addEventListener("drag", handleDrag, false);
+    document.addEventListener("dragend", handleDragEnd, false);
+    document.addEventListener("dragover", handleDragOver, false);
+    document.addEventListener("drop", handleDrop, false);
+}
 
-    document.addEventListener("dragover", function( event ) {
-        event.preventDefault();
-    }, false);
+function handleDragStart(e) {
+    dragSrcEl = e.target;
 
-    document.addEventListener("drop", function( event ) {
-        event.preventDefault();
-        // move dragged elem to the selected drop target
-        if ( event.target.className === "dropZone" ) {
-            event.target.style.background = "";
-            dragged.parentNode.removeChild( dragged );
-            event.target.appendChild( dragged );
-        }
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
 
-    }, false);
+    e.target.classList.add("dragging");
+    e.target.parentNode.style.opacity = "1";
+    e.dataTransfer.setDragImage(dragSrcEl, 85, 135);
+}
+
+function handleDrag(e) {
+    e.target.classList.add("hide");
+}
+
+function handleDragEnd(e) {
+    e.target.classList.remove("hide");
+    e.target.classList.remove("dragging");
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+}
+
+function handleDrop(e) {
+    e.stopPropagation();
+
+    if ( e.target.className === "dropZone" ) {
+        dropInDropZone(dragSrcEl, e.target);
+        makeCardsFan("you", 1);
+    }
+}
+
+function dropInDropZone(dragSrcElement, dropZoneElement) {
+    dragSrcElement.style = "";
+    dragSrcElement.parentNode.removeChild(dragSrcElement);
+    dropZoneElement.appendChild(dragSrcElement);
 }
