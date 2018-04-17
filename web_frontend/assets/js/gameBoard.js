@@ -63,8 +63,13 @@ function updateCards(amountOfCards, parent, gradDirectionIndex) {
     let cards = document.querySelector(`#gameBoard .${parent} .cards ul`);
     cards.innerHTML = "";
 
+    let classAddOn = "";
+    if(parent === "you") {
+        classAddOn = 'class="draggable"';
+    }
+
     for(let i=0; i<amountOfCards; i++) {
-        cards.innerHTML += "<li>Card " + (i+1) + "</li>";
+        cards.innerHTML += `<li ${classAddOn}>Card ` + (i+1) + "</li>";
     }
 
     makeCardsFan(parent, gradDirectionIndex);
