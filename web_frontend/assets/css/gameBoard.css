@@ -215,7 +215,7 @@
 #gameBoard #fuse {
     position: absolute;
     right: 18vh;
-    width: 103vh;
+    width: 100vh;
     height: 10vh;
     top: 42vh;
     opacity: 0;
@@ -223,8 +223,8 @@
 
 #gameBoard #fuse.burn {
     opacity: 1;
-    -webkit-transition: ease-in all 20s; /* Safari */
-    transition: ease-in all 200ms;
+    -webkit-transition: ease-in opacity 20s; /* Safari */
+    transition: ease-in opacity 200ms;
 }
 
 #gameBoard #rope {
@@ -249,12 +249,12 @@
 
 #gameBoard #fuse.burn #rope {
     width: 4%;
-    -webkit-transition: ease-in all 20s; /* Safari */
-    transition: ease-in all 20s;
+    -webkit-transition: ease-in width 20s; /* Safari */
+    transition: ease-in width 20s;
 }
 
 #gameBoard #fuse.burn #spark {
     width: 10%;
-    -webkit-transition: ease-in all 20s; /* Safari */
-    transition: ease-in all 20s;
+    -webkit-transition: ease-in width 20s; /* Safari */
+    transition: ease-in width 20s;
 }
