@@ -22,7 +22,7 @@ function init() {
     document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck); /////
     document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
     document.getElementById('playGame').addEventListener('click', playGame);
-    document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);
+    /* document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);*/
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
     document.getElementById('addDeck').addEventListener('click', addDeck);

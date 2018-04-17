@@ -4,7 +4,7 @@ let cardCounter = 0;
 let cardBackUrl = "";
 
 function init() {
-    //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
+    /*document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);*/
     setBackground();
     getRandomCardBack();
     makeCardsFan("you", 1);
