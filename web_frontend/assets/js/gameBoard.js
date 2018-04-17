@@ -7,7 +7,7 @@ let cardBackUrl = "";
 let dragSrcEl = null;
 
 function init() {
-    setupDragging();
+    setupDraggingOfCards();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
     getRandomCardBack();
@@ -227,15 +227,20 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-function setupDragging() {
+function setupDraggingOfCards() {
     let dragged;
     let copyOfDragged;
 
-    document.addEventListener("dragstart", handleDragStart, false);
-    document.addEventListener("drag", handleDrag, false);
-    document.addEventListener("dragend", handleDragEnd, false);
-    document.addEventListener("dragover", handleDragOver, false);
-    document.addEventListener("drop", handleDrop, false);
+    let cards = document.querySelectorAll("#gameBoard .you .cards ul li");
+
+    for(let i=0; i<cards.length; i++) {
+        cards[i].addEventListener("dragstart", handleDragStart, false);
+        cards[i].addEventListener("drag", handleDrag, false);
+        cards[i].addEventListener("dragend", handleDragEnd, false);
+        cards[i].addEventListener("dragover", handleDragOver, false);
+        cards[i].addEventListener("drop", handleDrop, false);
+    }
+
 }
 
 function handleDragStart(e) {
@@ -273,6 +278,7 @@ function handleDrop(e) {
 
 function dropInDropZone(dragSrcElement, dropZoneElement) {
     dragSrcElement.style = "";
+    dragSrcElement.classList.remove("draggable");
     dragSrcElement.parentNode.removeChild(dragSrcElement);
     dropZoneElement.appendChild(dragSrcElement);
 }
