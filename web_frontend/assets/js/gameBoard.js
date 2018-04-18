@@ -25,8 +25,8 @@ function firstTurn() {
     updateEnemyMana(0, 0);
     updateEnemyCards(5);
     updateMyMana(0, 0);
-    updateCards(3,'you', 1);
-    setTimeout(yourTurn(), 10000);
+    updateMyCards(3);
+    setTimeout(yourTurn, 5000);
 }
 function yourTurn() {
     console.log("You're turn");
