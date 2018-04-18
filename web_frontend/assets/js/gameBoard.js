@@ -26,12 +26,12 @@ function firstTurn() {
     updateEnemyCards(5);
     updateMyMana(0, 0);
     updateMyCards(3);
-    setTimeout(yourTurn, 5000);
+    setTimeout(yourTurn, 1000);
 }
 function yourTurn() {
     console.log("You're turn");
     updateMyMana(1, 1);
-    updateCards(4,'you', 1);
+    updateMyCards(4);
 }
 
 function burnFuse(e) {
