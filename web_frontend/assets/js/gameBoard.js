@@ -19,6 +19,21 @@ function init() {
     */
 }
 
+
+
+function firstTurn() {
+    updateEnemyMana(0, 0);
+    updateEnemyCards(5);
+    updateMyMana(0, 0);
+    updateCards(3,'you', 1);
+    setTimeout(yourTurn(), 10000);
+}
+function yourTurn() {
+    console.log("You're turn");
+    updateMyMana(1, 1);
+    updateCards(4,'you', 1);
+}
+
 function burnFuse(e) {
     document.getElementById("fuse").classList.add("burn");
 }
