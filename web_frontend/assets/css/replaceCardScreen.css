@@ -23,9 +23,12 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 29vh;
+    position: absolute;
+    right: 20vw;
+    bottom: 36vh;
 }
 
-#randomCardsFromDeck li img {
+#replaceCardScreen img {
     width: 24vh;
 }
 
@@ -46,6 +49,24 @@
     text-align: center;
     left: 44vw;
     bottom: 28vh;;
+}
+
+#replacedCards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 29vh;
+    position: absolute;
+    right: 20vw;
+    bottom: 48vh;
+}
+
+#replacedCards li {
+    margin-left: 2vh;
+    margin-right: 2vh;
 }
 
 #replaceCardScreen .buttonHolder .insideButton {

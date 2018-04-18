@@ -32,6 +32,10 @@ function init() {
     document.getElementById('classPaladinDeckChooser').addEventListener('click', selectClassPaladinInDeckChooser);
     document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
+    document.getElementById('gotoCardsReplaced').addEventListener('click', gotoCardsReplaced);
+    document.getElementById('replacedCard1').addEventListener('click', replaceCard1);
+    document.getElementById('replacedCard2').addEventListener('click', replaceCard2);
+    document.getElementById('replacedCard3').addEventListener('click', replaceCard3);
 
     /*
     document.getElementById('tutorial1button').addEventListener('click', gotoTutorial2);
@@ -92,7 +96,22 @@ function playGame() {
         document.getElementById('vsScreen').className = "hidden";
         document.getElementById('replaceCardScreen').className = "";
     }, 3000);
+}
 
+function replaceCard1() {
+    document.getElementById('replacedCard1').className = "";
+}
+
+function replaceCard2() {
+    document.getElementById('replacedCard2').className = "";
+}
+
+function replaceCard3() {
+    document.getElementById('replacedCard3').className = "";
+}
+
+function gotoCardsReplaced() {
+    document.getElementById('replaceCardScreen').className = "hidden";
 }
 
 
