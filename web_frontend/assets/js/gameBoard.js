@@ -258,7 +258,7 @@ function setupDraggingOfCards() {
         cards[i].addEventListener("drag", handleDrag, false);
         cards[i].addEventListener("dragend", handleDragEnd, false);
         cards[i].addEventListener("dragover", handleDragOver, false);
-        cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);
+        /*cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);*/
     }
 
     document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
@@ -296,8 +296,14 @@ function handleDrop(e) {
     e.stopPropagation();
 
     if ( e.target.className === "dropZone" ) {
+        // left and right
         dropInDropZone(dragSrcEl, e.target);
         makeCardsFan("you", 1);
+    } else {
+        if (e.target.innerHTML.indexOf('Card') !== -1){
+            // middle
+            // add card on right position
+        }
     }
 }
 
@@ -309,5 +315,6 @@ function dropInDropZone(dragSrcElement, dropZoneElement) {
     dragSrcElement.draggable = false;
     dragSrcElement.style = "";
     dragSrcElement.parentNode.removeChild(dragSrcElement);
+    // appendChild cannot be used
     dropZoneElement.appendChild(dragSrcElement);
 }
