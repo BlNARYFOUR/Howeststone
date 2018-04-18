@@ -14,8 +14,18 @@ body, html {
 
 * {
     font-family: howeststoneFont, serif !important;
+    font-size: 2.06vh !important;
     text-decoration: none;
     color: #af8829;
+    -webkit-user-select: none; /* Safari, Chrome */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE */
+    user-select: none; /* CSS3 */
+    -webkit-user-drag: none;
+}
+
+*::selection {
+    background-color: transparent;
 }
 
 .buttonHolder .insideButton {

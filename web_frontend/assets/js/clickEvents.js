@@ -7,6 +7,10 @@ function main() {
 
 }
 
+function gotoCardsReplaced() {
+    document.getElementById('replaceCardScreen').className = "hidden";
+    firstTurn();
+}
 
 function init() {
     // register
@@ -23,7 +27,7 @@ function init() {
     document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck); /////
     document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
     document.getElementById('playGame').addEventListener('click', playGame);
-    document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);
+    /* document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);*/
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
     document.getElementById('addDeck').addEventListener('click', addDeck);
@@ -35,6 +39,7 @@ function init() {
     document.querySelector('#hero a:last-child').addEventListener('click', selectClassPaladinInDeckChooser);
     document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
+    document.getElementById('gotoCardsReplaced').addEventListener('click', gotoCardsReplaced)
 }
 
 function toggleFullScreen() {
@@ -75,11 +80,13 @@ function gotoRechooseDeck() {
 }
 
 function playGame() {
+    setBackground();
     document.getElementById('vsScreen').className = "";
+    document.getElementById('gameBoard').className = "";
     document.getElementById('deckSelector').className = "hidden";
     setTimeout(function playrealGame() {
-        document.getElementById('gameBoard').className = "";
         document.getElementById('vsScreen').className = "hidden";
+        document.getElementById('replaceCardScreen').className = "";
     }, 3000);
 
 }
