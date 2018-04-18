@@ -4,24 +4,24 @@ document.addEventListener('DOMContentLoaded', init);
 let tutorialli = 1;
 let dragged;
 
-function volgendeTutorial() {
+function nextTutorial() {
 
     document.querySelector('#tutorials li:nth-child(' +tutorialli+ ')').className = "hidden";
     tutorialli += 1;
     document.querySelector('#tutorials li:nth-child(' + tutorialli + ')').className = "";
     if (tutorialli > 11){
-        document.getElementById('next').removeEventListener('click', volgendeTutorial);
+        document.getElementById('next').removeEventListener('click', nextTutorial);
         document.querySelector('#tutorials').className = "hidden";
     }
 }
 
 function tutorial() {
     document.querySelector('#tutorials').className = "";
-    document.getElementById('next').addEventListener('click', volgendeTutorial);
+    document.getElementById('next').addEventListener('click', nextTutorial);
 
 }
 
-function zoektest(e) {
+function searchTest(e) {
     e.preventDefault();
     console.log(document.getElementById('search').value);
 }
@@ -29,8 +29,8 @@ function zoektest(e) {
 function init() {
     /*tutorial();*/
 
-    document.getElementById('search').addEventListener('change', zoektest);
-    document.querySelector('#firstadd').addEventListener('click', firstadd);
+    document.getElementById('search').addEventListener('change', searchTest);
+    document.querySelector('#firstAdd').addEventListener('click', firstAdd);
     mockCards();
     checkallcards();
 
@@ -110,7 +110,7 @@ function disableFilter(e) {
     e.preventDefault();
     e.target.checked = e.target.checked !== true;
 }
-function firstadd() {
+function firstAdd() {
     let chosenCards = document.querySelectorAll(".chosenCards");
     if (chosenCards.length === 30){
         document.querySelector('.save').innerHTML = 'full deck';
