@@ -288,6 +288,7 @@ function handleDrop(e) {
 
 function handleDoubleClickAsDrop(e) {
     dropInDropZone(e.target, document.querySelector("#gameBoard .you .playingField .dropZone"));
+	makeCardsFan("you", 1);
 }
 
 function dropInDropZone(dragSrcElement, dropZoneElement) {
