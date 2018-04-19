@@ -4,28 +4,24 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+    text-align: center;
 }
 
-#replaceCardScreen p {
+#replaceCardScreen h1 {
     color: white;
-    position: absolute;
-    top: 25vh;
-    left: 43vw;
     font-size: 3vh !important;
     font-weight: bold;
+    margin-top: 24vh;
+    margin-bottom: 2vh;
+    display: inline-block;
 }
 
 #randomCardsFromDeck {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 29vh;
-    position: absolute;
-    right: 20vw;
-    bottom: 36vh;
 }
 
 #replaceCardScreen img {
@@ -38,17 +34,15 @@
 }
 
 #replaceCardScreen .buttonHolder {
-    position: absolute;
     display: inline-block;
     font-weight: bold;
-    background: no-repeat url("../media/button.png") center center;
+    background: no-repeat url(../media/button.png) center center;
     background-size: 100% 100%;
     width: 20vh;
     height: 7vh;
     line-height: 7.5vh;
     text-align: center;
-    left: 44vw;
-    bottom: 28vh;;
+    margin-top: 2vh;
 }
 
 #replacedCards {
