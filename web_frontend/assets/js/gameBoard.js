@@ -282,27 +282,31 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "EX1_405",
-            "dbfId": "866",
-            "name": "Shieldbearer",
+            "cardId": "EX1_012",
+            "dbfId": "749",
+            "name": "Bloodmage Thalnos",
             "cardSet": "Classic",
             "type": "Minion",
             "faction": "Neutral",
-            "rarity": "Common",
-            "cost": 1,
-            "attack": 0,
-            "health": 4,
-            "text": "Taunt",
-            "flavor": "Have you seen the size of the shields in this game?? This is no easy job.",
-            "artist": "Carl Critchlow",
+            "rarity": "Legendary",
+            "cost": 2,
+            "attack": 1,
+            "health": 1,
+            "text": "Spell Damage +1\\nDeathrattle: Draw a card.",
+            "flavor": "He's in charge of the Annual Scarlet Monastery Blood Drive!",
+            "artist": "Alex Horley Orlandelli",
             "collectible": true,
+            "elite": true,
             "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_405.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_405_premium.gif",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_012_premium.gif",
             "locale": "enUS",
             "mechanics": [
                 {
-                    "name": "Taunt"
+                    "name": "Deathrattle"
+                },
+                {
+                    "name": "Spell Damage"
                 }
             ]
         }
@@ -359,9 +363,16 @@ function setMyCards(cards) {
     let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
 
     for(let i=0; i<cards.length; i++) {
+        let addOn = "";
+
+        cardHtmlObjects[i].innerText = "";
+
+        if(cards[i]["rarity"] === "Legendary") {
+            cardHtmlObjects[i].innerHTML += '<span class="legendary"></span>';
+        }
+
         cardHtmlObjects[i].style.background = 'no-repeat url("' + cards[i]["img"] + '") center center';
         cardHtmlObjects[i].style.backgroundSize = "110%";
-        cardHtmlObjects[i].style.color = "transparent";
         cardHtmlObjects[i].style.border = "none";
     }
 }
@@ -542,7 +553,6 @@ function handleDrop(e) {
     if ( e.target.className === "dropZone" ) {
         dropInDropZone(dragSrcEl, e.target);
         updateMyCards();
-
     }
 }
 
@@ -560,6 +570,8 @@ function dropInDropZone(dragSrcElement, dropZoneElement) {
     dragSrcElement.style.color = "transparent";
     dragSrcElement.style.border = "none";
     dragSrcElement.style.background = background;
+    dragSrcElement.style.backgroundSize = "176%";
+    dragSrcElement.style.backgroundPositionY = "23%";
 
     dragSrcElement.parentNode.removeChild(dragSrcElement);
     dropZoneElement.appendChild(dragSrcElement);
