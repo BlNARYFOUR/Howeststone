@@ -517,7 +517,7 @@ function setupDraggingOfCards() {
         cards[i].addEventListener("drag", handleDrag, false);
         cards[i].addEventListener("dragend", handleDragEnd, false);
         cards[i].addEventListener("dragover", handleDragOver, false);
-        /*cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);*/
+        cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);
     }
 
     document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
@@ -552,9 +552,11 @@ function handleDragOver(e) {
 }
 
 function handleDrop(e) {
+    // control serverSided !!
+    let countOfListItemsInDropZone = document.querySelectorAll('.dropZone li').length;
     e.stopPropagation();
 
-    if ( e.target.className === "dropZone" ) {
+    if ( e.target.className === "dropZone" && countOfListItemsInDropZone < 7) {
         // left and right
         dropInDropZone(dragSrcEl, e.target);
         updateMyCards();
