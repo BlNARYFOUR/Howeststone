@@ -6,44 +6,28 @@ Deck's zijn maximaal 20 chars
 dus maximaal 'T T T T T T T T T T T T T T T T T T T T'
 
 Button zijn a
-vb <a>back</a>
+vb <a href='#'>back</a>
 
 
 ECMAscript 6
 
-clickevents:
-<ul>
-Mattijs:
-<li>gotoPlay: Main Menu => Choose Your Hero</li>
+feature branch:
+stage
+commit
+push
 
-<li>gotoHome: Choose Your Hero => Main Menu</li>
+development branch:
+pull
+merge request van development => feature
 
-<li>gotoDeck: Choose Your Hero => Choose Your Deck</li>
+merge conflicten oplossen!! (door iemand anders)
 
-<li>gotoHero: Choose Your Deck => Choose Your Hero</li>
+feature branch:
+hier kijken ofdat je code nog werkt met de andere code
+stage
+commit
+push
 
-<li>addDeck Choose Your Deck => Deck Builder</li>
+merge request van feature => development
 
-<li>gotoChooseDeck Deck Builder => Choose Your Deck</li>
-
-<li>ontbrekende HTML pagina</li>
-<li>gotoDeckBuilder: Main Menu => Deck Builder</li>
-
-<li>gotoNoDeck: Deck Builder => Main Menu</li>
-
-<li>playGame: Choose Your Deck => VS screen</li>
-
-NYI: ------------------------------------
-
-<li>gotoGameOptions: Playing Field => Options in Game</li>
-
-<li>gotoFinishMyGame: Options in Game => Playing Field</li>
-
-<li>gotoLeaveMyGame: Options in Game => Main Menu</li>
-
-Bert:
-<li>gotoOptions: Main Menu => Options</li>
-
-<li>gotoLeaveOptions Options => Main Menu </li>
-</ul>
-
+merge conflicten oplossen!! (door iemand anders)
