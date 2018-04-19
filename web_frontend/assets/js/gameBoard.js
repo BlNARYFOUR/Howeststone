@@ -8,6 +8,7 @@ let dragSrcEl = null;
 let myCards = null;
 
 function init() {
+    addFirstBetweenDrop();
     setupDraggingOfCards();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
@@ -18,6 +19,10 @@ function init() {
     document.getElementById("spark").addEventListener("click", burnFuse);
     document.getElementById("fuse").addEventListener("click", burnFuse);
     */
+}
+
+function addFirstBetweenDrop() {
+    document.querySelector("#gameBoard .you .playingField .dropZone").innerHTML += '<li class="betweenDrop"></li>';
 }
 
 function burnFuse(e) {
@@ -518,7 +523,6 @@ function setupDraggingOfCards() {
 
     document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
     document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("drop", handleDrop, false);
-
 }
 
 function handleDragStart(e) {
@@ -575,4 +579,5 @@ function dropInDropZone(dragSrcElement, dropZoneElement) {
 
     dragSrcElement.parentNode.removeChild(dragSrcElement);
     dropZoneElement.appendChild(dragSrcElement);
+    dropZoneElement.innerHTML += '<li class="betweenDrop"></li>';
 }

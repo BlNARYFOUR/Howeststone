@@ -203,6 +203,16 @@
     background-clip: padding-box;
 }
 
+#gameBoard .you .playingField .dropZone li.betweenDrop {
+    width: 2.5vh;
+    background: none;
+    border: none;
+}
+
+#gameBoard .you .playingField .dropZone li.betweenDrop:first-of-type, #gameBoard .you .playingField .dropZone li.betweenDrop:last-of-type {
+    width: 10vh;
+}
+
 #gameBoard .you .playingField .dropZone li .legendary {
     display: block;
     height: 120%;
