@@ -1,10 +1,14 @@
 "use strict";
+
 document.addEventListener("DOMContentLoaded", init);
+
 let cardCounter = 0;
 let cardBackUrl = "";
+let dragSrcEl = null;
 
 function init() {
-    /*document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);*/
+    setupDraggingOfCards();
+    //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
     getRandomCardBack();
     makeCardsFan("you", 1);
@@ -15,23 +19,77 @@ function init() {
     */
 }
 
-/*
+
+
+function firstTurn() {
+    updateEnemyMana(0, 0);
+    updateEnemyCards(5);
+    updateMyMana(0, 0);
+    updateMyCards(3);
+    setTimeout(yourTurn, 1000);
+}
+function yourTurn() {
+    console.log("You're turn");
+    updateMyMana(1, 1);
+    updateMyCards(4);
+}
+
 function burnFuse(e) {
-    document.getElementById("spark").classList.add("burn");
     document.getElementById("fuse").classList.add("burn");
 }
-*/
+
+function updateEnemyHero() {
+    updateHero("enemy");
+}
+
+function updateMyHero() {
+    updateHero("you");
+}
+
+function updateHero(parent) {
+    let heroName = "";
+
+    // here will come a fetch to get the hero name
+    heroName = "mage";
+
+    showHero(parent, heroName);
+}
+
+function showHero(parent, heroName) {
+    let hero = document.querySelector(`#gameBoard .${parent} .hero`);
+
+    hero.style.background = `no-repeat url("assets/media/${heroName}.png") center center`;
+    hero.style.backgroundSize = "contain";
+}
 
 function updateEnemyCards(amountOfCards) {
-    let cards = document.querySelector("#gameBoard .enemy .cards ul");
+    updateCards(amountOfCards, "enemy", -1);
+    setCards("enemy", cardBackUrl);
+}
+
+function updateMyCards(amountOfCards) {
+    updateCards(amountOfCards, "you", 1);
+    setupDraggingOfCards();
+}
+
+function getMyCardDetails() {
+    // This is the function where you will get all card images (in order), names, details, ... (JSON format)
+}
+
+function updateCards(amountOfCards, parent, gradDirectionIndex) {
+    let cards = document.querySelector(`#gameBoard .${parent} .cards ul`);
     cards.innerHTML = "";
 
-    for(let i=0; i<amountOfCards; i++) {
-        cards.innerHTML += "<li>Card " + (i+1) + "</li>";
+    let addOn = "";
+    if(parent === "you") {
+        addOn = 'draggable="true"';
     }
 
-    setCards("enemy", cardBackUrl);
-    makeCardsFan("enemy", -1);
+    for(let i=0; i<amountOfCards; i++) {
+        cards.innerHTML += `<li ${addOn}>Card ` + (i+1) + "</li>";
+    }
+
+    makeCardsFan(parent, gradDirectionIndex);
 }
 
 function updateEnemyMana(activeMana, totalMana) {
@@ -65,6 +123,10 @@ function setCards(parent, cardUrl) {
 }
 
 function getRandomCardBack() {
+	cardBackUrl = "assets/media/cardBackDefault.png";
+	
+	// WORKED, but API has broken (?)
+	/*
     fetch('https://omgvamp-hearthstone-v1.p.mashape.com/cardbacks', {
         method: 'GET',
         credentials: 'include',
@@ -85,6 +147,7 @@ function getRandomCardBack() {
     .catch(function(err) {
         console.log("Error 404: Could not connect to the server");
     });
+	*/
 }
 
 function addCard() {
@@ -94,6 +157,8 @@ function addCard() {
         document.querySelector('#gameBoard .you .cards ul').innerHTML += "<li>Card " + cardCounter + "</li>";
         makeCardsFan("you", 1);
     }
+
+    setupDraggingOfCards();
 }
 
 function makeCardsFan(parentClass, gradDirectionIndex) {                                // gradDirectionIndex: Normally -1 or 1
@@ -135,6 +200,8 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
 
     if(diff > 0) {
         for(let i = minIndex; i < amountOfCards; i++) {
+            cards[i].style = "";
+
             if(gradDirectionIndex*currentGrad < 0) {
                 cards[i].style.transformOrigin = "right " + transformOriginHeight;
             }
@@ -153,10 +220,15 @@ function makeCardsFan(parentClass, gradDirectionIndex) {                        
     }
     else {
         for(let i = minIndex; i < amountOfCards; i++) {
-            cards[i].style.position = "relative";
+            cards[i].style = "";
+
+            cards[i].style.position = "absolute";
             cards[i].style.bottom = "-2vh";
-            cards[i].style.marginRight = "-2vh";
-            cards[i].classList.add("notFanned");
+
+            let buf = (cardWidth/window.innerHeight*100)/(amountOfCards%2+1);               // 50% - cardWith when even, 50% - cardWith/2 when uneven (center aligning)
+            buf -= (cardWidth/window.innerHeight*100)*(parseInt(amountOfCards/2)-i);        // align card according to its position
+
+            cards[i].style.left ="calc(50% - " + buf + "vh)";
         }
         console.log(`cards of ${parentClass} did not need to be fanned...`);
     }
@@ -171,4 +243,78 @@ function setBackground() {
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
+}
+
+function setupDraggingOfCards() {
+    let dragged;
+    let copyOfDragged;
+
+    let cards = document.querySelectorAll("#gameBoard .you .cards ul li");
+
+    document.draggable = false;
+
+    for(let i=0; i<cards.length; i++) {
+        cards[i].addEventListener("dragstart", handleDragStart, false);
+        cards[i].addEventListener("drag", handleDrag, false);
+        cards[i].addEventListener("dragend", handleDragEnd, false);
+        cards[i].addEventListener("dragover", handleDragOver, false);
+        /*cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);*/
+    }
+
+    document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
+    document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("drop", handleDrop, false);
+
+}
+
+function handleDragStart(e) {
+    e.stopImmediatePropagation();
+    dragSrcEl = e.target;
+
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
+
+    e.target.classList.add("dragging");
+    e.target.parentNode.style.opacity = "1";
+    e.dataTransfer.setDragImage(dragSrcEl, 85, 135);
+}
+
+function handleDrag(e) {
+    e.stopImmediatePropagation();
+    e.target.classList.add("hide");
+}
+
+function handleDragEnd(e) {
+    e.target.classList.remove("hide");
+    e.target.classList.remove("dragging");
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+}
+
+function handleDrop(e) {
+    e.stopPropagation();
+
+    if ( e.target.className === "dropZone" ) {
+        // left and right
+        dropInDropZone(dragSrcEl, e.target);
+        makeCardsFan("you", 1);
+    } else {
+        if (e.target.innerHTML.indexOf('Card') !== -1){
+            // middle
+            // add card on right position
+        }
+    }
+}
+
+function handleDoubleClickAsDrop(e) {
+    dropInDropZone(e.target, document.querySelector("#gameBoard .you .playingField .dropZone"));
+}
+
+function dropInDropZone(dragSrcElement, dropZoneElement) {
+    dragSrcElement.draggable = false;
+    dragSrcElement.style = "";
+    dragSrcElement.parentNode.removeChild(dragSrcElement);
+    // appendChild cannot be used
+    dropZoneElement.appendChild(dragSrcElement);
 }

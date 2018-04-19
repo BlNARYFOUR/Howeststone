@@ -16,6 +16,7 @@
 }
 
 #gameBoard .you {
+    position: relative;
     display: block;
     width: 100%;
     height: 53.25vh;
@@ -23,6 +24,7 @@
 }
 
 #gameBoard .enemy {
+    position: relative;
     display: block;
     width: 100%;
     height: 46.75vh;
@@ -72,17 +74,30 @@
 
 #gameBoard .you .cards li {
     bottom: -0.5vh;
+    -webkit-user-drag: element;
 }
 
-#gameBoard .you .cards li:hover, #gameBoard .you .cards li:active {
+#gameBoard .you .cards li:hover {
     transform-origin: left center !important;
     transform: scale(2.5, 2.5) translate(-0.5vh, -5vh) !important;
     z-index: 2 !important;
 }
 
-#gameBoard .you .cards li.notFanned:hover, #gameBoard .you .cards li.notFanned:active {
+#gameBoard .you .cards li.notFanned:hover {
     transform-origin: left center !important;
     transform: scale(2.5, 2.5) translate(-0.5vh, -5.25vh) !important;
+}
+
+#gameBoard .main .you .cards li.dragging {
+    transition: none !important;
+    transform: none !important;
+    width: 14.85483870967741935483870967742vh;
+    height: 22.5vh;
+    line-height: 22.5vh;
+}
+
+#gameBoard .main .you .cards li.hide {
+    opacity: 0;
 }
 
 #gameBoard .enemy .cards li {
@@ -91,8 +106,8 @@
 
 #gameBoard .manaTotal {
     position: absolute;
-    height: 5vh;
-    line-height: 5vh;
+    height: 4.5vh;
+    line-height: 4.5vh;
     width: 8vh;
     z-index: 0;
     text-align: center;
@@ -100,12 +115,12 @@
 }
 
 #gameBoard .you .manaTotal {
-    bottom: 5.3vh;
+    bottom: 5.7vh;
     right: 32.25vh;
 }
 
 #gameBoard .enemy .manaTotal {
-    top: 4.75vh;
+    top: 4.95vh;
     right: 35.7vh;
 }
 
@@ -149,14 +164,41 @@
 
 #gameBoard .you .hero {
     bottom: 16.1vh;
-    background: no-repeat url("../media/mage.png") center center;
+    /*background: no-repeat url("../media/mage.png") center center;*/
     background-size: contain;
 }
 
 #gameBoard .enemy .hero {
     top: 10.55vh;
-    background: no-repeat url("../media/mage.png") center center;
+    /*background: no-repeat url("../media/mage.png") center center;*/
     background-size: contain;
+}
+
+#gameBoard .you .playingField {
+    position: absolute;
+    width: 100%;
+    height: 52.5%;
+    top: 1vh;
+}
+
+#gameBoard .you .playingField .dropZone {
+    display: block;
+    height: 100%;
+    border-radius: 0 0 40% 40% / 0 0 100% 100%;
+    text-align: center;
+    z-index: 3;
+}
+
+#gameBoard .you .playingField .dropZone li {
+    text-align: center;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 9.9032258064516129032258064516131vh;
+    height: 15vh;
+    line-height: 15vh;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    border: whitesmoke thin solid;
 }
 
 #gameBoard #tempButtonAddCard {
@@ -172,28 +214,49 @@
     z-index: 2;
 }
 
-/*
-#playField #fuse {
-    width: 80%;
+#gameBoard #fuse {
+    position: absolute;
+    right: 18vh;
+    width: 100vh;
+    height: 10vh;
+    top: 42vh;
+    opacity: 0;
+}
+
+#gameBoard #fuse.burn {
+    opacity: 1;
+    -webkit-transition: ease-in opacity 20s; /* Safari */
+    transition: ease-in opacity 200ms;
+}
+
+#gameBoard #rope {
+    position: absolute;
+    display: block;
+    right: 0;
+    width: 92.5%;
+    height: 100%;
     background: repeat-x url("../media/rope.png") center right;
-    background-size: 700px 300px;
+    background-size: 89.1vh 38.2vh;
 }
 
-#playField #spark {
-    top: 1.4%;
-    width: 85%;
+#gameBoard #spark {
+    position: absolute;
+    display: block;
+    right: 0;
+    height: 95%;
+    width: 100%;
     background: no-repeat url("../media/sparkles.gif") center left;
-    background-size: 110px;
+    background-size: 14vh;
 }
 
-#playField #fuse.burn {
+#gameBoard #fuse.burn #rope {
     width: 4%;
     -webkit-transition: ease-in width 20s; /* Safari */
-    /*transition: ease-in width 20s;
+    transition: ease-in width 20s;
 }
 
-#playField #spark.burn {
+#gameBoard #fuse.burn #spark {
     width: 10%;
     -webkit-transition: ease-in width 20s; /* Safari */
-/*transition: ease-in width 20s;
+    transition: ease-in width 20s;
 }

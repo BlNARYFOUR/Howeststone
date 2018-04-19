@@ -15,6 +15,7 @@
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/replaceCardScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/deckSelector.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/heroSelector.css" rel="stylesheet" type="text/css"/>
@@ -275,17 +276,19 @@
         <ul class="you">
             <li class="cards">
                 <ul>
-                    <!-- must be generated in JS
-                    <li>Card 1</li>
-                    <li>Card 2</li>
-                    <li>Card 3</li>
-                    <li>Card 4</li>
-                    <li>Card 5</li>
-                    <li>Card 6</li>
-                    <li>Card 7</li>
-                    <li>Card 8</li>
-                    <li>Card 9</li>
-                    <li>Card 10</li>-->
+                    <!-- must be generated in JS -->
+                    <!--
+                    <li draggable="true">Card 1</li>
+                    <li draggable="true">Card 2</li>
+                    <li draggable="true">Card 3</li>
+                    <li draggable="true">Card 4</li>
+                    <li draggable="true">Card 5</li>
+                    <li draggable="true">Card 6</li>
+                    <li draggable="true">Card 7</li>
+                    <li draggable="true">Card 8</li>
+                    <li draggable="true">Card 9</li>
+                    <li draggable="true">Card 10</li>
+                    -->
                 </ul>
             </li>
 
@@ -308,12 +311,9 @@
             </li>
 
             <li class="playingField">
-                <ul>
+                <ul class="dropZone">
                     <!-- must be generated in JS -->
                     <!-- background etc. included! -->
-                    <li></li>
-                    <li></li>
-                    <li></li>
                 </ul>
             </li>
         </ul>
@@ -334,6 +334,16 @@
     </div>
 </div>
 
+<div id="replaceCardScreen" class="hidden">
+    <p>Keep or replace cards</p>
+    <ul id="randomCardsFromDeck">
+        <li><img src="images/card1.png" alt="card1" title="card1"></li>
+        <li><img src="images/card2.png" alt="card2" title="card2"></li>
+        <li><img src="images/card3.png" alt="card3" title="card3"></li>
+    </ul>
+    <span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Continue</a></span>
+</div>
+
 <div id="vsScreen" class="hidden">
     <div id="enemyHero">
         <img src="images/portraitMage.png" alt="enemyHero" title="enemyHero">
@@ -342,6 +352,7 @@
     <div id="playerHero">
         <img src="images/portraitMage.png" alt="playerHero" title="playerHero">
     </div>
+
 </div>
 
 <div id="options" class="hidden">
