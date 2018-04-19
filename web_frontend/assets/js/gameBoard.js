@@ -316,5 +316,48 @@ function dropInDropZone(dragSrcElement, dropZoneElement) {
     dragSrcElement.style = "";
     dragSrcElement.parentNode.removeChild(dragSrcElement);
     // appendChild cannot be used
+    // give minion class nonAttack
+    // check if charge is present
+    // check if battlecry is present
     dropZoneElement.appendChild(dragSrcElement);
+    dragSrcElement.addEventListener('click', visualiseAttack)
+}
+function endturn() {
+    // delete all class nonAttack
+}
+
+function visualiseAttack(e) {
+    // check if a card has class nonAttack
+    // check if their is one or more minions with taunt
+    // not attack on other minions
+    // begin drag&drop without removing li
+    // dragend check on what element the target is dropped and does the *real* attack function
+    console.log('cannot attack');
+    attack();
+}
+
+function attack() {
+    // get source and destination
+    // armor Hero
+    // sHealth sAttack dHealth dAttack
+    // check if card has stealth
+    // remove source stealth
+    // check if card has divine shield
+    // remove divine shield
+    // dHealth - sAttack = dHealth
+    // enable enraged
+    // check if dHealth is under 0 or (source has poisonous and destination is minion)
+    // destroyed()
+    // sHealth - dAttack = sHealth
+    // enable enraged
+    // check if sHealth is under 0 or (destination has poisonous and source is minion)
+    // destroyed()
+    // check if card has windfury and windfury hasn't been triggered
+    // give minion class nonAttack
+}
+
+function destroyed() {
+    // check if card has deathrattle
+    // win || lose
+    // discard card
 }
