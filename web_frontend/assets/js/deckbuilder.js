@@ -30,7 +30,7 @@ function init() {
     /*tutorial();*/
 
     document.getElementById('search').addEventListener('change', searchTest);
-    document.querySelector('#firstAdd').addEventListener('click', firstAdd);
+    document.querySelector('#firstadd').addEventListener('click', firstadd);
     mockCards();
     checkallcards();
 
@@ -110,7 +110,7 @@ function disableFilter(e) {
     e.preventDefault();
     e.target.checked = e.target.checked !== true;
 }
-function firstAdd() {
+function firstadd() {
     let chosenCards = document.querySelectorAll(".chosenCards");
     if (chosenCards.length === 30){
         document.querySelector('.save').innerHTML = 'full deck';
@@ -138,6 +138,8 @@ function addCardToDeck(e) {
     }catch(error) {
         dit = e;
     }
+    console.log(dit);
+    console.log('hier zit error in vind het aub');
     let chosenCards = document.querySelectorAll(".chosenCards");
     let sameCard = 0;
     for(let i = 0; i < chosenCards.length; i++){

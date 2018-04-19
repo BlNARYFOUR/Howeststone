@@ -1,7 +1,7 @@
 #deckbuilder body{
     position: relative;
     font-family: sans-serif;
-    font-size: 1rem;
+    font-size: 1rem !important;
     color: black;
     background-color: white;
 }
@@ -63,7 +63,7 @@
     word-spacing: 10vh;
 }
 #deckbuilder #hero a{
-    font-size: 2rem;
+    font-size: 2rem !important;
     border: 1px black solid;
     border-radius: 100%;
     padding: 1%;
@@ -78,7 +78,7 @@
 #deckbuilder #quickfilter a, #deckbuilder #cardAmount{
     display: inline-block;
     padding: 5px;
-    font-size: 0.7rem;
+    font-size: 0.7rem !important;
     border: 1px black solid;
 }
 
@@ -254,10 +254,12 @@
 }
 
 .cardInDeck figure{
+    -webkit-user-drag: element;
     width: 23vh;
     display: inline-block;
 }
 .chosenCards figure{
+    -webkit-user-drag: element;
     width: 11vh;
     display: inline-block;
 }
