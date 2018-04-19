@@ -293,6 +293,7 @@ function handleDoubleClickAsDrop(e) {
 
 function dropInDropZone(dragSrcElement, dropZoneElement) {
     dragSrcElement.draggable = false;
+    dragSrcElement.removeEventListener("dblclick", handleDoubleClickAsDrop);
     dragSrcElement.style = "";
     dragSrcElement.parentNode.removeChild(dragSrcElement);
     dropZoneElement.appendChild(dragSrcElement);
