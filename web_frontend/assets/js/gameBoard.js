@@ -23,8 +23,10 @@ function init() {
 
 
 function firstTurn() {
+    updateEnemyHero();
     updateEnemyMana(0, 0);
     updateEnemyCards(5);
+    updateMyHero();
     updateMyMana(0, 0);
     updateMyCards(3);
     setTimeout(yourTurn, 1000);
@@ -79,7 +81,15 @@ function updateMyCards() {
 
     updateCards(myCards.length, "you", 1);
     setMyCards(myCards);
+    giveClassNameEqualToCardID();
     setupDraggingOfCards();
+}
+
+function giveClassNameEqualToCardID() {
+    let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
+    for(let i=0; i<myCards.length; i++){
+        cardHtmlObjects[i].classList.add(myCards[i].cardId);
+    }
 }
 
 function MOCKMYCARDS() {
@@ -572,8 +582,18 @@ function handleDoubleClickAsDrop(e) {
     dropInDropZone(e.target, document.querySelector("#gameBoard .you .playingField .dropZone"));
 	updateMyCards();
 }
+function returnTypeOfMyCards(liWithClass) {
+    let cardId = liWithClass.getAttribute('class');
+    for(let i=0; i<myCards.length; i++){
+        if (cardId.indexOf(myCards[i].cardId) !== -1){
+            return myCards[i].type;
+        }
+    }
+    return null;
+}
 
 function dropInDropZone(dragSrcElement, dropZoneElement) {
+
     dragSrcElement.draggable = false;
     dragSrcElement.removeEventListener("dblclick", handleDoubleClickAsDrop);
 
@@ -588,7 +608,15 @@ function dropInDropZone(dragSrcElement, dropZoneElement) {
     // give minion class nonAttack
     // check if charge is present
     // check if battlecry is present
-    dropZoneElement.appendChild(dragSrcElement);
+    let type = returnTypeOfMyCards(dragSrcElement);
+    switch (type){
+        case 'Minion':
+            dropZoneElement.appendChild(dragSrcElement);
+            break;
+        case 'Weapon':
+            document.querySelector('.weapon').appendChild(dragSrcElement);
+            break;
+    }
     dragSrcElement.addEventListener('click', visualiseAttack)
 }
 function endturn() {
