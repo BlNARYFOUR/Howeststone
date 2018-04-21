@@ -343,8 +343,9 @@ function updateCards(amountOfCards, parent, gradDirectionIndex) {
         addOn = 'draggable="true"';
     }
 
+    // just li's
     for(let i=0; i<amountOfCards; i++) {
-        cards.innerHTML += `<li ${addOn}>Card ` + (i+1) + "</li>";
+        cards.innerHTML += `<li></li>`;
     }
 
     makeCardsFan(parent, gradDirectionIndex);
@@ -520,19 +521,69 @@ function setupDraggingOfCards() {
 
     let cards = document.querySelectorAll("#gameBoard .you .cards ul li");
 
-    document.draggable = false;
+    // gone
+    //document.draggable = false;
 
     for(let i=0; i<cards.length; i++) {
-        cards[i].addEventListener("dragstart", handleDragStart, false);
+        cards[i].addEventListener("mousedown", touchStart, false);
+        cards[i].addEventListener("touchstart", touchStart, false);
+        /*cards[i].addEventListener("dragstart", handleDragStart, false);
         cards[i].addEventListener("drag", handleDrag, false);
         cards[i].addEventListener("dragend", handleDragEnd, false);
         cards[i].addEventListener("dragover", handleDragOver, false);
-        cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);
+        cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);*/
     }
 
     document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
     document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("drop", handleDrop, false);
 
+}
+let drag;
+let dragOffsetX;
+let dragOffsetY;
+function touchStart(e) {
+    dragOffsetX = e.offsetX;
+    dragOffsetY = e.offsetY;
+    if (typeof e.clientX === "number"){
+        let XCoordinate = e.clientX - dragOffsetX;
+        let YCoordinate = e.clientY - dragOffsetY;
+        drag.style.left = XCoordinate + 'px';
+        drag.style.top = YCoordinate+ 'px';
+    }
+    else {
+        // What to use for tablet ???
+        let XCoordinate = 1;
+        let YCoordinate = 1;
+        drag.style.left = XCoordinate + 'px';
+        drag.style.top = YCoordinate+ 'px';
+    }
+    drag = e.target.cloneNode(true);
+    document.body.appendChild(drag);
+    drag.removeAttribute('style');
+    drag.style.zIndex = '1';
+    drag.style.width = '14.854838709677vh';
+    drag.style.height= '22.5vh';
+    drag.style.position = 'absolute';
+
+    drag.style.background = e.target.style.background;
+    document.addEventListener("touchmove", touchMove, false);
+    document.addEventListener("touchend", touchEnd, false);
+    document.addEventListener("mousemove", touchMove, false);
+    document.addEventListener("mouseup", touchEnd, false);
+}
+function touchMove(e) {
+    let XCoordinate = e.clientX - dragOffsetX;
+    let YCoordinate = e.clientY - dragOffsetY;
+    drag.style.left = XCoordinate + 'px';
+    drag.style.top = YCoordinate + 'px';
+}
+
+function touchEnd(e) {
+    drag.parentElement.removeChild(drag);
+    document.removeEventListener("touchmove", touchMove, false);
+    document.removeEventListener("touchend", touchEnd, false);
+    document.removeEventListener("mousemove", touchMove, false);
+    document.removeEventListener("mouseup", touchEnd, false);
 }
 
 function handleDragStart(e) {
@@ -594,6 +645,7 @@ function returnTypeOfMyCards(liWithClass) {
 
 function dropInDropZone(dragSrcElement, dropZoneElement) {
 
+    /* gone
     dragSrcElement.draggable = false;
     dragSrcElement.removeEventListener("dblclick", handleDoubleClickAsDrop);
 
@@ -617,7 +669,7 @@ function dropInDropZone(dragSrcElement, dropZoneElement) {
             document.querySelector('.weapon').appendChild(dragSrcElement);
             break;
     }
-    dragSrcElement.addEventListener('click', visualiseAttack)
+    dragSrcElement.addEventListener('click', visualiseAttack) */
 }
 function endturn() {
     // delete all class nonAttack

@@ -74,7 +74,7 @@
 
 #gameBoard .you .cards li {
     bottom: -0.5vh;
-    -webkit-user-drag: element;
+    /*-webkit-user-drag: element;*/
 }
 
 #gameBoard .you .cards li:hover {
@@ -88,13 +88,13 @@
     transform: scale(2.5, 2.5) translate(-0.5vh, -5.25vh) !important;
 }
 
-#gameBoard .main .you .cards li.dragging {
+/*#gameBoard .main .you .cards li.dragging {
     transition: none !important;
     transform: none !important;
     width: 14.85483870967741935483870967742vh;
     height: 22.5vh;
     line-height: 22.5vh;
-}
+}*/
 
 #gameBoard .main .you .cards li.hide {
     opacity: 0;
