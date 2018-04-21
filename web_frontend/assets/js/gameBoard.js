@@ -544,22 +544,10 @@ let dragOffsetY;
 function touchStart(e) {
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
-    if (typeof e.clientX === "number"){
-        let XCoordinate = e.clientX - dragOffsetX;
-        let YCoordinate = e.clientY - dragOffsetY;
-        drag.style.left = XCoordinate + 'px';
-        drag.style.top = YCoordinate+ 'px';
-    }
-    else {
-        // What to use for tablet ???
-        let XCoordinate = 1;
-        let YCoordinate = 1;
-        drag.style.left = XCoordinate + 'px';
-        drag.style.top = YCoordinate+ 'px';
-    }
     drag = e.target.cloneNode(true);
     document.body.appendChild(drag);
     drag.removeAttribute('style');
+    touchMove(e);
     drag.style.zIndex = '1';
     drag.style.width = '14.854838709677vh';
     drag.style.height= '22.5vh';
@@ -572,10 +560,19 @@ function touchStart(e) {
     document.addEventListener("mouseup", touchEnd, false);
 }
 function touchMove(e) {
-    let XCoordinate = e.clientX - dragOffsetX;
-    let YCoordinate = e.clientY - dragOffsetY;
-    drag.style.left = XCoordinate + 'px';
-    drag.style.top = YCoordinate + 'px';
+    if (typeof e.clientX === "number"){
+        let XCoordinate = e.clientX - dragOffsetX;
+        let YCoordinate = e.clientY - dragOffsetY;
+        drag.style.left = XCoordinate + 'px';
+        drag.style.top = YCoordinate+ 'px';
+    }
+    else {
+        // Mattijs: the web browser cannot calculate the offset so I use this as default
+        let XCoordinate = e.touches[0].clientX - 40;
+        let YCoordinate = e.touches[0].clientY - 80;
+        drag.style.left = XCoordinate + 'px';
+        drag.style.top = YCoordinate+ 'px';
+    }
 }
 
 function touchEnd(e) {
