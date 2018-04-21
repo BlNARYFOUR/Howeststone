@@ -10,6 +10,7 @@ function init() {
 function getThreeRandomCardsFromDeck() {
 
 
+
     /*fetch('', {
         method: 'GET',
         credentials: 'include',

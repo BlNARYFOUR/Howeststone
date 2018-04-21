@@ -19,7 +19,19 @@ function init() {
     */
 }
 
+function activateReplaceCards() {
+    document.querySelector("#randomCardsFromDeck li").addEventListener('dblclick', toggleReplaceCard());
+    //document.getElementById('replacedCard1').addEventListener('click', toggleReplaceCard("replacedCard1"));
+    //document.querySelector('#randomCardsFromDeck:nth-child(2)').addEventListener('click', toggleReplaceCard());
+    //document.getElementById('replacedCard2').addEventListener('click', toggleReplaceCard("replacedCard2"));
+    //sdocument.querySelector('#randomCardsFromDeck:nth-child(3)').addEventListener('click', toggleReplaceCard());
+    //document.getElementById('replacedCard3').addEventListener('click', toggleReplaceCard("replacedCard3"));
+}
 
+function toggleReplaceCard() {
+    document.getElementById("randomCardsFromDeck").firstElementChild.style.backgroundImage = "images/game-logo-hearthstone.png";
+    document.querySelector("#randomCardsFromDeck > li span").className = "";
+}
 
 function firstTurn() {
     updateEnemyMana(0, 0);
