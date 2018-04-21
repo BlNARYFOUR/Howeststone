@@ -525,8 +525,8 @@ function setupDraggingOfCards() {
     //document.draggable = false;
 
     for(let i=0; i<cards.length; i++) {
-        cards[i].addEventListener("mousedown", touchStart, false);
-        cards[i].addEventListener("touchstart", touchStart, false);
+        cards[i].addEventListener("mousedown", touchStart);
+        cards[i].addEventListener("touchstart", touchStart);
         /*cards[i].addEventListener("dragstart", handleDragStart, false);
         cards[i].addEventListener("drag", handleDrag, false);
         cards[i].addEventListener("dragend", handleDragEnd, false);
@@ -541,24 +541,29 @@ function setupDraggingOfCards() {
 let drag;
 let dragOffsetX;
 let dragOffsetY;
+
 function touchStart(e) {
+
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
+
     drag = e.target.cloneNode(true);
     document.body.appendChild(drag);
     drag.removeAttribute('style');
+
     touchMove(e);
     drag.style.zIndex = '1';
     drag.style.width = '14.854838709677vh';
     drag.style.height= '22.5vh';
     drag.style.position = 'absolute';
-
     drag.style.background = e.target.style.background;
+
     document.addEventListener("touchmove", touchMove, false);
-    document.addEventListener("touchend", touchEnd, false);
     document.addEventListener("mousemove", touchMove, false);
     document.addEventListener("mouseup", touchEnd, false);
+    document.addEventListener("touchend", touchEnd, false);
 }
+
 function touchMove(e) {
     if (typeof e.clientX === "number"){
         let XCoordinate = e.clientX - dragOffsetX;
@@ -582,7 +587,7 @@ function touchEnd(e) {
     document.removeEventListener("mousemove", touchMove, false);
     document.removeEventListener("mouseup", touchEnd, false);
 }
-
+/*
 function handleDragStart(e) {
     e.stopImmediatePropagation();
     dragSrcEl = e.target;
@@ -666,8 +671,8 @@ function dropInDropZone(dragSrcElement, dropZoneElement) {
             document.querySelector('.weapon').appendChild(dragSrcElement);
             break;
     }
-    dragSrcElement.addEventListener('click', visualiseAttack) */
-}
+    dragSrcElement.addEventListener('click', visualiseAttack)
+}*/
 function endturn() {
     // delete all class nonAttack
 }
