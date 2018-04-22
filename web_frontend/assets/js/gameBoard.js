@@ -534,8 +534,8 @@ function setupDraggingOfCards() {
         cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);*/
     }
 
-    document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
-    document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("drop", handleDrop, false);
+    //document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
+    //document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("drop", handleDrop, false);
 
 }
 let drag;
