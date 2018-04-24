@@ -213,8 +213,13 @@
     margin: 1vh;
     border-radius: 50%;
     background-clip: padding-box;
+    position: relative;
 }
-
+#gameBoard .you .playingField .dropZone li .health{
+    position: absolute;
+    left: 0;
+    bottom: -5vh;
+}
 #gameBoard .you .playingField .dropZone li .legendary {
     display: block;
     height: 120%;
@@ -263,7 +268,7 @@
     border-radius: 50%;
     background-clip: padding-box;
 }
-#gameBoard .enemy .playingField .dropZone li .legendary {
+#gameBoard .enemy .playingField ul li .legendary {
     display: block;
     height: 120%;
     width: 144%;

@@ -4,11 +4,10 @@ document.addEventListener("DOMContentLoaded", init);
 
 let cardCounter = 0;
 let cardBackUrl = "";
-let dragSrcEl = null;
 let myCards = null;
 
 function init() {
-    setupDraggingOfCards();
+    setupMovingOfCards();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
     getRandomCardBack();
@@ -138,7 +137,7 @@ function updateMyCards() {
     updateCards(myCards.length, "you", 1);
     setMyCards(myCards);
     giveClassNameEqualToCardID();
-    setupDraggingOfCards();
+    setupMovingOfCards();
 }
 
 function giveClassNameEqualToCardID() {
@@ -397,17 +396,9 @@ function MOCKMYCARDS() {
 function updateCards(amountOfCards, parent, gradDirectionIndex) {
     let cards = document.querySelector(`#gameBoard .${parent} .cards ul`);
     cards.innerHTML = "";
-
-    let addOn = "";
-    if(parent === "you") {
-        addOn = 'draggable="true"';
-    }
-
-    // just li's
     for(let i=0; i<amountOfCards; i++) {
         cards.innerHTML += `<li></li>`;
     }
-
     makeCardsFan(parent, gradDirectionIndex);
 }
 
@@ -495,7 +486,7 @@ function addCard() {
         makeCardsFan("you", 1);
     }
 
-    setupDraggingOfCards();
+    setupMovingOfCards();
 }
 
 function makeCardsFan(parentClass, gradDirectionIndex) {                                // gradDirectionIndex: Normally -1 or 1
@@ -582,27 +573,25 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-function setupDraggingOfCards() {
-    let dragged;
-    let copyOfDragged;
-
+function setupMovingOfCards() {
     let cards = document.querySelectorAll("#gameBoard .you .cards ul li");
-
-
     for(let i=0; i<cards.length; i++) {
         cards[i].addEventListener("mousedown", touchStart);
         cards[i].addEventListener("touchstart", touchStart);
     }
 }
+
 let drag;
 let dragOffsetX;
 let dragOffsetY;
-
+let itemThatIsBeingMoved;
+let moved;
 function touchStart(e) {
 
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
-
+    itemThatIsBeingMoved = e.target;
+    moved = false;
     drag = e.target.cloneNode(true);
     document.body.appendChild(drag);
     drag.removeAttribute('style');
@@ -643,6 +632,10 @@ function emptyPlayingFieldDrop() {
     if ((rectDrag.right < rectDropZone.right) && (rectDrag.left > rectDropZone.left) && (rectDrag.bottom < (rectDropZone.bottom + 100)) && (rectDrag.top > rectDropZone.top -100)){
         let cardOnPlayingField = cloneDragElement();
         dropZone.appendChild(cardOnPlayingField);
+        cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
+        moved = true;
+        cardOnPlayingField.addEventListener("mousedown", attackStart);
+        cardOnPlayingField.addEventListener("touchstart", attackStart);
     }
 }
 
@@ -666,6 +659,10 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[i+1]);
+            cardOnPlayingField.innerHTML = '<span class="health"></span><span class="attack"></span>';
+            moved = true;
+            cardOnPlayingField.addEventListener("mousedown", attackStart);
+            cardOnPlayingField.addEventListener("touchstart", attackStart);
             break;
         }
         right = left;
@@ -673,6 +670,10 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
+            cardOnPlayingField.innerHTML = '<span class="health"></span><span class="attack"></span>';
+            moved = true;
+            cardOnPlayingField.addEventListener("mousedown", attackStart);
+            cardOnPlayingField.addEventListener("touchstart", attackStart);
             break;
         }
         left = dropZoneLi[i+1].getBoundingClientRect().right;
@@ -680,6 +681,10 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.appendChild(cardOnPlayingField);
+            cardOnPlayingField.innerHTML = '<span class="health"></span><span class="attack"></span>';
+            moved = true;
+            cardOnPlayingField.addEventListener("mousedown", attackStart);
+            cardOnPlayingField.addEventListener("touchstart", attackStart);
             break;
         }
     }
@@ -689,21 +694,30 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
+            cardOnPlayingField.innerHTML = '<span class="health"></span><span class="attack"></span>';
+            moved = true;
+            cardOnPlayingField.addEventListener("mousedown", attackStart);
+            cardOnPlayingField.addEventListener("touchstart", attackStart);
         }else {
             let left = dropZoneLi[0].getBoundingClientRect().left;
             let right = dropZone.getBoundingClientRect().right;
             if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
                 let cardOnPlayingField = cloneDragElement();
                 dropZone.appendChild(cardOnPlayingField);
+                cardOnPlayingField.innerHTML = '<span class="health"></span><span class="attack"></span>';
+                giveMinionHealthAndAttack();
+                moved = true;
+                cardOnPlayingField.addEventListener("mousedown", attackStart);
+                cardOnPlayingField.addEventListener("touchstart", attackStart);
             }
         }
     }
 
 }
 
-
 function touchEnd(e) {
-    // TODO fetch check for card
+    // TODO fetch play the card
+    // TODO succeeded or not
     let dropZoneLi = document.querySelectorAll('#gameBoard .you .playingField .dropZone li');
     switch (dropZoneLi.length){
         case 1:
@@ -722,60 +736,15 @@ function touchEnd(e) {
 
     }
     drag.parentElement.removeChild(drag);
+    if (moved === true){
+        itemThatIsBeingMoved.parentElement.removeChild(itemThatIsBeingMoved);
+        updateMyCards();
+
+    }
     document.removeEventListener("touchmove", touchMove, false);
     document.removeEventListener("touchend", touchEnd, false);
     document.removeEventListener("mousemove", touchMove, false);
     document.removeEventListener("mouseup", touchEnd, false);
-}
-/*
-function handleDragStart(e) {
-    e.stopImmediatePropagation();
-    dragSrcEl = e.target;
-
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', this.innerHTML);
-
-    e.target.classList.add("dragging");
-    e.target.parentNode.style.opacity = "1";
-    e.dataTransfer.setDragImage(dragSrcEl, 85, 135);
-}
-
-function handleDrag(e) {
-    e.stopImmediatePropagation();
-    e.target.classList.add("hide");
-}
-
-function handleDragEnd(e) {
-    e.target.classList.remove("hide");
-    e.target.classList.remove("dragging");
-}
-
-function handleDragOver(e) {
-    e.preventDefault();
-}
-
-function handleDrop(e) {
-    // control serverSided !!
-    let countOfListItemsInDropZone = document.querySelectorAll('.dropZone li').length;
-    e.stopPropagation();
-
-    if ( e.target.className === "dropZone" && countOfListItemsInDropZone < 7) {
-        // left and right
-        dropInDropZone(dragSrcEl, e.target);
-        updateMyCards();
-        makeCardsFan("you", 1);
-    } else {
-        if (e.target.innerHTML.indexOf('Card') !== -1){
-            // middle
-            // add card on right position
-        }
-        updateMyCards();
-    }
-}
-
-function handleDoubleClickAsDrop(e) {
-    dropInDropZone(e.target, document.querySelector("#gameBoard .you .playingField .dropZone"));
-	updateMyCards();
 }
 function returnTypeOfMyCards(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
@@ -787,38 +756,30 @@ function returnTypeOfMyCards(liWithClass) {
     return null;
 }
 
-function dropInDropZone(dragSrcElement, dropZoneElement) {
+function giveMinionHealthAndAttack() {
+    // fetch with claasID of card
+    // gives Attack and Health values back
+    let H = 2;
+    let A = 1;
+    document.querySelector('.health').innerHTML += H;
+    document.querySelector('.attack').innerHTML += A;
+}
+/* give minion class nonAttack
+ check if charge is present
+check if battleCry is present
+let type = returnTypeOfMyCards(drag);
+switch (type){
+    case 'Minion':
+        dropZoneElement.appendChild(dragSrcElement);
+        break;
+    case 'Weapon':
+        document.querySelector('.weapon').appendChild(dragSrcElement);
+        break;
+}
+drag.addEventListener('click', visualiseAttack); */
 
-    /* gone
-    dragSrcElement.draggable = false;
-    dragSrcElement.removeEventListener("dblclick", handleDoubleClickAsDrop);
 
-    let background = dragSrcElement.style.background;
-    dragSrcElement.removeAttribute("style");
-    dragSrcElement.style.color = "transparent";
-    dragSrcElement.style.border = "none";
-    dragSrcElement.style.background = background;
-    dragSrcElement.style.backgroundSize = "176%";
-    dragSrcElement.style.backgroundPositionY = "23%";
 
-    dragSrcElement.parentNode.removeChild(dragSrcElement);
-    // appendChild cannot be used
-    dropZoneElement.appendChild(dragSrcElement);
-    dropZoneElement.innerHTML += '<li class="betweenDrop"></li>';
-    // give minion class nonAttack
-    // check if charge is present
-    // check if battlecry is present
-    let type = returnTypeOfMyCards(dragSrcElement);
-    switch (type){
-        case 'Minion':
-            dropZoneElement.appendChild(dragSrcElement);
-            break;
-        case 'Weapon':
-            document.querySelector('.weapon').appendChild(dragSrcElement);
-            break;
-    }
-    dragSrcElement.addEventListener('click', visualiseAttack)
-}*/
 function endturn() {
     // delete all class nonAttack
 }
@@ -832,6 +793,11 @@ function visualiseAttack(e) {
     console.log('cannot attack');
     attack();
 }
+
+function attackStart() {
+    console.log('cannot attack');
+}
+
 
 function attack() {
     // get source and destination
