@@ -28,7 +28,6 @@ function init() {
     /* document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);*/
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
-    document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoHeroChooser').addEventListener('click', gotoHeroChooser);
     // todo: document.getElementById('classMage').addEventListener('click', selectClassMage);
     // todo: document.getElementById('classMageDeckChooser').addEventListener('click', selectClassMageInDeckChooser);
@@ -164,14 +163,6 @@ function gotoCredits() {
 function gotoLeaveOptions() {
     document.getElementById('options').className = "";
     document.getElementById('creditsScreen').className = "hidden";
-}
-
-function addDeck() {
-    document.getElementById('deckSelector').className = "hidden";
-    document.getElementById('deckbuilder').className = "";
-    document.getElementById('gotoRechooseDeck').removeEventListener('click', gotoRechooseDeck);
-    document.getElementById('gotoRechooseDeck').setAttribute("id", "gotoChooseDeck");
-    document.getElementById('gotoChooseDeck').addEventListener('click', gotoChooseDeck);
 }
 
 function gotoChooseDeck() {
