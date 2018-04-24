@@ -8,7 +8,6 @@ let dragSrcEl = null;
 let myCards = null;
 
 function init() {
-    addFirstBetweenDrop();
     setupDraggingOfCards();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
@@ -22,6 +21,7 @@ function init() {
 }
 
 function firstTurn() {
+    console.log('test');
     updateEnemyHero();
     updateEnemyMana(0, 0);
     updateEnemyCards(5);
@@ -34,10 +34,6 @@ function yourTurn() {
     console.log("You're turn");
     updateMyMana(1, 1);
     updateMyCards(4);
-}
-function addFirstBetweenDrop() {
-    document.querySelector("#gameBoard .you .playingField .dropZone").innerHTML += '<li class="betweenDrop"></li>';
-
 }
 
 function burnFuse(e) {
@@ -535,21 +531,11 @@ function setupDraggingOfCards() {
 
     let cards = document.querySelectorAll("#gameBoard .you .cards ul li");
 
-    // gone
-    //document.draggable = false;
 
     for(let i=0; i<cards.length; i++) {
         cards[i].addEventListener("mousedown", touchStart);
         cards[i].addEventListener("touchstart", touchStart);
-        /*cards[i].addEventListener("dragstart", handleDragStart, false);
-        cards[i].addEventListener("drag", handleDrag, false);
-        cards[i].addEventListener("dragend", handleDragEnd, false);
-        cards[i].addEventListener("dragover", handleDragOver, false);
-        cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);*/
     }
-
-    //document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
-    //document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("drop", handleDrop, false);
 }
 let drag;
 let dragOffsetX;
@@ -593,16 +579,90 @@ function touchMove(e) {
     }
 }
 
-function touchEnd(e) {
-    // TODO fetch check for card
+function emptyPlayingFieldDrop() {
     let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
     let rectDrag = drag.getBoundingClientRect();
     let rectDropZone = dropZone.getBoundingClientRect();
     if ((rectDrag.right < rectDropZone.right) && (rectDrag.left > rectDropZone.left) && (rectDrag.bottom < (rectDropZone.bottom + 100)) && (rectDrag.top > rectDropZone.top -100)){
-        let cardOnPlayingField = drag.cloneNode(true);
-        cardOnPlayingField.removeAttribute('style');
-        cardOnPlayingField.style.background = drag.style.background;
+        let cardOnPlayingField = cloneDragElement();
         dropZone.appendChild(cardOnPlayingField);
+    }
+}
+
+function cloneDragElement() {
+    let cardOnPlayingField = drag.cloneNode(true);
+    cardOnPlayingField.removeAttribute('style');
+    cardOnPlayingField.style.background = drag.style.background;
+    cardOnPlayingField.style.backgroundSize = "176%";
+    cardOnPlayingField.style.backgroundPositionY = "23%";
+    return cardOnPlayingField;
+}
+
+function calculateDropZones(dropZoneLi) {
+    let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
+    let rectDrag = drag.getBoundingClientRect();
+    let top = dropZone.getBoundingClientRect().top -100;
+    let bottom = dropZone.getBoundingClientRect().bottom + 100;
+    for (let i = 0; i< dropZoneLi.length -1; i++){
+        let left = dropZoneLi[i].getBoundingClientRect().left;
+        let right = dropZoneLi[i+1].getBoundingClientRect().right;
+        if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
+            let cardOnPlayingField = cloneDragElement();
+            dropZone.insertBefore(cardOnPlayingField, dropZoneLi[i+1]);
+            break;
+        }
+        right = left;
+        left = dropZone.getBoundingClientRect().left;
+        if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
+            let cardOnPlayingField = cloneDragElement();
+            dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
+            break;
+        }
+        left = dropZoneLi[i+1].getBoundingClientRect().right;
+        right = dropZone.getBoundingClientRect().right;
+        if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
+            let cardOnPlayingField = cloneDragElement();
+            dropZone.appendChild(cardOnPlayingField);
+            break;
+        }
+    }
+    if(dropZoneLi.length === 1){
+        let left = dropZone.getBoundingClientRect().left;
+        let right = dropZoneLi[0].getBoundingClientRect().left;
+        if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
+            let cardOnPlayingField = cloneDragElement();
+            dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
+        }else {
+            let left = dropZoneLi[0].getBoundingClientRect().left;
+            let right = dropZone.getBoundingClientRect().right;
+            if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
+                let cardOnPlayingField = cloneDragElement();
+                dropZone.appendChild(cardOnPlayingField);
+            }
+        }
+    }
+
+}
+
+
+function touchEnd(e) {
+    // TODO fetch check for card
+    let dropZoneLi = document.querySelectorAll('#gameBoard .you .playingField .dropZone li');
+    switch (dropZoneLi.length){
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+            calculateDropZones(dropZoneLi);
+            break;
+        case 7:
+            break;
+        default:
+            emptyPlayingFieldDrop();
+            break;
+
     }
     drag.parentElement.removeChild(drag);
     document.removeEventListener("touchmove", touchMove, false);

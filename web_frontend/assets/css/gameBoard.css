@@ -210,7 +210,9 @@
     line-height: 13.5vh;
     vertical-align: middle;
     background-color: rgba(0,0,0,0.7);
+    /*
     border: whitesmoke thin solid;
+     */
     border-radius: 50%;
     background-clip: padding-box;
 }
