@@ -33,11 +33,10 @@ function deactivateReplaceCards() {
         replaceCards[i].removeEventListener('click', toggleReplaceCard);
     }
 }
-// TODO change this let
 let countReplaceCards = 0;
 function toggleReplaceCard(e) {
-    countReplaceCards = replaceCards.length;
     let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
+    countReplaceCards = replaceCards.length;
     e.target.querySelector('span').classList.toggle('hidden');
     for(let i = 0; i < replaceCards.length; i++){
         if (replaceCards[i].querySelector('span').classList.contains('hidden')){
