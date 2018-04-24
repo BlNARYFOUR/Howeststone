@@ -40,7 +40,6 @@ function toggleReplaceCard(e) {
     let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
     e.target.querySelector('span').classList.toggle('hidden');
     for(let i = 0; i < replaceCards.length; i++){
-        console.log(replaceCards[i].querySelector('span'));
         if (replaceCards[i].querySelector('span').classList.contains('hidden')){
             countReplaceCards -= 1;
         }
