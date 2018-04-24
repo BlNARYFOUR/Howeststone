@@ -1,9 +1,66 @@
 "use strict";
 
+let selectedDeck = "";
+let selectedDeckObj = null;
+
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     loadHeroes();
+    document.getElementById('gotoDeckSelector').addEventListener('click', gotoDeckSelector);
+    document.getElementById('playGame').addEventListener('click', playGame);
+    loadDecks();
+}
+
+function showDecks(decks) {
+    for (let i=0; i<decks.length; i++) {
+            document.querySelector("#deckSelector .decks").innerHTML += '<li><a href="#">' + decks[i] + '</a></li>';
+
+            if(i===0) {
+                selectedDeck = decks[i];
+            }
+    }
+
+    let selectableDecks = document.querySelectorAll('#deckSelector .decks li a');
+    for(let i=0; i<selectableDecks.length; i++) {
+        selectableDecks[i].addEventListener("click", handleSelectedDeck);
+    }
+}
+
+function handleSelectedDeck(e) {
+    let clickedDeck = this;
+
+    if(selectedDeckObj !== null) {
+        selectedDeckObj.style.backgroundColor = "";
+    }
+
+    selectedDeckObj = clickedDeck;
+    selectedDeck = clickedDeck.innerText;
+
+    console.log(selectedDeck);
+
+    this.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+}
+
+function loadDecks() {
+    /*
+    fetch('threebeesandme/howeststone/get/decks', {
+        method: 'GET'
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        showDecks(result)
+    })
+    .catch(function(err) {
+        console.log("Error: Could not load the heroes :'(");
+    });
+    */
+
+    showDecks(["Some Deck :)", "Deck 1", "Deck 2", "OP 1 shot", "Noob deck"]);
 }
 
 function showHeroes(heroes) {
@@ -64,4 +121,76 @@ function handleSelectedHero(e) {
     }
 
     document.querySelector("#vsScreen .player").innerHTML = `<img src="assets/media/${heroName}.png" alt="playerHero" title="playerHero">`;
+}
+
+function gotoDeckSelector() {
+    document.getElementById('deckSelector').className = "";
+    document.getElementById('heroSelector').className = "hidden";
+
+    let heroName = document.querySelector("#heroSelector .selectedHeroName").innerText;
+
+    sendSelectedHero(heroName);
+}
+
+function sendSelectedHero(heroName) {
+    console.log("Send selected hero: " + heroName);
+
+    /*
+    fetch('threebeesandme/howeststone/post/pregame/hero', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'playerHero': heroName                   // TODO: IMPORTANT!!!
+        }
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        showHeroes(result)
+    })
+    .catch(function(err) {
+        console.log("Error: Could not load the heroes :'(");
+    });
+    */
+}
+
+function playGame() {
+    sendSelectedDeck(selectedDeck);
+    setBackground();
+    document.getElementById('vsScreen').className = "";
+    document.getElementById('gameBoard').className = "";
+    makeCardsFan("you", 1);
+    document.getElementById('deckSelector').className = "hidden";
+    setTimeout(function playRealGame() {
+        document.getElementById('vsScreen').className = "hidden";
+        document.getElementById('replaceCardScreen').className = "";
+    }, 3000);
+}
+
+function sendSelectedDeck(deckName) {
+    console.log("Send selected deck: " + deckName);
+
+    /*
+    fetch('threebeesandme/howeststone/post/pregame/hero', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'deck': deckName                   // TODO: IMPORTANT!!!
+        }
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        showHeroes(result)
+    })
+    .catch(function(err) {
+        console.log("Error: Could not load the heroes :'(");
+    });
+    */
 }

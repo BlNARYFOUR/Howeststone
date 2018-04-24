@@ -19,14 +19,13 @@ function init() {
     document.getElementById('gotoDeckChooser').addEventListener('click', gotoDeckChooser);
     document.getElementById('gotoOptions').addEventListener('click', gotoOptions);
 // gotoLogout
-    document.getElementById('gotoDeckSelector').addEventListener('click', gotoDeckSelector);
     let mainMenugoers = document.querySelectorAll('.gotoMainMenu');
     for(let i =0; i< mainMenugoers.length; i++){
         mainMenugoers[i].addEventListener('click', gotoMainMenu);
     }
     document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck); /////
     document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
-    document.getElementById('playGame').addEventListener('click', playGame);
+    // todo: document.getElementById('playGame').addEventListener('click', playGame);
     /* document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);*/
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
@@ -80,8 +79,9 @@ function gotoMainMenu(e) {
     document.getElementById('mainMenu').className = "";
     this.parentElement.parentElement.parentElement.className = "hidden";
 }
+
 function gotoDeckChooser() {
-    document.getElementById('deckChooser').className = "";
+    document.getElementById('heroChooser').className = "";
     document.getElementById('mainMenu').className = "hidden";
 }
 
@@ -91,20 +91,8 @@ function gotoGameOptions() {
 }
 
 function gotoRechooseDeck() {
-    document.getElementById('deckChooser').className = "";
+    document.getElementById('heroChooser').className = "";
     document.getElementById('deckbuilder').className = "hidden";
-}
-
-function playGame() {
-    setBackground();
-    document.getElementById('vsScreen').className = "";
-    document.getElementById('gameBoard').className = "";
-	makeCardsFan("you", 1);
-    document.getElementById('deckSelector').className = "hidden";
-    setTimeout(function playrealGame() {
-        document.getElementById('vsScreen').className = "hidden";
-        document.getElementById('replaceCardScreen').className = "";
-    }, 3000);
 }
 
 function replaceCard1() {
@@ -123,7 +111,6 @@ function gotoCardsReplaced() {
     document.getElementById('replaceCardScreen').className = "hidden";
 }
 
-
 function gotoHome() {
     document.getElementById('mainMenu').className = "";
     document.getElementById('heroSelector').className = "hidden";
@@ -138,11 +125,6 @@ function gotoHeroSelector() {
         document.getElementById('mainMenu').className = "hidden";
         document.getElementById('heroSelector').className = "";
     }
-}
-
-function gotoDeckSelector() {
-    document.getElementById('deckSelector').className = "";
-    document.getElementById('heroSelector').className = "hidden";
 }
 
 function gotoHeroChooser() {
