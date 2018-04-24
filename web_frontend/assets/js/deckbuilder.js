@@ -46,9 +46,9 @@ function searchTest(e) {
 function init() {
     /*tutorial();*/
 
-    document.getElementById('search').addEventListener('change', searchTest);
+    document.getElementById('search').addEventListener('input', searchTest);
     document.querySelector('#firstadd').addEventListener('click', firstadd);
-    //mockCards();
+
     checkallcards();
     let myCards =MOCKMYCARDS() ;
     MockCardsToDeckBuilder(myCards);
@@ -154,17 +154,7 @@ function firstadd() {
     document.querySelector('.main').classList.toggle('hidden');
     document.querySelector('.save').classList.toggle('hidden');
 }
-function mockCards() {
-    let total = 5;
-    for (let i = 1; i <= total; i++) {
-        mockCard('card'+i);
-    }
-}
 
-function mockCard(card) {
-   document.getElementById('cards').innerHTML += "<li class ='cardInDeck'><figure draggable='true'><img src='images/"+card+".png' alt="+card+" title="+card+" id="+card+">"+"</figure></li>"
-       //"<img src='images/"+card+".png' alt="+card+" title="+card+"></figure></li>";
-}
 
 function addCardToDeck(e) {
     let dit;
