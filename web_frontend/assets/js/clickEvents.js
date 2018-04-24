@@ -24,7 +24,6 @@ function init() {
         mainMenugoers[i].addEventListener('click', gotoMainMenu);
     }
     document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck); /////
-    document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
     // todo: document.getElementById('playGame').addEventListener('click', playGame);
     /* document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);*/
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
@@ -150,33 +149,6 @@ function selectClassPaladin() {
     selectedHero.style.backgroundImage = "url('images/portraitPaladin.png')";
     selectedDeck.style.backgroundImage = "url('images/portraitPaladin.png')";
     playerHero.innerHTML = "<img src='images/portraitPaladin.png' alt='playerHero' title='playerhero'>"
-}
-
-function selectClassMageInDeckChooser() {
-    document.querySelector('#hero a:first-child').style.backgroundColor = 'grey';
-    document.querySelector('#hero a:last-child').style.backgroundColor = 'white';
-    document.getElementById("selectedHeroNameInDeckChooser").innerHTML = 'Mage Annie';
-    //selectedHeroInDeckChooser.style.backgroundImage = "url('images/portraitMage.png')";
-}
-
-function selectClassPaladinInDeckChooser() {
-    document.querySelector('#hero a:first-child').style.backgroundColor = 'white';
-    document.querySelector('#hero a:last-child').style.backgroundColor = 'grey';
-    document.getElementById("selectedHeroNameInDeckChooser").innerHTML = 'Paladin Azir';
-    selectedHeroInDeckChooser.style.backgroundImage = "url('images/portraitPaladin.png')";
-}
-
-
-function gotoDeckBuilder() {
-    /*
-    if ((document.getE('selectedHeroInDeckChooser').getAttribute('style') === null) || (document.getElementById('selectedHeroInDeckChooser').getAttribute('style').indexOf('aladin') === -1)){
-        selectClassMageInDeckChooser();
-    }else {
-        selectClassPaladinInDeckChooser();
-    }
-    document.getElementById('deckChooser').className = "hidden";
-    document.getElementById('deckbuilder').className = "";
-    */
 }
 
 function gotoOptions() {

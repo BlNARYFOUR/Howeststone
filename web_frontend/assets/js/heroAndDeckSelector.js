@@ -1,5 +1,6 @@
 "use strict";
 
+let selectedHero = "";
 let selectedDeck = "";
 let selectedDeckObj = null;
 
@@ -7,9 +8,11 @@ document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     loadHeroes();
+    loadDecks();
+
     document.getElementById('gotoDeckSelector').addEventListener('click', gotoDeckSelector);
     document.getElementById('playGame').addEventListener('click', playGame);
-    loadDecks();
+    document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
 }
 
 function showDecks(decks) {
@@ -67,10 +70,15 @@ function showHeroes(heroes) {
     let heroesHtml = document.querySelectorAll('.heroes');
 
     for (let i=0; i<heroes.length; i++) {
+        if(i===0) {
+            selectedHero = heroes[i].toLowerCase();
+        }
+
         for(let j=0; j<heroesHtml.length; j++) {
             heroesHtml[j].innerHTML += '<li><a href="#" class="' + heroes[i].toLowerCase() + '"><h2>' + heroes[i] + '</h2></a></li>';
         }
 
+        document.querySelector("#deckbuilder #hero").innerHTML += '<a href="#">' + heroes[i] + '</a>';
         let heroHtmlObj = document.querySelectorAll('.heroes .' + heroes[i].toLowerCase());
 
         for(let j=0; j<heroHtmlObj.length; j++) {
@@ -109,6 +117,7 @@ function loadHeroes() {
 function handleSelectedHero(e) {
     let clickedHero = this;
     let heroName = clickedHero.classList[0];
+    selectedHero = heroName;
 
     console.log(heroName);
 
@@ -168,6 +177,23 @@ function playGame() {
         document.getElementById('vsScreen').className = "hidden";
         document.getElementById('replaceCardScreen').className = "";
     }, 3000);
+}
+
+function gotoDeckBuilder() {
+    let heroes = document.querySelectorAll("#deckbuilder #hero a");
+
+    for(let i=0; i<heroes.length; i++) {
+        console.log("Gets in here: " + selectedHero);
+        if(heroes[i].innerText.toLowerCase() === selectedHero) {
+            heroes[i].style.backgroundColor = "grey";
+        }
+        else {
+            heroes[i].style.backgroundColor = "white";
+        }
+    }
+
+    document.getElementById('heroChooser').className = "hidden";
+    document.getElementById('deckbuilder').className = "";
 }
 
 function sendSelectedDeck(deckName) {
