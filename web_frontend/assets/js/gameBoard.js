@@ -735,11 +735,15 @@ function touchEnd(e) {
             break;
 
     }
-    drag.parentElement.removeChild(drag);
-    if (moved === true){
-        itemThatIsBeingMoved.parentElement.removeChild(itemThatIsBeingMoved);
-        updateMyCards();
+    try{
+        drag.parentElement.removeChild(drag);
+        if (moved === true){
+            itemThatIsBeingMoved.parentElement.removeChild(itemThatIsBeingMoved);
+            updateMyCards();
 
+        }
+    } catch (err){
+        console.log('nothing can be removed' + err);
     }
     document.removeEventListener("touchmove", touchMove, false);
     document.removeEventListener("touchend", touchEnd, false);
@@ -794,8 +798,53 @@ function visualiseAttack(e) {
     attack();
 }
 
-function attackStart() {
+function attackStart(e) {
+    let target = e.target;
+    if (e.path[0].tagName === 'SPAN'){
+        target = e.target.parentElement;
+    }
+    console.log(target);
     console.log('cannot attack');
+    dragOffsetX = e.offsetX;
+    dragOffsetY = e.offsetY;
+    itemThatIsBeingMoved = target;
+    moved = false;
+    drag = target.cloneNode(true);
+    document.body.appendChild(drag);
+    drag.removeAttribute('style');
+
+    touchMove(e);
+    drag.style.zIndex = '1';
+    drag.style.width = '9.9032258064516129032258064516131vh';
+    drag.style.height= '15vh';
+    drag.style.position = 'absolute';
+    drag.style.borderRadius = '50%';
+    drag.style.background = target.style.background;
+    
+    document.addEventListener("touchmove", attackMove, false);
+    document.addEventListener("mousemove", attackMove, false);
+    document.addEventListener("mouseup", attackEnd, false);
+    document.addEventListener("touchend", attackEnd, false);
+}
+
+function attackMove(e) {
+    // change this to only clientX and clientY putting in variable
+    if (typeof e.clientX === "number"){
+        let XCoordinate = e.clientX - dragOffsetX;
+        let YCoordinate = e.clientY - dragOffsetY;
+        drag.style.left = XCoordinate + 'px';
+        drag.style.top = YCoordinate+ 'px';
+    }
+    else {
+        // Mattijs: the web browser cannot calculate the offset so I use this as default
+        let XCoordinate = e.touches[0].clientX - 40;
+        let YCoordinate = e.touches[0].clientY - 80;
+        drag.style.left = XCoordinate + 'px';
+        drag.style.top = YCoordinate+ 'px';
+    }
+}
+function attackEnd() {
+
 }
 
 
