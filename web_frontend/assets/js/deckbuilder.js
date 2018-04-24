@@ -24,15 +24,34 @@ function tutorial() {
 function searchTest(e) {
     e.preventDefault();
     console.log(document.getElementById('search').value);
+
+    // Declare variables
+    let input, filter, ul, li, img, i;
+    input = document.getElementById('search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("cards");
+    li =ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        img = li[i].getElementsByTagName("img")[0];
+        if (img.getAttribute('id').toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
 }
 
 function init() {
     /*tutorial();*/
 
-    document.getElementById('search').addEventListener('change', searchTest);
+    document.getElementById('search').addEventListener('input', searchTest);
     document.querySelector('#firstadd').addEventListener('click', firstadd);
-    mockCards();
+
     checkallcards();
+    let myCards =MOCKMYCARDS() ;
+    MockCardsToDeckBuilder(myCards);
 
     let cardInDeck = document.querySelectorAll('#cards li');
     for (let i = 0; i < cardInDeck.length; i++){
@@ -77,6 +96,22 @@ function init() {
         inputs[i].addEventListener('click', unselectFilter)
     }
 }
+
+function MockCardsToDeckBuilder(cards) {
+
+    for (let i = 0; i < cards.length; i++) {
+        let imgUrl = cards[i]["img"];
+        let imgID = cards[i]["name"];
+        console.log(imgID);
+        document.getElementById('cards').innerHTML += '<li class ="cardInDeck"><figure draggable=true><img src="'+imgUrl+'" alt="'+imgID+'" title="'+imgID+'" id="'+imgID+'">'+'</figure></li>';
+    }
+}
+
+
+
+
+
+
 function checkallcards() {
     let cardInDeck = document.querySelectorAll(".cardInDeck");
     for(let i = 0 ; i < cardInDeck.length; i++){
@@ -119,17 +154,7 @@ function firstadd() {
     document.querySelector('.main').classList.toggle('hidden');
     document.querySelector('.save').classList.toggle('hidden');
 }
-function mockCards() {
-    let total = 5;
-    for (let i = 1; i <= total; i++) {
-        mockCard('card'+i);
-    }
-}
 
-function mockCard(card) {
-   document.getElementById('cards').innerHTML += "<li class ='cardInDeck'><figure draggable='true'><img src='images/"+card+".png' alt="+card+" title="+card+">"+"</figure></li>"
-       //"<img src='images/"+card+".png' alt="+card+" title="+card+"></figure></li>";
-}
 
 function addCardToDeck(e) {
     let dit;
