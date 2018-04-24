@@ -5,6 +5,7 @@ let tutorialli = 1;
 let dragged;
 let filterArray = [];
 
+
 function nextTutorial() {
 
     document.querySelector('#tutorials li:nth-child(' +tutorialli+ ')').className = "hidden";
@@ -328,6 +329,17 @@ function thirdFilter() {
     for (let i = 0; i < ManaFilter.length; i++) {
         if (ManaFilter[i].checked){
             filterArray[2] = (ManaFilter[i].value);
+            console.log(filterArray);
+        }
+    }
+}
+
+function fourthFilter() {
+    let cardRarityFilter = document.getElementsByName('cardRarity');
+
+    for (let i = 0; i < cardRarityFilter.length; i++) {
+        if (cardRarityFilter[i].checked){
+            filterArray[3] = (cardRarityFilter[i].value);
             console.log(filterArray);
         }
     }
