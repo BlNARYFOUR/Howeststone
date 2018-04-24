@@ -130,7 +130,7 @@ function gotoHome() {
 }
 
 function gotoHeroSelector() {
-    setTimeout(goto, 4800);     // This should be shown while loading ;)
+    setTimeout(goto, 2400);     // This should be shown while loading ;)
     startLoadingScreen();
 
     function goto() {
