@@ -8,8 +8,11 @@ function main() {
 }
 
 function gotoCardsReplaced() {
-    console.log('testd');
+    if (countReplaceCards !== 0){
+        replaceCards(countReplaceCards);
+    }
     document.getElementById('replaceCardScreen').className = "hidden";
+    deactivateReplaceCards();
     firstTurn();
 }
 
@@ -41,9 +44,7 @@ function init() {
     document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
     document.getElementById('gotoCardsReplaced').addEventListener('click', gotoCardsReplaced);
-    document.getElementById('replacedCard1').addEventListener('click', replaceCard1);
-    document.getElementById('replacedCard2').addEventListener('click', replaceCard2);
-    document.getElementById('replacedCard3').addEventListener('click', replaceCard3);
+
 }
 
 function toggleFullScreen() {
@@ -86,24 +87,13 @@ function playGame() {
     setBackground();
     document.getElementById('vsScreen').className = "";
     document.getElementById('gameBoard').className = "";
-	makeCardsFan("you", 1);
+	//makeCardsFan("you", 1);
     document.getElementById('deckSelector').className = "hidden";
     setTimeout(function playrealGame() {
         document.getElementById('vsScreen').className = "hidden";
         document.getElementById('replaceCardScreen').className = "";
+        activateReplaceCards();
     }, 3000);
-}
-
-function replaceCard1() {
-    document.getElementById('replacedCard1').className = "";
-}
-
-function replaceCard2() {
-    document.getElementById('replacedCard2').className = "";
-}
-
-function replaceCard3() {
-    document.getElementById('replacedCard3').className = "";
 }
 
 function gotoHome() {
@@ -112,7 +102,7 @@ function gotoHome() {
 }
 
 function gotoHeroSelector() {
-    setTimeout(goto, 4800);     // This should be shown while loading ;)
+    setTimeout(goto, 2400);     // This should be shown while loading ;)
     startLoadingScreen();
 
     function goto() {

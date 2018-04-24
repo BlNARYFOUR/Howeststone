@@ -20,6 +20,63 @@ function init() {
     */
 }
 
+function setupGameBoard() {
+    document.getElementById('endTurn').addEventListener('click', endTurn);
+}
+
+function endTurn(e) {
+    /*
+    fetch('threebeesandme/howeststone/post/endturn',{
+        method: 'POST'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("turn end has been send to server");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not end turn");
+        });
+        */
+    console.log("turn end has been send to server");
+}
+
+function activateReplaceCards() {
+    // TODO background images replacen (li + span)
+    let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
+    for(let i = 0; i < replaceCards.length; i++){
+        replaceCards[i].addEventListener('click', toggleReplaceCard);
+    }
+}
+
+function deactivateReplaceCards() {
+    let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
+    for(let i = 0; i < replaceCards.length; i++){
+        replaceCards[i].removeEventListener('click', toggleReplaceCard);
+    }
+}
+let countReplaceCards = 0;
+function toggleReplaceCard(e) {
+    let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
+    countReplaceCards = replaceCards.length;
+    e.target.querySelector('span').classList.toggle('hidden');
+    for(let i = 0; i < replaceCards.length; i++){
+        if (replaceCards[i].querySelector('span').classList.contains('hidden')){
+            countReplaceCards -= 1;
+        }
+    }
+    if (countReplaceCards !== 0){
+        document.querySelector('#gotoCardsReplaced').innerHTML = 'Replace';
+    } else {
+        document.querySelector('#gotoCardsReplaced').innerHTML = 'Continue';
+    }
+
+
+}
+
 function firstTurn() {
     console.log('test');
     updateEnemyHero();
