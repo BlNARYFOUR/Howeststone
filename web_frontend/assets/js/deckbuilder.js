@@ -225,11 +225,74 @@ function search(e) {
 function initialiseSort() {
     let sort =  document.getElementById('sort');
     let sortValue = sort.options[sort.selectedIndex].value;
-    if (sortValue = "alfaz"){
-        sortCardsAlphabetically();
+    switch(sortValue) {
+        case "alfaz":
+            console.log("sort by alfaz");
+
+            fetch('howeststone/database/get/search/alfaz', {
+                method: 'GET',
+                headers: {}
+            })
+                .then(function(res) {
+                    if(res.ok === true)
+                        return res.json();
+                })
+
+                .catch(function(err) {
+                    console.log("Error 404: Could not connect to the server");
+                });
+
+            break;
+        case "alfza":
+            console.log("sort by alfza");
+
+            fetch('howeststone/database/get/search/alfza', {
+                method: 'GET',
+                headers: {}
+            })
+                .then(function(res) {
+                    if(res.ok === true)
+                        return res.json();
+                })
+
+                .catch(function(err) {
+                    console.log("Error 404: Could not connect to the server");
+                });
+
+            break;
+        case "mana07":
+            console.log("sort by mana07");
+
+            fetch('howeststone/database/get/search/mana07', {
+                method: 'GET',
+                headers: {}
+            })
+                .then(function(res) {
+                    if(res.ok === true)
+                        return res.json();
+                })
+
+                .catch(function(err) {
+                    console.log("Error 404: Could not connect to the server");
+                });
+
+            break;
+        case "mana70":
+            console.log("sort by mana70");
+
+            fetch('howeststone/database/get/search/mana70', {
+                method: 'GET',
+                headers: {}
+            })
+                .then(function(res) {
+                    if(res.ok === true)
+                        return res.json();
+                })
+
+                .catch(function(err) {
+                    console.log("Error 404: Could not connect to the server");
+                });
+            break;
     }
 }
 
-function sortCardsAlphabetically() {
-  
-}
