@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
 
     <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#513d1f">
+    <meta name="theme-color" content="#000000">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#513d1f">
+    <meta name="msapplication-navbutton-color" content="#000000">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="#513d1f">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- The iOS apple-mobile-web-app-status-bar-style attribute only supports black, black-translucent or default` - you cannot use a custom color apparently. -->
+
 
     <!--<link rel="icon" type="image/png" href="assets/media/icon2.png"/>
     <link rel="icon" type="image/png" href="assets/media/icon.png"/>-->
@@ -338,11 +340,16 @@
 </div>
 
 <div id="replaceCardScreen" class="hidden">
-    <p>Keep or replace cards</p>
+    <h1>Keep or replace cards</h1>
     <ul id="randomCardsFromDeck">
         <li><img src="images/card1.png" alt="card1" title="card1"></li>
         <li><img src="images/card2.png" alt="card2" title="card2"></li>
         <li><img src="images/card3.png" alt="card3" title="card3"></li>
+    </ul>
+    <ul id="replacedCards">
+        <li id="replacedCard1" class="hidden"><img src="images/game-logo-hearthstone.png"></li>
+        <li id="replacedCard2" class="hidden"><img src="images/game-logo-hearthstone.png"></li>
+        <li id="replacedCard3" class="hidden"><img src="images/game-logo-hearthstone.png"></li>
     </ul>
     <span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Continue</a></span>
 </div>
