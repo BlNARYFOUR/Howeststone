@@ -659,7 +659,7 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[i+1]);
-            cardOnPlayingField.innerHTML = '<span class="health"></span><span class="attack"></span>';
+            cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
             moved = true;
             cardOnPlayingField.addEventListener("mousedown", attackStart);
             cardOnPlayingField.addEventListener("touchstart", attackStart);
@@ -670,7 +670,7 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
-            cardOnPlayingField.innerHTML = '<span class="health"></span><span class="attack"></span>';
+            cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
             moved = true;
             cardOnPlayingField.addEventListener("mousedown", attackStart);
             cardOnPlayingField.addEventListener("touchstart", attackStart);
@@ -681,7 +681,7 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.appendChild(cardOnPlayingField);
-            cardOnPlayingField.innerHTML = '<span class="health"></span><span class="attack"></span>';
+            cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
             moved = true;
             cardOnPlayingField.addEventListener("mousedown", attackStart);
             cardOnPlayingField.addEventListener("touchstart", attackStart);
@@ -694,7 +694,7 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
-            cardOnPlayingField.innerHTML = '<span class="health"></span><span class="attack"></span>';
+            cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
             moved = true;
             cardOnPlayingField.addEventListener("mousedown", attackStart);
             cardOnPlayingField.addEventListener("touchstart", attackStart);
@@ -704,7 +704,7 @@ function calculateDropZones(dropZoneLi) {
             if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
                 let cardOnPlayingField = cloneDragElement();
                 dropZone.appendChild(cardOnPlayingField);
-                cardOnPlayingField.innerHTML = '<span class="health"></span><span class="attack"></span>';
+                cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
                 giveMinionHealthAndAttack();
                 moved = true;
                 cardOnPlayingField.addEventListener("mousedown", attackStart);
