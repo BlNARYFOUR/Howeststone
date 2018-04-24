@@ -581,6 +581,16 @@ function touchMove(e) {
 }
 
 function touchEnd(e) {
+    // TODO fetch check for card
+    let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
+    let rectDrag = drag.getBoundingClientRect();
+    let rectDropZone = dropZone.getBoundingClientRect();
+    if ((rectDrag.right < rectDropZone.right) && (rectDrag.left > rectDropZone.left) && (rectDrag.bottom < (rectDropZone.bottom + 100)) && (rectDrag.top > rectDropZone.top -100)){
+        let cardOnPlayingField = drag.cloneNode(true);
+        cardOnPlayingField.removeAttribute('style');
+        cardOnPlayingField.style.background = drag.style.background;
+        dropZone.appendChild(cardOnPlayingField);
+    }
     drag.parentElement.removeChild(drag);
     document.removeEventListener("touchmove", touchMove, false);
     document.removeEventListener("touchend", touchEnd, false);
