@@ -21,32 +21,12 @@ function tutorial() {
 
 }
 
-function searchTest(e) {
-    e.preventDefault();
-    console.log(document.getElementById('search').value);
-
-    // Declare variables
-    let input, filter, ul, li, img, i;
-    input = document.getElementById('search');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("cards");
-    li =ul.getElementsByTagName('li');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        img = li[i].getElementsByTagName("img")[0];
-        if (img.getAttribute('id').toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
 function init() {
     /*tutorial();*/
 
-    document.getElementById('search').addEventListener('input', searchTest);
+    document.getElementById('search').addEventListener('input', search);
+    document.getElementById('sort').addEventListener('change', initialiseSort);
+
     document.querySelector('#firstadd').addEventListener('click', firstadd);
 
     checkallcards();
@@ -218,4 +198,38 @@ function nodetailOfCard(e){
 
 function detailOfCard(e) {
     this.lastChild.lastChild.style.display = 'block';
+}
+
+function search(e) {
+    e.preventDefault();
+    console.log(document.getElementById('search').value);
+
+    // Declare variables
+    let input, filter, ul, li, img, i;
+    input = document.getElementById('search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("cards");
+    li =ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        img = li[i].getElementsByTagName("img")[0];
+        if (img.getAttribute('id').toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function initialiseSort() {
+    let sort =  document.getElementById('sort');
+    let sortValue = sort.options[sort.selectedIndex].value;
+    if (sortValue = "alfaz"){
+        sortCardsAlphabetically();
+    }
+}
+
+function sortCardsAlphabetically() {
+  
 }
