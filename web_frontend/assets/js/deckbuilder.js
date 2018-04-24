@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', init);
 let tutorialli = 1;
 let dragged;
+let filterArray = [];
 
 function nextTutorial() {
 
@@ -25,7 +26,10 @@ function init() {
     /*tutorial();*/
 
     document.getElementById('search').addEventListener('input', search);
-    document.getElementById('sort').addEventListener('change', initialiseSort);
+    document.getElementById('sort').addEventListener('change', sort);
+    document.getElementById('firstFilter').addEventListener('change',firstFilter);
+    document.getElementById('secondFilter').addEventListener('change',secondFilter);
+    document.getElementById('thirdFilter').addEventListener('change',thirdFilter);
 
     document.querySelector('#firstadd').addEventListener('click', firstadd);
 
@@ -222,7 +226,7 @@ function search(e) {
     }
 }
 
-function initialiseSort() {
+function sort() {
     let sort =  document.getElementById('sort');
     let sortValue = sort.options[sort.selectedIndex].value;
     switch(sortValue) {
@@ -293,6 +297,39 @@ function initialiseSort() {
                     console.log("Error 404: Could not connect to the server");
                 });
             break;
+    }
+}
+
+function firstFilter() {
+    let specificCardsFilter =  document.getElementsByName('specificCards');
+
+    for (let i = 0; i < specificCardsFilter.length; i++) {
+        if (specificCardsFilter[i].checked){
+            filterArray[0] = (specificCardsFilter[i].value);
+            console.log(filterArray);
+        }
+    }
+}
+
+function secondFilter() {
+    let cardTypesFilter = document.getElementsByName('cardTypes');
+
+    for (let i = 0; i < cardTypesFilter.length; i++) {
+        if (cardTypesFilter[i].checked){
+            filterArray[1] = (cardTypesFilter[i].value);
+            console.log(filterArray);
+        }
+    }
+}
+
+function thirdFilter() {
+    let ManaFilter = document.getElementsByName('Mana');
+
+    for (let i = 0; i < ManaFilter.length; i++) {
+        if (ManaFilter[i].checked){
+            filterArray[2] = (ManaFilter[i].value);
+            console.log(filterArray);
+        }
     }
 }
 
