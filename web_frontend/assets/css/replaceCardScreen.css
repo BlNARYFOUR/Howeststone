@@ -16,7 +16,7 @@
     display: inline-block;
 }
 
-#randomCardsFromDeck {
+#replaceCardScreen ul {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +28,7 @@
     width: 24vh;
 }
 
-#randomCardsFromDeck li {
+#replaceCardScreen ul li {
     margin-left: 2vh;
     margin-right: 2vh;
     box-sizing: border-box;

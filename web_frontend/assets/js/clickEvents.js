@@ -8,7 +8,11 @@ function main() {
 }
 
 function gotoCardsReplaced() {
+    if (countReplaceCards !== 0){
+        replaceCards(countReplaceCards);
+    }
     document.getElementById('replaceCardScreen').className = "hidden";
+    deactivateReplaceCards();
     firstTurn();
 }
 
@@ -90,22 +94,6 @@ function playGame() {
         activateReplaceCards();
     }, 3000);
 }
-
-function toggleReplaceCard(cardToReplace) {
-    alert("begin functie");
-    let replaceCross = document.getElementById(cardToReplace);
-    if (document.getElementById(cardToReplace).className === "") {
-        document.getElementById(cardToReplace).className = "hidden";
-    } else {
-        document.getElementById(cardToReplace).className = "";
-    }
-}
-
-
-function gotoCardsReplaced() {
-    document.getElementById('replaceCardScreen').className = "hidden";
-}
-
 
 function gotoHome() {
     document.getElementById('mainMenu').className = "";

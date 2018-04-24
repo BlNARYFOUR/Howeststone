@@ -20,17 +20,38 @@ function init() {
 }
 
 function activateReplaceCards() {
-    document.querySelector("#randomCardsFromDeck li").addEventListener('dblclick', toggleReplaceCard());
-    //document.getElementById('replacedCard1').addEventListener('click', toggleReplaceCard("replacedCard1"));
-    //document.querySelector('#randomCardsFromDeck:nth-child(2)').addEventListener('click', toggleReplaceCard());
-    //document.getElementById('replacedCard2').addEventListener('click', toggleReplaceCard("replacedCard2"));
-    //sdocument.querySelector('#randomCardsFromDeck:nth-child(3)').addEventListener('click', toggleReplaceCard());
-    //document.getElementById('replacedCard3').addEventListener('click', toggleReplaceCard("replacedCard3"));
+    // TODO background images replacen (li + span)
+    let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
+    for(let i = 0; i < replaceCards.length; i++){
+        replaceCards[i].addEventListener('click', toggleReplaceCard);
+    }
 }
 
-function toggleReplaceCard() {
-    document.getElementById("randomCardsFromDeck").firstElementChild.style.backgroundImage = "images/game-logo-hearthstone.png";
-    document.querySelector("#randomCardsFromDeck > li span").className = "";
+function deactivateReplaceCards() {
+    let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
+    for(let i = 0; i < replaceCards.length; i++){
+        replaceCards[i].removeEventListener('click', toggleReplaceCard);
+    }
+}
+// TODO change this let
+let countReplaceCards = 0;
+function toggleReplaceCard(e) {
+    countReplaceCards = replaceCards.length;
+    let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
+    e.target.querySelector('span').classList.toggle('hidden');
+    for(let i = 0; i < replaceCards.length; i++){
+        console.log(replaceCards[i].querySelector('span'));
+        if (replaceCards[i].querySelector('span').classList.contains('hidden')){
+            countReplaceCards -= 1;
+        }
+    }
+    if (countReplaceCards !== 0){
+        document.querySelector('#gotoCardsReplaced').innerHTML = 'Replace';
+    } else {
+        document.querySelector('#gotoCardsReplaced').innerHTML = 'Continue';
+    }
+
+
 }
 
 function firstTurn() {
