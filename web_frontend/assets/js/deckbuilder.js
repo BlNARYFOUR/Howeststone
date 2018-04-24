@@ -49,6 +49,12 @@ function init() {
     document.getElementById('search').addEventListener('input', searchTest);
     document.querySelector('#firstadd').addEventListener('click', firstadd);
 
+    document.querySelector('#quickfilter a:first-child').addEventListener('click', viewFullDeck);
+    document.querySelector('#quickfilter a:nth-child(2)').addEventListener('click', viewMinions);
+    document.querySelector('#quickfilter a:nth-child(3)').addEventListener('click', viewSpells);
+    document.querySelector('#quickfilter a:nth-child(4)').addEventListener('click', viewWeapons);
+
+
     checkallcards();
     let myCards =MOCKMYCARDS() ;
     MockCardsToDeckBuilder(myCards);
@@ -218,4 +224,20 @@ function nodetailOfCard(e){
 
 function detailOfCard(e) {
     this.lastChild.lastChild.style.display = 'block';
+}
+
+function viewFullDeck() {
+    console.log('dsfqsdf');
+}
+
+function viewMinions() {
+    console.log('qssdfdfsgqEREZRT');
+}
+
+function viewSpells() {
+    console.log('spells');
+}
+
+function viewWeapons() {
+    console.log('weapons');
 }
