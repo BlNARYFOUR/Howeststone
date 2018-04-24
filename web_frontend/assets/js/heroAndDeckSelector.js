@@ -59,11 +59,9 @@ function handleSelectedHero(e) {
     let backgroundHolders = document.querySelectorAll(".selectedHero");
 
     for(let i = 0; i < selectedHeroName.length; i++) {
-        console.log("gets here");
         selectedHeroName[i].innerHTML = heroName;
         backgroundHolders[i].style.backgroundImage = `url('assets/media/${heroName}.png')`;
     }
 
-    //selectedDeck.style.backgroundImage = "url('images/portraitMage.png')";
-    //playerHero.innerHTML = "<img src='images/portraitMage.png' alt='playerHero' title='playerhero'>";
+    document.querySelector("#vsScreen .player").innerHTML = `<img src="assets/media/${heroName}.png" alt="playerHero" title="playerHero">`;
 }

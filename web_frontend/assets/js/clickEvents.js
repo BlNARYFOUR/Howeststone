@@ -186,13 +186,15 @@ function selectClassPaladinInDeckChooser() {
 
 
 function gotoDeckBuilder() {
-    if ((document.getElementById('selectedHeroInDeckChooser').getAttribute('style') === null) || (document.getElementById('selectedHeroInDeckChooser').getAttribute('style').indexOf('aladin') === -1)){
+    /*
+    if ((document.getE('selectedHeroInDeckChooser').getAttribute('style') === null) || (document.getElementById('selectedHeroInDeckChooser').getAttribute('style').indexOf('aladin') === -1)){
         selectClassMageInDeckChooser();
     }else {
         selectClassPaladinInDeckChooser();
     }
     document.getElementById('deckChooser').className = "hidden";
     document.getElementById('deckbuilder').className = "";
+    */
 }
 
 function gotoOptions() {
