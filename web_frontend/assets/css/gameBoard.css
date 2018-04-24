@@ -194,11 +194,33 @@
     box-sizing: border-box;
     display: inline-block;
     width: 9.9032258064516129032258064516131vh;
-    height: 15vh;
-    line-height: 15vh;
+    height: 13.5vh;
+    line-height: 13.5vh;
     vertical-align: middle;
     background-color: rgba(0,0,0,0.7);
     border: whitesmoke thin solid;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+
+#gameBoard .you .playingField .dropZone li.betweenDrop {
+    width: 2.5vh;
+    background: none;
+    border: none;
+}
+
+#gameBoard .you .playingField .dropZone li.betweenDrop:first-of-type, #gameBoard .you .playingField .dropZone li.betweenDrop:last-of-type {
+    width: 10vh;
+}
+
+#gameBoard .you .playingField .dropZone li .legendary {
+    display: block;
+    height: 120%;
+    width: 144%;
+    margin-left: -22%;
+    margin-top: -10%;
+    background: no-repeat url("../media/legendary.png") center 20%;
+    background-size: 110%;
 }
 
 #gameBoard #tempButtonAddCard {
@@ -259,4 +281,18 @@
     width: 10%;
     -webkit-transition: ease-in width 20s; /* Safari */
     transition: ease-in width 20s;
+}
+
+#endTurn {
+    position: absolute;
+    top: 43vh;
+    right: 2.5vh;
+    width: 12vh;
+    height: 5.5vh;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+    cursor: pointer;
+    text-align: center;
+    line-height: 4vh;
 }
