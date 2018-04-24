@@ -74,7 +74,7 @@
 
 #gameBoard .you .cards li {
     bottom: -0.5vh;
-    -webkit-user-drag: element;
+    /*-webkit-user-drag: element;*/
 }
 
 #gameBoard .you .cards li:hover {
@@ -88,13 +88,13 @@
     transform: scale(2.5, 2.5) translate(-0.5vh, -5.25vh) !important;
 }
 
-#gameBoard .main .you .cards li.dragging {
+/*#gameBoard .main .you .cards li.dragging {
     transition: none !important;
     transform: none !important;
     width: 14.85483870967741935483870967742vh;
     height: 22.5vh;
     line-height: 22.5vh;
-}
+}*/
 
 #gameBoard .main .you .cards li.hide {
     opacity: 0;
@@ -189,6 +189,18 @@
     z-index: 3;
 }
 
+/* weapon has yet to be change to a circle*/
+#gameBoard .you .weapon li{
+    position: absolute;
+    top: 20vh;
+    left: 43vh;
+    width: 9.9032258064516129032258064516131vh;
+    height: 15vh;
+    line-height: 15vh;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    border: whitesmoke thin solid;
+}
 #gameBoard .you .playingField .dropZone li {
     text-align: center;
     box-sizing: border-box;
@@ -198,7 +210,9 @@
     line-height: 13.5vh;
     vertical-align: middle;
     background-color: rgba(0,0,0,0.7);
+    /*
     border: whitesmoke thin solid;
+     */
     border-radius: 50%;
     background-clip: padding-box;
 }

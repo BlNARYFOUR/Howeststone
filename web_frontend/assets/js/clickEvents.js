@@ -44,6 +44,7 @@ function init() {
     document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
     document.getElementById('gotoCardsReplaced').addEventListener('click', gotoCardsReplaced);
+
 }
 
 function toggleFullScreen() {
