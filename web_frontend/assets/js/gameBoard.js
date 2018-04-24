@@ -25,6 +25,23 @@ function setupGameBoard() {
     document.getElementById('endTurn').addEventListener('click', endTurn);
 }
 
+function timeLeft() {
+    fetch('threebeesandme/howeststone/get/timeleft',{
+        method: 'GET'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("turn time was retrieved from the server");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not get turntime");
+        });
+}
+
 function endTurn(e) {
     /*
     fetch('threebeesandme/howeststone/post/endturn',{
