@@ -32,12 +32,12 @@ function init() {
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
     document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoHeroChooser').addEventListener('click', gotoHeroChooser);
-    document.getElementById('classMage').addEventListener('click', selectClassMage);
+    // todo: document.getElementById('classMage').addEventListener('click', selectClassMage);
     document.getElementById('classMageDeckChooser').addEventListener('click', selectClassMageInDeckChooser);
     document.querySelector('#hero a:first-child').addEventListener('click', selectClassMageInDeckChooser);
     document.getElementById('classPaladinDeckChooser').addEventListener('click', selectClassPaladinInDeckChooser);
     document.querySelector('#hero a:last-child').addEventListener('click', selectClassPaladinInDeckChooser);
-    document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
+    // todo: document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
     document.getElementById('gotoCardsReplaced').addEventListener('click', gotoCardsReplaced);
     document.getElementById('replacedCard1').addEventListener('click', replaceCard1);
