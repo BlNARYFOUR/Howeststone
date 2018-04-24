@@ -5,21 +5,21 @@ document.addEventListener("DOMContentLoaded", init);
 let cardCounter = 0;
 let cardBackUrl = "";
 let dragSrcEl = null;
+let myCards = null;
 
 function init() {
+    addFirstBetweenDrop();
     setupDraggingOfCards();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
     getRandomCardBack();
-    makeCardsFan("you", 1);
+    //makeCardsFan("you", 1);
 
     /*
     document.getElementById("spark").addEventListener("click", burnFuse);
     document.getElementById("fuse").addEventListener("click", burnFuse);
     */
 }
-
-
 
 function firstTurn() {
     updateEnemyMana(0, 0);
@@ -32,6 +32,10 @@ function yourTurn() {
     console.log("You're turn");
     updateMyMana(1, 1);
     updateMyCards(4);
+}
+function addFirstBetweenDrop() {
+    document.querySelector("#gameBoard .you .playingField .dropZone").innerHTML += '<li class="betweenDrop"></li>';
+
 }
 
 function burnFuse(e) {
@@ -62,18 +66,269 @@ function showHero(parent, heroName) {
     hero.style.backgroundSize = "contain";
 }
 
-function updateEnemyCards(amountOfCards) {
+function updateEnemyCards() {
+    let amountOfCards = 0;
+
+    /* Here should come a fetch to get enemy amount of cards */
+    amountOfCards = 7;      // MOCK DATA
+
     updateCards(amountOfCards, "enemy", -1);
-    setCards("enemy", cardBackUrl);
+    setEnemyCardBacks("enemy", cardBackUrl);
 }
 
-function updateMyCards(amountOfCards) {
-    updateCards(amountOfCards, "you", 1);
+function updateMyCards() {
+    /* Here should come a fetch to get cardInMyHand data */
+    myCards = MOCKMYCARDS();
+
+    updateCards(myCards.length, "you", 1);
+    setMyCards(myCards);
     setupDraggingOfCards();
 }
 
-function getMyCardDetails() {
-    // This is the function where you will get all card images (in order), names, details, ... (JSON format)
+function MOCKMYCARDS() {
+    return [
+        {
+            "cardId": "CS2_231",
+            "dbfId": "179",
+            "name": "Wisp",
+            "cardSet": "Classic",
+            "type": "Minion",
+            "faction": "Neutral",
+            "rarity": "Common",
+            "cost": 0,
+            "attack": 1,
+            "health": 1,
+            "flavor": "If you hit an Eredar Lord with enough Wisps, it will explode. But why?",
+            "artist": "Malcolm Davis",
+            "collectible": true,
+            "playerClass": "Neutral",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_231.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_231_premium.gif",
+            "locale": "enUS"
+        },
+        {
+            "cardId": "CS2_188",
+            "dbfId": "242",
+            "name": "Abusive Sergeant",
+            "cardSet": "Classic",
+            "type": "Minion",
+            "faction": "Alliance",
+            "rarity": "Common",
+            "cost": 1,
+            "attack": 1,
+            "health": 1,
+            "text": "Battlecry: Give a minion +2_Attack this turn.",
+            "flavor": "ADD ME TO YOUR DECK, MAGGOT!",
+            "artist": "Luca Zontini",
+            "collectible": true,
+            "playerClass": "Neutral",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_188_premium.gif",
+            "locale": "enUS",
+            "mechanics": [
+                {
+                    "name": "Battlecry"
+                }
+            ]
+        },
+        {
+            "cardId": "EX1_009",
+            "dbfId": "1688",
+            "name": "Angry Chicken",
+            "cardSet": "Classic",
+            "type": "Minion",
+            "rarity": "Rare",
+            "cost": 1,
+            "attack": 1,
+            "health": 1,
+            "text": "Has +5 Attack while damaged.",
+            "flavor": "There is no beast more frightening (or ridiculous) than a fully enraged chicken.",
+            "artist": "Mike Sass",
+            "collectible": true,
+            "race": "Beast",
+            "playerClass": "Neutral",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_009.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_009_premium.gif",
+            "locale": "enUS"
+        },
+        {
+            "cardId": "EX1_008",
+            "dbfId": "757",
+            "name": "Argent Squire",
+            "cardSet": "Classic",
+            "type": "Minion",
+            "faction": "Alliance",
+            "rarity": "Common",
+            "cost": 1,
+            "attack": 1,
+            "health": 1,
+            "text": "Divine Shield",
+            "flavor": "\"I solemnly swear to uphold the Light, purge the world of darkness, and to eat only burritos.\" - The Argent Dawn Oath",
+            "artist": "Zoltan & Gabor",
+            "collectible": true,
+            "playerClass": "Neutral",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_008.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_008_premium.gif",
+            "locale": "enUS",
+            "mechanics": [
+                {
+                    "name": "Divine Shield"
+                }
+            ]
+        },
+        {
+            "cardId": "CS2_059",
+            "dbfId": "469",
+            "name": "Blood Imp",
+            "cardSet": "Classic",
+            "type": "Minion",
+            "faction": "Neutral",
+            "rarity": "Common",
+            "cost": 1,
+            "attack": 0,
+            "health": 1,
+            "text": "[x] Stealth. At the end of your \\nturn, give another random\\n friendly minion +1 Health.",
+            "flavor": "Imps are content to hide and viciously taunt everyone nearby.",
+            "artist": "Bernie Kang",
+            "collectible": true,
+            "race": "Demon",
+            "playerClass": "Warlock",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_059_premium.gif",
+            "locale": "enUS",
+            "mechanics": [
+                {
+                    "name": "Stealth"
+                }
+            ]
+        },
+        {
+            "cardId": "EX1_319",
+            "dbfId": "1090",
+            "name": "Flame Imp",
+            "cardSet": "Classic",
+            "type": "Minion",
+            "faction": "Neutral",
+            "rarity": "Common",
+            "cost": 1,
+            "attack": 3,
+            "health": 2,
+            "text": "Battlecry: Deal 3 damage to your hero.",
+            "flavor": "Imps like being on fire. They just do.",
+            "artist": "Alex Horley Orlandelli",
+            "collectible": true,
+            "race": "Demon",
+            "playerClass": "Warlock",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_319_premium.gif",
+            "locale": "enUS",
+            "mechanics": [
+                {
+                    "name": "Battlecry"
+                }
+            ]
+        },
+        {
+            "cardId": "EX1_538t",
+            "dbfId": "1715",
+            "name": "Hound",
+            "cardSet": "Classic",
+            "type": "Minion",
+            "cost": 1,
+            "attack": 1,
+            "health": 1,
+            "text": "Charge",
+            "race": "Beast",
+            "playerClass": "Hunter",
+            "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_538t.png",
+            "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_538t_premium.gif",
+            "locale": "enUS",
+            "mechanics": [
+                {
+                    "name": "Charge"
+                }
+            ]
+        },
+        {
+            "cardId": "NEW1_017",
+            "dbfId": "443",
+            "name": "Hungry Crab",
+            "cardSet": "Classic",
+            "type": "Minion",
+            "rarity": "Epic",
+            "cost": 1,
+            "attack": 1,
+            "health": 2,
+            "text": "Battlecry: Destroy a Murloc and gain +2/+2.",
+            "flavor": "Murloc. It's what's for dinner.",
+            "artist": "Jaemin Kim",
+            "collectible": true,
+            "race": "Beast",
+            "playerClass": "Neutral",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_017.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_017_premium.gif",
+            "locale": "enUS",
+            "mechanics": [
+                {
+                    "name": "Battlecry"
+                }
+            ]
+        },
+        {
+            "cardId": "EX1_029",
+            "dbfId": "658",
+            "name": "Leper Gnome",
+            "cardSet": "Classic",
+            "type": "Minion",
+            "faction": "Neutral",
+            "rarity": "Common",
+            "cost": 1,
+            "attack": 1,
+            "health": 1,
+            "text": "Deathrattle: Deal 2 damage to the enemy_hero.",
+            "flavor": "He really just wants to be your friend, but the constant rejection is starting to really get to him.",
+            "artist": "Glenn Rane",
+            "collectible": true,
+            "playerClass": "Neutral",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_029.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_029_premium.gif",
+            "locale": "enUS",
+            "mechanics": [
+                {
+                    "name": "Deathrattle"
+                }
+            ]
+        },
+        {
+            "cardId": "EX1_012",
+            "dbfId": "749",
+            "name": "Bloodmage Thalnos",
+            "cardSet": "Classic",
+            "type": "Minion",
+            "faction": "Neutral",
+            "rarity": "Legendary",
+            "cost": 2,
+            "attack": 1,
+            "health": 1,
+            "text": "Spell Damage +1\\nDeathrattle: Draw a card.",
+            "flavor": "He's in charge of the Annual Scarlet Monastery Blood Drive!",
+            "artist": "Alex Horley Orlandelli",
+            "collectible": true,
+            "elite": true,
+            "playerClass": "Neutral",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_012_premium.gif",
+            "locale": "enUS",
+            "mechanics": [
+                {
+                    "name": "Deathrattle"
+                },
+                {
+                    "name": "Spell Damage"
+                }
+            ]
+        }
+    ];
 }
 
 function updateCards(amountOfCards, parent, gradDirectionIndex) {
@@ -111,7 +366,7 @@ function updateMyMana(activeMana, totalMana) {
     }
 }
 
-function setCards(parent, cardUrl) {
+function setEnemyCardBacks(parent, cardUrl) {
     let cardBacks = document.querySelectorAll(`#gameBoard .${parent} .cards li`);
 
     for(let i=0; i<cardBacks.length; i++) {
@@ -119,6 +374,24 @@ function setCards(parent, cardUrl) {
         cardBacks[i].style.backgroundSize = "125%";
         cardBacks[i].style.color = "transparent";
         cardBacks[i].style.border = "none";
+    }
+}
+
+function setMyCards(cards) {
+    let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
+
+    for(let i=0; i<cards.length; i++) {
+        let addOn = "";
+
+        cardHtmlObjects[i].innerText = "";
+
+        if(cards[i]["rarity"] === "Legendary") {
+            cardHtmlObjects[i].innerHTML += '<span class="legendary"></span>';
+        }
+
+        cardHtmlObjects[i].style.background = 'no-repeat url("' + cards[i]["img"] + '") center center';
+        cardHtmlObjects[i].style.backgroundSize = "110%";
+        cardHtmlObjects[i].style.border = "none";
     }
 }
 
@@ -263,7 +536,6 @@ function setupDraggingOfCards() {
 
     document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
     document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("drop", handleDrop, false);
-
 }
 
 function handleDragStart(e) {
@@ -304,17 +576,29 @@ function handleDrop(e) {
             // middle
             // add card on right position
         }
+        updateMyCards();
     }
 }
 
 function handleDoubleClickAsDrop(e) {
     dropInDropZone(e.target, document.querySelector("#gameBoard .you .playingField .dropZone"));
+	updateMyCards();
 }
 
 function dropInDropZone(dragSrcElement, dropZoneElement) {
     dragSrcElement.draggable = false;
-    dragSrcElement.style = "";
+    dragSrcElement.removeEventListener("dblclick", handleDoubleClickAsDrop);
+
+    let background = dragSrcElement.style.background;
+    dragSrcElement.removeAttribute("style");
+    dragSrcElement.style.color = "transparent";
+    dragSrcElement.style.border = "none";
+    dragSrcElement.style.background = background;
+    dragSrcElement.style.backgroundSize = "176%";
+    dragSrcElement.style.backgroundPositionY = "23%";
+
     dragSrcElement.parentNode.removeChild(dragSrcElement);
     // appendChild cannot be used
     dropZoneElement.appendChild(dragSrcElement);
+    dropZoneElement.innerHTML += '<li class="betweenDrop"></li>';
 }
