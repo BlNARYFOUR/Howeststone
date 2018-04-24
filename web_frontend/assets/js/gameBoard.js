@@ -21,8 +21,21 @@ function init() {
     */
 }
 
+function firstTurn() {
+    updateEnemyMana(0, 0);
+    updateEnemyCards(5);
+    updateMyMana(0, 0);
+    updateMyCards(3);
+    setTimeout(yourTurn, 1000);
+}
+function yourTurn() {
+    console.log("You're turn");
+    updateMyMana(1, 1);
+    updateMyCards(4);
+}
 function addFirstBetweenDrop() {
     document.querySelector("#gameBoard .you .playingField .dropZone").innerHTML += '<li class="betweenDrop"></li>';
+
 }
 
 function burnFuse(e) {
@@ -518,7 +531,7 @@ function setupDraggingOfCards() {
         cards[i].addEventListener("drag", handleDrag, false);
         cards[i].addEventListener("dragend", handleDragEnd, false);
         cards[i].addEventListener("dragover", handleDragOver, false);
-        cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);
+        /*cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);*/
     }
 
     document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
@@ -555,7 +568,14 @@ function handleDrop(e) {
     e.stopPropagation();
 
     if ( e.target.className === "dropZone" ) {
+        // left and right
         dropInDropZone(dragSrcEl, e.target);
+        makeCardsFan("you", 1);
+    } else {
+        if (e.target.innerHTML.indexOf('Card') !== -1){
+            // middle
+            // add card on right position
+        }
         updateMyCards();
     }
 }
@@ -578,6 +598,7 @@ function dropInDropZone(dragSrcElement, dropZoneElement) {
     dragSrcElement.style.backgroundPositionY = "23%";
 
     dragSrcElement.parentNode.removeChild(dragSrcElement);
+    // appendChild cannot be used
     dropZoneElement.appendChild(dragSrcElement);
     dropZoneElement.innerHTML += '<li class="betweenDrop"></li>';
 }
