@@ -38,14 +38,14 @@
     background-color: rgba(0,0,0,0.4);
 }
 
-#deckSelector #selectedDeck {
+#deckSelector .selectedHero {
     display: block;
     position: absolute;
     bottom: 40.5vh;
     right: 11vh;
     width: 28.25vh;
     height: 32vh;
-    background: no-repeat url("../../images/portraitMage.png") center right;
+    background: no-repeat url("../media/mage.png") center right;
     background-size: 100% 100%;
     border: thin hidden;
     border-radius: 50% 50% 0 0 / 60% 60% 0 0;
@@ -63,6 +63,7 @@
     height: 4.5vh;
     line-height: 4.5vh;
     text-align: center;
+    text-transform: capitalize;
 }
 
 #deckSelector .buttonHolder {

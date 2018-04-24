@@ -33,10 +33,10 @@ function init() {
     document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoHeroChooser').addEventListener('click', gotoHeroChooser);
     // todo: document.getElementById('classMage').addEventListener('click', selectClassMage);
-    document.getElementById('classMageDeckChooser').addEventListener('click', selectClassMageInDeckChooser);
-    document.querySelector('#hero a:first-child').addEventListener('click', selectClassMageInDeckChooser);
-    document.getElementById('classPaladinDeckChooser').addEventListener('click', selectClassPaladinInDeckChooser);
-    document.querySelector('#hero a:last-child').addEventListener('click', selectClassPaladinInDeckChooser);
+    // todo: document.getElementById('classMageDeckChooser').addEventListener('click', selectClassMageInDeckChooser);
+    // todo: document.querySelector('#hero a:first-child').addEventListener('click', selectClassMageInDeckChooser);
+    // todo: document.getElementById('classPaladinDeckChooser').addEventListener('click', selectClassPaladinInDeckChooser);
+    // todo: document.querySelector('#hero a:last-child').addEventListener('click', selectClassPaladinInDeckChooser);
     // todo: document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
     document.getElementById('gotoCardsReplaced').addEventListener('click', gotoCardsReplaced);
@@ -76,7 +76,7 @@ function toggleFullScreen() {
 }
 
 function gotoMainMenu(e) {
-    console.log(this.parentElement.parentElement.parentElement);
+    //console.log(this.parentElement.parentElement.parentElement);
     document.getElementById('mainMenu').className = "";
     this.parentElement.parentElement.parentElement.className = "hidden";
 }
@@ -174,7 +174,7 @@ function selectClassMageInDeckChooser() {
     document.querySelector('#hero a:first-child').style.backgroundColor = 'grey';
     document.querySelector('#hero a:last-child').style.backgroundColor = 'white';
     document.getElementById("selectedHeroNameInDeckChooser").innerHTML = 'Mage Annie';
-    selectedHeroInDeckChooser.style.backgroundImage = "url('images/portraitMage.png')";
+    //selectedHeroInDeckChooser.style.backgroundImage = "url('images/portraitMage.png')";
 }
 
 function selectClassPaladinInDeckChooser() {

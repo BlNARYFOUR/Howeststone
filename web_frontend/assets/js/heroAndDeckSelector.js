@@ -4,17 +4,27 @@ document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     loadHeroes();
-    document.querySelectorAll('#heroes');
 }
 
 function showHeroes(heroes) {
-    for (let i = 0; i < heroes.length; i++) {
-        document.querySelector('.heroes').innerHTML += '<li><a href="#" class="' + heroes[i].toLowerCase() + '"><h2>' + heroes[i] + '</h2></a></li>';
+    let heroesHtml = document.querySelectorAll('.heroes');
 
-        let heroHtmlObj = document.querySelector('.heroes .'+heroes[i].toLowerCase());
+    for (let i=0; i<heroes.length; i++) {
+        for(let j=0; j<heroesHtml.length; j++) {
+            heroesHtml[j].innerHTML += '<li><a href="#" class="' + heroes[i].toLowerCase() + '"><h2>' + heroes[i] + '</h2></a></li>';
+        }
 
-        heroHtmlObj.style.background = "url('images/portrait"+heroes[i]+".png') center center no-repeat";
-        heroHtmlObj.style.backgroundSize = "150%";
+        let heroHtmlObj = document.querySelectorAll('.heroes .' + heroes[i].toLowerCase());
+
+        for(let j=0; j<heroHtmlObj.length; j++) {
+            heroHtmlObj[j].style.background = 'url("assets/media/' + heroes[i] + '.png") center center no-repeat';
+            heroHtmlObj[j].style.backgroundSize = "145%";
+        }
+    }
+
+    let selectableHeroes = document.querySelectorAll('.heroes li a');
+    for(let i=0; i<selectableHeroes.length; i++) {
+        selectableHeroes[i].addEventListener("click", handleSelectedHero);
     }
 }
 
@@ -37,4 +47,23 @@ function loadHeroes() {
     */
 
     showHeroes(["Mage", "Paladin"]);    // TODO: Must be replaced later by 'result'
+}
+
+function handleSelectedHero(e) {
+    let clickedHero = this;
+    let heroName = clickedHero.classList[0];
+
+    console.log(heroName);
+
+    let selectedHeroName = document.querySelectorAll(".selectedHeroName");
+    let backgroundHolders = document.querySelectorAll(".selectedHero");
+
+    for(let i = 0; i < selectedHeroName.length; i++) {
+        console.log("gets here");
+        selectedHeroName[i].innerHTML = heroName;
+        backgroundHolders[i].style.backgroundImage = `url('assets/media/${heroName}.png')`;
+    }
+
+    //selectedDeck.style.backgroundImage = "url('images/portraitMage.png')";
+    //playerHero.innerHTML = "<img src='images/portraitMage.png' alt='playerHero' title='playerhero'>";
 }
