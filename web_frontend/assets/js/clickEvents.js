@@ -99,7 +99,7 @@ function playGame() {
     setBackground();
     document.getElementById('vsScreen').className = "";
     document.getElementById('gameBoard').className = "";
-	makeCardsFan("you", 1);
+	//makeCardsFan("you", 1);
     document.getElementById('deckSelector').className = "hidden";
     setTimeout(function playrealGame() {
         document.getElementById('vsScreen').className = "hidden";
@@ -121,6 +121,7 @@ function replaceCard3() {
 
 function gotoCardsReplaced() {
     document.getElementById('replaceCardScreen').className = "hidden";
+    setupGameBoard();
 }
 
 

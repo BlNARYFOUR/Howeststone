@@ -21,6 +21,32 @@ function init() {
     */
 }
 
+function setupGameBoard() {
+    document.getElementById('endTurn').addEventListener('click', endTurn);
+}
+
+function endTurn(e) {
+    /*
+    fetch('threebeesandme/howeststone/post/endturn',{
+        method: 'POST'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("turn end has been send to server");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not end turn");
+        });
+        */
+    console.log("turn end has been send to server");
+}
+
+
+
 function firstTurn() {
     updateEnemyMana(0, 0);
     updateEnemyCards(5);
