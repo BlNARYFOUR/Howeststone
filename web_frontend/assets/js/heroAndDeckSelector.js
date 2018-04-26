@@ -57,7 +57,7 @@ function handleSelectedDeck(e) {
 
 function loadDecks() {
     /*
-    fetch('threebeesandme/howeststone/get/decks', {
+    fetch('threebeesandme/howeststone/get/heroanddeckselector/decks', {
         method: 'GET'
     })
     .then(function(res) {
@@ -105,7 +105,7 @@ function showHeroes(heroes) {
 
 function loadHeroes() {
     /*
-    fetch('threebeesandme/howeststone/get/heroes', {
+    fetch('threebeesandme/howeststone/get/heroanddeckselector/heroes', {
         method: 'GET'
     })
     .then(function(res) {
@@ -155,7 +155,7 @@ function sendSelectedHero(heroName) {
     console.log("Send selected hero: " + heroName);
 
     /*
-    fetch('threebeesandme/howeststone/post/pregame/hero', {
+    fetch('threebeesandme/howeststone/post/heroanddeckselector/hero', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -168,10 +168,10 @@ function sendSelectedHero(heroName) {
     })
     .then(function(text) {
         let result = text;
-        showHeroes(result)
+        console.log(result);
     })
     .catch(function(err) {
-        console.log("Error: Could not load the heroes :'(");
+        console.log("Error: Could not send the selected hero :'(");
     });
     */
 }
@@ -215,7 +215,7 @@ function sendSelectedDeck(deckName) {
     console.log("Send selected deck: " + deckName);
 
     /*
-    fetch('threebeesandme/howeststone/post/pregame/hero', {
+    fetch('threebeesandme/howeststone/post/heroanddeckselector/deck', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -228,10 +228,10 @@ function sendSelectedDeck(deckName) {
     })
     .then(function(text) {
         let result = text;
-        showHeroes(result)
+        console.log(result);
     })
     .catch(function(err) {
-        console.log("Error: Could not load the heroes :'(");
+        console.log("Error: Could not send the selected deck :'(");
     });
     */
 }
