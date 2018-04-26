@@ -227,17 +227,70 @@ function detailOfCard(e) {
 }
 
 function viewFullDeck() {
-    console.log('dsfqsdf');
+
+    fetch('threebeesandme/howeststone/get/deckbuilder/showfulldeck',{
+        method: 'GET',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("All chosenCards shown");
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });
 }
 
 function viewMinions() {
-    console.log('qssdfdfsgqEREZRT');
+    fetch('threebeesandme/howeststone/get/deckbuilder/showminions',{
+        method: 'GET',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Only minions shown");
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });
 }
 
 function viewSpells() {
-    console.log('spells');
+    fetch('threebeesandme/howeststone/get/deckbuilder/showspells',{
+        method: 'GET',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Only spells shown");
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });
 }
 
 function viewWeapons() {
-    console.log('weapons');
+    fetch('threebeesandme/howeststone/get/deckbuilder/showweapons',{
+        method: 'GET',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Only weapons shown");
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });
 }
