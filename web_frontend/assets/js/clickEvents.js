@@ -8,7 +8,11 @@ function main() {
 }
 
 function gotoCardsReplaced() {
+    if (countReplaceCards !== 0){
+        replaceCards(countReplaceCards);
+    }
     document.getElementById('replaceCardScreen').className = "hidden";
+    deactivateReplaceCards();
     firstTurn();
 }
 
@@ -37,22 +41,7 @@ function init() {
     // todo: document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
     document.getElementById('gotoCardsReplaced').addEventListener('click', gotoCardsReplaced);
-    document.getElementById('replacedCard1').addEventListener('click', replaceCard1);
-    document.getElementById('replacedCard2').addEventListener('click', replaceCard2);
-    document.getElementById('replacedCard3').addEventListener('click', replaceCard3);
 
-    /*
-    document.getElementById('tutorial1button').addEventListener('click', gotoTutorial2);
-    document.getElementById('tutorial2button').addEventListener('click', gotoTutorial3);
-    document.getElementById('tutorial3button').addEventListener('click', gotoTutorial4);
-    document.getElementById('tutorial4button').addEventListener('click', gotoTutorial5);
-    document.getElementById('tutorial5button').addEventListener('click', gotoTutorial6);
-    document.getElementById('tutorial6button').addEventListener('click', gotoTutorial7);
-    document.getElementById('tutorial7button').addEventListener('click', gotoTutorial8);
-    document.getElementById('tutorial8button').addEventListener('click', gotoTutorial9);
-    document.getElementById('tutorial9button').addEventListener('click', gotoTutorial10);
-    document.getElementById('tutorial10button').addEventListener('click', gotoTutorial11);
-    document.getElementById('tutorial11button').addEventListener('click', gotoLeaveTutorial);*/
 }
 
 function toggleFullScreen() {
@@ -93,20 +82,17 @@ function gotoRechooseDeck() {
     document.getElementById('deckbuilder').className = "hidden";
 }
 
-function replaceCard1() {
-    document.getElementById('replacedCard1').className = "";
-}
-
-function replaceCard2() {
-    document.getElementById('replacedCard2').className = "";
-}
-
-function replaceCard3() {
-    document.getElementById('replacedCard3').className = "";
-}
-
-function gotoCardsReplaced() {
-    document.getElementById('replaceCardScreen').className = "hidden";
+function playGame() {
+    setBackground();
+    document.getElementById('vsScreen').className = "";
+    document.getElementById('gameBoard').className = "";
+	//makeCardsFan("you", 1);
+    document.getElementById('deckSelector').className = "hidden";
+    setTimeout(function playrealGame() {
+        document.getElementById('vsScreen').className = "hidden";
+        document.getElementById('replaceCardScreen').className = "";
+        activateReplaceCards();
+    }, 3000);
 }
 
 function gotoHome() {

@@ -12,8 +12,8 @@
     <!-- The iOS apple-mobile-web-app-status-bar-style attribute only supports black, black-translucent or default` - you cannot use a custom color apparently. -->
 
 
-    <!--<link rel="icon" type="image/png" href="assets/media/icon2.png"/>-->
-    <link rel="icon" type="image/png" href="assets/media/icon.png"/>
+    <!--<link rel="icon" type="image/png" href="assets/media/icon2.png"/>
+    <link rel="icon" type="image/png" href="assets/media/icon.png"/>-->
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
@@ -271,11 +271,7 @@
 
             <li class="playingField">
                 <ul>
-                    <!-- must be generated in JS -->
-                    <!-- background etc. included! -->
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li class="CS2_059" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png") center 23% / 176% no-repeat;'></li><li class="EX1_319" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png") center 23% / 176% no-repeat;'></li><li class="CS2_188" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png") center 23% / 176% no-repeat;'></li><li class="EX1_012" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png") center 23% / 176% no-repeat;'><span class="legendary"></span></li>
                 </ul>
             </li>
         </ul>
@@ -313,6 +309,9 @@
                 <!-- leave empty -->
             </li>
 
+            <li class="weapon">
+                <!-- leave empty -->
+            </li>
             <li class="deck">
                 <!-- leave empty -->
             </li>
@@ -343,16 +342,12 @@
 
 <div id="replaceCardScreen" class="hidden">
     <h1>Keep or replace cards</h1>
-    <ul id="randomCardsFromDeck">
-        <li><img src="images/card1.png" alt="card1" title="card1"></li>
-        <li><img src="images/card2.png" alt="card2" title="card2"></li>
-        <li><img src="images/card3.png" alt="card3" title="card3"></li>
+    <ul>
+        <li><span class="hidden">Replaced!</span></li>
+        <li><span class="hidden">Replaced!</span></li>
+        <li><span class="hidden">Replaced!</span></li>
     </ul>
-    <ul id="replacedCards">
-        <li id="replacedCard1" class="hidden"><img src="images/game-logo-hearthstone.png"></li>
-        <li id="replacedCard2" class="hidden"><img src="images/game-logo-hearthstone.png"></li>
-        <li id="replacedCard3" class="hidden"><img src="images/game-logo-hearthstone.png"></li>
-    </ul>
+
     <span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Continue</a></span>
 </div>
 
@@ -430,7 +425,6 @@
 <script src="assets/js/deckChooser.js"></script>
 <script src="assets/js/clickEvents.js"></script>
 <script src="assets/js/gameBoard.js"></script>
-<!--<script src="assets/js/playingField.js"></script>-->
 
 </body>
 </html>
