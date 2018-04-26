@@ -74,7 +74,7 @@
 
 #gameBoard .you .cards li {
     bottom: -0.5vh;
-    -webkit-user-drag: element;
+    /*-webkit-user-drag: element;*/
 }
 
 #gameBoard .you .cards li:hover {
@@ -88,13 +88,13 @@
     transform: scale(2.5, 2.5) translate(-0.5vh, -5.25vh) !important;
 }
 
-#gameBoard .main .you .cards li.dragging {
+/*#gameBoard .main .you .cards li.dragging {
     transition: none !important;
     transform: none !important;
     width: 14.85483870967741935483870967742vh;
     height: 22.5vh;
     line-height: 22.5vh;
-}
+}*/
 
 #gameBoard .main .you .cards li.hide {
     opacity: 0;
@@ -189,6 +189,18 @@
     z-index: 3;
 }
 
+/* weapon has yet to be change to a circle*/
+#gameBoard .you .weapon li{
+    position: absolute;
+    top: 20vh;
+    left: 43vh;
+    width: 9.9032258064516129032258064516131vh;
+    height: 15vh;
+    line-height: 15vh;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    border: whitesmoke thin solid;
+}
 #gameBoard .you .playingField .dropZone li {
     text-align: center;
     box-sizing: border-box;
@@ -198,22 +210,60 @@
     line-height: 13.5vh;
     vertical-align: middle;
     background-color: rgba(0,0,0,0.7);
-    border: whitesmoke thin solid;
+    margin: 1vh;
     border-radius: 50%;
     background-clip: padding-box;
 }
 
-#gameBoard .you .playingField .dropZone li.betweenDrop {
-    width: 2.5vh;
-    background: none;
-    border: none;
-}
-
-#gameBoard .you .playingField .dropZone li.betweenDrop:first-of-type, #gameBoard .you .playingField .dropZone li.betweenDrop:last-of-type {
-    width: 10vh;
-}
-
 #gameBoard .you .playingField .dropZone li .legendary {
+    display: block;
+    height: 120%;
+    width: 144%;
+    margin-left: -22%;
+    margin-top: -10%;
+    background: no-repeat url("../media/legendary.png") center 20%;
+    background-size: 110%;
+}
+#gameBoard .enemy .playingField{
+    position: absolute;
+    width: 100%;
+    height: 52.5%;
+    bottom: 1vh;
+}
+#gameBoard .enemy .playingField ul {
+    display: block;
+    height: 100%;
+    border-radius: 0 0 40% 40% / 0 0 100% 100%;
+    text-align: center;
+    z-index: 3;
+}
+#gameBoard .enemy .weapon li{
+    position: absolute;
+    top: 20vh;
+    left: 43vh;
+    width: 9.9032258064516129032258064516131vh;
+    height: 15vh;
+    line-height: 15vh;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    border: whitesmoke thin solid;
+}
+#gameBoard .enemy .playingField ul li {
+    text-align: center;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 9.9032258064516129032258064516131vh;
+    height: 13.5vh;
+    line-height: 13.5vh;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    margin-right: 1vh;
+    margin-top: 10vh;
+    margin-left: 1vh;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+#gameBoard .enemy .playingField .dropZone li .legendary {
     display: block;
     height: 120%;
     width: 144%;
