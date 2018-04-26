@@ -113,6 +113,7 @@ function updateHero(parent) {
 
 function showHero(parent, heroName) {
     let hero = document.querySelector(`#gameBoard .${parent} .hero`);
+    hero.innerHTML = '<span class="health">30</span>';
 
     hero.style.background = `no-repeat url("assets/media/${heroName}.png") center center`;
     hero.style.backgroundSize = "contain";
@@ -787,14 +788,12 @@ function attackStart(e) {
     if (e.path[0].tagName === 'SPAN'){
         target = e.target.parentElement;
     }
-    console.log(target);
-    console.log('cannot attack');
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
     itemThatIsBeingMoved = target;
     moved = false;
-    drag = target.cloneNode(true);
-    document.body.appendChild(drag);
+    drag = target.cloneNode(false);
+    document.querySelector('#gameBoard').appendChild(drag);
     drag.removeAttribute('style');
 
     movingOfDragElement(e);
@@ -812,7 +811,16 @@ function attackStart(e) {
 }
 
 function attackEnd() {
-
+    let enemies = document.querySelectorAll('.enemy .playingField ul li');
+    for (let i = 0; i < enemies.length; i++){
+        let rectDrag = drag.getBoundingClientRect();
+        let enemy = enemies[i].getBoundingClientRect();
+        if ((rectDrag.right < enemy.right+30) && (rectDrag.left > enemy.left-30) && (rectDrag.bottom < enemy.bottom+100) && (rectDrag.top > enemy.top-100)) {
+            console.log('attack');
+            console.log(enemies[i]);
+        }
+    }
+    drag.parentElement.removeChild(drag);
     document.removeEventListener("touchmove", movingOfDragElement, false);
     document.removeEventListener("mousemove", movingOfDragElement, false);
     document.removeEventListener("mouseup", attackEnd, false);
