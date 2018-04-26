@@ -296,4 +296,16 @@ function filterCards() {
     }
 
     console.log(filterArray);
+
+    /*fetch('threebeesandme/howeststone/post/deckbuilder/filterCards', {
+        method: 'post',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        })*/
 }
