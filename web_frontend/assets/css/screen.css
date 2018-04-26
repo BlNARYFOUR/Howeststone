@@ -18,9 +18,31 @@ footer{
 
 footer ul{}
 
-footer ul li{}
+footer ul li{
+    text-align: center;
+    z-index: 2;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    background-color: blue;
+    width: 4vh;
+    height: 2vh;
+    line-height: 2vh;
+    cursor: pointer;
+    border: thin hidden;
+}
 
-footer ul li:first-of-type{}
+footer ul li:first-of-type{
+    background:no-repeat url("../media/soundButtonSprite.png")left top;
+    background-size: 100%;
+
+ }
+
+footer ul li:first-of-type .muted{
+    background: url("../media/soundButtonSprite.png");
+
+}
 
 footer ul li:last-of-type{}
 
