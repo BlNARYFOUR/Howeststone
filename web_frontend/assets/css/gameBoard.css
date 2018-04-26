@@ -229,6 +229,8 @@
     font-weight: bold;
 }
 
+
+#gameBoard .enemy .hero .health,
 #gameBoard .you .hero .health{
     background-image: url(../media/health_placeHolder.png);
     position: absolute;
