@@ -6,6 +6,9 @@ let cardCounter = 0;
 let cardBackUrl = "";
 let dragSrcEl = null;
 let myCards = null;
+let timeLeftObj = null;
+
+let MOCKTIME = 50;
 
 function init() {
     addFirstBetweenDrop();
@@ -14,35 +17,69 @@ function init() {
     setBackground();
     getRandomCardBack();
     //makeCardsFan("you", 1);
-
-    /*
-    document.getElementById("spark").addEventListener("click", burnFuse);
-    document.getElementById("fuse").addEventListener("click", burnFuse);
-    */
 }
 
 function setupGameBoard() {
-    document.getElementById('endTurn').addEventListener('click', endTurn);
+    document.getElementById('endTurn').addEventListener('click', endMyTurn);
+}
+
+function startMyTurn() {
+    startTimeLeftCheck();
+    console.log("You're turn");
+    updateMyMana(1, 1);
+    updateMyCards();
+}
+
+function startTimeLeftCheck() {
+    // TODO: timeLeftObj = setInterval(timeLeft, 1000);
+
+    MOCKTIME = 50;
+    timeLeftObj = setInterval(MOCKTIMELEFT, 1000);
+}
+
+function MOCKTIMELEFT() {
+    MOCKTIME -= 1;
+
+    if(MOCKTIME <= 20) {
+        burnFuse();
+    }
+
+    if(MOCKTIME <= 0) {
+        endMyTurn();
+    }
+}
+
+function stopTimeLeftCheck() {
+    clearInterval(timeLeftObj);
 }
 
 function timeLeft() {
-    fetch('threebeesandme/howeststone/get/timeleft',{
+    fetch('threebeesandme/howeststone/get/timeleft', {
         method: 'GET'
     })
-        .then(function(res) {
-            if(res.ok === true)
-                return res.json();
-        })
-        .then(function(text) {
-            let result = text;
-            console.log("turn time was retrieved from the server");
-        })
-        .catch(function(err) {
-            console.log("Error: Could not get turntime");
-        });
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        console.log("Time left was retrieved from the server");
+        if(result <= 20) {
+            burnFuse();
+        }
+        else if(result <= 0) {
+            endMyTurn();
+        }
+    })
+    .catch(function(err) {
+        console.log("Error: Could not get time left");
+    });
 }
 
-function endTurn(e) {
+function endMyTurn(e) {
+    stopTimeLeftCheck();
+    stopBurnFuse();
+
     /*
     fetch('threebeesandme/howeststone/post/endturn',{
         method: 'POST'
@@ -62,27 +99,25 @@ function endTurn(e) {
     console.log("turn end has been send to server");
 }
 
-
-
 function firstTurn() {
     updateEnemyMana(0, 0);
     updateEnemyCards(5);
     updateMyMana(0, 0);
     updateMyCards(3);
-    setTimeout(yourTurn, 1000);
+    startMyTurn();
 }
-function yourTurn() {
-    console.log("You're turn");
-    updateMyMana(1, 1);
-    updateMyCards(4);
-}
+
 function addFirstBetweenDrop() {
     document.querySelector("#gameBoard .you .playingField .dropZone").innerHTML += '<li class="betweenDrop"></li>';
 
 }
 
-function burnFuse(e) {
+function burnFuse() {
     document.getElementById("fuse").classList.add("burn");
+}
+
+function stopBurnFuse() {
+    document.getElementById("fuse").classList.remove("burn");
 }
 
 function updateEnemyHero() {
