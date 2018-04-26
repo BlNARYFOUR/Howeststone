@@ -71,11 +71,11 @@
 
 <div id="heroSelector" class="hidden">
     <div class="SelectorBox">
-        <ul id="heroes">
+        <ul class="heroes">
         </ul>
 
-        <span id="selectedHero"></span>
-        <h1 class="selectedHeroName">Mage Annie</h1>
+        <span class="selectedHero"></span>
+        <h1 class="selectedHeroName">Mage</h1>
 
         <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckSelector">Continue</a></span>
         <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
@@ -84,7 +84,8 @@
 
 <div id="deckSelector" class="hidden">
     <div class="SelectorBox">
-        <ul id="yourDecks">
+        <ul class="decks">
+            <!--
             <li id="deck_0"><a href="#">Some Deck :)</a></li>
             <li id="deck_1"><a href="#">Deck 2</a></li>
             <li id="deck_2"><a href="#">Deck 3</a></li>
@@ -94,25 +95,26 @@
             <li id="deck_6"><a href="#">Deck 7</a></li>
             <li id="deck_7"><a href="#">Deck 8</a></li>
             <li id="deck_9"><a href="#">Deck 9</a></li>
+            -->
         </ul>
 
         <span id="addDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="addDeck">Add deck</a></span>
 
-        <div id="selectedDeck"></div>
-        <h1 class="selectedHeroName">Mage Annie</h1>
+        <div class="selectedHero"></div>
+        <h1 class="selectedHeroName">Mage</h1>
 
         <a href="#" id="playGame"></a>
         <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHeroChooser">Back</a></span>
     </div>
 </div>
 
-<div id="deckChooser" class="hidden">
+<div id="heroChooser" class="hidden">
     <div class="SelectorBox">
-        <ul id="listOfHeroes">
+        <ul class="heroes">
         </ul>
 
-        <span id="selectedHeroInDeckChooser"></span>
-        <h1 id="selectedHeroNameInDeckChooser">Mage Annie</h1>
+        <span class="selectedHero"></span>
+        <h1 class="selectedHeroName">Mage</h1>
 
         <span id="gotoDeckBuilderHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckBuilder">Continue</a></span>
         <span id="gotoMainMenuHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
@@ -132,17 +134,20 @@
         <li class="hidden">The filtered cards apear here.</li>
         <li class="hidden">Here's your selected hero.</li>
         <li class="hidden">Here's your deck.</li>
-        <li class="hidden">Klick here to create a new deck.</li>
-        <li class="hidden">Klick here to save your deck.</li>
-        <li class="hidden">Card info; mana in the left uppercorner, attack in the left bottom corner and health in the right bottom
+        <li class="hidden">Click here to create a new deck.</li>
+        <li class="hidden">Click here to save your deck.</li>
+        <li class="hidden">Card info; mana in the left upper corner, attack in the left bottom corner and health in the right bottom
             corner. </li>
-        <li class="hidden">Add and remove a card by double klicking or dragging.</li>
-        <li class="hidden">Decks of your selected hero apear here, klick 'add deck' to make a new one</li>
+        <li class="hidden">Add and remove a card by double clicking or dragging.</li>
+        <li class="hidden">Decks of your selected hero apear here, click 'add deck' to make a new one</li>
         <li><a href="#" id="next">Next</a></li>
     </ul>
     <header>
-        <div id="hero"><a href="#">Mage</a>
+        <div id="hero">
+            <!--
+            <a href="#">Mage</a>
             <a href="#">Paladin</a>
+            -->
         </div>
         <div id="quickfilter">
             <a href="#">Full Deck</a>
@@ -347,12 +352,12 @@
 </div>
 
 <div id="vsScreen" class="hidden">
-    <div id="enemyHero">
-        <img src="images/portraitMage.png" alt="enemyHero" title="enemyHero">
+    <div class="enemy">
+        <img src="assets/media/mage.png" alt="enemyHero" title="enemyHero">
     </div>
     <img src="assets/media/vs.png" alt="VS" title="VS" id="vs">
-    <div id="playerHero">
-        <img src="images/portraitMage.png" alt="playerHero" title="playerHero">
+    <div class="player">
+        <img src="assets/media/mage.png" alt="playerHero" title="playerHero">
     </div>
 
 </div>
@@ -416,7 +421,7 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/loadingScreen.js"></script>
 <script src="assets/js/deckbuilder.js"></script>
-<script src="assets/js/Hero-Deck_selector.js"></script>
+<script src="assets/js/heroAndDeckSelector.js"></script>
 <script src="assets/js/deckChooser.js"></script>
 <script src="assets/js/clickEvents.js"></script>
 <script src="assets/js/gameBoard.js"></script>
