@@ -72,8 +72,6 @@ function toggleReplaceCard(e) {
     } else {
         document.querySelector('#gotoCardsReplaced').innerHTML = 'Continue';
     }
-
-
 }
 
 function firstTurn() {
@@ -576,8 +574,8 @@ function getRandomInt(max) {
 function setupMovingOfCards() {
     let cards = document.querySelectorAll("#gameBoard .you .cards ul li");
     for(let i=0; i<cards.length; i++) {
-        cards[i].addEventListener("mousedown", touchStart);
-        cards[i].addEventListener("touchstart", touchStart);
+        cards[i].addEventListener("mousedown", layCardOnFieldStart);
+        cards[i].addEventListener("touchstart", layCardOnFieldStart);
     }
 }
 
@@ -586,30 +584,31 @@ let dragOffsetX;
 let dragOffsetY;
 let itemThatIsBeingMoved;
 let moved;
-function touchStart(e) {
+function layCardOnFieldStart(e) {
 
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
     itemThatIsBeingMoved = e.target;
     moved = false;
     drag = e.target.cloneNode(true);
+    itemThatIsBeingMoved.classList.add('hidden');
     document.body.appendChild(drag);
     drag.removeAttribute('style');
 
-    touchMove(e);
+    movingOfDragElement(e);
     drag.style.zIndex = '1';
     drag.style.width = '14.854838709677vh';
     drag.style.height= '22.5vh';
     drag.style.position = 'absolute';
     drag.style.background = e.target.style.background;
 
-    document.addEventListener("touchmove", touchMove, false);
-    document.addEventListener("mousemove", touchMove, false);
-    document.addEventListener("mouseup", touchEnd, false);
-    document.addEventListener("touchend", touchEnd, false);
+    document.addEventListener("touchmove", movingOfDragElement, false);
+    document.addEventListener("mousemove", movingOfDragElement, false);
+    document.addEventListener("mouseup", layCardOnFieldEnd, false);
+    document.addEventListener("touchend", layCardOnFieldEnd, false);
 }
 
-function touchMove(e) {
+function movingOfDragElement(e) {
     if (typeof e.clientX === "number"){
         let XCoordinate = e.clientX - dragOffsetX;
         let YCoordinate = e.clientY - dragOffsetY;
@@ -625,17 +624,14 @@ function touchMove(e) {
     }
 }
 
-function emptyPlayingFieldDrop() {
+function emptyPlayingFieldEnd() {
     let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
     let rectDrag = drag.getBoundingClientRect();
     let rectDropZone = dropZone.getBoundingClientRect();
     if ((rectDrag.right < rectDropZone.right) && (rectDrag.left > rectDropZone.left) && (rectDrag.bottom < (rectDropZone.bottom + 100)) && (rectDrag.top > rectDropZone.top -100)){
         let cardOnPlayingField = cloneDragElement();
         dropZone.appendChild(cardOnPlayingField);
-        cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
-        moved = true;
-        cardOnPlayingField.addEventListener("mousedown", attackStart);
-        cardOnPlayingField.addEventListener("touchstart", attackStart);
+        inField(cardOnPlayingField);
     }
 }
 
@@ -648,7 +644,17 @@ function cloneDragElement() {
     return cardOnPlayingField;
 }
 
-function calculateDropZones(dropZoneLi) {
+function inField(cardOnPlayingField) {
+    // mockData
+    let health = 2;
+    let attack = 1;
+    moved = true;
+    cardOnPlayingField.innerHTML += `<span class="health">${health}</span><span class="attack">${attack}</span>`;
+    cardOnPlayingField.addEventListener("mousedown", attackStart);
+    cardOnPlayingField.addEventListener("touchstart", attackStart);
+}
+
+function PlayingFieldEnd(dropZoneLi) {
     let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
     let rectDrag = drag.getBoundingClientRect();
     let top = dropZone.getBoundingClientRect().top -100;
@@ -659,10 +665,7 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[i+1]);
-            cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
-            moved = true;
-            cardOnPlayingField.addEventListener("mousedown", attackStart);
-            cardOnPlayingField.addEventListener("touchstart", attackStart);
+            inField(cardOnPlayingField);
             break;
         }
         right = left;
@@ -670,10 +673,7 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
-            cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
-            moved = true;
-            cardOnPlayingField.addEventListener("mousedown", attackStart);
-            cardOnPlayingField.addEventListener("touchstart", attackStart);
+            inField(cardOnPlayingField);
             break;
         }
         left = dropZoneLi[i+1].getBoundingClientRect().right;
@@ -681,10 +681,7 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.appendChild(cardOnPlayingField);
-            cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
-            moved = true;
-            cardOnPlayingField.addEventListener("mousedown", attackStart);
-            cardOnPlayingField.addEventListener("touchstart", attackStart);
+            inField(cardOnPlayingField);
             break;
         }
     }
@@ -694,28 +691,21 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
-            cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
-            moved = true;
-            cardOnPlayingField.addEventListener("mousedown", attackStart);
-            cardOnPlayingField.addEventListener("touchstart", attackStart);
+            inField(cardOnPlayingField);
         }else {
             let left = dropZoneLi[0].getBoundingClientRect().left;
             let right = dropZone.getBoundingClientRect().right;
             if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
                 let cardOnPlayingField = cloneDragElement();
                 dropZone.appendChild(cardOnPlayingField);
-                cardOnPlayingField.innerHTML += '<span class="health"></span><span class="attack"></span>';
-                giveMinionHealthAndAttack();
-                moved = true;
-                cardOnPlayingField.addEventListener("mousedown", attackStart);
-                cardOnPlayingField.addEventListener("touchstart", attackStart);
+                inField(cardOnPlayingField);
             }
         }
     }
 
 }
 
-function touchEnd(e) {
+function layCardOnFieldEnd(e) {
     // TODO fetch play the card
     // TODO succeeded or not
     let dropZoneLi = document.querySelectorAll('#gameBoard .you .playingField .dropZone li');
@@ -726,18 +716,20 @@ function touchEnd(e) {
         case 4:
         case 5:
         case 6:
-            calculateDropZones(dropZoneLi);
+            PlayingFieldEnd(dropZoneLi);
             break;
         case 7:
             break;
         default:
-            emptyPlayingFieldDrop();
+            emptyPlayingFieldEnd();
             break;
 
     }
     try{
         drag.parentElement.removeChild(drag);
+        itemThatIsBeingMoved.classList.remove('hidden');
         if (moved === true){
+
             itemThatIsBeingMoved.parentElement.removeChild(itemThatIsBeingMoved);
             updateMyCards();
 
@@ -745,10 +737,10 @@ function touchEnd(e) {
     } catch (err){
         console.log('nothing can be removed' + err);
     }
-    document.removeEventListener("touchmove", touchMove, false);
-    document.removeEventListener("touchend", touchEnd, false);
-    document.removeEventListener("mousemove", touchMove, false);
-    document.removeEventListener("mouseup", touchEnd, false);
+    document.removeEventListener("touchmove", movingOfDragElement, false);
+    document.removeEventListener("touchend", layCardOnFieldEnd, false);
+    document.removeEventListener("mousemove", movingOfDragElement, false);
+    document.removeEventListener("mouseup", layCardOnFieldEnd, false);
 }
 function returnTypeOfMyCards(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
@@ -760,14 +752,6 @@ function returnTypeOfMyCards(liWithClass) {
     return null;
 }
 
-function giveMinionHealthAndAttack() {
-    // fetch with claasID of card
-    // gives Attack and Health values back
-    let H = 2;
-    let A = 1;
-    document.querySelector('.health').innerHTML += H;
-    document.querySelector('.attack').innerHTML += A;
-}
 /* give minion class nonAttack
  check if charge is present
 check if battleCry is present
@@ -813,38 +797,26 @@ function attackStart(e) {
     document.body.appendChild(drag);
     drag.removeAttribute('style');
 
-    touchMove(e);
+    movingOfDragElement(e);
     drag.style.zIndex = '1';
     drag.style.width = '9.9032258064516129032258064516131vh';
     drag.style.height= '15vh';
     drag.style.position = 'absolute';
     drag.style.borderRadius = '50%';
     drag.style.background = target.style.background;
-    
-    document.addEventListener("touchmove", attackMove, false);
-    document.addEventListener("mousemove", attackMove, false);
+
+    document.addEventListener("touchmove", movingOfDragElement, false);
+    document.addEventListener("mousemove", movingOfDragElement, false);
     document.addEventListener("mouseup", attackEnd, false);
     document.addEventListener("touchend", attackEnd, false);
 }
 
-function attackMove(e) {
-    // change this to only clientX and clientY putting in variable
-    if (typeof e.clientX === "number"){
-        let XCoordinate = e.clientX - dragOffsetX;
-        let YCoordinate = e.clientY - dragOffsetY;
-        drag.style.left = XCoordinate + 'px';
-        drag.style.top = YCoordinate+ 'px';
-    }
-    else {
-        // Mattijs: the web browser cannot calculate the offset so I use this as default
-        let XCoordinate = e.touches[0].clientX - 40;
-        let YCoordinate = e.touches[0].clientY - 80;
-        drag.style.left = XCoordinate + 'px';
-        drag.style.top = YCoordinate+ 'px';
-    }
-}
 function attackEnd() {
 
+    document.removeEventListener("touchmove", movingOfDragElement, false);
+    document.removeEventListener("mousemove", movingOfDragElement, false);
+    document.removeEventListener("mouseup", attackEnd, false);
+    document.removeEventListener("touchend", attackEnd, false);
 }
 
 
