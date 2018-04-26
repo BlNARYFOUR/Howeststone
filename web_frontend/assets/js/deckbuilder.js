@@ -3,8 +3,9 @@
 document.addEventListener('DOMContentLoaded', init);
 let tutorialli = 1;
 let dragged;
-let filterArray = [];
-
+let cardTypeFilterChecked = false;
+let ManaFilterChecked = false;
+let cardRarityFilterChecked = false;
 
 function nextTutorial() {
 
@@ -28,9 +29,10 @@ function init() {
 
     document.getElementById('search').addEventListener('input', search);
     document.getElementById('sort').addEventListener('change', sort);
-    document.getElementById('firstFilter').addEventListener('change',firstFilter);
-    document.getElementById('secondFilter').addEventListener('change',secondFilter);
-    document.getElementById('thirdFilter').addEventListener('change',thirdFilter);
+    document.getElementById('firstFilter').addEventListener('change',filterCards);
+    document.getElementById('secondFilter').addEventListener('change',filterCards);
+    document.getElementById('thirdFilter').addEventListener('change',filterCards);
+    document.getElementById('fourthFilter').addEventListener('change',filterCards);
 
     document.querySelector('#firstadd').addEventListener('click', firstadd);
 
@@ -230,118 +232,68 @@ function search(e) {
 function sort() {
     let sort =  document.getElementById('sort');
     let sortValue = sort.options[sort.selectedIndex].value;
-    switch(sortValue) {
-        case "alfaz":
-            console.log("sort by alfaz");
 
-            fetch('howeststone/database/get/search/alfaz', {
-                method: 'GET',
-                headers: {}
+        console.log(sortValue);
+
+        /*fetch('threebeesandme/howeststone/post/deckbuilder/sort?by='+sortValue, {
+                method: 'post',
             })
-                .then(function(res) {
-                    if(res.ok === true)
-                        return res.json();
-                })
-
-                .catch(function(err) {
-                    console.log("Error 404: Could not connect to the server");
-                });
-
-            break;
-        case "alfza":
-            console.log("sort by alfza");
-
-            fetch('howeststone/database/get/search/alfza', {
-                method: 'GET',
-                headers: {}
+            .then(function(res) {
+                if(res.ok === true)
+                    return res.json();
             })
-                .then(function(res) {
-                    if(res.ok === true)
-                        return res.json();
-                })
 
-                .catch(function(err) {
-                    console.log("Error 404: Could not connect to the server");
-                });
-
-            break;
-        case "mana07":
-            console.log("sort by mana07");
-
-            fetch('howeststone/database/get/search/mana07', {
-                method: 'GET',
-                headers: {}
-            })
-                .then(function(res) {
-                    if(res.ok === true)
-                        return res.json();
-                })
-
-                .catch(function(err) {
-                    console.log("Error 404: Could not connect to the server");
-                });
-
-            break;
-        case "mana70":
-            console.log("sort by mana70");
-
-            fetch('howeststone/database/get/search/mana70', {
-                method: 'GET',
-                headers: {}
-            })
-                .then(function(res) {
-                    if(res.ok === true)
-                        return res.json();
-                })
-
-                .catch(function(err) {
-                    console.log("Error 404: Could not connect to the server");
-                });
-            break;
-    }
+            .catch(function(err) {
+                console.log("Error 404: Could not connect to the server");
+            });*/
 }
 
-function firstFilter() {
+
+function filterCards() {
     let specificCardsFilter =  document.getElementsByName('specificCards');
+    let cardTypesFilter = document.getElementsByName('cardTypes');
+    let ManaFilter = document.getElementsByName('Mana');
+    let cardRarityFilter = document.getElementsByName('cardRarity');
+
+
+    let filterArray = [];
+
 
     for (let i = 0; i < specificCardsFilter.length; i++) {
         if (specificCardsFilter[i].checked){
-            filterArray[0] = (specificCardsFilter[i].value);
-            console.log(filterArray);
+            filterArray.push(specificCardsFilter[i].value);
         }
     }
-}
-
-function secondFilter() {
-    let cardTypesFilter = document.getElementsByName('cardTypes');
 
     for (let i = 0; i < cardTypesFilter.length; i++) {
         if (cardTypesFilter[i].checked){
-            filterArray[1] = (cardTypesFilter[i].value);
-            console.log(filterArray);
+            filterArray.push(cardTypesFilter[i].value);
+            cardTypeFilterChecked = true;
         }
     }
-}
-
-function thirdFilter() {
-    let ManaFilter = document.getElementsByName('Mana');
+    if (cardTypeFilterChecked === false) {
+        filterArray.push(-1);
+    }
 
     for (let i = 0; i < ManaFilter.length; i++) {
         if (ManaFilter[i].checked){
-            filterArray[2] = (ManaFilter[i].value);
-            console.log(filterArray);
+            filterArray.push(ManaFilter[i].value);
+            ManaFilterChecked = true;
         }
     }
-}
-
-function fourthFilter() {
-    let cardRarityFilter = document.getElementsByName('cardRarity');
+    if (ManaFilterChecked === false) {
+        filterArray.push(-1);
+    }
 
     for (let i = 0; i < cardRarityFilter.length; i++) {
         if (cardRarityFilter[i].checked){
-            filterArray[3] = (cardRarityFilter[i].value);
-            console.log(filterArray);
+            filterArray.push(cardRarityFilter[i].value);
+            cardRarityFilterChecked = true;
         }
     }
-}
+    if (cardRarityFilterChecked === false) {
+        filterArray.push(-1);
+    }
 
+    console.log(filterArray);
+}
