@@ -586,7 +586,7 @@ let dragOffsetY;
 let itemThatIsBeingMoved;
 let moved;
 function layCardOnFieldStart(e) {
-
+    // TODO fetch
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
     itemThatIsBeingMoved = e.target;
@@ -730,10 +730,8 @@ function layCardOnFieldEnd(e) {
         drag.parentElement.removeChild(drag);
         itemThatIsBeingMoved.classList.remove('hidden');
         if (moved === true){
-
             itemThatIsBeingMoved.parentElement.removeChild(itemThatIsBeingMoved);
             updateMyCards();
-
         }
     } catch (err){
         console.log('nothing can be removed' + err);
@@ -742,6 +740,7 @@ function layCardOnFieldEnd(e) {
     document.removeEventListener("touchend", layCardOnFieldEnd, false);
     document.removeEventListener("mousemove", movingOfDragElement, false);
     document.removeEventListener("mouseup", layCardOnFieldEnd, false);
+    // TODO fetch
 }
 function returnTypeOfMyCards(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
@@ -770,6 +769,7 @@ drag.addEventListener('click', visualiseAttack); */
 
 
 function endturn() {
+    // TODO fetch
     // delete all class nonAttack
 }
 
@@ -784,6 +784,7 @@ function visualiseAttack(e) {
 }
 
 function attackStart(e) {
+    // TODO fetch
     let target = e.target;
     if (e.path[0].tagName === 'SPAN'){
         target = e.target.parentElement;
@@ -825,6 +826,7 @@ function attackEnd() {
     document.removeEventListener("mousemove", movingOfDragElement, false);
     document.removeEventListener("mouseup", attackEnd, false);
     document.removeEventListener("touchend", attackEnd, false);
+    // TODO fetch
 }
 
 
