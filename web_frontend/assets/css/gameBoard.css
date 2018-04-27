@@ -346,3 +346,35 @@
     text-align: center;
     line-height: 4vh;
 }
+
+#gameBoard .buttonHolder {
+    position: absolute;
+    display: inline-block;
+    font-weight: bold;
+    background: no-repeat url("../media/button.png") center center;
+    background-size: 100% 100%;
+    width: 20vh;
+    height: 7vh;
+    line-height: 7.5vh;
+    text-align: center;
+}
+
+#gameBoard .buttonHolder .insideButton {
+    display: inline-block;
+    width: 11vh;
+    line-height: 5.5vh;
+    border-radius: 10% / 50%;
+}
+
+#gameBoard #battleLogHolder {
+    bottom: 49vh;
+    left: -5.9vh;
+    height: 5vh;
+    line-height: 5.5vh;
+    transform: rotate(90deg);
+}
+
+#gameBoard #showBattleLog {
+    color: transparent !important;
+    background: no-repeat url("../media/battleLog.png") center center / 33%;
+}
