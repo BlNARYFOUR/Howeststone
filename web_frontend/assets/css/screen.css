@@ -16,8 +16,6 @@ footer{
     line-height: 2.5vh;
 }
 
-footer ul{}
-
 footer ul li{
     text-align: center;
     z-index: 2;
@@ -30,22 +28,18 @@ footer ul li{
 }
 
 footer ul li:first-of-type{
+    background: url("../media/soundButtonSprite.png")left 1px;
+    background-size: 100%;
     width: 7vh;
     height: 100%;
     bottom: 0;
 }
 
-footer ul li.unmuted{
-    background: url("../media/soundButtonSprite.png")left 1px;
-    background-size: 100%;
-}
-
 footer ul li.muted{
     background:no-repeat url("../media/soundButtonSprite.png")left bottom;
     background-size: 100%;
- }
+}
 
-footer ul li:last-of-type{}
 
 .hidden {
     display: none !important;
@@ -65,34 +59,4 @@ footer ul li:last-of-type{}
 
 .buttonHolder .insideButton {
     color: #513d1f !important;
-}
-
-#gameBoard .you .manaHolder {
-    position: absolute;
-    background-color: rgba(0,0,0,0.5);
-    width: 30.5vh;
-    height: 5vh;
-    line-height: 5vh;
-    bottom: 5.5vh;
-    right: 1vh;
-}
-
-#gameBoard .you .manaHolder li {
-    display: inline-block;
-    vertical-align: middle;
-    width: 3vh;
-    height: 3.5vh;
-    margin-right: -0.6vh;
-    /*background-color: rgba(255,0,255,0.5);*/
-}
-
-#gameBoard .you .manaHolder li.mana {
-    background: no-repeat url("../media/manaSprite.png") left top;
-    background-size: 120% 205%;
-}
-
-#gameBoard .you .manaHolder li.usedMana {
-    background: no-repeat url("../media/manaSprite.png") -0.25vh bottom;
-    margin-top: 0.2vh;
-    background-size: 120% 205%;
 }
