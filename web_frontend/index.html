@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
 
     <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#513d1f">
+    <meta name="theme-color" content="#000000">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#513d1f">
+    <meta name="msapplication-navbutton-color" content="#000000">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="#513d1f">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- The iOS apple-mobile-web-app-status-bar-style attribute only supports black, black-translucent or default` - you cannot use a custom color apparently. -->
+
 
     <!--<link rel="icon" type="image/png" href="assets/media/icon2.png"/>
     <link rel="icon" type="image/png" href="assets/media/icon.png"/>-->
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/replaceCardScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/deckSelector.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/heroSelector.css" rel="stylesheet" type="text/css"/>
@@ -68,11 +71,11 @@
 
 <div id="heroSelector" class="hidden">
     <div class="SelectorBox">
-        <ul id="heroes">
+        <ul class="heroes">
         </ul>
 
-        <span id="selectedHero"></span>
-        <h1 class="selectedHeroName">Mage Annie</h1>
+        <span class="selectedHero"></span>
+        <h1 class="selectedHeroName">Mage</h1>
 
         <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckSelector">Continue</a></span>
         <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
@@ -81,7 +84,8 @@
 
 <div id="deckSelector" class="hidden">
     <div class="SelectorBox">
-        <ul id="yourDecks">
+        <ul class="decks">
+            <!--
             <li id="deck_0"><a href="#">Some Deck :)</a></li>
             <li id="deck_1"><a href="#">Deck 2</a></li>
             <li id="deck_2"><a href="#">Deck 3</a></li>
@@ -91,25 +95,26 @@
             <li id="deck_6"><a href="#">Deck 7</a></li>
             <li id="deck_7"><a href="#">Deck 8</a></li>
             <li id="deck_9"><a href="#">Deck 9</a></li>
+            -->
         </ul>
 
         <span id="addDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="addDeck">Add deck</a></span>
 
-        <div id="selectedDeck"></div>
-        <h1 class="selectedHeroName">Mage Annie</h1>
+        <div class="selectedHero"></div>
+        <h1 class="selectedHeroName">Mage</h1>
 
         <a href="#" id="playGame"></a>
         <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHeroChooser">Back</a></span>
     </div>
 </div>
 
-<div id="deckChooser" class="hidden">
+<div id="heroChooser" class="hidden">
     <div class="SelectorBox">
-        <ul id="listOfHeroes">
+        <ul class="heroes">
         </ul>
 
-        <span id="selectedHeroInDeckChooser"></span>
-        <h1 id="selectedHeroNameInDeckChooser">Mage Annie</h1>
+        <span class="selectedHero"></span>
+        <h1 class="selectedHeroName">Mage</h1>
 
         <span id="gotoDeckBuilderHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckBuilder">Continue</a></span>
         <span id="gotoMainMenuHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
@@ -129,17 +134,20 @@
         <li class="hidden">The filtered cards apear here.</li>
         <li class="hidden">Here's your selected hero.</li>
         <li class="hidden">Here's your deck.</li>
-        <li class="hidden">Klick here to create a new deck.</li>
-        <li class="hidden">Klick here to save your deck.</li>
-        <li class="hidden">Card info; mana in the left uppercorner, attack in the left bottom corner and health in the right bottom
+        <li class="hidden">Click here to create a new deck.</li>
+        <li class="hidden">Click here to save your deck.</li>
+        <li class="hidden">Card info; mana in the left upper corner, attack in the left bottom corner and health in the right bottom
             corner. </li>
-        <li class="hidden">Add and remove a card by double klicking or dragging.</li>
-        <li class="hidden">Decks of your selected hero apear here, klick 'add deck' to make a new one</li>
+        <li class="hidden">Add and remove a card by double clicking or dragging.</li>
+        <li class="hidden">Decks of your selected hero apear here, click 'add deck' to make a new one</li>
         <li><a href="#" id="next">Next</a></li>
     </ul>
     <header>
-        <div id="hero"><a href="#">Mage</a>
+        <div id="hero">
+            <!--
+            <a href="#">Mage</a>
             <a href="#">Paladin</a>
+            -->
         </div>
         <div id="quickfilter">
             <a href="#">Full Deck</a>
@@ -263,11 +271,7 @@
 
             <li class="playingField">
                 <ul>
-                    <!-- must be generated in JS -->
-                    <!-- background etc. included! -->
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li class="CS2_059" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png") center 23% / 176% no-repeat;'></li><li class="EX1_319" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png") center 23% / 176% no-repeat;'></li><li class="CS2_188" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png") center 23% / 176% no-repeat;'></li><li class="EX1_012" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png") center 23% / 176% no-repeat;'><span class="legendary"></span></li>
                 </ul>
             </li>
         </ul>
@@ -275,17 +279,19 @@
         <ul class="you">
             <li class="cards">
                 <ul>
-                    <!-- must be generated in JS
-                    <li>Card 1</li>
-                    <li>Card 2</li>
-                    <li>Card 3</li>
-                    <li>Card 4</li>
-                    <li>Card 5</li>
-                    <li>Card 6</li>
-                    <li>Card 7</li>
-                    <li>Card 8</li>
-                    <li>Card 9</li>
-                    <li>Card 10</li>-->
+                    <!-- must be generated in JS -->
+                    <!--
+                    <li draggable="true">Card 1</li>
+                    <li draggable="true">Card 2</li>
+                    <li draggable="true">Card 3</li>
+                    <li draggable="true">Card 4</li>
+                    <li draggable="true">Card 5</li>
+                    <li draggable="true">Card 6</li>
+                    <li draggable="true">Card 7</li>
+                    <li draggable="true">Card 8</li>
+                    <li draggable="true">Card 9</li>
+                    <li draggable="true">Card 10</li>
+                    -->
                 </ul>
             </li>
 
@@ -303,26 +309,29 @@
                 <!-- leave empty -->
             </li>
 
+            <li class="weapon">
+                <!-- leave empty -->
+            </li>
             <li class="deck">
                 <!-- leave empty -->
             </li>
 
             <li class="playingField">
-                <ul>
+                <ul class="dropZone">
                     <!-- must be generated in JS -->
                     <!-- background etc. included! -->
-                    <li></li>
-                    <li></li>
-                    <li></li>
                 </ul>
             </li>
         </ul>
 
+        <span id="battleLogHolder" class="buttonHolder"><a href="#" class="insideButton" id="showBattleLog">Battle log</a></span>
         <ul id="battleLog">
             <!-- must be generated in JS -->
-            <li></li>
-            <li></li>
-            <li></li>
+            <!--
+            <li>Step attacked Brem</li>
+            <li>Log 2</li>
+            <li>Log 3</li>
+            -->
         </ul>
 
         <div id="fuse">
@@ -334,14 +343,26 @@
     </div>
 </div>
 
+<div id="replaceCardScreen" class="hidden">
+    <h1>Keep or replace cards</h1>
+    <ul>
+        <li><span class="hidden">Replaced!</span></li>
+        <li><span class="hidden">Replaced!</span></li>
+        <li><span class="hidden">Replaced!</span></li>
+    </ul>
+
+    <span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Continue</a></span>
+</div>
+
 <div id="vsScreen" class="hidden">
-    <div id="enemyHero">
-        <img src="images/portraitMage.png" alt="enemyHero" title="enemyHero">
+    <div class="enemy">
+        <img src="assets/media/mage.png" alt="enemyHero" title="enemyHero">
     </div>
     <img src="assets/media/vs.png" alt="VS" title="VS" id="vs">
-    <div id="playerHero">
-        <img src="images/portraitMage.png" alt="playerHero" title="playerHero">
+    <div class="player">
+        <img src="assets/media/mage.png" alt="playerHero" title="playerHero">
     </div>
+
 </div>
 
 <div id="options" class="hidden">
@@ -366,7 +387,10 @@
             <ul>
                 <li>Koen Cornelis</li>
             </ul>
-
+            <h2>Composer</h2>
+            <ul>
+                <li>Michiel Van Mulders</li>
+            </ul>
             <div id="developerTeamAndFunctions">
                 <section>
                     <h2>Developer Team</h2>
@@ -408,11 +432,10 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/loadingScreen.js"></script>
 <script src="assets/js/deckbuilder.js"></script>
-<script src="assets/js/Hero-Deck_selector.js"></script>
+<script src="assets/js/heroAndDeckSelector.js"></script>
 <script src="assets/js/deckChooser.js"></script>
 <script src="assets/js/clickEvents.js"></script>
 <script src="assets/js/gameBoard.js"></script>
-<!--<script src="assets/js/playingField.js"></script>-->
 
 </body>
 </html>
