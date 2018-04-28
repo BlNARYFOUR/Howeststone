@@ -12,7 +12,7 @@ footer{
     background-color: rgba(0, 0, 0,0.6);
     width: 100%;
     bottom: 0;
-    height: 2.5vh;
+    height: 4.5vh;
     line-height: 2.5vh;
 }
 
@@ -26,23 +26,24 @@ footer ul li{
     right: 0;
     color: white;
     background-color: blue;
-    width: 4vh;
-    height: 2vh;
-    line-height: 2vh;
     cursor: pointer;
-    border: thin hidden;
 }
 
 footer ul li:first-of-type{
-    background:no-repeat url("../media/soundButtonSprite.png")left top;
-    background-size: 100%;
-
- }
-
-footer ul li:first-of-type .muted{
-    background: url("../media/soundButtonSprite.png");
-
+    width: 7vh;
+    height: 100%;
+    bottom: 0;
 }
+
+footer ul li.unmuted{
+    background: url("../media/soundButtonSprite.png")left 1px;
+    background-size: 100%;
+}
+
+footer ul li.muted{
+    background:no-repeat url("../media/soundButtonSprite.png")left bottom;
+    background-size: 100%;
+ }
 
 footer ul li:last-of-type{}
 
