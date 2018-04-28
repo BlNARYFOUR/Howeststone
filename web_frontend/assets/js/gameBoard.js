@@ -20,6 +20,48 @@ function init() {
 
 function setupGameBoard() {
     document.getElementById('endTurn').addEventListener('click', endMyTurn);
+    document.getElementById('showBattleLog').addEventListener('click', showOrHideBattleLog);
+}
+
+function showOrHideBattleLog(e) {
+    e.preventDefault();
+    document.querySelector("#gameBoard #battleLog").classList.toggle("hidden");
+}
+
+function loadBattleLog() {
+    /*
+    fetch('threebeesandme/howeststone/get/gameboard/battlelog', {
+        method: 'GET'
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        showBattleLog(result)
+    })
+    .catch(function(err) {
+        console.log("Error: Could not load the heroes :'(");
+    });
+    */
+
+    showBattleLog([ "Step attacked Brem",
+                    "Brem blocked Step",
+                    "Brem countered with Bert",
+                    "Brand stopped Bert",
+                    "Brand got burned",
+                    "Bert got torched",
+                    "Step died of exhaustion",
+                    "Brem got VICTORY"]);
+}
+
+function showBattleLog(logArr) {
+    let htmlBattleLogObj = document.querySelector("#gameBoard #battleLog");
+
+    for(let i=0; i<logArr.length; i++) {
+        htmlBattleLogObj.innerHTML += `<li>${logArr[i]}</li>`;
+    }
 }
 
 function startMyTurn() {
