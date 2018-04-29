@@ -814,14 +814,14 @@ function attackStart(e) {
 function attackEnd() {
     let enemies = document.querySelectorAll('.enemy .playingField ul li');
     let rectDrag = drag.getBoundingClientRect();
-    let hero = document.querySelector('#gameBoard .enemy .hero .health').getBoundingClientRect();
-    if ((rectDrag.right > hero.left-140) && (rectDrag.left < hero.left+121) && (rectDrag.bottom < hero.bottom+16) && (rectDrag.top > hero.top-87)) {
+    let hero = document.querySelector('#gameBoard .enemy .hero').getBoundingClientRect();
+    if ((rectDrag.right < hero.right+29) && (rectDrag.left > hero.left-35) && (rectDrag.bottom < hero.bottom+35) && (rectDrag.top > rectDrag.top-9)) {
         console.log('attack');
-        console.log(document.querySelector('#gameBoard .enemy .hero .health'));
+        console.log(document.querySelector('#gameBoard .enemy .hero'));
     }
     for (let i = 0; i < enemies.length; i++){
         let enemy = enemies[i].getBoundingClientRect();
-        if ((rectDrag.right < enemy.right+30) && (rectDrag.left > enemy.left-30) && (rectDrag.bottom < enemy.bottom+100) && (rectDrag.top > enemy.top-100)) {
+        if ((rectDrag.right < enemy.right+13) && (rectDrag.left > enemy.left-13) && (rectDrag.bottom < enemy.bottom+26) && (rectDrag.top > enemy.top-18)) {
             console.log('attack');
             console.log(enemies[i]);
         }
