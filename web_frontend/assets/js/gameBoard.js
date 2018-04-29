@@ -677,7 +677,7 @@ function PlayingFieldEnd(dropZoneLi) {
             inField(cardOnPlayingField);
             break;
         }
-        left = dropZoneLi[i+1].getBoundingClientRect().right;
+        left = dropZoneLi[dropZoneLi.length-1].getBoundingClientRect().right;
         right = dropZone.getBoundingClientRect().right;
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
