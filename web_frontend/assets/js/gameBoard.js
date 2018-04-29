@@ -580,7 +580,7 @@ function setupMovingOfCards() {
     }
 }
 
-let drag;
+let dragSrcElement;
 let dragOffsetX;
 let dragOffsetY;
 let itemThatIsBeingMoved;
@@ -591,17 +591,17 @@ function layCardOnFieldStart(e) {
     dragOffsetY = e.offsetY;
     itemThatIsBeingMoved = e.target;
     moved = false;
-    drag = e.target.cloneNode(true);
+    dragSrcElement = e.target.cloneNode(true);
     itemThatIsBeingMoved.classList.add('hidden');
-    document.body.appendChild(drag);
-    drag.removeAttribute('style');
+    document.body.appendChild(dragSrcElement);
+    dragSrcElement.removeAttribute('style');
 
     movingOfDragElement(e);
-    drag.style.zIndex = '1';
-    drag.style.width = '14.854838709677vh';
-    drag.style.height= '22.5vh';
-    drag.style.position = 'absolute';
-    drag.style.background = e.target.style.background;
+    dragSrcElement.style.zIndex = '1';
+    dragSrcElement.style.width = '14.854838709677vh';
+    dragSrcElement.style.height= '22.5vh';
+    dragSrcElement.style.position = 'absolute';
+    dragSrcElement.style.background = e.target.style.background;
 
     document.addEventListener("touchmove", movingOfDragElement, false);
     document.addEventListener("mousemove", movingOfDragElement, false);
@@ -613,21 +613,21 @@ function movingOfDragElement(e) {
     if (typeof e.clientX === "number"){
         let XCoordinate = e.clientX - dragOffsetX;
         let YCoordinate = e.clientY - dragOffsetY;
-        drag.style.left = XCoordinate + 'px';
-        drag.style.top = YCoordinate+ 'px';
+        dragSrcElement.style.left = XCoordinate + 'px';
+        dragSrcElement.style.top = YCoordinate+ 'px';
     }
     else {
         // Mattijs: the web browser cannot calculate the offset so I use this as default
         let XCoordinate = e.touches[0].clientX - 40;
         let YCoordinate = e.touches[0].clientY - 80;
-        drag.style.left = XCoordinate + 'px';
-        drag.style.top = YCoordinate+ 'px';
+        dragSrcElement.style.left = XCoordinate + 'px';
+        dragSrcElement.style.top = YCoordinate+ 'px';
     }
 }
 
 function emptyPlayingFieldEnd() {
     let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
-    let rectDrag = drag.getBoundingClientRect();
+    let rectDrag = dragSrcElement.getBoundingClientRect();
     let rectDropZone = dropZone.getBoundingClientRect();
     if ((rectDrag.right < rectDropZone.right) && (rectDrag.left > rectDropZone.left) && (rectDrag.bottom < (rectDropZone.bottom + 100)) && (rectDrag.top > rectDropZone.top -100)){
         let cardOnPlayingField = cloneDragElement();
@@ -637,9 +637,9 @@ function emptyPlayingFieldEnd() {
 }
 
 function cloneDragElement() {
-    let cardOnPlayingField = drag.cloneNode(true);
+    let cardOnPlayingField = dragSrcElement.cloneNode(true);
     cardOnPlayingField.removeAttribute('style');
-    cardOnPlayingField.style.background = drag.style.background;
+    cardOnPlayingField.style.background = dragSrcElement.style.background;
     cardOnPlayingField.style.backgroundSize = "176%";
     cardOnPlayingField.style.backgroundPositionY = "23%";
     return cardOnPlayingField;
@@ -657,7 +657,7 @@ function inField(cardOnPlayingField) {
 
 function PlayingFieldEnd(dropZoneLi) {
     let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
-    let rectDrag = drag.getBoundingClientRect();
+    let rectDrag = dragSrcElement.getBoundingClientRect();
     let top = dropZone.getBoundingClientRect().top -100;
     let bottom = dropZone.getBoundingClientRect().bottom + 100;
     for (let i = 0; i< dropZoneLi.length -1; i++){
@@ -727,7 +727,7 @@ function layCardOnFieldEnd(e) {
 
     }
     try{
-        drag.parentElement.removeChild(drag);
+        dragSrcElement.parentElement.removeChild(dragSrcElement);
         itemThatIsBeingMoved.classList.remove('hidden');
         if (moved === true){
             itemThatIsBeingMoved.parentElement.removeChild(itemThatIsBeingMoved);
@@ -755,7 +755,7 @@ function returnTypeOfMyCards(liWithClass) {
 /* give minion class nonAttack
  check if charge is present
 check if battleCry is present
-let type = returnTypeOfMyCards(drag);
+let type = returnTypeOfMyCards(dragSrcElement);
 switch (type){
     case 'Minion':
         dropZoneElement.appendChild(dragSrcElement);
@@ -764,7 +764,7 @@ switch (type){
         document.querySelector('.weapon').appendChild(dragSrcElement);
         break;
 }
-drag.addEventListener('click', visualiseAttack); */
+dragSrcElement.addEventListener('click', visualiseAttack); */
 
 
 
@@ -793,17 +793,17 @@ function attackStart(e) {
     dragOffsetY = e.offsetY;
     itemThatIsBeingMoved = target;
     moved = false;
-    drag = target.cloneNode(false);
-    document.querySelector('#gameBoard').appendChild(drag);
-    drag.removeAttribute('style');
+    dragSrcElement = target.cloneNode(false);
+    document.querySelector('#gameBoard').appendChild(dragSrcElement);
+    dragSrcElement.removeAttribute('style');
 
     movingOfDragElement(e);
-    drag.style.zIndex = '1';
-    drag.style.width = '9.9032258064516129032258064516131vh';
-    drag.style.height= '15vh';
-    drag.style.position = 'absolute';
-    drag.style.borderRadius = '50%';
-    drag.style.background = target.style.background;
+    dragSrcElement.style.zIndex = '1';
+    dragSrcElement.style.width = '9.9032258064516129032258064516131vh';
+    dragSrcElement.style.height= '15vh';
+    dragSrcElement.style.position = 'absolute';
+    dragSrcElement.style.borderRadius = '50%';
+    dragSrcElement.style.background = target.style.background;
 
     document.addEventListener("touchmove", movingOfDragElement, false);
     document.addEventListener("mousemove", movingOfDragElement, false);
@@ -813,7 +813,7 @@ function attackStart(e) {
 
 function attackEnd() {
     let enemies = document.querySelectorAll('.enemy .playingField ul li');
-    let rectDrag = drag.getBoundingClientRect();
+    let rectDrag = dragSrcElement.getBoundingClientRect();
     let hero = document.querySelector('#gameBoard .enemy .hero').getBoundingClientRect();
     if ((rectDrag.right < hero.right+29) && (rectDrag.left > hero.left-35) && (rectDrag.bottom < hero.bottom+35) && (rectDrag.top > rectDrag.top-9)) {
         console.log('attack');
@@ -826,7 +826,7 @@ function attackEnd() {
             console.log(enemies[i]);
         }
     }
-    drag.parentElement.removeChild(drag);
+    dragSrcElement.parentElement.removeChild(dragSrcElement);
     document.removeEventListener("touchmove", movingOfDragElement, false);
     document.removeEventListener("mousemove", movingOfDragElement, false);
     document.removeEventListener("mouseup", attackEnd, false);
