@@ -32,7 +32,7 @@
 }
 
 #creditsScreen h1 {
-    font-size: 1.8rem;
+    font-size: 2rem !important;
     margin-bottom: 2vh;
     font-weight: bold;
 }
@@ -61,7 +61,7 @@
     width: 20vh;
     height: 7vh;
     line-height: 7.5vh;
-    margin-top: 17.5vh;
+    margin-top: 10vh;
 }
 
 #creditsScreen .buttonHolder .insideButton {

@@ -1,7 +1,7 @@
 #deckbuilder body{
     position: relative;
     font-family: sans-serif;
-    font-size: 1rem;
+    font-size: 1rem !important;
     color: black;
     background-color: white;
 }
@@ -30,6 +30,8 @@
     position: absolute;
     top: 10vh;
 }
+
+
 #deckbuilder #firstadd {
     text-align: center;
     line-height: 5vh;
@@ -61,10 +63,11 @@
     word-spacing: 10vh;
 }
 #deckbuilder #hero a{
-    font-size: 2rem;
+    font-size: 2rem !important;
     border: 1px black solid;
     border-radius: 100%;
     padding: 1%;
+    text-transform: capitalize;
 }
 #deckbuilder #quickfilter{
     position: absolute;
@@ -76,10 +79,12 @@
 #deckbuilder #quickfilter a, #deckbuilder #cardAmount{
     display: inline-block;
     padding: 5px;
-    font-size: 0.7rem;
+    font-size: 0.7rem !important;
     border: 1px black solid;
 }
+
 #deckbuilder #deck{
+    overflow-y: scroll;
     position: absolute;
     top: 14vh;
     width: 55vw;
@@ -250,20 +255,25 @@
 }
 
 .cardInDeck figure{
+    -webkit-user-drag: element;
     width: 23vh;
     display: inline-block;
 }
 .chosenCards figure{
+    -webkit-user-drag: element;
     width: 11vh;
     display: inline-block;
 }
-.cardInDeck figure img:last-child{
+/*.cardInDeck figure img:last-child{
     z-index: 1;
     position: absolute;
     display: none;
     top: 0;
     left: -23vw;
     width: 45vh;
+}*/
+.two{
+    background-color: blue;
 }
 
 .cardInDeck, .chosenCards {

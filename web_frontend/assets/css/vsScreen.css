@@ -1,29 +1,29 @@
-#enemyHero {
-    right: 15vw;
-    top: 3vw;
-    position: absolute;
-}
-
-#playerHero {
-    position: absolute;
-    left: 15vw;
-    bottom: 10vh;
-}
-
-#enemyHero img, #playerHero img {
-    width: 36vh;
-}
-
-#vs {
-    position: absolute;
-    left: 44vw;
-    top: 38vh;
-    width: 12vw;
-}
-
 #vsScreen {
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+}
+
+#vsScreen .enemy {
+    right: 15vw;
+    top: 3vw;
+    position: absolute;
+}
+
+#vsScreen .player {
+    position: absolute;
+    left: 15vw;
+    bottom: 10vh;
+}
+
+#vsScreen .enemy img, #vsScreen .player img {
+    width: 36vh;
+}
+
+#vsScreen #vs {
+    position: absolute;
+    left: 44vw;
+    top: 38vh;
+    width: 12vw;
 }
