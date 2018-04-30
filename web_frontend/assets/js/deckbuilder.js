@@ -48,7 +48,7 @@ function donNotSubmit(e) {
 
 function init() {
     /*tutorial();*/
-    document.querySelector('form').addEventListener('submit', donNotSubmit);
+    document.querySelector('#deckbuilder aside form').addEventListener('submit', donNotSubmit);
     document.getElementById('search').addEventListener('input', searchTest);
     document.querySelector('#firstadd').addEventListener('click', firstadd);
 
