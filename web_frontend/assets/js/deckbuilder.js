@@ -5,7 +5,6 @@ let tutorialli = 1;
 let dragged;
 
 function nextTutorial() {
-
     document.querySelector('#tutorials li:nth-child(' +tutorialli+ ')').className = "hidden";
     tutorialli += 1;
     document.querySelector('#tutorials li:nth-child(' + tutorialli + ')').className = "";
@@ -120,8 +119,7 @@ function checkallcards() {
     let cardInDeck = document.querySelectorAll(".cardInDeck");
     for(let i = 0 ; i < cardInDeck.length; i++){
         cardInDeck[i].addEventListener('dblclick', addCardToDeck);
-        //cardInDeck[i].addEventListener('mouseover', detailOfCard);
-        //cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
+        cardInDeck[i].addEventListener('dragstart', )
     }
     let chosenCards = document.querySelectorAll(".chosenCards");
     let lenghtAllCards = document.querySelectorAll(".two").length + chosenCards.length;

@@ -13,7 +13,8 @@ function gotoCardsReplaced() {
     }
     document.getElementById('replaceCardScreen').className = "hidden";
     deactivateReplaceCards();
-    firstTurn();
+    setTimeout(yourTurn, 1000);
+
 }
 
 function init() {
@@ -84,7 +85,7 @@ function gotoRechooseDeck() {
 }
 
 function playGame() {
-    setBackground();
+    gameBoardSetup();
     document.getElementById('vsScreen').className = "";
     document.getElementById('gameBoard').className = "";
 	//makeCardsFan("you", 1);

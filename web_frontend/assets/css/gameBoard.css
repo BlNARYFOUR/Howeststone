@@ -191,15 +191,46 @@
 /* weapon has yet to be change to a circle*/
 #gameBoard .you .weapon li{
     position: absolute;
-    top: 20vh;
+    top: 23vh;
     left: 43vh;
-    width: 9.9032258064516129032258064516131vh;
-    height: 15vh;
-    line-height: 15vh;
+    width: 10vh;
+    height: 10vh;
+    line-height: 10vh;
     vertical-align: middle;
     background-color: rgba(0,0,0,0.7);
     border: whitesmoke thin solid;
+    border-radius: 50%;
+    background-position: center 27% !important;
 }
+#gameBoard .you .weapon li .attack{
+    background-image: url(../media/attack_placeHolder.png);
+    position: absolute;
+    left: -1vh;
+    bottom: -5vh;
+    background-size: 5vh;
+    width: 5vh;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: -0.5vh 1.7vh;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+}
+#gameBoard .you .weapon li .durability{
+    background-image: url(../media/durability_placeHolder.png);
+    position: absolute;
+    right: -1vh;
+    bottom: -5vh;
+    background-size: 5vh;
+    width: 5vh;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: 0 1.9vh;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+}
+
 #gameBoard .you .playingField .dropZone li {
     text-align: center;
     box-sizing: border-box;
@@ -227,7 +258,22 @@
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     font-weight: bold;
 }
-
+#gameBoard .you .hero .heroAttack{
+    background-image: url(../media/attack_placeHolder.png);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 0;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+    bottom: -2vh;
+    width: 6vh;
+    background-size: 5vh;
+    height: 6vh;
+    left: -1vh;
+    line-height: 7vh;
+    text-align: center;
+}
 
 #gameBoard .enemy .hero .health,
 #gameBoard .you .hero .health{
@@ -293,6 +339,7 @@
     background-color: rgba(0,0,0,0.7);
     border: whitesmoke thin solid;
 }
+
 #gameBoard .enemy .playingField ul li {
     text-align: center;
     box-sizing: border-box;
