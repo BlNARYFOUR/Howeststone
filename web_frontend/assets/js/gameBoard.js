@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", init);
 let cardCounter = 0;
 let cardBackUrl = "";
 let myCards = null;
+let timeLeftObj = null;
+
+let MOCKTIME = 50;
 
 function init() {
     setupMovingOfCards();
@@ -12,18 +15,111 @@ function init() {
     setBackground();
     getRandomCardBack();
     //makeCardsFan("you", 1);
-
-    /*
-    document.getElementById("spark").addEventListener("click", burnFuse);
-    document.getElementById("fuse").addEventListener("click", burnFuse);
-    */
 }
 
 function setupGameBoard() {
-    document.getElementById('endTurn').addEventListener('click', endTurn);
+    document.getElementById('endTurn').addEventListener('click', endMyTurn);
+    document.getElementById('showBattleLog').addEventListener('click', showOrHideBattleLog);
 }
 
-function endTurn(e) {
+function showOrHideBattleLog(e) {
+    e.preventDefault();
+    document.querySelector("#gameBoard #battleLog").classList.toggle("hidden");
+}
+
+function loadBattleLog() {
+    /*
+    fetch('threebeesandme/howeststone/get/gameboard/battlelog', {
+        method: 'GET'
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        showBattleLog(result)
+    })
+    .catch(function(err) {
+        console.log("Error: Could not load the heroes :'(");
+    });
+    */
+
+    showBattleLog([ "Step attacked Brem",
+                    "Brem blocked Step",
+                    "Brem countered with Bert",
+                    "Brand stopped Bert",
+                    "Brand got burned",
+                    "Bert got torched",
+                    "Step died of exhaustion",
+                    "Brem got VICTORY"]);
+}
+
+function showBattleLog(logArr) {
+    let htmlBattleLogObj = document.querySelector("#gameBoard #battleLog");
+
+    for(let i=0; i<logArr.length; i++) {
+        htmlBattleLogObj.innerHTML += `<li>${logArr[i]}</li>`;
+    }
+}
+
+function startMyTurn() {
+    startTimeLeftCheck();
+    console.log("You're turn");
+    updateMyMana(1, 1);
+    updateMyCards();
+}
+
+function startTimeLeftCheck() {
+    // TODO: timeLeftObj = setInterval(timeLeft, 1000);
+
+    MOCKTIME = 50;
+    timeLeftObj = setInterval(MOCKTIMELEFT, 1000);
+}
+
+function MOCKTIMELEFT() {
+    MOCKTIME -= 1;
+
+    if(MOCKTIME <= 20) {
+        burnFuse();
+    }
+
+    if(MOCKTIME <= 0) {
+        endMyTurn();
+    }
+}
+
+function stopTimeLeftCheck() {
+    clearInterval(timeLeftObj);
+}
+
+function timeLeft() {
+    fetch('threebeesandme/howeststone/get/timeleft', {
+        method: 'GET'
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        console.log("Time left was retrieved from the server");
+        if(result <= 20) {
+            burnFuse();
+        }
+        else if(result <= 0) {
+            endMyTurn();
+        }
+    })
+    .catch(function(err) {
+        console.log("Error: Could not get time left");
+    });
+}
+
+function endMyTurn(e) {
+    stopTimeLeftCheck();
+    stopBurnFuse();
+
     /*
     fetch('threebeesandme/howeststone/post/endturn',{
         method: 'POST'
@@ -91,8 +187,12 @@ function yourTurn() {
     updateMyCards(4);
 }
 
-function burnFuse(e) {
+function burnFuse() {
     document.getElementById("fuse").classList.add("burn");
+}
+
+function stopBurnFuse() {
+    document.getElementById("fuse").classList.remove("burn");
 }
 
 function updateEnemyHero() {

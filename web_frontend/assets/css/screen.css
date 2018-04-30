@@ -8,6 +8,40 @@ body, html {
     height: 100%;
 }
 
+footer{
+    position: absolute;
+    background-color: rgba(0, 0, 0,0.6);
+    width: 100%;
+    bottom: 0;
+    height: 4.5vh;
+    line-height: 2.5vh;
+}
+
+footer ul li{
+    text-align: center;
+    z-index: 2;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    background-color: blue;
+    cursor: pointer;
+}
+
+footer ul li:first-of-type{
+    background: url("../media/soundButtonSprite.png")left 1px;
+    background-size: 100%;
+    width: 7vh;
+    height: 100%;
+    bottom: 0;
+}
+
+footer ul li.muted{
+    background:no-repeat url("../media/soundButtonSprite.png")left bottom;
+    background-size: 100%;
+}
+
+
 .hidden {
     display: none !important;
     visibility: hidden;
