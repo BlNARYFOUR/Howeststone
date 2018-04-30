@@ -6,7 +6,10 @@ function init() {
 
 }
 
-function playPauseMusic() {
+function playPauseMusic(e) {
+    e.preventDefault();
+
+    document.querySelector("#playMainMenuMusic").classList.toggle("muted");
     let audio = document.getElementById('mainMenuMusic');
     if (audio.paused) {
         audio.play();
