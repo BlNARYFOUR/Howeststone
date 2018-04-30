@@ -684,6 +684,9 @@ function layCardOnFieldStart(e) {
     dragSrcElement.style.position = 'absolute';
     dragSrcElement.style.background = e.target.style.background;
 
+
+    document.removeEventListener("mousedown", layCardOnFieldStart);
+    document.removeEventListener("touchstart", layCardOnFieldStart);
     document.addEventListener("touchmove", movingOfDragElement, false);
     document.addEventListener("mousemove", movingOfDragElement, false);
     document.addEventListener("mouseup", layCardOnFieldEnd, false);
@@ -972,6 +975,8 @@ function attackStart(e) {
 
     dragSrcElement.style.background = target.style.background;
 
+    document.removeEventListener("mousedown", layCardOnFieldStart);
+    document.removeEventListener("touchstart", layCardOnFieldStart);
     document.addEventListener("touchmove", movingOfDragElement, false);
     document.addEventListener("mousemove", movingOfDragElement, false);
     document.addEventListener("mouseup", attackEnd, false);
@@ -999,6 +1004,8 @@ function heroAttackStart(e) {
         dragSrcElement.style.height= '22.5vh';
         dragSrcElement.style.background = target.style.background;
 
+        document.removeEventListener("mousedown", layCardOnFieldStart);
+        document.removeEventListener("touchstart", layCardOnFieldStart);
         document.addEventListener("touchmove", movingOfDragElement, false);
         document.addEventListener("mousemove", movingOfDragElement, false);
         document.addEventListener("mouseup", heroAttackEnd, false);
