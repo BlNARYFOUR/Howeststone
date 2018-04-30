@@ -1,6 +1,6 @@
 #deckSelector {
-    background: black url("../media/deckSelector.png") no-repeat center center;
-    background-size: 177.77vh 100vh;
+    background: url(../media/backgroundAnnieOrigin.jpg) no-repeat center center;
+    background-size: cover;
     height: 100vh;
     width: 100vw;
     position: absolute;
@@ -12,6 +12,8 @@
     width: 132vh;
     margin-left: auto;
     margin-right: auto;
+    background: url(../media/heroSelector.png) no-repeat center center;
+    background-size: 177.77vh 100vh;
 }
 
 #deckSelector .decks {
