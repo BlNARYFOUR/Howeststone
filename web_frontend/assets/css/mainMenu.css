@@ -88,6 +88,18 @@
     color: #513d1f;
     font-family: heartstoneFront, serif;
 }
+#playMainMenuMusic{
+    text-align: center;
+    z-index: 2;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    background-color: blue;
+    width: 10vh;
+    height: 5vh;
+    line-height: 5vh;
+}
 
 
 
