@@ -67,6 +67,7 @@
     border: 1px black solid;
     border-radius: 100%;
     padding: 1%;
+    text-transform: capitalize;
 }
 #deckbuilder #quickfilter{
     position: absolute;

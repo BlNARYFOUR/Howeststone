@@ -7,6 +7,7 @@ function main() {
 
 }
 
+// TODO
 function gotoCardsReplaced() {
     if (countReplaceCards !== 0){
         replaceCards(countReplaceCards);
@@ -23,25 +24,15 @@ function init() {
     document.getElementById('gotoDeckChooser').addEventListener('click', gotoDeckChooser);
     document.getElementById('gotoOptions').addEventListener('click', gotoOptions);
 // gotoLogout
-    document.getElementById('gotoDeckSelector').addEventListener('click', gotoDeckSelector);
     let mainMenugoers = document.querySelectorAll('.gotoMainMenu');
     for(let i =0; i< mainMenugoers.length; i++){
         mainMenugoers[i].addEventListener('click', gotoMainMenu);
     }
-    document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck); /////
-    document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
-    document.getElementById('playGame').addEventListener('click', playGame);
-    /* document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);*/
+    document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck);
+    /* TODO: document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);*/
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
-    document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoHeroChooser').addEventListener('click', gotoHeroChooser);
-    document.getElementById('classMage').addEventListener('click', selectClassMage);
-    document.getElementById('classMageDeckChooser').addEventListener('click', selectClassMageInDeckChooser);
-    document.querySelector('#hero a:first-child').addEventListener('click', selectClassMageInDeckChooser);
-    document.getElementById('classPaladinDeckChooser').addEventListener('click', selectClassPaladinInDeckChooser);
-    document.querySelector('#hero a:last-child').addEventListener('click', selectClassPaladinInDeckChooser);
-    document.getElementById('classPaladin').addEventListener('click', selectClassPaladin);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
     document.getElementById('gotoCardsReplaced').addEventListener('click', gotoCardsReplaced);
 
@@ -65,40 +56,25 @@ function toggleFullScreen() {
 }
 
 function gotoMainMenu(e) {
+    //console.log(this.parentElement.parentElement.parentElement);
     document.getElementById('mainMenu').className = "";
     this.parentElement.parentElement.parentElement.className = "hidden";
 }
+
 function gotoDeckChooser() {
-    document.getElementById('deckChooser').className = "";
+    document.getElementById('heroChooser').className = "";
     document.getElementById('mainMenu').className = "hidden";
 }
 
+// TODO
 function gotoGameOptions() {
     document.getElementById('gameBoard').className = "hidden";
     document.getElementById('options').className = "";
 }
 
 function gotoRechooseDeck() {
-    document.getElementById('deckChooser').className = "";
+    document.getElementById('heroChooser').className = "";
     document.getElementById('deckbuilder').className = "hidden";
-}
-
-function playGame() {
-    setBackground();
-    document.getElementById('vsScreen').className = "";
-    document.getElementById('gameBoard').className = "";
-	//makeCardsFan("you", 1);
-    document.getElementById('deckSelector').className = "hidden";
-    setTimeout(function playrealGame() {
-        document.getElementById('vsScreen').className = "hidden";
-        document.getElementById('replaceCardScreen').className = "";
-        activateReplaceCards();
-    }, 3000);
-}
-
-function gotoHome() {
-    document.getElementById('mainMenu').className = "";
-    document.getElementById('heroSelector').className = "hidden";
 }
 
 function gotoHeroSelector() {
@@ -112,59 +88,9 @@ function gotoHeroSelector() {
     }
 }
 
-function gotoDeckSelector() {
-    document.getElementById('deckSelector').className = "";
-    document.getElementById('heroSelector').className = "hidden";
-}
-
 function gotoHeroChooser() {
     document.getElementById('deckSelector').className = "hidden";
     document.getElementById('heroSelector').className = "";
-}
-
-function selectClassMage() {
-    let selectedHeroName = document.getElementsByClassName("selectedHeroName");
-    for (let i = 0; i < selectedHeroName.length; i++) {
-        selectedHeroName[i].innerHTML = 'Mage Annie';
-    }
-    selectedHero.style.backgroundImage = "url('images/portraitMage.png')";
-    selectedDeck.style.backgroundImage = "url('images/portraitMage.png')";
-    playerHero.innerHTML = "<img src='images/portraitMage.png' alt='playerHero' title='playerhero'>";
-}
-
-function selectClassPaladin() {
-    let selectedHeroName = document.getElementsByClassName("selectedHeroName");
-    for (let i = 0; i < selectedHeroName.length; i++) {
-        selectedHeroName[i].innerHTML = 'Paladin Azir';
-    }
-    selectedHero.style.backgroundImage = "url('images/portraitPaladin.png')";
-    selectedDeck.style.backgroundImage = "url('images/portraitPaladin.png')";
-    playerHero.innerHTML = "<img src='images/portraitPaladin.png' alt='playerHero' title='playerhero'>"
-}
-
-function selectClassMageInDeckChooser() {
-    document.querySelector('#hero a:first-child').style.backgroundColor = 'grey';
-    document.querySelector('#hero a:last-child').style.backgroundColor = 'white';
-    document.getElementById("selectedHeroNameInDeckChooser").innerHTML = 'Mage Annie';
-    selectedHeroInDeckChooser.style.backgroundImage = "url('images/portraitMage.png')";
-}
-
-function selectClassPaladinInDeckChooser() {
-    document.querySelector('#hero a:first-child').style.backgroundColor = 'white';
-    document.querySelector('#hero a:last-child').style.backgroundColor = 'grey';
-    document.getElementById("selectedHeroNameInDeckChooser").innerHTML = 'Paladin Azir';
-    selectedHeroInDeckChooser.style.backgroundImage = "url('images/portraitPaladin.png')";
-}
-
-
-function gotoDeckBuilder() {
-    if ((document.getElementById('selectedHeroInDeckChooser').getAttribute('style') === null) || (document.getElementById('selectedHeroInDeckChooser').getAttribute('style').indexOf('aladin') === -1)){
-        selectClassMageInDeckChooser();
-    }else {
-        selectClassPaladinInDeckChooser();
-    }
-    document.getElementById('deckChooser').className = "hidden";
-    document.getElementById('deckbuilder').className = "";
 }
 
 function gotoOptions() {
@@ -180,14 +106,6 @@ function gotoCredits() {
 function gotoLeaveOptions() {
     document.getElementById('options').className = "";
     document.getElementById('creditsScreen').className = "hidden";
-}
-
-function addDeck() {
-    document.getElementById('deckSelector').className = "hidden";
-    document.getElementById('deckbuilder').className = "";
-    document.getElementById('gotoRechooseDeck').removeEventListener('click', gotoRechooseDeck);
-    document.getElementById('gotoRechooseDeck').setAttribute("id", "gotoChooseDeck");
-    document.getElementById('gotoChooseDeck').addEventListener('click', gotoChooseDeck);
 }
 
 function gotoChooseDeck() {
