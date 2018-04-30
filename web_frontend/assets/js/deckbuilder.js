@@ -89,7 +89,7 @@ function MockCardsToDeckBuilder(cards) {
     for (let i = 0; i < cards.length; i++) {
         let imgUrl = cards[i]["img"];
         let imgID = cards[i]["name"];
-        console.log(imgID);
+        //console.log(imgID);
         document.getElementById('cards').innerHTML += '<li class ="cardInDeck"><figure draggable=true><img src="'+imgUrl+'" alt="'+imgID+'" title="'+imgID+'" id="'+imgID+'">'+'</figure></li>';
     }
 }
