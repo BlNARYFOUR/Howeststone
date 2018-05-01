@@ -60,3 +60,18 @@ function handlePostHeroes() {
 
     return $database->addHero($name, $heroesHeroPowerName, $health);
 }
+
+function handlePostCards() {
+    $database = new Database();
+
+    $name = isset($_POST['cardName']) ? $_POST['cardName'] : null;
+    $type = isset($_POST['cardType']) ? $_POST['cardType'] : null;
+    $img = isset($_POST['cardImg']) ? $_POST['cardImg'] : null;
+    $rarity = isset($_POST['cardRarity']) ? $_POST['cardRarity'] : null;
+    $health = isset($_POST['cardHealth']) ? $_POST['cardHealth'] : null;
+    $manaCost = isset($_POST['cardManaCost']) ? $_POST['cardManaCost'] : null;
+    $heroId = isset($_POST['heroHealth']) ? $_POST['heroHealth'] : null;
+
+    return $database->addCard($name, $type, $img, $rarity, $health, $manaCost, $heroId);
+}
+
