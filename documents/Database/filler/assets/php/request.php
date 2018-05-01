@@ -75,3 +75,12 @@ function handlePostCards() {
     return $database->addCard($name, $type, $img, $rarity, $health, $manaCost, $heroId);
 }
 
+function handlePostCardMechanics() {
+    $database = new Database();
+
+    $name = isset($_POST['cmMechanicName']) ? $_POST['cmMechanicName'] : null;
+    $card = isset($_POST['cmCardName']) ? $_POST['cmCardName'] : null;
+
+    return $database->addMechanicToCards($name,$card);
+}
+
