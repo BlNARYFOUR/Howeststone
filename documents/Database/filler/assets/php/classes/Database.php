@@ -190,7 +190,31 @@ class Database {
         return $mechanicIds;
     }
 
-    
+    public function getCardIds() {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $sql = "SELECT cardId FROM cards";
+        $result = $conn->query($sql);
+
+        $cardIds = $result->fetch_assoc()["cardId"];
+
+        $conn->close();
+
+        return $cardIds;
+    }
+
+    public function getDeckIds() {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $sql = "SELECT deckId FROM decks";
+        $result = $conn->query($sql);
+
+        $deckIds = $result->fetch_assoc()["deckId"];
+
+        $conn->close();
+
+        return $deckIds;
+    }
 }
 
 /*
