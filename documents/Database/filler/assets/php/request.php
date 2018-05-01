@@ -10,13 +10,13 @@ switch($requestPost) {
         $reply = handlePostHeroPowers();
         break;
     case "mechanics":
-        $reply = null;
+        $reply = handlePostMechanics();
         break;
     case "heroes":
-        $reply = null;
+        $reply = handlePostHeroes();
         break;
     case "cards":
-        $reply = null;
+        $reply = handlePostCards();
         break;
     case "cardMechanics":
         $reply = null;
