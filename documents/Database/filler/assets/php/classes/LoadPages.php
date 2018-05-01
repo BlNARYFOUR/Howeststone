@@ -53,7 +53,6 @@ class LoadPages {
                 <label for="cardHeroName">Hero Name: </label>
                 <select name="cardHeroName" id="cardHeroName" required="required">
                 </select>
-                <input type="text" name="heroHealth" id="heroHealth" placeholder="Health" required="required" />
                 <input type="submit" name="cardBut" id="cardBut" value="Add this!" />
             </form>
 

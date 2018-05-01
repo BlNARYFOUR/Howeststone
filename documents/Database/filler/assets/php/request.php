@@ -43,7 +43,7 @@ function handlePostHeroPowers() {
     return $database->addHeroPower($name, $manaCost);
 }
 
-function handlePostMechnanics() {
+function handlePostMechanics() {
     $database = new Database();
 
     $name = isset($_POST['meName']) ? $_POST['meName'] : null;
@@ -70,7 +70,7 @@ function handlePostCards() {
     $rarity = isset($_POST['cardRarity']) ? $_POST['cardRarity'] : null;
     $health = isset($_POST['cardHealth']) ? $_POST['cardHealth'] : null;
     $manaCost = isset($_POST['cardManaCost']) ? $_POST['cardManaCost'] : null;
-    $heroId = isset($_POST['heroHealth']) ? $_POST['heroHealth'] : null;
+    $heroId = isset($_POST['cardHeroName']) ? $_POST['cardHeroName'] : null;
 
     return $database->addCard($name, $type, $img, $rarity, $health, $manaCost, $heroId);
 }
