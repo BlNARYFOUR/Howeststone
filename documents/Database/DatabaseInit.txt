@@ -1,19 +1,19 @@
-CREATE DATABASE howeststone  
+CREATE DATABASE howeststone;
 
-USE howeststone
+USE howeststone;
 
 CREATE TABLE HeroPowers (
 	heroPowerId INT(2) AUTO_INCREMENT NOT NULL,
 	heroPoWerName VARCHAR(30) NOT NULL,
 	manaCost INT(1) NOT NULL,
 	CONSTRAINT pk_HeroPowers PRIMARY KEY(heroPowerId)
-)ENGINE = INNODB
+)ENGINE = INNODB;
 
 CREATE TABLE Mechanics (
 	mechanicId INT(1) AUTO_INCREMENT NOT NULL,
 	mechanicName VARCHAR(2) NOT NULL,
 	CONSTRAINT pk_mechanics PRIMARY KEY(mechanicId)
-)ENGINE = INNODB
+)ENGINE = INNODB;
 
 CREATE TABLE Heroes (
 	heroId INT(2) AUTO_INCREMENT NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE Heroes (
 	health INT(2) NOT NULL,
 	CONSTRAINT pk_heroes PRIMARY KEY(heroId),
 	CONSTRAINT fk_Heroes FOREIGN KEY(heroPowerId) REFERENCES HeroPowers(heroPowerId)
-)ENGINE = INNODB
+)ENGINE = INNODB;
 
 CREATE TABLE Cards (
 	cardId INT(3) AUTO_INCREMENT NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE Cards (
 	heroId INT(2),
 	CONSTRAINT pk_cards PRIMARY KEY(cardId),
 	CONSTRAINT fk_cards FOREIGN KEY(heroId) REFERENCES Heroes(heroId)
-)ENGINE = INNODB
+)ENGINE = INNODB;
 
 CREATE TABLE cardMechanics (
 	mechanicId INT(1) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE cardMechanics (
 	CONSTRAINT pk_cardMechanics PRIMARY KEY(mechanicId, cardId),
 	CONSTRAINT fk_cardMechanics FOREIGN KEY(mechanicId) REFERENCES Mechanics(mechanicId),
 	CONSTRAINT fk_cardMechanics2 FOREIGN KEY(cardId) REFERENCES Cards(cardId)
-)ENGINE = INNODB
+)ENGINE = INNODB;
 
 CREATE TABLE Decks (
 	deckId INT(2) AUTO_INCREMENT NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE Decks (
 	heroId INT(2) NOT NULL,
 	CONSTRAINT pk_Decks PRIMARY KEY(deckId),
 	CONSTRAINT fk_Decks FOREIGN KEY(heroId) REFERENCES Heroes(heroId)
-)ENGINE = INNODB
+)ENGINE = INNODB;
 
 CREATE TABLE CardsInDecks (
 	deckId INT(2) NOT NULL,
@@ -60,5 +60,5 @@ CREATE TABLE CardsInDecks (
 	CONSTRAINT pk_CardsInDecks PRIMARY KEY(deckId, cardId),
 	CONSTRAINT fk_CardsInDecks FOREIGN KEY(deckId) REFERENCES Decks(deckId),
 	CONSTRAINT fk_CardsInDecks2 FOREIGN KEY(cardId) REFERENCES Cards(cardId)
-)ENGINE = INNODB
+)ENGINE = INNODB;
 	
