@@ -7,6 +7,7 @@ class LoadPages {
         <html lang="en">
         <head>
             <meta charset="UTF-8">
+            <link type="text/css" rel="stylesheet" href="assets/css/screen.css" />
             <title>My Login</title>
         </head>
         <body>

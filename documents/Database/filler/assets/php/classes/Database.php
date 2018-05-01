@@ -4,53 +4,15 @@ class Database {
     private $serverName = "localhost";
     private $userName = "root";
     private $password = "";
-    private $dbName = "messageSystem";
+    private $dbName = "howeststone";
 
-    public function isValidUser($username, $password) {
-        $isValid = false;
+    public function addHeroPower($name, $manaCost) {
         $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
 
-        $username = htmlspecialchars($username);
-        $password = htmlspecialchars($password);
+        $name = htmlspecialchars($name);
+        $manaCost = htmlspecialchars($manaCost);
 
-        $sql = "SELECT COUNT(*) AS occurrence FROM users WHERE BINARY usr = \"$username\" AND pwd = \"$password\"";
-        $result = $conn->query($sql);
-
-        if ($result->fetch_assoc()["occurrence"] > 0) {
-            $isValid = true;
-        }
-
-        $conn->close();
-
-        return $isValid;
-    }
-
-    public function findUser($username) {
-        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
-        $succeeded = false;
-
-        $username = htmlspecialchars($username);
-
-        $sql = "SELECT COUNT(*) AS occurrence FROM users WHERE usr = \"$username\"";
-        $result = $conn->query($sql);
-
-        if ($result->fetch_assoc()["occurrence"] > 0) {
-            $succeeded = true;
-        }
-
-        $conn->close();
-
-        return $succeeded;
-    }
-
-    public function addUser($username, $password, $mail) {
-        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
-
-        $username = htmlspecialchars($username);
-        $password = htmlspecialchars($password);
-        $mail = htmlspecialchars($mail);
-
-        $sql = "INSERT INTO users (usr, pwd, email, regTime) VALUES (\"$username\", \"$password\", \"$mail\", CURRENT_TIME)";
+        $sql = "INSERT INTO heropowers (heroPowerName, manaCost) VALUES (\"$name\", \"$manaCost\")";
         $result = false;
 
         if ($conn->query($sql) === TRUE) {
@@ -61,15 +23,175 @@ class Database {
 
         return $result;
     }
+
+    public function addMechanic($name) {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $name = htmlspecialchars($name);
+
+        $sql = "INSERT INTO mechanics (mechanicName) VALUES (\"$name\")";
+        $result = false;
+
+        if ($conn->query($sql) === TRUE) {
+            $result = true;
+        }
+
+        $conn->close();
+
+        return $result;
+    }
+
+    public function addHero($name, $heroPowerId, $health) {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $name = htmlspecialchars($name);
+        $heroPowerId = htmlspecialchars($heroPowerId);
+        $health = htmlspecialchars($health);
+
+        $sql = "INSERT INTO heroes (heroName, heroPowerId, health) VALUES (\"$name\", \"$heroPowerId\", \"$health\")";
+        $result = false;
+
+        if ($conn->query($sql) === TRUE) {
+            $result = true;
+        }
+
+        $conn->close();
+
+        return $result;
+    }
+
+    public function addCard($name, $type, $img, $rarity, $health, $manaCost, $heroId) {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $name = htmlspecialchars($name);
+        $type = htmlspecialchars($type);
+        $img = htmlspecialchars($img);
+        $rarity = htmlspecialchars($rarity);
+        $health = htmlspecialchars($health);
+        $manaCost = htmlspecialchars($manaCost);
+        $heroId = htmlspecialchars($heroId);
+
+        $sql = "INSERT INTO cards (cardName, cardType, img, rarity, health, manaCost, heroId) VALUES (\"$name\", \"$type\", \"$img\", \"$rarity\", \"$health\" ,\"$manaCost\", \"$heroId\")";
+        $result = false;
+
+        if ($conn->query($sql) === TRUE) {
+            $result = true;
+        }
+
+        $conn->close();
+
+        return $result;
+    }
+
+    public function addMechanicToCard($mechanicId, $cardId) {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $mechanicId = htmlspecialchars($mechanicId);
+        $cardId = htmlspecialchars($cardId);
+
+        $sql = "INSERT INTO cardMechanics (mechanicId, cardId) VALUES (\"$mechanicId\", \"$cardId\")";
+        $result = false;
+
+        if ($conn->query($sql) === TRUE) {
+            $result = true;
+        }
+
+        $conn->close();
+
+        return $result;
+    }
+
+    public function addDeck($name, $heroId) {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $name = htmlspecialchars($name);
+        $heroId = htmlspecialchars($heroId);
+
+        $sql = "INSERT INTO decks (deckName, heroId) VALUES (\"$name\", \"$heroId\")";
+        $result = false;
+
+        if ($conn->query($sql) === TRUE) {
+            $result = true;
+        }
+
+        $conn->close();
+
+        return $result;
+    }
+
+    public function addCardToDeck($deckId, $cardId, $amount) {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $deckId = htmlspecialchars($deckId);
+        $cardId = htmlspecialchars($cardId);
+        $amount = htmlspecialchars($amount);
+
+        $sql = "INSERT INTO cardsindecks (deckId, cardId, amount) VALUES (\"$deckId\", \"$cardId\", \"$amount\")";
+        $result = false;
+
+        if ($conn->query($sql) === TRUE) {
+            $result = true;
+        }
+
+        $conn->close();
+
+        return $result;
+    }
+
+    public function getHeroPowerIds() {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $sql = "SELECT heroPowerId FROM heropowers";
+        $result = $conn->query($sql);
+
+        $heroPowerIds = $result->fetch_assoc()["heroPowerId"];
+
+        $conn->close();
+
+        return $heroPowerIds;
+    }
+
+    public function getHeroIds() {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $sql = "SELECT heroId FROM heroes";
+        $result = $conn->query($sql);
+
+        $heroIds = $result->fetch_assoc()["heroId"];
+
+        $conn->close();
+
+        return $heroIds;
+    }
+
+    public function getHeroNames() {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $sql = "SELECT heroName FROM heroes";
+        $result = $conn->query($sql);
+
+        $heroNames = $result->fetch_assoc()["heroName"];
+
+        $conn->close();
+
+        return $heroNames;
+    }
+
+    public function getMechanicIds() {
+        $conn = new mysqli($this->serverName, $this->userName, $this->password, $this->dbName);
+
+        $sql = "SELECT mechanicId FROM mechanics";
+        $result = $conn->query($sql);
+
+        $mechanicIds = $result->fetch_assoc()["mechanicId"];
+
+        $conn->close();
+
+        return $mechanicIds;
+    }
+
+    
 }
-
-
-
-// users        : (id, usr, pwd, email, regDate)
-// chats        : (id, chatName, creatorId, creationDate)
-// members      : (chatId, userId)
-// messages     : (id, chatId, senderId, content, sendDate)
-// reads        : (messageId, userId)
 
 /*
     CREATE DATABASE howeststone;
@@ -78,7 +200,7 @@ class Database {
 
     CREATE TABLE HeroPowers (
         heroPowerId INT(2) AUTO_INCREMENT NOT NULL,
-        heroPoWerName VARCHAR(30) NOT NULL,
+        heroPowerName VARCHAR(30) NOT NULL,
         manaCost INT(1) NOT NULL,
         CONSTRAINT pk_HeroPowers PRIMARY KEY(heroPowerId)
     )ENGINE = INNODB;
