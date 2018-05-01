@@ -7,7 +7,7 @@ $reply = "Not even been in the switchCase?";
 
 switch($requestPost) {
     case "heroPowers":
-        $reply = null;
+        $reply = handlePostHeroPowers();
         break;
     case "mechanics":
         $reply = null;
@@ -37,4 +37,6 @@ echo json_encode("$reply");
 function handlePostHeroPowers() {
     $requestPost = isset($_POST['request']) ? $_POST['request'] : null;
     $requestPost = isset($_POST['request']) ? $_POST['request'] : null;
+
+    return null;
 }
