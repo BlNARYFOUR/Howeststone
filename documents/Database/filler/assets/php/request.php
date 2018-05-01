@@ -35,8 +35,12 @@ switch($requestPost) {
 echo json_encode("$reply");
 
 function handlePostHeroPowers() {
-    $requestPost = isset($_POST['request']) ? $_POST['request'] : null;
-    $requestPost = isset($_POST['request']) ? $_POST['request'] : null;
+    $database = new Database();
 
-    return null;
+    $name = isset($_POST['hpName']) ? $_POST['hpName'] : null;
+    $manaCost = isset($_POST['hpManaCost']) ? $_POST['hpManaCost'] : null;
+
+
+
+    return $database->addHeroPower($name, $manaCost);
 }
