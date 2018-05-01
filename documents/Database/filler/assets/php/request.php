@@ -19,7 +19,7 @@ switch($requestPost) {
         $reply = handlePostCards();
         break;
     case "cardMechanics":
-        $reply = null;
+        $reply = handlePostCardMechanics();
         break;
     case "decks":
         $reply = null;
@@ -55,7 +55,7 @@ function handlePostHeroes() {
     $database = new Database();
 
     $name = isset($_POST['heroName']) ? $_POST['heroName'] : null;
-    $heroesHeroPowerName = isset($_POST['heroesHeroPowerName']) ? $_POST['meName'] : null;
+    $heroesHeroPowerName = isset($_POST['heroesHeroPowerName']) ? $_POST['heroesHeroPowerName'] : null;
     $health = isset($_POST['heroHealth']) ? $_POST['heroHealth'] : null;
 
     return $database->addHero($name, $heroesHeroPowerName, $health);
@@ -81,6 +81,6 @@ function handlePostCardMechanics() {
     $name = isset($_POST['cmMechanicName']) ? $_POST['cmMechanicName'] : null;
     $card = isset($_POST['cmCardName']) ? $_POST['cmCardName'] : null;
 
-    return $database->addMechanicToCards($name,$card);
+    return $database->addMechanicToCard($name,$card);
 }
 

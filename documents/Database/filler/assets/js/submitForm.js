@@ -44,22 +44,13 @@ function tryRequest(formId) {
         })
         .then(function(text) {
             console.log(text);
-            switch(text) {
-                case "Login succeeded":
-                case "Registration succeeded":
-                case "Logout succeeded":
-                    location.reload();
-                    break;
-                default:
-                    showResult(formId, text);
-                    break;
-            }
+            showResult(text);
         })
         .catch(function(err) {
-            showResult(formId, err.message);
+            showResult(err.message);
         });
 }
 
-function showResult(formId, result) {
-    document.querySelector(`.result`).innerText = result;
+function showResult(result) {
+    document.querySelector(".result").innerText = result;
 }

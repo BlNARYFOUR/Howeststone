@@ -231,7 +231,7 @@ class Database {
 
     CREATE TABLE Mechanics (
         mechanicId INT(1) AUTO_INCREMENT NOT NULL,
-        mechanicName VARCHAR(2) NOT NULL,
+        mechanicName VARCHAR(30) NOT NULL,
         CONSTRAINT pk_mechanics PRIMARY KEY(mechanicId)
     )ENGINE = INNODB;
 
