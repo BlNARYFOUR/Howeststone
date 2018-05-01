@@ -91,7 +91,6 @@ class LoadPages {
         </main>
 
         <script src="assets/js/submitForm.js"></script>
-        <script src="assets/js/responsive.js"></script>
         </body>
         </html>
         <?php

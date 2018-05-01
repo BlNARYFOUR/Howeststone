@@ -61,5 +61,5 @@ function tryRequest(formId) {
 }
 
 function showResult(formId, result) {
-    document.querySelector(`#${formId} .result`).innerText = result;
+    document.querySelector(`.result`).innerText = result;
 }
