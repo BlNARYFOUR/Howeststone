@@ -40,7 +40,13 @@ function handlePostHeroPowers() {
     $name = isset($_POST['hpName']) ? $_POST['hpName'] : null;
     $manaCost = isset($_POST['hpManaCost']) ? $_POST['hpManaCost'] : null;
 
-
-
     return $database->addHeroPower($name, $manaCost);
+}
+
+function handlePostMechnanics() {
+    $database = new Database();
+
+    $name = isset($_POST['meName']) ? $_POST['meName'] : null;
+
+    return $database->addMechanic($name);
 }
