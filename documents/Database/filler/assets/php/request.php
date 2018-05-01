@@ -50,3 +50,13 @@ function handlePostMechnanics() {
 
     return $database->addMechanic($name);
 }
+
+function handlePostHeroes() {
+    $database = new Database();
+
+    $name = isset($_POST['heroName']) ? $_POST['heroName'] : null;
+    $heroesHeroPowerName = isset($_POST['heroesHeroPowerName']) ? $_POST['meName'] : null;
+    $health = isset($_POST['heroHealth']) ? $_POST['heroHealth'] : null;
+
+    return $database->addHero($name, $heroesHeroPowerName, $health);
+}
