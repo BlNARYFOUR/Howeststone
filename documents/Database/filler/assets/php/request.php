@@ -22,10 +22,10 @@ switch($requestPost) {
         $reply = handlePostCardMechanics();
         break;
     case "decks":
-        $reply = null;
+        $reply = handlePostDecks();
         break;
     case "cardsInDecks":
-        $reply = null;
+        $reply = handlePostcardsInDecks();
         break;
     default:
         $reply = "Unrecognized request";
@@ -83,4 +83,25 @@ function handlePostCardMechanics() {
 
     return $database->addMechanicToCard($name,$card);
 }
+
+function handlePostDecks() {
+    $database = new Database();
+
+    $name = isset($_POST['deckName']) ? $_POST['deckName'] : null;
+    $heroId = isset($_POST['deckHeroName']) ? $_POST['deckHeroName'] : null;
+
+    return $database->addDeck($name,$heroId);
+}
+
+function handlePostcardsInDecks() {
+    $database = new Database();
+
+    $deckId = isset($_POST['cidDeckName']) ? $_POST['cidDeckName'] : null;
+    $cardId = isset($_POST['cidCardName']) ? $_POST['cidCardName'] : null;
+    $amount = isset($_POST['cidAmount']) ? $_POST['cidAmount'] : null;
+
+    return $database->addCardToDeck($deckId,$cardId,$amount);
+}
+
+
 
