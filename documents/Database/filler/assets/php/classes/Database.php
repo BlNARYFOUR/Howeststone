@@ -226,6 +226,7 @@ CREATE TABLE HeroPowers (
 	heroPowerId INT(2) AUTO_INCREMENT NOT NULL,
 	heroPoWerName VARCHAR(30) NOT NULL,
 	manaCost INT(1) NOT NULL,
+	damage INT(2),
 	CONSTRAINT pk_HeroPowers PRIMARY KEY(heroPowerId)
 )ENGINE = INNODB;
 
