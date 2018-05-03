@@ -2,7 +2,7 @@ plugins {
     id 'ru.vyarus.quality' version '2.4.0'
 }
 
-group 'be.howest.TI.project-I.group-XX'
+group 'be.howest.TI.project-I.group-31'
 version '0.1-SNAPSHOT'
 
 apply plugin: 'java'
