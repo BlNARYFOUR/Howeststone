@@ -11,7 +11,7 @@ CREATE TABLE HeroPowers (
 
 CREATE TABLE Mechanics (
 	mechanicId INT(1) AUTO_INCREMENT NOT NULL,
-	mechanicName VARCHAR(2) NOT NULL,
+	mechanicName VARCHAR(20) NOT NULL,
 	CONSTRAINT pk_mechanics PRIMARY KEY(mechanicId)
 )ENGINE = INNODB;
 
@@ -31,6 +31,7 @@ CREATE TABLE Cards (
 	img VARCHAR(125) NOT NULL,
 	rarity VARCHAR(10) NOT NULL,
 	health INT(2),
+	damage INT(2),
 	manaCost INT(2) NOT NULL,
 	heroId INT(2),
 	CONSTRAINT pk_cards PRIMARY KEY(cardId),
