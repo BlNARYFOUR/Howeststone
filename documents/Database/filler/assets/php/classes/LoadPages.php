@@ -23,6 +23,7 @@ class LoadPages {
                 <h2>Add a Hero Power</h2>
                 <input type="text" name="hpName" id="hpName" placeholder="Name" required="required" />
                 <input type="text" name="hpManaCost" id="hpManaCost" placeholder="Mana Cost" required="required" />
+                <input type="text" name="hpDmg" id="hpDmg" placeholder="Damage" />
                 <input type="submit" name="hpBut" id="hpBut" value="Add this!" />
             </form>
 
