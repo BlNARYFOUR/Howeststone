@@ -22,7 +22,7 @@ switch($requestPost) {
         $reply = handlePostCardMechanics();
         break;
     case "decks":
-        $reply = null;
+        $reply = handlePostDecks();
         break;
     case "cardsInDecks":
         $reply = null;
@@ -83,4 +83,15 @@ function handlePostCardMechanics() {
 
     return $database->addMechanicToCard($name,$card);
 }
+
+function handlePostDecks() {
+    $database = new Database();
+
+    $name = isset($_POST['deckName']) ? $_POST['deckName'] : null;
+    $heroId = isset($_POST['deckHeroName']) ? $_POST['deckHeroName'] : null;
+
+    return $database->addDeck($name,$heroId);
+}
+
+
 
