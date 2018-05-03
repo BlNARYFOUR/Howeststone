@@ -1,0 +1,8 @@
+threebeesandme/howeststone/get/gameboard/battlelog
+threebeesandme/howeststone/get/timeleft
+threebeesandme/howeststone/post/endturn
+
+threebeesandme/howeststone/get/heroanddeckselector/decks
+threebeesandme/howeststone/get/heroanddeckselector/heroes
+threebeesandme/howeststone/post/heroanddeckselector/hero
+threebeesandme/howeststone/post/heroanddeckselector/deck
