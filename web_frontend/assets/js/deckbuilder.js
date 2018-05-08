@@ -214,6 +214,25 @@ function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zo
     }
     checkallcards();
 }
+
+function saveDeck() {
+    fetch('threebeesandme/post/deckbuilder/savedeck',{
+        method: 'POST',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Deck is saved");
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });
+}
+
+
 function nodetailOfCard(e){
     this.lastChild.lastChild.style.display = 'none';
 }
