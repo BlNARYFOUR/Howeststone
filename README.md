@@ -13,3 +13,6 @@
   * add files
   * commit and push
   * start feature branching
+
+
+![picture](PMDOC/groepsfoto.jpg)
