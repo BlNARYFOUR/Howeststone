@@ -935,11 +935,6 @@ dragSrcElement.addEventListener('click', visualiseAttack); */
 
 
 
-function endturn() {
-    // TODO fetch
-    // delete all class nonAttack
-}
-
 function visualiseAttack(e) {
     // check if a card has class nonAttack
     // check if their is one or more minions with taunt
@@ -992,7 +987,24 @@ function attackStart(e) {
     document.addEventListener("touchend", attackEnd, false);
 }
 function heroAttackStart(e) {
-    // TODO fetch + their is no need for two functions
+    // TODO Their is no need for two functions
+
+    fetch('threebeesandme/post/gameboard/heroattackStart',{
+        method: 'POST'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("hero attack start has been send to server");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not start hero attack");
+        });
+
+
     if (heroAttack === true){
         let target = e.target;
         if (e.path[0].tagName === 'SPAN'){
