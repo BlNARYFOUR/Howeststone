@@ -765,8 +765,8 @@ function addMinionToPlayingField(cardPlayed) {
     let cardAttack =returnAttackOfMyCard(itemThatIsBeingMoved);
     let cardHealth = returnHealthOfMyCard(itemThatIsBeingMoved);
     cardPlayed.innerHTML += `<span class="health">${cardHealth}</span><span class="attack">${cardAttack}</span>`;
-    cardPlayed.addEventListener("mousedown", attackStart);
-    cardPlayed.addEventListener("touchstart", attackStart);
+    cardPlayed.addEventListener("mousedown", loadAttackStart);
+    cardPlayed.addEventListener("touchstart", loadAttackStart);
 }
 
 function PlayingFieldEnd(dropZoneLi) {
@@ -944,22 +944,7 @@ function visualiseAttack(e) {
     console.log('cannot attack');
     attack();
 }
-function attackStart(e) {
-    fetch('threebeesandme/post/gameboard/attackStart',{
-        method: 'POST'
-    })
-        .then(function(res) {
-            if(res.ok === true)
-                return res.json();
-        })
-        .then(function(text) {
-            let result = text;
-            console.log("attack start has been send to server");
-        })
-        .catch(function(err) {
-            console.log("Error: Could not start attack");
-        });
-
+function attackStart() {
     let target = e.target;
     if (e.path[0].tagName === 'SPAN'){
         target = e.target.parentElement;
@@ -986,11 +971,10 @@ function attackStart(e) {
     document.addEventListener("mouseup", attackEnd, false);
     document.addEventListener("touchend", attackEnd, false);
 }
-function heroAttackStart(e) {
-    // TODO Their is no need for two functions
 
-    fetch('threebeesandme/post/gameboard/heroattackStart',{
-        method: 'POST'
+function loadAttackStart(e) {
+    fetch('threebeesandme/get/gameboard/attackpermission',{
+        method: 'get'
     })
         .then(function(res) {
             if(res.ok === true)
@@ -998,10 +982,29 @@ function heroAttackStart(e) {
         })
         .then(function(text) {
             let result = text;
-            console.log("hero attack start has been send to server");
+            attackStart(result)
+            console.log("asking for attack permission has been send to server");
         })
         .catch(function(err) {
-            console.log("Error: Could not start hero attack");
+            console.log("Error: Could not send permission for attack");
+        });
+}
+function heroAttackStart(e) {
+    // TODO Their is no need for two functions
+
+    fetch('threebeesandme/post/gameboard/heroattackStart',{
+        method: 'GET'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("asking for attack permission has been send to server");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not send permission for attack");
         });
 
 
