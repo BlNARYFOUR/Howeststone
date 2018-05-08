@@ -51,6 +51,8 @@ function init() {
     document.querySelector('#deckbuilder aside form').addEventListener('submit', donNotSubmit);
     document.getElementById('search').addEventListener('input', searchTest);
     document.querySelector('#firstadd').addEventListener('click', firstadd);
+    document.querySelector('.saveButton').addEventListener('click', saveDeck);
+    document.querySelector('#newDeck').addEventListener('click', newDeck);
 
     checkallcards();
     let myCards =MOCKMYCARDS() ;
@@ -216,7 +218,9 @@ function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zo
 }
 
 function saveDeck() {
-    fetch('threebeesandme/post/deckbuilder/savedeck',{
+    alert('fsdffd');
+
+    /*fetch('threebeesandme/post/deckbuilder/savedeck',{
         method: 'POST',
     })
         .then(function(res) {
@@ -229,7 +233,25 @@ function saveDeck() {
         })
         .catch(function(err) {
             console.log("Error 404: Could not connect to the server");
-        });
+        });*/
+}
+
+function newDeck() {
+    alert('kllmlml');
+    /*fetch('threebeesandme/post/deckbuilder/newdeck',{
+        method: 'POST',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("New deck is ready to be build");
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });*/
 }
 
 
