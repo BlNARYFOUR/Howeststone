@@ -51,6 +51,9 @@ function init() {
     document.querySelector('#deckbuilder aside form').addEventListener('submit', donNotSubmit);
     document.getElementById('search').addEventListener('input', searchTest);
     document.querySelector('#firstadd').addEventListener('click', firstadd);
+    document.querySelector('.saveButton').addEventListener('click', saveDeck);
+    document.querySelector('#newDeck').addEventListener('click', newDeck);
+    document.querySelector('#deleteDeck').addEventListener('click', deleteDeck);
 
     checkallcards();
     let myCards =MOCKMYCARDS() ;
@@ -216,7 +219,7 @@ function removeCardFromDeck(e) { //remove eventlistener niet vergeten (nu nog zo
 }
 
 function saveDeck() {
-    fetch('threebeesandme/post/deckbuilder/savedeck',{
+    /*fetch('threebeesandme/post/deckbuilder/savedeck',{
         method: 'POST',
     })
         .then(function(res) {
@@ -229,9 +232,42 @@ function saveDeck() {
         })
         .catch(function(err) {
             console.log("Error 404: Could not connect to the server");
-        });
+        });*/
 }
 
+function newDeck() {
+    /*fetch('threebeesandme/post/deckbuilder/newdeck',{
+        method: 'POST',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("New deck is ready to be build");
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });*/
+}
+
+function deleteDeck() {
+    /*fetch('threebeesandme/post/deckbuilder/deleteDeck',{
+        method: 'POST',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Deck is deleted");
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });*/
+}
 
 function nodetailOfCard(e){
     this.lastChild.lastChild.style.display = 'none';
