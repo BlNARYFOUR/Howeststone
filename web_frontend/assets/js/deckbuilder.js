@@ -54,6 +54,12 @@ function init() {
     document.querySelector('.saveButton').addEventListener('click', saveDeck);
     document.querySelector('#newDeck').addEventListener('click', newDeck);
     document.querySelector('#deleteDeck').addEventListener('click', deleteDeck);
+    let heroesDeckbuilder = document.querySelectorAll('#deckbuilder #hero a');
+
+    for (let i = 0; i < heroesDeckbuilder.length; i++) {
+        heroesDeckbuilder[i].addEventListener('click', selectHero);
+    }
+
 
     checkallcards();
     let myCards =MOCKMYCARDS() ;
@@ -231,7 +237,7 @@ function saveDeck() {
             console.log("Deck is saved");
         })
         .catch(function(err) {
-            console.log("Error 404: Could not connect to the server");
+            console.log("Error: couldn't save deck");
         });*/
 }
 
@@ -248,7 +254,7 @@ function newDeck() {
             console.log("New deck is ready to be build");
         })
         .catch(function(err) {
-            console.log("Error 404: Could not connect to the server");
+            console.log("Error: couldn't add new deck");
         });*/
 }
 
@@ -265,8 +271,42 @@ function deleteDeck() {
             console.log("Deck is deleted");
         })
         .catch(function(err) {
-            console.log("Error 404: Could not connect to the server");
+            console.log("Error: couldn't delete deck");
         });*/
+}
+
+function selectHero(e) {
+    let hero = this.innerText.toLowerCase();
+    sendSelectedHero(hero);
+
+}
+
+function sendSelectedHero(heroName) {
+    console.log("Send selected hero: " + heroName);
+
+    /*
+    fetch('threebeesandme/post/deckbuilder/selecthero', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'playerHero': heroName                   // TODO: IMPORTANT!!!
+        }
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        console.log(result);
+        updateDecks();
+    })
+    .catch(function(err) {
+        console.log("Error: Could not send the selected hero :'(");
+    });
+    */
+
+    // todo: updateDecks()
 }
 
 function nodetailOfCard(e){

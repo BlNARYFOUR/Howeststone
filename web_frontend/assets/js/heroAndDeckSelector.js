@@ -121,7 +121,7 @@ function loadHeroes() {
     });
     */
 
-    showHeroes(["Mage", "Paladin"]);    // TODO: Must be replaced later by 'result'
+    showHeroes(["mage", "paladin"]);    // TODO: Must be replaced later by 'result'
 }
 
 function handleSelectedHero(e) {
