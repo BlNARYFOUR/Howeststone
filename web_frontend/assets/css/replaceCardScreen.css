@@ -16,7 +16,7 @@
     display: inline-block;
 }
 
-#randomCardsFromDeck {
+#replaceCardScreen ul {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,10 +28,27 @@
     width: 24vh;
 }
 
-#randomCardsFromDeck li {
+#replaceCardScreen ul li {
     margin-left: 2vh;
     margin-right: 2vh;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 19.8064516129vh;
+    height: 30vh;
+    transition: transform 0.25s;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    border: whitesmoke thin solid;
+    z-index: 1 !important;
+    line-height: 64vh;
+    background-size: 19vh;
 }
+
+
+#replaceCardScreen span {
+
+}
+
 
 #replaceCardScreen .buttonHolder {
     display: inline-block;
@@ -42,26 +59,10 @@
     height: 7vh;
     line-height: 7.5vh;
     text-align: center;
-    margin-top: 2vh;
+    margin-top: 5vh;
 }
 
-#replacedCards {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 29vh;
-    position: absolute;
-    right: 20vw;
-    bottom: 48vh;
-}
 
-#replacedCards li {
-    margin-left: 2vh;
-    margin-right: 2vh;
-}
 
 #replaceCardScreen .buttonHolder .insideButton {
     display: inline-block;
@@ -69,3 +70,6 @@
     line-height: 5.5vh;
     border-radius: 10% / 50%;
 }
+
+
+

@@ -6,26 +6,121 @@ let cardCounter = 0;
 let cardBackUrl = "";
 let dragSrcEl = null;
 let myCards = null;
+let timeLeftObj = null;
+
+let MOCKTIME = 50;
 
 function init() {
-    addFirstBetweenDrop();
     setupDraggingOfCards();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
     getRandomCardBack();
     //makeCardsFan("you", 1);
-
-    /*
-    document.getElementById("spark").addEventListener("click", burnFuse);
-    document.getElementById("fuse").addEventListener("click", burnFuse);
-    */
 }
 
 function setupGameBoard() {
-    document.getElementById('endTurn').addEventListener('click', endTurn);
+    document.getElementById('endTurn').addEventListener('click', endMyTurn);
+    document.getElementById('showBattleLog').addEventListener('click', showOrHideBattleLog);
 }
 
-function endTurn(e) {
+function showOrHideBattleLog(e) {
+    e.preventDefault();
+    document.querySelector("#gameBoard #battleLog").classList.toggle("hidden");
+}
+
+function loadBattleLog() {
+    /*
+    fetch('threebeesandme/howeststone/get/gameboard/battlelog', {
+        method: 'GET'
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        showBattleLog(result)
+    })
+    .catch(function(err) {
+        console.log("Error: Could not load the heroes :'(");
+    });
+    */
+
+    showBattleLog([ "Step attacked Brem",
+                    "Brem blocked Step",
+                    "Brem countered with Bert",
+                    "Brand stopped Bert",
+                    "Brand got burned",
+                    "Bert got torched",
+                    "Step died of exhaustion",
+                    "Brem got VICTORY"]);
+}
+
+function showBattleLog(logArr) {
+    let htmlBattleLogObj = document.querySelector("#gameBoard #battleLog");
+
+    for(let i=0; i<logArr.length; i++) {
+        htmlBattleLogObj.innerHTML += `<li>${logArr[i]}</li>`;
+    }
+}
+
+function startMyTurn() {
+    startTimeLeftCheck();
+    console.log("You're turn");
+    updateMyMana(1, 1);
+    updateMyCards();
+}
+
+function startTimeLeftCheck() {
+    // TODO: timeLeftObj = setInterval(timeLeft, 1000);
+
+    MOCKTIME = 50;
+    timeLeftObj = setInterval(MOCKTIMELEFT, 1000);
+}
+
+function MOCKTIMELEFT() {
+    MOCKTIME -= 1;
+
+    if(MOCKTIME <= 20) {
+        burnFuse();
+    }
+
+    if(MOCKTIME <= 0) {
+        endMyTurn();
+    }
+}
+
+function stopTimeLeftCheck() {
+    clearInterval(timeLeftObj);
+}
+
+function timeLeft() {
+    fetch('threebeesandme/howeststone/get/timeleft', {
+        method: 'GET'
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        console.log("Time left was retrieved from the server");
+        if(result <= 20) {
+            burnFuse();
+        }
+        else if(result <= 0) {
+            endMyTurn();
+        }
+    })
+    .catch(function(err) {
+        console.log("Error: Could not get time left");
+    });
+}
+
+function endMyTurn(e) {
+    stopTimeLeftCheck();
+    stopBurnFuse();
+
     /*
     fetch('threebeesandme/howeststone/post/endturn',{
         method: 'POST'
@@ -45,27 +140,56 @@ function endTurn(e) {
     console.log("turn end has been send to server");
 }
 
+function activateReplaceCards() {
+    // TODO background images replacen (li + span)
+    let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
+    for(let i = 0; i < replaceCards.length; i++){
+        replaceCards[i].addEventListener('click', toggleReplaceCard);
+    }
+}
 
+function deactivateReplaceCards() {
+    let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
+    for(let i = 0; i < replaceCards.length; i++){
+        replaceCards[i].removeEventListener('click', toggleReplaceCard);
+    }
+}
+let countReplaceCards = 0;
+function toggleReplaceCard(e) {
+    let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
+    countReplaceCards = replaceCards.length;
+    e.target.querySelector('span').classList.toggle('hidden');
+    for(let i = 0; i < replaceCards.length; i++){
+        if (replaceCards[i].querySelector('span').classList.contains('hidden')){
+            countReplaceCards -= 1;
+        }
+    }
+    if (countReplaceCards !== 0){
+        document.querySelector('#gotoCardsReplaced').innerHTML = 'Replace';
+    } else {
+        document.querySelector('#gotoCardsReplaced').innerHTML = 'Continue';
+    }
+
+
+}
 
 function firstTurn() {
+    console.log('test');
+    updateEnemyHero();
     updateEnemyMana(0, 0);
     updateEnemyCards(5);
+    updateMyHero();
     updateMyMana(0, 0);
     updateMyCards(3);
-    setTimeout(yourTurn, 1000);
-}
-function yourTurn() {
-    console.log("You're turn");
-    updateMyMana(1, 1);
-    updateMyCards(4);
-}
-function addFirstBetweenDrop() {
-    document.querySelector("#gameBoard .you .playingField .dropZone").innerHTML += '<li class="betweenDrop"></li>';
-
+    startMyTurn();
 }
 
-function burnFuse(e) {
+function burnFuse() {
     document.getElementById("fuse").classList.add("burn");
+}
+
+function stopBurnFuse() {
+    document.getElementById("fuse").classList.remove("burn");
 }
 
 function updateEnemyHero() {
@@ -108,7 +232,15 @@ function updateMyCards() {
 
     updateCards(myCards.length, "you", 1);
     setMyCards(myCards);
+    giveClassNameEqualToCardID();
     setupDraggingOfCards();
+}
+
+function giveClassNameEqualToCardID() {
+    let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
+    for(let i=0; i<myCards.length; i++){
+        cardHtmlObjects[i].classList.add(myCards[i].cardId);
+    }
 }
 
 function MOCKMYCARDS() {
@@ -366,8 +498,9 @@ function updateCards(amountOfCards, parent, gradDirectionIndex) {
         addOn = 'draggable="true"';
     }
 
+    // just li's
     for(let i=0; i<amountOfCards; i++) {
-        cards.innerHTML += `<li ${addOn}>Card ` + (i+1) + "</li>";
+        cards.innerHTML += `<li></li>`;
     }
 
     makeCardsFan(parent, gradDirectionIndex);
@@ -550,20 +683,146 @@ function setupDraggingOfCards() {
 
     let cards = document.querySelectorAll("#gameBoard .you .cards ul li");
 
-    document.draggable = false;
 
     for(let i=0; i<cards.length; i++) {
-        cards[i].addEventListener("dragstart", handleDragStart, false);
-        cards[i].addEventListener("drag", handleDrag, false);
-        cards[i].addEventListener("dragend", handleDragEnd, false);
-        cards[i].addEventListener("dragover", handleDragOver, false);
-        /*cards[i].addEventListener("dblclick", handleDoubleClickAsDrop, false);*/
+        cards[i].addEventListener("mousedown", touchStart);
+        cards[i].addEventListener("touchstart", touchStart);
     }
+}
+let drag;
+let dragOffsetX;
+let dragOffsetY;
 
-    document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("dragover", handleDragOver, false);
-    document.querySelector("#gameBoard .you .playingField .dropZone").addEventListener("drop", handleDrop, false);
+function touchStart(e) {
+
+    dragOffsetX = e.offsetX;
+    dragOffsetY = e.offsetY;
+
+    drag = e.target.cloneNode(true);
+    document.body.appendChild(drag);
+    drag.removeAttribute('style');
+
+    touchMove(e);
+    drag.style.zIndex = '1';
+    drag.style.width = '14.854838709677vh';
+    drag.style.height= '22.5vh';
+    drag.style.position = 'absolute';
+    drag.style.background = e.target.style.background;
+
+    document.addEventListener("touchmove", touchMove, false);
+    document.addEventListener("mousemove", touchMove, false);
+    document.addEventListener("mouseup", touchEnd, false);
+    document.addEventListener("touchend", touchEnd, false);
 }
 
+function touchMove(e) {
+    if (typeof e.clientX === "number"){
+        let XCoordinate = e.clientX - dragOffsetX;
+        let YCoordinate = e.clientY - dragOffsetY;
+        drag.style.left = XCoordinate + 'px';
+        drag.style.top = YCoordinate+ 'px';
+    }
+    else {
+        // Mattijs: the web browser cannot calculate the offset so I use this as default
+        let XCoordinate = e.touches[0].clientX - 40;
+        let YCoordinate = e.touches[0].clientY - 80;
+        drag.style.left = XCoordinate + 'px';
+        drag.style.top = YCoordinate+ 'px';
+    }
+}
+
+function emptyPlayingFieldDrop() {
+    let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
+    let rectDrag = drag.getBoundingClientRect();
+    let rectDropZone = dropZone.getBoundingClientRect();
+    if ((rectDrag.right < rectDropZone.right) && (rectDrag.left > rectDropZone.left) && (rectDrag.bottom < (rectDropZone.bottom + 100)) && (rectDrag.top > rectDropZone.top -100)){
+        let cardOnPlayingField = cloneDragElement();
+        dropZone.appendChild(cardOnPlayingField);
+    }
+}
+
+function cloneDragElement() {
+    let cardOnPlayingField = drag.cloneNode(true);
+    cardOnPlayingField.removeAttribute('style');
+    cardOnPlayingField.style.background = drag.style.background;
+    cardOnPlayingField.style.backgroundSize = "176%";
+    cardOnPlayingField.style.backgroundPositionY = "23%";
+    return cardOnPlayingField;
+}
+
+function calculateDropZones(dropZoneLi) {
+    let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
+    let rectDrag = drag.getBoundingClientRect();
+    let top = dropZone.getBoundingClientRect().top -100;
+    let bottom = dropZone.getBoundingClientRect().bottom + 100;
+    for (let i = 0; i< dropZoneLi.length -1; i++){
+        let left = dropZoneLi[i].getBoundingClientRect().left;
+        let right = dropZoneLi[i+1].getBoundingClientRect().right;
+        if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
+            let cardOnPlayingField = cloneDragElement();
+            dropZone.insertBefore(cardOnPlayingField, dropZoneLi[i+1]);
+            break;
+        }
+        right = left;
+        left = dropZone.getBoundingClientRect().left;
+        if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
+            let cardOnPlayingField = cloneDragElement();
+            dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
+            break;
+        }
+        left = dropZoneLi[i+1].getBoundingClientRect().right;
+        right = dropZone.getBoundingClientRect().right;
+        if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
+            let cardOnPlayingField = cloneDragElement();
+            dropZone.appendChild(cardOnPlayingField);
+            break;
+        }
+    }
+    if(dropZoneLi.length === 1){
+        let left = dropZone.getBoundingClientRect().left;
+        let right = dropZoneLi[0].getBoundingClientRect().left;
+        if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
+            let cardOnPlayingField = cloneDragElement();
+            dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
+        }else {
+            let left = dropZoneLi[0].getBoundingClientRect().left;
+            let right = dropZone.getBoundingClientRect().right;
+            if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
+                let cardOnPlayingField = cloneDragElement();
+                dropZone.appendChild(cardOnPlayingField);
+            }
+        }
+    }
+
+}
+
+
+function touchEnd(e) {
+    // TODO fetch check for card
+    let dropZoneLi = document.querySelectorAll('#gameBoard .you .playingField .dropZone li');
+    switch (dropZoneLi.length){
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+            calculateDropZones(dropZoneLi);
+            break;
+        case 7:
+            break;
+        default:
+            emptyPlayingFieldDrop();
+            break;
+
+    }
+    drag.parentElement.removeChild(drag);
+    document.removeEventListener("touchmove", touchMove, false);
+    document.removeEventListener("touchend", touchEnd, false);
+    document.removeEventListener("mousemove", touchMove, false);
+    document.removeEventListener("mouseup", touchEnd, false);
+}
+/*
 function handleDragStart(e) {
     e.stopImmediatePropagation();
     dragSrcEl = e.target;
@@ -591,11 +850,14 @@ function handleDragOver(e) {
 }
 
 function handleDrop(e) {
+    // control serverSided !!
+    let countOfListItemsInDropZone = document.querySelectorAll('.dropZone li').length;
     e.stopPropagation();
 
-    if ( e.target.className === "dropZone" ) {
+    if ( e.target.className === "dropZone" && countOfListItemsInDropZone < 7) {
         // left and right
         dropInDropZone(dragSrcEl, e.target);
+        updateMyCards();
         makeCardsFan("you", 1);
     } else {
         if (e.target.innerHTML.indexOf('Card') !== -1){
@@ -610,8 +872,19 @@ function handleDoubleClickAsDrop(e) {
     dropInDropZone(e.target, document.querySelector("#gameBoard .you .playingField .dropZone"));
 	updateMyCards();
 }
+function returnTypeOfMyCards(liWithClass) {
+    let cardId = liWithClass.getAttribute('class');
+    for(let i=0; i<myCards.length; i++){
+        if (cardId.indexOf(myCards[i].cardId) !== -1){
+            return myCards[i].type;
+        }
+    }
+    return null;
+}
 
 function dropInDropZone(dragSrcElement, dropZoneElement) {
+
+    /* gone
     dragSrcElement.draggable = false;
     dragSrcElement.removeEventListener("dblclick", handleDoubleClickAsDrop);
 
@@ -627,4 +900,56 @@ function dropInDropZone(dragSrcElement, dropZoneElement) {
     // appendChild cannot be used
     dropZoneElement.appendChild(dragSrcElement);
     dropZoneElement.innerHTML += '<li class="betweenDrop"></li>';
+    // give minion class nonAttack
+    // check if charge is present
+    // check if battlecry is present
+    let type = returnTypeOfMyCards(dragSrcElement);
+    switch (type){
+        case 'Minion':
+            dropZoneElement.appendChild(dragSrcElement);
+            break;
+        case 'Weapon':
+            document.querySelector('.weapon').appendChild(dragSrcElement);
+            break;
+    }
+    dragSrcElement.addEventListener('click', visualiseAttack)
+}*/
+function endturn() {
+    // delete all class nonAttack
+}
+
+function visualiseAttack(e) {
+    // check if a card has class nonAttack
+    // check if their is one or more minions with taunt
+    // not attack on other minions
+    // begin drag&drop without removing li
+    // dragend check on what element the target is dropped and does the *real* attack function
+    console.log('cannot attack');
+    attack();
+}
+
+function attack() {
+    // get source and destination
+    // armor Hero
+    // sHealth sAttack dHealth dAttack
+    // check if card has stealth
+    // remove source stealth
+    // check if card has divine shield
+    // remove divine shield
+    // dHealth - sAttack = dHealth
+    // enable enraged
+    // check if dHealth is under 0 or (source has poisonous and destination is minion)
+    // destroyed()
+    // sHealth - dAttack = sHealth
+    // enable enraged
+    // check if sHealth is under 0 or (destination has poisonous and source is minion)
+    // destroyed()
+    // check if card has windfury and windfury hasn't been triggered
+    // give minion class nonAttack
+}
+
+function destroyed() {
+    // check if card has deathrattle
+    // win || lose
+    // discard card
 }
