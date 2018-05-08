@@ -950,7 +950,21 @@ function visualiseAttack(e) {
     attack();
 }
 function attackStart(e) {
-    // TODO fetch
+    fetch('threebeesandme/post/gameboard/attackStart',{
+        method: 'POST'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("attack start has been send to server");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not start attack");
+        });
+
     let target = e.target;
     if (e.path[0].tagName === 'SPAN'){
         target = e.target.parentElement;
