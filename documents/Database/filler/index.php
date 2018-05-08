@@ -15,7 +15,7 @@ foreach ($data as $row) {
     $stmt->bindParam(6, $row['damage']);
     $stmt->bindParam(7, $row['manaCost']);
     $stmt->bindParam(8, $row['heroId']);
-    
+    $stmt->bindParam(9, $row['race']);
 }
 
 include_once "assets/php/classes/LoadPages.php";
