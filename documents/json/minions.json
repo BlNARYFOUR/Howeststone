@@ -2278,7 +2278,7 @@
     "type": "Minion",
     "faction": "Neutral",
     "rarity": "Common",
-    "cost": 1,
+    "cost": 0,
     "attack": 1,
     "health": 1,
     "race": "Beast",
@@ -2557,7 +2557,34 @@
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_120_premium.gif",
     "locale": "enUS"
   },
-
+  {
+    "cardId": "EX1_306",
+    "dbfId": "592",
+    "name": "Succubus",
+    "cardSet": "Basic",
+    "type": "Minion",
+    "faction": "Neutral",
+    "rarity": "Free",
+    "cost": 2,
+    "attack": 4,
+    "health": 3,
+    "text": "Battlecry: Discard a random card.",
+    "flavor": "Warlocks have it pretty good.",
+    "artist": "Matt Dixon",
+    "collectible": true,
+    "race": "Demon",
+    "playerClass": "Warlock",
+    "howToGet": "Unlocked at Level 1.",
+    "howToGetGold": "Unlocked at Level 40.",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_306.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_306_premium.gif",
+    "locale": "enUS",
+    "mechanics": [
+      {
+        "name": "Battlecry"
+      }
+    ]
+  },
   {
     "cardId": "EX1_582",
     "dbfId": "175",
@@ -3456,80 +3483,5 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_186.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_186_premium.gif",
     "locale": "enUS"
-  },
-  {
-    "cardId": "GVG_123",
-    "dbfId": "2249",
-    "name": "Soot Spewer",
-    "cardSet": "Goblins vs Gnomes",
-    "type": "Minion",
-    "rarity": "Rare",
-    "cost": 3,
-    "attack": 3,
-    "health": 3,
-    "text": "<b>Spell Damage +1</b>",
-    "flavor": "The inventor of the goblin shredder is involved in several patent disputes with the inventor of the soot spewer.",
-    "artist": "Phil Saunders",
-    "collectible": true,
-    "race": "Mech",
-    "playerClass": "Mage",
-    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/GVG_123.png",
-    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/GVG_123_premium.gif",
-    "locale": "enUS",
-    "mechanics": [
-      {
-        "name": "Spell Damage"
-      }
-    ]
-  },
-  {
-    "cardId": "OG_120",
-    "dbfId": "38463",
-    "name": "Anomalus",
-    "cardSet": "Whispers of the Old Gods",
-    "type": "Minion",
-    "rarity": "Legendary",
-    "cost": 8,
-    "attack": 8,
-    "health": 6,
-    "text": "<b>Deathrattle:</b> Deal 8 damage to all minions.",
-    "flavor": "That's short for \"Anomnomnomnomalus\".",
-    "artist": "Kan Liu",
-    "collectible": true,
-    "elite": true,
-    "race": "Elemental",
-    "playerClass": "Mage",
-    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/OG_120.png",
-    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/OG_120_premium.gif",
-    "locale": "enUS",
-    "mechanics": [
-      {
-        "name": "Deathrattle"
-      }
-    ]
-  },
-  {
-    "cardId": "OG_083",
-    "dbfId": "38409",
-    "name": "Twilight Flamecaller",
-    "cardSet": "Whispers of the Old Gods",
-    "type": "Minion",
-    "rarity": "Common",
-    "cost": 3,
-    "attack": 2,
-    "health": 2,
-    "text": "<b>Battlecry:</b> Deal 1 damage to all enemy minions.",
-    "flavor": "Make sure you summon a Twilight Marshmallowcaller too! Mmmm Mmm Mmm!!",
-    "artist": "Anton Zemskov",
-    "collectible": true,
-    "playerClass": "Mage",
-    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/OG_083.png",
-    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/OG_083_premium.gif",
-    "locale": "enUS",
-    "mechanics": [
-      {
-        "name": "Battlecry"
-      }
-    ]
   }
 ]
