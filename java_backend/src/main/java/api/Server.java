@@ -1,6 +1,5 @@
 package api;
 
-import cardProperties.Mechanics;
 import io.javalin.Javalin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
