@@ -7,4 +7,6 @@ public class Card {
     private String rarity;
     private int manaCost;
     // list with all abilities and mechanics?
+
+    // method playCard
 }

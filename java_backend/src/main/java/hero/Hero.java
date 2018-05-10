@@ -7,4 +7,5 @@ public class Hero {
     private int heroPowerID;
     // private String heroPowerName;
 
+    // method use heroPower
 }
