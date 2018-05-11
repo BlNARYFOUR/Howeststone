@@ -716,7 +716,7 @@ function itIsOkToPlayCard() {
         dropZone.appendChild(cardPlayed);
         addMinionToPlayingField(cardPlayed);
     } else{
-        let dropZone = document.querySelector('#gameBoard .you .weapon');
+        let dropZone = document.querySelector('#gameBoard .you .weapon ul');
         dropZone.innerHTML = '';
         dropZone.appendChild(cardPlayed);
         addWeaponToPlayingField(cardPlayed);
@@ -1057,8 +1057,8 @@ function heroAttackEnd() {
         dragSrcElement.parentElement.removeChild(dragSrcElement);
         if (heroAttack === false){
             deactivateHeroAttack();
-            let oldDurability = document.querySelector('#gameBoard .you .weapon li .durability').innerHTML;
-            document.querySelector('#gameBoard .you .weapon li .durability').innerHTML = oldDurability -1;
+            let oldDurability = document.querySelector('#gameBoard .you .weapon ul li .durability').innerHTML;
+            document.querySelector('#gameBoard .you .weapon ul li .durability').innerHTML = oldDurability -1;
         }
     } catch (err){
         console.log('nothing can be removed' + err);
