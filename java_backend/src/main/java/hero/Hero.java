@@ -5,7 +5,8 @@ public class Hero {
     private String heroName;
     private int heroID;
     private int heroPowerID;
-    // private String heroPowerName;
 
+
+    // method hasWeapon
     // method use heroPower
 }
