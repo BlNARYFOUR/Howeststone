@@ -12,8 +12,7 @@ CREATE TABLE Heroes (
 	heroId INT(2) AUTO_INCREMENT NOT NULL,
 	heroName VARCHAR(30) NOT NULL,
 	health INT(2) NOT NULL,
-	CONSTRAINT pk_heroes PRIMARY KEY(heroId),
-	CONSTRAINT fk_Heroes FOREIGN KEY(heroPowerId) REFERENCES HeroPowers(heroPowerId)
+	CONSTRAINT pk_heroes PRIMARY KEY(heroId)
 )ENGINE = INNODB;
 
 CREATE TABLE Cards (
