@@ -104,9 +104,9 @@ function showHeroes(heroes) {
 }
 
 function loadHeroes() {
-    /*
-    fetch('threebeesandme/howeststone/get/heroanddeckselector/heroes', {
-        method: 'GET'
+    fetch('http://localhost:4242/threebeesandme/howeststone/get/heroanddeckselector/heroes', {
+        method: 'GET',
+        mode: 'no-cors'
     })
     .then(function(res) {
         if(res.ok === true)
@@ -119,9 +119,9 @@ function loadHeroes() {
     .catch(function(err) {
         console.log("Error: Could not load the heroes :'(");
     });
-    */
 
-    showHeroes(["Mage", "Paladin"]);    // TODO: Must be replaced later by 'result'
+
+    //showHeroes(["Mage", "Paladin"]);    // TODO: Must be replaced later by 'result'
 }
 
 function handleSelectedHero(e) {

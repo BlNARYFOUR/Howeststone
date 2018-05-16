@@ -1,5 +1,8 @@
 package api;
 
+import game.GameBoard;
+import game.Player;
+import hero.Hero;
 import io.javalin.Context;
 import io.javalin.Javalin;
 
@@ -9,6 +12,11 @@ class Routes {
         // case sensitive
         server.get("/API/getAllCards", this::getAllCards);
         server.get("/", this::handleRoot);
+        server.get("/threebeesandme/howeststone/get/heroanddeckselector/heroes", this::loadHeroes);
+    }
+
+    private void loadHeroes(Context context) {
+        context.result("[Mage, Paladin]");
     }
 
     private void getAllCards(Context context) {
