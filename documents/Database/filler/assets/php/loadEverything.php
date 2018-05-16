@@ -22,6 +22,7 @@ foreach($mechanicNames as $mechanicName) {
     $stmt->execute();
 }
 
+/*
 $jsondata = file_get_contents('minions.json');
 $data =json_decode($jsondata, true);
 
