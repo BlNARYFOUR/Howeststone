@@ -1039,8 +1039,7 @@ function heroAttackEnd() {
     }
     for (let i = 0; i < enemies.length; i++){
         let enemy = enemies[i].getBoundingClientRect();
-        // TODO make the area bigger so that the hero can attack
-        if ((rectDrag.right < enemy.right+13) && (rectDrag.left > enemy.left-13) && (rectDrag.bottom < enemy.bottom+26) && (rectDrag.top > enemy.top-18)) {
+        if ((rectDrag.right < enemy.right+30) && (rectDrag.left > enemy.left-30) && (rectDrag.bottom < enemy.bottom+50) && (rectDrag.top > enemy.top-50)) {
             console.log('attack');
             console.log(enemies[i]);
             heroAttack = false;
