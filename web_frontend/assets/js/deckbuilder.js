@@ -8,7 +8,6 @@ let ManaFilterChecked = false;
 let cardRarityFilterChecked = false;
 
 function nextTutorial() {
-
     document.querySelector('#tutorials li:nth-child(' +tutorialli+ ')').className = "hidden";
     tutorialli += 1;
     document.querySelector('#tutorials li:nth-child(' + tutorialli + ')').className = "";
@@ -24,16 +23,40 @@ function tutorial() {
 
 }
 
+
+function searchTest(e) {
+    e.preventDefault();
+    console.log(document.getElementById('search').value);
+
+    // Declare variable
+    let cardsInDeck = document.querySelectorAll('#cards li');
+    // TODO fetch for search
+    // Loop through all list items, and hide those who don't match the search query
+    for (let i = 0; i < cardsInDeck.length; i++) {
+        let img = cardsInDeck[i].getElementsByTagName("img")[0];
+        if (img.getAttribute('id').toUpperCase().indexOf(document.getElementById('search').value.toUpperCase()) > -1) {
+            cardsInDeck[i].style.display = "";
+        } else {
+            cardsInDeck[i].style.display = "none";
+        }
+    }
+}
+
+function donNotSubmit(e) {
+    e.preventDefault();
+}
+
 function init() {
     /*tutorial();*/
-
+    
+    document.querySelector('#deckbuilder aside form').addEventListener('submit', donNotSubmit);
+    document.getElementById('search').addEventListener('input', searchTest);
     document.getElementById('search').addEventListener('input', search);
     document.getElementById('sort').addEventListener('change', sort);
     document.getElementById('firstFilter').addEventListener('change',filterCards);
     document.getElementById('secondFilter').addEventListener('change',filterCards);
     document.getElementById('thirdFilter').addEventListener('change',filterCards);
     document.getElementById('fourthFilter').addEventListener('change',filterCards);
-
     document.querySelector('#firstadd').addEventListener('click', firstadd);
 
     checkallcards();
@@ -103,8 +126,7 @@ function checkallcards() {
     let cardInDeck = document.querySelectorAll(".cardInDeck");
     for(let i = 0 ; i < cardInDeck.length; i++){
         cardInDeck[i].addEventListener('dblclick', addCardToDeck);
-        //cardInDeck[i].addEventListener('mouseover', detailOfCard);
-        //cardInDeck[i].addEventListener('mouseout', nodetailOfCard);
+        cardInDeck[i].addEventListener('dragstart', )
     }
     let chosenCards = document.querySelectorAll(".chosenCards");
     let lenghtAllCards = document.querySelectorAll(".two").length + chosenCards.length;

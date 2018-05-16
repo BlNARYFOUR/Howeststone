@@ -36,11 +36,9 @@
 <body>
 
 <audio id="mainMenuMusic" autoplay loop>
-    <source src="assets/media/tavernAmbienceMusic.mp3" type="audio/mpeg">
+    <source src="assets/media/menu_howeststone.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
-
-<a id="playMainMenuMusic" class="hidden" href="#">Play</a>
 
 <div id="mainMenu" class="">
     <div class="menuBox">
@@ -271,7 +269,7 @@
 
             <li class="playingField">
                 <ul>
-                    <li class="CS2_059" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png") center 23% / 176% no-repeat;'></li><li class="EX1_319" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png") center 23% / 176% no-repeat;'></li><li class="CS2_188" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png") center 23% / 176% no-repeat;'></li><li class="EX1_012" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png") center 23% / 176% no-repeat;'><span class="legendary"></span></li>
+                    <li class="CS2_059" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span></li><li class="EX1_319" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span></li><li class="CS2_188" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span></li><li class="EX1_012" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span><span class="legendary"></span></li>
                 </ul>
             </li>
         </ul>
@@ -281,16 +279,6 @@
                 <ul>
                     <!-- must be generated in JS -->
                     <!--
-                    <li draggable="true">Card 1</li>
-                    <li draggable="true">Card 2</li>
-                    <li draggable="true">Card 3</li>
-                    <li draggable="true">Card 4</li>
-                    <li draggable="true">Card 5</li>
-                    <li draggable="true">Card 6</li>
-                    <li draggable="true">Card 7</li>
-                    <li draggable="true">Card 8</li>
-                    <li draggable="true">Card 9</li>
-                    <li draggable="true">Card 10</li>
                     -->
                 </ul>
             </li>
@@ -416,6 +404,12 @@
         <span class="buttonHolder"><a href="#" class="insideButton" id="gotoLeaveOptions">Back</a></span>
     </div>
 </div>
+
+<footer>
+    <ul>
+        <li class="" id="playMainMenuMusic"></li>
+    </ul>
+</footer>
 
 <!-- LET LOADING SCREEN BE THE LAST DIV!!! -->
 <div id="loadingScreen" class="hidden">
