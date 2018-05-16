@@ -2,10 +2,30 @@
 
 $db = new PDO('mysql:host=localhost;dbname=howeststone');
 
+$mechanicNames = ["Charge", "Divine Shield", "Windfury", "Battlecry", "Taunt", "Poisonous", "Deathrattle", "enrage", "Stealth"];
+
+/*
+ * Charge
+ * Divine Shield
+ * Windfury
+ * Battlecry
+ * Taunt
+ * Poisonous
+ * Deathrattle
+ * Enrage
+ * Stealth
+ */
+
+foreach($mechanicNames as $mechanicName) {
+    $stmt = $db->prepare("insert into mechanics (mechanicName) values (:name)");
+    $stmt->bindParam(":name", $mechanicName);
+    $stmt->execute();
+}
+
 $jsondata = file_get_contents('minions.json');
 $data =json_decode($jsondata, true);
 
-$stmt = $db->prepare("insert into cards values(?,?,?,?,?,?,?,?,?)");
+$stmt = $db->prepare("insert into cards (cardName, cardType, img, rarity, attack, health, manaCost, heroId) values (?,?,?,?,?,?,?,?,?)");
 
 foreach ($data as $row) {
     $stmt->bindParam(1, $row['cardName']);
