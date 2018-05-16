@@ -3,6 +3,7 @@ package deckbuilder; /*
   Have a nice day!
  */
 
+import com.sun.xml.internal.bind.v2.TODO;
 import hero.Hero;
 
 public class Deckbuilder {
@@ -13,13 +14,49 @@ public class Deckbuilder {
     private String sortOption;
 
 
-    public void saveDeck() {
-        //checkIfDeckIsFull()
-        // INSERT_DECK(deckName, getSelectedHero.getId)
-        // INSERT_CARDSINDECK
+    public void addCardToDeck() {
+
     }
 
+    public void deleteCardToDeck() {
 
+    }
+
+    public void saveDeck() {
+        // checkIfDeckIsFull()
+        // INSERT_DECK(deckName, getSelectedHero.getId)
+        // INSERT_CARDSINDECK
+        //TODO
+    }
+
+    public void showCardsOfHero(Hero selectedHero) {
+        //TODO
+    }
+
+    public void filterCards() {
+        //TODO
+    }
+
+    public void sortCards() {
+        //TODO
+    }
+
+    public void searchCards() {
+        //TODO
+    }
+
+    public void switchDeck() {
+        if (deckIsSaved()) {
+            //TODO
+        } else {
+            throw new IllegalArgumentException("Your current deck hasn't been saved yet!");
+        }
+    }
+
+    private boolean deckIsSaved() {
+        return true;
+        //TODO
+    }
 
     public Hero getSelectedHero() {
         return selectedHero;
