@@ -6,7 +6,18 @@ public class Card {
     private String urlOfImg;
     private String rarity;
     private int manaCost;
-    // list with all abilities and mechanics?
 
+    public Card() {
+        // TODO random card
+        this.cardID = 1;
+    }
+
+    public String toString() {
+        return String.valueOf(cardID);
+    }
+
+    // list with all abilities and mechanics?
     // method playCard
+
+
 }

@@ -15,7 +15,6 @@ public class StartUp {
         // TODO standard (random) deck ???
         // not yet full
         // howeststone.setDeck("Standard");
-
-
+        // System.out.println(howeststone.getDeck());
     }
 }
