@@ -1,5 +1,7 @@
 package hero;
 
+import cards.CardCollection;
+
 public class Hero {
     private int mageAttack;
     private int health;
@@ -16,9 +18,17 @@ public class Hero {
         }if(heroName.equals("Paladin")){
             this.heroName = "Paladin";
             this.heroPowerID = 1;
+        }else {
+          throw new IllegalArgumentException("Hero only Paladin or Mage");
         }
 
     }
-// method hasWeapon
+
+    @Override
+    public String toString() {
+        return heroName;
+    }
+
+    // method hasWeapon
     // method use heroPower
 }
