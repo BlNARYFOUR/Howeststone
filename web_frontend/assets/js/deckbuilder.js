@@ -2,6 +2,10 @@
 
 document.addEventListener('DOMContentLoaded', init);
 let tutorialLi = 1;
+let dragged;
+let cardTypeFilterChecked = false;
+let ManaFilterChecked = false;
+let cardRarityFilterChecked = false;
 
 function nextTutorial() {
     document.querySelector('#tutorials li:nth-child(' +tutorialLi+ ')').className = "hidden";
@@ -18,6 +22,7 @@ function tutorial() {
     document.getElementById('next').addEventListener('click', nextTutorial);
 
 }
+
 
 function searchTest(e) {
     e.preventDefault();
@@ -118,9 +123,16 @@ function clickOnCardInDeck(e) {
 }
 
 function init() {
-    // tutorial();
+    /*tutorial();*/
+    
     document.querySelector('#deckbuilder aside form').addEventListener('submit', donNotSubmit);
     document.getElementById('search').addEventListener('input', searchTest);
+    document.getElementById('search').addEventListener('input', search);
+    document.getElementById('sort').addEventListener('change', sort);
+    document.getElementById('firstFilter').addEventListener('change',filterCards);
+    document.getElementById('secondFilter').addEventListener('change',filterCards);
+    document.getElementById('thirdFilter').addEventListener('change',filterCards);
+    document.getElementById('fourthFilter').addEventListener('change',filterCards);
     document.querySelector('#firstAdd').addEventListener('click', firstAdd);
 
     let myCards = MOCKMYCARDS() ;
@@ -245,4 +257,111 @@ function removeCardFromDeck(card) { //remove eventlistener niet vergeten (nu nog
         card.parentNode.remove();
     }
     checkAllCards();
+}
+
+function detailOfCard(e) {
+    this.lastChild.lastChild.style.display = 'block';
+}
+
+function search(e) {
+    e.preventDefault();
+    console.log(document.getElementById('search').value);
+
+    // Declare variables
+    let input, filter, ul, li, img, i;
+    input = document.getElementById('search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("cards");
+    li =ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        img = li[i].getElementsByTagName("img")[0];
+        if (img.getAttribute('id').toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function sort() {
+    let sort =  document.getElementById('sort');
+    let sortValue = sort.options[sort.selectedIndex].value;
+
+        console.log(sortValue);
+
+        /*fetch('threebeesandme/howeststone/post/deckbuilder/sort?by='+sortValue, {
+                method: 'post',
+            })
+            .then(function(res) {
+                if(res.ok === true)
+                    return res.json();
+            })
+
+            .catch(function(err) {
+                console.log("Error 404: Could not connect to the server");
+            });*/
+}
+
+
+function filterCards() {
+    let specificCardsFilter =  document.getElementsByName('specificCards');
+    let cardTypesFilter = document.getElementsByName('cardTypes');
+    let ManaFilter = document.getElementsByName('Mana');
+    let cardRarityFilter = document.getElementsByName('cardRarity');
+
+
+    let filterArray = [];
+
+
+    for (let i = 0; i < specificCardsFilter.length; i++) {
+        if (specificCardsFilter[i].checked){
+            filterArray.push(specificCardsFilter[i].value);
+        }
+    }
+
+    for (let i = 0; i < cardTypesFilter.length; i++) {
+        if (cardTypesFilter[i].checked){
+            filterArray.push(cardTypesFilter[i].value);
+            cardTypeFilterChecked = true;
+        }
+    }
+    if (cardTypeFilterChecked === false) {
+        filterArray.push(-1);
+    }
+
+    for (let i = 0; i < ManaFilter.length; i++) {
+        if (ManaFilter[i].checked){
+            filterArray.push(ManaFilter[i].value);
+            ManaFilterChecked = true;
+        }
+    }
+    if (ManaFilterChecked === false) {
+        filterArray.push(-1);
+    }
+
+    for (let i = 0; i < cardRarityFilter.length; i++) {
+        if (cardRarityFilter[i].checked){
+            filterArray.push(cardRarityFilter[i].value);
+            cardRarityFilterChecked = true;
+        }
+    }
+    if (cardRarityFilterChecked === false) {
+        filterArray.push(-1);
+    }
+
+    console.log(filterArray);
+
+    /*fetch('threebeesandme/howeststone/post/deckbuilder/filterCards', {
+        method: 'post',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        })*/
 }
