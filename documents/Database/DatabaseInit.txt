@@ -35,6 +35,10 @@ CREATE TABLE Cards (
 	damage INT(2),
 	manaCost INT(2) NOT NULL,
 	heroId INT(2),
+	abilityType1 VARCHAR(30),
+	abilityType2 VARCHAR(30),
+	abilityValue1 INT(2),
+	abilityValue2 INT(2),
 	CONSTRAINT pk_cards PRIMARY KEY(cardId),
 	CONSTRAINT fk_cards FOREIGN KEY(heroId) REFERENCES Heroes(heroId)
 )ENGINE = INNODB;
