@@ -9,7 +9,8 @@ public class Player {
     CardCollection cardsOnPlayingField;
     CardCollection cardsInDeck;
 
-    void beginTurn(){
-
+    void beginTurn() {
+        // +1 mana until 10
+        // draw card
     }
 }

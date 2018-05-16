@@ -6,6 +6,7 @@ import io.javalin.Javalin;
 class Routes {
 
     Routes(final Javalin server) {
+        // case sensitive
         server.get("/API/getAllCards", this::getAllCards);
         server.get("/", this::handleRoot);
     }
@@ -15,7 +16,7 @@ class Routes {
     }
 
     private void handleRoot(final Context context) {
-        context.result("Hello you i");
+        context.result("Hello you");
     }
 
 
