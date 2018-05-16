@@ -18,4 +18,12 @@ public class SqlStatements {
 
     public static final String SElECT_MECHANICS =
             "SELECT * FROM Decks;";
+
+    public static final String INSERT_DECK =
+            "INSERT INTO `howeststone `.`Decks` (`deckName`, `heroId`) " +
+                    "VALUES (?, ?);";
+
+    public static final String INSERT_CARDSINDECK =
+            "INSERT INTO `howeststone `.`CardsInDecks` (`deckId`, `cardId`) " +
+                    "VALUES (?, ?);";
 }
