@@ -33,7 +33,7 @@ CREATE TABLE Cards (
 )ENGINE = INNODB;
 
 CREATE TABLE cardMechanics (
-	mechanicId INT(1) NOT NULL,
+	mechanicId INT(3) NOT NULL,
 	cardId INT(3) NOT NULL,
 	CONSTRAINT pk_cardMechanics PRIMARY KEY(mechanicId, cardId),
 	CONSTRAINT fk_cardMechanics FOREIGN KEY(mechanicId) REFERENCES Mechanics(mechanicId),

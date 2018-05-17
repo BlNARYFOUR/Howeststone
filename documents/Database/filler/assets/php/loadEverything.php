@@ -3,7 +3,7 @@
 $db = new PDO('mysql:host=localhost;dbname=howeststone');
 
 $mechanicNames = ["Charge", "Divine Shield", "Windfury", "Battlecry", "Taunt", "Poisonous", "Deathrattle", "enrage", "Stealth"];
-$heroNames = ["Mage", "Palading"];
+$heroNames = ["Mage", "Paladin"];
 /*
  * Charge
  * Divine Shield
