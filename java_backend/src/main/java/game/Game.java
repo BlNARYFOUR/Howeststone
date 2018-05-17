@@ -4,7 +4,14 @@ import cards.CardCollection;
 import hero.Hero;
 import sun.security.krb5.internal.crypto.DesMacCksumType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
+    // TODO: MOCKERS
+    protected static final String[] MOCKED_HEROES = {"Mage", "Paladin"};
+
+    // TODO: actual fields
     private Hero you;
     private CardCollection deck;
 
@@ -17,8 +24,8 @@ public class Game {
     }
 
     // TODO change to multiple Heroes
-    public String getHeroes() {
-        return "Mage Paladin";
+    public String[] getHeroNames() {
+        return MOCKED_HEROES;
     }
 
     // TODO change to multiple Decks
@@ -35,5 +42,15 @@ public class Game {
 
     public CardCollection getDeck() {
         return deck;
+    }
+
+    public List<String> getDeckNames() {
+        List<String> mocked = new ArrayList<String>();
+
+        mocked.add("Standard");
+        mocked.add("Deck 1");
+        mocked.add("Deck 2");
+
+        return mocked;
     }
 }
