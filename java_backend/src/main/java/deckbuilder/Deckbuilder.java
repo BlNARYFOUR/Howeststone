@@ -14,21 +14,28 @@ public class Deckbuilder {
 
 
     public void addCardToDeck() {
-
+        // check if card isn't already in deck ==> if ! legendary card: check if there are 2 copies ==> ADD_CARD_COPY
+        // INSERT_CARDSINDECK(deckId, cardId)
     }
 
     public void deleteCardToDeck() {
-
+        // check number of copies
+        // if number is 2 ==> DELETE_CARD_COPY
+        // else DELETE_CARD
     }
 
     public void saveDeck() {
         // checkIfDeckIsFull()
         // INSERT_DECK(deckName, getSelectedHero.getId)
         // INSERT_CARDSINDECK
-        //TODO
     }
 
     public void showCardsOfHero(Hero selectedHero) {
+        // for (Card card: allcards) {
+        //      if ( ! card.getHeroId = selectedHero.getId) {
+        //              zet card hidden
+        //      }
+        // }
         //TODO
     }
 
