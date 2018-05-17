@@ -16,7 +16,7 @@ class Routes {
     }
 
     private void loadHeroes(Context context) {
-        context.result("[Mage, Paladin]");
+        context.result("[\"Mage\",\"Paladin\"]");
     }
 
     private void getAllCards(Context context) {
