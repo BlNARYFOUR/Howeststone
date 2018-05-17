@@ -29,8 +29,12 @@ public class StartUp {
         System.out.println(howeststone.getDeckNames());
         // TODO standard (random) deck ???
         // not yet full
-        // howeststone.setDeck("Standard");
-        // System.out.println(howeststone.getDeck());
+        howeststone.setDeck("Standard");
+        //System.out.println(howeststone.getDeck()
+        Player you = new Player(howeststone.getHero());
+        GameBoard gb = new GameBoard(you, howeststone.getDeck());
+        System.out.println(gb);
+
     }
 
     private String askInputUntilFoundInList(List<String> list) {

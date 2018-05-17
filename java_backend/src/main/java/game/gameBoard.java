@@ -13,9 +13,9 @@ public class GameBoard {
     */
     private int turnTime;
 
-    public GameBoard(Player player, Player enemy) {
+    public GameBoard(Player player, CardCollection deck) {
         this.player = player;
-        this.enemy = enemy;
+        this.enemy = getEnemy();
         this.turnTime = 50;
         beginGame();
     }
@@ -52,5 +52,10 @@ public class GameBoard {
 
     private void giveTurn(){
 
+    }
+
+    public Player getEnemy() {
+        Hero enemyHero = new Hero("Mage");
+        return new Player(enemyHero);
     }
 }

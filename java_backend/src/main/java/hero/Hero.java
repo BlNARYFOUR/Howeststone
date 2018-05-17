@@ -11,15 +11,18 @@ public class Hero {
 
     public Hero(String heroName){
         this.health = 30;
-        if(heroName.equals("Mage")){
-            this.heroName = "Mage";
-            this.heroPowerID = 0;
-            this.mageAttack = 1;
-        }if(heroName.equals("Paladin")){
-            this.heroName = "Paladin";
-            this.heroPowerID = 1;
-        }else {
-          throw new IllegalArgumentException("Hero only Paladin or Mage");
+        switch (heroName) {
+            case "Mage":
+                this.heroName = "Mage";
+                this.heroPowerID = 0;
+                this.mageAttack = 1;
+                break;
+            case "Paladin":
+                this.heroName = "Paladin";
+                this.heroPowerID = 1;
+                break;
+            default:
+                throw new IllegalArgumentException("Hero only Paladin or Mage");
         }
 
     }
