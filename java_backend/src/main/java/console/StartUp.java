@@ -1,5 +1,6 @@
 package console;
 
+import console.formatters.ColorFormats;
 import game.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,15 +46,15 @@ public class StartUp {
             input = scanner.nextLine();
 
             if(!list.contains(input)) {
-                System.out.println("\033[31;1mThis is not an option!");
-                System.out.println("\033[0mThe available options are:");
+                System.out.println(ColorFormats.red("This is not an option!"));
+                System.out.println("The available options are:");
 
                 System.out.println(formatList(list));
             }
         }
         while(!list.contains(input));
 
-        System.out.println("\033[31;1mSelected: \033[32m" + input + "\033[0m");
+        System.out.println(ColorFormats.red("Selected: ") + ColorFormats.green(input));
 
         return input;
     };
