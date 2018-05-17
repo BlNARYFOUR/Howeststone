@@ -4,18 +4,16 @@ import console.formatters.ColorFormats;
 import game.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class StartUp {
+public class Display {
     private Scanner scanner = new Scanner( System.in );
 
     public static void main(String[] args) {
-        new StartUp().run();
+        new Display().run();
     }
 
     private void run() {
