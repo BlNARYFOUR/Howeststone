@@ -3,7 +3,7 @@
 $db = new PDO('mysql:host=localhost;dbname=howeststone');
 
 $mechanicNames = ["Charge", "Divine Shield", "Windfury", "Battlecry", "Taunt", "Poisonous", "Deathrattle", "enrage", "Stealth"];
-
+$heroNames = ["Mage", "Palading"];
 /*
  * Charge
  * Divine Shield
@@ -16,11 +16,18 @@ $mechanicNames = ["Charge", "Divine Shield", "Windfury", "Battlecry", "Taunt", "
  * Stealth
  */
 
-foreach($mechanicNames as $mechanicName) {
+foreach($heroNames as $heroName) {
+    $stmt = $db->prepare("insert into heroes (heroName) values (:name)");
+    $stmt->bindParam(":name", $heroName);
+    $stmt->execute();
+}
+
+/*foreach($mechanicNames as $mechanicName) {
     $stmt = $db->prepare("insert into mechanics (mechanicName) values (:name)");
     $stmt->bindParam(":name", $mechanicName);
     $stmt->execute();
 }
+*/
 
 /*
 $jsondata = file_get_contents('minions.json');
