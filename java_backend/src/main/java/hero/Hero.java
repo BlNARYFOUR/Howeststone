@@ -3,6 +3,8 @@ package hero; /*
   Have a nice day!
  */
 
+import cards.Card;
+
 public class Hero {
     private int health;
     private String heroName;
@@ -21,6 +23,13 @@ public class Hero {
     public Hero(int health, String heroName, int heroId, int heroPowerId) {
         this(health, heroName, heroId, heroPowerId, 0);
     }*/
+
+    public void heroAttack(Card weapon) {
+        // damage target
+        // eventueel damage hero
+        // -1 durability weapon
+        // if durability == 0 ==> make weapon go away
+    }
 
     public void executeHeroPower(int heroPowerId) {
         // check For Two Mana;

@@ -20,7 +20,7 @@ public class doThingsWithDb {
                 ""
         );
     }
-    private void insertDeck(String deckName, int heroId) {
+    public void insertDeck(String deckName, int heroId) {
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_DECK,

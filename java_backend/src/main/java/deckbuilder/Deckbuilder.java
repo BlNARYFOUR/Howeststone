@@ -26,7 +26,7 @@ public class Deckbuilder {
 
     public void saveDeck() {
         // checkIfDeckIsFull()
-        // INSERT_DECK(deckName, getSelectedHero.getId)
+        // insertDeck(deckName, getSelectedHero.getId);
         // INSERT_CARDSINDECK
     }
 
