@@ -15,6 +15,7 @@ function init() {
     setBackground();
     getRandomCardBack();
     //makeCardsFan("you", 1);
+    document.querySelector(".you .heroPower span").addEventListener('click', useHeroPower);
 }
 
 function setupGameBoard() {
@@ -53,6 +54,25 @@ function loadBattleLog() {
                     "Bert got torched",
                     "Step died of exhaustion",
                     "Brem got VICTORY"]);
+}
+
+function  useHeroPower() {
+    console.log('kaaaapow!');
+    fetch('localhost:4242/threebeesandme/howeststone/get/useheropower',{
+           method: 'GET',
+        mode: 'no-cors'
+       })
+           .then(function(res) {
+               if(res.ok === true)
+                   return res.json();
+           })
+           .then(function(text) {
+               let result = text;
+               console.log("Heropower is used");
+           })
+           .catch(function(err) {
+               console.log("Error: Could not use heropower");
+           });
 }
 
 function showBattleLog(logArr) {
@@ -997,7 +1017,7 @@ function loadAttackStart(e) {
 function heroAttackStart(e) {
     // TODO Their is no need for two functions
 
-    fetch('threebeesandme/post/gameboard/heroattackStart',{
+    fetch('localhost:4242/threebeesandme/post/gameboard/heroattackStart',{
         method: 'GET'
     })
         .then(function(res) {
