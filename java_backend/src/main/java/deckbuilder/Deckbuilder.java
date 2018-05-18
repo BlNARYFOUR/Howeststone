@@ -1,9 +1,10 @@
-package deckbuilder; /*
+package deckbuilder;/*
   Created by Bert on 16/05/2018.
   Have a nice day!
  */
 
 import hero.Hero;
+import be.howest.ti.threebeesandme.howeststone.db.DoThingsWithDb;
 
 public class Deckbuilder {
 
@@ -53,14 +54,15 @@ public class Deckbuilder {
 
     public void switchDeck() {
         if (deckIsSaved()) {
-            //TODO
+            // openDeck()
+            // resetFilters()
         } else {
             throw new IllegalArgumentException("Your current deck hasn't been saved yet!");
         }
     }
 
     private boolean deckIsSaved() {
-        return true;
+        return true; //false
         //TODO
     }
 

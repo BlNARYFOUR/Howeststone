@@ -5,10 +5,10 @@ package be.howest.ti.threebeesandme.howeststone.db; /*
 
 import java.sql.*;
 
-public class doThingsWithDb {
+public class DoThingsWithDb {
 
     public static void main(String[] args) {
-        new doThingsWithDb().run();
+        new DoThingsWithDb().run();
     }
 
     SqlDatabase db;
