@@ -36,6 +36,14 @@ footer ul li:first-of-type{
     bottom: 0;
 }
 
+footer ul li:last-of-type{
+    background-size: 100%;
+    width: 12vh;
+    height: 100%;
+    bottom: 0;
+    right: 8vh;
+}
+
 footer ul li.muted{
     background:no-repeat url("../media/soundButtonSprite.png")left bottom;
     background-size: 100%;
@@ -67,3 +75,6 @@ footer ul li.muted{
 .buttonHolder .insideButton {
     color: #513d1f !important;
 }
+
+
+
