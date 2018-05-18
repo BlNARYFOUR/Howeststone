@@ -18,12 +18,8 @@ public class Display {
 
     private void run() {
         Game howeststone = new Game();
-        final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
 
-        System.out.println("Select one of the following heroes:");
-        System.out.println(formatList(HEROES));
-        String selectedHero = askInputUntilFoundInList(HEROES);
-        howeststone.setHero(selectedHero);
+        chooseHero(howeststone);
 
         System.out.println(howeststone.getDeckNames());
         // TODO standard (random) deck ???
@@ -34,6 +30,14 @@ public class Display {
         GameBoard gb = new GameBoard(you, howeststone.getDeck());
         System.out.println(gb);
 
+    }
+
+    private void chooseHero(Game howeststone) {
+        final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
+        System.out.println("Select one of the following heroes:");
+        System.out.println(formatList(HEROES));
+        String selectedHero = askInputUntilFoundInList(HEROES);
+        howeststone.setHero(selectedHero);
     }
 
     private String askInputUntilFoundInList(List<String> list) {
