@@ -12,15 +12,19 @@ public class Game {
     protected static final String[] MOCKED_HEROES = {"Mage", "Paladin"};
 
     // TODO: actual fields
-    private Hero you;
-    private CardCollection deck;
+    private Player you;
+    private Player enemy;
+    private int turnTime;
+    /*private Hero you;
+    private CardCollection deck;*/
 
     public void setHero(String hero) {
-        this.you = new Hero(hero);
+        you = new Player();
+        you.setHero(new Hero(hero));
     }
 
     public Hero getHero() {
-        return you;
+        return you.getHero();
     }
 
     // TODO change to multiple Heroes
@@ -35,14 +39,12 @@ public class Game {
 
     public void setDeck(String deckName) {
         // TODO check if deck exist
-        if (deckName.equals("Standard")) {
-            this.deck = new CardCollection(deckName);
-        }
+        you.setDeck(deckName);
     }
 
-    public CardCollection getDeck() {
+    /*public CardCollection getDeck() {
         return deck;
-    }
+    }*/
 
     public List<String> getDeckNames() {
         List<String> mocked = new ArrayList<String>();
@@ -52,5 +54,9 @@ public class Game {
         mocked.add("Deck 2");
 
         return mocked;
+    }
+
+    public Player getYou() {
+        return you;
     }
 }

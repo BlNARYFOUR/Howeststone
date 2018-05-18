@@ -15,14 +15,14 @@ public class CardCollection {
     public CardCollection(String name) {
         this.cards = new ArrayList<Card>();
         this.name = name;
-        if (name.equals("Standard")){
+        /*if (name.equals("Standard")){
             for(int i = 0; i < 30; i ++){
                 Card card = new Card();
                 cards.add(card);
             }
         }else{
             // TODO check if deck exist
-        }
+        }*/
     }
 
     private void shuffleCardCollection(){

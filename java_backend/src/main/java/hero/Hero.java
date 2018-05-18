@@ -27,6 +27,10 @@ public class Hero {
 
     }
 
+    public String getHeroName() {
+        return heroName;
+    }
+
     @Override
     public String toString() {
         return heroName;

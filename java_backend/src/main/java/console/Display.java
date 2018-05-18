@@ -21,23 +21,44 @@ public class Display {
 
         chooseHero(howeststone);
 
-        System.out.println(howeststone.getDeckNames());
-        // TODO standard (random) deck ???
-        // not yet full
-        howeststone.setDeck("Standard");
-        //System.out.println(howeststone.getDeck()
-        Player you = new Player(howeststone.getHero());
-        GameBoard gb = new GameBoard(you, howeststone.getDeck());
-        System.out.println(gb);
+        chooseDeck(howeststone);
 
+        startGame(howeststone);
+
+        //howeststone.setDeck("Standard");
+        //System.out.println(howeststone.getDeck());
+        //Player you = new Player(howeststone.getHero());
+        //GameBoard gb = new GameBoard(you, howeststone.getDeck());
+        //System.out.println(gb);
     }
 
     private void chooseHero(Game howeststone) {
         final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
+
         System.out.println("Select one of the following heroes:");
         System.out.println(formatList(HEROES));
         String selectedHero = askInputUntilFoundInList(HEROES);
         howeststone.setHero(selectedHero);
+    }
+
+    private void chooseDeck(Game howeststone) {
+        final List<String> DECKS = new ArrayList<>(howeststone.getDeckNames());
+
+        System.out.println("Select one of the following decks:");
+        System.out.println(formatList(DECKS));
+        String selectedDeck = askInputUntilFoundInList(DECKS);
+        howeststone.setDeck(selectedDeck);
+    }
+
+    private void startGame(Game howeststone) {
+        // TODO check if Player has hero and deck
+        // TODO make enemy
+        System.out.println(ColorFormats.red("Match Settings: Player: ") + ColorFormats.green(howeststone.getYou().getHero().getHeroName()));
+        int beginnerIndex = (int) Math.round(Math.random());
+
+        if (beginnerIndex == 1) {
+
+        }
     }
 
     private String askInputUntilFoundInList(List<String> list) {
@@ -59,7 +80,7 @@ public class Display {
         System.out.println(ColorFormats.red("Selected: ") + ColorFormats.green(input));
 
         return input;
-    };
+    }
 
     @NotNull
     private String formatList( List<String> list) {

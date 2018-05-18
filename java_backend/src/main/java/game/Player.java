@@ -4,20 +4,29 @@ import cards.CardCollection;
 import hero.Hero;
 
 public class Player {
-    Hero ownHero;
+    private Hero hero;
     CardCollection cardsInHand;
     CardCollection cardsOnPlayingField;
     CardCollection cardsInDeck;
 
-    public Player(Hero ownHero) {
-        this.ownHero = ownHero;
-        cardsOnPlayingField = new CardCollection();
-        cardsInHand = new CardCollection();
-        cardsInDeck = new CardCollection();
+    public Hero getHero() {
+        return hero;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+    public Player() {
+
     }
 
     void beginTurn() {
         // +1 mana until 10
         // draw card
+    }
+
+    public CardCollection setDeck(String deckName) {
+        return new CardCollection(deckName);
     }
 }
