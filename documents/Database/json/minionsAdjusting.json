@@ -500,10 +500,16 @@
       {
         "type": "drawCards",
         "value": "1"
+      },
+      {
+        "type": "spellDamage",
+        "target": "self",
+        "value": "1"
       }
     ]
   },
   {
+    /* TODO: Here */
     "cardId": "NEW1_018",
     "dbfId": "999",
     "name": "Bloodsail Raider",
