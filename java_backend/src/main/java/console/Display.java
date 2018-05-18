@@ -58,7 +58,7 @@ public class Display {
     };
 
     @NotNull
-    private String formatList( List<String> list) {
+    private String formatList(@NotNull List<String> list) {
         StringBuilder strBuilder = new StringBuilder();
 
         for(String str : list) {

@@ -9,7 +9,7 @@ public class Card {
     private String rarity;
     private int manaCost;
     private List<Abilities> cardAbilities;
-    private List<Mechanics> cardMechanics;
+    // TODO: private List<Mechanics> cardMechanics;
 
     public Card(){
         // TODO random card
@@ -21,6 +21,12 @@ public class Card {
         return String.valueOf(cardID);
     }
 
+    // method attack
+    public boolean attack(Card card) { // boolean returns whether you can attack
+        // TODO: card.doDamage();
+
+        return false;
+    }
 
 
     // list with all abilities and mechanics?

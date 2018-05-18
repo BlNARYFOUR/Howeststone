@@ -3,7 +3,6 @@ package cards;
 public class Minion extends Card{
     private int attack;
     private int health;
-    private int howManyTimesThisTurnCanIStillAttack;
 
     public int getAttack() {
         return attack;
@@ -21,13 +20,4 @@ public class Minion extends Card{
         this.health = health;
     }
 
-    public int getHowManyTimesThisTurnCanIStillAttack() {
-        return howManyTimesThisTurnCanIStillAttack;
-    }
-
-    public void setHowManyTimesThisTurnCanIStillAttack(int howManyTimesThisTurnCanIStillAttack) {
-        this.howManyTimesThisTurnCanIStillAttack = howManyTimesThisTurnCanIStillAttack;
-    }
-
-    // method attack
 }
