@@ -39,14 +39,23 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Battlecry"
+        "name": "Battlecry",
+        "mechNeeded": 0
+      },
+      {
+        "name": "Turn End",
+        "mechNeeded": 1
       }
     ],
     "mechanics": [
       {
-        "type": "addAttack",
-        "target": "friendlyMinion",
-        "value": 2
+        "type": "attack",
+        "target": "minion",
+        "value": "2"
+      },
+      {
+        "type": "attack",
+        "target": ""
       }
     ]
   },
@@ -76,9 +85,9 @@
     ],
     "mechanics": [
       {
-        "type": "addAttack",
+        "type": "attack",
         "target": "self",
-        "value": 5
+        "value": "5"
       }
     ]
   },
@@ -137,7 +146,7 @@
     ],
     "mechanics": [
       {
-        "type": "addHealth",
+        "type": "health",
         "target": "randomFriendlyMinion",
         "value": 1
       }
@@ -170,9 +179,9 @@
     ],
     "mechanics": [
       {
-        "type": "damage",
+        "type": "health",
         "target": "friendlyHero",
-        "value": 3
+        "value": -3
       }
     ]
   },
@@ -223,16 +232,16 @@
     ],
     "mechanics": [
       {
-        "type": "destroyMinion",
+        "type": "destroy",
         "target": "Murloc"
       },
       {
-        "type": "addAttack",
+        "type": "attack",
         "target": "self",
         "value": 2
       },
       {
-        "type": "addHealth",
+        "type": "health",
         "target": "self",
         "value": 2
       }
@@ -264,9 +273,9 @@
     ],
     "mechanics": [
       {
-        "type": "damage",
+        "type": "health",
         "target": "enemyHero",
-        "value": 2
+        "value": -2
       }
     ]
   },
@@ -387,7 +396,7 @@
     ],
     "mechanics": [
       {
-        "type": "addHealth",
+        "type": "health",
         "target": "randomFriendlyMinion",
         "value": 1
       }
@@ -419,7 +428,7 @@
     ],
     "mechanics": [
       {
-        "type": "addAttack",
+        "type": "attack",
         "target": "self",
         "value": 3
       }
@@ -479,10 +488,18 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Deathrattle"
+        "name": "Deathrattle",
+        "mechNeeded": 0
       },
       {
-        "name": "Spell Damage"
+        "name": "Battlecry",
+        "mechNeeded": 1
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "1"
       }
     ]
   },
