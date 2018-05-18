@@ -28,5 +28,16 @@ public class CardCollection {
         Card result = cardsInDeck.get(0);
         cardsInDeck.remove(0);
         return result;
+        // check please
+        //TODO
+    }
+
+    public Card searchDeck(Card cardThatYouAreLookingFor) {
+        for (Card aCard : cardsInDeck) {
+            if (aCard.getId() == cardThatYouAreLookingFor.getId()) {
+                return aCard;
+            }
+        }
+        throw new IllegalArgumentException("This card isn't present in this deck&");
     }
 }
