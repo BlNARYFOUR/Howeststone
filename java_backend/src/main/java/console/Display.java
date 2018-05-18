@@ -51,14 +51,39 @@ public class Display {
     }
 
     private void startGame(Game howeststone) {
+        final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
+        int randomHeroIndex = (int)Math.round(Math.random())*(HEROES.size()-1);
+
+        howeststone.setEnemy(HEROES.get(randomHeroIndex));
+        howeststone.setDeck("Standard");
+
         // TODO check if Player has hero and deck
-        // TODO make enemy
-        System.out.println(ColorFormats.red("Match Settings: Player: ") + ColorFormats.green(howeststone.getYou().getHero().getHeroName()));
-        int beginnerIndex = (int) Math.round(Math.random());
-
-        if (beginnerIndex == 1) {
-
+        if (howeststone.getYou().getHero() != null && howeststone.getYou().getDeck() != null) {
+            //TODO get out of this function not exception
+            throw new NullPointerException();
         }
+
+        System.out.println(ColorFormats.red("Match Settings: Player: ")
+                + ColorFormats.green(howeststone.getYou().getHero().getHeroName())
+                + ColorFormats.red(" Enemy: ") + ColorFormats.green(howeststone.getEnemy().getHeroName()));
+
+        flipCoin(howeststone);
+    }
+
+    private void flipCoin(Game howeststone) {
+        String playerThatGetsCoin = "";
+        String playerThatBegins = "";
+
+        if (Math.random() < 0.5) {
+            playerThatGetsCoin = "Player";
+            playerThatBegins = "Enemy";
+
+        } else {
+            playerThatGetsCoin = "Enemy";
+            playerThatBegins = "Player";
+        }
+        System.out.println(ColorFormats.green(playerThatBegins) + ColorFormats.red(" starts the game and ")
+                + ColorFormats.green(playerThatGetsCoin) + ColorFormats.red(" gets the coin"));
     }
 
     private String askInputUntilFoundInList(List<String> list) {

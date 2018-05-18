@@ -27,6 +27,16 @@ public class Game {
         return you.getHero();
     }
 
+    public void setEnemy(String hero) {
+        enemy = new Player();
+        enemy.setHero(new Hero(hero));
+        enemy.setDeck("Standard");
+    }
+
+    public Hero getEnemy() {
+        return enemy.getHero();
+    }
+
     // TODO change to multiple Heroes
     public String[] getHeroNames() {
         return MOCKED_HEROES;

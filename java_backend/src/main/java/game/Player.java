@@ -29,4 +29,8 @@ public class Player {
     public CardCollection setDeck(String deckName) {
         return new CardCollection(deckName);
     }
+
+    public Object getDeck() {
+        return cardsInDeck;
+    }
 }
