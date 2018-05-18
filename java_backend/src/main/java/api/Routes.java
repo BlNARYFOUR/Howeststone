@@ -1,10 +1,10 @@
 package api;
 
-import game.GameBoard;
-import game.Player;
-import hero.Hero;
+import game.*;
+import hero.*;
 import io.javalin.Context;
 import io.javalin.Javalin;
+import io.javalin.*;
 
 class Routes {
 
@@ -16,7 +16,7 @@ class Routes {
     }
 
     private void loadHeroes(Context context) {
-        context.result("[\"Mage\",\"Paladin\"]");
+        context.json("[{\"name\": \"Mage\"},{\"name\": \"Paladin\"}]");
     }
 
     private void getAllCards(Context context) {

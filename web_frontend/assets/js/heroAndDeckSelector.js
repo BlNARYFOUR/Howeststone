@@ -77,6 +77,7 @@ function loadDecks() {
 }
 
 function showHeroes(heroes) {
+    console.log(heroes);
     let heroesHtml = document.querySelectorAll('.heroes');
 
     for (let i=0; i<heroes.length; i++) {
@@ -105,11 +106,13 @@ function showHeroes(heroes) {
 
 function loadHeroes() {
     fetch('http://localhost:4242/threebeesandme/howeststone/get/heroanddeckselector/heroes', {
+        'Content-Type': 'application/json',
         method: 'GET',
         mode: 'no-cors'
     })
     .then(function(res) {
         if(res.ok === true)
+            console.log(res);
             return res.json();
     })
     .then(function(text) {
