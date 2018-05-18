@@ -40,12 +40,20 @@
     "abilities": [
       {
         "name": "Battlecry"
+      },
+      {
+        "name": "Turn End"
       }
     ],
     "mechanics": [
       {
         "type": "addAttack",
-        "target": "friendlyMinion",
+        "target": "minion",
+        "value": 2
+      },
+      {
+        "type": "deleteAttack",
+        "target": "sameMinion",
         "value": 2
       }
     ]
