@@ -198,8 +198,7 @@
     ],
     "mechanics": [
       {
-        "type": "drawCard",
-        "target": "self",
+        "type": "drawCards",
         "value": "amountFriendlyDamagedMinions"
       }
     ]
@@ -285,7 +284,18 @@
     "playerClass": "Hunter",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_617.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_617_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target": "randomEnemyMinion"
+      }
+    ]
   },
   {
     "cardId": "EX1_349",
@@ -303,7 +313,18 @@
     "playerClass": "Paladin",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_349.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_349_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "enemyCardsInHand"
+      }
+    ]
   },
   {
     "cardId": "EX1_317",
@@ -321,7 +342,19 @@
     "playerClass": "Warlock",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_317.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_317_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "target": "Demon",
+        "value": "2"
+      }
+    ]
   },
   {
     "cardId": "EX1_626",
@@ -342,6 +375,15 @@
     "abilities": [
       {
         "name": "Silence"
+      },
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "1"
       }
     ]
   },
@@ -365,6 +407,18 @@
     "abilities": [
       {
         "name": "AffectedBySpellPower"
+      }
+      {
+        "name": "Silence"
+      },
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "1"
       }
     ]
   },
