@@ -37,10 +37,16 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_188_premium.gif",
     "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
     "mechanics": [
       {
-        "ability": "Battlecry",
-        
+        "type": "addAttack",
+        "target": "friendlyMinion",
+        "value": 2
       }
     ]
   },
@@ -62,7 +68,19 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_009.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_009_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Enrage"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addAttack",
+        "target": "self",
+        "value": 5
+      }
+    ]
   },
   {
     "cardId": "EX1_008",
@@ -83,9 +101,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_008.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_008_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Divine Shield"
+        "name": "Divine Shield"
       }
     ]
   },
@@ -109,9 +127,19 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_059_premium.gif",
     "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Stealth"
+      },
+      {
+        "name": "Turn End"
+      }
+    ],
     "mechanics": [
       {
-        "ability": "Stealth"
+        "type": "addHealth",
+        "target": "randomFriendlyMinion",
+        "value": 1
       }
     ]
   },
@@ -135,9 +163,16 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_319_premium.gif",
     "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
     "mechanics": [
       {
-        "ability": "Battlecry"
+        "type": "damage",
+        "target": "friendlyHero",
+        "value": 3
       }
     ]
   },
@@ -156,9 +191,9 @@
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_538t.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_538t_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       }
     ]
   },
@@ -181,9 +216,25 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_017.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_017_premium.gif",
     "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
     "mechanics": [
       {
-        "ability": "Battlecry"
+        "type": "destroyMinion",
+        "target": "Murloc"
+      },
+      {
+        "type": "addAttack",
+        "target": "self",
+        "value": 2
+      },
+      {
+        "type": "addHealth",
+        "target": "self",
+        "value": 2
       }
     ]
   },
@@ -206,9 +257,16 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_029.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_029_premium.gif",
     "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Deathrattle"
+      }
+    ],
     "mechanics": [
       {
-        "ability": "Deathrattle"
+        "type": "damage",
+        "target": "enemyHero",
+        "value": 2
       }
     ]
   },
@@ -231,9 +289,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_405.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_405_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -272,9 +330,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_010.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_010_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Stealth"
+        "name": "Stealth"
       }
     ]
   },
@@ -298,9 +356,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_169.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_169_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Windfury"
+        "name": "Windfury"
       }
     ]
   },
@@ -321,7 +379,19 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_004.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_004_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Turn End"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addHealth",
+        "target": "randomFriendlyMinion",
+        "value": 1
+      }
+    ]
   },
   {
     "cardId": "EX1_393",
@@ -341,7 +411,19 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_393.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_393_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Enrage"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addAttack",
+        "target": "self",
+        "value": 3
+      }
+    ]
   },
   {
     "cardId": "EX1_362",
@@ -362,12 +444,16 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_362.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_362_premium.gif",
     "locale": "enUS",
-    "mechanics": [
-      {
-        "ability": "Divine Shield"
-      },
+    "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addAbility",
+        "target": "friendlyMinion",
+        "ability": "Divine Shield"
       }
     ]
   },
@@ -391,9 +477,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_012_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Deathrattle"
+        "name": "Deathrattle"
       },
       {
         "name": "Spell Damage"
@@ -419,9 +505,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_018.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_018_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -444,9 +530,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_059.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_059_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -469,9 +555,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_603.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_603_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -495,9 +581,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_162.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_162_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "AdjacentBuff"
+        "name": "AdjacentBuff"
       },
       {
         "name": "Aura"
@@ -538,9 +624,9 @@
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/NEW1_040t.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/NEW1_040t_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -583,9 +669,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_096.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_096_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Deathrattle"
+        "name": "Deathrattle"
       }
     ]
   },
@@ -608,9 +694,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_082.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_082_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -652,9 +738,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_058.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_058_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       },
       {
         "name": "Battlecry"
@@ -680,9 +766,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_049.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_049_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -744,9 +830,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_382.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_382_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -769,9 +855,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_089.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_089_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -794,9 +880,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_590.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_590_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Divine Shield"
+        "name": "Divine Shield"
       },
       {
         "name": "Battlecry"
@@ -823,9 +909,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_103.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_103_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -868,9 +954,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_117.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_117_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -894,9 +980,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_170.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_170_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Poisonous"
+        "name": "Poisonous"
       }
     ]
   },
@@ -920,9 +1006,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_301.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_301_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       },
       {
         "name": "Battlecry"
@@ -1004,9 +1090,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_181.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_181_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1030,9 +1116,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_203.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_203_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Silence"
+        "name": "Silence"
       },
       {
         "name": "Battlecry"
@@ -1059,9 +1145,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_017.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_017_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Stealth"
+        "name": "Stealth"
       }
     ]
   },
@@ -1085,9 +1171,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_507.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_507_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Aura"
+        "name": "Aura"
       }
     ]
   },
@@ -1110,9 +1196,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_412.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_412_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Windfury"
+        "name": "Windfury"
       }
     ]
   },
@@ -1135,9 +1221,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_020.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_020_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Divine Shield"
+        "name": "Divine Shield"
       }
     ]
   },
@@ -1160,9 +1246,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_027.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_027_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Aura"
+        "name": "Aura"
       }
     ]
   },
@@ -1185,9 +1271,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_390.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_390_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -1210,9 +1296,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_021.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_021_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Windfury"
+        "name": "Windfury"
       }
     ]
   },
@@ -1235,9 +1321,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_304.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_304_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1260,9 +1346,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_057.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_057_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1285,9 +1371,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_584.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_584_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Spell Damage"
+        "name": "Spell Damage"
       },
       {
         "name": "Battlecry"
@@ -1313,9 +1399,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_046.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_046_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1338,9 +1424,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_093.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_093_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       },
       {
         "name": "Battlecry"
@@ -1366,9 +1452,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_396.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_396_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -1392,9 +1478,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_313.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_313_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1417,9 +1503,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_023.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_023_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Divine Shield"
+        "name": "Divine Shield"
       }
     ]
   },
@@ -1442,9 +1528,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_048.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_048_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Silence"
+        "name": "Silence"
       },
       {
         "name": "Battlecry"
@@ -1471,9 +1557,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_043.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_043_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1496,9 +1582,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_097.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_097_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       },
       {
         "name": "Deathrattle"
@@ -1523,9 +1609,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_005.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_005_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1549,9 +1635,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_024.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_024_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1574,9 +1660,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS1_069.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS1_069_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -1600,9 +1686,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_558.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_558_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1645,9 +1731,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_041.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_041_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1671,9 +1757,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_028.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_028_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Stealth"
+        "name": "Stealth"
       }
     ]
   },
@@ -1696,9 +1782,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_067.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_067_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       },
       {
         "name": "Divine Shield"
@@ -1740,9 +1826,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_583.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_583_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1765,9 +1851,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_032.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_032_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       },
       {
         "name": "Divine Shield"
@@ -1792,9 +1878,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_623.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_623_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1817,9 +1903,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_002.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_002_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       },
       {
         "name": "Battlecry"
@@ -1845,9 +1931,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_033.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_033_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Windfury"
+        "name": "Windfury"
       }
     ]
   },
@@ -1913,9 +1999,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_161.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_161_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Stealth"
+        "name": "Stealth"
       }
     ]
   },
@@ -1939,9 +2025,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_414.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_414_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       }
     ]
   },
@@ -1986,9 +2072,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_561.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_561_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2013,9 +2099,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_543.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_543_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       }
     ]
   },
@@ -2040,9 +2126,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_563.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_563_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Spell Damage"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -2141,9 +2227,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_189.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_189_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2167,9 +2253,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS1_042.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS1_042_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -2324,9 +2410,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_171.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_171_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       }
     ]
   },
@@ -2352,9 +2438,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_175.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_175_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Aura"
+        "name": "Aura"
       }
     ]
   },
@@ -2380,9 +2466,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_065.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_065_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -2406,9 +2492,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_011.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_011_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2454,9 +2540,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_173.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_173_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       }
     ]
   },
@@ -2480,9 +2566,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_121.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_121_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -2506,9 +2592,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_142.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_142_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Spell Damage"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -2532,9 +2618,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_015.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_015_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2580,9 +2666,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_306.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_306_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2606,9 +2692,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_582.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_582_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Spell Damage"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -2628,9 +2714,9 @@
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/NEW1_034.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/NEW1_034_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       }
     ]
   },
@@ -2654,9 +2740,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_141.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_141_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2681,9 +2767,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_125.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_125_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -2703,9 +2789,9 @@
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/NEW1_033.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/NEW1_033_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Aura"
+        "name": "Aura"
       }
     ]
   },
@@ -2745,9 +2831,9 @@
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/NEW1_032.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/NEW1_032_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -2770,9 +2856,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_122.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_122_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Aura"
+        "name": "Aura"
       }
     ]
   },
@@ -2796,9 +2882,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_019.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_019_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2823,9 +2909,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_127.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_127_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -2850,9 +2936,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_084.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_084_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       },
       {
         "name": "Aura"
@@ -2879,9 +2965,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_124.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_124_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       }
     ]
   },
@@ -2925,9 +3011,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_147.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_147_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2952,9 +3038,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_070.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_070_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       },
       {
         "name": "Battlecry"
@@ -2981,9 +3067,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_011.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_011_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       }
     ]
   },
@@ -3027,9 +3113,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_197.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_197_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Spell Damage"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -3053,9 +3139,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_179.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_179_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -3079,9 +3165,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_131.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_131_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       }
     ]
   },
@@ -3105,9 +3191,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_187.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_187_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -3131,9 +3217,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_055.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_055_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3157,9 +3243,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_226.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_226_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3204,9 +3290,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_593.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_593_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3230,9 +3316,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_150.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_150_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3258,9 +3344,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_178.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_178_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       },
       {
         "name": "Aura"
@@ -3287,9 +3373,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_155.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_155_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Spell Damage"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -3334,9 +3420,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_064.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_064_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3360,9 +3446,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_162.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_162_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Taunt"
+        "name": "Taunt"
       }
     ]
   },
@@ -3386,9 +3472,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_213.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_213_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Charge"
+        "name": "Charge"
       }
     ]
   },
@@ -3433,9 +3519,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_088.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_088_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Battlecry"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3459,9 +3545,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_222.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_222_premium.gif",
     "locale": "enUS",
-    "mechanics": [
+    "abilities": [
       {
-        "ability": "Aura"
+        "name": "Aura"
       }
     ]
   },
