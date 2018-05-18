@@ -684,6 +684,9 @@ function layCardOnFieldStart(e) {
     dragSrcElement.style.position = 'absolute';
     dragSrcElement.style.background = e.target.style.background;
 
+
+    document.removeEventListener("mousedown", layCardOnFieldStart);
+    document.removeEventListener("touchstart", layCardOnFieldStart);
     document.addEventListener("touchmove", movingOfDragElement, false);
     document.addEventListener("mousemove", movingOfDragElement, false);
     document.addEventListener("mouseup", layCardOnFieldEnd, false);
@@ -713,7 +716,7 @@ function itIsOkToPlayCard() {
         dropZone.appendChild(cardPlayed);
         addMinionToPlayingField(cardPlayed);
     } else{
-        let dropZone = document.querySelector('#gameBoard .you .weapon');
+        let dropZone = document.querySelector('#gameBoard .you .weapon ul');
         dropZone.innerHTML = '';
         dropZone.appendChild(cardPlayed);
         addWeaponToPlayingField(cardPlayed);
@@ -966,6 +969,8 @@ function attackStart() {
 
     dragSrcElement.style.background = target.style.background;
 
+    document.removeEventListener("mousedown", layCardOnFieldStart);
+    document.removeEventListener("touchstart", layCardOnFieldStart);
     document.addEventListener("touchmove", movingOfDragElement, false);
     document.addEventListener("mousemove", movingOfDragElement, false);
     document.addEventListener("mouseup", attackEnd, false);
@@ -1028,6 +1033,8 @@ function heroAttackStart(e) {
         dragSrcElement.style.height= '22.5vh';
         dragSrcElement.style.background = target.style.background;
 
+        document.removeEventListener("mousedown", layCardOnFieldStart);
+        document.removeEventListener("touchstart", layCardOnFieldStart);
         document.addEventListener("touchmove", movingOfDragElement, false);
         document.addEventListener("mousemove", movingOfDragElement, false);
         document.addEventListener("mouseup", heroAttackEnd, false);
@@ -1068,8 +1075,7 @@ function heroAttackEnd() {
     }
     for (let i = 0; i < enemies.length; i++){
         let enemy = enemies[i].getBoundingClientRect();
-        // TODO make the area bigger so that the hero can attack
-        if ((rectDrag.right < enemy.right+13) && (rectDrag.left > enemy.left-13) && (rectDrag.bottom < enemy.bottom+26) && (rectDrag.top > enemy.top-18)) {
+        if ((rectDrag.right < enemy.right+30) && (rectDrag.left > enemy.left-30) && (rectDrag.bottom < enemy.bottom+50) && (rectDrag.top > enemy.top-50)) {
             console.log('attack');
             console.log(enemies[i]);
             heroAttack = false;
@@ -1079,8 +1085,8 @@ function heroAttackEnd() {
         dragSrcElement.parentElement.removeChild(dragSrcElement);
         if (heroAttack === false){
             deactivateHeroAttack();
-            let oldDurability = document.querySelector('#gameBoard .you .weapon li .durability').innerHTML;
-            document.querySelector('#gameBoard .you .weapon li .durability').innerHTML = oldDurability -1;
+            let oldDurability = document.querySelector('#gameBoard .you .weapon ul li .durability').innerHTML;
+            document.querySelector('#gameBoard .you .weapon ul li .durability').innerHTML = oldDurability -1;
         }
     } catch (err){
         console.log('nothing can be removed' + err);
