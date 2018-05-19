@@ -55,7 +55,8 @@
       },
       {
         "type": "attack",
-        "target": ""
+        "target": "lastUsedMinion",
+        "value": "-2"
       }
     ]
   },
