@@ -1154,7 +1154,12 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "twoRandomMinions",
+        "target": "randomMinion",
+        "value": "-2"
+      },
+      {
+        "type": "health",
+        "target": "randomMinion",
         "value": "-2"
       }
     ]
@@ -1239,7 +1244,29 @@
     "howToGetGold": "Unlocked at Level 15.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_105.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_105_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry",
+        "mechNeeded": 0
+      },
+      {
+        "name": "Turn End",
+        "mechNeeded": 1
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "self",
+        "value": "4"
+      },
+      {
+        "type": "attack",
+        "target": "self",
+        "value": "-4"
+      }
+    ]
   },
   {
     "cardId": "CS2_089",
@@ -1259,7 +1286,19 @@
     "howToGetGold": "Unlocked at Level 15.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_089.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_089_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "target",
+        "value": "6"
+      }
+    ]
   },
   {
     "cardId": "DS1_233",
@@ -1279,7 +1318,19 @@
     "howToGetGold": "Unlocked at Level 15.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_233.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_233_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "enemyHero",
+        "value": "-5"
+      }
+    ]
   },
   {
     "cardId": "CS2_234",
@@ -1298,7 +1349,20 @@
     "howToGetGold": "Unlocked at Level 36.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_234.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_234_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    //TODO check deze stuff maar eens MAX3
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target": "minion",
+        "value": "double"
+      }
+    ]
   },
   {
     "cardId": "CS2_023",
@@ -1318,7 +1382,18 @@
     "howToGetGold": "Unlocked at Level 15.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_023.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_023_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "2"
+      }
+    ]
   },
   {
     "cardId": "CS2_061",
@@ -1338,7 +1413,24 @@
     "howToGetGold": "Unlocked at Level 45.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_061.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_061_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "target",
+        "value": "-2"
+      },
+      {
+        "type": "health",
+        "target": "self",
+        "value": "2"
+      }
+    ]
   },
   {
     "cardId": "CS2_057",
@@ -1358,7 +1450,19 @@
     "howToGetGold": "Unlocked at Level 47.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_057.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_057_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "minion",
+        "value": "-4"
+      }
+    ]
   },
   {
     "cardId": "EX1_622",
@@ -1377,7 +1481,25 @@
     "howToGetGold": "Unlocked at Level 43.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_622.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_622_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    //TODO check deze stuff maar eens MIN5
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target": "minion",
+        "value": "MIN 5 attack"
+      },
+      {
+        "type": "health",
+        "target": "self",
+        "value": "2"
+      }
+    ]
   },
   {
     "cardId": "EX1_606",
@@ -1397,7 +1519,24 @@
     "howToGetGold": "Unlocked at Level 28.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_606.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_606_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "armor",
+        "target": "self",
+        "value": "5"
+      },
+      {
+        "type": "drawCards",
+        "value": "1"
+      }
+
+    ]
   },
   {
     "cardId": "CS2_092",
@@ -1417,7 +1556,24 @@
     "howToGetGold": "Unlocked at Level 49.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_092.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_092_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "minion",
+        "value": "4"
+      },
+      {
+        "type": "attack",
+        "target": "minion",
+        "value": "4"
+      }
+    ]
   },
   {
     "cardId": "CS2_093",
@@ -1437,7 +1593,19 @@
     "howToGetGold": "Unlocked at Level 43.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_093.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_093_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "allEnemyMinions",
+        "value": "-2"
+      }
+    ]
   },
   {
     "cardId": "CS2_029",
@@ -1457,7 +1625,19 @@
     "howToGetGold": "Unlocked at Level 44.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_029.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_029_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "target",
+        "value": "-6"
+      }
+    ]
   },
   {
     "cardId": "CS2_094",
@@ -1477,7 +1657,23 @@
     "howToGetGold": "Unlocked at Level 32.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_094.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_094_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "target",
+        "value": "-3"
+      },
+      {
+        "type": "drawCards",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "CS2_062",
@@ -1497,7 +1693,19 @@
     "howToGetGold": "Unlocked at Level 49.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_062.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_062_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "allCharacters",
+        "value": "-3"
+      }
+    ]
   },
   {
     "cardId": "DS1_183",
@@ -1517,8 +1725,26 @@
     "howToGetGold": "Unlocked at Level 36.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_183.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_183_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "randomMinion",
+        "value": "-3"
+      },
+      {
+        "type": "health",
+        "target": "randomMinion",
+        "value": "-3"
+      }
+    ]
   },
+  //TODO hier is er een transformation (hoe gaan we dit implementeren)
   {
     "cardId": "CS2_022",
     "dbfId": "77",
@@ -1537,7 +1763,24 @@
     "howToGetGold": "Unlocked at Level 47.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_022.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_022_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "setHealth",
+        "target": "minion",
+        "value": "1"
+      },
+      {
+        "type": "setAttack",
+        "target": "minion",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "CS1_112",
@@ -1557,7 +1800,24 @@
     "howToGetGold": "Unlocked at Level 45.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS1_112.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS1_112_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "allEnemies",
+        "value": "-2"
+      },
+      {
+        "type": "health",
+        "target": "allFriendlyCharacters",
+        "value": "2"
+      }
+    ]
   },
   {
     "cardId": "CS2_032",
@@ -1577,6 +1837,18 @@
     "howToGetGold": "Unlocked at Level 51.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_032.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_032_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "allEnemyMinions",
+        "value": "-4"
+      }
+    ]
   }
 ]
