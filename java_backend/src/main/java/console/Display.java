@@ -1,3 +1,4 @@
+
 package console;
 
 import console.formatters.ColorFormats;
@@ -18,13 +19,10 @@ public class Display {
 
     private void run() {
         Game howeststone = new Game();
-
         chooseHero(howeststone);
-
         chooseDeck(howeststone);
-
         startGame(howeststone);
-
+        
         //howeststone.setDeck("Standard");
         //System.out.println(howeststone.getDeck());
         //Player you = new Player(howeststone.getHero());
@@ -42,7 +40,12 @@ public class Display {
     }
 
     private void chooseDeck(Game howeststone) {
-        final List<String> DECKS = new ArrayList<>(howeststone.getDeckNames());
+        newLine();
+        if (howeststone.getYou().getHero() == null){
+            throw new NullPointerException();
+        }
+
+        final List<String> DECKS = new ArrayList<>(howeststone.getYou().getHero().getDeckNames());
 
         System.out.println("Select one of the following decks:");
         System.out.println(formatList(DECKS));
@@ -51,6 +54,7 @@ public class Display {
     }
 
     private void startGame(Game howeststone) {
+        newLine();
         final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
         int randomHeroIndex = (int)Math.round(Math.random())*(HEROES.size()-1);
 
@@ -58,7 +62,7 @@ public class Display {
         howeststone.setDeck("Standard");
 
         // TODO check if Player has hero and deck
-        if (howeststone.getYou().getHero() != null && howeststone.getYou().getDeck() != null) {
+        if (howeststone.getYou().getHero() == null || howeststone.getYou().getDeck() == null) {
             //TODO get out of this function not exception
             throw new NullPointerException();
         }
@@ -118,5 +122,8 @@ public class Display {
         }
 
         return  strBuilder.toString();
+    }
+    private void newLine(){
+        System.out.println("\n");
     }
 }

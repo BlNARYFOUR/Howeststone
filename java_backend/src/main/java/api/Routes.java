@@ -1,8 +1,7 @@
 package api;
 
-import game.GameBoard;
-import game.Player;
-import hero.Hero;
+import game.*;
+import hero.*;
 import io.javalin.Context;
 import io.javalin.Javalin;
 

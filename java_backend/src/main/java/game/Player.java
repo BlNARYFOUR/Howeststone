@@ -26,8 +26,8 @@ public class Player {
         // draw card
     }
 
-    public CardCollection setDeck(String deckName) {
-        return new CardCollection(deckName);
+    public void setDeck(String deckName) {
+        cardsInDeck = new CardCollection(deckName);
     }
 
     public Object getDeck() {

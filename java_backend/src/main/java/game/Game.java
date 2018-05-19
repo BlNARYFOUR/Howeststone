@@ -52,19 +52,6 @@ public class Game {
         you.setDeck(deckName);
     }
 
-    /*public CardCollection getDeck() {
-        return deck;
-    }*/
-
-    public List<String> getDeckNames() {
-        List<String> mocked = new ArrayList<String>();
-
-        mocked.add("Standard");
-        mocked.add("Deck 1");
-        mocked.add("Deck 2");
-
-        return mocked;
-    }
 
     public Player getYou() {
         return you;
