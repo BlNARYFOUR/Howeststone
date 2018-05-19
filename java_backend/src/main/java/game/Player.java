@@ -30,7 +30,7 @@ public class Player {
         cardsInDeck = new CardCollection(deckName);
     }
 
-    public Object getDeck() {
+    public CardCollection getDeck() {
         return cardsInDeck;
     }
 }

@@ -30,6 +30,10 @@ public class CardCollection {
         Collections.shuffle(cards);
     }
 
+    public Card drawCard(){
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();

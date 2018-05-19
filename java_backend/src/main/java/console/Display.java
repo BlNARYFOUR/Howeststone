@@ -67,14 +67,17 @@ public class Display {
             throw new NullPointerException();
         }
 
-        System.out.println(ColorFormats.red("Match Settings: Player: ")
-                + ColorFormats.green(howeststone.getYou().getHero().getHeroName())
-                + ColorFormats.red(" Enemy: ") + ColorFormats.green(howeststone.getEnemy().getHeroName()));
+        System.out.println("Match Settings: "
+                + "\nPlayer: "
+                + howeststone.getYou().getHero().getHeroName()
+                + "\n     VS"
+                + "\nEnemy: " + howeststone.getEnemy().getHeroName());
 
         flipCoin(howeststone);
     }
 
     private void flipCoin(Game howeststone) {
+        newLine();
         String playerThatGetsCoin = "";
         String playerThatBegins = "";
 
@@ -86,8 +89,17 @@ public class Display {
             playerThatGetsCoin = "Enemy";
             playerThatBegins = "Player";
         }
-        System.out.println(ColorFormats.green(playerThatBegins) + ColorFormats.red(" starts the game and ")
-                + ColorFormats.green(playerThatGetsCoin) + ColorFormats.red(" gets the coin"));
+        System.out.println(playerThatBegins + " starts the game and "
+                + playerThatGetsCoin + " gets the coin");
+        replaceCards(howeststone);
+    }
+
+    private void replaceCards(Game howeststone) {
+        // TODO 3 or 4 times
+        howeststone.getYou().getDeck().drawCard();
+        // TODO replace or not
+        // - cardInfo // on one line
+        // 
     }
 
     private String askInputUntilFoundInList(List<String> list) {
@@ -124,6 +136,6 @@ public class Display {
         return  strBuilder.toString();
     }
     private void newLine(){
-        System.out.println("\n");
+        System.out.println();
     }
 }
