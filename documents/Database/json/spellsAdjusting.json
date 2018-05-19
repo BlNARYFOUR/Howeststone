@@ -1113,7 +1113,19 @@
     "howToGetGold": "Unlocked at Level 28.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_025.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_025_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "allEnemyMinions",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "CS2_114",
@@ -1133,7 +1145,19 @@
     "howToGetGold": "Unlocked at Level 40.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_114.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_114_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "twoRandomMinions",
+        "value": "-2"
+      }
+    ]
   },
   {
     "cardId": "CS2_236",
@@ -1152,7 +1176,19 @@
     "howToGetGold": "Unlocked at Level 28.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_236.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_236_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "minion",
+        "value": "double"
+      }
+    ]
   },
   {
     "cardId": "CS2_108",
@@ -1172,7 +1208,18 @@
     "howToGetGold": "Unlocked at Level 47.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_108.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_108_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target": "damagedEnemyMinion"
+      }
+    ]
   },
   {
     "cardId": "CS2_105",
