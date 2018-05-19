@@ -387,7 +387,6 @@
       }
     ]
   },
-  // TODO eens checken of dit goed is
   {
     "cardId": "EX1_303",
     "dbfId": "147",
@@ -412,17 +411,16 @@
     ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "allEnemyMinions",
-        "value": "damageSelectedFriendlyMinion"
-      },
-      {
         "type": "destroy",
         "target": "friendlyMinion"
+      },
+      {
+        "type": "health",
+        "target": "allEnemyMinions",
+        "value": "damageLastUsedMinion"
       }
     ]
   },
-  // TODO eens checken of dit goed is
   {
     "cardId": "EX1_355",
     "dbfId": "1522",
@@ -446,12 +444,12 @@
     ],
     "mechanics": [
       {
-        "type": "doubleDamage",
-        "target": "minion"
+        "type": "damage",
+        "target": "minion",
+        "value": "double"
       }
     ]
   },
-  // TODO eens checken of dit goed is
   {
     "cardId": "EX1_407",
     "dbfId": "75",
@@ -476,13 +474,16 @@
     ],
     "mechanics": [
       {
+        "type": "immune",
+        "target": "randomMinion"
+      },
+      {
         "type": "destroy",
-        "target": "allMinionsExceptOne"
+        "target": "allMinions"
       }
     ]
 
   },
-  // TODO Adjacent minions HELP
   {
     "cardId": "EX1_537",
     "dbfId": "394",
@@ -510,6 +511,11 @@
         "type": "health",
         "target": "minion",
         "value": "-5"
+      },
+      {
+        "type": "health",
+        "target": "adjacentMinions",
+        "value": "-2"
       }
     ]
   },
@@ -567,6 +573,16 @@
     "abilities": [
       {
         "name": "ImmuneToSpellpower"
+      },
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target":"allEnemies",
+        "value": "8"
       }
     ]
   },
