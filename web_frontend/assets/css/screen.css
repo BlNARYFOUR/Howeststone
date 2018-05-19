@@ -23,8 +23,6 @@ footer ul li{
     position: absolute;
     bottom: 0;
     right: 0;
-    color: white;
-    background-color: blue;
     cursor: pointer;
 }
 
@@ -33,14 +31,14 @@ footer ul li:first-of-type{
     background-size: 100%;
     width: 7vh;
     height: 100%;
-    bottom: 0;
 }
 
 footer ul li:last-of-type{
-    background-size: 100%;
+    background: url(../media/buttonStone.png) no-repeat;
+    background-size: 12vh 4vh;
+    text-align: center;
     width: 12vh;
     height: 100%;
-    bottom: 0;
     right: 8vh;
 }
 
