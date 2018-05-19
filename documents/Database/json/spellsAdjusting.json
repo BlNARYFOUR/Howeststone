@@ -168,9 +168,9 @@
     ],
     "mechanics": [
       {
-        "type": "attack",
+        "type": "health",
         "target": "minion",
-        "value": "armor"
+        "value": "-armor"
       }
     ]
   },
@@ -258,12 +258,12 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "minion",
+        "target": "damagedMinion",
         "value": "3"
       },
       {
         "type": "attack",
-        "target": "minion",
+        "target": "damagedMinion",
         "value": "3"
       }
     ]
@@ -417,7 +417,7 @@
       {
         "type": "health",
         "target": "allEnemyMinions",
-        "value": "damageLastUsedMinion"
+        "value": "attackLastUsedMinion"
       }
     ]
   },
@@ -444,7 +444,7 @@
     ],
     "mechanics": [
       {
-        "type": "damage",
+        "type": "attack",
         "target": "minion",
         "value": "double"
       }
@@ -581,7 +581,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target":"allEnemies",
+        "target":"randomEnemies",
         "value": "8"
       }
     ]
@@ -601,7 +601,24 @@
     "playerClass": "Priest",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_624.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_624_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target":"target",
+        "value": "-5"
+      },
+      {
+        "type": "health",
+        "target":"self",
+        "value": "5"
+      }
+    ]
   },
   {
     "cardId": "EX1_309",
@@ -619,7 +636,23 @@
     "playerClass": "Warlock",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_309.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_309_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target":"minion"
+      },
+      {
+        "type": "health",
+        "target":"self",
+        "value": "3"
+      }
+    ]
   },
   {
     "cardId": "EX1_354",
@@ -637,7 +670,23 @@
     "playerClass": "Paladin",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_354.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_354_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target":"self",
+        "value": "8"
+      },
+      {
+        "type": "drawCards",
+        "value": "3"
+      }
+    ]
   },
   {
     "cardId": "EX1_312",
@@ -655,7 +704,18 @@
     "playerClass": "Warlock",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_312.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_312_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target":"allMinions"
+      }
+    ]
   },
   {
     "cardId": "EX1_279",
@@ -673,7 +733,19 @@
     "playerClass": "Mage",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_279.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_279_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target":"target",
+        "value": "-10"
+      }
+    ]
   },
   {
     "cardId": "NEW1_003",
@@ -692,7 +764,23 @@
     "howToGetGold": "Unlocked at Level 15.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_003.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_003_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target": "Demon"
+      },
+      {
+        "type": "health",
+        "target":"self",
+        "value": "5"
+      }
+    ]
   },
   {
     "cardId": "GAME_005",
@@ -705,7 +793,19 @@
     "playerClass": "Neutral",
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/GAME_005.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/GAME_005_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "mana",
+        "target": "self",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "EX1_277",
@@ -729,6 +829,16 @@
     "abilities": [
       {
         "name": "ImmuneToSpellpower"
+      },
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "randomEnemies",
+        "value": "-3"
       }
     ]
   },
@@ -750,7 +860,19 @@
     "howToGetGold": "Unlocked at Level 32.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_185.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_185_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "target",
+        "value": "-2"
+      }
+    ]
   },
   {
     "cardId": "CS2_087",
@@ -770,7 +892,19 @@
     "howToGetGold": "Unlocked at Level 45.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_087.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_087_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "minion",
+        "value": "3"
+      }
+    ]
   },
   {
     "cardId": "EX1_371",
@@ -815,7 +949,19 @@
     "howToGetGold": "Unlocked at Level 23.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS1_130.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS1_130_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "target",
+        "value": "-2"
+      }
+    ]
   },
   {
     "cardId": "EX1_360",
@@ -835,7 +981,19 @@
     "howToGetGold": "Unlocked at Level 28.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_360.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_360_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "setAttack",
+        "target": "minion",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "CS2_084",
@@ -855,7 +1013,19 @@
     "howToGetGold": "Unlocked at Level 40.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_084.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_084_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "setHealth",
+        "target": "minion",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "CS2_004",
@@ -875,7 +1045,23 @@
     "howToGetGold": "Unlocked at Level 47.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_004.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_004_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "minion",
+        "value": "2"
+      },
+      {
+        "type": "drawCards",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "EX1_400",
@@ -895,7 +1081,19 @@
     "howToGetGold": "Unlocked at Level 32.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_400.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_400_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "allMinions",
+        "value": "-1"
+      }
+    ]
   },
   {
     "cardId": "CS2_025",
