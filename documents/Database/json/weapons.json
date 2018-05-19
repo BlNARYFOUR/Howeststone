@@ -137,7 +137,7 @@
     "mechanics": [
       {
         "type": "attack",
-        "target": "adjecent",
+        "target": "adjacentMinions",
         "value": 2
       }
     ]
