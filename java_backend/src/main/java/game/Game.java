@@ -52,8 +52,15 @@ public class Game {
         you.setDeck(deckName);
     }
 
-
     public Player getYou() {
         return you;
+    }
+
+    public int getTurnTime() {
+        return turnTime;
+    }
+
+    public void setTurnTime(int turnTime) {
+        this.turnTime = turnTime;
     }
 }
