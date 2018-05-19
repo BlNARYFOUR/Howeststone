@@ -15,6 +15,7 @@ function init() {
     setBackground();
     getRandomCardBack();
     //makeCardsFan("you", 1);
+    document.querySelector(".you .heroPower span").addEventListener('click', useHeroPower);
 }
 
 function setupGameBoard() {
@@ -1093,4 +1094,25 @@ function destroyed() {
     // check if card has deathrattle
     // win || lose
     // discard card
+}
+
+function  useHeroPower() {
+
+
+    /*fetch('threebeesandme/howeststone/get/useheropower',{
+        method: 'GET'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Heropower is used");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not use heropower");
+        });*/
+
+
 }
