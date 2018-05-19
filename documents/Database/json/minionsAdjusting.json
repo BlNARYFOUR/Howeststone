@@ -530,8 +530,16 @@
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_018_premium.gif",
     "locale": "enUS",
     "abilities": [
+      //TODO check deze battlecry eens na en de value van de mechanic
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target":"self",
+        "value": "attack = attackWeapon"
       }
     ]
   },
@@ -558,6 +566,18 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "minion",
+        "value": "health"
+      },
+      {
+        "type": "health",
+        "target": "minion",
+        "value": "attack"
+      }
     ]
   },
   {
@@ -583,6 +603,18 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "minion",
+        "value": "-1"
+      },
+      {
+        "type": "attack",
+        "target": "minion",
+        "value": "2"
+      }
     ]
   },
   {
@@ -607,10 +639,14 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "AdjacentBuff"
-      },
-      {
         "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "adjacentMinions",
+        "value": "1"
       }
     ]
   },
@@ -632,7 +668,20 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_023.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_023_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Untargetable"
+      }
+    ],
+    "mechanics": [
+      {
+        "target": "Spells"
+      },
+      {
+        "target": "HeroPowers"
+      }
+    ]
   },
   {
     "cardId": "NEW1_040t",
@@ -672,7 +721,19 @@
     "playerClass": "Priest",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_341.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_341_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Begin Turn"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "damagedFriendlyCharacter",
+        "value": "3"
+      }
+    ]
   },
   {
     "cardId": "EX1_096",
@@ -696,6 +757,12 @@
     "abilities": [
       {
         "name": "Deathrattle"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "1"
       }
     ]
   },
@@ -724,6 +791,7 @@
       }
     ]
   },
+  //TODO I got here but needed to sleep ZZZZzzzzZZZZzzzzZZZZzzzZZZZ --> smell ya later json
   {
     "cardId": "NEW1_037",
     "dbfId": "351",
