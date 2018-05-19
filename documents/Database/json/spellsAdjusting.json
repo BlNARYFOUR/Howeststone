@@ -422,6 +422,7 @@
       }
     ]
   },
+  // TODO eens checken of dit goed is
   {
     "cardId": "EX1_355",
     "dbfId": "1522",
@@ -450,6 +451,7 @@
       }
     ]
   },
+  // TODO eens checken of dit goed is
   {
     "cardId": "EX1_407",
     "dbfId": "75",
@@ -480,6 +482,7 @@
     ]
 
   },
+  // TODO Adjacent minions HELP
   {
     "cardId": "EX1_537",
     "dbfId": "394",
@@ -496,7 +499,19 @@
     "playerClass": "Hunter",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_537.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_537_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "minion",
+        "value": "-5"
+      }
+    ]
   },
   {
     "cardId": "EX1_365",
@@ -517,7 +532,18 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "AffectedBySpellPower"
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "1"
+      },
+      {
+        "type": "health",
+        "target":"minion",
+        "value": "costDrawnCard"
       }
     ]
   },
