@@ -21,7 +21,6 @@ footer ul li{
     display: inline-block;
     text-align: center;
     z-index: 2;
-    /*position: absolute;*/
     cursor: pointer;
     width: 7vh;
     margin: 0.5vh;
