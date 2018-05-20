@@ -225,8 +225,24 @@ function updateMyHero() {
 
 function updateHero(parent) {
     let heroName = "";
+    fetch('http://localhost:4242/threebeesandme/get/yourhero',{
+        method: 'get',
+        mode: 'no-cors'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("you're hero is" + result);
+        })
+        .catch(function(err) {
+            console.log("Error: Could not get hero");
+        });
 
-    // here will come a fetch to get the hero name
+
+    // TODO fetch heroname
     heroName = "mage";
 
     showHero(parent, heroName);
@@ -243,7 +259,7 @@ function showHero(parent, heroName) {
 function updateEnemyCards() {
     let amountOfCards = 0;
 
-    /* Here should come a fetch to get enemy amount of cards */
+    // TODO fetch for cardInEnemyHand and other info
     amountOfCards = 7;      // MOCK DATA
 
     updateCards(amountOfCards, "enemy", -1);
@@ -251,7 +267,7 @@ function updateEnemyCards() {
 }
 
 function updateMyCards() {
-    /* Here should come a fetch to get cardInMyHand data */
+    // TODO fetch for cardsInMyHand and other info
     myCards = MOCKMYCARDS();
 
     updateCards(myCards.length, "you", 1);

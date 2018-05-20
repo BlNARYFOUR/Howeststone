@@ -14,6 +14,9 @@ class Routes {
         server.get("threebeesandme/get/gameboard/timeleft", this::getTimeLeft);
         server.post("threebeesandme/post/gameboard/endturn", this::handleEndUrn);
         server.get("threebeesandme/get/useheropower", this::useHeroPower);
+        server.get("/threebeesandme/get/yourhero", this::getYourHero);
+        server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
+        server.get("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
 
         // HERO AND DECK SELECTOR
         server.get("threebeesandme/get/heroanddeckselector/decks", this::getAllDecks);
@@ -55,6 +58,18 @@ class Routes {
 
     private void useHeroPower(Context context) {
         context.result("kaaapow");
+    }
+
+    private void getYourHero(Context context) {
+        // TODO check if this will work (you.getYourHero.getName().toString)
+    }
+
+    private void canHeroAttack(Context context) {
+        context.result("no :p");
+    }
+
+    private void canThisMinionAttack(Context context) {
+        context.result("no :p");
     }
 
     // HERO AND DECK SELECTOR
