@@ -11,7 +11,7 @@ class Routes {
     Routes(final Javalin server) {
         // case sensitive
         server.get("/API/getAllCards", this::getAllCards);
-        server.get("/", this::handleRoot);
+        //server.get("/", this::handleRoot);
         server.get("/threebeesandme/howeststone/get/heroanddeckselector/heroes", this::loadHeroes);
     }
 
