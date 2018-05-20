@@ -31,7 +31,9 @@ public class CardCollection {
     }
 
     public Card drawCard(){
-        return null;
+        Card draw = cards.get(1);
+        cards.remove(1);
+        return draw;
     }
 
     @Override

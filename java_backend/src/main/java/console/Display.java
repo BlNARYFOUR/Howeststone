@@ -81,6 +81,7 @@ public class Display {
         String playerThatGetsCoin = "";
         String playerThatBegins = "";
 
+        // TODO change cannot be strings
         if (Math.random() < 0.5) {
             playerThatGetsCoin = "Player";
             playerThatBegins = "Enemy";
@@ -96,9 +97,11 @@ public class Display {
 
     private void replaceCards(Game howeststone) {
         // TODO 3 or 4 times
-        howeststone.getYou().getDeck().drawCard();
+        // TODO IndexOutOfBoundsException
+        System.out.println(howeststone.getYou().getDeck().drawCard());
         // TODO replace or not
         // - cardInfo // on one line
+
         // 
     }
 
