@@ -504,7 +504,7 @@
       },
       {
         "type": "spellDamage",
-        "target": "self",
+        "target": "allFriendlyCharachters",
         "value": "1"
       }
     ]
@@ -957,7 +957,7 @@
       {
         "name": "Return To Hand"
       }
-
+// TODO help
     ],
     "mechanics": [
       {
@@ -1696,14 +1696,14 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_584.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_584_premium.gif",
     "locale": "enUS",
-    //TODO mss ook een checken of dit volgens de "bin" normen is!!!
     "abilities": [
       {
-        "name": "Spell Damage"
+        "name": "Battlecry"
       }
     ],
     "mechanics": [
       {
+        "type": "spellDamage",
         "target": "adjacentMinions",
         "value": "1"
       }
@@ -1937,7 +1937,6 @@
       {
         "type": "health",
         "target": "friendlyHero",
-        //TODO eens kijken hoe we dit schrijven in andere branches!!!
         "value": "amountOfCardsInHand"
       }
     ]
@@ -1968,6 +1967,14 @@
       {
         "name": "Deathrattle"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        //TODO zeker een checken of we als target all gebruiken
+        "target": "all",
+        "value": "-2"
+      }
     ]
   },
   {
@@ -1991,6 +1998,13 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target": "minion",
+        "value": "MIN 7 attack"
       }
     ]
   },
@@ -2017,6 +2031,18 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "friendlyWeapon",
+        "value": "1"
+      },
+      {
+      "type": "durability",
+      "target": "friendlyWeapon",
+      "value": "1"
       }
     ]
   },
@@ -2069,6 +2095,16 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "durabilityEnemyWeapon"
+      },
+      {
+        "type": "destroy",
+        "target": "enemyWeapon"
+      }
     ]
   },
   {
@@ -2089,7 +2125,23 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_221.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_221_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Enrage"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "friendlyWeapon",
+        "value": "2"
+      },
+      {
+        "type": "destroy",
+        "target": "enemyWeapon"
+      }
+    ]
   },
   {
     "cardId": "NEW1_041",
@@ -2113,6 +2165,12 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target": "randomEnemyMinion"
       }
     ]
   },
@@ -2209,6 +2267,13 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "friendlyHero",
+        "value": "4"
+      }
     ]
   },
   {
@@ -2261,6 +2326,13 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "friendlyMinion",
+        "value": "3"
+      }
     ]
   },
   {
@@ -2284,10 +2356,13 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Taunt"
-      },
-      {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target": "enemyMinionWithTaunt"
       }
     ]
   },
@@ -2336,7 +2411,24 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_249.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_249_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Turn End"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addAbility",
+        "target": "self",
+        "value": "Devine Shield"
+      },
+      {
+        "type": "health",
+        "target": "all",
+        "value": "-2"
+      }
+    ]
   },
   {
     "cardId": "EX1_350",
@@ -2354,10 +2446,28 @@
     "artist": "Wei Wang",
     "collectible": true,
     "elite": true,
+    //TODO zeker eens kijken of hier geen overbodige stuff inzit!!
     "playerClass": "Priest",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_350.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_350_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "spellDamage",
+        "target": "allFriendlyCharacter",
+        "value": "double"
+      },
+      {
+        "type": "healing",
+        "target": "allFriendlyChacters",
+        "value": "double"
+      }
+    ]
   },
   {
     "cardId": "CS2_161",
@@ -2407,6 +2517,16 @@
     "abilities": [
       {
         "name": "Charge"
+      },
+      {
+        "name": "Enrage"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "self",
+        "value": "6"
       }
     ]
   },
@@ -2428,7 +2548,24 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_038.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_038_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Turn End"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "self",
+        "value": "1"
+      },
+      {
+        "type": "health",
+        "target": "self",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "EX1_561",
@@ -2454,6 +2591,13 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "setHealth",
+        "target": "hero",
+        "value": "15"
       }
     ]
   },
@@ -2507,7 +2651,14 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Spell Damage"
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "spellDamage",
+        "target": "hero",
+        "value": "5"
       }
     ]
   },
@@ -2531,7 +2682,18 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_560.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_560_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "setTurnTime",
+        "value": "15"
+      }
+    ]
   },
   {
     "cardId": "EX1_586",
