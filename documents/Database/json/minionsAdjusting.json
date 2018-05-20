@@ -2695,6 +2695,7 @@
       }
     ]
   },
+  // TODO HELP  in hand effects!!!
   {
     "cardId": "EX1_586",
     "dbfId": "211",
@@ -2715,6 +2716,7 @@
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_586_premium.gif",
     "locale": "enUS"
   },
+  // TODO HELP  in hand effects!!!
   {
     "cardId": "GAME_002",
     "dbfId": "1733",
@@ -2772,6 +2774,13 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "target",
+        "value": "-1"
+      }
     ]
   },
   {
@@ -2820,7 +2829,19 @@
     "howToGetGold": "Unlocked at Warlock Level 53.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_508.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_508_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "friendlyMurlocs",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "EX1_025t",
@@ -2896,7 +2917,18 @@
     "howToGetGold": "Unlocked at Level 40.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_235.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_235_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "On Heal"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "CS2_tk1",
@@ -2915,6 +2947,7 @@
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/CS2_tk1_premium.gif",
     "locale": "enUS"
   },
+  // TODO special card for the hero power of the PALADIN (what should I do with it?)!!
   {
     "cardId": "CS2_101t",
     "dbfId": "1652",
@@ -2983,6 +3016,13 @@
       {
         "name": "Aura"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "friendlyBeasts",
+        "value": "1"
+      }
     ]
   },
   {
@@ -3036,6 +3076,13 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "target",
+        "value": "2"
       }
     ]
   },
@@ -3135,7 +3182,14 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Spell Damage"
+        "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "spellDamage",
+        "target": "allFriendlyCharacters",
+        "value": "1"
       }
     ]
   },
@@ -3162,6 +3216,12 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "1"
       }
     ]
   },
@@ -3211,6 +3271,12 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "destroy",
+        "target": "randomFriendlyCard"
+      }
     ]
   },
   {
@@ -3235,7 +3301,14 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Spell Damage"
+        "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "spellDamage",
+        "target": "allFriendlyCharacters",
+        "value": "1"
       }
     ]
   },
@@ -3285,6 +3358,13 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "target",
+        "value": "-1"
+      }
     ]
   },
   {
@@ -3333,6 +3413,14 @@
     "abilities": [
       {
         "name": "Aura"
+      }
+    ],
+    //TODO checken bij de spells of dit ook zo wordt gedaan!!
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "allFriendlyMinions",
+        "value": "1"
       }
     ]
   },
@@ -3401,6 +3489,14 @@
       {
         "name": "Aura"
       }
+    ],
+    //TODO checken bij de spells of dit ook zo wordt gedaan!!
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "allFriendlyMinions",
+        "value": "1"
+      }
     ]
   },
   {
@@ -3426,6 +3522,18 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "friendlyMinion",
+        "value": "1"
+      },
+      {
+        "type": "health",
+        "target": "friendlyMinion",
+        "value": "1"
       }
     ]
   },
@@ -3456,6 +3564,7 @@
       }
     ]
   },
+  //TODO HIERONDER MOET NOG WORDEN GEDAAN
   {
     "cardId": "EX1_084",
     "dbfId": "1009",
