@@ -1061,8 +1061,7 @@
       },
       {
         "name": "DestroyedDevinShield",
-        "mechNeeded": 1,
-        "mechNeeded": 2
+        "mechNeeded": 1
       }
     ],
     "mechanics": [
@@ -1070,7 +1069,6 @@
         "type": "destroyDivineShield",
         "target": "allMinions"
       },
-
       {
         "type": "health",
         "target": "self",
