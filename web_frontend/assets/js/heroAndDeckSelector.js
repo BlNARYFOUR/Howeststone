@@ -106,14 +106,17 @@ function showHeroes(heroes) {
 
 function loadHeroes() {
     fetch('http://localhost:4242/threebeesandme/howeststone/get/heroanddeckselector/heroes', {
-        'Content-Type': 'application/json',
-        method: 'GET',
-        mode: 'no-cors'
+        method: 'GET'
     })
     .then(function(res) {
-        if(res.ok === true)
+        console.log(res.ok);
+        if(res.ok !== true) {
             console.log(res);
             return res.json();
+        }
+        else {
+            return "ERROR";
+        }
     })
     .then(function(text) {
         let result = text;
