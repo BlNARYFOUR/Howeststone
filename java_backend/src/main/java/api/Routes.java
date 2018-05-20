@@ -1,5 +1,6 @@
 package api;
 
+import game.*;
 import io.javalin.Context;
 import io.javalin.Javalin;
 
@@ -32,6 +33,8 @@ class Routes {
         //TODO sort server.post("threebeesandme/post/deckbuilder/sort?by=", null);
         server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
     }
+
+    Game howeststone = new Game();
 
     private void handleRoot(final Context context) {
         context.result("This is the HowestStone API, This API is designed so you can play HowestStone on browser :D");
@@ -81,6 +84,7 @@ class Routes {
     }
 
     private void getAllHeroes(Context context) {
+        context.json(howeststone.getHeroNames());
         context.result("Just got all the heroes");
     }
 
