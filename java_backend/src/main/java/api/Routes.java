@@ -7,6 +7,7 @@ class Routes {
 
     Routes(final Javalin server) {
         server.get("/", this::handleRoot);
+        server.get("/threebeesandme/howeststone/get/useheropower", this::useHeroPower);
         //server.get("/API/getAllCards", this::getAllCards);
 
         // GAME BOARD
@@ -21,8 +22,13 @@ class Routes {
         server.post("threebeesandme/post/heroanddeckselector/deck", this::handleDeckSelection);
     }
 
+    private void useHeroPower(Context context) {
+        context.result("kaaapow");
+    }
+
     private void handleRoot(final Context context) {
         context.result("This is the HowestStone API, This API is designed so you can play HowestStone on browser :D");
+
     }
 
     // GAME BOARD
