@@ -271,8 +271,9 @@ function removeCardFromDeck(card) { //remove eventlistener niet vergeten (nu nog
 }
 
 function saveDeck() {
-    /*fetch('threebeesandme/post/deckbuilder/savedeck',{
+    /*fetch('http://localhost:4242/threebeesandme/post/deckbuilder/savedeck',{
         method: 'POST',
+        mode: 'no-cors'
     })
         .then(function(res) {
             if(res.ok === true)
@@ -288,8 +289,9 @@ function saveDeck() {
 }
 
 function newDeck() {
-    /*fetch('threebeesandme/post/deckbuilder/newdeck',{
+    /*fetch('http://localhost:4242/threebeesandme/post/deckbuilder/newdeck',{
         method: 'POST',
+        mode: 'no-cors'
     })
         .then(function(res) {
             if(res.ok === true)
@@ -305,7 +307,7 @@ function newDeck() {
 }
 
 function deleteDeck() {
-    /*fetch('threebeesandme/post/deckbuilder/deleteDeck',{
+    /*fetch('http://localhost:4242/threebeesandme/post/deckbuilder/deleteDeck',{
         method: 'POST',
     })
         .then(function(res) {
@@ -331,8 +333,9 @@ function sendSelectedHero(heroName) {
     console.log("Send selected hero: " + heroName);
 
     /*
-    fetch('threebeesandme/post/deckbuilder/selecthero', {
+    fetch('http://localhost:4242/threebeesandme/post/deckbuilder/selecthero', {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json',
             'playerHero': heroName                   // TODO: IMPORTANT!!!
@@ -352,7 +355,7 @@ function sendSelectedHero(heroName) {
     });
     */
 
-    // todo: updateDecks()
+    // TODO: updateDecks()
 }
 
 function nodetailOfCard(e){
@@ -391,7 +394,7 @@ function sort() {
 
         console.log(sortValue);
 
-        /*fetch('threebeesandme/howeststone/post/deckbuilder/sort?by='+sortValue, {
+        /*fetch('threebeesandme/post/deckbuilder/sort?by='+sortValue, {
                 method: 'post',
             })
             .then(function(res) {
@@ -453,7 +456,7 @@ function filterCards() {
 
     console.log(filterArray);
 
-    /*fetch('threebeesandme/howeststone/post/deckbuilder/filterCards', {
+    /*fetch('threebeesandme/post/deckbuilder/filterCards', {
         method: 'post',
     })
         .then(function(res) {

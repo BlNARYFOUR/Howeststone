@@ -7,23 +7,27 @@ class Routes {
 
     Routes(final Javalin server) {
         server.get("/", this::handleRoot);
-        server.get("/threebeesandme/howeststone/get/useheropower", this::useHeroPower);
         //server.get("/API/getAllCards", this::getAllCards);
 
         // GAME BOARD
         server.get("threebeesandme/get/gameboard/battlelog", this::getBattleLog);
         server.get("threebeesandme/get/gameboard/timeleft", this::getTimeLeft);
         server.post("threebeesandme/post/gameboard/endturn", this::handleEndUrn);
+        server.get("threebeesandme/get/useheropower", this::useHeroPower);
 
         // HERO AND DECK SELECTOR
         server.get("threebeesandme/get/heroanddeckselector/decks", this::getAllDecks);
         server.get("threebeesandme/get/heroanddeckselector/heroes", this::getAllHeroes);
         server.post("threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
         server.post("threebeesandme/post/heroanddeckselector/deck", this::handleDeckSelection);
-    }
 
-    private void useHeroPower(Context context) {
-        context.result("kaaapow");
+        // DECKBUILDER
+        server.post("threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
+        server.post("threebeesandme/post/deckbuilder/newdeck", this::newDeck);
+        server.post("threebeesandme/post/deckbuilder/deleteDeck", this::deleteDeck);
+        server.post("threebeesandme/post/deckbuilder/selecthero", this::handleHeroSelection);
+        //TODO sort server.post("threebeesandme/post/deckbuilder/sort?by=", null);
+        server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
     }
 
     private void handleRoot(final Context context) {
@@ -49,6 +53,10 @@ class Routes {
         context.result("Turn has ended");
     }
 
+    private void useHeroPower(Context context) {
+        context.result("kaaapow");
+    }
+
     // HERO AND DECK SELECTOR
 
     private void getAllDecks(Context context) {
@@ -67,5 +75,24 @@ class Routes {
 
     private void handleDeckSelection(Context context) {
         context.result("Deck has been selected");
+    }
+
+    // DECK BUILDER
+
+    private void saveDeck(Context context) {
+        context.result("Deck has been saved");
+    }
+
+
+    private void newDeck(Context context) {
+        context.result("A new deck has been created");
+    }
+
+    private void deleteDeck(Context context){
+        context.result("Your deck has been deleted");
+    }
+
+    private void filterCards(Context context) {
+        context.result("Your deck has been filtered");
     }
 }

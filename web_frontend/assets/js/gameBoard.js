@@ -30,7 +30,7 @@ function showOrHideBattleLog(e) {
 
 function loadBattleLog() {
     /*
-    fetch('threebeesandme/howeststone/get/gameboard/battlelog', {
+    fetch('http://localhost:4242/threebeesandme/get/gameboard/battlelog', {
         method: 'GET'
     })
     .then(function(res) {
@@ -58,7 +58,7 @@ function loadBattleLog() {
 
 function  useHeroPower() {
     console.log('kaaaapow!');
-    fetch('localhost:4242/threebeesandme/howeststone/get/useheropower',{
+    fetch('http://localhost:4242/threebeesandme/get/useheropower',{
            method: 'GET',
         mode: 'no-cors'
        })
@@ -114,7 +114,7 @@ function stopTimeLeftCheck() {
 }
 
 function timeLeft() {
-    fetch('threebeesandme/howeststone/get/timeleft', {
+    fetch('http://localhost:4242/threebeesandme/get/timeleft', {
         method: 'GET'
     })
     .then(function(res) {
@@ -141,7 +141,7 @@ function endMyTurn(e) {
     stopBurnFuse();
 
     /*
-    fetch('threebeesandme/howeststone/post/endturn',{
+    fetch('http://localhost:4242/threebeesandme/post/endturn',{
         method: 'POST'
     })
         .then(function(res) {
@@ -998,7 +998,7 @@ function attackStart() {
 }
 
 function loadAttackStart(e) {
-    fetch('threebeesandme/get/gameboard/attackpermission',{
+    fetch('http://localhost:4242/threebeesandme/get/gameboard/attackpermission',{
         method: 'get'
     })
         .then(function(res) {
@@ -1017,7 +1017,7 @@ function loadAttackStart(e) {
 function heroAttackStart(e) {
     // TODO Their is no need for two functions
 
-    fetch('localhost:4242/threebeesandme/post/gameboard/heroattackStart',{
+    fetch('http://localhost:4242/threebeesandme/post/gameboard/heroattackStart',{
         method: 'GET'
     })
         .then(function(res) {
@@ -1144,23 +1144,3 @@ function destroyed() {
     // discard card
 }
 
-function  useHeroPower() {
-
-
-    /*fetch('threebeesandme/howeststone/get/useheropower',{
-        method: 'GET'
-    })
-        .then(function(res) {
-            if(res.ok === true)
-                return res.json();
-        })
-        .then(function(text) {
-            let result = text;
-            console.log("Heropower is used");
-        })
-        .catch(function(err) {
-            console.log("Error: Could not use heropower");
-        });*/
-
-
-}
