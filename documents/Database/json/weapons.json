@@ -78,7 +78,7 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Attack Begin"
+        "name": "On Attack"
       }
     ],
     "mechanics": [
@@ -131,7 +131,7 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Attack Begin"
+        "name": "On Attack"
       }
     ],
     "mechanics": [
