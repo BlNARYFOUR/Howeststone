@@ -1350,7 +1350,6 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_234.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_234_premium.gif",
     "locale": "enUS",
-    //TODO check deze stuff maar eens MAX3
     "abilities": [
       {
         "name": "Battlecry"
@@ -1360,7 +1359,7 @@
       {
         "type": "destroy",
         "target": "minion",
-        "value": "double"
+        "value": "MAX 3 attack"
       }
     ]
   },
@@ -1487,17 +1486,11 @@
         "name": "Battlecry"
       }
     ],
-    //TODO check deze stuff maar eens MIN5
     "mechanics": [
       {
         "type": "destroy",
         "target": "minion",
         "value": "MIN 5 attack"
-      },
-      {
-        "type": "health",
-        "target": "self",
-        "value": "2"
       }
     ]
   },
@@ -1744,7 +1737,6 @@
       }
     ]
   },
-  //TODO hier is er een transformation (hoe gaan we dit implementeren)
   {
     "cardId": "CS2_022",
     "dbfId": "77",
@@ -1771,14 +1763,9 @@
     ],
     "mechanics": [
       {
-        "type": "setHealth",
+        "type": "transform",
         "target": "minion",
-        "value": "1"
-      },
-      {
-        "type": "setAttack",
-        "target": "minion",
-        "value": "1"
+        "value": "Sheep"
       }
     ]
   },
