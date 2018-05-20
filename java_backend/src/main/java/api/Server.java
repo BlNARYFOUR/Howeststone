@@ -26,4 +26,5 @@ public class Server {
         new Server(4242).start();
         LOGGER.debug("server started");
     }
+
 }

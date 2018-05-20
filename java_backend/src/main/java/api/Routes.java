@@ -1,12 +1,15 @@
 package api;
 
 import game.*;
+import hero.*;
 import io.javalin.Context;
 import io.javalin.Javalin;
 
 class Routes {
 
     Routes(final Javalin server) {
+        // case sensitive
+        server.get("/API/getAllCards", this::getAllCards);
         server.get("/", this::handleRoot);
         //server.get("/API/getAllCards", this::getAllCards);
 
@@ -32,6 +35,11 @@ class Routes {
         server.post("threebeesandme/post/deckbuilder/selecthero", this::handleHeroSelection);
         //TODO sort server.post("threebeesandme/post/deckbuilder/sort?by=", null);
         server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
+        server.get("/threebeesandme/howeststone/get/heroanddeckselector/heroes", this::loadHeroes);
+    }
+
+    private void loadHeroes(Context context) {
+        context.result("[\"Mage\",\"Paladin\"]");
     }
 
     Game howeststone = new Game();
