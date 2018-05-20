@@ -1143,3 +1143,24 @@ function destroyed() {
     // win || lose
     // discard card
 }
+
+function  useHeroPower() {
+
+
+    /*fetch('threebeesandme/howeststone/get/useheropower',{
+        method: 'GET'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Heropower is used");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not use heropower");
+        });*/
+
+
+}
