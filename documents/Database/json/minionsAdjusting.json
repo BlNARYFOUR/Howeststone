@@ -789,9 +789,26 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "randomCharacter",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target": "randomCharacter",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target": "randomCharacter",
+        "value": "-1"
+      }
     ]
   },
-  //TODO I got here but needed to sleep ZZZZzzzzZZZZzzzzZZZZzzzZZZZ --> smell ya later json
+
   {
     "cardId": "NEW1_037",
     "dbfId": "351",
@@ -809,7 +826,19 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_037.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_037_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Turn End"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "randomFriendlyMinion",
+        "value": "1"
+      }
+    ]
   },
   {
     "cardId": "EX1_058",
@@ -836,6 +865,12 @@
       },
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "Taunt",
+        "target": "adjacentMinions"
       }
     ]
   },
