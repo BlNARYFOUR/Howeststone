@@ -1668,7 +1668,12 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Battlecry"
+        "name": "Return To Hand"
+      }
+    ],
+    "mechanics": [
+      {
+        "target": "friendlyMinion"
       }
     ]
   },
@@ -1691,12 +1696,16 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_584.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_584_premium.gif",
     "locale": "enUS",
+    //TODO mss ook een checken of dit volgens de "bin" normen is!!!
     "abilities": [
       {
         "name": "Spell Damage"
-      },
+      }
+    ],
+    "mechanics": [
       {
-        "name": "Battlecry"
+        "target": "adjacentMinions",
+        "value": "1"
       }
     ]
   },
@@ -1721,7 +1730,24 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Battlecry"
+        "name": "Battlecry",
+        "mechNeeded": 0
+      },
+      {
+        "name": "Turn End",
+        "mechNeeded": 1
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "minion",
+        "value": "2"
+      },
+      {
+        "type": "attack",
+        "target": "lastUsedMinion",
+        "value": "-2"
       }
     ]
   },
@@ -1746,10 +1772,24 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Taunt"
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addAbility",
+        "target": "adjacentMinions",
+        "value": "Taunt"
       },
       {
-        "name": "Battlecry"
+        "type": "attack",
+        "target": "adjacentMinions",
+        "value": "1"
+      },
+      {
+        "type": "health",
+        "target": "adjacentMinions",
+        "value": "1"
       }
     ]
   },
@@ -1802,6 +1842,13 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "friendlyHero",
+        "value": "-5"
+      }
     ]
   },
   {
@@ -1850,10 +1897,14 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Silence"
-      },
-      {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addAbility",
+        "target": "minion",
+        "value": "Silence"
       }
     ]
   },
@@ -1880,6 +1931,14 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "friendlyHero",
+        //TODO eens kijken hoe we dit schrijven in andere branches!!!
+        "value": "amountOfCardsInHand"
       }
     ]
   },
