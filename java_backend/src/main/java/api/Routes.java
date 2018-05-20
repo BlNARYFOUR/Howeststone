@@ -16,7 +16,7 @@ class Routes {
     }
 
     private void loadHeroes(Context context) {
-        String[] heroes = {"Mage", "Paladin"};
+        String[] heroes = {"mage", "paladin"};
         context.json(heroes);
     }
 

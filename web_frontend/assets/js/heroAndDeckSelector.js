@@ -105,12 +105,12 @@ function showHeroes(heroes) {
 }
 
 function loadHeroes() {
-    fetch('http://localhost:4242/threebeesandme/howeststone/get/heroanddeckselector/heroes', {
+    fetch('/threebeesandme/howeststone/get/heroanddeckselector/heroes', {
         method: 'GET'
     })
     .then(function(res) {
         console.log(res.ok);
-        if(res.ok !== true) {
+        if(res.ok === true) {
             console.log(res);
             return res.json();
         }
