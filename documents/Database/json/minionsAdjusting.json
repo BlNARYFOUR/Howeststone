@@ -510,7 +510,6 @@
     ]
   },
   {
-    /* TODO: Here */
     "cardId": "NEW1_018",
     "dbfId": "999",
     "name": "Bloodsail Raider",
@@ -1109,7 +1108,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "otherMurlocs",
+        "target": "friendlyMurlocs",
         "value": "2"
       }
     ]
@@ -1435,6 +1434,13 @@
       {
         "name": "Aura"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "friendlyMurlocs",
+        "value": "2"
+      }
     ]
   },
   {
@@ -1459,6 +1465,21 @@
     "abilities": [
       {
         "name": "Windfury"
+      },
+      {
+        "name": "Enrage"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addAbility",
+        "target": "self",
+        "value": "Windfury"
+      },
+      {
+        "type": "attack",
+        "target": "self",
+        "value": "1"
       }
     ]
   },
@@ -1510,6 +1531,18 @@
       {
         "name": "Aura"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "friendlyPirates",
+        "value": "1"
+      },
+      {
+        "type": "health",
+        "target": "friendlyPirates",
+        "value": "1"
+      }
     ]
   },
   {
@@ -1534,6 +1567,16 @@
     "abilities": [
       {
         "name": "Taunt"
+      },
+      {
+        "name": "Enrage"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "self",
+        "value": "3"
       }
     ]
   },
@@ -1584,6 +1627,23 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    //TODO zeker eens mijn values bekijken van de setAttack en setHealth!!! TY
+    "mechanics": [
+      {
+        "type": "setAttack",
+        "target": "self",
+        "value": "attackAdjacentMinions + attack"
+      },
+      {
+        "type": "setHealth",
+        "target": "self",
+        "value": "healthAdjacentMinions + attack"
+      },
+      {
+        "type": "destroy",
+        "target": "adjacentMinions"
       }
     ]
   },
