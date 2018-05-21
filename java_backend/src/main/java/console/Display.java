@@ -31,12 +31,14 @@ public class Display {
     }
 
     private void chooseHero(Game howeststone) {
+        Player you = new Player();
         final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
 
         System.out.println("Select one of the following heroes:");
         System.out.println(formatList(HEROES));
         String selectedHero = askInputUntilFoundInList(HEROES);
-        howeststone.setHero(selectedHero);
+        you.setHero(selectedHero);
+        howeststone.addPlayer(you);
     }
 
     private void chooseDeck(Game howeststone) {
@@ -54,25 +56,22 @@ public class Display {
     }
 
     private void startGame(Game howeststone) {
-        newLine();
-        final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
-        int randomHeroIndex = (int)Math.round(Math.random())*(HEROES.size()-1);
-
-        howeststone.setEnemy(HEROES.get(randomHeroIndex));
-        howeststone.setDeck("Standard");
-
-        // TODO check if Player has hero and deck
         if (howeststone.getYou().getHero() == null || howeststone.getYou().getDeck() == null) {
             //TODO get out of this function not exception
             throw new NullPointerException();
         }
+        newLine();
+        final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
+        int randomHeroIndex = (int)Math.round(Math.random())*(HEROES.size()-1);
+        Player enemy = new Player();
 
-        System.out.println("Match Settings: "
-                + "\nPlayer: "
-                + howeststone.getYou().getHero().getHeroName()
-                + "\n     VS"
-                + "\nEnemy: " + howeststone.getEnemy().getHeroName());
+        enemy.setHero(HEROES.get(randomHeroIndex));
+        enemy.setDeck("Standard");
+        howeststone.addBot(enemy);
+        howeststone.setTime(50);
 
+        System.out.println(howeststone);
+        howeststone.shuffleDecks();
         flipCoin(howeststone);
     }
 
@@ -92,12 +91,16 @@ public class Display {
         }
         System.out.println(playerThatBegins + " starts the game and "
                 + playerThatGetsCoin + " gets the coin");
+
         replaceCards(howeststone);
     }
 
     private void replaceCards(Game howeststone) {
         // TODO 3 or 4 times
         // TODO IndexOutOfBoundsException
+
+        System.out.println(howeststone.getYou().getDeck().drawCard());
+        System.out.println(howeststone.getYou().getDeck().drawCard());
         System.out.println(howeststone.getYou().getDeck().drawCard());
         // TODO replace or not
         // - cardInfo // on one line

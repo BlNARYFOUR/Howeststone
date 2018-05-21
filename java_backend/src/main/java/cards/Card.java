@@ -1,8 +1,10 @@
 package cards;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Card {
+    private static int mockID;
     private int cardID;
     private String cardName;
     private String urlOfImg;
@@ -12,8 +14,21 @@ public class Card {
     // TODO: private List<Mechanics> cardMechanics;
 
     public Card(){
-        // TODO random card
+        // cannot be all cards
+        this.cardID = mockID;
+        mockID ++;
+        getOtherInfo(mockID);
     }
+
+    private void getOtherInfo(int mockID) {
+        this.cardName = "mock";
+        this.urlOfImg = "http://wow.zamimg.com/images/hearthstone/cards/enus/original/GAME_002.png";
+        this.rarity = "epic";
+        this.manaCost = 0;
+        this.cardAbilities = new ArrayList<>();
+        cardAbilities.add(new Abilities());
+    }
+
     public Card(int cardID){
         // TODO get other cardSpecifications
     }

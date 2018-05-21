@@ -17,6 +17,10 @@ public class Player {
         this.hero = hero;
     }
 
+    public void setHero(String heroName){
+        this.hero = new Hero(heroName);
+    }
+
     public Player() {
 
     }
