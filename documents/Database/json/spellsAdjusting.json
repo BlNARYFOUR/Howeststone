@@ -52,13 +52,14 @@
     ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "minion",
-        "value": "2"
-      },{
         "type": "health",
         "target": "minion",
         "value": "-1"
+      },
+      {
+        "type": "attack",
+        "target": "lastUsed",
+        "value": "2"
       }
     ]
   },
@@ -109,7 +110,7 @@
         "value": "1"
       },{
         "type": "health",
-        "target": "minion",
+        "target": "lastUsed",
         "value": "1"
       }
     ]
@@ -170,7 +171,7 @@
       {
         "type": "health",
         "target": "minion",
-        "value": "-armor"
+        "value": "-armorFriendlyHero"
       }
     ]
   },
@@ -199,7 +200,7 @@
     "mechanics": [
       {
         "type": "drawCards",
-        "value": "amountFriendlyDamagedMinions"
+        "value": "amountDamagedFriendlyCharacter"
       }
     ]
   },
@@ -263,7 +264,7 @@
       },
       {
         "type": "attack",
-        "target": "damagedMinion",
+        "target": "lastUsed",
         "value": "3"
       }
     ]
@@ -322,7 +323,7 @@
     "mechanics": [
       {
         "type": "drawCards",
-        "value": "enemyAmountOfCardsInHand"
+        "value": "amountEnemyCardsInHand"
       }
     ]
   },
@@ -417,7 +418,7 @@
       {
         "type": "health",
         "target": "allEnemyMinions",
-        "value": "attackLastUsedMinion"
+        "value": "attackLastUsed"
       }
     ]
   },
@@ -581,8 +582,43 @@
     "mechanics": [
       {
         "type": "health",
-        "target":"randomEnemies",
-        "value": "8"
+        "target":"randomEnemy",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target":"randomEnemy",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target":"randomEnemy",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target":"randomEnemy",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target":"randomEnemy",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target":"randomEnemy",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target":"randomEnemy",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target":"randomEnemy",
+        "value": "-1"
       }
     ]
   },
@@ -615,7 +651,7 @@
       },
       {
         "type": "health",
-        "target":"self",
+        "target":"friendlyHero",
         "value": "5"
       }
     ]
@@ -649,7 +685,7 @@
       },
       {
         "type": "health",
-        "target":"self",
+        "target":"friendlyHero",
         "value": "3"
       }
     ]
@@ -679,7 +715,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target":"self",
+        "target": "target",
         "value": "8"
       },
       {
@@ -742,7 +778,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target":"target",
+        "target": "target",
         "value": "-10"
       }
     ]
@@ -777,7 +813,7 @@
       },
       {
         "type": "health",
-        "target":"self",
+        "target": "friendlyHero",
         "value": "5"
       }
     ]
@@ -837,8 +873,18 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "randomEnemies",
-        "value": "-3"
+        "target": "randomEnemy",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target": "randomEnemy",
+        "value": "-1"
+      },
+      {
+        "type": "health",
+        "target": "randomEnemy",
+        "value": "-1"
       }
     ]
   },
