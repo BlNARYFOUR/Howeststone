@@ -150,7 +150,7 @@
       {
         "type": "health",
         "target": "randomFriendlyMinion",
-        "value": 1
+        "value": "1"
       }
     ]
   },
@@ -183,7 +183,7 @@
       {
         "type": "health",
         "target": "friendlyHero",
-        "value": -3
+        "value": "-3"
       }
     ]
   },
@@ -240,12 +240,12 @@
       {
         "type": "attack",
         "target": "self",
-        "value": 2
+        "value": "2"
       },
       {
         "type": "health",
         "target": "self",
-        "value": 2
+        "value": "2"
       }
     ]
   },
@@ -277,7 +277,7 @@
       {
         "type": "health",
         "target": "enemyHero",
-        "value": -2
+        "value": "-2"
       }
     ]
   },
@@ -400,7 +400,7 @@
       {
         "type": "health",
         "target": "randomFriendlyMinion",
-        "value": 1
+        "value": "1"
       }
     ]
   },
@@ -432,7 +432,7 @@
       {
         "type": "attack",
         "target": "self",
-        "value": 3
+        "value": "3"
       }
     ]
   },
@@ -611,7 +611,7 @@
       },
       {
         "type": "attack",
-        "target": "minion",
+        "target": "lastUsed",
         "value": "2"
       }
     ]
@@ -723,7 +723,7 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Begin Turn"
+        "name": "Turn Begin"
       }
     ],
     "mechanics": [
@@ -776,6 +776,7 @@
     "cost": 2,
     "attack": 3,
     "health": 2,
+    // TODO hoe zorg je ervoor dat hij zichzelf geen damage doet?
     "text": "Battlecry: Deal 3 damage randomly split between all other characters.",
     "flavor": "He's not really all that crazy, he is just not as careful with explosives as he should be.",
     "artist": "Mike Sass",
@@ -787,9 +788,13 @@
     "abilities": [
       {
         "name": "Battlecry"
+      },
+      {
+        "name": "Turn End"
       }
     ],
     "mechanics": [
+
       {
         "type": "health",
         "target": "randomCharacter",
@@ -807,7 +812,6 @@
       }
     ]
   },
-
   {
     "cardId": "NEW1_037",
     "dbfId": "351",
@@ -1928,7 +1932,7 @@
       {
         "type": "health",
         "target": "friendlyHero",
-        "value": "amountOfCardsInHand"
+        "value": "amountFriendlyCardsInHand"
       }
     ]
   },
@@ -2712,7 +2716,7 @@
       {
         "type": "cost",
         "target": "self",
-        "value": "amountOfMinionsOnBattlefield"
+        "value": "amountMinionsOnBattlefield"
       }
     ]
   },
@@ -3538,7 +3542,7 @@
       },
       {
         "type": "health",
-        "target": "friendlyMinion",
+        "target": "lastUsed",
         "value": "1"
       }
     ]
@@ -3716,12 +3720,12 @@
       },
       {
         "type": "attack",
-        "target": "friendlyBeast",
+        "target": "lastUsed",
         "value": "2"
       },
       {
         "type": "health",
-        "target": "friendlyBeast",
+        "target": "lastUsed",
         "value": "2"
       }
     ]
@@ -3945,12 +3949,12 @@
       {
         "type": "attack",
         "target": "friendlyBeast",
-        "value": "amountOfFriendlyMinionsOnBattlefield"
+        "value": "amountFriendlyMinionsOnBattlefield"
       },
       {
         "type": "health",
-        "target": "friendlyBeast",
-        "value": "amountOfFriendlyMinionsOnBattlefield"
+        "target": "lastUsed",
+        "value": "amountFriendlyMinionsOnBattlefield"
       }
     ]
   },
