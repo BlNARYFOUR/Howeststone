@@ -57,7 +57,7 @@ function handleSelectedDeck(e) {
 
 function loadDecks() {
     /*
-    fetch('threebeesandme/howeststone/get/heroanddeckselector/decks', {
+    fetch('threebeesandme/get/heroanddeckselector/decks', {
         method: 'GET'
     })
     .then(function(res) {
@@ -104,9 +104,9 @@ function showHeroes(heroes) {
 }
 
 function loadHeroes() {
-    /*
-    fetch('threebeesandme/howeststone/get/heroanddeckselector/heroes', {
-        method: 'GET'
+    fetch('http://localhost:4242/threebeesandme/howeststone/get/heroanddeckselector/heroes', {
+        method: 'GET',
+        mode: 'no-cors'
     })
     .then(function(res) {
         if(res.ok === true)
@@ -119,9 +119,9 @@ function loadHeroes() {
     .catch(function(err) {
         console.log("Error: Could not load the heroes :'(");
     });
-    */
 
-    showHeroes(["mage", "paladin"]);    // TODO: Must be replaced later by 'result'
+
+    //showHeroes(["Mage", "Paladin"]);    // TODO: Must be replaced later by 'result'
 }
 
 function handleSelectedHero(e) {
@@ -155,7 +155,7 @@ function sendSelectedHero(heroName) {
     console.log("Send selected hero: " + heroName);
 
     /*
-    fetch('threebeesandme/howeststone/post/heroanddeckselector/hero', {
+    fetch('threebeesandme/post/heroanddeckselector/hero', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -215,7 +215,7 @@ function sendSelectedDeck(deckName) {
     console.log("Send selected deck: " + deckName);
 
     /*
-    fetch('threebeesandme/howeststone/post/heroanddeckselector/deck', {
+    fetch('threebeesandme/post/heroanddeckselector/deck', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ function showOrHideBattleLog(e) {
 
 function loadBattleLog() {
     /*
-    fetch('threebeesandme/howeststone/get/gameboard/battlelog', {
+    fetch('http://localhost:4242/threebeesandme/get/gameboard/battlelog', {
         method: 'GET'
     })
     .then(function(res) {
@@ -58,7 +58,7 @@ function loadBattleLog() {
 
 function  useHeroPower() {
     console.log('kaaaapow!');
-    fetch('localhost:4242/threebeesandme/howeststone/get/useheropower',{
+    fetch('http://localhost:4242/threebeesandme/get/useheropower',{
            method: 'GET',
         mode: 'no-cors'
        })
@@ -114,7 +114,7 @@ function stopTimeLeftCheck() {
 }
 
 function timeLeft() {
-    fetch('threebeesandme/howeststone/get/timeleft', {
+    fetch('http://localhost:4242/threebeesandme/get/timeleft', {
         method: 'GET'
     })
     .then(function(res) {
@@ -141,7 +141,7 @@ function endMyTurn(e) {
     stopBurnFuse();
 
     /*
-    fetch('threebeesandme/howeststone/post/endturn',{
+    fetch('http://localhost:4242/threebeesandme/post/endturn',{
         method: 'POST'
     })
         .then(function(res) {
@@ -225,8 +225,24 @@ function updateMyHero() {
 
 function updateHero(parent) {
     let heroName = "";
+    fetch('http://localhost:4242/threebeesandme/get/yourhero',{
+        method: 'get',
+        mode: 'no-cors'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("you're hero is" + result);
+        })
+        .catch(function(err) {
+            console.log("Error: Could not get hero");
+        });
 
-    // here will come a fetch to get the hero name
+
+    // TODO fetch heroname
     heroName = "mage";
 
     showHero(parent, heroName);
@@ -243,7 +259,7 @@ function showHero(parent, heroName) {
 function updateEnemyCards() {
     let amountOfCards = 0;
 
-    /* Here should come a fetch to get enemy amount of cards */
+    // TODO fetch for cardInEnemyHand and other info
     amountOfCards = 7;      // MOCK DATA
 
     updateCards(amountOfCards, "enemy", -1);
@@ -251,7 +267,7 @@ function updateEnemyCards() {
 }
 
 function updateMyCards() {
-    /* Here should come a fetch to get cardInMyHand data */
+    // TODO fetch for cardsInMyHand and other info
     myCards = MOCKMYCARDS();
 
     updateCards(myCards.length, "you", 1);
@@ -998,7 +1014,7 @@ function attackStart() {
 }
 
 function loadAttackStart(e) {
-    fetch('threebeesandme/get/gameboard/attackpermission',{
+    fetch('http://localhost:4242/threebeesandme/get/gameboard/attackpermission',{
         method: 'get'
     })
         .then(function(res) {
@@ -1017,7 +1033,7 @@ function loadAttackStart(e) {
 function heroAttackStart(e) {
     // TODO Their is no need for two functions
 
-    fetch('localhost:4242/threebeesandme/post/gameboard/heroattackStart',{
+    fetch('http://localhost:4242/threebeesandme/post/gameboard/heroattackStart',{
         method: 'GET'
     })
         .then(function(res) {
@@ -1144,23 +1160,3 @@ function destroyed() {
     // discard card
 }
 
-function  useHeroPower() {
-
-
-    /*fetch('threebeesandme/howeststone/get/useheropower',{
-        method: 'GET'
-    })
-        .then(function(res) {
-            if(res.ok === true)
-                return res.json();
-        })
-        .then(function(text) {
-            let result = text;
-            console.log("Heropower is used");
-        })
-        .catch(function(err) {
-            console.log("Error: Could not use heropower");
-        });*/
-
-
-}
