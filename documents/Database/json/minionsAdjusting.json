@@ -3588,10 +3588,14 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Charge"
-      },
-      {
         "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "friendlyChargeMinions",
+        "value": "1"
       }
     ]
   },
@@ -3665,6 +3669,12 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "drawCards",
+        "value": "1"
+      }
     ]
   },
   {
@@ -3690,10 +3700,24 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Taunt"
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addAbility",
+        "target": "friendlyBeast",
+        "value": "Taunt"
       },
       {
-        "name": "Battlecry"
+        "type": "attack",
+        "target": "friendlyBeast",
+        "value": "2"
+      },
+      {
+        "type": "health",
+        "target": "friendlyBeast",
+        "value": "2"
       }
     ]
   },
@@ -3765,7 +3789,14 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Spell Damage"
+        "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "spellDamage",
+        "target": "allFriendlyCharacters",
+        "value": "1"
       }
     ]
   },
@@ -3871,6 +3902,13 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "allFriendlyCharacters",
+        "value": "2"
+      }
     ]
   },
   {
@@ -3897,6 +3935,19 @@
       {
         "name": "Battlecry"
       }
+    ],
+    //TODO checken of er een betere naam is voor de value!!
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "friendlyBeast",
+        "value": "amountOfFriendlyMinionsOnPlayingfield"
+      },
+      {
+        "type": "health",
+        "target": "friendlyBeast",
+        "value": "amountOfFriendlyMinionsOnPlayingfield"
+      }
     ]
   },
   {
@@ -3918,7 +3969,19 @@
     "howToGetGold": "Unlocked at Warlock Level 57.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_399.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_399_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "On Hit"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "self",
+        "value": "3"
+      }
+    ]
   },
   {
     "cardId": "EX1_593",
@@ -3943,6 +4006,13 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "attack",
+        "target": "self",
+        "value": "3"
       }
     ]
   },
@@ -3970,6 +4040,13 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "target",
+        "value": "-2"
+      }
     ]
   },
   {
@@ -3996,10 +4073,14 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Charge"
-      },
-      {
         "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addAbility",
+        "target": "friendlyBeasts",
+        "value": "Charge"
       }
     ]
   },
@@ -4025,7 +4106,14 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Spell Damage"
+        "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "spellDamage",
+        "target": "allFriendlyCharacters",
+        "value": "1"
       }
     ]
   },
@@ -4073,6 +4161,18 @@
     "abilities": [
       {
         "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "addAbility",
+        "target": "self",
+        "value": "Devine Shield"
+      },
+      {
+        "type": "health",
+        "target": "all",
+        "value": "-1"
       }
     ]
   },
@@ -4173,6 +4273,13 @@
       {
         "name": "Battlecry"
       }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "friendlyHero",
+        "value": "6"
+      }
     ]
   },
   {
@@ -4198,6 +4305,18 @@
     "abilities": [
       {
         "name": "Aura"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "health",
+        "target": "friendlyMinions",
+        "value": "1"
+      },
+      {
+        "type": "attack",
+        "target": "friendlyMinions",
+        "value": "1"
       }
     ]
   },
