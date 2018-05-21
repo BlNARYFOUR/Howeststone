@@ -31,7 +31,7 @@ public class Card {
 
     public Card(int cardID){
         getOtherInfo(cardID);
-        
+
         // TODO get other cardSpecifications
     }
     public String toString() {
