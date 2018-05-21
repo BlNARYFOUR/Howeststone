@@ -15,16 +15,18 @@ public class SqlDatabase {
         }
     }
 
-    private final String url, user, password;
+    private final String URL;
+    private final String USER;
+    private final String PASSWORD;
 
     public SqlDatabase(String url, String user, String password) {
-        this.url = url;
-        this.user = user;
-        this.password = password;
+        this.URL = url;
+        this.USER = user;
+        this.PASSWORD = password;
     }
 
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
 }
