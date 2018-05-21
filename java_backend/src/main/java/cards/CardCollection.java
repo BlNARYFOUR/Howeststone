@@ -15,18 +15,17 @@ public class CardCollection {
     public CardCollection(String name) {
         this.cards = new ArrayList<Card>();
         this.name = name;
-        /*if (name.equals("Standard")){
+        if (name.equals("Standard")){
             for(int i = 0; i < 30; i ++){
                 Card card = new Card();
                 cards.add(card);
             }
-        }else{
-            // TODO check if deck exist
-        }*/
+            // underneath or function in game shuffleDecks() or both?
+            shuffle();
+        }
     }
 
-    private void shuffleCardCollection(){
-        // beneath or with parameter ?
+    private void shuffle(){
         Collections.shuffle(cards);
     }
 

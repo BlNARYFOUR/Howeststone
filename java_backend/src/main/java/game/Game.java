@@ -5,6 +5,7 @@ import hero.Hero;
 import sun.security.krb5.internal.crypto.DesMacCksumType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Game {
@@ -18,19 +19,9 @@ public class Game {
     /*private Hero you;
     private CardCollection deck;*/
 
-    public void setHero(String hero) {
-        you = new Player();
-        you.setHero(new Hero(hero));
-    }
 
     public Hero getHero() {
         return you.getHero();
-    }
-
-    public void setEnemy(String hero) {
-        enemy = new Player();
-        enemy.setHero(new Hero(hero));
-        enemy.setDeck("Standard");
     }
 
     public Hero getEnemy() {
@@ -52,8 +43,29 @@ public class Game {
         you.setDeck(deckName);
     }
 
+    @Override
+    public String toString() {
+
+        return "\nPlayer: " + you.getHero() + "\n     VS" + "\nEnemy: " + enemy.getHero();
+    }
 
     public Player getYou() {
         return you;
+    }
+
+    public void addPlayer(Player you) {
+        this.you = you;
+    }
+
+    public void addBot(Player enemy) {
+        this.enemy = enemy;
+    }
+
+    public void setTime(int time) {
+        this.turnTime = time;
+    }
+
+    public void shuffleDecks() {
+
     }
 }
