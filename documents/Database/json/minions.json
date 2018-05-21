@@ -37,27 +37,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_188_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-
-        "name": "Battlecry",
-        "mechNeeded": 0
-      },
-      {
-        "name": "Turn End",
-        "mechNeeded": 1
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "minion",
-        "value": "2"
-      },
-      {
-        "type": "attack",
-        "target": "lastUsed",
-        "value": "-2"
+        "name": "Battlecry"
       }
     ]
   },
@@ -79,19 +61,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_009.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_009_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Enrage"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "attack",
-        "target": "self",
-        "value": "5"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_008",
@@ -112,7 +82,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_008.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_008_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Divine Shield"
       }
@@ -138,19 +108,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_059_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Stealth"
-      },
-      {
-        "name": "Turn End"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "randomFriendlyMinion",
-        "value": 1
+        "name": "Stealth"
       }
     ]
   },
@@ -174,16 +134,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_319_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "friendlyHero",
-        "value": -3
+        "name": "Battlecry"
       }
     ]
   },
@@ -202,7 +155,7 @@
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_538t.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_538t_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Charge"
       }
@@ -227,25 +180,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_017.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_017_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "destroy",
-        "target": "Murloc"
-      },
-      {
-        "type": "attack",
-        "target": "self",
-        "value": 2
-      },
-      {
-        "type": "health",
-        "target": "self",
-        "value": 2
+        "name": "Battlecry"
       }
     ]
   },
@@ -268,16 +205,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_029.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_029_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Deathrattle"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "enemyHero",
-        "value": -2
+        "name": "Deathrattle"
       }
     ]
   },
@@ -300,7 +230,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_405.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_405_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -341,7 +271,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_010.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_010_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Stealth"
       }
@@ -367,7 +297,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_169.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_169_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Windfury"
       }
@@ -390,19 +320,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_004.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_004_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Turn End"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "health",
-        "target": "randomFriendlyMinion",
-        "value": 1
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_393",
@@ -422,19 +340,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_393.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_393_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Enrage"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "attack",
-        "target": "self",
-        "value": 3
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_362",
@@ -455,16 +361,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_362.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_362_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "friendlyMinion",
-        "value": "Divine Shield"
+        "name": "Divine Shield"
+      },
+      {
+        "name": "Battlecry"
       }
     ]
   },
@@ -488,25 +390,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_012_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Deathrattle",
-        "mechNeeded": 0
-      },
-      {
-        "name": "Battlecry",
-        "mechNeeded": 1
-      }
-    ],
     "mechanics": [
       {
-        "type": "drawCards",
-        "value": "1"
+        "name": "Deathrattle"
       },
       {
-        "type": "spellDamage",
-        "target": "allFriendlyCharachters",
-        "value": "1"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -529,16 +418,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_018.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_018_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "setAttack",
-        "target":"self",
-        "value": "attackWeapon"
+        "name": "Battlecry"
       }
     ]
   },
@@ -561,21 +443,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_059.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_059_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "minion",
-        "value": "health"
-      },
-      {
-        "type": "health",
-        "target": "lastUsed",
-        "value": "attack"
+        "name": "Battlecry"
       }
     ]
   },
@@ -598,21 +468,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_603.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_603_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "minion",
-        "value": "-1"
-      },
-      {
-        "type": "attack",
-        "target": "minion",
-        "value": "2"
+        "name": "Battlecry"
       }
     ]
   },
@@ -636,16 +494,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_162.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_162_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "adjacentMinions",
-        "value": "1"
+        "name": "AdjacentBuff"
+      },
+      {
+        "name": "Aura"
       }
     ]
   },
@@ -667,20 +521,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_023.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_023_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Untargetable"
-      }
-    ],
-    "mechanics": [
-      {
-        "target": "Spells"
-      },
-      {
-        "target": "HeroPowers"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "NEW1_040t",
@@ -696,7 +537,7 @@
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/NEW1_040t.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/NEW1_040t_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -720,19 +561,7 @@
     "playerClass": "Priest",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_341.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_341_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Begin Turn"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "health",
-        "target": "damagedFriendlyCharacter",
-        "value": "3"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_096",
@@ -753,15 +582,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_096.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_096_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Deathrattle"
-      }
-    ],
     "mechanics": [
       {
-        "type": "drawCards",
-        "value": "1"
+        "name": "Deathrattle"
       }
     ]
   },
@@ -784,30 +607,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_082.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_082_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Battlecry"
       }
-    ],
-    "mechanics": [
-      {
-        "type": "health",
-        "target": "randomCharacter",
-        "value": "-1"
-      },
-      {
-        "type": "health",
-        "target": "randomCharacter",
-        "value": "-1"
-      },
-      {
-        "type": "health",
-        "target": "randomCharacter",
-        "value": "-1"
-      }
     ]
   },
-
   {
     "cardId": "NEW1_037",
     "dbfId": "351",
@@ -825,19 +630,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_037.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_037_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Turn End"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "attack",
-        "target": "randomFriendlyMinion",
-        "value": "1"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_058",
@@ -858,16 +651,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_058.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_058_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "adjacentMinions",
-        "value": "Taunt"
+        "name": "Taunt"
+      },
+      {
+        "name": "Battlecry"
       }
     ]
   },
@@ -890,14 +679,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_049.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_049_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Return To Hand"
-      }
-    ],
     "mechanics": [
       {
-        "target": "friendlyMinion"
+        "name": "Battlecry"
       }
     ]
   },
@@ -918,18 +702,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_007.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_007_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "On Hit"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "drawCards",
-        "value": "1"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_006",
@@ -949,18 +722,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_006.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_006_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Turn Begin"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "swap",
-        "target": "randomMinionInHand"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_382",
@@ -981,16 +743,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_382.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_382_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "setAttack",
-        "target": "enemyMinion",
-        "value": "1"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1013,16 +768,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_089.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_089_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "mana",
-        "target": "enemyHero",
-        "value": "1"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1045,30 +793,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_590.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_590_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry",
-        "mechNeeded": 0
-      },
-      {
-        "name": "DestroyedDevinShield",
-        "mechNeeded": 1
-      }
-    ],
     "mechanics": [
       {
-        "type": "destroyDivineShield",
-        "target": "allMinions"
+        "name": "Divine Shield"
       },
       {
-        "type": "health",
-        "target": "self",
-        "value": "3"
-      },
-      {
-        "type": "attack",
-        "target": "self",
-        "value": "3"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1092,16 +822,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_103.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_103_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "friendlyMurlocs",
-        "value": "2"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1124,19 +847,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_102.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_102_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Turn Begin"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "health",
-        "target": "randomEnemy",
-        "value": "-2"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "CS2_117",
@@ -1156,16 +867,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_117.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_117_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "target",
-        "value": "3"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1189,7 +893,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_170.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_170_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Poisonous"
       }
@@ -1215,19 +919,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_301.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_301_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       },
       {
         "name": "Battlecry"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "destroyManaCrystals",
-        "target": "friendlyHero",
-        "value": "1"
       }
     ]
   },
@@ -1265,19 +962,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/tt_004.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/tt_004_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "On Death"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "attack",
-        "target": "self",
-        "value": "1"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_604",
@@ -1297,19 +982,7 @@
     "playerClass": "Warrior",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_604.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_604_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "On Hit"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "attack",
-        "target": "self",
-        "value": "1"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "CS2_181",
@@ -1330,16 +1003,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_181.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_181_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "self",
-        "value": "-4"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1363,16 +1029,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_203.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_203_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "minion",
-        "value": "Silence"
+        "name": "Silence"
+      },
+      {
+        "name": "Battlecry"
       }
     ]
   },
@@ -1396,7 +1058,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_017.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_017_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Stealth"
       }
@@ -1422,16 +1084,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_507.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_507_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "friendlyMurlocs",
-        "value": "2"
+        "name": "Aura"
       }
     ]
   },
@@ -1454,24 +1109,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_412.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_412_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Windfury"
-      },
-      {
-        "name": "Enrage"
-      }
-    ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "self",
-        "value": "Windfury"
-      },
-      {
-        "type": "attack",
-        "target": "self",
-        "value": "1"
+        "name": "Windfury"
       }
     ]
   },
@@ -1494,7 +1134,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_020.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_020_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Divine Shield"
       }
@@ -1519,21 +1159,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_027.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_027_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "friendlyPirates",
-        "value": "1"
-      },
-      {
-        "type": "health",
-        "target": "friendlyPirates",
-        "value": "1"
+        "name": "Aura"
       }
     ]
   },
@@ -1556,19 +1184,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_390.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_390_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Taunt"
-      },
-      {
-        "name": "Enrage"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "self",
-        "value": "3"
+        "name": "Taunt"
       }
     ]
   },
@@ -1591,7 +1209,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_021.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_021_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Windfury"
       }
@@ -1616,25 +1234,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_304.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_304_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "self",
-        "value": "attackAdjacentMinions"
-      },
-      {
-        "type": "health",
-        "target": "self",
-        "value": "healthAdjacentMinions"
-      },
-      {
-        "type": "destroy",
-        "target": "adjacentMinions"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1657,14 +1259,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_057.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_057_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Return To Hand"
-      }
-    ],
     "mechanics": [
       {
-        "target": "friendlyMinion"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1687,16 +1284,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_584.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_584_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "spellDamage",
-        "target": "adjacentMinions",
-        "value": "1"
+        "name": "Spell Damage"
+      },
+      {
+        "name": "Battlecry"
       }
     ]
   },
@@ -1719,26 +1312,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_046.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_046_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry",
-        "mechNeeded": 0
-      },
-      {
-        "name": "Turn End",
-        "mechNeeded": 1
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "minion",
-        "value": "2"
-      },
-      {
-        "type": "attack",
-        "target": "lastUsed",
-        "value": "-2"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1761,26 +1337,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_093.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_093_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "adjacentMinions",
-        "value": "Taunt"
+        "name": "Taunt"
       },
       {
-        "type": "attack",
-        "target": "adjacentMinions",
-        "value": "1"
-      },
-      {
-        "type": "health",
-        "target": "adjacentMinions",
-        "value": "1"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1803,7 +1365,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_396.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_396_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -1829,16 +1391,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_313.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_313_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "friendlyHero",
-        "value": "-5"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1861,7 +1416,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_023.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_023_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Divine Shield"
       }
@@ -1886,16 +1441,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_048.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_048_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "minion",
-        "value": "Silence"
+        "name": "Silence"
+      },
+      {
+        "name": "Battlecry"
       }
     ]
   },
@@ -1919,16 +1470,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_043.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_043_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "friendlyHero",
-        "value": "amountOfCardsInHand"
+        "name": "Battlecry"
       }
     ]
   },
@@ -1951,19 +1495,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_097.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_097_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       },
       {
         "name": "Deathrattle"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "health",
-        "target": "all",
-        "value": "-2"
       }
     ]
   },
@@ -1985,16 +1522,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_005.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_005_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "destroy",
-        "target": "minion",
-        "value": "MIN 7 attack"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2018,21 +1548,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_024.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_024_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "friendlyWeapon",
-        "value": "1"
-      },
-      {
-      "type": "durability",
-      "target": "friendlyWeapon",
-      "value": "1"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2055,7 +1573,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS1_069.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS1_069_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -2081,19 +1599,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_558.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_558_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "drawCards",
-        "value": "durabilityEnemyWeapon"
-      },
-      {
-        "type": "destroy",
-        "target": "enemyWeapon"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2115,23 +1623,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_221.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_221_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Enrage"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "attack",
-        "target": "friendlyWeapon",
-        "value": "2"
-      },
-      {
-        "type": "destroy",
-        "target": "enemyWeapon"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "NEW1_041",
@@ -2152,15 +1644,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_041.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_041_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "destroy",
-        "target": "randomEnemyMinion"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2184,7 +1670,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_028.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_028_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Stealth"
       }
@@ -2209,7 +1695,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_067.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_067_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Charge"
       },
@@ -2253,16 +1739,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_583.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_583_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "friendlyHero",
-        "value": "4"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2285,7 +1764,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_032.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_032_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       },
@@ -2312,16 +1791,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_623.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_623_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "friendlyMinion",
-        "value": "3"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2344,15 +1816,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_002.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_002_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "destroy",
-        "target": "enemyMinionWithTaunt"
+        "name": "Taunt"
+      },
+      {
+        "name": "Battlecry"
       }
     ]
   },
@@ -2375,7 +1844,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_033.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_033_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Windfury"
       }
@@ -2401,24 +1870,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_249.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_249_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Turn End"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "addAbility",
-        "target": "self",
-        "value": "Devine Shield"
-      },
-      {
-        "type": "health",
-        "target": "all",
-        "value": "-2"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_350",
@@ -2439,24 +1891,7 @@
     "playerClass": "Priest",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_350.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_350_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "spellDamage",
-        "target": "allFriendlyCharacters",
-        "value": "double"
-      },
-      {
-        "type": "spellHealing",
-        "target": "allFriendlyCharacters",
-        "value": "double"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "CS2_161",
@@ -2477,7 +1912,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_161.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_161_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Stealth"
       }
@@ -2503,19 +1938,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_414.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_414_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Charge"
-      },
-      {
-        "name": "Enrage"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "self",
-        "value": "6"
+        "name": "Charge"
       }
     ]
   },
@@ -2537,24 +1962,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_038.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_038_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Turn End"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "attack",
-        "target": "self",
-        "value": "1"
-      },
-      {
-        "type": "health",
-        "target": "self",
-        "value": "1"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_561",
@@ -2577,16 +1985,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_561.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_561_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "setHealth",
-        "target": "hero",
-        "value": "15"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2611,7 +2012,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_543.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_543_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Charge"
       }
@@ -2638,16 +2039,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_563.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_563_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "spellDamage",
-        "target": "hero",
-        "value": "5"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -2671,18 +2065,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_560.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_560_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "setTurnTime",
-        "value": "15"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_586",
@@ -2702,19 +2085,7 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_586.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_586_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Update In Hand"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "cost",
-        "target": "self",
-        "value": "amountOfMinionsOnBattlefield"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "GAME_002",
@@ -2730,12 +2101,7 @@
     "playerClass": "Neutral",
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/GAME_002.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/GAME_002_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Uncollectable"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "CS2_boar",
@@ -2774,16 +2140,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_189.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_189_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "target",
-        "value": "-1"
+        "name": "Battlecry"
       }
     ]
   },
@@ -2807,7 +2166,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS1_042.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS1_042_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -2833,19 +2192,7 @@
     "howToGetGold": "Unlocked at Warlock Level 53.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_508.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_508_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "attack",
-        "target": "friendlyMurlocs",
-        "value": "1"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_025t",
@@ -2921,18 +2268,7 @@
     "howToGetGold": "Unlocked at Level 40.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_235.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_235_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "On Heal"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "drawCards",
-        "value": "1"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "CS2_tk1",
@@ -2964,12 +2300,7 @@
     "playerClass": "Paladin",
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/CS2_101t.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/CS2_101t_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Uncollectable"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "CS2_171",
@@ -2992,7 +2323,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_171.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_171_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Charge"
       }
@@ -3020,16 +2351,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_175.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_175_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "friendlyBeasts",
-        "value": "1"
+        "name": "Aura"
       }
     ]
   },
@@ -3055,7 +2379,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_065.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_065_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -3081,16 +2405,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_011.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_011_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "target",
-        "value": "2"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3136,7 +2453,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_173.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_173_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Charge"
       }
@@ -3162,7 +2479,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_121.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_121_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -3188,16 +2505,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_142.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_142_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "spellDamage",
-        "target": "allFriendlyCharacters",
-        "value": "1"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -3221,15 +2531,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_015.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_015_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "drawCards",
-        "value": "1"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3275,15 +2579,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_306.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_306_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "destroy",
-        "target": "randomFriendlyCard"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3307,16 +2605,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_582.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_582_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "spellDamage",
-        "target": "allFriendlyCharacters",
-        "value": "1"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -3336,7 +2627,7 @@
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/NEW1_034.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/NEW1_034_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Charge"
       }
@@ -3362,16 +2653,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_141.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_141_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "target",
-        "value": "-1"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3396,7 +2680,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_125.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_125_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -3418,16 +2702,9 @@
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/NEW1_033.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/NEW1_033_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "allFriendlyMinions",
-        "value": "1"
+        "name": "Aura"
       }
     ]
   },
@@ -3467,7 +2744,7 @@
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/NEW1_032.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/NEW1_032_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -3492,16 +2769,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_122.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_122_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "allFriendlyMinions",
-        "value": "1"
+        "name": "Aura"
       }
     ]
   },
@@ -3525,21 +2795,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_019.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_019_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "friendlyMinion",
-        "value": "1"
-      },
-      {
-        "type": "health",
-        "target": "friendlyMinion",
-        "value": "1"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3564,7 +2822,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_127.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_127_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -3591,16 +2849,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_084.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_084_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "friendlyChargeMinions",
-        "value": "1"
+        "name": "Charge"
+      },
+      {
+        "name": "Aura"
       }
     ]
   },
@@ -3624,7 +2878,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_124.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_124_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Charge"
       }
@@ -3670,15 +2924,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_147.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_147_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "drawCards",
-        "value": "1"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3703,26 +2951,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_070.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_070_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "friendlyBeast",
-        "value": "Taunt"
+        "name": "Taunt"
       },
       {
-        "type": "attack",
-        "target": "friendlyBeast",
-        "value": "2"
-      },
-      {
-        "type": "health",
-        "target": "friendlyBeast",
-        "value": "2"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3746,7 +2980,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_011.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_011_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Charge"
       }
@@ -3792,16 +3026,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_197.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_197_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "spellDamage",
-        "target": "allFriendlyCharacters",
-        "value": "1"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -3825,7 +3052,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_179.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_179_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -3851,7 +3078,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_131.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_131_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Charge"
       }
@@ -3877,7 +3104,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_187.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_187_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -3903,16 +3130,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_055.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_055_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "allFriendlyCharacters",
-        "value": "2"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3936,21 +3156,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_226.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_226_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "friendlyBeast",
-        "value": "amountOfFriendlyMinionsOnBattlefield"
-      },
-      {
-        "type": "health",
-        "target": "friendlyBeast",
-        "value": "amountOfFriendlyMinionsOnBattlefield"
+        "name": "Battlecry"
       }
     ]
   },
@@ -3973,19 +3181,7 @@
     "howToGetGold": "Unlocked at Warlock Level 57.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_399.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_399_premium.gif",
-    "locale": "enUS",
-    "abilities": [
-      {
-        "name": "On Hit"
-      }
-    ],
-    "mechanics": [
-      {
-        "type": "attack",
-        "target": "self",
-        "value": "3"
-      }
-    ]
+    "locale": "enUS"
   },
   {
     "cardId": "EX1_593",
@@ -4007,16 +3203,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_593.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_593_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "attack",
-        "target": "self",
-        "value": "3"
+        "name": "Battlecry"
       }
     ]
   },
@@ -4040,16 +3229,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_150.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_150_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "target",
-        "value": "-2"
+        "name": "Battlecry"
       }
     ]
   },
@@ -4075,16 +3257,12 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/DS1_178.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/DS1_178_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "friendlyBeasts",
-        "value": "Charge"
+        "name": "Charge"
+      },
+      {
+        "name": "Aura"
       }
     ]
   },
@@ -4108,16 +3286,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_155.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_155_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "spellDamage",
-        "target": "allFriendlyCharacters",
-        "value": "1"
+        "name": "Spell Damage"
       }
     ]
   },
@@ -4162,21 +3333,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_064.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_064_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "self",
-        "value": "Devine Shield"
-      },
-      {
-        "type": "health",
-        "target": "all",
-        "value": "-1"
+        "name": "Battlecry"
       }
     ]
   },
@@ -4200,7 +3359,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_162.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_162_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Taunt"
       }
@@ -4226,7 +3385,7 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_213.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_213_premium.gif",
     "locale": "enUS",
-    "abilities": [
+    "mechanics": [
       {
         "name": "Charge"
       }
@@ -4273,16 +3432,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_088.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_088_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Battlecry"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "friendlyHero",
-        "value": "6"
+        "name": "Battlecry"
       }
     ]
   },
@@ -4306,21 +3458,9 @@
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_222.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_222_premium.gif",
     "locale": "enUS",
-    "abilities": [
-      {
-        "name": "Aura"
-      }
-    ],
     "mechanics": [
       {
-        "type": "health",
-        "target": "friendlyMinions",
-        "value": "1"
-      },
-      {
-        "type": "attack",
-        "target": "friendlyMinions",
-        "value": "1"
+        "name": "Aura"
       }
     ]
   },
