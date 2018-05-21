@@ -67,4 +67,13 @@ public class CardCollection {
         return name;
     }
 
+    public Card getCheapestCard() {
+        Card cheapestCard = this.cards.get(0);
+        for(Card x : this.cards ){
+            if (x.getManaCost() < cheapestCard.getManaCost()) {
+                cheapestCard = x;
+            }
+        }
+        return cheapestCard;
+    }
 }

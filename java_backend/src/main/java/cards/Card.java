@@ -29,6 +29,10 @@ public class Card {
         cardAbilities.add(new Abilities());
     }
 
+    public int getManaCost() {
+        return manaCost;
+    }
+
     public Card(int cardID){
         this.cardID = cardID;
         getOtherInfo(cardID);

@@ -1,6 +1,7 @@
 
 package console;
 
+import cards.Card;
 import console.formatters.ColorFormats;
 import game.*;
 import org.jetbrains.annotations.NotNull;
@@ -65,7 +66,7 @@ public class Display {
         enemy.setHero(HEROES.get(randomHeroIndex));
         enemy.setDeck("Standard");
         howeststone.addEnemy(enemy);
-        howeststone.setTime(50);
+        howeststone.setTurnTime(50);
 
         System.out.println(howeststone);
         howeststone.shuffleDecks();
@@ -82,14 +83,12 @@ public class Display {
         boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
             howeststone.setActivePlayer("You");
+            System.out.println("You begin the game");
         } else {
             howeststone.setActivePlayer("Enemy");
-        }
-        if (howeststone.getActivePlayer().equals("You")){
-            System.out.println("You begin the game");
-        }else {
             System.out.println("Enemy begins the game");
         }
+
         replaceCards(howeststone);
     }
 
@@ -122,36 +121,32 @@ public class Display {
         System.out.println(howeststone.getYou().getDeck());
 
         // howeststone.getYou().setCardsInHand(replace);
-        if (howeststone.getActivePlayer().equals("You")){
-            // add 3 cards to hand
-            yourTurn(howeststone);
-        }else {
 
-        }
         if (howeststone.getActivePlayer().equals("You")){
             // add 3/4 cards to hand
-            howeststone.setTurnTime(75);
+            howeststone.setTurnTime(50);
         }else {
             for (String card: replaceCardList) {
                 howeststone.getEnemy().getCardsInHand().addCard(Integer.parseInt(card));
             }
-
-            enemyPlayTurn(howeststone);
+            // replace cards ?
+            enemyTurn(howeststone);
         }
 
         //
     }
 
-    private void enemyPlayTurn(Game howeststone) {
-        //TODO als het niet de eerste turn is, howeststone.getEnemy().getCardsInHand().addCard(drawCard())
-
-        /*String cheapestCard = howeststone.getEnemy().getCardsInHand().getCheapestCard();
-        if (howeststone.getEnemy().getMana() >= cheapestCard) {
-            enemyPlay(cheapestCard);
-        } else {
+    private void enemyTurn(Game howeststone) {
+        //howeststone.getEnemy().getCardsInHand().addCard(howeststone.getYou().getDeck().drawCard()));
+        // +1 mana
+        Card cheapestCard = howeststone.getEnemy().getCardsInHand().getCheapestCard();
+        if (howeststone.getManaEnemy() >= cheapestCard.getManaCost()) {
+            playCard(cheapestCard, howeststone);
+        } /*else {
             howeststone.endTurn();
         }*/
     }
+
 
     private void yourTurn(Game howeststone) {
         // TODO change because cannot be defined here
@@ -161,6 +156,15 @@ public class Display {
         // info
         // cardssInPlayingField
         // cardsInHand
+    }
+
+    private void playCard(Card card, Game howeststone) {
+        if ((howeststone.getActivePlayer()).equals("You")) {
+            // kaart plaatsingsgebied is playerkant
+        } else {
+            // kaart plaatsingsgebied is enemykant
+        }
+        // check of er daar minder dan zeven liggen
     }
 
     private String askInputUntilFoundInList(List<String> list) {
