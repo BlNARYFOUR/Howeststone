@@ -39,6 +39,7 @@
     "locale": "enUS",
     "abilities": [
       {
+
         "name": "Battlecry",
         "mechNeeded": 0
       },
