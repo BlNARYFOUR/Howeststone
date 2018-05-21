@@ -17,7 +17,7 @@ public class Card {
         // cannot be all cards
         this.cardID = mockID;
         mockID ++;
-        getOtherInfo(mockID);
+        getOtherInfo(cardID);
     }
 
     private void getOtherInfo(int mockID) {
@@ -30,6 +30,8 @@ public class Card {
     }
 
     public Card(int cardID){
+        getOtherInfo(cardID);
+        
         // TODO get other cardSpecifications
     }
     public String toString() {

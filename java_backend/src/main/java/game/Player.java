@@ -3,6 +3,8 @@ package game;
 import cards.CardCollection;
 import hero.Hero;
 
+import java.util.List;
+
 public class Player {
     private Hero hero;
     private CardCollection cardsInHand;
@@ -43,5 +45,9 @@ public class Player {
 
     public CardCollection getDeck() {
         return cardsInDeck;
+    }
+
+    public void setCardsInHand(CardCollection cardsInHand) {
+        this.cardsInHand = cardsInHand;
     }
 }

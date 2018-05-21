@@ -94,24 +94,41 @@ public class Display {
     }
 
     private void replaceCards(Game howeststone) {
-        List<String> REPLACECOMANDO = new ArrayList<>();
+        List<String> replaceCardList = new ArrayList<>();
         if (howeststone.getActivePlayer().equals("You")){
             for (int i = 0; i < 3 ; i++){
-                REPLACECOMANDO.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+                replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
             }
         }else {
             for (int i = 0; i < 4 ; i++){
-                REPLACECOMANDO.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+                replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
             }
         }
-        REPLACECOMANDO.add("stop");
+        replaceCardList.add("stop");
         System.out.println("Select which one(s) you want to switch:");
-        System.out.println(formatList(REPLACECOMANDO));
-        List<String> replace = askInputUntilStop(REPLACECOMANDO);
+        System.out.println(formatList(replaceCardList));
+        List<String> replace = askInputUntilStop(replaceCardList);
         // TODO replace or not
+        // foreach replace new card in hand
         // - cardInfo // on one line
+        // howeststone.getYou().setCardsInHand(replace);
+        if (howeststone.getActivePlayer().equals("You")){
+            // add 3 cards to hand
+            yourTurn(howeststone);
+        }else {
 
+        }
         // 
+    }
+
+    private void yourTurn(Game howeststone) {
+        // TODO change because cannot be defined here
+        List<String> cardsInHand= new ArrayList<>();
+        cardsInHand.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+
+        // info
+        // cardssInPlayingField
+        // cardsInHand
     }
 
     private String askInputUntilFoundInList(List<String> list) {
