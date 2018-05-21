@@ -1,10 +1,10 @@
 
 package console;
 
+import cards.Card;
 import console.formatters.ColorFormats;
 import game.*;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 
 public class Display {
@@ -82,11 +82,12 @@ public class Display {
         boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
             howeststone.setActivePlayer("You");
-            System.out.println("You begin the game");
+            System.out.println(ColorFormats.magenta("You begin the game"));
         } else {
             howeststone.setActivePlayer("Enemy");
-            System.out.println("Enemy begins the game");
+            System.out.println(ColorFormats.yellow("Enemy begins the game"));
         }
+
         replaceCards(howeststone);
     }
 
@@ -136,9 +137,8 @@ public class Display {
 
     private void yourTurn(Game howeststone) {
         // TODO change because cannot be defined here
-        List<String> cardsInHand= new ArrayList<>();
-        cardsInHand.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
-
+        howeststone.getYou().getCardsInHand().addCard(howeststone.getYou().getDeck().drawCard().getCardID());
+        System.out.println(formatCardList(howeststone.getYou().getCardsInHand().getCards()));
         // info
         // cardssInPlayingField
         // cardsInHand
@@ -189,8 +189,20 @@ public class Display {
         }
         while(!input.equals("stop"));
         replace.remove("stop");
-        System.out.println(ColorFormats.red("Selected: ") + ColorFormats.green(formatList(replace)));
+        System.out.println(ColorFormats.red("Selected: ") + formatList(replace));
         return replace;
+    }
+    @NotNull
+    private String formatCardList(@NotNull List<Card> list) {
+        StringBuilder strBuilder = new StringBuilder();
+
+        for(Card str : list) {
+            strBuilder.append("\t- ");
+            strBuilder.append(str);
+            strBuilder.append('\n');
+        }
+
+        return  strBuilder.toString();
     }
     @NotNull
     private String formatList(@NotNull List<String> list) {

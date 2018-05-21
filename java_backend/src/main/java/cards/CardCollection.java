@@ -67,4 +67,7 @@ public class CardCollection {
         return name;
     }
 
+    public List<Card> getCards() {
+        return cards;
+    }
 }
