@@ -30,8 +30,8 @@ public class Card {
     }
 
     public Card(int cardID){
+        this.cardID = cardID;
         getOtherInfo(cardID);
-
         // TODO get other cardSpecifications
     }
     public String toString() {

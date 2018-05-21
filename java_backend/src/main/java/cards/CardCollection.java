@@ -24,7 +24,6 @@ public class CardCollection {
             shuffle();
         }
     }
-
     private void shuffle(){
         Collections.shuffle(cards);
     }
@@ -34,7 +33,18 @@ public class CardCollection {
         cards.remove(1);
         return DRAW;
     }
+    
+    public void addCards(List<String> replace) {
+        for (String cardID : replace) {
+            addCard(Integer.parseInt(cardID));
+        }
+    }
 
+    private void addCard(int cardID) {
+        Card card = new Card(cardID);
+        cards.add(card);
+        shuffle();
+    }
     @Override
     public String toString() {
         final StringBuilder RES = new StringBuilder();
@@ -49,4 +59,5 @@ public class CardCollection {
     public String getNameOfCardCollection() {
         return name;
     }
+
 }

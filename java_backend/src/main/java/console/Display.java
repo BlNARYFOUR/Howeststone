@@ -109,8 +109,18 @@ public class Display {
         System.out.println(formatList(replaceCardList));
         List<String> replace = askInputUntilStop(replaceCardList);
         // TODO replace or not
-        // foreach replace new card in hand
         // - cardInfo // on one line
+
+        System.out.println("replace" + replace);
+        howeststone.getYou().getDeck().addCards(replace);
+        for (String cardID: replace) {
+            replaceCardList.remove(cardID);
+            replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+        }
+        replaceCardList.remove("stop");
+        System.out.println("replaceCardList" + replaceCardList);
+        System.out.println(howeststone.getYou().getDeck());
+
         // howeststone.getYou().setCardsInHand(replace);
         if (howeststone.getActivePlayer().equals("You")){
             // add 3 cards to hand
@@ -118,7 +128,6 @@ public class Display {
         }else {
 
         }
-        // 
     }
 
     private void yourTurn(Game howeststone) {
