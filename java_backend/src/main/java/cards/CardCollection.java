@@ -38,12 +38,12 @@ public class CardCollection {
 
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder();
-        res.append(name);
+        final StringBuilder RES = new StringBuilder();
+        RES.append(name);
         for (Card card : cards) {
-            res.append("\nID: ").append(card);
+            RES.append("\nID: ").append(card);
         }
-        res.append("\n").append(cards.size());
-        return String.valueOf(res);
+        RES.append("\n").append(cards.size());
+        return String.valueOf(RES);
     }
 }
