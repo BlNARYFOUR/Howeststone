@@ -11,10 +11,10 @@ public class Card {
     private List<Abilities> cardAbilities;
     // TODO: private List<Mechanics> cardMechanics;
 
-    public Card(){
+    public Card() {
         // TODO random card
     }
-    public Card(int cardID){
+    public Card(int cardID) {
         // TODO get other cardSpecifications
     }
     public String toString() {
@@ -22,7 +22,8 @@ public class Card {
     }
 
     // method attack
-    public boolean attack(Card card) { // boolean returns whether you can attack
+    // boolean returns whether you can attack
+    public boolean attack(Card card) {
         // TODO: card.doDamage();
 
         return false;

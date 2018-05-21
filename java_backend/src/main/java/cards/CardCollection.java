@@ -25,15 +25,15 @@ public class CardCollection {
         }*/
     }
 
-    private void shuffleCardCollection(){
+    private void shuffleCardCollection() {
         // beneath or with parameter ?
         Collections.shuffle(cards);
     }
 
-    public Card drawCard(){
-        Card draw = cards.get(1);
+    public Card drawCard() {
+        final Card DRAW = cards.get(1);
         cards.remove(1);
-        return draw;
+        return DRAW;
     }
 
     @Override
