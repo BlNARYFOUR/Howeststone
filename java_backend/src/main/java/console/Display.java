@@ -65,7 +65,7 @@ public class Display {
         enemy.setHero(HEROES.get(randomHeroIndex));
         enemy.setDeck("Standard");
         howeststone.addEnemy(enemy);
-        howeststone.setTime(50);
+        howeststone.setTurnTime(50);
 
         System.out.println(howeststone);
         howeststone.shuffleDecks();
@@ -82,67 +82,48 @@ public class Display {
         boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
             howeststone.setActivePlayer("You");
+            System.out.println("You begin the game");
         } else {
             howeststone.setActivePlayer("Enemy");
-        }
-        if (howeststone.getActivePlayer().equals("You")){
-            System.out.println("You begin the game");
-        }else {
             System.out.println("Enemy begins the game");
         }
         replaceCards(howeststone);
     }
 
     private void replaceCards(Game howeststone) {
-        List<String> replaceCardList = new ArrayList<>();
-        if (howeststone.getActivePlayer().equals("You")){
-            for (int i = 0; i < 3 ; i++){
-                replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
-            }
-        }else {
-            for (int i = 0; i < 4 ; i++){
-                replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
-            }
+        List<String> yourCardsInHandList = new ArrayList<>();
+        List<String> enemyCardsInHandList = new ArrayList<>();
+        for (int i = 0; i < 3 ; i++){
+            yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+            enemyCardsInHandList.add(String.valueOf(howeststone.getEnemy().getDeck().drawCard()));
         }
-        replaceCardList.add("stop");
+        if (howeststone.getActivePlayer().equals("You")){
+            enemyCardsInHandList.add(String.valueOf(howeststone.getEnemy().getDeck().drawCard()));
+        }else {
+            yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+        }
+        yourCardsInHandList.add("stop");
         System.out.println("Select which one(s) you want to switch:");
-        System.out.println(formatList(replaceCardList));
-        List<String> replace = askInputUntilStop(replaceCardList);
-        // TODO replace or not
+        System.out.println(formatList(yourCardsInHandList));
         // - cardInfo // on one line
+        List<String> replace = askInputUntilStop(yourCardsInHandList);
 
-        System.out.println("replace" + replace);
         howeststone.getYou().getDeck().addCards(replace);
         for (String cardID: replace) {
-            replaceCardList.remove(cardID);
-            replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+            yourCardsInHandList.remove(cardID);
+            yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
-        replaceCardList.remove("stop");
-        System.out.println("replaceCardList" + replaceCardList);
-        System.out.println(howeststone.getYou().getDeck());
-
-        // howeststone.getYou().setCardsInHand(replace);
+        yourCardsInHandList.remove("stop");
+        howeststone.getEnemy().setCardsInHand(enemyCardsInHandList);
+        howeststone.getYou().setCardsInHand(yourCardsInHandList);
         if (howeststone.getActivePlayer().equals("You")){
-            // add 3 cards to hand
             yourTurn(howeststone);
         }else {
-
+            enemyTurn(howeststone);
         }
-        if (howeststone.getActivePlayer().equals("You")){
-            // add 3/4 cards to hand
-            howeststone.setTurnTime(75);
-        }else {
-            for (String card: replaceCardList) {
-                howeststone.getEnemy().getCardsInHand().addCard(Integer.parseInt(card));
-            }
-
-            enemyPlayTurn(howeststone);
-        }
-
-        //
     }
 
-    private void enemyPlayTurn(Game howeststone) {
+    private void enemyTurn(Game howeststone) {
         //TODO als het niet de eerste turn is, howeststone.getEnemy().getCardsInHand().addCard(drawCard())
 
         /*String cheapestCard = howeststone.getEnemy().getCardsInHand().getCheapestCard();

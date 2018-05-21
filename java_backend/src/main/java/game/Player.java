@@ -55,4 +55,9 @@ public class Player {
     public void setCardsInHand(CardCollection cardsInHand) {
         this.cardsInHand = cardsInHand;
     }
+
+    public void setCardsInHand(List<String> cardsInHandList) {
+        cardsInHand = new CardCollection();
+        cardsInHand.addCards(cardsInHandList);
+    }
 }
