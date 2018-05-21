@@ -55,7 +55,7 @@
       },
       {
         "type": "attack",
-        "target": "lastUsedMinion",
+        "target": "lastUsed",
         "value": "-2"
       }
     ]
@@ -529,16 +529,15 @@
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_018_premium.gif",
     "locale": "enUS",
     "abilities": [
-      //TODO check deze battlecry eens na en de value van de mechanic
       {
         "name": "Battlecry"
       }
     ],
     "mechanics": [
       {
-        "type": "attack",
+        "type": "setAttack",
         "target":"self",
-        "value": "attack = attackWeapon"
+        "value": "attackWeapon"
       }
     ]
   },
@@ -574,7 +573,7 @@
       },
       {
         "type": "health",
-        "target": "minion",
+        "target": "lastUsed",
         "value": "attack"
       }
     ]
@@ -921,7 +920,7 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "On Damage Taken"
+        "name": "On Hit"
       }
     ],
     "mechanics": [
@@ -953,20 +952,12 @@
     "abilities": [
       {
         "name": "Turn Begin"
-      },
-      {
-        "name": "Return To Hand"
       }
-// TODO help
     ],
     "mechanics": [
       {
-        "target": "self"
-      },
-      {
-        "type": "addAbility",
-        "target": "randomMinionInHand",
-        "value": "1"
+        "type": "swap",
+        "target": "randomMinionInHand"
       }
     ]
   },
@@ -1629,17 +1620,16 @@
         "name": "Battlecry"
       }
     ],
-    //TODO zeker eens mijn values bekijken van de setAttack en setHealth!!! TY
     "mechanics": [
       {
-        "type": "setAttack",
+        "type": "attack",
         "target": "self",
-        "value": "attackAdjacentMinions + attack"
+        "value": "attackAdjacentMinions"
       },
       {
-        "type": "setHealth",
+        "type": "health",
         "target": "self",
-        "value": "healthAdjacentMinions + attack"
+        "value": "healthAdjacentMinions"
       },
       {
         "type": "destroy",
@@ -1746,7 +1736,7 @@
       },
       {
         "type": "attack",
-        "target": "lastUsedMinion",
+        "target": "lastUsed",
         "value": "-2"
       }
     ]
@@ -1971,7 +1961,6 @@
     "mechanics": [
       {
         "type": "health",
-        //TODO zeker een checken of we als target all gebruiken
         "target": "all",
         "value": "-2"
       }
@@ -2446,7 +2435,6 @@
     "artist": "Wei Wang",
     "collectible": true,
     "elite": true,
-    //TODO zeker eens kijken of hier geen overbodige stuff inzit!!
     "playerClass": "Priest",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_350.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_350_premium.gif",
@@ -2459,12 +2447,12 @@
     "mechanics": [
       {
         "type": "spellDamage",
-        "target": "allFriendlyCharacter",
+        "target": "allFriendlyCharacters",
         "value": "double"
       },
       {
-        "type": "healing",
-        "target": "allFriendlyChacters",
+        "type": "spellHealing",
+        "target": "allFriendlyCharacters",
         "value": "double"
       }
     ]
@@ -2695,7 +2683,6 @@
       }
     ]
   },
-  // TODO HELP  in hand effects!!!
   {
     "cardId": "EX1_586",
     "dbfId": "211",
@@ -2714,9 +2701,20 @@
     "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_586.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_586_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Update In Hand"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "cost",
+        "target": "self",
+        "value": "amountOfMinionsOnBattlefield"
+      }
+    ]
   },
-  // TODO HELP  in hand effects!!!
   {
     "cardId": "GAME_002",
     "dbfId": "1733",
@@ -2731,7 +2729,12 @@
     "playerClass": "Neutral",
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/GAME_002.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/GAME_002_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Uncollectable"
+      }
+    ]
   },
   {
     "cardId": "CS2_boar",
@@ -2947,7 +2950,6 @@
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/CS2_tk1_premium.gif",
     "locale": "enUS"
   },
-  // TODO special card for the hero power of the PALADIN (what should I do with it?)!!
   {
     "cardId": "CS2_101t",
     "dbfId": "1652",
@@ -2961,7 +2963,12 @@
     "playerClass": "Paladin",
     "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/CS2_101t.png",
     "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/CS2_101t_premium.gif",
-    "locale": "enUS"
+    "locale": "enUS",
+    "abilities": [
+      {
+        "name": "Uncollectable"
+      }
+    ]
   },
   {
     "cardId": "CS2_171",
@@ -3415,7 +3422,6 @@
         "name": "Aura"
       }
     ],
-    //TODO checken bij de spells of dit ook zo wordt gedaan!!
     "mechanics": [
       {
         "type": "attack",
@@ -3490,7 +3496,6 @@
         "name": "Aura"
       }
     ],
-    //TODO checken bij de spells of dit ook zo wordt gedaan!!
     "mechanics": [
       {
         "type": "attack",
@@ -3564,7 +3569,6 @@
       }
     ]
   },
-  //TODO HIERONDER MOET NOG WORDEN GEDAAN
   {
     "cardId": "EX1_084",
     "dbfId": "1009",
@@ -3936,17 +3940,16 @@
         "name": "Battlecry"
       }
     ],
-    //TODO checken of er een betere naam is voor de value!!
     "mechanics": [
       {
         "type": "attack",
         "target": "friendlyBeast",
-        "value": "amountOfFriendlyMinionsOnPlayingfield"
+        "value": "amountOfFriendlyMinionsOnBattlefield"
       },
       {
         "type": "health",
         "target": "friendlyBeast",
-        "value": "amountOfFriendlyMinionsOnPlayingfield"
+        "value": "amountOfFriendlyMinionsOnBattlefield"
       }
     ]
   },
