@@ -62,23 +62,23 @@ public class SqlStatements {
                     + ")ENGINE = INNODB";
 
     public static final String SELECT_DECKS =
-            "SELECT deckName, heroId FROM Decks;";
+            "SELECT deckName, heroId FROM howeststone.Decks;";
 
     public static final String SELECT_HEROES =
-            "SELECT * FROM Decks;";
+            "SELECT * FROM howeststone.Decks;";
 
     public static final String SELECT_CARDS =
-            "SELECT * FROM Decks;";
+            "SELECT * FROM howeststone.Decks;";
 
     public static final String SELECT_CARDSINDECK =
-            "SELECT * FROM Decks;";
+            "SELECT * FROM howeststone.Decks;";
 
     public static final String SELECT_MECHANICS =
-            "SELECT * FROM Decks;";
+            "SELECT * FROM howeststone.Decks;";
 
     public static final String INSERT_DECK =
-            "INSERT INTO `howeststone `.`Decks` (`deckName`, `heroId`) VALUES (?, ?);";
+            "INSERT INTO `howeststone`.`Decks` (`deckName`, `heroId`) VALUES (?, ?);";
 
     public static final String INSERT_CARDSINDECK =
-            "INSERT INTO `howeststone `.`CardsInDecks` (`deckId`, `cardId`) VALUES (?, ?);";
+            "INSERT INTO `howeststone`.`CardsInDecks` (`deckId`, `cardId`) VALUES (?, ?);";
 }
