@@ -1609,7 +1609,7 @@
       },
       {
         "type": "attack",
-        "target": "minion",
+        "target": "lastUsed",
         "value": "4"
       }
     ]
