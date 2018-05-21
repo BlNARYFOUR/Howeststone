@@ -5,9 +5,9 @@ import hero.Hero;
 
 public class Player {
     private Hero hero;
-    CardCollection cardsInHand;
-    CardCollection cardsOnPlayingField;
-    CardCollection cardsInDeck;
+    private CardCollection cardsInHand;
+    private CardCollection cardsOnPlayingField;
+    private CardCollection cardsInDeck;
 
     public Hero getHero() {
         return hero;
@@ -28,6 +28,13 @@ public class Player {
     void beginTurn() {
         // +1 mana until 10
         // draw card
+    }
+
+    @Override
+    public String toString() {
+        // deck hero
+        // mss nog extra zoals health mana
+        return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
     }
 
     public void setDeck(String deckName) {

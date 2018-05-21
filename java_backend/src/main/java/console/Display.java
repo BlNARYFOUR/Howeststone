@@ -5,10 +5,7 @@ import console.formatters.ColorFormats;
 import game.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Display {
     private Scanner scanner = new Scanner( System.in );
@@ -23,9 +20,9 @@ public class Display {
         chooseDeck(howeststone);
         startGame(howeststone);
         
-        //howeststone.setDeck("Standard");
+        //howeststone.setYourDeck("Standard");
         //System.out.println(howeststone.getDeck());
-        //Player you = new Player(howeststone.getHero());
+        //Player you = new Player(howeststone.getYourHero());
         //GameBoard gb = new GameBoard(you, howeststone.getDeck());
         //System.out.println(gb);
     }
@@ -38,7 +35,7 @@ public class Display {
         System.out.println(formatList(HEROES));
         String selectedHero = askInputUntilFoundInList(HEROES);
         you.setHero(selectedHero);
-        howeststone.addPlayer(you);
+        howeststone.addYou(you);
     }
 
     private void chooseDeck(Game howeststone) {
@@ -52,7 +49,7 @@ public class Display {
         System.out.println("Select one of the following decks:");
         System.out.println(formatList(DECKS));
         String selectedDeck = askInputUntilFoundInList(DECKS);
-        howeststone.setDeck(selectedDeck);
+        howeststone.setYourDeck(selectedDeck);
     }
 
     private void startGame(Game howeststone) {
@@ -67,7 +64,7 @@ public class Display {
 
         enemy.setHero(HEROES.get(randomHeroIndex));
         enemy.setDeck("Standard");
-        howeststone.addBot(enemy);
+        howeststone.addEnemy(enemy);
         howeststone.setTime(50);
 
         System.out.println(howeststone);
@@ -77,31 +74,40 @@ public class Display {
 
     private void flipCoin(Game howeststone) {
         newLine();
-        String playerThatGetsCoin = "";
-        String playerThatBegins = "";
 
         // TODO change cannot be strings
-        if (Math.random() < 0.5) {
-            playerThatGetsCoin = "Player";
-            playerThatBegins = "Enemy";
 
+        // change to boolean
+        Random rand = new Random();
+        boolean doYouBegin = rand.nextBoolean();
+        if (doYouBegin) {
+            howeststone.setActivePlayer("You");
         } else {
-            playerThatGetsCoin = "Enemy";
-            playerThatBegins = "Player";
+            howeststone.setActivePlayer("Enemy");
         }
-        System.out.println(playerThatBegins + " starts the game and "
-                + playerThatGetsCoin + " gets the coin");
-
+        if (howeststone.getActivePlayer().equals("You")){
+            System.out.println("You begin the game");
+        }else {
+            System.out.println("Enemy begins the game");
+        }
         replaceCards(howeststone);
     }
 
     private void replaceCards(Game howeststone) {
-        // TODO 3 or 4 times
-        // TODO IndexOutOfBoundsException
-
-        System.out.println(howeststone.getYou().getDeck().drawCard());
-        System.out.println(howeststone.getYou().getDeck().drawCard());
-        System.out.println(howeststone.getYou().getDeck().drawCard());
+        List<String> REPLACECOMANDO = new ArrayList<>();
+        if (howeststone.getActivePlayer().equals("You")){
+            for (int i = 0; i < 3 ; i++){
+                REPLACECOMANDO.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+            }
+        }else {
+            for (int i = 0; i < 4 ; i++){
+                REPLACECOMANDO.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+            }
+        }
+        REPLACECOMANDO.add("stop");
+        System.out.println("Select which one(s) you want to switch:");
+        System.out.println(formatList(REPLACECOMANDO));
+        List<String> replace = askInputUntilStop(REPLACECOMANDO);
         // TODO replace or not
         // - cardInfo // on one line
 
@@ -129,6 +135,34 @@ public class Display {
         return input;
     }
 
+
+    private List<String> askInputUntilStop(List<String> list) {
+        String input;
+        List<String> replace = new ArrayList<>();
+        do {
+            System.out.print("Input here: ");
+            input = scanner.nextLine();
+
+            if(list.contains(input)) {
+                if (replace.contains(input)){
+                    replace.remove(input);
+                } else {
+                    replace.add(input);
+                }
+                // change ? remove and add ?
+
+                System.out.println("Select which one(s) you want to switch:");
+                System.out.println(formatList(list));
+                System.out.println("Select which one(s) you don't want to switch:");
+                System.out.println(formatList(replace));
+            }
+        }
+        while(!input.equals("stop"));
+        replace.remove("stop");
+        System.out.println(ColorFormats.red("Selected: ") + ColorFormats.green(formatList(replace)));
+
+        return replace;
+    }
     @NotNull
     private String formatList(@NotNull List<String> list) {
         StringBuilder strBuilder = new StringBuilder();

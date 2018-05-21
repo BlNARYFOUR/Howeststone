@@ -45,4 +45,8 @@ public class CardCollection {
         res.append("\n").append(cards.size());
         return String.valueOf(res);
     }
+
+    public String getNameOfCardCollection() {
+        return name;
+    }
 }

@@ -11,7 +11,6 @@ class Routes {
         // case sensitive
         server.get("/API/getAllCards", this::getAllCards);
         server.get("/", this::handleRoot);
-        server.get("/threebeesandme/howeststone/get/useheropower", this::useHeroPower);
         //server.get("/API/getAllCards", this::getAllCards);
 
         // GAME BOARD
@@ -39,8 +38,6 @@ class Routes {
         server.get("/threebeesandme/howeststone/get/heroanddeckselector/heroes", this::loadHeroes);
     }
 
-    private void useHeroPower(Context context) {
-        context.result("kaaapow");
     private void loadHeroes(Context context) {
         context.result("[\"Mage\",\"Paladin\"]");
     }
@@ -75,7 +72,7 @@ class Routes {
     }
 
     private void getYourHero(Context context) {
-        // TODO check if this will work (you.getYourHero.getName().toString)
+        // TODO check if this will work (you.getYourHero.getNameOfCardCollection().toString)
     }
 
     private void canHeroAttack(Context context) {

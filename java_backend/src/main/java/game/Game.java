@@ -1,12 +1,6 @@
 package game;
 
-import cards.CardCollection;
 import hero.Hero;
-import sun.security.krb5.internal.crypto.DesMacCksumType;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class Game {
     // TODO: MOCKERS
@@ -16,15 +10,16 @@ public class Game {
     private Player you;
     private Player enemy;
     private int turnTime;
+    private String activePlayer;
     /*private Hero you;
     private CardCollection deck;*/
 
 
-    public Hero getHero() {
+    public Hero getYourHero() {
         return you.getHero();
     }
 
-    public Hero getEnemy() {
+    public Hero getEnemyHero() {
         return enemy.getHero();
     }
 
@@ -38,7 +33,7 @@ public class Game {
         return "Standard";
     }
 
-    public void setDeck(String deckName) {
+    public void setYourDeck(String deckName) {
         // TODO check if deck exist
         you.setDeck(deckName);
     }
@@ -53,11 +48,14 @@ public class Game {
         return you;
     }
 
-    public void addPlayer(Player you) {
+    public Player getEnemy(){
+        return enemy;
+    }
+    public void addYou(Player you) {
         this.you = you;
     }
 
-    public void addBot(Player enemy) {
+    public void addEnemy(Player enemy) {
         this.enemy = enemy;
     }
 
@@ -67,5 +65,13 @@ public class Game {
 
     public void shuffleDecks() {
 
+    }
+
+    public void setActivePlayer(String activePlayer) {
+        this.activePlayer = activePlayer;
+    }
+
+    public String getActivePlayer() {
+        return activePlayer;
     }
 }

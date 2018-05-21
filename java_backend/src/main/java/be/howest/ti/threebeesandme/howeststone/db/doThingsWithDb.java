@@ -11,7 +11,7 @@ public class doThingsWithDb {
         new doThingsWithDb().run();
     }
 
-    private SqlDatabase db;
+    SqlDatabase db;
 
     private void run() {
         db = new SqlDatabase(
