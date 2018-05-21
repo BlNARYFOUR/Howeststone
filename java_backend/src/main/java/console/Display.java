@@ -124,8 +124,29 @@ public class Display {
             replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
         System.out.println(replaceCardList);
+        if (howeststone.getActivePlayer().equals("You")){
+            // add 3/4 cards to hand
+            howeststone.setTurnTime(75);
+        }else {
+            for (String card: replaceCardList) {
+                howeststone.getEnemy().getCardsInHand().addCard(Integer.parseInt(card));
+            }
 
+            enemyPlayTurn(howeststone);
+        }
 
+        //
+    }
+
+    private void enemyPlayTurn(Game howeststone) {
+        //TODO als het niet de eerste turn is, howeststone.getEnemy().getCardsInHand().addCard(drawCard())
+
+        /*String cheapestCard = howeststone.getEnemy().getCardsInHand().getCheapestCard();
+        if (howeststone.getEnemy().getMana() >= cheapestCard) {
+            enemyPlay(cheapestCard);
+        } else {
+            howeststone.endTurn();
+        }*/
     }
 
     private String askInputUntilFoundInList(List<String> list) {

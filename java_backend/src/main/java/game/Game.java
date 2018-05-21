@@ -59,10 +59,6 @@ public class Game {
         this.enemy = enemy;
     }
 
-    public void setTime(int time) {
-        this.turnTime = time;
-    }
-
     public void shuffleDecks() {
 
     }
