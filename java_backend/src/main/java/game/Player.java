@@ -23,11 +23,16 @@ public class Player {
         this.hero = new Hero(heroName);
     }
 
+    public CardCollection getCardsInHand() {
+        return cardsInHand;
+    }
+
     public Player() {
 
     }
 
-    void beginTurn() {
+    public void beginTurn() {
+
         // +1 mana until 10
         // draw card
     }
