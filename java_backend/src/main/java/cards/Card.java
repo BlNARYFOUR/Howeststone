@@ -37,7 +37,8 @@ public class Card {
     }
 
     // method attack
-    public boolean attack(Card card) { // boolean returns whether you can attack
+    // boolean returns whether you can attack
+    public boolean attack(Card card) {
         // TODO: card.doDamage();
 
         return false;

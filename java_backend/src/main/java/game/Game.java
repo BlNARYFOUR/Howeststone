@@ -74,4 +74,12 @@ public class Game {
     public String getActivePlayer() {
         return activePlayer;
     }
+
+    public int getTurnTime() {
+        return turnTime;
+    }
+
+    public void setTurnTime(int turnTime) {
+        this.turnTime = turnTime;
+    }
 }
