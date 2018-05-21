@@ -25,25 +25,25 @@ public class CardCollection {
         }*/
     }
 
-    private void shuffleCardCollection(){
+    private void shuffleCardCollection() {
         // beneath or with parameter ?
         Collections.shuffle(cards);
     }
 
-    public Card drawCard(){
-        Card draw = cards.get(1);
+    public Card drawCard() {
+        final Card DRAW = cards.get(1);
         cards.remove(1);
-        return draw;
+        return DRAW;
     }
 
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder();
-        res.append(name);
+        final StringBuilder RES = new StringBuilder();
+        RES.append(name);
         for (Card card : cards) {
-            res.append("\nID: ").append(card);
+            RES.append("\nID: ").append(card);
         }
-        res.append("\n").append(cards.size());
-        return String.valueOf(res);
+        RES.append("\n").append(cards.size());
+        return String.valueOf(RES);
     }
 }
