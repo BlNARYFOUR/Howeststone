@@ -94,24 +94,38 @@ public class Display {
     }
 
     private void replaceCards(Game howeststone) {
-        List<String> REPLACECOMANDO = new ArrayList<>();
+        List<String> replaceCardList = new ArrayList<>();
         if (howeststone.getActivePlayer().equals("You")){
             for (int i = 0; i < 3 ; i++){
-                REPLACECOMANDO.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+                replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
             }
         }else {
             for (int i = 0; i < 4 ; i++){
-                REPLACECOMANDO.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+                replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
             }
         }
-        REPLACECOMANDO.add("stop");
+        replaceCardList.add("stop");
         System.out.println("Select which one(s) you want to switch:");
-        System.out.println(formatList(REPLACECOMANDO));
-        List<String> replace = askInputUntilStop(REPLACECOMANDO);
+        System.out.println(formatList(replaceCardList));
+        List<String> replace = askInputUntilStop(replaceCardList);
         // TODO replace or not
         // - cardInfo // on one line
 
-        // 
+        //
+        for (String card: replace) {
+            howeststone.getYou().getDeck().addCard(Integer.parseInt(card));
+            System.out.println(howeststone.getYou().getDeck());
+
+            // verwijderen van beide lijsten
+            howeststone.getYou().getDeck().removeCard(Integer.parseInt(card));
+            replaceCardList.remove(card);
+            replaceCardList.remove("Stop");
+
+            replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+        }
+        System.out.println(replaceCardList);
+
+
     }
 
     private String askInputUntilFoundInList(List<String> list) {
@@ -160,7 +174,6 @@ public class Display {
         while(!input.equals("stop"));
         replace.remove("stop");
         System.out.println(ColorFormats.red("Selected: ") + ColorFormats.green(formatList(replace)));
-
         return replace;
     }
     @NotNull

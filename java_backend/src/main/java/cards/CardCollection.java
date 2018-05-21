@@ -35,6 +35,18 @@ public class CardCollection {
         return DRAW;
     }
 
+    public void addCard(int cardID) {
+        Card card = new Card(cardID);
+        cards.add(card);
+        shuffle();
+    }
+
+    public void removeCard(int cardID) {
+        Card card = new Card(cardID);
+        cards.remove(card);
+    }
+
+
     @Override
     public String toString() {
         final StringBuilder RES = new StringBuilder();
