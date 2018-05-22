@@ -1,4 +1,11 @@
-<h1>This is our project Readme</h1>
+<h1>Howeststone</h1>
+
+Wij hebben naar aanleiding van de module Project I <br/>
+onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
+
+<h2>Getting Started</h2>
+
+
                                                                                                                 
 
 Mattijs Step (Oranje) I'm gonna catch them all.
