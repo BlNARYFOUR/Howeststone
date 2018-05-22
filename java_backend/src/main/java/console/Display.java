@@ -2,6 +2,7 @@
 package console;
 
 import cards.Card;
+import cards.CardCollection;
 import console.formatters.ColorFormats;
 import game.*;
 import org.jetbrains.annotations.NotNull;
@@ -160,6 +161,7 @@ public class Display {
 
     private void playCard(Card card, Game howeststone) {
         if ((howeststone.getActivePlayer()).equals("You")) {
+            CardCollection areaPlayingField = howeststone.getYou().getCardsOnPlayingField();
             // kaart plaatsingsgebied is playerkant
         } else {
             // kaart plaatsingsgebied is enemykant

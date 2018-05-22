@@ -27,6 +27,10 @@ public class Player {
         return cardsInHand;
     }
 
+    public CardCollection getCardsOnPlayingField() {
+        return cardsOnPlayingField;
+    }
+
     public Player() {
 
     }
