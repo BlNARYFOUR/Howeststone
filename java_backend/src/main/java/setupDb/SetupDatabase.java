@@ -23,35 +23,57 @@ public class SetupDatabase {
     private static final String MINIONS_LOCATION = "json/minions.json";
     private static final String WEAPONS_LOCATION = "json/weapons.json";
 
+    private static final String[] HEROES = {"Mage", "Paladin"};
+
     private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
+    private JSONArray spellList;
+    private JSONArray minionList;
+    private JSONArray weaponList;
     //private static final SqlDatabase db = null;
 
-    private void run() {
+    private SetupDatabase() {
         try {
-            Set<String> abilities = new HashSet<>();
-
-            JSONArray spellList = getJSONList(SPELLS_LOCATION);
-            JSONArray minionList = getJSONList(MINIONS_LOCATION);
-            JSONArray weaponList = getJSONList(WEAPONS_LOCATION);
-
-            addAbilitiesToSet(spellList, abilities);
-            addAbilitiesToSet(minionList, abilities);
-            addAbilitiesToSet(weaponList, abilities);
-
-            System.out.println("Abilities:");
-            outputSet(abilities);
-
-            System.out.println("Adding abilities to database...");
-            List<String> abilityList = new ArrayList<>(abilities);
-            Collections.sort(abilityList);
-            for (String ability : abilityList) {    
-                insertAbility(ability);
-            }
-            System.out.println(ColorFormats.blue("abilities have been added!"));
-
-        } catch (ParseException | IOException | NullPointerException e) {
+            spellList = getJSONList(SPELLS_LOCATION);
+            minionList = getJSONList(MINIONS_LOCATION);
+            weaponList = getJSONList(WEAPONS_LOCATION);
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    private void run() {
+        addAbilitiesToDb();
+        addHeroesToDb();
+    }
+
+    private void addAbilitiesToDb() {
+        Set<String> abilities = new HashSet<>();
+
+        addAbilitiesToSet(spellList, abilities);
+        addAbilitiesToSet(minionList, abilities);
+        addAbilitiesToSet(weaponList, abilities);
+
+        System.out.println("Abilities:");
+        outputSet(abilities);
+
+        System.out.println("\nAdding abilities to database...");
+        List<String> abilityList = new ArrayList<>(abilities);
+        Collections.sort(abilityList);
+        for (String ability : abilityList) {
+            insertAbility(ability);
+        }
+        System.out.println(ColorFormats.blue("abilities have been added!"));
+    }
+
+    private void addHeroesToDb() {
+        System.out.println("\nHeroes:");
+        outputList(Arrays.asList(HEROES));
+
+        System.out.println("\nAdding heroes to database...");
+        for (String hero : HEROES) {
+            insertHero(hero);
+        }
+        System.out.println(ColorFormats.blue("heroes have been added!"));
     }
 
     private Set<String> addAbilitiesToSet(JSONArray jsonArray, Set<String> prevFoundAbilities) {
@@ -73,6 +95,10 @@ public class SetupDatabase {
 
     private void outputSet(Set<String> set) {
         List<String> list = new ArrayList<>(set);
+        outputList(list);
+    }
+
+    private void outputList(List<String> list) {
         Collections.sort(list);
 
         for (Object obj : list) {
@@ -110,6 +136,33 @@ public class SetupDatabase {
                     System.out.printf("\t* '%s' now has ID %d\n", ability, ID);
                 } else {
                     throw new SQLException("No ability created: no ID obtained.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void insertHero(String hero) {
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_HERO,
+                        Statement.RETURN_GENERATED_KEYS)
+        ) {
+            stmt.setString(1, hero);
+            final int AFFECTED_ROWS = stmt.executeUpdate();
+
+            if (AFFECTED_ROWS == 0) {
+                throw new SQLException("No hero created: no rows affected.");
+            }
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    final long ID = rs.getLong(1);
+                    System.out.printf("\t* '%s' now has ID %d\n", hero, ID);
+                } else {
+                    throw new SQLException("No hero created: no ID obtained.");
                 }
             }
 
