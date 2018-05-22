@@ -1,7 +1,7 @@
 
 package console;
 
-import console.formatters.ColorFormats;
+import formatters.ColorFormats;
 import game.*;
 import org.jetbrains.annotations.NotNull;
 
