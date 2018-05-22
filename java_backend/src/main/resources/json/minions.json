@@ -149,7 +149,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "randomFriendlyMinion",
+        "target": "randomFriendlyOtherMinion",
         "value": "1"
       }
     ]
@@ -399,7 +399,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "randomFriendlyMinion",
+        "target": "randomFriendlyOtherMinion",
         "value": "1"
       }
     ]
@@ -776,7 +776,6 @@
     "cost": 2,
     "attack": 3,
     "health": 2,
-    // TODO hoe zorg je ervoor dat hij zichzelf geen damage doet?
     "text": "Battlecry: Deal 3 damage randomly split between all other characters.",
     "flavor": "He's not really all that crazy, he is just not as careful with explosives as he should be.",
     "artist": "Mike Sass",
@@ -788,26 +787,22 @@
     "abilities": [
       {
         "name": "Battlecry"
-      },
-      {
-        "name": "Turn End"
       }
     ],
     "mechanics": [
-
       {
         "type": "health",
-        "target": "randomCharacter",
+        "target": "randomOtherCharacter",
         "value": "-1"
       },
       {
         "type": "health",
-        "target": "randomCharacter",
+        "target": "randomOtherCharacter",
         "value": "-1"
       },
       {
         "type": "health",
-        "target": "randomCharacter",
+        "target": "randomOtherCharacter",
         "value": "-1"
       }
     ]
@@ -838,7 +833,7 @@
     "mechanics": [
       {
         "type": "attack",
-        "target": "randomFriendlyMinion",
+        "target": "randomFriendlyOtherMinion",
         "value": "1"
       }
     ]
@@ -1055,7 +1050,7 @@
         "mechNeeded": 0
       },
       {
-        "name": "DestroyedDevinShield",
+        "name": "DestroyedDevineShield",
         "mechNeeded": 1
       }
     ],
@@ -1104,7 +1099,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "friendlyMurlocs",
+        "target": "allFriendlyOtherMurlocs",
         "value": "2"
       }
     ]
@@ -1434,7 +1429,7 @@
     "mechanics": [
       {
         "type": "attack",
-        "target": "friendlyMurlocs",
+        "target": "allFriendlyOtherMurlocs",
         "value": "2"
       }
     ]
@@ -1531,12 +1526,12 @@
     "mechanics": [
       {
         "type": "attack",
-        "target": "friendlyPirates",
+        "target": "allFriendlyOtherPirates",
         "value": "1"
       },
       {
         "type": "health",
-        "target": "friendlyPirates",
+        "target": "allFriendlyOtherPirates",
         "value": "1"
       }
     ]
@@ -2034,9 +2029,9 @@
         "value": "1"
       },
       {
-      "type": "durability",
-      "target": "friendlyWeapon",
-      "value": "1"
+        "type": "durability",
+        "target": "friendlyWeapon",
+        "value": "1"
       }
     ]
   },
@@ -2413,13 +2408,8 @@
     ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "self",
-        "value": "Devine Shield"
-      },
-      {
         "type": "health",
-        "target": "all",
+        "target": "allOther",
         "value": "-2"
       }
     ]
@@ -2716,7 +2706,7 @@
       {
         "type": "cost",
         "target": "self",
-        "value": "amountMinionsOnBattlefield"
+        "value": "amountOtherMinionsOnBattlefield"
       }
     ]
   },
@@ -2846,7 +2836,7 @@
     "mechanics": [
       {
         "type": "attack",
-        "target": "friendlyMurlocs",
+        "target": "allFriendlyOtherMurlocs",
         "value": "1"
       }
     ]
@@ -3032,7 +3022,7 @@
     "mechanics": [
       {
         "type": "attack",
-        "target": "friendlyBeasts",
+        "target": "allFriendlyOtherBeasts",
         "value": "1"
       }
     ]
@@ -3430,7 +3420,7 @@
     "mechanics": [
       {
         "type": "attack",
-        "target": "allFriendlyMinions",
+        "target": "allFriendlyOtherMinions",
         "value": "1"
       }
     ]
@@ -3504,7 +3494,7 @@
     "mechanics": [
       {
         "type": "attack",
-        "target": "allFriendlyMinions",
+        "target": "allFriendlyOtherMinions",
         "value": "1"
       }
     ]
@@ -3949,12 +3939,12 @@
       {
         "type": "attack",
         "target": "friendlyBeast",
-        "value": "amountFriendlyMinionsOnBattlefield"
+        "value": "amountFriendlyOtherMinionsOnBattlefield"
       },
       {
         "type": "health",
         "target": "lastUsed",
-        "value": "amountFriendlyMinionsOnBattlefield"
+        "value": "amountFriendlyOtherMinionsOnBattlefield"
       }
     ]
   },
@@ -4173,13 +4163,8 @@
     ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "self",
-        "value": "Devine Shield"
-      },
-      {
         "type": "health",
-        "target": "all",
+        "target": "allOther",
         "value": "-1"
       }
     ]
@@ -4318,12 +4303,12 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "friendlyMinions",
+        "target": "allFriendlyOtherMinions",
         "value": "1"
       },
       {
         "type": "attack",
-        "target": "friendlyMinions",
+        "target": "allFriendlyOtherMinions",
         "value": "1"
       }
     ]
