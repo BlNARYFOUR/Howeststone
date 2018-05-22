@@ -24,8 +24,13 @@ public class CardCollection {
             shuffle();
         }
     }
+
     private void shuffle(){
         Collections.shuffle(cards);
+    }
+
+    public List<Card> getCards() {
+        return cards;
     }
 
     public Card drawCard() {

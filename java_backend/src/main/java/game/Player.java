@@ -10,6 +10,7 @@ public class Player {
     private CardCollection cardsInHand;
     private CardCollection cardsOnPlayingField;
     private CardCollection cardsInDeck;
+    private int mana = 0;
 
     public Hero getHero() {
         return hero;
@@ -29,6 +30,14 @@ public class Player {
 
     public CardCollection getCardsOnPlayingField() {
         return cardsOnPlayingField;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
     }
 
     public Player() {

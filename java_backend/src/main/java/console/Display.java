@@ -128,24 +128,29 @@ public class Display {
             howeststone.setTurnTime(50);
         }else {
             for (String card: replaceCardList) {
-                howeststone.getEnemy().getCardsInHand().addCard(Integer.parseInt(card));
+                //TODO add card to hand enemy
             }
             // replace cards ?
+            System.out.println(howeststone.getEnemy().getCardsInHand());
             enemyTurn(howeststone);
         }
-
-        //
     }
 
     private void enemyTurn(Game howeststone) {
-        //howeststone.getEnemy().getCardsInHand().addCard(howeststone.getYou().getDeck().drawCard()));
-        // +1 mana
+        // check deze code zeker
+        howeststone.getEnemy().getCardsInHand().addCard(Integer.parseInt(howeststone.getYou().getDeck().drawCard().toString()));
+        howeststone.getEnemy().setMana(howeststone.getEnemy().getMana()+1);
+
+        // enemy speelt altijd goedkoopste kaarten eerst
         Card cheapestCard = howeststone.getEnemy().getCardsInHand().getCheapestCard();
-        if (howeststone.getManaEnemy() >= cheapestCard.getManaCost()) {
+        while (howeststone.getManaEnemy() >= cheapestCard.getManaCost()) {
             playCard(cheapestCard, howeststone);
-        } /*else {
-            howeststone.endTurn();
-        }*/
+            cheapestCard = howeststone.getEnemy().getCardsInHand().getCheapestCard();
+        }
+        // endTurn();
+        // yourTurn(howeststone);
+        System.out.println(howeststone.getEnemy().getCardsOnPlayingField());
+
     }
 
 
@@ -160,13 +165,13 @@ public class Display {
     }
 
     private void playCard(Card card, Game howeststone) {
-        if ((howeststone.getActivePlayer()).equals("You")) {
-            CardCollection areaPlayingField = howeststone.getYou().getCardsOnPlayingField();
-            // kaart plaatsingsgebied is playerkant
-        } else {
-            // kaart plaatsingsgebied is enemykant
+        CardCollection areaPlayingField = howeststone.getYou().getCardsOnPlayingField();
+        if ((howeststone.getActivePlayer()).equals("Enemy")) {
+            areaPlayingField = howeststone.getEnemy().getCardsOnPlayingField();
         }
-        // check of er daar minder dan zeven liggen
+        if (areaPlayingField.getCards().size() < 7) {
+            areaPlayingField.addCard(Integer.parseInt(card.toString()));
+        }
     }
 
     private String askInputUntilFoundInList(List<String> list) {
