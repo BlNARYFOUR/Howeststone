@@ -78,19 +78,6 @@ function gotoRechooseDeck() {
     document.getElementById('deckbuilder').className = "hidden";
 }
 
-function playGame() {
-    gameBoardSetup();
-    document.getElementById('vsScreen').className = "";
-    document.getElementById('gameBoard').className = "";
-	//makeCardsFan("you", 1);
-    document.getElementById('deckSelector').className = "hidden";
-    setTimeout(function playrealGame() {
-        document.getElementById('vsScreen').className = "hidden";
-        document.getElementById('replaceCardScreen').className = "";
-        activateReplaceCards();
-    }, 3000);
-}
-
 function gotoHome() {
     document.getElementById('mainMenu').className = "";
     document.getElementById('heroSelector').className = "hidden";

@@ -31,6 +31,9 @@ class Routes {
         server.get("threebeesandme/get/heroanddeckselector/heroes", this::getAllHeroes);
         server.post("threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
         server.post("threebeesandme/post/heroanddeckselector/deck", this::handleDeckSelection);
+        server.get("/threebeesandme/howeststone/get/heroanddeckselector/heroes", this::loadHeroes);
+        server.post("/threebeesandme/howeststone/post/heroanddeckselector/hero", this::setHero);
+        server.get("/threebeesandme/howeststone/get/heroanddeckselector/decks", this::loadDeck);
 
         // DECKBUILDER
         server.post("threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
@@ -39,10 +42,7 @@ class Routes {
         server.post("threebeesandme/post/deckbuilder/selecthero", this::handleHeroSelection);
         //TODO sort server.post("threebeesandme/post/deckbuilder/sort?by=", null);
         server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
-        server.get("/threebeesandme/howeststone/get/heroanddeckselector/heroes", this::loadHeroes);
-        server.post("/threebeesandme/howeststone/post/heroanddeckselector/hero", this::setHero);
-        server.get("/threebeesandme/howeststone/get/heroanddeckselector/decks", this::loadDeck);
-    }
+         }
 
 
 
@@ -58,7 +58,6 @@ class Routes {
         context.json(howeststone.getYou().getHero().getHeroName());
     }
     private void loadDeck(Context context) {
-        System.out.println(howeststone.getYou());
         context.json(howeststone.getYou().getHero().getDeckNames());
     }
 
