@@ -165,6 +165,8 @@ public class Display {
             while (card.getCanAttack() && windfuryCounter <= 2) {
 
                 //TODO maak functie die een random target kiest
+                //howeststone.getYou().getRandomTarget();
+
                 // kies random minion/hero van speler ==> randomCardPlayer
                 // Card target = randomCardPlayer;
                 // int health = target.getHealth (voor hieronder)
@@ -193,21 +195,6 @@ public class Display {
         }
     }
 
-    private void useHeroPower(Game howeststone, Player player) {
-        if (Objects.equals(player.getHero().getHeroName(), "Paladin")) {
-            //TODO replace silver hand recruit id
-            //player.getCardsOnPlayingField().addCard("Silver Hand Recruit");
-        } else {
-            // TODO choose if target is selected before or in this function
-            if (player == howeststone.getEnemy()) {
-                // chooseRandomTarget();
-            } else {
-                // select target
-            }
-            // damage target by 2
-        }
-    }
-
     private void yourTurn(Game howeststone) {
         // TODO change because cannot be defined here
         List<String> cardsInHand= new ArrayList<>();
@@ -218,6 +205,7 @@ public class Display {
         // cardsInHand
     }
 
+
     private void playCard(Card card, Game howeststone) {
         CardCollection areaPlayingField = howeststone.getYou().getCardsOnPlayingField();
         if ((howeststone.getActivePlayer()).equals("Enemy")) {
@@ -225,6 +213,21 @@ public class Display {
         }
         if (areaPlayingField.getCards().size() < 7) {
             areaPlayingField.addCard(Integer.parseInt(card.toString()));
+        }
+    }
+
+    private void useHeroPower(Game howeststone, Player player) {
+        if (Objects.equals(player.getHero().getHeroName(), "Paladin")) {
+            //TODO replace silver hand recruit id
+            //player.getCardsOnPlayingField().addCard("Silver Hand Recruit");
+        } else {
+            // TODO choose if target is selected before or in this function
+            if (player == howeststone.getEnemy()) {
+                // howeststone.getYou().getRandomTarget();
+            } else {
+                // select target
+            }
+            // damage target by 2
         }
     }
 
