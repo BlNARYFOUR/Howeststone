@@ -42,11 +42,13 @@ public class DisplayScreen {
     private Set<String> addAbilitiesToSet(JSONArray jsonArray, Set<String> prevFoundAbilities) {
         for (Object obj : jsonArray) {
             JSONObject jsonObject = (JSONObject) obj;
-            JSONArray abilityList = (JSONArray) jsonObject.get("abilities");
+            JSONArray abilityList = (JSONArray) jsonObject.getOrDefault("abilities", null);
 
-            for (Object ability : abilityList) {
-                JSONObject jsonAbility = (JSONObject) ability;
-                prevFoundAbilities.add(jsonAbility.get("name").toString());
+            if(abilityList != null) {
+                for (Object ability : abilityList) {
+                    JSONObject jsonAbility = (JSONObject) ability;
+                    prevFoundAbilities.add(jsonAbility.get("name").toString());
+                }
             }
         }
 
@@ -63,7 +65,7 @@ public class DisplayScreen {
         JSONParser parser = new JSONParser();
 
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("json/minions.json").getFile());
+        File file = new File(classLoader.getResource("json/weapons.json").getFile());
         Object obj = parser.parse(new FileReader(file));
 
         return (JSONArray) obj;
