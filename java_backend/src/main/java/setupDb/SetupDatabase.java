@@ -10,9 +10,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class DisplayScreen {
+public class SetupDatabase {
     public static void main(String[] args) {
-        new DisplayScreen().run();
+        new SetupDatabase().run();
     }
 
     private static final String SPELLS_LOCATION = "json/spells.json";

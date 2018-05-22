@@ -86,6 +86,9 @@ public class SqlStatements {
     public static final String INSERT_DECK =
             "INSERT INTO `howeststone`.`Decks` (`deckName`, `heroId`) VALUES (?, ?);";
 
-    public static final String INSERT_CARDSINDECK =
+    public static final String INSERT_CARDS_IN_DECK =
             "INSERT INTO `howeststone`.`CardsInDecks` (`deckId`, `cardId`) VALUES (?, ?);";
+
+    public static final String INSERT_ABILITY =
+            "INSERT INTO `howeststone`.`Abilities` (`abilityName`) VALUES (?)";
 }
