@@ -2,13 +2,13 @@ package db;
 
 import java.sql.*;
 
-public class DoThingsWithDb {
+public class DoThingsWithDatabase {
 
     public static void main(String[] args) {
-        new DoThingsWithDb().run();
+        new DoThingsWithDatabase().run();
     }
 
-    SqlDatabase db;
+    private SqlDatabase db;
 
     private void run() {
         db = new SqlDatabase("localhost:88", "root", "");
