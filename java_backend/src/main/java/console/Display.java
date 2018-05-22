@@ -152,24 +152,42 @@ public class Display {
 
         enemyMinionsAttack(howeststone);
 
+
         // endTurn();
+        // setCanAttack of all minions of enemy to true
         howeststone.setActivePlayer("You");
         System.out.println(howeststone.getEnemy().getCardsOnPlayingField());
     }
 
     private void enemyMinionsAttack(Game howeststone) {
         for (Card card: howeststone.getEnemy().getCardsOnPlayingField().getCards()) {
-            /*while (card.getCanAttack()) {
-                kies random minion/hero van speler
-                val die aan
-                voer eventuele abilities uit
-                update health
-                voer dode kaarten af
-                update battlelog
-                if (!card.getCardAbilities.contains("windfury")) {
+            int windfuryCounter = 1;
+            while (card.getCanAttack() && windfuryCounter <= 2) {
+                // kies random minion/hero van speler ==> randomCardPlayer
+                //Card target = randomCardPlayer;
+                // int health = target.getHealth (voor hieronder)
+
+                // val die aan (attack functie in classe minion)
+                // howeststone.getEnemy().getCardsOnPlayingField()...attack(target)
+                // + int attack = getAttack
+
+                // voer eventuele abilities uit
+
+                // update health
+                // health - attack (- eventuele abilitydamage)
+
+                // howeststone.getEnemy().getCardsOnPlayingField()...setHealth(card.getHealth - target.getDamage (- eventuele ability))
+
+                // voer dode kaarten af
+
+                // update battlelog
+
+                /*if (!card.getCardAbilities.contains("windfury")) {
                     card.setCanAttack(false)
-                }
-            }*/
+                } else {
+                    windfuryCounter ++
+                }*/
+            }
         }
     }
 

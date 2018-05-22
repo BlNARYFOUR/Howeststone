@@ -11,6 +11,7 @@ public class Card {
     private String rarity;
     private int manaCost;
     private List<Abilities> cardAbilities;
+    private boolean canAttack = false;
     // TODO: private List<Mechanics> cardMechanics;
 
     public Card(){
@@ -48,6 +49,10 @@ public class Card {
         // TODO: card.doDamage();
 
         return false;
+    }
+
+    public boolean getCanAttack() {
+        return canAttack;
     }
 
 
