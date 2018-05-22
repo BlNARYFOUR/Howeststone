@@ -62,9 +62,9 @@ CREATE TABLE Decks (
 )ENGINE = INNODB;
 
 CREATE TABLE CardsInDecks (
-	deckId INT(3) NOT NULL,
+	deckId INT(2) NOT NULL,
 	cardId INT(3) NOT NULL,
-	amount INT(3) NOT NULL,
+	amount INT(1) NOT NULL MAX(2),
 	CONSTRAINT pk_CardsInDecks PRIMARY KEY(deckId, cardId),
 	CONSTRAINT fk_CardsInDecks FOREIGN KEY(deckId) REFERENCES Decks(deckId),
 	CONSTRAINT fk_CardsInDecks2 FOREIGN KEY(cardId) REFERENCES Cards(cardId)
