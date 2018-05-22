@@ -141,14 +141,14 @@ public class Display {
         howeststone.getEnemy().getCardsInHand().addCard(Integer.parseInt(howeststone.getYou().getDeck().drawCard().toString()));
         howeststone.getEnemy().setMana(howeststone.getEnemy().getMana()+1);
 
-        // enemy speelt altijd goedkoopste kaarten eerst
-        Card cheapestCard = howeststone.getEnemy().getCardsInHand().getCheapestCard();
-        while (howeststone.getManaEnemy() >= cheapestCard.getManaCost()) {
-            playCard(cheapestCard, howeststone);
-            cheapestCard = howeststone.getEnemy().getCardsInHand().getCheapestCard();
+        // enemy speelt altijd duurste kaarten eerst
+        Card mostExpensiveCard = howeststone.getEnemy().getCardsInHand().getMostExpensiveCard();
+        while (howeststone.getManaEnemy() >= mostExpensiveCard.getManaCost()) {
+            playCard(mostExpensiveCard, howeststone);
+            mostExpensiveCard = howeststone.getEnemy().getCardsInHand().getMostExpensiveCard();
         }
         // endTurn();
-        // yourTurn(howeststone);
+        howeststone.setActivePlayer("You");
         System.out.println(howeststone.getEnemy().getCardsOnPlayingField());
 
     }

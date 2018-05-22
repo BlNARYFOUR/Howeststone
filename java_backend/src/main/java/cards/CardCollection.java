@@ -72,6 +72,7 @@ public class CardCollection {
         return name;
     }
 
+    /*
     public Card getCheapestCard() {
         Card cheapestCard = this.cards.get(0);
         for(Card x : this.cards ){
@@ -80,5 +81,15 @@ public class CardCollection {
             }
         }
         return cheapestCard;
+    }*/
+
+    public Card getMostExpensiveCard() {
+        Card mostExpensiveCard = this.cards.get(0);
+        for(Card x : this.cards ){
+            if (x.getManaCost() > mostExpensiveCard.getManaCost()) {
+                mostExpensiveCard = x;
+            }
+        }
+        return mostExpensiveCard;
     }
 }
