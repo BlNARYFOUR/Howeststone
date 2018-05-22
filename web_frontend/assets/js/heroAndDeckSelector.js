@@ -77,7 +77,6 @@ function loadDecks() {
 }
 
 function showHeroes(heroes) {
-    console.log(heroes);
     let heroesHtml = document.querySelectorAll('.heroes');
 
     for (let i=0; i<heroes.length; i++) {
@@ -109,9 +108,7 @@ function loadHeroes() {
         method: 'GET'
     })
     .then(function(res) {
-        console.log(res.ok);
         if(res.ok === true) {
-            console.log(res);
             return res.json();
         }
         else {
