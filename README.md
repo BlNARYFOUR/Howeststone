@@ -20,6 +20,10 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 <h5>Java</h5>
 ![alt text](documents/Java/javaUML.png "modelJavaClasses")
 
+<h4>Progress</h4>
+<h5>Frontend</h5>
+<h5>Backend</h5>
+
 
 
 
