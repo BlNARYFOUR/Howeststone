@@ -2,13 +2,14 @@ package be.howest.ti.threebeesandme.howeststone.db;
 
 import java.sql.*;
 
-public class DoThingsWithDb {
+public class DoThingsWithDataBase {
 
-    public static void main(String[] args) {
-        new DoThingsWithDb().run();
-    }
 
     SqlDatabase db;
+
+    public static void main(String[] args) {
+        new DoThingsWithDataBase().run();
+    }
 
     private void run() {
         db = new SqlDatabase("localhost:88", "root", "");
