@@ -4,18 +4,18 @@ document.addEventListener("DOMContentLoaded", init);
 
 let cardCounter = 0;
 let cardBackUrl = "";
-let dragSrcEl = null;
 let myCards = null;
 let timeLeftObj = null;
 
 let MOCKTIME = 50;
 
 function init() {
-    setupDraggingOfCards();
+    setupMovingOfCards();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
     getRandomCardBack();
     //makeCardsFan("you", 1);
+    document.querySelector(".you .heroPower span").addEventListener('click', useHeroPower);
 }
 
 function setupGameBoard() {
@@ -30,7 +30,7 @@ function showOrHideBattleLog(e) {
 
 function loadBattleLog() {
     /*
-    fetch('threebeesandme/howeststone/get/gameboard/battlelog', {
+    fetch('http://localhost:4242/threebeesandme/get/gameboard/battlelog', {
         method: 'GET'
     })
     .then(function(res) {
@@ -54,6 +54,25 @@ function loadBattleLog() {
                     "Bert got torched",
                     "Step died of exhaustion",
                     "Brem got VICTORY"]);
+}
+
+function  useHeroPower() {
+    console.log('kaaaapow!');
+    fetch('http://localhost:4242/threebeesandme/get/useheropower',{
+           method: 'GET',
+        mode: 'no-cors'
+       })
+           .then(function(res) {
+               if(res.ok === true)
+                   return res.json();
+           })
+           .then(function(text) {
+               let result = text;
+               console.log("Heropower is used");
+           })
+           .catch(function(err) {
+               console.log("Error: Could not use heropower");
+           });
 }
 
 function showBattleLog(logArr) {
@@ -95,7 +114,7 @@ function stopTimeLeftCheck() {
 }
 
 function timeLeft() {
-    fetch('threebeesandme/howeststone/get/timeleft', {
+    fetch('http://localhost:4242/threebeesandme/get/timeleft', {
         method: 'GET'
     })
     .then(function(res) {
@@ -122,7 +141,7 @@ function endMyTurn(e) {
     stopBurnFuse();
 
     /*
-    fetch('threebeesandme/howeststone/post/endturn',{
+    fetch('http://localhost:4242/threebeesandme/post/endturn',{
         method: 'POST'
     })
         .then(function(res) {
@@ -169,19 +188,23 @@ function toggleReplaceCard(e) {
     } else {
         document.querySelector('#gotoCardsReplaced').innerHTML = 'Continue';
     }
-
-
 }
 
-function firstTurn() {
-    console.log('test');
+function gameBoardSetup() {
+    setBackground();
     updateEnemyHero();
     updateEnemyMana(0, 0);
-    updateEnemyCards(5);
     updateMyHero();
     updateMyMana(0, 0);
+}
+let heroAttack;
+function yourTurn() {
+    heroAttack = true;
+    console.log("You're turn");
+    updateEnemyCards(5);
     updateMyCards(3);
-    startMyTurn();
+    updateMyMana(1, 1);
+    updateMyCards(4);
 }
 
 function burnFuse() {
@@ -202,8 +225,24 @@ function updateMyHero() {
 
 function updateHero(parent) {
     let heroName = "";
+    fetch('http://localhost:4242/threebeesandme/get/yourhero',{
+        method: 'get',
+        mode: 'no-cors'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("you're hero is" + result);
+        })
+        .catch(function(err) {
+            console.log("Error: Could not get hero");
+        });
 
-    // here will come a fetch to get the hero name
+
+    // TODO fetch heroname
     heroName = "mage";
 
     showHero(parent, heroName);
@@ -211,6 +250,7 @@ function updateHero(parent) {
 
 function showHero(parent, heroName) {
     let hero = document.querySelector(`#gameBoard .${parent} .hero`);
+    hero.innerHTML = '<span class="health">30</span>';
 
     hero.style.background = `no-repeat url("assets/media/${heroName}.png") center center`;
     hero.style.backgroundSize = "contain";
@@ -219,7 +259,7 @@ function showHero(parent, heroName) {
 function updateEnemyCards() {
     let amountOfCards = 0;
 
-    /* Here should come a fetch to get enemy amount of cards */
+    // TODO fetch for cardInEnemyHand and other info
     amountOfCards = 7;      // MOCK DATA
 
     updateCards(amountOfCards, "enemy", -1);
@@ -227,13 +267,13 @@ function updateEnemyCards() {
 }
 
 function updateMyCards() {
-    /* Here should come a fetch to get cardInMyHand data */
+    // TODO fetch for cardsInMyHand and other info
     myCards = MOCKMYCARDS();
 
     updateCards(myCards.length, "you", 1);
     setMyCards(myCards);
     giveClassNameEqualToCardID();
-    setupDraggingOfCards();
+    setupMovingOfCards();
 }
 
 function giveClassNameEqualToCardID() {
@@ -245,25 +285,6 @@ function giveClassNameEqualToCardID() {
 
 function MOCKMYCARDS() {
     return [
-        {
-            "cardId": "CS2_231",
-            "dbfId": "179",
-            "name": "Wisp",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "faction": "Neutral",
-            "rarity": "Common",
-            "cost": 0,
-            "attack": 1,
-            "health": 1,
-            "flavor": "If you hit an Eredar Lord with enough Wisps, it will explode. But why?",
-            "artist": "Malcolm Davis",
-            "collectible": true,
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_231.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_231_premium.gif",
-            "locale": "enUS"
-        },
         {
             "cardId": "CS2_188",
             "dbfId": "242",
@@ -310,6 +331,34 @@ function MOCKMYCARDS() {
             "locale": "enUS"
         },
         {
+            "cardId": "EX1_398t",
+            "dbfId": "1707",
+            "name": "Battle Axe",
+            "cardSet": "Classic",
+            "type": "Weapon",
+            "cost": 1,
+            "attack": 2,
+            "durability": 2,
+            "playerClass": "Warrior",
+            "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_398t.png",
+            "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_398t_premium.gif",
+            "locale": "enUS"
+        },
+        {
+            "cardId": "EX1_409t",
+            "dbfId": "1661",
+            "name": "Heavy Axe",
+            "cardSet": "Classic",
+            "type": "Weapon",
+            "cost": 1,
+            "attack": 1,
+            "durability": 3,
+            "playerClass": "Warrior",
+            "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_409t.png",
+            "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_409t_premium.gif",
+            "locale": "enUS"
+        },
+        {
             "cardId": "EX1_008",
             "dbfId": "757",
             "name": "Argent Squire",
@@ -335,30 +384,45 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "CS2_059",
-            "dbfId": "469",
-            "name": "Blood Imp",
+            "cardId": "EX1_410",
+            "dbfId": "546",
+            "name": "Shield Slam",
             "cardSet": "Classic",
-            "type": "Minion",
+            "type": "Spell",
             "faction": "Neutral",
-            "rarity": "Common",
+            "rarity": "Epic",
             "cost": 1,
-            "attack": 0,
-            "health": 1,
-            "text": "[x] Stealth. At the end of your \\nturn, give another random\\n friendly minion +1 Health.",
-            "flavor": "Imps are content to hide and viciously taunt everyone nearby.",
-            "artist": "Bernie Kang",
+            "text": "Deal 1 damage to a minion for each Armor you have.",
+            "flavor": "\"What is a better weapon? The sharp one your enemies expect, or the blunt one they ignore?\" - The Art of Warrior, Chapter 9",
+            "artist": "Raymond Swanland",
             "collectible": true,
-            "race": "Demon",
-            "playerClass": "Warlock",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_059_premium.gif",
+            "playerClass": "Warrior",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_410.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_410_premium.gif",
             "locale": "enUS",
             "mechanics": [
                 {
-                    "name": "Stealth"
+                    "name": "AffectedBySpellPower"
                 }
             ]
+        },
+        {
+            "cardId": "EX1_392",
+            "dbfId": "400",
+            "name": "Battle Rage",
+            "cardSet": "Classic",
+            "type": "Spell",
+            "faction": "Neutral",
+            "rarity": "Common",
+            "cost": 2,
+            "text": "Draw a card for each damaged friendly character.",
+            "flavor": "\"You won't like me when I'm angry.\"",
+            "artist": "Alex Horley Orlandelli",
+            "collectible": true,
+            "playerClass": "Warrior",
+            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_392.png",
+            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_392_premium.gif",
+            "locale": "enUS"
         },
         {
             "cardId": "EX1_319",
@@ -387,27 +451,6 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "EX1_538t",
-            "dbfId": "1715",
-            "name": "Hound",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "cost": 1,
-            "attack": 1,
-            "health": 1,
-            "text": "Charge",
-            "race": "Beast",
-            "playerClass": "Hunter",
-            "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_538t.png",
-            "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_538t_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Charge"
-                }
-            ]
-        },
-        {
             "cardId": "NEW1_017",
             "dbfId": "443",
             "name": "Hungry Crab",
@@ -429,31 +472,6 @@ function MOCKMYCARDS() {
             "mechanics": [
                 {
                     "name": "Battlecry"
-                }
-            ]
-        },
-        {
-            "cardId": "EX1_029",
-            "dbfId": "658",
-            "name": "Leper Gnome",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "faction": "Neutral",
-            "rarity": "Common",
-            "cost": 1,
-            "attack": 1,
-            "health": 1,
-            "text": "Deathrattle: Deal 2 damage to the enemy_hero.",
-            "flavor": "He really just wants to be your friend, but the constant rejection is starting to really get to him.",
-            "artist": "Glenn Rane",
-            "collectible": true,
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_029.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_029_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Deathrattle"
                 }
             ]
         },
@@ -492,17 +510,9 @@ function MOCKMYCARDS() {
 function updateCards(amountOfCards, parent, gradDirectionIndex) {
     let cards = document.querySelector(`#gameBoard .${parent} .cards ul`);
     cards.innerHTML = "";
-
-    let addOn = "";
-    if(parent === "you") {
-        addOn = 'draggable="true"';
-    }
-
-    // just li's
     for(let i=0; i<amountOfCards; i++) {
         cards.innerHTML += `<li></li>`;
     }
-
     makeCardsFan(parent, gradDirectionIndex);
 }
 
@@ -524,7 +534,9 @@ function updateMyMana(activeMana, totalMana) {
         manaList.innerHTML += '<li class="usedMana"></li>\r\n';
     }
 }
-
+function returnRemainingCrystal() {
+    return document.querySelectorAll("#gameBoard .you .manaHolder ul .mana").length;
+}
 function setEnemyCardBacks(parent, cardUrl) {
     let cardBacks = document.querySelectorAll(`#gameBoard .${parent} .cards li`);
 
@@ -590,7 +602,7 @@ function addCard() {
         makeCardsFan("you", 1);
     }
 
-    setupDraggingOfCards();
+    setupMovingOfCards();
 }
 
 function makeCardsFan(parentClass, gradDirectionIndex) {                                // gradDirectionIndex: Normally -1 or 1
@@ -677,82 +689,128 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-function setupDraggingOfCards() {
-    let dragged;
-    let copyOfDragged;
-
+function setupMovingOfCards() {
     let cards = document.querySelectorAll("#gameBoard .you .cards ul li");
-
-
     for(let i=0; i<cards.length; i++) {
-        cards[i].addEventListener("mousedown", touchStart);
-        cards[i].addEventListener("touchstart", touchStart);
+        cards[i].addEventListener("mousedown", layCardOnFieldStart);
+        cards[i].addEventListener("touchstart", layCardOnFieldStart);
     }
 }
-let drag;
+
+let dragSrcElement;
 let dragOffsetX;
 let dragOffsetY;
-
-function touchStart(e) {
-
+let itemThatIsBeingMoved;
+let moved;
+function layCardOnFieldStart(e) {
+    // TODO fetch
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
+    itemThatIsBeingMoved = e.target;
+    moved = false;
+    dragSrcElement = e.target.cloneNode(true);
+    itemThatIsBeingMoved.classList.add('hidden');
+    document.body.appendChild(dragSrcElement);
+    dragSrcElement.removeAttribute('style');
 
-    drag = e.target.cloneNode(true);
-    document.body.appendChild(drag);
-    drag.removeAttribute('style');
+    movingOfDragElement(e);
+    dragSrcElement.style.zIndex = '1';
+    dragSrcElement.style.width = '14.854838709677vh';
+    dragSrcElement.style.height= '22.5vh';
+    dragSrcElement.style.position = 'absolute';
+    dragSrcElement.style.background = e.target.style.background;
 
-    touchMove(e);
-    drag.style.zIndex = '1';
-    drag.style.width = '14.854838709677vh';
-    drag.style.height= '22.5vh';
-    drag.style.position = 'absolute';
-    drag.style.background = e.target.style.background;
 
-    document.addEventListener("touchmove", touchMove, false);
-    document.addEventListener("mousemove", touchMove, false);
-    document.addEventListener("mouseup", touchEnd, false);
-    document.addEventListener("touchend", touchEnd, false);
+    document.removeEventListener("mousedown", layCardOnFieldStart);
+    document.removeEventListener("touchstart", layCardOnFieldStart);
+    document.addEventListener("touchmove", movingOfDragElement, false);
+    document.addEventListener("mousemove", movingOfDragElement, false);
+    document.addEventListener("mouseup", layCardOnFieldEnd, false);
+    document.addEventListener("touchend", layCardOnFieldEnd, false);
 }
 
-function touchMove(e) {
+function movingOfDragElement(e) {
     if (typeof e.clientX === "number"){
         let XCoordinate = e.clientX - dragOffsetX;
         let YCoordinate = e.clientY - dragOffsetY;
-        drag.style.left = XCoordinate + 'px';
-        drag.style.top = YCoordinate+ 'px';
+        dragSrcElement.style.left = XCoordinate + 'px';
+        dragSrcElement.style.top = YCoordinate+ 'px';
     }
     else {
         // Mattijs: the web browser cannot calculate the offset so I use this as default
         let XCoordinate = e.touches[0].clientX - 40;
         let YCoordinate = e.touches[0].clientY - 80;
-        drag.style.left = XCoordinate + 'px';
-        drag.style.top = YCoordinate+ 'px';
+        dragSrcElement.style.left = XCoordinate + 'px';
+        dragSrcElement.style.top = YCoordinate+ 'px';
     }
 }
 
-function emptyPlayingFieldDrop() {
+function itIsOkToPlayCard() {
+    let cardPlayed = cloneDragElement();
+    if (type === 'Minion'){
+        let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
+        dropZone.appendChild(cardPlayed);
+        addMinionToPlayingField(cardPlayed);
+    } else{
+        let dropZone = document.querySelector('#gameBoard .you .weapon ul');
+        dropZone.innerHTML = '';
+        dropZone.appendChild(cardPlayed);
+        addWeaponToPlayingField(cardPlayed);
+    }
+}
+
+function CheckingIfCardIsOnPlayingField() {
     let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
-    let rectDrag = drag.getBoundingClientRect();
+    let rectDrag = dragSrcElement.getBoundingClientRect();
     let rectDropZone = dropZone.getBoundingClientRect();
     if ((rectDrag.right < rectDropZone.right) && (rectDrag.left > rectDropZone.left) && (rectDrag.bottom < (rectDropZone.bottom + 100)) && (rectDrag.top > rectDropZone.top -100)){
-        let cardOnPlayingField = cloneDragElement();
-        dropZone.appendChild(cardOnPlayingField);
+        itIsOkToPlayCard();
     }
 }
 
 function cloneDragElement() {
-    let cardOnPlayingField = drag.cloneNode(true);
+    let cardOnPlayingField = dragSrcElement.cloneNode(true);
     cardOnPlayingField.removeAttribute('style');
-    cardOnPlayingField.style.background = drag.style.background;
+    cardOnPlayingField.style.background = dragSrcElement.style.background;
     cardOnPlayingField.style.backgroundSize = "176%";
     cardOnPlayingField.style.backgroundPositionY = "23%";
     return cardOnPlayingField;
 }
 
-function calculateDropZones(dropZoneLi) {
+function activateHeroAttack(heroAttackValue) {
+    document.querySelector('#gameBoard .you .hero').innerHTML += `<span class="heroAttack">${heroAttackValue}</span>`;
+    document.querySelector('#gameBoard .you .hero').addEventListener("mousedown", heroAttackStart);
+    document.querySelector('#gameBoard .you .hero').addEventListener("touchstart", heroAttackStart);
+}
+function deactivateHeroAttack() {
+    let heroAttackElement = document.querySelector('#gameBoard .you .hero .heroAttack');
+    heroAttackElement.parentElement.removeChild(heroAttackElement);
+    document.querySelector('#gameBoard .you .hero').removeEventListener("mousedown", heroAttackStart);
+    document.querySelector('#gameBoard .you .hero').removeEventListener("touchstart", heroAttackStart);
+}
+
+function addWeaponToPlayingField(cardPlayed) {
+    moved = true;
+    updateMyMana(remainingCrystals - cost, document.querySelectorAll("#gameBoard .you .manaHolder ul li").length);
+    let cardAttack =returnAttackOfMyCard(itemThatIsBeingMoved);
+    let cardDurability = returnDurabilityOfMyCard(itemThatIsBeingMoved);
+    cardPlayed.innerHTML += `<span class="attack">${cardAttack}</span><span class="durability">${cardDurability}</span>`;
+    activateHeroAttack(cardAttack);
+}
+function addMinionToPlayingField(cardPlayed) {
+    // mockData
+    moved = true;
+    updateMyMana(remainingCrystals - cost, document.querySelectorAll("#gameBoard .you .manaHolder ul li").length);
+    let cardAttack =returnAttackOfMyCard(itemThatIsBeingMoved);
+    let cardHealth = returnHealthOfMyCard(itemThatIsBeingMoved);
+    cardPlayed.innerHTML += `<span class="health">${cardHealth}</span><span class="attack">${cardAttack}</span>`;
+    cardPlayed.addEventListener("mousedown", loadAttackStart);
+    cardPlayed.addEventListener("touchstart", loadAttackStart);
+}
+
+function PlayingFieldEnd(dropZoneLi) {
     let dropZone = document.querySelector('#gameBoard .you .playingField .dropZone');
-    let rectDrag = drag.getBoundingClientRect();
+    let rectDrag = dragSrcElement.getBoundingClientRect();
     let top = dropZone.getBoundingClientRect().top -100;
     let bottom = dropZone.getBoundingClientRect().bottom + 100;
     for (let i = 0; i< dropZoneLi.length -1; i++){
@@ -761,6 +819,7 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[i+1]);
+            addMinionToPlayingField(cardOnPlayingField);
             break;
         }
         right = left;
@@ -768,13 +827,15 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
+            addMinionToPlayingField(cardOnPlayingField);
             break;
         }
-        left = dropZoneLi[i+1].getBoundingClientRect().right;
+        left = dropZoneLi[dropZoneLi.length-1].getBoundingClientRect().right;
         right = dropZone.getBoundingClientRect().right;
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.appendChild(cardOnPlayingField);
+            addMinionToPlayingField(cardOnPlayingField);
             break;
         }
     }
@@ -784,95 +845,75 @@ function calculateDropZones(dropZoneLi) {
         if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
             let cardOnPlayingField = cloneDragElement();
             dropZone.insertBefore(cardOnPlayingField, dropZoneLi[0]);
+            addMinionToPlayingField(cardOnPlayingField);
         }else {
             let left = dropZoneLi[0].getBoundingClientRect().left;
             let right = dropZone.getBoundingClientRect().right;
             if ((rectDrag.right < right) && (rectDrag.left > left) && (rectDrag.bottom < bottom) && (rectDrag.top > top)){
                 let cardOnPlayingField = cloneDragElement();
                 dropZone.appendChild(cardOnPlayingField);
+                addMinionToPlayingField(cardOnPlayingField);
             }
         }
     }
 
 }
 
-
-function touchEnd(e) {
-    // TODO fetch check for card
-    let dropZoneLi = document.querySelectorAll('#gameBoard .you .playingField .dropZone li');
-    switch (dropZoneLi.length){
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-            calculateDropZones(dropZoneLi);
-            break;
-        case 7:
-            break;
-        default:
-            emptyPlayingFieldDrop();
-            break;
-
-    }
-    drag.parentElement.removeChild(drag);
-    document.removeEventListener("touchmove", touchMove, false);
-    document.removeEventListener("touchend", touchEnd, false);
-    document.removeEventListener("mousemove", touchMove, false);
-    document.removeEventListener("mouseup", touchEnd, false);
-}
-/*
-function handleDragStart(e) {
-    e.stopImmediatePropagation();
-    dragSrcEl = e.target;
-
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', this.innerHTML);
-
-    e.target.classList.add("dragging");
-    e.target.parentNode.style.opacity = "1";
-    e.dataTransfer.setDragImage(dragSrcEl, 85, 135);
-}
-
-function handleDrag(e) {
-    e.stopImmediatePropagation();
-    e.target.classList.add("hide");
-}
-
-function handleDragEnd(e) {
-    e.target.classList.remove("hide");
-    e.target.classList.remove("dragging");
-}
-
-function handleDragOver(e) {
-    e.preventDefault();
-}
-
-function handleDrop(e) {
-    // control serverSided !!
-    let countOfListItemsInDropZone = document.querySelectorAll('.dropZone li').length;
-    e.stopPropagation();
-
-    if ( e.target.className === "dropZone" && countOfListItemsInDropZone < 7) {
-        // left and right
-        dropInDropZone(dragSrcEl, e.target);
-        updateMyCards();
-        makeCardsFan("you", 1);
-    } else {
-        if (e.target.innerHTML.indexOf('Card') !== -1){
-            // middle
-            // add card on right position
+let cost;
+let remainingCrystals;
+let type;
+function layCardOnFieldEnd(e) {
+    // TODO fetch play the card
+    // TODO succeeded or not
+    type = returnTypeOfMyCard(e.target);
+    cost =returnCostOfMyCard(e.target);
+    remainingCrystals = returnRemainingCrystal();
+    if (cost > remainingCrystals){
+        console.error('not enough mana');
+    }else{
+        switch (type){
+            case 'Minion':
+                let dropZoneLi = document.querySelectorAll('#gameBoard .you .playingField .dropZone li');
+                switch (dropZoneLi.length){
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                        PlayingFieldEnd(dropZoneLi);
+                        break;
+                    case 7:
+                        break;
+                    default:
+                        CheckingIfCardIsOnPlayingField();
+                        break;
+                }
+                break;
+            case 'Weapon':
+                CheckingIfCardIsOnPlayingField();
+                break;
+            case 'Spell':
+                console.log('NYI'); //TODO fetch
         }
-        updateMyCards();
     }
+    try{
+        dragSrcElement.parentElement.removeChild(dragSrcElement);
+        itemThatIsBeingMoved.classList.remove('hidden');
+        if (moved === true){
+            itemThatIsBeingMoved.parentElement.removeChild(itemThatIsBeingMoved);
+            updateMyCards();
+        }
+    } catch (err){
+        console.log('nothing can be removed' + err);
+    }
+    document.removeEventListener("touchmove", movingOfDragElement, false);
+    document.removeEventListener("touchend", layCardOnFieldEnd, false);
+    document.removeEventListener("mousemove", movingOfDragElement, false);
+    document.removeEventListener("mouseup", layCardOnFieldEnd, false);
+    // TODO fetch
 }
-
-function handleDoubleClickAsDrop(e) {
-    dropInDropZone(e.target, document.querySelector("#gameBoard .you .playingField .dropZone"));
-	updateMyCards();
-}
-function returnTypeOfMyCards(liWithClass) {
+function returnTypeOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for(let i=0; i<myCards.length; i++){
         if (cardId.indexOf(myCards[i].cardId) !== -1){
@@ -881,42 +922,57 @@ function returnTypeOfMyCards(liWithClass) {
     }
     return null;
 }
-
-function dropInDropZone(dragSrcElement, dropZoneElement) {
-
-    /* gone
-    dragSrcElement.draggable = false;
-    dragSrcElement.removeEventListener("dblclick", handleDoubleClickAsDrop);
-
-    let background = dragSrcElement.style.background;
-    dragSrcElement.removeAttribute("style");
-    dragSrcElement.style.color = "transparent";
-    dragSrcElement.style.border = "none";
-    dragSrcElement.style.background = background;
-    dragSrcElement.style.backgroundSize = "176%";
-    dragSrcElement.style.backgroundPositionY = "23%";
-
-    dragSrcElement.parentNode.removeChild(dragSrcElement);
-    // appendChild cannot be used
-    dropZoneElement.appendChild(dragSrcElement);
-    dropZoneElement.innerHTML += '<li class="betweenDrop"></li>';
-    // give minion class nonAttack
-    // check if charge is present
-    // check if battlecry is present
-    let type = returnTypeOfMyCards(dragSrcElement);
-    switch (type){
-        case 'Minion':
-            dropZoneElement.appendChild(dragSrcElement);
-            break;
-        case 'Weapon':
-            document.querySelector('.weapon').appendChild(dragSrcElement);
-            break;
+function returnDurabilityOfMyCard(liWithClass) {
+    let cardId = liWithClass.getAttribute('class');
+    for(let i=0; i<myCards.length; i++){
+        if (cardId.indexOf(myCards[i].cardId) !== -1){
+            return myCards[i].durability;
+        }
     }
-    dragSrcElement.addEventListener('click', visualiseAttack)
-}*/
-function endturn() {
-    // delete all class nonAttack
+    return null;
 }
+function returnHealthOfMyCard(liWithClass) {
+    let cardId = liWithClass.getAttribute('class');
+    for(let i=0; i<myCards.length; i++){
+        if (cardId.indexOf(myCards[i].cardId) !== -1){
+            return myCards[i].health;
+        }
+    }
+    return null;
+}
+function returnAttackOfMyCard(liWithClass) {
+    let cardId = liWithClass.getAttribute('class');
+    for(let i=0; i<myCards.length; i++){
+        if (cardId.indexOf(myCards[i].cardId) !== -1){
+            return myCards[i].attack;
+        }
+    }
+    return null;
+}
+function returnCostOfMyCard(liWithClass) {
+    let cardId = liWithClass.getAttribute('class');
+    for(let i=0; i<myCards.length; i++){
+        if (cardId.indexOf(myCards[i].cardId) !== -1){
+            return myCards[i].cost;
+        }
+    }
+    return null;
+}
+/* give minion class nonAttack
+ check if charge is present
+check if battleCry is present
+let type = returnTypeOfMyCards(dragSrcElement);
+switch (type){
+    case 'Minion':
+        dropZoneElement.appendChild(dragSrcElement);
+        break;
+    case 'Weapon':
+        document.querySelector('.weapon').appendChild(dragSrcElement);
+        break;
+}
+dragSrcElement.addEventListener('click', visualiseAttack); */
+
+
 
 function visualiseAttack(e) {
     // check if a card has class nonAttack
@@ -926,6 +982,156 @@ function visualiseAttack(e) {
     // dragend check on what element the target is dropped and does the *real* attack function
     console.log('cannot attack');
     attack();
+}
+function attackStart() {
+    let target = e.target;
+    if (e.path[0].tagName === 'SPAN'){
+        target = e.target.parentElement;
+    }
+    dragOffsetX = e.offsetX;
+    dragOffsetY = e.offsetY;
+    itemThatIsBeingMoved = target;
+    moved = false;
+    dragSrcElement = target.cloneNode(false);
+    document.querySelector('#gameBoard').appendChild(dragSrcElement);
+    dragSrcElement.removeAttribute('style');
+
+    movingOfDragElement(e);
+    dragSrcElement.style.zIndex = '1';
+    dragSrcElement.style.position = 'absolute';
+    dragSrcElement.style.width = '9.9032258064516129032258064516131vh';
+    dragSrcElement.style.height= '15vh';
+    dragSrcElement.style.borderRadius = '50%';
+
+    dragSrcElement.style.background = target.style.background;
+
+    document.removeEventListener("mousedown", layCardOnFieldStart);
+    document.removeEventListener("touchstart", layCardOnFieldStart);
+    document.addEventListener("touchmove", movingOfDragElement, false);
+    document.addEventListener("mousemove", movingOfDragElement, false);
+    document.addEventListener("mouseup", attackEnd, false);
+    document.addEventListener("touchend", attackEnd, false);
+}
+
+function loadAttackStart(e) {
+    fetch('http://localhost:4242/threebeesandme/get/gameboard/attackpermission',{
+        method: 'get'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            attackStart(result)
+            console.log("asking for attack permission has been send to server");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not send permission for attack");
+        });
+}
+function heroAttackStart(e) {
+    // TODO Their is no need for two functions
+
+    fetch('http://localhost:4242/threebeesandme/post/gameboard/heroattackStart',{
+        method: 'GET'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("asking for attack permission has been send to server");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not send permission for attack");
+        });
+
+
+    if (heroAttack === true){
+        let target = e.target;
+        if (e.path[0].tagName === 'SPAN'){
+            target = e.target.parentElement;
+        }
+        dragOffsetX = e.offsetX;
+        dragOffsetY = e.offsetY;
+        itemThatIsBeingMoved = target;
+        moved = false;
+        dragSrcElement = target.cloneNode(false);
+        document.querySelector('#gameBoard').appendChild(dragSrcElement);
+        dragSrcElement.removeAttribute('style');
+
+        movingOfDragElement(e);
+        dragSrcElement.style.zIndex = '1';
+        dragSrcElement.style.position = 'absolute';
+        dragSrcElement.style.width = '14.854838709677vh';
+        dragSrcElement.style.height= '22.5vh';
+        dragSrcElement.style.background = target.style.background;
+
+        document.removeEventListener("mousedown", layCardOnFieldStart);
+        document.removeEventListener("touchstart", layCardOnFieldStart);
+        document.addEventListener("touchmove", movingOfDragElement, false);
+        document.addEventListener("mousemove", movingOfDragElement, false);
+        document.addEventListener("mouseup", heroAttackEnd, false);
+        document.addEventListener("touchend", heroAttackEnd, false);
+    }
+}
+
+function attackEnd() {
+    let enemies = document.querySelectorAll('.enemy .playingField ul li');
+    let rectDrag = dragSrcElement.getBoundingClientRect();
+    let hero = document.querySelector('#gameBoard .enemy .hero').getBoundingClientRect();
+    if ((rectDrag.right < hero.right+29) && (rectDrag.left > hero.left-35) && (rectDrag.bottom < hero.bottom+35) && (rectDrag.top > rectDrag.top-9)) {
+        console.log('attack');
+        console.log(document.querySelector('#gameBoard .enemy .hero'));
+    }
+    for (let i = 0; i < enemies.length; i++){
+        let enemy = enemies[i].getBoundingClientRect();
+        if ((rectDrag.right < enemy.right+13) && (rectDrag.left > enemy.left-13) && (rectDrag.bottom < enemy.bottom+26) && (rectDrag.top > enemy.top-18)) {
+            console.log('attack');
+            console.log(enemies[i]);
+        }
+    }
+    dragSrcElement.parentElement.removeChild(dragSrcElement);
+    document.removeEventListener("touchmove", movingOfDragElement, false);
+    document.removeEventListener("mousemove", movingOfDragElement, false);
+    document.removeEventListener("mouseup", attackEnd, false);
+    document.removeEventListener("touchend", attackEnd, false);
+    // TODO fetch
+}
+function heroAttackEnd() {
+    let enemies = document.querySelectorAll('.enemy .playingField ul li');
+    let rectDrag = dragSrcElement.getBoundingClientRect();
+    let hero = document.querySelector('#gameBoard .enemy .hero').getBoundingClientRect();
+    if ((rectDrag.right < hero.right+29) && (rectDrag.left > hero.left-35) && (rectDrag.bottom < hero.bottom+35) && (rectDrag.top > rectDrag.top-9)) {
+        console.log('attack');
+        console.log(document.querySelector('#gameBoard .enemy .hero'));
+        heroAttack = false;
+    }
+    for (let i = 0; i < enemies.length; i++){
+        let enemy = enemies[i].getBoundingClientRect();
+        if ((rectDrag.right < enemy.right+30) && (rectDrag.left > enemy.left-30) && (rectDrag.bottom < enemy.bottom+50) && (rectDrag.top > enemy.top-50)) {
+            console.log('attack');
+            console.log(enemies[i]);
+            heroAttack = false;
+        }
+    }
+    try{
+        dragSrcElement.parentElement.removeChild(dragSrcElement);
+        if (heroAttack === false){
+            deactivateHeroAttack();
+            let oldDurability = document.querySelector('#gameBoard .you .weapon ul li .durability').innerHTML;
+            document.querySelector('#gameBoard .you .weapon ul li .durability').innerHTML = oldDurability -1;
+        }
+    } catch (err){
+        console.log('nothing can be removed' + err);
+    }
+    document.removeEventListener("touchmove", movingOfDragElement, false);
+    document.removeEventListener("mousemove", movingOfDragElement, false);
+    document.removeEventListener("mouseup", attackEnd, false);
+    document.removeEventListener("touchend", attackEnd, false);
+    // TODO fetch
 }
 
 function attack() {
@@ -953,3 +1159,4 @@ function destroyed() {
     // win || lose
     // discard card
 }
+

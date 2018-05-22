@@ -32,7 +32,7 @@
 }
 
 
-#deckbuilder #firstadd {
+#deckbuilder #firstAdd {
     text-align: center;
     line-height: 5vh;
     position: absolute;
@@ -255,12 +255,10 @@
 }
 
 .cardInDeck figure{
-    -webkit-user-drag: element;
     width: 23vh;
     display: inline-block;
 }
 .chosenCards figure{
-    -webkit-user-drag: element;
     width: 11vh;
     display: inline-block;
 }

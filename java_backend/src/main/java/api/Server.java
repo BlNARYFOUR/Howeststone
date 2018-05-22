@@ -14,7 +14,7 @@ public class Server {
         this.port = port;
     }
 
-    public void start() {
+    private void start() {
         final Javalin server = Javalin.create()
                 .port(port)
                 .start();
@@ -26,4 +26,5 @@ public class Server {
         new Server(4242).start();
         LOGGER.debug("server started");
     }
+
 }

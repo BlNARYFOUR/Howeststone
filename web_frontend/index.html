@@ -36,7 +36,7 @@
 <body>
 
 <audio id="mainMenuMusic" autoplay loop>
-    <source src="assets/media/tavernAmbienceMusic.mp3" type="audio/mpeg">
+    <source src="assets/media/menu_howeststone.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
 
@@ -155,24 +155,24 @@
             <p id="cardAmount">30/30</p>
         </div>
         <ul id="deck"></ul>
-        <a id="firstadd" href="#">+</a>
-        <a id="save" href="#">SAVE</a>
+        <a id="firstAdd" href="#">+</a>
+        <a class="saveButton" id="save" href="#">SAVE</a>
     </header>
     <div class="main">
         <ul id="cards"></ul>
-        <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
+        <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#" id="newDeck">+</a></li></ul>
     </div>
     <div class="save hidden">
         <label for="deckName">You're deck is not yet complete<br/> would you like to save it?</label>
         <input type="text" name="deckName" id="deckName" placeholder="Deck 01">
-        <ul><li><a href="#">save</a></li>
-            <li><a href="#">delete</a></li>
+        <ul><li><a href="#" class="saveButton">save</a></li>
+            <li><a href="#" id="deleteDeck">delete</a></li>
             <li><a href="#">back</a></li></ul>
     </div>
     <aside>
+        <input id="search" type="text" placeholder="search"/>
+        <label id="sortlabel" for="sort">sort</label>
         <form>
-            <input id="search" type="text" placeholder="search"/>
-            <label id="sortlabel" for="sort">sort</label>
             <select id="sort">
                 <option value="alfaz">Alfabetic (a->z)</option>
                 <option value="alfza">Alfabetic (z->a)</option>
@@ -188,7 +188,7 @@
                     <label for="all">All Useable Cards</label>
                     <input type="radio" name="specificCards" value="Mage" id="mage"/>
                     <label for="mage">Mage</label>
-                    <input type="radio" name="specificCards" value="Neutral" id="paladin"/>
+                    <input type="radio" name="specificCards" value="Paladin" id="paladin"/>
                     <label for="paladin">Paladin</label>
                     <input type="radio" name="specificCards" value="Neutral" id="neutral"/>
                     <label for="neutral">Neutral</label>
@@ -263,13 +263,24 @@
                 <!-- leave empty -->
             </li>
 
+            <li class="weapon">
+                <ul>
+                    <li class="EX1_409t" style="background: url('http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_409t.png') center 23% / 176% no-repeat;"><span class="attack">1</span><span class="durability">3</span>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="heroPower">
+                <span style="background-color: rgba(0,0,0,0.7)"></span>
+            </li>
+
             <li class="deck">
                 <!-- leave empty -->
             </li>
 
             <li class="playingField">
                 <ul>
-                    <li class="CS2_059" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png") center 23% / 176% no-repeat;'></li><li class="EX1_319" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png") center 23% / 176% no-repeat;'></li><li class="CS2_188" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png") center 23% / 176% no-repeat;'></li><li class="EX1_012" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png") center 23% / 176% no-repeat;'><span class="legendary"></span></li>
+                    <li class="CS2_059" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span></li><li class="EX1_319" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span></li><li class="CS2_188" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span></li><li class="EX1_012" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span><span class="legendary"></span></li>
                 </ul>
             </li>
         </ul>
@@ -279,16 +290,6 @@
                 <ul>
                     <!-- must be generated in JS -->
                     <!--
-                    <li draggable="true">Card 1</li>
-                    <li draggable="true">Card 2</li>
-                    <li draggable="true">Card 3</li>
-                    <li draggable="true">Card 4</li>
-                    <li draggable="true">Card 5</li>
-                    <li draggable="true">Card 6</li>
-                    <li draggable="true">Card 7</li>
-                    <li draggable="true">Card 8</li>
-                    <li draggable="true">Card 9</li>
-                    <li draggable="true">Card 10</li>
                     -->
                 </ul>
             </li>
@@ -308,8 +309,15 @@
             </li>
 
             <li class="weapon">
-                <!-- leave empty -->
+                <ul>
+                    <!-- leave empty -->
+                </ul>
             </li>
+
+            <li class="heroPower">
+                <span style="background-color: rgba(0,0,0,0.7)"></span>
+            </li>
+
             <li class="deck">
                 <!-- leave empty -->
             </li>
