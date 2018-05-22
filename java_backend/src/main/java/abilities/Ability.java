@@ -1,5 +1,5 @@
 package abilities;
 
-public class Ability {
+public interface Ability {
 
 }

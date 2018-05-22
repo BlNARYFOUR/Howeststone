@@ -1,6 +1,6 @@
 package abilities;
 
-public class Charge {
+public class Charge implements Ability {
     private boolean exhausted = false;
 
 
