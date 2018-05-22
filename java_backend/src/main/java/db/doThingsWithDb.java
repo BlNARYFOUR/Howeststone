@@ -1,4 +1,4 @@
-package be.howest.ti.threebeesandme.howeststone.db;
+package db;
 
 import java.sql.*;
 

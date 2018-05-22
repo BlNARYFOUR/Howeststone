@@ -1,4 +1,4 @@
-package be.howest.ti.threebeesandme.howeststone.db;
+package db;
 
 public class SqlStatements {
     public static final String DROP_DATABASE =
