@@ -6,12 +6,15 @@ import io.javalin.Context;
 import io.javalin.Javalin;
 import io.javalin.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Routes {
 
     Routes(final Javalin server) {
         // case sensitive
         server.get("/API/getAllCards", this::getAllCards);
-        server.get("/", this::handleRoot);
         //server.get("/API/getAllCards", this::getAllCards);
 
         // GAME BOARD
@@ -37,18 +40,26 @@ class Routes {
         //TODO sort server.post("threebeesandme/post/deckbuilder/sort?by=", null);
         server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
         server.get("/threebeesandme/howeststone/get/heroanddeckselector/heroes", this::loadHeroes);
+        server.post("/threebeesandme/howeststone/post/heroanddeckselector/hero", this::setHero);
+        server.get("/threebeesandme/howeststone/get/heroanddeckselector/decks", this::loadDeck);
     }
 
-    private void loadHeroes(Context context) {
-        String[] heroes = {"mage", "paladin"};
-        context.json(heroes);
-    }
+
 
     Game howeststone = new Game();
 
-    private void handleRoot(final Context context) {
-        context.result("This is the HowestStone API, This API is designed so you can play HowestStone on browser :D");
-
+    private void loadHeroes(Context context) {
+        context.json(howeststone.getHeroNames());
+    }
+    private void setHero(Context context) {
+        Player you = new Player();
+        you.setHero(context.body());
+        howeststone.addYou(you);
+        context.json(howeststone.getYou().getHero().getHeroName());
+    }
+    private void loadDeck(Context context) {
+        System.out.println(howeststone.getYou());
+        context.json(howeststone.getYou().getHero().getDeckNames());
     }
 
     // GAME BOARD

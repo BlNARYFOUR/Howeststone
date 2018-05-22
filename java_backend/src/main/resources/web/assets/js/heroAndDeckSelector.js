@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     loadHeroes();
-    loadDecks();
 
     document.getElementById('gotoDeckSelector').addEventListener('click', gotoDeckSelector);
     document.getElementById('playGame').addEventListener('click', playGame);
@@ -56,7 +55,6 @@ function handleSelectedDeck(e) {
 }
 
 function loadDecks() {
-    /*
     fetch('threebeesandme/howeststone/get/heroanddeckselector/decks', {
         method: 'GET'
     })
@@ -71,9 +69,9 @@ function loadDecks() {
     .catch(function(err) {
         console.log("Error: Could not load the heroes :'(");
     });
-    */
 
-    showDecks(["Some Deck :)", "Deck 1", "Deck 2", "OP 1 shot", "Noob deck"]);
+
+    //showDecks(["Some Deck :)", "Deck 1", "Deck 2", "OP 1 shot", "Noob deck"]);
 }
 
 function showHeroes(heroes) {
@@ -122,9 +120,6 @@ function loadHeroes() {
     .catch(function(err) {
         console.log("Error: Could not load the heroes :'(");
     });
-
-
-    //showHeroes(["Mage", "Paladin"]);    // TODO: Must be replaced later by 'result'
 }
 
 function handleSelectedHero(e) {
@@ -146,37 +141,37 @@ function handleSelectedHero(e) {
 }
 
 function gotoDeckSelector() {
+    let heroName = document.querySelector("#heroSelector .selectedHeroName").innerText;
+    console.log(sendSelectedHero(heroName));
+    loadDecks();
+
     document.getElementById('deckSelector').className = "";
     document.getElementById('heroSelector').className = "hidden";
 
-    let heroName = document.querySelector("#heroSelector .selectedHeroName").innerText;
 
-    sendSelectedHero(heroName);
 }
 
 function sendSelectedHero(heroName) {
     console.log("Send selected hero: " + heroName);
-
-    /*
-    fetch('threebeesandme/howeststone/post/heroanddeckselector/hero', {
+    fetch('/threebeesandme/howeststone/post/heroanddeckselector/hero', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'playerHero': heroName                   // TODO: IMPORTANT!!!
-        }
+        body: heroName
     })
     .then(function(res) {
-        if(res.ok === true)
-            return res.json();
+        if(res.ok === true){
+            return res.json;
+        }
     })
     .then(function(text) {
         let result = text;
         console.log(result);
+        return result;
+
     })
     .catch(function(err) {
         console.log("Error: Could not send the selected hero :'(");
     });
-    */
+
 }
 
 function playGame() {
