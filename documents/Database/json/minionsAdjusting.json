@@ -2411,7 +2411,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "allOther",
+        "target": "allOtherCharacters",
         "value": "-2"
       }
     ]
@@ -4166,7 +4166,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "allOther",
+        "target": "allOtherCharacters",
         "value": "-1"
       }
     ]
