@@ -30,4 +30,7 @@ public class SqlStatements {
 
     public static String INSERT_MECHANIC =
             "INSERT INTO `howeststone`.`Mechanics` (`mechanicType`) VALUES (?)";
+
+    public static String INSERT_CARD =
+            "INSERT INTO `howeststone`.`Cards` (`cardName`, `cardType`, `img`, `rarity`, `health`, `attack`, `manaCost`, `durability`, `heroId`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 }

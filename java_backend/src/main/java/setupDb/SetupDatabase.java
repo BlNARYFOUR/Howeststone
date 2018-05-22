@@ -97,6 +97,10 @@ public class SetupDatabase {
         System.out.println(ColorFormats.blue("mechanics have been added!"));
     }
 
+    private void addCardsToDb() {
+
+    }
+
     private void listAllMechanicTargets() {
         Set<String> mechanics = new HashSet<>();
 
@@ -129,6 +133,41 @@ public class SetupDatabase {
 
     private void insertHero(String hero) {
         insertSingleValue(hero, SqlStatements.INSERT_HERO, "hero");
+    }
+
+    private void insertCard(String name, String type, String img, String rarity, int attack, int health, int manaCost, int durability, int heroId) {
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_CARD,
+                        Statement.RETURN_GENERATED_KEYS)
+        ) {
+            stmt.setString(1, name);
+            stmt.setString(2, type);
+            stmt.setString(3, img);
+            stmt.setString(4, rarity);
+            stmt.setInt(5, attack);
+            stmt.setInt(6, health);
+            stmt.setInt(7, manaCost);
+            stmt.setInt(8, durability);
+            stmt.setInt(9, heroId);
+            final int AFFECTED_ROWS = stmt.executeUpdate();
+
+            if (AFFECTED_ROWS == 0) {
+                throw new SQLException("No card created: no rows affected.");
+            }
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    final long ID = rs.getLong(1);
+                    System.out.printf("\t* '%s' now has ID %d\n", name, ID);
+                } else {
+                    throw new SQLException("No card created: no ID obtained.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void insertSingleValue(String value, String statement, String name) {
@@ -174,17 +213,19 @@ public class SetupDatabase {
         return addSubItemsToSet(jsonArray, prevFoundMechanicValues, "mechanics", "value");
     }
 
+
+
     private Set<String> addSubItemsToSet(JSONArray jsonArray, Set<String> prevFound, String item, String subItem) {
         for (Object obj : jsonArray) {
             JSONObject jsonObject = (JSONObject) obj;
             //noinspection unchecked
-            JSONArray abilityList = (JSONArray) jsonObject.getOrDefault(item, null);
+            JSONArray itemList = (JSONArray) jsonObject.getOrDefault(item, null);
 
-            if(abilityList != null) {
-                for (Object ability : abilityList) {
-                    JSONObject jsonAbility = (JSONObject) ability;
+            if(itemList != null) {
+                for (Object subItemObj : itemList) {
+                    JSONObject jsonAbility = (JSONObject) subItemObj;
                     //noinspection unchecked
-                    prevFound.add(jsonAbility.getOrDefault(subItem, "<NULL>").toString());
+                    prevFound.add(jsonAbility.getOrDefault(subItem, "NULL").toString());
                 }
             }
         }

@@ -31,6 +31,7 @@ CREATE TABLE Cards (
         health INT(2),
         attack INT(2),
         manaCost INT(2) NOT NULL,
+        durability INT(2),
         heroId INT(2),
         CONSTRAINT pk_cards PRIMARY KEY(cardId),
         CONSTRAINT fk_cards FOREIGN KEY(heroId) REFERENCES Heroes(heroId)
