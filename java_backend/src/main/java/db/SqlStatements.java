@@ -5,10 +5,13 @@ public class SqlStatements {
             "SELECT deckName, heroId FROM Decks;";
 
     public static final String SELECT_HEROES =
-            "SELECT * FROM .Decks;";
+            "SELECT * FROM howeststone.Decks;";
 
     public static final String SELECT_CARDS =
             "SELECT * FROM howeststone.Decks;";
+
+    public static final String SELECT_HERO_ID =
+            "SELECT heroId FROM howeststone.Heroes WHERE heroName = ?";
 
     public static final String SELECT_CARDSINDECK =
             "SELECT * FROM howeststone.Decks;";
@@ -32,5 +35,5 @@ public class SqlStatements {
             "INSERT INTO `howeststone`.`Mechanics` (`mechanicType`) VALUES (?)";
 
     public static String INSERT_CARD =
-            "INSERT INTO `howeststone`.`Cards` (`cardName`, `cardType`, `img`, `rarity`, `health`, `attack`, `manaCost`, `durability`, `heroId`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO `howeststone`.`Cards` (`cardName`, `cardType`,`race` ,`img`, `rarity`, `health`, `attack`, `manaCost`, `durability`, `heroId`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 }

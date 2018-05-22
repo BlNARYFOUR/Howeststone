@@ -23,7 +23,7 @@ public class SetupDatabase {
     private static final String MINIONS_LOCATION = "json/minions.json";
     private static final String WEAPONS_LOCATION = "json/weapons.json";
 
-    private static final String[] HEROES = {"Mage", "Paladin"};
+    private static final String[] HEROES = {"Neutral", "Mage", "Paladin"};
 
     private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
     private JSONArray spellList;
@@ -46,6 +46,7 @@ public class SetupDatabase {
         addMechanicsToDb();
         listAllMechanicTargets();
         listAllMechanicValues();
+        addCardsToDb();
     }
 
     private void addAbilitiesToDb() {
@@ -98,7 +99,52 @@ public class SetupDatabase {
     }
 
     private void addCardsToDb() {
+        System.out.println("\nAdding cards...");
+        addCardFromJSONArray(spellList);
+        addCardFromJSONArray(minionList);
+        addCardFromJSONArray(weaponList);
+        System.out.println(ColorFormats.blue("cards have been added!"));
+    }
 
+    private void addCardFromJSONArray(JSONArray cards) {
+        String name;
+        String type;
+        String race;
+        String img;
+        String rarity;
+        int attack;
+        int health;
+        int manaCost;
+        int durability;
+        int heroId = 0;
+
+        for (Object card : cards) {
+            JSONObject jsonCard = (JSONObject) card;
+
+            //noinspection unchecked
+            name = jsonCard.getOrDefault("name", "NULL").toString();
+            //noinspection unchecked
+            type = jsonCard.getOrDefault("type", "NULL").toString();
+            //noinspection unchecked
+            race = jsonCard.getOrDefault("race", "NULL").toString();
+            //noinspection unchecked
+            img = jsonCard.getOrDefault("img", "NULL").toString();
+            //noinspection unchecked
+            rarity = jsonCard.getOrDefault("rarity", "NULL").toString();
+            //noinspection unchecked
+            attack = Integer.parseInt(jsonCard.getOrDefault("attack", 0).toString());
+            //noinspection unchecked
+            health = Integer.parseInt(jsonCard.getOrDefault("health", 0).toString());
+            //noinspection unchecked
+            manaCost = Integer.parseInt(jsonCard.getOrDefault("cost", 0).toString());
+            //noinspection unchecked
+            durability = Integer.parseInt(jsonCard.getOrDefault("durability", 0).toString());
+            //noinspection unchecked
+            heroId = getHeroId(jsonCard.getOrDefault("playerClass", "NULL").toString());
+
+            if(0 <= heroId)
+                insertCard(name, type, race, img, rarity, attack, health, manaCost, durability, heroId);
+        }
     }
 
     private void listAllMechanicTargets() {
@@ -135,7 +181,7 @@ public class SetupDatabase {
         insertSingleValue(hero, SqlStatements.INSERT_HERO, "hero");
     }
 
-    private void insertCard(String name, String type, String img, String rarity, int attack, int health, int manaCost, int durability, int heroId) {
+    private void insertCard(String name, String type,String race ,String img, String rarity, int attack, int health, int manaCost, int durability, int heroId) {
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_CARD,
@@ -143,13 +189,14 @@ public class SetupDatabase {
         ) {
             stmt.setString(1, name);
             stmt.setString(2, type);
-            stmt.setString(3, img);
-            stmt.setString(4, rarity);
-            stmt.setInt(5, attack);
-            stmt.setInt(6, health);
-            stmt.setInt(7, manaCost);
-            stmt.setInt(8, durability);
-            stmt.setInt(9, heroId);
+            stmt.setString(3, race);
+            stmt.setString(4, img);
+            stmt.setString(5, rarity);
+            stmt.setInt(6, attack);
+            stmt.setInt(7, health);
+            stmt.setInt(8, manaCost);
+            stmt.setInt(9, durability);
+            stmt.setInt(10, heroId);
             final int AFFECTED_ROWS = stmt.executeUpdate();
 
             if (AFFECTED_ROWS == 0) {
@@ -197,6 +244,28 @@ public class SetupDatabase {
         }
     }
 
+    private int getHeroId(String heroName) {
+        int id = -1;
+
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.SELECT_HERO_ID);
+        ){
+            stmt.setString(1, heroName);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    id = rs.getInt("heroId");
+                } else {
+                    System.out.println(ColorFormats.red("\t* No ID found for "+ heroName +"!"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
+
     private Set<String> addAbilitiesToSet(JSONArray jsonArray, Set<String> prevFoundAbilities) {
         return addSubItemsToSet(jsonArray, prevFoundAbilities, "abilities", "name");
     }
@@ -212,8 +281,6 @@ public class SetupDatabase {
     private Set<String> addMechanicValueToSet(JSONArray jsonArray, Set<String> prevFoundMechanicValues) {
         return addSubItemsToSet(jsonArray, prevFoundMechanicValues, "mechanics", "value");
     }
-
-
 
     private Set<String> addSubItemsToSet(JSONArray jsonArray, Set<String> prevFound, String item, String subItem) {
         for (Object obj : jsonArray) {

@@ -26,6 +26,7 @@ CREATE TABLE Cards (
 	cardId INT(3) AUTO_INCREMENT NOT NULL,
         cardName VARCHAR(45) NOT NULL,
         cardType VARCHAR(45) NOT NULL,
+        race VARCHAR(45),
         img VARCHAR(100) NOT NULL,
         rarity VARCHAR(45) NOT NULL,
         health INT(2),
