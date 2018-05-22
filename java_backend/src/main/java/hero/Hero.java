@@ -2,6 +2,10 @@ package hero;
 
 import cards.CardCollection;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 public class Hero {
     private int mageAttack;
     private int health;
@@ -57,4 +61,13 @@ public class Hero {
         // check if dead here? or with function of lives decrease
     }
 
+    public List<String> getDeckNames() {
+        List<String> mocked = new ArrayList<String>();
+
+        mocked.add("Standard");
+        mocked.add("Deck 1");
+        mocked.add("Deck 2");
+
+        return mocked;
+    }
 }

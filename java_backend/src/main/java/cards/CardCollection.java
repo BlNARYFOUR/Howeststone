@@ -15,29 +15,59 @@ public class CardCollection {
     public CardCollection(String name) {
         this.cards = new ArrayList<Card>();
         this.name = name;
-        /*if (name.equals("Standard")){
+        if (name.equals("Standard")){
             for(int i = 0; i < 30; i ++){
                 Card card = new Card();
                 cards.add(card);
             }
-        }else{
-            // TODO check if deck exist
-        }*/
+            // underneath or function in game shuffleDecks() or both?
+            shuffle();
+        }
     }
-
-    private void shuffleCardCollection(){
-        // beneath or with parameter ?
+    private void shuffle(){
         Collections.shuffle(cards);
     }
 
+    public Card drawCard() {
+        final Card DRAW = cards.get(1);
+        cards.remove(1);
+        return DRAW;
+    }
+    
+    public void addCards(List<String> replace) {
+        for (String cardID : replace) {
+            addCard(Integer.parseInt(cardID));
+        }
+    }
+
+    public void addCard(int cardID) {
+        Card card = new Card(cardID);
+        cards.add(card);
+        shuffle();
+    }
+
+    public void removeCard(int cardID) {
+        Card card = new Card(cardID);
+        cards.remove(card);
+    }
+
+
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder();
-        res.append(name);
+        final StringBuilder RES = new StringBuilder();
+        RES.append(name);
         for (Card card : cards) {
-            res.append("\nID: ").append(card);
+            RES.append("\nID: ").append(card);
         }
-        res.append("\n").append(cards.size());
-        return String.valueOf(res);
+        RES.append("\n").append(cards.size());
+        return String.valueOf(RES);
+    }
+
+    public String getNameOfCardCollection() {
+        return name;
+    }
+
+    public List<Card> getCards() {
+        return cards;
     }
 }

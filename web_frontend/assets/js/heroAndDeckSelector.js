@@ -57,7 +57,7 @@ function handleSelectedDeck(e) {
 
 function loadDecks() {
     /*
-    fetch('threebeesandme/howeststone/get/heroanddeckselector/decks', {
+    fetch('threebeesandme/get/heroanddeckselector/decks', {
         method: 'GET'
     })
     .then(function(res) {
@@ -158,7 +158,7 @@ function sendSelectedHero(heroName) {
     console.log("Send selected hero: " + heroName);
 
     /*
-    fetch('threebeesandme/howeststone/post/heroanddeckselector/hero', {
+    fetch('threebeesandme/post/heroanddeckselector/hero', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -218,7 +218,7 @@ function sendSelectedDeck(deckName) {
     console.log("Send selected deck: " + deckName);
 
     /*
-    fetch('threebeesandme/howeststone/post/heroanddeckselector/deck', {
+    fetch('threebeesandme/post/heroanddeckselector/deck', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

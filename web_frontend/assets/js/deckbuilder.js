@@ -127,6 +127,16 @@ function init() {
     
     document.querySelector('#deckbuilder aside form').addEventListener('submit', donNotSubmit);
     document.getElementById('search').addEventListener('input', searchTest);
+    
+    document.querySelector('.saveButton').addEventListener('click', saveDeck);
+    document.querySelector('#newDeck').addEventListener('click', newDeck);
+    document.querySelector('#deleteDeck').addEventListener('click', deleteDeck);
+    let heroesDeckbuilder = document.querySelectorAll('#deckbuilder #hero a');
+
+    for (let i = 0; i < heroesDeckbuilder.length; i++) {
+        heroesDeckbuilder[i].addEventListener('click', selectHero);
+    }
+
     document.getElementById('search').addEventListener('input', search);
     document.getElementById('sort').addEventListener('change', sort);
     document.getElementById('firstFilter').addEventListener('change',filterCards);
@@ -134,6 +144,7 @@ function init() {
     document.getElementById('thirdFilter').addEventListener('change',filterCards);
     document.getElementById('fourthFilter').addEventListener('change',filterCards);
     document.querySelector('#firstAdd').addEventListener('click', firstAdd);
+
 
     let myCards = MOCKMYCARDS() ;
     MockCardsToDeckBuilder(myCards);
@@ -256,7 +267,99 @@ function removeCardFromDeck(card) { //remove eventlistener niet vergeten (nu nog
     } else {
         card.parentNode.remove();
     }
-    checkAllCards();
+    checkallcards();
+}
+
+function saveDeck() {
+    /*fetch('http://localhost:4242/threebeesandme/post/deckbuilder/savedeck',{
+        method: 'POST',
+        mode: 'no-cors'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Deck is saved");
+        })
+        .catch(function(err) {
+            console.log("Error: couldn't save deck");
+        });*/
+}
+
+function newDeck() {
+    /*fetch('http://localhost:4242/threebeesandme/post/deckbuilder/newdeck',{
+        method: 'POST',
+        mode: 'no-cors'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("New deck is ready to be build");
+        })
+        .catch(function(err) {
+            console.log("Error: couldn't add new deck");
+        });*/
+}
+
+function deleteDeck() {
+    /*fetch('http://localhost:4242/threebeesandme/post/deckbuilder/deleteDeck',{
+        method: 'POST',
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Deck is deleted");
+        })
+        .catch(function(err) {
+            console.log("Error: couldn't delete deck");
+        });*/
+}
+
+function selectHero(e) {
+    let hero = this.innerText.toLowerCase();
+    sendSelectedHero(hero);
+
+}
+
+function sendSelectedHero(heroName) {
+    console.log("Send selected hero: " + heroName);
+
+    /*
+    fetch('http://localhost:4242/threebeesandme/post/deckbuilder/selecthero', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'playerHero': heroName                   // TODO: IMPORTANT!!!
+        }
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+    .then(function(text) {
+        let result = text;
+        console.log(result);
+        updateDecks();
+    })
+    .catch(function(err) {
+        console.log("Error: Could not send the selected hero :'(");
+    });
+    */
+
+    // TODO: updateDecks()
+}
+
+function nodetailOfCard(e){
+    this.lastChild.lastChild.style.display = 'none';
 }
 
 function detailOfCard(e) {
@@ -291,7 +394,7 @@ function sort() {
 
         console.log(sortValue);
 
-        /*fetch('threebeesandme/howeststone/post/deckbuilder/sort?by='+sortValue, {
+        /*fetch('threebeesandme/post/deckbuilder/sort?by='+sortValue, {
                 method: 'post',
             })
             .then(function(res) {
@@ -353,7 +456,7 @@ function filterCards() {
 
     console.log(filterArray);
 
-    /*fetch('threebeesandme/howeststone/post/deckbuilder/filterCards', {
+    /*fetch('threebeesandme/post/deckbuilder/filterCards', {
         method: 'post',
     })
         .then(function(res) {

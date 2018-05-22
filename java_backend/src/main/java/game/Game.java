@@ -1,11 +1,6 @@
 package game;
 
-import cards.CardCollection;
 import hero.Hero;
-import sun.security.krb5.internal.crypto.DesMacCksumType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Game {
     // TODO: MOCKERS
@@ -15,25 +10,16 @@ public class Game {
     private Player you;
     private Player enemy;
     private int turnTime;
+    private String activePlayer;
     /*private Hero you;
     private CardCollection deck;*/
 
-    public void setHero(String hero) {
-        you = new Player();
-        you.setHero(new Hero(hero));
-    }
 
-    public Hero getHero() {
+    public Hero getYourHero() {
         return you.getHero();
     }
 
-    public void setEnemy(String hero) {
-        enemy = new Player();
-        enemy.setHero(new Hero(hero));
-        enemy.setDeck("Standard");
-    }
-
-    public Hero getEnemy() {
+    public Hero getEnemyHero() {
         return enemy.getHero();
     }
 
@@ -47,26 +33,49 @@ public class Game {
         return "Standard";
     }
 
-    public void setDeck(String deckName) {
+    public void setYourDeck(String deckName) {
         // TODO check if deck exist
         you.setDeck(deckName);
     }
 
-    /*public CardCollection getDeck() {
-        return deck;
-    }*/
+    @Override
+    public String toString() {
 
-    public List<String> getDeckNames() {
-        List<String> mocked = new ArrayList<String>();
-
-        mocked.add("Standard");
-        mocked.add("Deck 1");
-        mocked.add("Deck 2");
-
-        return mocked;
+        return "\nPlayer: " + you.getHero() + "\n     VS" + "\nEnemy: " + enemy.getHero();
     }
 
     public Player getYou() {
         return you;
+    }
+
+    public Player getEnemy(){
+        return enemy;
+    }
+    public void addYou(Player you) {
+        this.you = you;
+    }
+
+    public void addEnemy(Player enemy) {
+        this.enemy = enemy;
+    }
+
+    public void shuffleDecks() {
+
+    }
+
+    public void setActivePlayer(String activePlayer) {
+        this.activePlayer = activePlayer;
+    }
+
+    public String getActivePlayer() {
+        return activePlayer;
+    }
+
+    public int getTurnTime() {
+        return turnTime;
+    }
+
+    public void setTurnTime(int turnTime) {
+        this.turnTime = turnTime;
     }
 }

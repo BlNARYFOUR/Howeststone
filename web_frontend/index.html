@@ -154,23 +154,23 @@
         </div>
         <ul id="deck"></ul>
         <a id="firstAdd" href="#">+</a>
-        <a id="save" href="#">SAVE</a>
+        <a class="saveButton" id="save" href="#">SAVE</a>
     </header>
     <div class="main">
         <ul id="cards"></ul>
-        <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#">+</a></li></ul>
+        <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#" id="newDeck">+</a></li></ul>
     </div>
     <div class="save hidden">
         <label for="deckName">You're deck is not yet complete<br/> would you like to save it?</label>
         <input type="text" name="deckName" id="deckName" placeholder="Deck 01">
-        <ul><li><a href="#">save</a></li>
-            <li><a href="#">delete</a></li>
+        <ul><li><a href="#" class="saveButton">save</a></li>
+            <li><a href="#" id="deleteDeck">delete</a></li>
             <li><a href="#">back</a></li></ul>
     </div>
     <aside>
+        <input id="search" type="text" placeholder="search"/>
+        <label id="sortlabel" for="sort">sort</label>
         <form>
-            <input id="search" type="text" placeholder="search"/>
-            <label id="sortlabel" for="sort">sort</label>
             <select id="sort">
                 <option value="alfaz">Alfabetic (a->z)</option>
                 <option value="alfza">Alfabetic (z->a)</option>

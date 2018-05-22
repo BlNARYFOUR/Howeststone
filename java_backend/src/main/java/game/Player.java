@@ -3,11 +3,13 @@ package game;
 import cards.CardCollection;
 import hero.Hero;
 
+import java.util.List;
+
 public class Player {
     private Hero hero;
-    CardCollection cardsInHand;
-    CardCollection cardsOnPlayingField;
-    CardCollection cardsInDeck;
+    private CardCollection cardsInHand;
+    private CardCollection cardsOnPlayingField;
+    private CardCollection cardsInDeck;
 
     public Hero getHero() {
         return hero;
@@ -17,20 +19,45 @@ public class Player {
         this.hero = hero;
     }
 
+    public void setHero(String heroName){
+        this.hero = new Hero(heroName);
+    }
+
+    public CardCollection getCardsInHand() {
+        return cardsInHand;
+    }
+
     public Player() {
 
     }
 
-    void beginTurn() {
+    public void beginTurn() {
+
         // +1 mana until 10
         // draw card
     }
 
-    public CardCollection setDeck(String deckName) {
-        return new CardCollection(deckName);
+    @Override
+    public String toString() {
+        // deck hero
+        // mss nog extra zoals health mana
+        return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
     }
 
-    public Object getDeck() {
+    public void setDeck(String deckName) {
+        cardsInDeck = new CardCollection(deckName);
+    }
+
+    public CardCollection getDeck() {
         return cardsInDeck;
+    }
+
+    public void setCardsInHand(CardCollection cardsInHand) {
+        this.cardsInHand = cardsInHand;
+    }
+
+    public void setCardsInHand(List<String> cardsInHandList) {
+        cardsInHand = new CardCollection();
+        cardsInHand.addCards(cardsInHandList);
     }
 }

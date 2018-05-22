@@ -15,6 +15,7 @@ function init() {
     setBackground();
     getRandomCardBack();
     //makeCardsFan("you", 1);
+    document.querySelector(".you .heroPower span").addEventListener('click', useHeroPower);
 }
 
 function setupGameBoard() {
@@ -29,7 +30,7 @@ function showOrHideBattleLog(e) {
 
 function loadBattleLog() {
     /*
-    fetch('threebeesandme/howeststone/get/gameboard/battlelog', {
+    fetch('http://localhost:4242/threebeesandme/get/gameboard/battlelog', {
         method: 'GET'
     })
     .then(function(res) {
@@ -53,6 +54,25 @@ function loadBattleLog() {
                     "Bert got torched",
                     "Step died of exhaustion",
                     "Brem got VICTORY"]);
+}
+
+function  useHeroPower() {
+    console.log('kaaaapow!');
+    fetch('http://localhost:4242/threebeesandme/get/useheropower',{
+           method: 'GET',
+        mode: 'no-cors'
+       })
+           .then(function(res) {
+               if(res.ok === true)
+                   return res.json();
+           })
+           .then(function(text) {
+               let result = text;
+               console.log("Heropower is used");
+           })
+           .catch(function(err) {
+               console.log("Error: Could not use heropower");
+           });
 }
 
 function showBattleLog(logArr) {
@@ -94,7 +114,7 @@ function stopTimeLeftCheck() {
 }
 
 function timeLeft() {
-    fetch('threebeesandme/howeststone/get/timeleft', {
+    fetch('http://localhost:4242/threebeesandme/get/timeleft', {
         method: 'GET'
     })
     .then(function(res) {
@@ -121,7 +141,7 @@ function endMyTurn(e) {
     stopBurnFuse();
 
     /*
-    fetch('threebeesandme/howeststone/post/endturn',{
+    fetch('http://localhost:4242/threebeesandme/post/endturn',{
         method: 'POST'
     })
         .then(function(res) {
@@ -205,8 +225,24 @@ function updateMyHero() {
 
 function updateHero(parent) {
     let heroName = "";
+    fetch('http://localhost:4242/threebeesandme/get/yourhero',{
+        method: 'get',
+        mode: 'no-cors'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("you're hero is" + result);
+        })
+        .catch(function(err) {
+            console.log("Error: Could not get hero");
+        });
 
-    // here will come a fetch to get the hero name
+
+    // TODO fetch heroname
     heroName = "mage";
 
     showHero(parent, heroName);
@@ -223,7 +259,7 @@ function showHero(parent, heroName) {
 function updateEnemyCards() {
     let amountOfCards = 0;
 
-    /* Here should come a fetch to get enemy amount of cards */
+    // TODO fetch for cardInEnemyHand and other info
     amountOfCards = 7;      // MOCK DATA
 
     updateCards(amountOfCards, "enemy", -1);
@@ -231,7 +267,7 @@ function updateEnemyCards() {
 }
 
 function updateMyCards() {
-    /* Here should come a fetch to get cardInMyHand data */
+    // TODO fetch for cardsInMyHand and other info
     myCards = MOCKMYCARDS();
 
     updateCards(myCards.length, "you", 1);
@@ -768,8 +804,8 @@ function addMinionToPlayingField(cardPlayed) {
     let cardAttack =returnAttackOfMyCard(itemThatIsBeingMoved);
     let cardHealth = returnHealthOfMyCard(itemThatIsBeingMoved);
     cardPlayed.innerHTML += `<span class="health">${cardHealth}</span><span class="attack">${cardAttack}</span>`;
-    cardPlayed.addEventListener("mousedown", attackStart);
-    cardPlayed.addEventListener("touchstart", attackStart);
+    cardPlayed.addEventListener("mousedown", loadAttackStart);
+    cardPlayed.addEventListener("touchstart", loadAttackStart);
 }
 
 function PlayingFieldEnd(dropZoneLi) {
@@ -938,11 +974,6 @@ dragSrcElement.addEventListener('click', visualiseAttack); */
 
 
 
-function endturn() {
-    // TODO fetch
-    // delete all class nonAttack
-}
-
 function visualiseAttack(e) {
     // check if a card has class nonAttack
     // check if their is one or more minions with taunt
@@ -952,8 +983,7 @@ function visualiseAttack(e) {
     console.log('cannot attack');
     attack();
 }
-function attackStart(e) {
-    // TODO fetch
+function attackStart() {
     let target = e.target;
     if (e.path[0].tagName === 'SPAN'){
         target = e.target.parentElement;
@@ -982,8 +1012,43 @@ function attackStart(e) {
     document.addEventListener("mouseup", attackEnd, false);
     document.addEventListener("touchend", attackEnd, false);
 }
+
+function loadAttackStart(e) {
+    fetch('http://localhost:4242/threebeesandme/get/gameboard/attackpermission',{
+        method: 'get'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            attackStart(result)
+            console.log("asking for attack permission has been send to server");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not send permission for attack");
+        });
+}
 function heroAttackStart(e) {
-    // TODO fetch + their is no need for two functions
+    // TODO Their is no need for two functions
+
+    fetch('http://localhost:4242/threebeesandme/post/gameboard/heroattackStart',{
+        method: 'GET'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("asking for attack permission has been send to server");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not send permission for attack");
+        });
+
+
     if (heroAttack === true){
         let target = e.target;
         if (e.path[0].tagName === 'SPAN'){
@@ -1094,3 +1159,4 @@ function destroyed() {
     // win || lose
     // discard card
 }
+
