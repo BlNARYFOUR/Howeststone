@@ -1164,7 +1164,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "3"
       }
     ]
@@ -2778,7 +2778,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "-1"
       }
     ]
@@ -3085,7 +3085,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "2"
       }
     ]
@@ -3366,7 +3366,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "-1"
       }
     ]
@@ -4044,7 +4044,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "-2"
       }
     ]

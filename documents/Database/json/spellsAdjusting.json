@@ -646,7 +646,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target":"target",
+        "target": "character",
         "value": "-5"
       },
       {
@@ -715,7 +715,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "8"
       },
       {
@@ -778,7 +778,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "-10"
       }
     ]
@@ -915,7 +915,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "-2"
       }
     ]
@@ -1004,7 +1004,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "-2"
       }
     ]
@@ -1341,7 +1341,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "6"
       }
     ]
@@ -1467,7 +1467,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "-2"
       },
       {
@@ -1673,7 +1673,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "-6"
       }
     ]
@@ -1705,7 +1705,7 @@
     "mechanics": [
       {
         "type": "health",
-        "target": "target",
+        "target": "character",
         "value": "-3"
       },
       {
