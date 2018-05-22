@@ -21,7 +21,7 @@ public class Display {
         chooseHero(howeststone);
         chooseDeck(howeststone);
         startGame(howeststone);
-        
+
         //howeststone.setYourDeck("Standard");
         //System.out.println(howeststone.getDeck());
         //Player you = new Player(howeststone.getYourHero());
@@ -148,10 +148,10 @@ public class Display {
             mostExpensiveCard = howeststone.getEnemy().getCardsInHand().getMostExpensiveCard();
             printGame(howeststone);
         }
-        //TODO use heroPower and attack with minions
 
         enemyMinionsAttack(howeststone);
-
+        // TODO check of je genoeg mana hebt voor de heropower + als het mage is: of er een target is
+        useHeroPower(howeststone, howeststone.getEnemy());
 
         // endTurn();
         // setCanAttack of all minions of enemy to true
@@ -163,8 +163,10 @@ public class Display {
         for (Card card: howeststone.getEnemy().getCardsOnPlayingField().getCards()) {
             int windfuryCounter = 1;
             while (card.getCanAttack() && windfuryCounter <= 2) {
+
+                //TODO maak functie die een random target kiest
                 // kies random minion/hero van speler ==> randomCardPlayer
-                //Card target = randomCardPlayer;
+                // Card target = randomCardPlayer;
                 // int health = target.getHealth (voor hieronder)
 
                 // val die aan (attack functie in classe minion)
@@ -188,6 +190,21 @@ public class Display {
                     windfuryCounter ++
                 }*/
             }
+        }
+    }
+
+    private void useHeroPower(Game howeststone, Player player) {
+        if (Objects.equals(player.getHero().getHeroName(), "Paladin")) {
+            //TODO replace silver hand recruit id
+            //player.getCardsOnPlayingField().addCard("Silver Hand Recruit");
+        } else {
+            // TODO choose if target is selected before or in this function
+            if (player == howeststone.getEnemy()) {
+                // chooseRandomTarget();
+            } else {
+                // select target
+            }
+            // damage target by 2
         }
     }
 
