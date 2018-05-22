@@ -150,7 +150,6 @@ public class Display {
         // endTurn();
         // yourTurn(howeststone);
         System.out.println(howeststone.getEnemy().getCardsOnPlayingField());
-
     }
 
 
