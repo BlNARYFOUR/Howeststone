@@ -149,9 +149,28 @@ public class Display {
             printGame(howeststone);
         }
         //TODO use heroPower and attack with minions
+
+        enemyMinionsAttack(howeststone);
+
         // endTurn();
         howeststone.setActivePlayer("You");
         System.out.println(howeststone.getEnemy().getCardsOnPlayingField());
+    }
+
+    private void enemyMinionsAttack(Game howeststone) {
+        for (Card card: howeststone.getEnemy().getCardsOnPlayingField().getCards()) {
+            /*while (card.getCanAttack()) {
+                kies random minion/hero van speler
+                val die aan
+                voer eventuele abilities uit
+                update health
+                voer dode kaarten af
+                update battlelog
+                if (!card.getCardAbilities.contains("windfury")) {
+                    card.setCanAttack(false)
+                }
+            }*/
+        }
     }
 
     private void yourTurn(Game howeststone) {
