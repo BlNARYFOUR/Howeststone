@@ -141,16 +141,25 @@ public class Display {
         howeststone.getEnemy().getCardsInHand().addCard(Integer.parseInt(howeststone.getYou().getDeck().drawCard().toString()));
         howeststone.getEnemy().setMana(howeststone.getEnemy().getMana()+1);
 
-        // enemy speelt altijd duurste kaarten eerst
+        // enemy speelt altijd duurste kaarten eerst:
         Card mostExpensiveCard = howeststone.getEnemy().getCardsInHand().getMostExpensiveCard();
         while (howeststone.getManaEnemy() >= mostExpensiveCard.getManaCost()) {
             playCard(mostExpensiveCard, howeststone);
             mostExpensiveCard = howeststone.getEnemy().getCardsInHand().getMostExpensiveCard();
+            printGame(howeststone);
         }
+        //TODO use heroPower and attack with minions
         // endTurn();
         howeststone.setActivePlayer("You");
         System.out.println(howeststone.getEnemy().getCardsOnPlayingField());
 
+    }
+
+    private void printGame(Game howeststone) {
+        System.out.println(ColorFormats.red("weapon/hero/mana/hand Enemy: ") + ColorFormats.green("NYI"));
+        System.out.println(ColorFormats.red("Playing Field Enemy: ") + ColorFormats.green(howeststone.getEnemy().getCardsOnPlayingField().toString()));
+        System.out.println(ColorFormats.red("Playing Field Player: ") + ColorFormats.green(howeststone.getYou().getCardsOnPlayingField().toString()));
+        System.out.println(ColorFormats.red("weapon/hero/mana/hand Player: ") + ColorFormats.green("NYI"));
     }
 
 
