@@ -8,8 +8,7 @@ import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class DisplayScreen {
     public static void main(String[] args) {
@@ -28,8 +27,8 @@ public class DisplayScreen {
             JSONArray minionList = getJSONList(MINIONS_LOCATION);
             JSONArray weaponList = getJSONList(WEAPONS_LOCATION);
 
-            //addAbilitiesToSet(spellList, abilities);
-            //addAbilitiesToSet(minionList, abilities);
+            addAbilitiesToSet(spellList, abilities);
+            addAbilitiesToSet(minionList, abilities);
             addAbilitiesToSet(weaponList, abilities);
 
             outputSet(abilities);
@@ -42,6 +41,7 @@ public class DisplayScreen {
     private Set<String> addAbilitiesToSet(JSONArray jsonArray, Set<String> prevFoundAbilities) {
         for (Object obj : jsonArray) {
             JSONObject jsonObject = (JSONObject) obj;
+            //noinspection unchecked
             JSONArray abilityList = (JSONArray) jsonObject.getOrDefault("abilities", null);
 
             if(abilityList != null) {
@@ -55,9 +55,13 @@ public class DisplayScreen {
         return prevFoundAbilities;
     }
 
-    private void outputSet(Set set) {
-        for (Object obj : set) {
-            System.out.println(obj.toString());
+    private void outputSet(Set<String> set) {
+        List<String> list = new ArrayList<>(set);
+
+        Collections.sort(list);
+
+        for (Object obj : list) {
+            System.out.println("\t- " + obj.toString());
         }
     }
 
@@ -65,7 +69,8 @@ public class DisplayScreen {
         JSONParser parser = new JSONParser();
 
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("json/weapons.json").getFile());
+        //noinspection ConstantConditions
+        File file = new File(classLoader.getResource(resourceLocation).getFile());
         Object obj = parser.parse(new FileReader(file));
 
         return (JSONArray) obj;
