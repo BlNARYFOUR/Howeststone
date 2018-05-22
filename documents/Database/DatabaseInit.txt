@@ -42,7 +42,7 @@ CREATE TABLE cardMechanics (
 	cardMechId INT (3) AUTO_INCREMENT NOT NULL,
         mechanicId INT(3) NOT NULL,
         target VARCHAR(45),
-        VALUE INT(3),
+        mechValue VARCHAR(45),
         CONSTRAINT pk_cardMechanics PRIMARY KEY(cardMechId),
         CONSTRAINT fk_cardMechanics FOREIGN KEY(mechanicId) REFERENCES Mechanics(mechanicId)
 )ENGINE = INNODB;
@@ -73,3 +73,7 @@ CREATE TABLE CardsInDecks (
         CONSTRAINT fk_CardsInDecks FOREIGN KEY(deckId) REFERENCES Decks(deckId),
         CONSTRAINT fk_CardsInDecks2 FOREIGN KEY(cardId) REFERENCES Cards(cardId)
 )ENGINE = INNODB;
+
+INSERT INTO howeststone.mechanics (mechanicType) VALUES ("none");
+
+INSERT INTO howeststone.cardmechanics (mechanicId, target, mechValue) VALUES (1, "none", "none");

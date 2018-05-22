@@ -107,19 +107,19 @@ public class SetupDatabase {
     }
 
     private void addCardFromJSONArray(JSONArray cards) {
-        String name;
-        String type;
-        String race;
-        String img;
-        String rarity;
-        int attack;
-        int health;
-        int manaCost;
-        int durability;
-        int heroId = 0;
-
         for (Object card : cards) {
             JSONObject jsonCard = (JSONObject) card;
+
+            String name;
+            String type;
+            String race;
+            String img;
+            String rarity;
+            int attack;
+            int health;
+            int manaCost;
+            int durability;
+            int heroId = 0;
 
             //noinspection unchecked
             name = jsonCard.getOrDefault("name", "NULL").toString();
@@ -142,8 +142,33 @@ public class SetupDatabase {
             //noinspection unchecked
             heroId = getHeroId(jsonCard.getOrDefault("playerClass", "NULL").toString());
 
-            if(0 <= heroId)
+            if(0 <= heroId) {
                 insertCard(name, type, race, img, rarity, attack, health, manaCost, durability, heroId);
+                addCardMechanicsToDb(jsonCard);
+            }
+        }
+    }
+
+    private void addCardMechanicsToDb(JSONObject card) {
+        //noinspection unchecked
+        JSONArray jsonMechanics = (JSONArray) card.getOrDefault("mechanics", null);
+
+        if(jsonMechanics != null) {
+            for (Object subItemObj : jsonMechanics) {
+                JSONObject jsonAbility = (JSONObject) subItemObj;
+                //noinspection unchecked
+                String mechanicType = jsonAbility.get("type").toString();
+                //noinspection unchecked
+                String target = jsonAbility.getOrDefault("target", "NULL").toString();
+                //noinspection unchecked
+                String value = jsonAbility.getOrDefault("value", "NULL").toString();
+
+                int id = getMechanicId(mechanicType);
+
+                if (0 <= id) {
+                    insertCardMechanic(id, target, value);
+                }
+            }
         }
     }
 
@@ -244,26 +269,63 @@ public class SetupDatabase {
         }
     }
 
+    private void insertCardMechanic(int mechanicId, String target, String value) {
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_CARD_MECHANIC,
+                        Statement.RETURN_GENERATED_KEYS)
+        ) {
+            stmt.setInt(1, mechanicId);
+            stmt.setString(2, target);
+            stmt.setString(3, value);
+            final int AFFECTED_ROWS = stmt.executeUpdate();
+
+            if (AFFECTED_ROWS == 0) {
+                throw new SQLException("No cardMechanic created: no rows affected.");
+            }
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    final long ID = rs.getLong(1);
+                    System.out.printf("\t* new cardMechanic now has ID %d\n", ID);
+                } else {
+                    throw new SQLException("No cardMechanic created: no ID obtained.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private int getHeroId(String heroName) {
-        int id = -1;
+        return getSingleInt(heroName, SqlStatements.SELECT_HERO_ID, "heroId");
+    }
+
+    private int getMechanicId(String mechanicType) {
+        return getSingleInt(mechanicType, SqlStatements.SELECT_MECHANIC_ID, "mechanicId");
+    }
+
+    private int getSingleInt(String value, String statement, String name) {
+        int num = -1;
 
         try (
                 Connection conn = db.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(SqlStatements.SELECT_HERO_ID);
+                PreparedStatement stmt = conn.prepareStatement(statement);
         ){
-            stmt.setString(1, heroName);
+            stmt.setString(1, value);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    id = rs.getInt("heroId");
+                    num = rs.getInt(name);
                 } else {
-                    System.out.println(ColorFormats.red("\t* No ID found for "+ heroName +"!"));
+                    System.out.println(ColorFormats.red("\t* No " + name + " found for "+ value +"!"));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return id;
+        return num;
     }
 
     private Set<String> addAbilitiesToSet(JSONArray jsonArray, Set<String> prevFoundAbilities) {
