@@ -788,26 +788,22 @@
     "abilities": [
       {
         "name": "Battlecry"
-      },
-      {
-        "name": "Turn End"
       }
     ],
     "mechanics": [
-
       {
         "type": "health",
-        "target": "randomCharacter",
+        "target": "randomOtherCharacter",
         "value": "-1"
       },
       {
         "type": "health",
-        "target": "randomCharacter",
+        "target": "randomOtherCharacter",
         "value": "-1"
       },
       {
         "type": "health",
-        "target": "randomCharacter",
+        "target": "randomOtherCharacter",
         "value": "-1"
       }
     ]
@@ -1055,7 +1051,7 @@
         "mechNeeded": 0
       },
       {
-        "name": "DestroyedDevinShield",
+        "name": "DestroyedDevineShield",
         "mechNeeded": 1
       }
     ],
@@ -2413,13 +2409,8 @@
     ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "self",
-        "value": "Devine Shield"
-      },
-      {
         "type": "health",
-        "target": "all",
+        "target": "allOther",
         "value": "-2"
       }
     ]
