@@ -152,16 +152,7 @@ public class Display {
         // endTurn();
         howeststone.setActivePlayer("You");
         System.out.println(howeststone.getEnemy().getCardsOnPlayingField());
-
     }
-
-    private void printGame(Game howeststone) {
-        System.out.println(ColorFormats.red("weapon/hero/mana/hand Enemy: ") + ColorFormats.green("NYI"));
-        System.out.println(ColorFormats.red("Playing Field Enemy: ") + ColorFormats.green(howeststone.getEnemy().getCardsOnPlayingField().toString()));
-        System.out.println(ColorFormats.red("Playing Field Player: ") + ColorFormats.green(howeststone.getYou().getCardsOnPlayingField().toString()));
-        System.out.println(ColorFormats.red("weapon/hero/mana/hand Player: ") + ColorFormats.green("NYI"));
-    }
-
 
     private void yourTurn(Game howeststone) {
         // TODO change because cannot be defined here
@@ -181,6 +172,13 @@ public class Display {
         if (areaPlayingField.getCards().size() < 7) {
             areaPlayingField.addCard(Integer.parseInt(card.toString()));
         }
+    }
+
+    private void printGame(Game howeststone) {
+        System.out.println(ColorFormats.red("weapon/hero/mana/hand Enemy: ") + ColorFormats.green("NYI"));
+        System.out.println(ColorFormats.red("Playing Field Enemy: ") + ColorFormats.green(howeststone.getEnemy().getCardsOnPlayingField().toString()));
+        System.out.println(ColorFormats.red("Playing Field Player: ") + ColorFormats.green(howeststone.getYou().getCardsOnPlayingField().toString()));
+        System.out.println(ColorFormats.red("weapon/hero/mana/hand Player: ") + ColorFormats.green("NYI"));
     }
 
     private String askInputUntilFoundInList(List<String> list) {
