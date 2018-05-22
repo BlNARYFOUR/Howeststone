@@ -44,6 +44,7 @@ public class SetupDatabase {
         addAbilitiesToDb();
         addHeroesToDb();
         addMechanicsToDb();
+        listAllMechanicTargets();
     }
 
     private void addAbilitiesToDb() {
@@ -83,7 +84,7 @@ public class SetupDatabase {
         addMechanicTypeToSet(weaponList, mechanics);
         addMechanicTypeToSet(minionList, mechanics);
 
-        System.out.println("Mechanics:");
+        System.out.println("\nMechanics:");
         outputSet(mechanics);
 
         System.out.println("\nAdding mechanics to database...");
@@ -93,6 +94,17 @@ public class SetupDatabase {
             insertMechanic(mechanic);
         }
         System.out.println(ColorFormats.blue("mechanics have been added!"));
+    }
+
+    private void listAllMechanicTargets() {
+        Set<String> mechanics = new HashSet<>();
+
+        addMechanicTargetToSet(spellList, mechanics);
+        addMechanicTargetToSet(weaponList, mechanics);
+        addMechanicTargetToSet(minionList, mechanics);
+
+        System.out.println("\nTargets:");
+        outputSet(mechanics);
     }
 
     private void insertMechanic(String mechanic) {
@@ -142,6 +154,10 @@ public class SetupDatabase {
         return addSubItemsToSet(jsonArray, prevFoundMechanicTypes, "mechanics", "type");
     }
 
+    private Set<String> addMechanicTargetToSet(JSONArray jsonArray, Set<String> prevFoundMechanicTypes) {
+        return addSubItemsToSet(jsonArray, prevFoundMechanicTypes, "mechanics", "target");
+    }
+
     private Set<String> addSubItemsToSet(JSONArray jsonArray, Set<String> prevFound, String item, String subItem) {
         for (Object obj : jsonArray) {
             JSONObject jsonObject = (JSONObject) obj;
@@ -151,7 +167,8 @@ public class SetupDatabase {
             if(abilityList != null) {
                 for (Object ability : abilityList) {
                     JSONObject jsonAbility = (JSONObject) ability;
-                    prevFound.add(jsonAbility.get(subItem).toString());
+                    //noinspection unchecked
+                    prevFound.add(jsonAbility.getOrDefault(subItem, "NULL").toString());
                 }
             }
         }
