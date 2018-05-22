@@ -27,4 +27,7 @@ public class SqlStatements {
 
     public static String INSERT_HERO =
             "INSERT INTO `howeststone`.`Heroes` (`heroName`) VALUES (?)";
+
+    public static String INSERT_MECHANIC =
+            "INSERT INTO `howeststone`.`Mechanics` (`mechanicType`) VALUES (?)";
 }

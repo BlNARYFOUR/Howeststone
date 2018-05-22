@@ -675,10 +675,10 @@
     ],
     "mechanics": [
       {
-        "target": "Spells"
+        "type": "spell"
       },
       {
-        "target": "HeroPowers"
+        "type": "heroPower"
       }
     ]
   },
@@ -891,11 +891,12 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Return To Hand"
+        "name": "Battlecry"
       }
     ],
     "mechanics": [
       {
+        "type": "returnToHand",
         "target": "friendlyMinion"
       }
     ]
@@ -1658,11 +1659,12 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Return To Hand"
+        "name": "Battlecry"
       }
     ],
     "mechanics": [
       {
+        "type": "returnToHand",
         "target": "friendlyMinion"
       }
     ]
