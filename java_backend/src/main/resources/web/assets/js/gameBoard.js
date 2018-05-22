@@ -224,10 +224,11 @@ function updateMyHero() {
 }
 
 function updateHero(parent) {
+
     let heroName = "";
-    fetch('http://localhost:4242/threebeesandme/get/yourhero',{
+    fetch('/threebeesandme/get/hero?parent='+parent ,{
         method: 'get',
-        mode: 'no-cors'
+
     })
         .then(function(res) {
             if(res.ok === true)

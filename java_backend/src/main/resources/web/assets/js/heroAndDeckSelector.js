@@ -7,7 +7,7 @@ let selectedDeckObj = null;
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    loadHeroes();
+    getAllHeroes();
 
     document.getElementById('gotoDeckSelector').addEventListener('click', gotoDeckSelector);
     document.getElementById('playGame').addEventListener('click', playGame);
@@ -55,8 +55,8 @@ function handleSelectedDeck(e) {
     this.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
 }
 
-function loadDecks() {
-    fetch('threebeesandme/howeststone/get/heroanddeckselector/decks', {
+function getAllDecks() {
+    fetch('/threebeesandme/get/heroanddeckselector/decks', {
         method: 'GET'
     })
         .then(function (res) {
@@ -102,8 +102,8 @@ function showHeroes(heroes) {
     }
 }
 
-function loadHeroes() {
-    fetch('/threebeesandme/howeststone/get/heroanddeckselector/heroes', {
+function getAllHeroes() {
+    fetch('/threebeesandme/get/heroanddeckselector/heroes', {
         method: 'GET'
     })
         .then(function (res) {
@@ -143,14 +143,14 @@ function handleSelectedHero(e) {
 
 function gotoDeckSelector() {
     let heroName = document.querySelector("#heroSelector .selectedHeroName").innerText;
-    sendSelectedHero(heroName);
+    handleHeroSelection(heroName);
     document.getElementById('deckSelector').className = "";
     document.getElementById('heroSelector').className = "hidden";
 }
 
-function sendSelectedHero(heroName) {
+function handleHeroSelection(heroName) {
     console.log("Send selected hero: " + heroName);
-    fetch('/threebeesandme/howeststone/post/heroanddeckselector/hero', {
+    fetch('/threebeesandme/post/heroanddeckselector/hero', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
@@ -164,7 +164,7 @@ function sendSelectedHero(heroName) {
                 return "ERROR";
         })
         .then(function (text) {
-            loadDecks();
+            getAllDecks();
         })
         .catch(function (err) {
             console.log("Error: Could not send the selected hero :'(");
@@ -173,8 +173,7 @@ function sendSelectedHero(heroName) {
 }
 
 function playGame() {
-    sendSelectedDeck(selectedDeck);
-    setBackground();
+    handleDeckSelection(selectedDeck);
     gameBoardSetup();
     document.getElementById('vsScreen').className = "";
     document.getElementById('gameBoard').className = "";
@@ -208,27 +207,26 @@ function deckbuilderSelectAndDeselectHero() {
     }
 }
 
-function sendSelectedDeck(deckName) {
+function handleDeckSelection(deckName) {
     console.log("Send selected deck: " + deckName);
-
-    /*
-    fetch('threebeesandme/howeststone/post/heroanddeckselector/deck', {
+    fetch('/threebeesandme/post/heroanddeckselector/deck', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'deck': deckName                   // TODO: IMPORTANT!!!
-        }
+        },
+        body: deckName
     })
     .then(function(res) {
         if(res.ok === true)
             return res.json();
+        else
+            return "ERROR";
     })
     .then(function(text) {
         let result = text;
-        console.log(result);
     })
     .catch(function(err) {
         console.log("Error: Could not send the selected deck :'(");
     });
-    */
+
 }
