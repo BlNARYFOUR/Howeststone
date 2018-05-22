@@ -23,7 +23,7 @@ public class SetupDatabase {
     private static final String MINIONS_LOCATION = "json/minions.json";
     private static final String WEAPONS_LOCATION = "json/weapons.json";
 
-    private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306", "root", "");
+    private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
     //private static final SqlDatabase db = null;
 
     private void run() {
@@ -41,11 +41,13 @@ public class SetupDatabase {
             System.out.println("Abilities:");
             outputSet(abilities);
 
-            System.out.println("\nDropping old Database...");
-            dropDatabase();
-
-            System.out.println("\nCreating new Database...");
-            createDatabase();
+            System.out.println("Adding abilities to database...");
+            List<String> abilityList = new ArrayList<>(abilities);
+            Collections.sort(abilityList);
+            for (String ability : abilityList) {    
+                insertAbility(ability);
+            }
+            System.out.println(ColorFormats.blue("abilities have been added!"));
 
         } catch (ParseException | IOException | NullPointerException e) {
             e.printStackTrace();
@@ -71,7 +73,6 @@ public class SetupDatabase {
 
     private void outputSet(Set<String> set) {
         List<String> list = new ArrayList<>(set);
-
         Collections.sort(list);
 
         for (Object obj : list) {
@@ -90,43 +91,11 @@ public class SetupDatabase {
         return (JSONArray) obj;
     }
 
-    private void dropDatabase() {
-        try (
-                Connection conn = db.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(SqlStatements.DROP_DATABASE);
-        ) {
-            if(!stmt.execute()) {
-                System.out.println(ColorFormats.blue("Database has been dropped!"));
-            }
-            else {
-                throw new SQLException("Database could not be dropped.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void createDatabase() {
-        try (
-                Connection conn = db.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(SqlStatements.CREATE_DATABASE);
-        ) {
-            if(stmt.execute()) {
-                System.out.println(ColorFormats.blue("Database has been created!"));
-            }
-            else {
-                throw new SQLException("Database could not be created.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void insertAbility(String ability) {
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_ABILITY,
-                        Statement.RETURN_GENERATED_KEYS);
+                        Statement.RETURN_GENERATED_KEYS)
         ) {
             stmt.setString(1, ability);
             final int AFFECTED_ROWS = stmt.executeUpdate();
@@ -138,7 +107,7 @@ public class SetupDatabase {
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     final long ID = rs.getLong(1);
-                    System.out.printf("%s now has ID %d", ability, ID);
+                    System.out.printf("\t* '%s' now has ID %d\n", ability, ID);
                 } else {
                     throw new SQLException("No ability created: no ID obtained.");
                 }
