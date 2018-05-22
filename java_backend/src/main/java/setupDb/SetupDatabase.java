@@ -45,6 +45,7 @@ public class SetupDatabase {
         addHeroesToDb();
         addMechanicsToDb();
         listAllMechanicTargets();
+        listAllMechanicValues();
     }
 
     private void addAbilitiesToDb() {
@@ -107,6 +108,17 @@ public class SetupDatabase {
         outputSet(mechanics);
     }
 
+    private void listAllMechanicValues() {
+        Set<String> mechanics = new HashSet<>();
+
+        addMechanicValueToSet(spellList, mechanics);
+        addMechanicValueToSet(weaponList, mechanics);
+        addMechanicValueToSet(minionList, mechanics);
+
+        System.out.println("\nValues:");
+        outputSet(mechanics);
+    }
+
     private void insertMechanic(String mechanic) {
         insertSingleValue(mechanic, SqlStatements.INSERT_MECHANIC, "mechanic");
     }
@@ -154,8 +166,12 @@ public class SetupDatabase {
         return addSubItemsToSet(jsonArray, prevFoundMechanicTypes, "mechanics", "type");
     }
 
-    private Set<String> addMechanicTargetToSet(JSONArray jsonArray, Set<String> prevFoundMechanicTypes) {
-        return addSubItemsToSet(jsonArray, prevFoundMechanicTypes, "mechanics", "target");
+    private Set<String> addMechanicTargetToSet(JSONArray jsonArray, Set<String> prevFoundMechanicTargets) {
+        return addSubItemsToSet(jsonArray, prevFoundMechanicTargets, "mechanics", "target");
+    }
+
+    private Set<String> addMechanicValueToSet(JSONArray jsonArray, Set<String> prevFoundMechanicValues) {
+        return addSubItemsToSet(jsonArray, prevFoundMechanicValues, "mechanics", "value");
     }
 
     private Set<String> addSubItemsToSet(JSONArray jsonArray, Set<String> prevFound, String item, String subItem) {
@@ -168,7 +184,7 @@ public class SetupDatabase {
                 for (Object ability : abilityList) {
                     JSONObject jsonAbility = (JSONObject) ability;
                     //noinspection unchecked
-                    prevFound.add(jsonAbility.getOrDefault(subItem, "NULL").toString());
+                    prevFound.add(jsonAbility.getOrDefault(subItem, "<NULL>").toString());
                 }
             }
         }
