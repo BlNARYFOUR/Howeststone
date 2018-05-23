@@ -3,6 +3,8 @@ package game;
 import cards.CardCollection;
 import hero.Hero;
 
+import java.util.List;
+
 public class Player {
     private Hero hero;
     private CardCollection cardsInHand;
@@ -21,11 +23,16 @@ public class Player {
         this.hero = new Hero(heroName);
     }
 
+    public CardCollection getCardsInHand() {
+        return cardsInHand;
+    }
+
     public Player() {
 
     }
 
-    void beginTurn() {
+    public void beginTurn() {
+
         // +1 mana until 10
         // draw card
     }
@@ -43,5 +50,14 @@ public class Player {
 
     public CardCollection getDeck() {
         return cardsInDeck;
+    }
+
+    public void setCardsInHand(CardCollection cardsInHand) {
+        this.cardsInHand = cardsInHand;
+    }
+
+    public void setCardsInHand(List<String> cardsInHandList) {
+        cardsInHand = new CardCollection();
+        cardsInHand.addCards(cardsInHandList);
     }
 }

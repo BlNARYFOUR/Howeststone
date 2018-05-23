@@ -4,7 +4,7 @@ import hero.Hero;
 
 public class Game {
     // TODO: MOCKERS
-    protected static final String[] MOCKED_HEROES = {"Mage", "Paladin"};
+    protected static final String[] MOCKED_HEROES = {"mage", "paladin"};
 
     // TODO: actual fields
     private Player you;
@@ -57,10 +57,6 @@ public class Game {
 
     public void addEnemy(Player enemy) {
         this.enemy = enemy;
-    }
-
-    public void setTime(int time) {
-        this.turnTime = time;
     }
 
     public void shuffleDecks() {

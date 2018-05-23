@@ -17,6 +17,7 @@ public class Server {
     void start() {
         final Javalin server = Javalin.create()
                 .port(port)
+                .enableStaticFiles("web")
                 .start();
         new Routes(server);
     }
