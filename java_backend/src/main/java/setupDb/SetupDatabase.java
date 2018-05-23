@@ -1,18 +1,18 @@
 package setupDb;
 
-import db.SqlDatabase;
-import db.SqlStatements;
-import formatters.ColorFormats;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+        import db.SqlDatabase;
+        import db.SqlStatements;
+        import formatters.ColorFormats;
+        import org.json.simple.JSONArray;
+        import org.json.simple.JSONObject;
+        import org.json.simple.parser.JSONParser;
+        import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.*;
-import java.util.*;
+        import java.io.File;
+        import java.io.FileReader;
+        import java.io.IOException;
+        import java.sql.*;
+        import java.util.*;
 
 public class SetupDatabase {
     public static void main(String[] args) {
@@ -350,6 +350,72 @@ public class SetupDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void createRandomDeck(String name, int heroId) {
+        // TODO
+    }
+
+    private void addCardToDeck(int deckId, int cardId) {
+        int amount = getAmountOfCardInDeck(deckId, cardId);
+
+        if(0 <= amount) {
+            
+        }
+    }
+
+    private void insertDeck(String name, int heroId) {
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_DECK)
+        ) {
+            stmt.setString(1, name);
+            stmt.setInt(2, heroId);
+            final int AFFECTED_ROWS = stmt.executeUpdate();
+
+            if (AFFECTED_ROWS == 0) {
+                throw new SQLException("No deck created: no rows affected.");
+            }
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    final long ID = rs.getLong(1);
+                    System.out.printf("\t* new deck now has ID %d\n", ID);
+                } else {
+                    throw new SQLException("No deck created: no ID obtained.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getAmountOfCardInDeck(int deckId, int cardId) {
+        int num = -1;
+
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.SELECT_AMOUNT_OF_CARDS_IN_DECK);
+        ){
+            stmt.setInt(1, deckId);
+            stmt.setInt(2, cardId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    num = rs.getInt("amount");
+                } else {
+                    System.out.println(ColorFormats.red("\t* No amount found for cardId " + cardId + " in deck " + deckId + "!"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return num;
+    }
+
+    private int getDeckId(String deckName) {
+        return getSingleInt(deckName, SqlStatements.SELECT_DECK_ID, "deckId");
     }
 
     private int getHeroId(String heroName) {
