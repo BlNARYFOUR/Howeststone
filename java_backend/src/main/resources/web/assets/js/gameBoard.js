@@ -196,6 +196,7 @@ function gameBoardSetup() {
     updateEnemyMana(0, 0);
     updateMyHero();
     updateMyMana(0, 0);
+    playGame();
 }
 let heroAttack;
 function yourTurn() {
@@ -224,9 +225,8 @@ function updateMyHero() {
 }
 
 function updateHero(parent) {
-
-    let heroName = "";
-    fetch('/threebeesandme/get/hero?parent='+parent ,{
+    let url = '/threebeesandme/get/hero?parent='+ parent;
+    fetch(url ,{
         method: 'get',
 
     })
@@ -236,20 +236,18 @@ function updateHero(parent) {
         })
         .then(function(text) {
             let result = text;
-            console.log("you're hero is" + result);
+            console.log(result);
+            showHero(parent, result);
         })
         .catch(function(err) {
             console.log("Error: Could not get hero");
         });
 
-
-    // TODO fetch heroname
-    heroName = "mage";
-
-    showHero(parent, heroName);
 }
 
 function showHero(parent, heroName) {
+    document.querySelector("#vsScreen ." +parent).innerHTML = `<img src="assets/media/${heroName}.png" alt="${parent}Hero" title="${parent}Hero">`;
+    
     let hero = document.querySelector(`#gameBoard .${parent} .hero`);
     hero.innerHTML = '<span class="health">30</span>';
 

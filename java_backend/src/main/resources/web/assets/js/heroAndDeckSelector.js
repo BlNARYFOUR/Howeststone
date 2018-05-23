@@ -3,6 +3,7 @@
 let selectedHero = "";
 let selectedDeck = "";
 let selectedDeckObj = null;
+let activePlayer;
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -10,7 +11,8 @@ function init() {
     getAllHeroes();
 
     document.getElementById('gotoDeckSelector').addEventListener('click', gotoDeckSelector);
-    document.getElementById('playGame').addEventListener('click', playGame);
+
+    document.getElementById('playGame').addEventListener('click', selectDeck);
     document.getElementById('addDeck').addEventListener('click', addDeck);
     document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
 }
@@ -50,8 +52,6 @@ function handleSelectedDeck(e) {
     selectedDeckObj = clickedDeck;
     selectedDeck = clickedDeck.innerText;
 
-    console.log(selectedDeck);
-
     this.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
 }
 
@@ -80,15 +80,15 @@ function showHeroes(heroes) {
 
     for (let i = 0; i < heroes.length; i++) {
         if (i === 0) {
-            selectedHero = heroes[i].toLowerCase();
+            selectedHero = heroes[i]
         }
 
         for (let j = 0; j < heroesHtml.length; j++) {
-            heroesHtml[j].innerHTML += '<li><a href="#" class="' + heroes[i].toLowerCase() + '"><h2>' + heroes[i] + '</h2></a></li>';
+            heroesHtml[j].innerHTML += '<li><a href="#" class="' + heroes[i] + '"><h2>' + heroes[i] + '</h2></a></li>';
         }
 
         document.querySelector("#deckbuilder #hero").innerHTML += '<a href="#">' + heroes[i] + '</a>';
-        let heroHtmlObj = document.querySelectorAll('.heroes .' + heroes[i].toLowerCase());
+        let heroHtmlObj = document.querySelectorAll('.heroes .' + heroes[i]);
 
         for (let j = 0; j < heroHtmlObj.length; j++) {
             heroHtmlObj[j].style.background = 'url("assets/media/' + heroes[i] + '.png") center center no-repeat';
@@ -128,8 +128,6 @@ function handleSelectedHero(e) {
     let heroName = clickedHero.classList[0];
     selectedHero = heroName;
 
-    console.log(heroName);
-
     let selectedHeroName = document.querySelectorAll(".selectedHeroName");
     let backgroundHolders = document.querySelectorAll(".selectedHero");
 
@@ -137,8 +135,6 @@ function handleSelectedHero(e) {
         selectedHeroName[i].innerHTML = heroName;
         backgroundHolders[i].style.backgroundImage = `url('assets/media/${heroName}.png')`;
     }
-
-    document.querySelector("#vsScreen .player").innerHTML = `<img src="assets/media/${heroName}.png" alt="playerHero" title="playerHero">`;
 }
 
 function gotoDeckSelector() {
@@ -171,10 +167,31 @@ function handleHeroSelection(heroName) {
         });
 
 }
-
-function playGame() {
+function selectDeck(e) {
+    e.preventDefault();
     handleDeckSelection(selectedDeck);
-    gameBoardSetup();
+}
+function makeGame() {
+
+    fetch('/threebeesandme/get/gameboard/begin', {
+        method: 'GET',
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+        else
+            return "ERROR";
+    })
+    .then(function(text) {
+        console.log(text);
+        activePlayer = text;
+        gameBoardSetup();
+    })
+    .catch(function(err) {
+        console.log("Error: cannot start game");
+    });
+}
+function playGame() {
     document.getElementById('vsScreen').className = "";
     document.getElementById('gameBoard').className = "";
     //makeCardsFan("you", 1);
@@ -198,7 +215,7 @@ function deckbuilderSelectAndDeselectHero() {
 
     for (let i = 0; i < heroes.length; i++) {
         console.log("Gets in here: " + selectedHero);
-        if (heroes[i].innerText.toLowerCase() === selectedHero) {
+        if (heroes[i].innerText === selectedHero) {
             heroes[i].style.backgroundColor = "grey";
         }
         else {
@@ -223,7 +240,7 @@ function handleDeckSelection(deckName) {
             return "ERROR";
     })
     .then(function(text) {
-        let result = text;
+        makeGame();
     })
     .catch(function(err) {
         console.log("Error: Could not send the selected deck :'(");

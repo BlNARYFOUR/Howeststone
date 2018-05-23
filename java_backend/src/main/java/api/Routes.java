@@ -3,8 +3,11 @@ package api;
 import game.*;
 import io.javalin.Context;
 import io.javalin.Javalin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.Random;
 
 class Routes {
 
@@ -14,6 +17,7 @@ class Routes {
         //server.get("/API/getAllCards", this::getAllCards);
 
         // GAME BOARD
+        server.get("/threebeesandme/get/gameboard/begin", this::beginGame);
         server.get("threebeesandme/get/gameboard/battlelog", this::getBattleLog);
         server.get("threebeesandme/get/gameboard/timeleft", this::getTimeLeft);
         server.post("threebeesandme/post/gameboard/endturn", this::handleEndUrn);
@@ -38,7 +42,6 @@ class Routes {
          }
 
 
-
     Game howeststone = new Game();
 
     // HERO AND DECK SELECTOR
@@ -57,8 +60,28 @@ class Routes {
     }
     private void handleDeckSelection(Context context) {
         howeststone.getYou().setDeck(context.body());
+        context.json(howeststone.getYou().getDeck().getNameOfCardCollection());
     }
     // GAME BOARD
+    private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
+
+    private void beginGame(Context context) {
+        if (howeststone.getYou().getHero() == null || howeststone.getYou().getDeck() == null) {
+            //TODO get out of this function not exception
+            throw new NullPointerException();
+        }
+        howeststone.generateEnemy();
+        howeststone.setTurnTime(50);
+
+        Random rand = new Random();
+        boolean doYouBegin = rand.nextBoolean();
+        if (doYouBegin) {
+            howeststone.setActivePlayer("You");
+        }else {
+            howeststone.setActivePlayer("Enemy");
+        }
+        context.json(howeststone.getActivePlayer());
+    }
 
     private void getAllCards(Context context) {
         context.result("Cards");
@@ -81,9 +104,13 @@ class Routes {
     }
 
     private void getHeroName(Context context) {
-        //TODO
+        String hero = context.queryParamMap().get("parent")[0];
+        if (hero.equals("enemy")){
+            context.json(howeststone.getEnemy().getHero().getHeroName());
+        }else{
+            context.json(howeststone.getYou().getHero().getHeroName());
+        }
     }
-
     private void canHeroAttack(Context context) {
         context.result("no :p");
     }

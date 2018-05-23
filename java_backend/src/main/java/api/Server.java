@@ -4,7 +4,7 @@ import io.javalin.Javalin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Server {
+class Server {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
 

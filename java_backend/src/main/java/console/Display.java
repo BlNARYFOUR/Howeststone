@@ -55,16 +55,8 @@ public class Display {
             //TODO get out of this function not exception
             throw new NullPointerException();
         }
-        newLine();
-        final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
-        int randomHeroIndex = (int)Math.round(Math.random())*(HEROES.size()-1);
-        Player enemy = new Player();
-
-        enemy.setHero(HEROES.get(randomHeroIndex));
-        enemy.setDeck("Standard");
-        howeststone.addEnemy(enemy);
+        howeststone.generateEnemy();
         howeststone.setTurnTime(50);
-
         System.out.println(howeststone);
         howeststone.shuffleDecks();
         flipCoin(howeststone);
