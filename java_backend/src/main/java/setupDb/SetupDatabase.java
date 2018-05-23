@@ -19,11 +19,14 @@ public class SetupDatabase {
         new SetupDatabase().run();
     }
 
+    private static final int MAX_DECK_SIZE = 30;
+
     private static final String SPELLS_LOCATION = "json/spells.json";
     private static final String MINIONS_LOCATION = "json/minions.json";
     private static final String WEAPONS_LOCATION = "json/weapons.json";
 
-    private static final String[] HEROES = {"Neutral", "Mage", "Paladin"};
+    private static final String NEUTRAL = "Neutral";
+    private static final String[] HEROES = {NEUTRAL, "Mage", "Paladin"};
     private static final String[] ABILITIES_WITH_MECHANICS = {"Aura", "Battlecry", "Deathrattle", "DestroyedDivineShield", "Enrage", "On Attack", "On Death", "On Heal", "On Hit", "Turn Begin", "Turn End", "Untargetable", "Update In Hand"};
 
     private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
@@ -48,6 +51,7 @@ public class SetupDatabase {
         listAllMechanicTargets();
         listAllMechanicValues();
         addCardsToDb();
+        createStandardDecks();
     }
 
     private void addAbilitiesToDb() {
@@ -195,6 +199,16 @@ public class SetupDatabase {
                 }
             }
         }
+    }
+
+    private void createStandardDecks() {
+        System.out.println("\nCreating standard decks...");
+        for(String heroName : HEROES) {
+            if(!heroName.equals(NEUTRAL)) {
+                createRandomDeck("Standard" + heroName, getHeroId(heroName));
+            }
+        }
+        System.out.println(ColorFormats.blue("standard decks have been created!"));
     }
 
     private void listAllMechanicTargets() {
@@ -353,18 +367,100 @@ public class SetupDatabase {
     }
 
     private void createRandomDeck(String name, int heroId) {
-        // TODO
-    }
+        int deckId = insertDeck(name, heroId);
+        int amountOfCards = getTotalAmountOfCards();
+        int cardId;
 
-    private void addCardToDeck(int deckId, int cardId) {
-        int amount = getAmountOfCardInDeck(deckId, cardId);
-
-        if(0 <= amount) {
-            
+        for(int i=0; i<MAX_DECK_SIZE; i++) {
+            do {
+                cardId = 1 + (int) Math.round(Math.random() * amountOfCards);
+            } while (!addCardToDeck(deckId, cardId));
         }
     }
 
-    private void insertDeck(String name, int heroId) {
+    private boolean addCardToDeck(int deckId, int cardId) {
+        int amount = getAmountOfCardInDeck(deckId, cardId);
+
+        if(0 <= amount && amount <= 1 && !isLegendary(cardId)) {
+            updateAmountOfCardInDeck(deckId, cardId, amount+1);
+            return true;
+        } else if(amount < 0) {
+            insertCardToDeck(deckId, cardId, 1);
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isLegendary(int cardId) {
+        boolean result = false;
+
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.IS_LEGENDARY);
+        ){
+            stmt.setInt(1, cardId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    result = rs.getBoolean("isLegendary");
+                } else {
+                    System.out.println(ColorFormats.red("\t* Could not read the rarity of this card!"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    private void updateAmountOfCardInDeck(int deckId, int cardId, int amount) {
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.UPDATE_AMOUNT_OF_CARD_IN_DECK,
+                        Statement.RETURN_GENERATED_KEYS)
+        ) {
+            stmt.setInt(1, amount);
+            stmt.setInt(2, deckId);
+            stmt.setInt(3, cardId);
+            final int AFFECTED_ROWS = stmt.executeUpdate();
+
+            if (AFFECTED_ROWS == 0) {
+                throw new SQLException("No amount of cards has been updated: no rows affected.");
+            } else {
+                System.out.println("Card amount has been updated in deck!");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertCardToDeck(int deckId, int cardId, int amount) {
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_CARD_TO_DECK,
+                        Statement.RETURN_GENERATED_KEYS)
+        ) {
+            stmt.setInt(1, deckId);
+            stmt.setInt(2, cardId);
+            stmt.setInt(3, amount);
+            final int AFFECTED_ROWS = stmt.executeUpdate();
+
+            if (AFFECTED_ROWS == 0) {
+                throw new SQLException("No card added to deck: no rows affected.");
+            } else {
+                System.out.println("Card has been added to deck!");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int insertDeck(String name, int heroId) {
+        long deckId = -1;
+
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_DECK)
@@ -379,8 +475,8 @@ public class SetupDatabase {
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    final long ID = rs.getLong(1);
-                    System.out.printf("\t* new deck now has ID %d\n", ID);
+                    deckId = rs.getLong(1);
+                    System.out.printf("\t* new deck now has ID %d\n", deckId);
                 } else {
                     throw new SQLException("No deck created: no ID obtained.");
                 }
@@ -389,6 +485,29 @@ public class SetupDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return (int) deckId;
+    }
+
+    private int getTotalAmountOfCards() {
+        int num = -1;
+
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_TOTAL_AMOUNT_OF_CARDS);
+        ){
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    num = rs.getInt("amountOfCards");
+                } else {
+                    System.out.println(ColorFormats.red("\t* Could not read the amount of cards!"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return num;
     }
 
     private int getAmountOfCardInDeck(int deckId, int cardId) {

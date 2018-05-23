@@ -28,6 +28,9 @@ public class SqlStatements {
     public static final String SELECT_MECHANICS =
             "SELECT * FROM howeststone.Decks;";
 
+    public static final String IS_LEGENDARY =
+            "SELECT rarity = \"Legendary\" AS `isLegendary` FROM cards WHERE cardId = ?";
+
     public static final String SELECT_AMOUNT_OF_CARDS_IN_DECK =
             "SELECT amount FROM howeststone.CardsInDecks WHERE deckId = ? AND cardId = ?";
 
@@ -54,4 +57,10 @@ public class SqlStatements {
 
     public static final String INSERT_CARD =
             "INSERT INTO `howeststone`.`Cards` (`cardName`, `cardType`,`race` ,`img`, `rarity`, `health`, `attack`, `manaCost`, `durability`, `heroId`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    public static final String UPDATE_AMOUNT_OF_CARD_IN_DECK =
+            "UPDATE `howeststone`.`CardsInDecks` SET amount = ? WHERE deckId = ? AND cardId = ?";
+
+    public static final String GET_TOTAL_AMOUNT_OF_CARDS =
+            "SELECT MAX(cardId) AS amountOfCards FROM cards";
 }
