@@ -29,10 +29,6 @@ public class CardCollection {
         Collections.shuffle(cards);
     }
 
-    public List<Card> getCards() {
-        return cards;
-    }
-
     public Card drawCard() {
         final Card DRAW = cards.get(1);
         cards.remove(1);

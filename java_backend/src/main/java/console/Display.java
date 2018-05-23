@@ -105,10 +105,10 @@ public class Display {
 
 
         // - cardInfo // on one line
-        List<String> replace = askInputUntilStop(yourCardsInHandList);
+        List<String> replaceCardList = askInputUntilStop(yourCardsInHandList);
 
-        howeststone.getYou().getDeck().addCards(replace);
-        for (String cardID: replace) {
+        howeststone.getYou().getDeck().addCards(replaceCardList);
+        for (String cardID: replaceCardList) {
             yourCardsInHandList.remove(cardID);
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
