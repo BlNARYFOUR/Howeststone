@@ -12,8 +12,7 @@ public abstract class Mechanic {
     public Mechanics getMECHANIC_TYPE() {
         return MECHANIC_TYPE;
     }
-
-    public abstract boolean executeAbility(Card self, Card target);
+    ;
 }
 
 }

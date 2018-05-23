@@ -1,6 +1,8 @@
 package abilities;
 
-public class Ability {
+import cards.Card;
+
+public abstract class Ability {
     private final Abilities ABILITY_TYPE;
 
     public Ability(Abilities ABILITY_TYPE) {
@@ -11,5 +13,5 @@ public class Ability {
         return ABILITY_TYPE;
     }
 
-    public boolean executeAbility(Card self, Card target, Game );
+    public abstract boolean executeAbility(Card self, Card target);
 }
