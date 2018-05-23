@@ -72,6 +72,9 @@ public class CardCollection {
         return name;
     }
 
+    public List<Card> getCards() {
+        return cards;
+    }
     public Card getCheapestCard() {
         Card cheapestCard = this.cards.get(0);
         for(Card x : this.cards ){

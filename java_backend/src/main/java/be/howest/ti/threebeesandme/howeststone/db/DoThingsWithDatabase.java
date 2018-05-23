@@ -1,16 +1,15 @@
-package be.howest.ti.threebeesandme.howeststone.db; /*
-  Created by Bert on 22/05/2018.
-  Have a nice day!
- */
+package be.howest.ti.threebeesandme.howeststone.db;
 
 import java.sql.*;
 
-public class DoThingsWithDatabase {
-    public static void main(String[] args) {
-        new be.howest.ti.threebeesandme.howeststone.db.DoThingsWithDatabase().run();
-    }
+public class DoThingsWithDataBase {
+
 
     SqlDatabase db;
+
+    public static void main(String[] args) {
+        new DoThingsWithDataBase().run();
+    }
 
     private void run() {
         db = new SqlDatabase("localhost:88", "root", "");
@@ -21,7 +20,7 @@ public class DoThingsWithDatabase {
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_DECK,
                         Statement.RETURN_GENERATED_KEYS);
-            ) {
+        ) {
             stmt.setString(1, deckName);
             stmt.setInt(2, heroId);
             final int AFFECTED_ROWS = stmt.executeUpdate();
@@ -39,9 +38,8 @@ public class DoThingsWithDatabase {
                 }
             }
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
-

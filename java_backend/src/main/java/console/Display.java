@@ -6,7 +6,6 @@ import cards.CardCollection;
 import console.formatters.ColorFormats;
 import game.*;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 
 public class Display {
@@ -34,7 +33,6 @@ public class Display {
         final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
 
         System.out.println("Select one of the following heroes:");
-        System.out.println(formatList(HEROES));
         String selectedHero = askInputUntilFoundInList(HEROES);
         you.setHero(selectedHero);
         howeststone.addYou(you);
@@ -49,7 +47,6 @@ public class Display {
         final List<String> DECKS = new ArrayList<>(howeststone.getYou().getHero().getDeckNames());
 
         System.out.println("Select one of the following decks:");
-        System.out.println(formatList(DECKS));
         String selectedDeck = askInputUntilFoundInList(DECKS);
         howeststone.setYourDeck(selectedDeck);
     }
@@ -84,38 +81,36 @@ public class Display {
         boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
             howeststone.setActivePlayer("You");
-            System.out.println("You begin the game");
+            System.out.println(ColorFormats.magenta("You begin the game"));
         } else {
             howeststone.setActivePlayer("Enemy");
-            System.out.println("Enemy begins the game");
+            System.out.println(ColorFormats.yellow("Enemy begins the game"));
         }
 
         replaceCards(howeststone);
     }
 
     private void replaceCards(Game howeststone) {
-        List<String> replaceCardList = new ArrayList<>();
-        if (howeststone.getActivePlayer().equals("You")){
-            for (int i = 0; i < 3 ; i++){
-                replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
-            }
-        }else {
-            for (int i = 0; i < 4 ; i++){
-                replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
-            }
+        List<String> yourCardsInHandList = new ArrayList<>();
+        List<String> enemyCardsInHandList = new ArrayList<>();
+        for (int i = 0; i < 3 ; i++){
+            yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+            enemyCardsInHandList.add(String.valueOf(howeststone.getEnemy().getDeck().drawCard()));
         }
-        replaceCardList.add("stop");
-        System.out.println("Select which one(s) you want to switch:");
-        System.out.println(formatList(replaceCardList));
-        List<String> replace = askInputUntilStop(replaceCardList);
-        // TODO replace or not
-        // - cardInfo // on one line
+        if (howeststone.getActivePlayer().equals("You")){
+            enemyCardsInHandList.add(String.valueOf(howeststone.getEnemy().getDeck().drawCard()));
+        }else {
+            yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+        }
 
-        System.out.println("replace" + replace);
+
+        // - cardInfo // on one line
+        List<String> replace = askInputUntilStop(yourCardsInHandList);
+
         howeststone.getYou().getDeck().addCards(replace);
         for (String cardID: replace) {
-            replaceCardList.remove(cardID);
-            replaceCardList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+            yourCardsInHandList.remove(cardID);
+            yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
         replaceCardList.remove("stop");
         System.out.println("replaceCardList" + replaceCardList);
@@ -155,12 +150,40 @@ public class Display {
 
     private void yourTurn(Game howeststone) {
         // TODO change because cannot be defined here
-        List<String> cardsInHand= new ArrayList<>();
-        cardsInHand.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
+        howeststone.getYou().getCardsInHand().addCard(howeststone.getYou().getDeck().drawCard().getCardID());
 
-        // info
+        // info:
+        // cardName
+        // manaCost
+        // (attack/health/durability)
+        // abilities & mechanics
+        // type
+        // heroID
+
         // cardssInPlayingField
         // cardsInHand
+
+        // draw a card
+        // mana up by 1
+
+        List<String> action = new ArrayList<>();
+        action.add("Use hero power");
+        // all values of these list
+        List<Card> cardsInHand = howeststone.getYou().getCardsInHand().getCards();
+        for (Card card : cardsInHand) {
+            action.add(String.valueOf(card));
+        }
+        // getAllAttackableMinions();
+        // if you have weapon
+        // action.add("Attack with hero");
+        askInputUntilStop(action);
+        // actions
+        // - heroPower 2Mana
+        // - play a card
+        // - attack
+        //      - hero
+        //      - minion
+        // end turn (active player change and enemy turn)
     }
 
     private void playCard(Card card, Game howeststone) {
@@ -175,7 +198,7 @@ public class Display {
 
     private String askInputUntilFoundInList(List<String> list) {
         String input;
-
+        System.out.println(formatList(list));
         do {
             System.out.print("Input here: ");
             input = scanner.nextLine();
@@ -197,29 +220,47 @@ public class Display {
 
     private List<String> askInputUntilStop(List<String> list) {
         String input;
+        list.add("stop");
         List<String> replace = new ArrayList<>();
+        System.out.println("Select what you want to do:");
+        System.out.println(formatList(list));
         do {
             System.out.print("Input here: ");
             input = scanner.nextLine();
 
             if(list.contains(input)) {
                 if (replace.contains(input)){
+                    // TODO how to say that this cannot be done always
+                    // for example actions
                     replace.remove(input);
                 } else {
                     replace.add(input);
                 }
                 // change ? remove and add ?
 
-                System.out.println("Select which one(s) you want to switch:");
+                System.out.println("Select what you want to do:");
                 System.out.println(formatList(list));
-                System.out.println("Select which one(s) you don't want to switch:");
+                System.out.println("Select what you want to undo:");
                 System.out.println(formatList(replace));
             }
         }
         while(!input.equals("stop"));
         replace.remove("stop");
-        System.out.println(ColorFormats.red("Selected: ") + ColorFormats.green(formatList(replace)));
+        list.remove("stop");
+        System.out.println(ColorFormats.red("Selected: ") + formatList(replace));
         return replace;
+    }
+    @NotNull
+    private String formatCardList(@NotNull List<Card> list) {
+        StringBuilder strBuilder = new StringBuilder();
+
+        for(Card str : list) {
+            strBuilder.append("\t- ");
+            strBuilder.append(str);
+            strBuilder.append('\n');
+        }
+
+        return  strBuilder.toString();
     }
     @NotNull
     private String formatList(@NotNull List<String> list) {
