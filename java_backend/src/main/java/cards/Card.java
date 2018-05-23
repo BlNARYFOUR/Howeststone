@@ -2,10 +2,11 @@ package cards;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt. (er zijn uitzonderingen)
 public class Card {
     private static int mockID;
 
+    private boolean exhausted;
     private int cardID;
     private String cardName;
     private String urlOfImg;
@@ -19,6 +20,7 @@ public class Card {
         this.cardID = mockID;
         mockID ++;
         getOtherInfo(cardID);
+        this.exhausted = true;
     }
 
     private void getOtherInfo(int mockID) {
@@ -48,6 +50,10 @@ public class Card {
         // TODO: card.doDamage();
 
         return false;
+    }
+
+    public void awaken() {
+        exhausted = false;
     }
 
 
