@@ -21,6 +21,6 @@ public class Charge extends Ability {
 
     @Override
     public void initiateTurn(Card self) {
-
+        //Charge can only be used one turn!
     }
 }

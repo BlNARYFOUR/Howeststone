@@ -6,6 +6,7 @@ import java.util.List;
 public class Card {
     private static int mockID;
 
+    private int maxAmountOfAttacks;
     private boolean exhausted;
     private int cardID;
     private String cardName;
@@ -13,6 +14,7 @@ public class Card {
     private String rarity;
     private int manaCost;
     private List<Abilities> cardAbilities;
+    private int amountAttacked;
     // TODO: private List<Mechanics> cardMechanics;
 
     public Card(){
@@ -21,6 +23,8 @@ public class Card {
         mockID ++;
         getOtherInfo(cardID);
         this.exhausted = true;
+        this.amountAttacked = 0;
+        this.maxAmountOfAttacks = 1;
     }
 
     private void getOtherInfo(int mockID) {
@@ -54,6 +58,14 @@ public class Card {
 
     public void awaken() {
         exhausted = false;
+    }
+
+    public int getAmountAttacked() {
+        return amountAttacked;
+    }
+
+    public void increaseMaxAmountOfAttacks() {
+        maxAmountOfAttacks++;
     }
 
 

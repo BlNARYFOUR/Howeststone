@@ -10,11 +10,17 @@ public class Windfury extends Ability {
 
     @Override
     public boolean executeAbility(Card self, Card target) {
-        return false;
+        if (super.isUseable() && self.getAmountAttacked() <= 1) {
+            self.increaseMaxAmountOfAttacks();
+            super.use();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void initiateTurn(Card self) {
-
+        super.makeUseable();
     }
 }
