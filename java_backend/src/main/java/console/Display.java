@@ -250,7 +250,8 @@ public class Display {
             } else {
                 // select target
             }
-            // damage target by 2
+            int damage = howeststone.getYou().getHero().getMageAttack(); //ofwel 2
+            //TODO target health -damage
         }
     }
 

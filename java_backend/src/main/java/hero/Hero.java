@@ -35,6 +35,14 @@ public class Hero {
         return heroName;
     }
 
+    public int getMageAttack() {
+        return mageAttack;
+    }
+
+    public int getHeroPowerID() {
+        return heroPowerID;
+    }
+
     @Override
     public String toString() {
         return heroName;
