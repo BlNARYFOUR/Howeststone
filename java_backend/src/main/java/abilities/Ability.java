@@ -1,6 +1,7 @@
 package abilities;
 
 import cards.Card;
+import events.Events;
 
 public abstract class Ability {
     private final Abilities ABILITY_TYPE;
@@ -27,7 +28,7 @@ public abstract class Ability {
         return !used;
     }
 
-    public abstract boolean executeAbility(Card self, Card target);
+    public abstract boolean executeAbility(Card self, Card target, Events event, int value);
 
     public abstract void initiateTurn(Card self);
 }

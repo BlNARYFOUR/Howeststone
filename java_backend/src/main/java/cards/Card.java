@@ -13,6 +13,7 @@ public class Card {
     private String urlOfImg;
     private String rarity;
     private int manaCost;
+    private int health;
     private List<Abilities> cardAbilities;
     private int amountAttacked;
     // TODO: private List<Mechanics> cardMechanics;
@@ -66,6 +67,10 @@ public class Card {
 
     public void increaseMaxAmountOfAttacks() {
         maxAmountOfAttacks++;
+    }
+
+    public void addHealth(int health) {
+        this.health += health;
     }
 
 

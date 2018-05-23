@@ -3,16 +3,17 @@ package abilities;
 import cards.Card;
 import events.Events;
 
-public class Charge extends Ability {
+public class DivineShield extends Ability {
 
-    public Charge(Abilities ABILITY_TYPE) {
+    public DivineShield(Abilities ABILITY_TYPE) {
         super(ABILITY_TYPE);
     }
 
+    // In value comes the damage the card would 've taken.
     @Override
     public boolean executeAbility(Card self, Card target, Events event, int value) {
-        if (super.isUseable()) {
-            self.awaken();
+        if (super.isUseable() && event == Events.ON_DAMAGE) {
+            self.addHealth(value);
             super.use();
             return true;
         } else {
@@ -22,6 +23,6 @@ public class Charge extends Ability {
 
     @Override
     public void initiateTurn(Card self) {
-        //Charge can only be used one turn!
+
     }
 }

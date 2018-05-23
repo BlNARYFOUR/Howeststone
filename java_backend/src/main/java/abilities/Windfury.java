@@ -1,6 +1,7 @@
 package abilities;
 
 import cards.Card;
+import events.Events;
 
 public class Windfury extends Ability {
 
@@ -9,7 +10,7 @@ public class Windfury extends Ability {
     }
 
     @Override
-    public boolean executeAbility(Card self, Card target) {
+    public boolean executeAbility(Card self, Card target, Events event, int value) {
         if (super.isUseable() && self.getAmountAttacked() <= 1) {
             self.increaseMaxAmountOfAttacks();
             super.use();
