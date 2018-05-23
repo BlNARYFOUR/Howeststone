@@ -71,10 +71,10 @@ public class Display {
         Random rand = new Random();
         boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
-            howeststone.setActivePlayer("You");
+            howeststone.setActivePlayer("you");
             System.out.println(ColorFormats.magenta("You begin the game"));
         } else {
-            howeststone.setActivePlayer("Enemy");
+            howeststone.setActivePlayer("enemy");
             System.out.println(ColorFormats.yellow("Enemy begins the game"));
         }
 

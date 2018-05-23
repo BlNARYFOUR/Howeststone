@@ -236,7 +236,6 @@ function updateHero(parent) {
         })
         .then(function(text) {
             let result = text;
-            console.log(result);
             showHero(parent, result);
         })
         .catch(function(err) {
@@ -247,7 +246,7 @@ function updateHero(parent) {
 
 function showHero(parent, heroName) {
     document.querySelector("#vsScreen ." +parent).innerHTML = `<img src="assets/media/${heroName}.png" alt="${parent}Hero" title="${parent}Hero">`;
-    
+
     let hero = document.querySelector(`#gameBoard .${parent} .hero`);
     hero.innerHTML = '<span class="health">30</span>';
 

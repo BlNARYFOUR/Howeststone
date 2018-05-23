@@ -145,7 +145,6 @@ function gotoDeckSelector() {
 }
 
 function handleHeroSelection(heroName) {
-    console.log("Send selected hero: " + heroName);
     fetch('/threebeesandme/post/heroanddeckselector/hero', {
         method: 'POST',
         headers: {
@@ -183,7 +182,6 @@ function makeGame() {
             return "ERROR";
     })
     .then(function(text) {
-        console.log(text);
         activePlayer = text;
         gameBoardSetup();
     })
@@ -225,7 +223,6 @@ function deckbuilderSelectAndDeselectHero() {
 }
 
 function handleDeckSelection(deckName) {
-    console.log("Send selected deck: " + deckName);
     fetch('/threebeesandme/post/heroanddeckselector/deck', {
         method: 'POST',
         headers: {

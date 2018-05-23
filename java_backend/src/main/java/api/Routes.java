@@ -76,9 +76,9 @@ class Routes {
         Random rand = new Random();
         boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
-            howeststone.setActivePlayer("You");
+            howeststone.setActivePlayer("you");
         }else {
-            howeststone.setActivePlayer("Enemy");
+            howeststone.setActivePlayer("enemy");
         }
         context.json(howeststone.getActivePlayer());
     }
