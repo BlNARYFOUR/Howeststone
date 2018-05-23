@@ -1,9 +1,9 @@
 package abilities;
 
-public class Charge implements Ability {
+public class Charge extends Ability {
     private boolean exhausted = false;
 
-
     public Charge() {
+
     }
 }
