@@ -2,7 +2,7 @@
 package console;
 
 import cards.Card;
-import console.formatters.ColorFormats;
+import formatters.ColorFormats;
 import game.*;
 import org.jetbrains.annotations.NotNull;
 import java.util.*;
