@@ -5,12 +5,14 @@ import java.util.List;
 
 public class Card {
     private static int mockID;
+
     private int cardID;
     private String cardName;
     private String urlOfImg;
     private String rarity;
     private int manaCost;
     private List<Abilities> cardAbilities;
+    private boolean canAttack = false;
     // TODO: private List<Mechanics> cardMechanics;
 
     public Card(){
@@ -38,6 +40,9 @@ public class Card {
         getOtherInfo(cardID);
         // TODO get other cardSpecifications
     }
+    public int getCardID() {
+        return cardID;
+    }
     public String toString() {
         return String.valueOf(cardID);
     }
@@ -48,6 +53,10 @@ public class Card {
         // TODO: card.doDamage();
 
         return false;
+    }
+
+    public boolean getCanAttack() {
+        return canAttack;
     }
 
 

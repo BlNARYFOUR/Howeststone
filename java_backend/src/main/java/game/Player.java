@@ -1,5 +1,6 @@
 package game;
 
+import cards.Card;
 import cards.CardCollection;
 import hero.Hero;
 
@@ -68,4 +69,23 @@ public class Player {
     public void setCardsInHand(CardCollection cardsInHand) {
         this.cardsInHand = cardsInHand;
     }
+
+    public void setCardsInHand(List<String> cardsInHandList) {
+        cardsInHand = new CardCollection();
+        cardsInHand.addCards(cardsInHandList);
+    }
+
+    /*public Card getRandomTarget() {
+        //TODO hoe zorg ik dat ik een kaart OF de hero kan teruggeven?
+
+        List<Card> targetCards = this.getCardsOnPlayingField().getCards();
+        int resultIndex = (int)Math.round(Math.random())*(targetCards.size());
+
+        if (resultIndex == targetCards.size()) {
+            //dan is het de Hero
+        } else {
+            return this.getCardsOnPlayingField().getCards().get(resultIndex);
+        }
+
+    }*/
 }
