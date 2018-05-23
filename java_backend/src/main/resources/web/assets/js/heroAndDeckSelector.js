@@ -197,7 +197,7 @@ function playGame() {
     setTimeout(function playrealGame() {
         document.getElementById('vsScreen').className = "hidden";
         document.getElementById('replaceCardScreen').className = "";
-        activateReplaceCards();
+        getReplaceCards();
     }, 3000);
 }
 
@@ -242,5 +242,4 @@ function handleDeckSelection(deckName) {
     .catch(function(err) {
         console.log("Error: Could not send the selected deck :'(");
     });
-
 }

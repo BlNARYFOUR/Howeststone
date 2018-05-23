@@ -1,5 +1,6 @@
 package api;
 
+import cards.CardCollection;
 import game.*;
 import io.javalin.Context;
 import io.javalin.Javalin;
@@ -17,7 +18,9 @@ class Routes {
         //server.get("/API/getAllCards", this::getAllCards);
 
         // GAME BOARD
+        server.get("/threebeesandme/get/gameboard/begincards", this::getBeginCards);
         server.get("/threebeesandme/get/gameboard/begin", this::beginGame);
+        server.get("/threebeesandme/post/gameboard/handcards", this::getHandCards);
         server.get("threebeesandme/get/gameboard/battlelog", this::getBattleLog);
         server.get("threebeesandme/get/gameboard/timeleft", this::getTimeLeft);
         server.post("threebeesandme/post/gameboard/endturn", this::handleEndUrn);
@@ -40,7 +43,6 @@ class Routes {
         //TODO sort server.post("threebeesandme/post/deckbuilder/sort?by=", null);
         server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
          }
-
 
     Game howeststone = new Game();
 
@@ -82,6 +84,25 @@ class Routes {
         }
         context.json(howeststone.getActivePlayer());
     }
+
+    private void getBeginCards(Context context) {
+        CardCollection beginCards = new CardCollection();
+        if (howeststone.getActivePlayer().equals("enemy")){
+            beginCards.addCard(howeststone.getYou().getDeck().drawCard().getCardID());
+        }
+        beginCards.addCard(howeststone.getYou().getDeck().drawCard().getCardID());
+        beginCards.addCard(howeststone.getYou().getDeck().drawCard().getCardID());
+        beginCards.addCard(howeststone.getYou().getDeck().drawCard().getCardID());
+        context.json(beginCards);
+        // TODO give cards ipv id's
+    }
+    private void getHandCards(Context context) {
+        System.out.println("test");
+        System.out.println(context.body());
+        context.json(howeststone);
+        // howeststone.getYou().setCardsInHand(null);
+    }
+
 
     private void getAllCards(Context context) {
         context.result("Cards");
