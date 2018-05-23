@@ -97,8 +97,8 @@ class Routes {
         // TODO give cards ipv id's
     }
     private void getHandCards(Context context) {
-        System.out.println("test");
         System.out.println(context.body());
+
         context.json(howeststone);
         // howeststone.getYou().setCardsInHand(null);
     }

@@ -161,8 +161,20 @@ function endMyTurn(e) {
 
 function gotoCardsReplaced() {
     // HOW TO DO THIS ??
-    document.querySelectorAll('#replaceCardScreen ul li.selected');
-    replaceCards();
+    let beginCards = document.querySelectorAll('#replaceCardScreen ul li');
+
+
+    let CardsInHand= [];
+    let CardsToDeck = [];
+    for (let i = 0; i <beginCards.length; i++){
+        if (beginCards[i].classList.length === 1){
+            CardsInHand.push(beginCards[i].classList[0]);
+        }else {
+            CardsToDeck.push(beginCards[i].classList[0])
+        }
+    }
+    let beginCardsJSON = {"CardsInHand": CardsInHand,"CardsToDeck": CardsToDeck};
+    replaceCards(beginCardsJSON);
     document.getElementById('replaceCardScreen').className = "hidden";
     deactivateReplaceCards();
 }
@@ -173,7 +185,7 @@ function replaceCards(countReplaceCards) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: countReplaceCards
+        body: JSON.stringify(countReplaceCards)
     })
         .then(function(res) {
             if(res.ok === true)
@@ -199,8 +211,9 @@ function activateReplaceCards(cards) {
     html += ' the game</h1><h2>Keep or replace cards</h2><ul>';
 
     for (let i = 0; i < cards["cards"].length; i++) {
-        html += '<li>' + cards["cards"][i]["cardID"] + '</li>';
+        html += '<li class="' + cards["cards"][i]["cardID"] + '"></li>';
     }
+    // TODO background-images of img via src=cards["cards"][i]["img"]
     html += '</ul><span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Replace</a></span>';
     document.querySelector("#replaceCardScreen").innerHTML = html;
 
