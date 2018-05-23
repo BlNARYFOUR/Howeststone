@@ -41,7 +41,7 @@
       {
 
         "name": "Battlecry",
-        "mechNeeded": 0
+        "mechNeeded": 1
       },
       {
         "name": "Turn End",
@@ -491,7 +491,7 @@
     "abilities": [
       {
         "name": "Deathrattle",
-        "mechNeeded": 0
+        "mechNeeded": 1
       },
       {
         "name": "Battlecry",
@@ -1048,10 +1048,10 @@
     "abilities": [
       {
         "name": "Battlecry",
-        "mechNeeded": 0
+        "mechNeeded": 1
       },
       {
-        "name": "DestroyedDevineShield",
+        "name": "DestroyedDivineShield",
         "mechNeeded": 1
       }
     ],
@@ -1370,9 +1370,8 @@
     ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "minion",
-        "value": "Silence"
+        "type": "silence",
+        "target": "minion"
       }
     ]
   },
@@ -1723,7 +1722,7 @@
     "abilities": [
       {
         "name": "Battlecry",
-        "mechNeeded": 0
+        "mechNeeded": 1
       },
       {
         "name": "Turn End",
@@ -1894,9 +1893,8 @@
     ],
     "mechanics": [
       {
-        "type": "addAbility",
-        "target": "minion",
-        "value": "Silence"
+        "type": "silence",
+        "target": "minion"
       }
     ]
   },

@@ -82,7 +82,13 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Silence"
+        "name": "Battlecry"
+      }
+    ],
+    "mechanics": [
+      {
+        "type": "silence",
+        "target": "minion"
       }
     ]
   },
@@ -375,13 +381,14 @@
     "locale": "enUS",
     "abilities": [
       {
-        "name": "Silence"
-      },
-      {
         "name": "Battlecry"
       }
     ],
     "mechanics": [
+      {
+        "type": "silence",
+        "target": "allEnemyMinions"
+      },
       {
         "type": "drawCards",
         "value": "1"
@@ -1294,7 +1301,7 @@
     "abilities": [
       {
         "name": "Battlecry",
-        "mechNeeded": 0
+        "mechNeeded": 1
       },
       {
         "name": "Turn End",

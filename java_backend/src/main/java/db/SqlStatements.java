@@ -16,6 +16,9 @@ public class SqlStatements {
     public static final String SELECT_MECHANIC_ID =
             "SELECT mechanicId FROM howeststone.Mechanics WHERE mechanicType = ?";
 
+    public static final String SELECT_ABILITY_ID =
+            "SELECT abilityId FROM howeststone.Abilities WHERE abilityName = ?";
+
     public static final String SELECT_CARDSINDECK =
             "SELECT * FROM howeststone.Decks;";
 
@@ -39,6 +42,9 @@ public class SqlStatements {
 
     public static final String INSERT_CARD_MECHANIC =
             "INSERT INTO `howeststone`.`CardMechanics` (`mechanicId`, `target`, `mechValue`) VALUES (?, ?, ?)";
+
+    public static final String INSERT_CARD_ABILITY =
+            "INSERT INTO `howeststone`.`CardAbilities` (`abilityId`, `cardId`, `cardMechId`) VALUES (?, ?, ?)";
 
     public static final String INSERT_CARD =
             "INSERT INTO `howeststone`.`Cards` (`cardName`, `cardType`,`race` ,`img`, `rarity`, `health`, `attack`, `manaCost`, `durability`, `heroId`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

@@ -24,6 +24,7 @@ public class SetupDatabase {
     private static final String WEAPONS_LOCATION = "json/weapons.json";
 
     private static final String[] HEROES = {"Neutral", "Mage", "Paladin"};
+    private static final String[] ABILITIES_WITH_MECHANICS = {"Aura", "Battlecry", "Deathrattle", "DestroyedDivineShield", "Enrage", "On Attack", "On Death", "On Heal", "On Hit", "Turn Begin", "Turn End", "Untargetable", "Update In Hand"};
 
     private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
     private JSONArray spellList;
@@ -143,30 +144,54 @@ public class SetupDatabase {
             heroId = getHeroId(jsonCard.getOrDefault("playerClass", "NULL").toString());
 
             if(0 <= heroId) {
-                insertCard(name, type, race, img, rarity, attack, health, manaCost, durability, heroId);
-                addCardMechanicsToDb(jsonCard);
+                int cardId = insertCard(name, type, race, img, rarity, attack, health, manaCost, durability, heroId);
+                addCardAbilityToDb(jsonCard, cardId);
             }
         }
     }
 
-    private void addCardMechanicsToDb(JSONObject card) {
+    private void addCardAbilityToDb(JSONObject card, int cardId) {
         //noinspection unchecked
-        JSONArray jsonMechanics = (JSONArray) card.getOrDefault("mechanics", null);
+        JSONArray jsonAbilities = (JSONArray) card.getOrDefault("abilities", null);
 
-        if(jsonMechanics != null) {
-            for (Object subItemObj : jsonMechanics) {
+        if(jsonAbilities != null) {
+            for (Object subItemObj : jsonAbilities) {
                 JSONObject jsonAbility = (JSONObject) subItemObj;
                 //noinspection unchecked
-                String mechanicType = jsonAbility.get("type").toString();
-                //noinspection unchecked
-                String target = jsonAbility.getOrDefault("target", "NULL").toString();
-                //noinspection unchecked
-                String value = jsonAbility.getOrDefault("value", "NULL").toString();
+                String abilityName = jsonAbility.get("name").toString();
 
-                int id = getMechanicId(mechanicType);
+                int abilityId = getAbilityId(abilityName);
 
-                if (0 <= id) {
-                    insertCardMechanic(id, target, value);
+                if (0 <= abilityId) {
+                    int cardMechId = 1;
+
+                    if(Arrays.asList(ABILITIES_WITH_MECHANICS).contains(abilityName)) {
+                        //noinspection unchecked
+                        JSONArray jsonMechanics = (JSONArray) card.getOrDefault("mechanics", null);
+                        //noinspection unchecked
+                        int mechNeeded = Integer.parseInt(jsonAbility.getOrDefault("mechNeeded", jsonMechanics.size()).toString());
+
+                        for (int i=0; i<mechNeeded; i++) {
+                            Object obj = jsonMechanics.get(i);
+
+                            JSONObject jsonMechanic = (JSONObject) obj;
+                            //noinspection unchecked
+                            String mechanicType = jsonMechanic.get("type").toString();
+                            //noinspection unchecked
+                            String target = jsonMechanic.getOrDefault("target", "NULL").toString();
+                            //noinspection unchecked
+                            String value = jsonMechanic.getOrDefault("value", "NULL").toString();
+
+                            int mechanicId = getMechanicId(mechanicType);
+
+                            if (0 <= mechanicId) {
+                                cardMechId = insertCardMechanic(mechanicId, target, value);
+                                insertCardAbility(abilityId, cardId, cardMechId);
+                            }
+                        }
+                    } else {
+                        insertCardAbility(abilityId, cardId, cardMechId);
+                    }
                 }
             }
         }
@@ -206,7 +231,9 @@ public class SetupDatabase {
         insertSingleValue(hero, SqlStatements.INSERT_HERO, "hero");
     }
 
-    private void insertCard(String name, String type,String race ,String img, String rarity, int attack, int health, int manaCost, int durability, int heroId) {
+    private int insertCard(String name, String type,String race ,String img, String rarity, int attack, int health, int manaCost, int durability, int heroId) {
+        long id = -1;
+
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_CARD,
@@ -230,8 +257,8 @@ public class SetupDatabase {
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    final long ID = rs.getLong(1);
-                    System.out.printf("\t* '%s' now has ID %d\n", name, ID);
+                    id = rs.getLong(1);
+                    System.out.printf("\t* '%s' now has ID %d\n", name, id);
                 } else {
                     throw new SQLException("No card created: no ID obtained.");
                 }
@@ -240,6 +267,8 @@ public class SetupDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return (int) id;
     }
 
     private void insertSingleValue(String value, String statement, String name) {
@@ -269,7 +298,9 @@ public class SetupDatabase {
         }
     }
 
-    private void insertCardMechanic(int mechanicId, String target, String value) {
+    private int insertCardMechanic(int mechanicId, String target, String value) {
+        long cardMechId = -1;
+
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_CARD_MECHANIC,
@@ -286,11 +317,34 @@ public class SetupDatabase {
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    final long ID = rs.getLong(1);
-                    System.out.printf("\t* new cardMechanic now has ID %d\n", ID);
+                    cardMechId = rs.getLong(1);
+                    System.out.printf("\t* new cardMechanic now has ID %d\n", cardMechId);
                 } else {
                     throw new SQLException("No cardMechanic created: no ID obtained.");
                 }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return (int) cardMechId;
+    }
+
+    private void insertCardAbility(int abilityId, int cardId, int cardMechId) {
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_CARD_ABILITY)
+        ) {
+            stmt.setInt(1, abilityId);
+            stmt.setInt(2, cardId);
+            stmt.setInt(3, cardMechId);
+            final int AFFECTED_ROWS = stmt.executeUpdate();
+
+            if (AFFECTED_ROWS == 0) {
+                throw new SQLException("No cardAbility created: no rows affected.");
+            } else {
+                System.out.println("\t* new cardAbility has been added");
             }
 
         } catch (SQLException e) {
@@ -304,6 +358,10 @@ public class SetupDatabase {
 
     private int getMechanicId(String mechanicType) {
         return getSingleInt(mechanicType, SqlStatements.SELECT_MECHANIC_ID, "mechanicId");
+    }
+
+    private int getAbilityId(String abilityName) {
+        return getSingleInt(abilityName, SqlStatements.SELECT_ABILITY_ID, "abilityId");
     }
 
     private int getSingleInt(String value, String statement, String name) {
