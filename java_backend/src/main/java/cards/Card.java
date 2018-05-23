@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Card {
     private static int mockID;
+
     private int cardID;
     private String cardName;
     private String urlOfImg;
@@ -38,6 +39,9 @@ public class Card {
         this.cardID = cardID;
         getOtherInfo(cardID);
         // TODO get other cardSpecifications
+    }
+    public int getCardID() {
+        return cardID;
     }
     public String toString() {
         return String.valueOf(cardID);

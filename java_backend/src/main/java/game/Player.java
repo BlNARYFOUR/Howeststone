@@ -70,6 +70,11 @@ public class Player {
         this.cardsInHand = cardsInHand;
     }
 
+    public void setCardsInHand(List<String> cardsInHandList) {
+        cardsInHand = new CardCollection();
+        cardsInHand.addCards(cardsInHandList);
+    }
+
     /*public Card getRandomTarget() {
         //TODO hoe zorg ik dat ik een kaart OF de hero kan teruggeven?
 
