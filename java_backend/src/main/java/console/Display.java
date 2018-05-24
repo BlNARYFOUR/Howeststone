@@ -157,7 +157,7 @@ public class Display {
     private void enemyMinionsAttack(Game howeststone) {
         for (Card card: howeststone.getEnemy().getCardsOnPlayingField().getCards()) {
             int windfuryCounter = 1;
-            while (card.getCanAttack() && windfuryCounter <= 2) {
+            while (card.getAmountAttacked() == 0 && windfuryCounter <= 2) {
 
                 //TODO maak functie die een random target kiest
                 //howeststone.getYou().getRandomTarget();
