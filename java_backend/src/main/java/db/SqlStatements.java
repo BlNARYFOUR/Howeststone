@@ -31,6 +31,13 @@ public class SqlStatements {
     public static final String IS_LEGENDARY =
             "SELECT rarity = \"Legendary\" AS `isLegendary` FROM cards WHERE cardId = ?";
 
+    public static final String IS_UNCOLLECTABLE =
+            "SELECT MAX(abilities.abilityName = \"Uncollectable\") AS `isUncollectable`"
+                    + " FROM cards"
+                    + " LEFT JOIN cardabilities ON cards.cardId=cardabilities.cardId"
+                    + " JOIN abilities ON cardabilities.abilityId=abilities.abilityId"
+                    + " WHERE cards.cardId = ?";
+
     public static final String SELECT_AMOUNT_OF_CARDS_IN_DECK =
             "SELECT amount FROM howeststone.CardsInDecks WHERE deckId = ? AND cardId = ?";
 

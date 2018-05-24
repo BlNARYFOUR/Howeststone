@@ -381,15 +381,37 @@ public class SetupDatabase {
     private boolean addCardToDeck(int deckId, int cardId) {
         int amount = getAmountOfCardInDeck(deckId, cardId);
 
-        if(0 <= amount && amount <= 1 && !isLegendary(cardId)) {
+        if(0 <= amount && amount <= 1 && !isLegendary(cardId) && !isUncollectable(cardId)) {
             updateAmountOfCardInDeck(deckId, cardId, amount+1);
             return true;
-        } else if(amount < 0) {
+        } else if(amount < 0 && !isUncollectable(cardId)) {
             insertCardToDeck(deckId, cardId, 1);
             return true;
         }
 
         return false;
+    }
+
+    private boolean isUncollectable(int cardId) {
+        boolean result = false;
+
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.IS_UNCOLLECTABLE);
+        ){
+            stmt.setInt(1, cardId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    result = rs.getBoolean("isUncollectable");
+                } else {
+                    System.out.println(ColorFormats.red("\t* Could not read the abilities of this card!"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     private boolean isLegendary(int cardId) {
