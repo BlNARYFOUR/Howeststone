@@ -1,5 +1,6 @@
 package game;
 
+import cards.Card;
 import cards.CardCollection;
 import hero.Hero;
 
@@ -10,6 +11,7 @@ public class Player {
     private CardCollection cardsInHand;
     private CardCollection cardsOnPlayingField;
     private CardCollection cardsInDeck;
+    private int mana = 0;
 
     public Hero getHero() {
         return hero;
@@ -25,6 +27,18 @@ public class Player {
 
     public CardCollection getCardsInHand() {
         return cardsInHand;
+    }
+
+    public CardCollection getCardsOnPlayingField() {
+        return cardsOnPlayingField;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
     }
 
     public Player() {
@@ -60,4 +74,18 @@ public class Player {
         cardsInHand = new CardCollection();
         cardsInHand.addCards(cardsInHandList);
     }
+
+    /*public Card getRandomTarget() {
+        //TODO hoe zorg ik dat ik een kaart OF de hero kan teruggeven?
+
+        List<Card> targetCards = this.getCardsOnPlayingField().getCards();
+        int resultIndex = (int)Math.round(Math.random())*(targetCards.size());
+
+        if (resultIndex == targetCards.size()) {
+            //dan is het de Hero
+        } else {
+            return this.getCardsOnPlayingField().getCards().get(resultIndex);
+        }
+
+    }*/
 }
