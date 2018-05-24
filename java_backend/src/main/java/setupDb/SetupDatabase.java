@@ -29,7 +29,7 @@ public class SetupDatabase {
     private static final String[] HEROES = {NEUTRAL, "Mage", "Paladin"};
     private static final String[] ABILITIES_WITH_MECHANICS = {"Aura", "Battlecry", "Deathrattle", "DestroyedDivineShield", "Enrage", "On Attack", "On Death", "On Heal", "On Hit", "Turn Begin", "Turn End", "Untargetable", "Update In Hand"};
 
-    private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
+    private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306/HOWESTSTONE", "root", "");
     private JSONArray spellList;
     private JSONArray minionList;
     private JSONArray weaponList;

@@ -59,7 +59,7 @@ public class Player {
     }
 
     public void setDeck(String deckName) {
-        cardsInDeck = new CardCollection(deckName);
+        //TODO cardsInDeck = new CardCollection(deckName, hero);
     }
 
     public CardCollection getDeck() {
@@ -72,7 +72,7 @@ public class Player {
 
     public void setCardsInHand(List<String> cardsInHandList) {
         cardsInHand = new CardCollection();
-        cardsInHand.addCards(cardsInHandList);
+        // TODO cardsInHand.addCards(cardsInHandList);
     }
 
     /*public Card getRandomTarget() {

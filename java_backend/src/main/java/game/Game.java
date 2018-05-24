@@ -1,11 +1,13 @@
 package game;
 
+import cards.CardCollection;
 import hero.Hero;
 
-public class Game {
-    // TODO: MOCKERS
-    protected static final String[] MOCKED_HEROES = {"mage", "paladin"};
+import java.util.*;
 
+public class Game {
+    public List<String> heroNames = new ArrayList<>();
+    public Map<String , CardCollection> deckNames = new HashMap<>();
     // TODO: actual fields
     private Player you;
     private Player enemy;
@@ -26,8 +28,8 @@ public class Game {
     }
 
     // TODO change to multiple Heroes
-    public String[] getHeroNames() {
-        return MOCKED_HEROES;
+    public List<String> getHeroNames() {
+        return heroNames;
     }
 
     // TODO change to multiple Decks
@@ -95,5 +97,13 @@ public class Game {
 
     public void setTurnTime(int turnTime) {
         this.turnTime = turnTime;
+    }
+
+    public List<String> getDeckNames() {
+        List<String> deckNamesForChosenHero = new ArrayList<>();
+        System.out.println(you.getHero().getHeroName());
+        System.out.println(deckNames.get(you.getHero().getHeroName()));
+        deckNamesForChosenHero.add(deckNames.get(you.getHero().getHeroName()).getNameOfCardCollection());
+        return deckNamesForChosenHero;
     }
 }

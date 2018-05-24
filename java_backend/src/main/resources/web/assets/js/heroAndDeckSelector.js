@@ -80,15 +80,15 @@ function showHeroes(heroes) {
 
     for (let i = 0; i < heroes.length; i++) {
         if (i === 0) {
-            selectedHero = heroes[i].toLowerCase();
+            selectedHero = heroes[i];
         }
 
         for (let j = 0; j < heroesHtml.length; j++) {
-            heroesHtml[j].innerHTML += '<li><a href="#" class="' + heroes[i].toLowerCase() + '"><h2>' + heroes[i] + '</h2></a></li>';
+            heroesHtml[j].innerHTML += '<li><a href="#" class="' + heroes[i] + '"><h2>' + heroes[i] + '</h2></a></li>';
         }
 
         document.querySelector("#deckbuilder #hero").innerHTML += '<a href="#">' + heroes[i] + '</a>';
-        let heroHtmlObj = document.querySelectorAll('.heroes .' + heroes[i].toLowerCase());
+        let heroHtmlObj = document.querySelectorAll('.heroes .' + heroes[i]);
 
         for (let j = 0; j < heroHtmlObj.length; j++) {
             heroHtmlObj[j].style.background = 'url("assets/media/' + heroes[i] + '.png") center center no-repeat';
@@ -198,7 +198,7 @@ function deckbuilderSelectAndDeselectHero() {
 
     for (let i = 0; i < heroes.length; i++) {
         console.log("Gets in here: " + selectedHero);
-        if (heroes[i].innerText.toLowerCase() === selectedHero) {
+        if (heroes[i].innerText === selectedHero) {
             heroes[i].style.backgroundColor = "grey";
         }
         else {

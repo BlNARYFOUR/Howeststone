@@ -7,8 +7,10 @@ import io.javalin.Javalin;
 import java.util.Arrays;
 
 class Routes {
+    private final Game HOWESTSTONE;
 
-    Routes(final Javalin server) {
+    Routes(final Javalin server, Game game) {
+        HOWESTSTONE = game;
         // case sensitive
         server.get("/API/getAllCards", this::getAllCards);
         //server.get("/API/getAllCards", this::getAllCards);
@@ -37,26 +39,22 @@ class Routes {
         server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
          }
 
-
-
-    Game howeststone = new Game();
-
     // HERO AND DECK SELECTOR
 
     private void getAllHeroes(Context context) {
-        context.json(howeststone.getHeroNames());
+        context.json(HOWESTSTONE.getHeroNames());
     }
     private void handleHeroSelection(Context context) {
         Player you = new Player();
         you.setHero(context.body());
-        howeststone.addYou(you);
-        context.json(howeststone.getYou().getHero().getHeroName());
+        HOWESTSTONE.addYou(you);
+        context.json(HOWESTSTONE.getYou().getHero().getHeroName());
     }
     private void getAllDecks(Context context) {
-        context.json(howeststone.getYou().getHero().getDeckNames());
+        context.json(HOWESTSTONE.getDeckNames());
     }
     private void handleDeckSelection(Context context) {
-        howeststone.getYou().setDeck(context.body());
+        HOWESTSTONE.getYou().setDeck(context.body());
     }
     // GAME BOARD
 
