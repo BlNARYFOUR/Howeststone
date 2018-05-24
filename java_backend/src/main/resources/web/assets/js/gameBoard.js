@@ -180,7 +180,7 @@ function gotoCardsReplaced() {
 }
 
 function replaceCards(countReplaceCards) {
-    fetch('/threebeesandme/post/gameboard/handcards', {
+    fetch('/threebeesandme/post/gameboard/cardsinhand', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
