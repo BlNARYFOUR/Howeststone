@@ -2,17 +2,20 @@ package cards;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt. (er zijn uitzonderingen)
 public class Card {
     private static int mockID;
 
+    private int maxAmountOfAttacks;
+    private boolean exhausted;
     private int cardID;
     private String cardName;
     private String urlOfImg;
     private String rarity;
     private int manaCost;
+    private int health;
     private List<Abilities> cardAbilities;
-    private boolean canAttack = false;
+    private int amountAttacked;
     // TODO: private List<Mechanics> cardMechanics;
 
     public Card(){
@@ -20,6 +23,9 @@ public class Card {
         this.cardID = mockID;
         mockID ++;
         getOtherInfo(cardID);
+        this.exhausted = true;
+        this.amountAttacked = 0;
+        this.maxAmountOfAttacks = 1;
     }
 
     private void getOtherInfo(int mockID) {
@@ -55,8 +61,20 @@ public class Card {
         return false;
     }
 
-    public boolean getCanAttack() {
-        return canAttack;
+    public void awaken() {
+        exhausted = false;
+    }
+
+    public int getAmountAttacked() {
+        return amountAttacked;
+    }
+
+    public void increaseMaxAmountOfAttacks() {
+        maxAmountOfAttacks++;
+    }
+
+    public void addHealth(int health) {
+        this.health += health;
     }
 
 
