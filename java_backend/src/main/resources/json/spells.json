@@ -840,6 +840,9 @@
     "abilities": [
       {
         "name": "Battlecry"
+      },
+      {
+        "name": "Uncollectable"
       }
     ],
     "mechanics": [
