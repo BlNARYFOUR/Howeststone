@@ -41,6 +41,22 @@ public class Card {
         return manaCost;
     }
 
+    public List<Abilities> getCardAbilities() {
+        return cardAbilities;
+    }
+
+    public int getMaxAmountOfAttacks() {
+        return maxAmountOfAttacks;
+    }
+
+    public boolean isExhausted() {
+        return exhausted;
+    }
+
+    public void setExhausted(boolean exhausted) {
+        this.exhausted = exhausted;
+    }
+
     public Card(int cardID){
         this.cardID = cardID;
         getOtherInfo(cardID);
@@ -71,6 +87,10 @@ public class Card {
 
     public void increaseMaxAmountOfAttacks() {
         maxAmountOfAttacks++;
+    }
+
+    public void increaseAmountAttacked() {
+        amountAttacked++;
     }
 
     public void addHealth(int health) {

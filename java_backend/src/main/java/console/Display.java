@@ -4,8 +4,10 @@ package console;
 import cards.Card;
 import cards.CardCollection;
 import formatters.ColorFormats;
-import game.*;
+import game.Game;
+import game.Player;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 public class Display {
@@ -157,9 +159,8 @@ public class Display {
     private void enemyMinionsAttack(Game howeststone) {
         for (Card card: howeststone.getEnemy().getCardsOnPlayingField().getCards()) {
             int windfuryCounter = 1;
-            while (card.getAmountAttacked() == 0 && windfuryCounter <= 2) {
+            while (!card.isExhausted() && card.getAmountAttacked() < card.getMaxAmountOfAttacks()) {
 
-                //TODO maak functie die een random target kiest
                 //howeststone.getYou().getRandomTarget();
 
                 // kies random minion/hero van speler ==> randomCardPlayer
@@ -181,11 +182,12 @@ public class Display {
 
                 // update battlelog
 
-                /*if (!card.getCardAbilities.contains("windfury")) {
-                    card.setCanAttack(false)
+                /*if (!card.getCardAbilities().contains(Abilities.WINDFURY)) {
+                    card.setExhausted(true);
                 } else {
-                    windfuryCounter ++
+                     card.increaseAmountAttacked();
                 }*/
+
             }
         }
     }
