@@ -7,17 +7,6 @@ function main() {
 
 }
 
-// TODO
-function gotoCardsReplaced() {
-    if (countReplaceCards !== 0){
-        replaceCards(countReplaceCards);
-    }
-    document.getElementById('replaceCardScreen').className = "hidden";
-    deactivateReplaceCards();
-    setTimeout(yourTurn, 1000);
-
-}
-
 function init() {
     // register
     // login
@@ -35,8 +24,6 @@ function init() {
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
     document.getElementById('gotoHeroChooser').addEventListener('click', gotoHeroChooser);
     document.getElementById('toggleFullScreen').addEventListener('click', toggleFullScreen);
-    document.getElementById('gotoCardsReplaced').addEventListener('click', gotoCardsReplaced);
-
 }
 
 function toggleFullScreen() {

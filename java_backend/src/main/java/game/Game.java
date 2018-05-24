@@ -2,9 +2,13 @@ package game;
 
 import hero.Hero;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Game {
     // TODO: MOCKERS
-    protected static final String[] MOCKED_HEROES = {"mage", "paladin"};
+    protected static final String[] MOCKED_HEROES = {"Mage", "Paladin"};
 
     // TODO: actual fields
     private Player you;
@@ -16,6 +20,14 @@ public class Game {
     /*private Hero you;
     private CardCollection deck;*/
 
+    public void generateEnemy(){
+        final List<String> HEROES = new ArrayList<>(Arrays.asList(this.getHeroNames()));
+        int randomHeroIndex = (int)Math.round(Math.random())*(HEROES.size()-1);
+        Player enemy = new Player();
+        enemy.setHero(HEROES.get(randomHeroIndex));
+        enemy.setDeck("Standard");
+        this.addEnemy(enemy);
+    }
 
     public Hero getYourHero() {
         return you.getHero();
