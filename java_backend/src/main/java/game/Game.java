@@ -1,5 +1,7 @@
 package game;
 
+import cards.Card;
+import cards.Minion;
 import hero.Hero;
 
 public class Game {
@@ -69,6 +71,7 @@ public class Game {
     public Player getEnemy(){
         return enemy;
     }
+
     public void addYou(Player you) {
         this.you = you;
     }
@@ -78,7 +81,6 @@ public class Game {
     }
 
     public void shuffleDecks() {
-
     }
 
     public void setActivePlayer(String activePlayer) {
@@ -95,5 +97,15 @@ public class Game {
 
     public void setTurnTime(int turnTime) {
         this.turnTime = turnTime;
+    }
+
+    public void attackMinion(Minion attacker, Minion target) {
+        int attackValueAttacker = attacker.getAttack();
+        int healthValueAttacker = attacker.getHealth();
+        int attackValueTarget = target.getAttack();
+        int healthValueTarget = target.getAttack();
+
+        target.setHealth(healthValueTarget - attackValueAttacker);
+        attacker.setHealth(healthValueAttacker - attackValueTarget);
     }
 }
