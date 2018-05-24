@@ -2,9 +2,12 @@
 package console;
 
 import cards.Card;
-import console.formatters.ColorFormats;
-import game.*;
+import cards.CardCollection;
+import formatters.ColorFormats;
+import game.Game;
+import game.Player;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 public class Display {
@@ -19,7 +22,7 @@ public class Display {
         chooseHero(howeststone);
         chooseDeck(howeststone);
         startGame(howeststone);
-        
+
         //howeststone.setYourDeck("Standard");
         //System.out.println(howeststone.getDeck());
         //Player you = new Player(howeststone.getYourHero());
@@ -96,31 +99,89 @@ public class Display {
 
 
         // - cardInfo // on one line
-        List<String> replace = askInputUntilStop(yourCardsInHandList);
+        List<String> replaceCardList = askInputUntilStop(yourCardsInHandList);
 
-        howeststone.getYou().getDeck().addCards(replace);
-        for (String cardID: replace) {
+        howeststone.getYou().getDeck().addCards(replaceCardList);
+        for (String cardID: replaceCardList) {
             yourCardsInHandList.remove(cardID);
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
-        howeststone.getEnemy().setCardsInHand(enemyCardsInHandList);
-        howeststone.getYou().setCardsInHand(yourCardsInHandList);
+        replaceCardList.remove("stop");
+        System.out.println("replaceCardList" + replaceCardList);
+        System.out.println(howeststone.getYou().getDeck());
+
+        // howeststone.getYou().setCardsInHand(replace);
+
         if (howeststone.getActivePlayer().equals("You")){
-            yourTurn(howeststone);
+            // add 3/4 cards to hand
+            howeststone.setTurnTime(50);
         }else {
+            for (String card: replaceCardList) {
+                //TODO add card to hand enemy
+            }
+            // replace cards ?
+            System.out.println(howeststone.getEnemy().getCardsInHand());
             enemyTurn(howeststone);
         }
     }
 
     private void enemyTurn(Game howeststone) {
-        //TODO als het niet de eerste turn is, howeststone.getEnemy().getCardsInHand().addCard(drawCard())
+        // check deze code zeker
+        howeststone.getEnemy().getCardsInHand().addCard(Integer.parseInt(howeststone.getYou().getDeck().drawCard().toString()));
+        howeststone.getEnemy().setMana(howeststone.getEnemy().getMana()+1);
 
-        /*String cheapestCard = howeststone.getEnemy().getCardsInHand().getCheapestCard();
-        if (howeststone.getEnemy().getMana() >= cheapestCard) {
-            enemyPlay(cheapestCard);
-        } else {
-            howeststone.endTurn();
-        }*/
+        // enemy speelt altijd duurste kaarten eerst:
+        Card mostExpensiveCard = howeststone.getEnemy().getCardsInHand().getMostExpensiveCard();
+        while (howeststone.getManaEnemy() >= mostExpensiveCard.getManaCost()) {
+            playCard(mostExpensiveCard, howeststone);
+            mostExpensiveCard = howeststone.getEnemy().getCardsInHand().getMostExpensiveCard();
+            printGame(howeststone);
+        }
+
+        enemyMinionsAttack(howeststone);
+        // TODO check of je genoeg mana hebt voor de heropower + als het mage is: of er een target is
+        useHeroPower(howeststone, howeststone.getEnemy());
+
+        // endTurn();
+        // setCanAttack of all minions of enemy to true
+        howeststone.setActivePlayer("You");
+        System.out.println(howeststone.getEnemy().getCardsOnPlayingField());
+    }
+
+    private void enemyMinionsAttack(Game howeststone) {
+        for (Card card: howeststone.getEnemy().getCardsOnPlayingField().getCards()) {
+            int windfuryCounter = 1;
+            while (!card.isExhausted() && card.getAmountAttacked() < card.getMaxAmountOfAttacks()) {
+
+                //howeststone.getYou().getRandomTarget();
+
+                // kies random minion/hero van speler ==> randomCardPlayer
+                // Card target = randomCardPlayer;
+                // int health = target.getHealth (voor hieronder)
+
+                // val die aan (attack functie in classe minion)
+                // howeststone.getEnemy().getCardsOnPlayingField()...attack(target)
+                // + int attack = getAttack
+
+                // voer eventuele abilities uit
+
+                // update health
+                // health - attack (- eventuele abilitydamage)
+
+                // howeststone.getEnemy().getCardsOnPlayingField()...setHealth(card.getHealth - target.getDamage (- eventuele ability))
+
+                // voer dode kaarten af
+
+                // update battlelog
+
+                /*if (!card.getCardAbilities().contains(Abilities.WINDFURY)) {
+                    card.setExhausted(true);
+                } else {
+                     card.increaseAmountAttacked();
+                }*/
+
+            }
+        }
     }
 
     private void yourTurn(Game howeststone) {
@@ -159,6 +220,40 @@ public class Display {
         //      - hero
         //      - minion
         // end turn (active player change and enemy turn)
+    }
+
+
+    private void playCard(Card card, Game howeststone) {
+        CardCollection areaPlayingField = howeststone.getYou().getCardsOnPlayingField();
+        if ((howeststone.getActivePlayer()).equals("Enemy")) {
+            areaPlayingField = howeststone.getEnemy().getCardsOnPlayingField();
+        }
+        if (areaPlayingField.getCards().size() < 7) {
+            areaPlayingField.addCard(Integer.parseInt(card.toString()));
+        }
+    }
+
+    private void useHeroPower(Game howeststone, Player player) {
+        if (Objects.equals(player.getHero().getHeroName(), "Paladin")) {
+            //TODO replace silver hand recruit id
+            //player.getCardsOnPlayingField().addCard("Silver Hand Recruit");
+        } else {
+            // TODO choose if target is selected before or in this function
+            if (player == howeststone.getEnemy()) {
+                // howeststone.getYou().getRandomTarget();
+            } else {
+                // select target
+            }
+            int damage = howeststone.getYou().getHero().getMageAttack(); //ofwel 2
+            //TODO target health -damage
+        }
+    }
+
+    private void printGame(Game howeststone) {
+        System.out.println(ColorFormats.red("weapon/hero/mana/hand Enemy: ") + ColorFormats.green("NYI"));
+        System.out.println(ColorFormats.red("Playing Field Enemy: ") + ColorFormats.green(howeststone.getEnemy().getCardsOnPlayingField().toString()));
+        System.out.println(ColorFormats.red("Playing Field Player: ") + ColorFormats.green(howeststone.getYou().getCardsOnPlayingField().toString()));
+        System.out.println(ColorFormats.red("weapon/hero/mana/hand Player: ") + ColorFormats.green("NYI"));
     }
 
     private String askInputUntilFoundInList(List<String> list) {

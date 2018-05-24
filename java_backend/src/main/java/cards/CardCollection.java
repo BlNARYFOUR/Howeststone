@@ -24,6 +24,7 @@ public class CardCollection {
             shuffle();
         }
     }
+
     private void shuffle(){
         Collections.shuffle(cards);
     }
@@ -69,5 +70,25 @@ public class CardCollection {
 
     public List<Card> getCards() {
         return cards;
+    }
+    /*
+    public Card getCheapestCard() {
+        Card cheapestCard = this.cards.get(0);
+        for(Card x : this.cards ){
+            if (x.getManaCost() < cheapestCard.getManaCost()) {
+                cheapestCard = x;
+            }
+        }
+        return cheapestCard;
+    }*/
+
+    public Card getMostExpensiveCard() {
+        Card mostExpensiveCard = this.cards.get(0);
+        for(Card x : this.cards ){
+            if (x.getManaCost() > mostExpensiveCard.getManaCost()) {
+                mostExpensiveCard = x;
+            }
+        }
+        return mostExpensiveCard;
     }
 }

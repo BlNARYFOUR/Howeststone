@@ -2029,9 +2029,9 @@
         "value": "1"
       },
       {
-      "type": "durability",
-      "target": "friendlyWeapon",
-      "value": "1"
+        "type": "durability",
+        "target": "friendlyWeapon",
+        "value": "1"
       }
     ]
   },

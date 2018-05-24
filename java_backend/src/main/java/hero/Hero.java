@@ -16,23 +16,31 @@ public class Hero {
     public Hero(String heroName){
         this.health = 30;
         switch (heroName) {
-            case "Mage":
-                this.heroName = "Mage";
+            case "mage":
+                this.heroName = "mage";
                 this.heroPowerID = 0;
                 this.mageAttack = 1;
                 break;
-            case "Paladin":
-                this.heroName = "Paladin";
+            case "paladin":
+                this.heroName = "paladin";
                 this.heroPowerID = 1;
                 break;
             default:
-                throw new IllegalArgumentException("Hero only Paladin or Mage");
+                throw new IllegalArgumentException("Hero only paladin or mage");
         }
 
     }
 
     public String getHeroName() {
         return heroName;
+    }
+
+    public int getMageAttack() {
+        return mageAttack;
+    }
+
+    public int getHeroPowerID() {
+        return heroPowerID;
     }
 
     @Override

@@ -13,6 +13,8 @@ public class Game {
     // TODO: actual fields
     private Player you;
     private Player enemy;
+    private int manaYou;
+    private int manaEnemy;
     private int turnTime;
     private String activePlayer;
     /*private Hero you;
@@ -48,6 +50,22 @@ public class Game {
     public void setYourDeck(String deckName) {
         // TODO check if deck exist
         you.setDeck(deckName);
+    }
+
+    public int getManaYou() {
+        return manaYou;
+    }
+
+    public void setManaYou(int manaYou) {
+        this.manaYou = manaYou;
+    }
+
+    public int getManaEnemy() {
+        return manaEnemy;
+    }
+
+    public void setManaEnemy(int manaEnemy) {
+        this.manaEnemy = manaEnemy;
     }
 
     @Override

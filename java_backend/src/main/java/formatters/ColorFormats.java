@@ -1,4 +1,4 @@
-package console.formatters;
+package formatters;
 
 public class ColorFormats {
     // \033 means "format the next" number after [ means what to format and m is the end of the format.
