@@ -84,5 +84,10 @@ public class SqlStatements {
             " WHERE deckName = ?";
 
 
-    public static final String GET_ABILITIES_OF_CARD = "";
+    public static final String GET_ABILITIES_OF_CARD = "SELECT cardabilities.abilityId, cardabilities.cardMechId, abilities.abilityName, cardmechanics.target, cardmechanics.mechValue, mechanics.mechanicType" +
+            " FROM cardabilities" +
+            " JOIN abilities ON cardabilities.abilityId=abilities.abilityId" +
+            " JOIN cardmechanics ON cardmechanics.cardMechId=cardabilities.cardMechId" +
+            " JOIN mechanics ON mechanics.mechanicId=cardmechanics.mechanicId" +
+            " WHERE cardId = ?";
 }

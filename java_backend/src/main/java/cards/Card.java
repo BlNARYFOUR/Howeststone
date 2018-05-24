@@ -1,13 +1,5 @@
 package cards;
 
-import db.SqlDatabase;
-import db.SqlStatements;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 // Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt. (er zijn uitzonderingen)
@@ -28,9 +20,9 @@ public abstract class Card {
     protected int durability;
     private int heroId;
 
-    private List<Abilities> cardAbilities;
+    /* TODO private List<Abilities> cardAbilities;
     private List<Mechanics> cardMechanics;
-
+*/
     public Card(int cardId, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
         this.cardID = cardId;
         this.cardName = cardName;
@@ -53,9 +45,9 @@ public abstract class Card {
         return manaCost;
     }
 
-    public List<Abilities> getCardAbilities() {
+    /* TODO public List<Abilities> getCardAbilities() {
         return cardAbilities;
-    }
+    }*/
 
     public int getMaxAmountOfAttacks() {
         return maxAmountOfAttacks;

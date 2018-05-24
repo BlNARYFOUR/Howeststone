@@ -1,5 +1,6 @@
 package api;
 
+import abilities.Ability;
 import cards.*;
 import db.SqlDatabase;
 import db.SqlStatements;
@@ -119,8 +120,7 @@ public class Server {
                 }
                 for (int i = 0; i < amount ; i++) {
                     System.out.println("NYI" + card);
-                    addAbilitiesMechanicsToCard(card);
-                    // cards.addCard(card);
+                    cards.addCard(card);
                 }
             }
         } catch (SQLException e) {
@@ -136,7 +136,18 @@ public class Server {
         ) {
             stmt.setInt(1, card.getCardID());
             ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                int abilityId = rs.getInt("abilityId");
+                String abilityName = rs.getString("abilityName");
+                // new ability
+                // check if ability already exist (card)
+                // add mechanics
+                int cardMechId = rs.getInt("cardMechId");
+                String target= rs.getString("target");
+                String mechValue = rs.getString("mechValue");
+                String mechanicType = rs.getString("mechanicType");
 
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
