@@ -106,4 +106,14 @@ public class CardCollection {
         }
         return mostExpensiveCard;
     }
+
+    public CardCollection getSubCollection(List<Integer> cardIds) {
+        CardCollection subCardCollection = new CardCollection();
+        for (int i = 0; i < cards.size(); i++){
+            if (cardIds.contains(cards.get(i).getcardId())){
+                subCardCollection.addCard(cards.get(i));
+            }
+        }
+        return subCardCollection;
+    }
 }

@@ -168,7 +168,7 @@ public class Game {
     }
 
     public CardCollection filterCards(List<String> filterArray) {
-        CardCollection cards = new CardCollection("filterCards");
+        List<Integer> cardIds = new ArrayList<>();
 
         String filterHeroName = "";
         String filterType = "";
@@ -196,45 +196,14 @@ public class Game {
             stmt.setString(4, filterRarity);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()){
-                Card card;
-                int cardId = rs.getInt("cardId");
-                String cardType = rs.getString("cardType");
-                String cardName = rs.getString("cardName");
-                String race = rs.getString("race");
-                String img = rs.getString("img");
-                String rarity = rs.getString("rarity");
-                int health = rs.getInt("health");
-                int attack = rs.getInt("attack");
-                int manaCost = rs.getInt("manaCost");
-                int durability = rs.getInt("durability");
-                int heroId = rs.getInt("heroId");
-                switch (cardType) {
-                    case "Weapon":
-                        card = new Weapon(cardId, cardName, race,
-                                img, rarity, health, attack, manaCost,
-                                durability, heroId);
-                        break;
-                    case "Spell":
-                        card = new Spell(cardId, cardName, race,
-                                img, rarity, health, attack, manaCost,
-                                durability, heroId);
-                        break;
-                    case "Minion":
-                        card = new Minion(cardId, cardName, race,
-                                img, rarity, health, attack, manaCost,
-                                durability, heroId);
-                        break;
-                    default:
-                        throw new IllegalArgumentException("database not setup correctly");
-                }
-                cards.addCard(card);
+                cardIds.add(rs.getInt("cardId"));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         System.out.println(filterHeroName + filterType + filterManaCost + filterRarity);
-        return new CardCollection();
+        return allCards.getSubCollection(cardIds);
     }
 
     public void setDataBase(SqlDatabase db) {
