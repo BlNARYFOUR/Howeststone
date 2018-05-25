@@ -160,10 +160,7 @@ function endMyTurn(e) {
 }
 
 function gotoCardsReplaced() {
-    // HOW TO DO THIS ??
     let beginCards = document.querySelectorAll('#replaceCardScreen ul li');
-
-
     let CardsInHand = [];
     let CardsToDeck = [];
 
@@ -198,8 +195,12 @@ function replaceCards(countReplaceCards) {
                 return "ERROR";
         })
         .then(function (text) {
-            console.log(text);
-            yourTurn();
+            console.log(activePlayer);
+            if(activePlayer === "enemy"){
+                enemyTurn();
+            }else {
+                yourTurn();
+            }
         })
         .catch(function (err) {
             console.log("Error: Could not get the cards in hand");
@@ -217,7 +218,7 @@ function getHTMLForReplaceCardScreen(cards) {
         html += '<li class="card_' + cards["cards"][i]["cardID"] + '"></li>';
     }
 
-    html += '</ul><span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Replace</a></span>';
+    html += '</ul><span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Continue</a></span>';
     document.querySelector("#replaceCardScreen").innerHTML = html;
 
 }
@@ -284,7 +285,16 @@ function gameBoardSetup() {
 }
 
 let heroAttack;
+function enemyTurn() {
+    // TODO fetch
+    // get amount of card in hand
+    // get max mana
+    // get playing field
+    // get heroes health
+    // weapon yes no
 
+    yourTurn();
+}
 function yourTurn() {
     // TODO fetch
     heroAttack = true;
