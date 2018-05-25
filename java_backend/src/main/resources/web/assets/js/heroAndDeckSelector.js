@@ -14,7 +14,7 @@ function init() {
 
     document.getElementById('playGame').addEventListener('click', selectDeck);
     document.getElementById('addDeck').addEventListener('click', addDeck);
-    document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
+
 }
 
 function addDeck() {
@@ -88,6 +88,7 @@ function showHeroes(heroes) {
         }
 
         document.querySelector("#deckbuilder #hero").innerHTML += '<a href="#">' + heroes[i] + '</a>';
+
         let heroHtmlObj = document.querySelectorAll('.heroes .' + heroes[i]);
 
         for (let j = 0; j < heroHtmlObj.length; j++) {
@@ -95,7 +96,10 @@ function showHeroes(heroes) {
             heroHtmlObj[j].style.backgroundSize = "145%";
         }
     }
-
+    let deckBuilderHeroes = document.querySelectorAll('#deckbuilder #hero a');
+    for (let i = 0; i < deckBuilderHeroes.length; i++) {
+        deckBuilderHeroes[i].addEventListener("click", otherHero);
+    }
     let selectableHeroes = document.querySelectorAll('.heroes li a');
     for (let i = 0; i < selectableHeroes.length; i++) {
         selectableHeroes[i].addEventListener("click", handleSelectedHero);
@@ -164,7 +168,6 @@ function handleHeroSelection(heroName) {
         .catch(function (err) {
             console.log("Error: Could not send the selected hero :'(");
         });
-
 }
 function selectDeck(e) {
     e.preventDefault();
@@ -199,27 +202,6 @@ function playGame() {
         document.getElementById('replaceCardScreen').className = "";
         getReplaceCards();
     }, 3000);
-}
-
-function gotoDeckBuilder() {
-    deckbuilderSelectAndDeselectHero();
-
-    document.getElementById('heroChooser').className = "hidden";
-    document.getElementById('deckbuilder').className = "";
-}
-
-function deckbuilderSelectAndDeselectHero() {
-    let heroes = document.querySelectorAll("#deckbuilder #hero a");
-
-    for (let i = 0; i < heroes.length; i++) {
-        console.log("Gets in here: " + selectedHero);
-        if (heroes[i].innerText === selectedHero) {
-            heroes[i].style.backgroundColor = "grey";
-        }
-        else {
-            heroes[i].style.backgroundColor = "white";
-        }
-    }
 }
 
 function handleDeckSelection(deckName) {

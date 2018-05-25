@@ -43,10 +43,12 @@ class Routes {
 
         // DECKBUILDER
         server.get("/threebeesandme/get/deckbuilder/cards", this::getAllCards);
+        server.post("/threebeesandme/post/deckbuilder/hero", this::handleHeroSelection);
+
+
         server.post("threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
-        server.post("threebeesandme/post/deckbuilder/newdeck", this::newDeck);
+        server.post("/threebeesandme/post/deckbuilder/newdeck", this::newDeck);
         server.post("threebeesandme/post/deckbuilder/deleteDeck", this::deleteDeck);
-        server.post("threebeesandme/post/deckbuilder/selecthero", this::handleHeroSelection);
         //TODO sort server.post("threebeesandme/post/deckbuilder/sort?by=", null);
         server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
     }

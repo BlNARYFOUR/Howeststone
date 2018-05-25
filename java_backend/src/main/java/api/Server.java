@@ -164,7 +164,6 @@ public class Server {
                         throw new IllegalArgumentException("database not setup correctly");
                 }
                 for (int i = 0; i < amount ; i++) {
-                    System.out.println("NYI" + card);
                     cards.addCard(card);
                 }
             }

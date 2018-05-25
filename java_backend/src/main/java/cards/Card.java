@@ -1,5 +1,9 @@
 package cards;
 
+import abilities.Abilities;
+import abilities.Ability;
+
+import java.util.ArrayList;
 import java.util.List;
 
 // Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt. (er zijn uitzonderingen)
@@ -19,7 +23,7 @@ public abstract class Card {
     protected int attack;
     protected int durability;
     private int heroId;
-
+    private List<Ability> cardAbilities;
     /* TODO private List<Abilities> cardAbilities;
     private List<Mechanics> cardMechanics;
     */

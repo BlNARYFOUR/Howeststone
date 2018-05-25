@@ -124,7 +124,8 @@ function clickOnCardInDeck(e) {
 
 function init() {
     /*tutorial();*/
-    
+    document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
+
     document.querySelector('#deckbuilder aside form').addEventListener('submit', donNotSubmit);
     document.getElementById('search').addEventListener('input', searchTest);
     document.getElementById('search').addEventListener('input', search);
@@ -184,7 +185,6 @@ function getAllCards() {
 
 function showCards(cards) {
     for (let i=0; i < cards["cards"].length; i++){
-        console.log(cards["cards"][i]);
         let imgUrl = cards["cards"][i]["img"];
         let imgID = cards["cards"][i]["cardId"];
         document.getElementById('cards').innerHTML += '<li class ="cardInDeck"><figure><img src="'+imgUrl+'" alt="'+imgID+'" title="'+imgID+'" id="'+imgID+'">'+'</figure></li>';
@@ -207,6 +207,71 @@ function checkAllCards() {
     }
 }
 
+function otherHero(e) {
+    // TODO check if deck needs to be saved
+    let heroName = e.target.innerText;
+    fetch('/threebeesandme/post/deckbuilder/hero', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: heroName
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function(text) {
+            selectedHero = text;
+            deckbuilderSelectAndDeselectHero();
+        })
+        .catch(function (err) {
+            console.log("Error: Could not send the selected hero");
+        });
+}
+function gotoDeckBuilder() {
+    let heroName = document.querySelector("#heroChooser .selectedHeroName").innerText;
+    fetch('/threebeesandme/post/deckbuilder/hero', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: heroName
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function(text) {
+            selectedHero = text;
+            deckbuilderSelectAndDeselectHero();
+            document.getElementById('heroChooser').className = "hidden";
+            document.getElementById('deckbuilder').className = "";
+        })
+        .catch(function (err) {
+            console.log("Error: Could not send the selected hero");
+        });
+
+    // .then do this
+}
+
+function deckbuilderSelectAndDeselectHero() {
+    let heroes = document.querySelectorAll("#deckbuilder #hero a");
+
+    for (let i = 0; i < heroes.length; i++) {
+        if (heroes[i].innerText === selectedHero) {
+            heroes[i].style.backgroundColor = "grey";
+        }
+        else {
+            heroes[i].style.backgroundColor = "white";
+        }
+    }
+}
+
 function unselectFilter(e) {
     e.preventDefault();
     document.getElementById(e.target.getAttribute('for')).checked = document.getElementById(e.target.getAttribute('for')).checked !== true;
@@ -214,7 +279,23 @@ function unselectFilter(e) {
 function disableFilter(e) {
     e.preventDefault();
 }
-function firstAdd() {
+function firstAdd(deck) {
+    // TODO
+    fetch("/threebeesandme/post/deckbuilder/newdeck", {
+        method: 'post',
+        body: deck
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+        })
+        .then(function (text) {
+            let result = text;
+            // TODO
+        })
+        .catch(function (err) {
+            console.log("Error: Could not get new deck");
+        });
     let chosenCards = document.querySelectorAll(".chosenCards");
     if (chosenCards.length === 30){
         document.querySelector('.save').innerHTML = 'full deck';
