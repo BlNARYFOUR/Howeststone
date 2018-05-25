@@ -126,6 +126,15 @@ public class Game {
                 enemy.playCard(card);
             }
         }
+
+        for (Card card : enemy.getCardsOnPlayingField().getCards()) {
+            //TODO check if card can attack
+            if (you.getCardsOnPlayingField().getCards().isEmpty()) {
+                card.attackHero(getYourHero());
+            } else {
+                card.attack(enemy.getRandomTargetMinion());
+            }
+        }
         setActivePlayer("you");
     }
 }

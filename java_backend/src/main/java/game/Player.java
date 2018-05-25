@@ -105,17 +105,11 @@ public class Player {
         }
     }
 
-    /*public Card getRandomTarget() {
-        //TODO hoe zorg ik dat ik een kaart OF de hero kan teruggeven?
-
+    public Card getRandomTargetMinion() {
         List<Card> targetCards = this.getCardsOnPlayingField().getCards();
-        int resultIndex = (int)Math.round(Math.random())*(targetCards.size());
+        int resultIndex = (int)Math.round(Math.random())*(targetCards.size()-1);
 
-        if (resultIndex == targetCards.size()) {
-            //dan is het de Hero
-        } else {
-            return this.getCardsOnPlayingField().getCards().get(resultIndex);
-        }
+        return this.getCardsOnPlayingField().getCards().get(resultIndex);
 
-    }*/
+    }
 }

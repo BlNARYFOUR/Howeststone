@@ -1,5 +1,7 @@
 package cards;
 
+import hero.Hero;
+
 import java.util.ArrayList;
 import java.util.List;
 // Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt. (er zijn uitzonderingen)
@@ -14,6 +16,7 @@ public class Card {
     private String rarity;
     private int manaCost;
     private int health;
+    private int attack;
     private List<Abilities> cardAbilities;
     private int amountAttacked;
     // TODO: private List<Mechanics> cardMechanics;
@@ -57,6 +60,14 @@ public class Card {
         this.exhausted = exhausted;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public Card(int cardID){
         this.cardID = cardID;
         getOtherInfo(cardID);
@@ -69,12 +80,15 @@ public class Card {
         return String.valueOf(cardID);
     }
 
-    // method attack
-    // boolean returns whether you can attack
-    public boolean attack(Card card) {
-        // TODO: card.doDamage();
+    public void attack(Card card) {
+        if (!this.isExhausted()) {
+            this.doDamage(card);
+        }
+    }
 
-        return false;
+    public void doDamage(Card target) {
+        target.setHealth(target.health-this.attack);
+        this.setHealth(this.health-target.attack);
     }
 
     public void awaken() {
@@ -99,6 +113,10 @@ public class Card {
 
     public String getCardType () {
         return "-1";
+    }
+
+    public void attackHero(Hero target) {
+        target.setHealth(target.getHealth()-this.attack);
     }
 
     // list with all abilities and mechanics?
