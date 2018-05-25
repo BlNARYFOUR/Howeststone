@@ -387,7 +387,7 @@ function updateMyCards() {
 function giveClassNameEqualToCardID() {
     let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
     for (let i = 0; i < myCards.length; i++) {
-        cardHtmlObjects[i].classList.add(myCards[i].cardId);
+        cardHtmlObjects[i].classList.add(myCards[i]["cardID"]);
     }
 }
 
