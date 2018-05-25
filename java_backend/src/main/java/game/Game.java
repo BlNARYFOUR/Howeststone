@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Game {
     // TODO: MOCKERS
-    protected static final String[] MOCKED_HEROES = {"Mage", "Paladin"};
+    protected static final String[] MOCKED_HEROES = {"mage", "paladin"};
 
     // TODO: actual fields
     private Player you;
@@ -21,12 +21,14 @@ public class Game {
     private int manaEnemy;
     private int turnTime;
     private String activePlayer;
+    private CardCollection yourSideOfPlayingField;
+    private CardCollection enemySideOfPlayingField;
     /*private Hero you;
     private CardCollection deck;*/
 
-    public void generateEnemy(){
+    public void generateEnemy() {
         final List<String> HEROES = new ArrayList<>(Arrays.asList(this.getHeroNames()));
-        int randomHeroIndex = (int)Math.round(Math.random())*(HEROES.size()-1);
+        int randomHeroIndex = (int) Math.round(Math.random()) * (HEROES.size() - 1);
         Player enemy = new Player();
         enemy.setHero(HEROES.get(randomHeroIndex));
         enemy.setDeck("Standard");
@@ -82,9 +84,10 @@ public class Game {
         return you;
     }
 
-    public Player getEnemy(){
+    public Player getEnemy() {
         return enemy;
     }
+
     public void addYou(Player you) {
         this.you = you;
     }
@@ -113,15 +116,18 @@ public class Game {
         this.turnTime = turnTime;
     }
 
-    public void startAutoplayer () {
+    public void startAutoplayer() {
         enemy.getCardsInHand().addCard(enemy.getDeck().drawCard().getCardID());
 
         List<Card> cardsInHand = enemy.getCardsInHand().getCards();
         cardsInHand.sort(new manaCardCollectionComparator());
 
-        double enemyBrain = (Math.random());;
+
+        double enemyBrain = (Math.random());
+        ;
         if (enemyBrain <= 0.25) {
-            enemy.getHero().executeHeroPower(enemy.getHero().getHeroPowerID());
+
+            enemy.getHero().executeHeroPower(enemy.getHero().getHeroPowerID(), getRandomTarget());
         }
 
         for (Card card : cardsInHand) {                                 //speel duurste kaarten eerst zolang je mana hebt
@@ -141,5 +147,39 @@ public class Game {
             }
         }
         setActivePlayer("you");
+    }
+
+    public Player activePlayerToPlayer() {
+        if (activePlayer.equals("you")) {
+            return you;
+        } else {
+            return enemy;
+        }
+    }
+
+    public Object getRandomTarget() {
+        int i;
+        if (activePlayer.equals("enemy")) {
+            i = yourSideOfPlayingField.getCards().size();
+            int randomIndex = (int) (Math.round(Math.random()) * (i));
+            if (randomIndex == i) {
+                return you.getHero();
+            }else {
+                return yourSideOfPlayingField.getCards().get(i);
+            }
+        } else {
+            i = enemySideOfPlayingField.getCards().size();
+            int randomIndex = (int) (Math.round(Math.random()) * (i));
+            if (randomIndex == i) {
+                return enemy.getHero();
+            }else {
+                return enemySideOfPlayingField.getCards().get(i);
+            }
+        }
+    }
+
+    public void createPlayingField() {
+        this.yourSideOfPlayingField = new CardCollection();
+        this.enemySideOfPlayingField = new CardCollection();
     }
 }

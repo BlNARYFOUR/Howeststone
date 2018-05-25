@@ -70,9 +70,9 @@ public class Hero {
         this(health, heroName, heroId, heroPowerId, 0);
     }*/
 
-    public void executeHeroPower(int heroPowerId) {
+    public void executeHeroPower(int heroPowerId, Object randomTarget) {
         if (heroPowerId == 0) {                     // dan is het mage
-
+            
         }
         // heroIdPower  = Paladin ==> check field is full ==> add 1/1 minion to field
         // heroIdPower = Mage ==> frontend activeren om target te selecteren ==> levens target in backend -1
