@@ -39,12 +39,11 @@
     margin-right: 2vh;
     box-sizing: border-box;
     display: inline-block;
-    width: 19.8064516129vh;
-    height: 30vh;
+    width: 26.4086021505vh;
+    height: 40vh;
     transition: transform 0.25s;
     vertical-align: middle;
     background-color: rgba(0,0,0,0.7);
-    border: whitesmoke thin solid;
     z-index: 1 !important;
     line-height: 64vh;
     background-size: 19vh;

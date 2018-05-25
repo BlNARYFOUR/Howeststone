@@ -169,9 +169,12 @@ function gotoCardsReplaced() {
 
     for (let i = 0; i < beginCards.length; i++) {
         if (beginCards[i].classList.length === 1) {
-            CardsInHand.push(beginCards[i].classList[0]);
+
+            CardsInHand.push(
+                beginCards[i].classList[0].split("_")[1]);
         } else {
-            CardsToDeck.push(beginCards[i].classList[0])
+            CardsToDeck.push(
+                beginCards[i].classList[0].split("_")[1]);
         }
     }
     let beginCardsJSON = {"CardsInHand": CardsInHand, "CardsToDeck": CardsToDeck};
@@ -222,8 +225,8 @@ function getHTMLForReplaceCardScreen(cards) {
 function getBackgroundImagesForCardScreen(cards) {
     for (let i = 0; i <cards["cards"].length; i++){
         let cardClass = document.querySelector("#replaceCardScreen ul li.card_" + cards["cards"][i]["cardID"]);
-        cardClass.style.background = 'no-repeat url("' + cards["cards"][i]["urlOfImg"] + '") center center';
-        cardClass.style.backgroundSize = "150%";
+        cardClass.style.background = 'no-repeat url("' + cards["cards"][i]["urlOfImg"] + '") center -5vh';
+        cardClass.style.backgroundSize = "115%";
     }
 }
 
