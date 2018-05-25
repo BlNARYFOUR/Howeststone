@@ -164,16 +164,20 @@ function gotoCardsReplaced() {
     let beginCards = document.querySelectorAll('#replaceCardScreen ul li');
 
 
-    let CardsInHand= [];
+    let CardsInHand = [];
     let CardsToDeck = [];
-    for (let i = 0; i <beginCards.length; i++){
-        if (beginCards[i].classList.length === 1){
-            CardsInHand.push(beginCards[i].classList[0]);
-        }else {
-            CardsToDeck.push(beginCards[i].classList[0])
+
+    for (let i = 0; i < beginCards.length; i++) {
+        if (beginCards[i].classList.length === 1) {
+
+            CardsInHand.push(
+                beginCards[i].classList[0].split("_")[1]);
+        } else {
+            CardsToDeck.push(
+                beginCards[i].classList[0].split("_")[1]);
         }
     }
-    let beginCardsJSON = {"CardsInHand": CardsInHand,"CardsToDeck": CardsToDeck};
+    let beginCardsJSON = {"CardsInHand": CardsInHand, "CardsToDeck": CardsToDeck};
     replaceCards(beginCardsJSON);
     document.getElementById('replaceCardScreen').className = "hidden";
     deactivateReplaceCards();
@@ -187,41 +191,57 @@ function replaceCards(countReplaceCards) {
         },
         body: JSON.stringify(countReplaceCards)
     })
-        .then(function(res) {
-            if(res.ok === true)
+        .then(function (res) {
+            if (res.ok === true)
                 return res.json();
             else
                 return "ERROR";
         })
-        .then(function(text) {
+        .then(function (text) {
             console.log(text);
             yourTurn();
         })
-        .catch(function(err) {
+        .catch(function (err) {
             console.log("Error: Could not get the cards in hand");
         });
 }
 
-function activateReplaceCards(cards) {
+function getHTMLForReplaceCardScreen(cards) {
     let html = '<h1>';
     html += activePlayer + " begin";
     if (activePlayer === "enemy") {
         html += "s";
     }
     html += ' the game</h1><h2>Keep or replace cards</h2><ul>';
-
     for (let i = 0; i < cards["cards"].length; i++) {
-        html += '<li class="' + cards["cards"][i]["cardID"] + '"></li>';
+        html += '<li class="card_' + cards["cards"][i]["cardID"] + '"></li>';
     }
-    // TODO background-images of img via src=cards["cards"][i]["img"]
+
     html += '</ul><span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Replace</a></span>';
     document.querySelector("#replaceCardScreen").innerHTML = html;
 
+}
+
+function getBackgroundImagesForCardScreen(cards) {
+    for (let i = 0; i <cards["cards"].length; i++){
+        let cardClass = document.querySelector("#replaceCardScreen ul li.card_" + cards["cards"][i]["cardID"]);
+        cardClass.style.background = 'no-repeat url("' + cards["cards"][i]["urlOfImg"] + '") center -5vh';
+        cardClass.style.backgroundSize = "115%";
+    }
+}
+
+function getClickeventsForCardScreen() {
     document.getElementById('gotoCardsReplaced').addEventListener('click', gotoCardsReplaced);
     let replaceCards = document.querySelectorAll('#replaceCardScreen ul li');
     for (let i = 0; i < replaceCards.length; i++) {
         replaceCards[i].addEventListener('click', toggleReplaceCard);
     }
+}
+
+function activateReplaceCards(cards) {
+    getHTMLForReplaceCardScreen(cards);
+    getBackgroundImagesForCardScreen(cards);
+    getClickeventsForCardScreen();
 }
 
 function getReplaceCards() {
@@ -238,7 +258,7 @@ function getReplaceCards() {
             activateReplaceCards(text);
         })
         .catch(function (err) {
-            console.log("Error: cannot get starting cards");
+            console.log(err +"Error: cannot get starting cards");
         });
 }
 

@@ -23,16 +23,16 @@ public class Display {
         chooseDeck(howeststone);
         startGame(howeststone);
 
-        //howeststone.setYourDeck("Standard");
-        //System.out.println(howeststone.getDeck());
-        //Player you = new Player(howeststone.getYourHero());
-        //GameBoard gb = new GameBoard(you, howeststone.getDeck());
+        //HOWESTSTONE.setYourDeck("Standard");
+        //System.out.println(HOWESTSTONE.getDeck());
+        //Player you = new Player(HOWESTSTONE.getYourHero());
+        //GameBoard gb = new GameBoard(you, HOWESTSTONE.getDeck());
         //System.out.println(gb);
     }
 
     private void chooseHero(Game howeststone) {
         Player you = new Player();
-        final List<String> HEROES = new ArrayList<>(Arrays.asList(howeststone.getHeroNames()));
+        final List<String> HEROES = new ArrayList<>(howeststone.getHeroNames());
 
         System.out.println("Select one of the following heroes:");
         String selectedHero = askInputUntilFoundInList(HEROES);
@@ -46,11 +46,12 @@ public class Display {
             throw new NullPointerException();
         }
 
-        final List<String> DECKS = new ArrayList<>(howeststone.getYou().getHero().getDeckNames());
+        final List<String> DECKS = new ArrayList<>(howeststone.getDeckNames());
 
         System.out.println("Select one of the following decks:");
         String selectedDeck = askInputUntilFoundInList(DECKS);
-        howeststone.setYourDeck(selectedDeck);
+
+        //howeststone.setYourDeck(selectedDeck);
     }
 
     private void startGame(Game howeststone) {
@@ -101,7 +102,7 @@ public class Display {
         // - cardInfo // on one line
         List<String> replaceCardList = askInputUntilStop(yourCardsInHandList);
 
-        howeststone.getYou().getDeck().addCards(replaceCardList);
+        // TODO howeststone.getYou().getDeck().addCards(replaceCardList);
         for (String cardID: replaceCardList) {
             yourCardsInHandList.remove(cardID);
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
@@ -110,7 +111,7 @@ public class Display {
         System.out.println("replaceCardList" + replaceCardList);
         System.out.println(howeststone.getYou().getDeck());
 
-        // howeststone.getYou().setCardsInHand(replace);
+        // HOWESTSTONE.getYou().setCardsInHand(replace);
 
         if (howeststone.getActivePlayer().equals("You")){
             // add 3/4 cards to hand
@@ -127,7 +128,7 @@ public class Display {
 
     private void enemyTurn(Game howeststone) {
         // check deze code zeker
-        howeststone.getEnemy().getCardsInHand().addCard(Integer.parseInt(howeststone.getYou().getDeck().drawCard().toString()));
+        howeststone.getEnemy().getCardsInHand().addCard((howeststone.getYou().getDeck().drawCard()));
         howeststone.getEnemy().setMana(howeststone.getEnemy().getMana()+1);
 
         // enemy speelt altijd duurste kaarten eerst:
@@ -153,14 +154,14 @@ public class Display {
             int windfuryCounter = 1;
             while (!card.isExhausted() && card.getAmountAttacked() < card.getMaxAmountOfAttacks()) {
 
-                //howeststone.getYou().getRandomTarget();
+                //HOWESTSTONE.getYou().getRandomTarget();
 
                 // kies random minion/hero van speler ==> randomCardPlayer
                 // Card target = randomCardPlayer;
                 // int health = target.getHealth (voor hieronder)
 
                 // val die aan (attack functie in classe minion)
-                // howeststone.getEnemy().getCardsOnPlayingField()...attack(target)
+                // HOWESTSTONE.getEnemy().getCardsOnPlayingField()...attack(target)
                 // + int attack = getAttack
 
                 // voer eventuele abilities uit
@@ -168,7 +169,7 @@ public class Display {
                 // update health
                 // health - attack (- eventuele abilitydamage)
 
-                // howeststone.getEnemy().getCardsOnPlayingField()...setHealth(card.getHealth - target.getDamage (- eventuele ability))
+                // HOWESTSTONE.getEnemy().getCardsOnPlayingField()...setHealth(card.getHealth - target.getDamage (- eventuele ability))
 
                 // voer dode kaarten af
 
@@ -186,7 +187,7 @@ public class Display {
 
     private void yourTurn(Game howeststone) {
         // TODO change because cannot be defined here
-        howeststone.getYou().getCardsInHand().addCard(howeststone.getYou().getDeck().drawCard().getCardID());
+        howeststone.getYou().getCardsInHand().addCard(howeststone.getYou().getDeck().drawCard());
 
         // info:
         // cardName
@@ -229,7 +230,7 @@ public class Display {
             areaPlayingField = howeststone.getEnemy().getCardsOnPlayingField();
         }
         if (areaPlayingField.getCards().size() < 7) {
-            areaPlayingField.addCard(Integer.parseInt(card.toString()));
+            areaPlayingField.addCard(card);
         }
     }
 
@@ -240,7 +241,7 @@ public class Display {
         } else {
             // TODO choose if target is selected before or in this function
             if (player == howeststone.getEnemy()) {
-                // howeststone.getYou().getRandomTarget();
+                // HOWESTSTONE.getYou().getRandomTarget();
             } else {
                 // select target
             }

@@ -10,19 +10,21 @@ public class Hero {
     private int mageAttack;
     private int health;
     private String heroName;
-    private int heroID;
+    private int heroId;
     private int heroPowerID;
 
     public Hero(String heroName){
         this.health = 30;
         switch (heroName) {
-            case "mage":
-                this.heroName = "mage";
+            case "Mage":
+                this.heroName = "Mage";
+                this.heroId = 1;
                 this.heroPowerID = 0;
                 this.mageAttack = 1;
                 break;
-            case "paladin":
-                this.heroName = "paladin";
+            case "Paladin":
+                this.heroName = "Paladin";
+                this.heroId = 3;
                 this.heroPowerID = 1;
                 break;
             default:
@@ -33,6 +35,10 @@ public class Hero {
 
     public String getHeroName() {
         return heroName;
+    }
+
+    public int getHeroId() {
+        return heroId;
     }
 
     public int getMageAttack() {
@@ -77,16 +83,5 @@ public class Hero {
         // heroIdPower  = Paladin ==> check field is full ==> add 1/1 minion to field
         // heroIdPower = Mage ==> frontend activeren om target te selecteren ==> levens target in backend -1
         // check if dead here? or with function of lives decrease
-    }
-
-    public List<String> getDeckNames() {
-        // TODO other hero other decks
-        List<String> mocked = new ArrayList<String>();
-
-        mocked.add("Standard");
-        mocked.add("Deck 1");
-        mocked.add("Deck 3");
-
-        return mocked;
     }
 }

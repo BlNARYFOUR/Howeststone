@@ -29,7 +29,7 @@ public class SetupDatabase {
     private static final String[] HEROES = {NEUTRAL, "Mage", "Paladin"};
     private static final String[] ABILITIES_WITH_MECHANICS = {"Aura", "Battlecry", "Deathrattle", "DestroyedDivineShield", "Enrage", "On Attack", "On Death", "On Heal", "On Hit", "Turn Begin", "Turn End", "Untargetable", "Update In Hand"};
 
-    private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
+    private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306/HOWESTSTONE", "root", "");
     private JSONArray spellList;
     private JSONArray minionList;
     private JSONArray weaponList;
@@ -52,6 +52,10 @@ public class SetupDatabase {
         listAllMechanicValues();
         addCardsToDb();
         createStandardDecks();
+    }
+
+    public void initDatabase() {
+
     }
 
     private void addAbilitiesToDb() {
@@ -205,7 +209,7 @@ public class SetupDatabase {
         System.out.println("\nCreating standard decks...");
         for(String heroName : HEROES) {
             if(!heroName.equals(NEUTRAL)) {
-                createRandomDeck("Standard" + heroName, getHeroId(heroName));
+                createRandomDeck("Standard " + heroName, getHeroId(heroName));
             }
         }
         System.out.println(ColorFormats.blue("standard decks have been created!"));

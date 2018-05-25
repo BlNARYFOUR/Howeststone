@@ -1,5 +1,7 @@
 package db;
 
+import cards.Card;
+
 import java.sql.*;
 
 public class DoThingsWithDatabase {
