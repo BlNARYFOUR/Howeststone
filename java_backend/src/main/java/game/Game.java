@@ -5,10 +5,7 @@ import cards.CardCollection;
 import cards.manaCardCollectionComparator;
 import hero.Hero;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Game {
     // TODO: MOCKERS
@@ -146,6 +143,7 @@ public class Game {
                 card.attack(enemy.getRandomTargetMinion());
             }
         }
+        //TODO zijn er end turn battlecries?
         setActivePlayer("you");
     }
 
@@ -182,4 +180,13 @@ public class Game {
         this.yourSideOfPlayingField = new CardCollection();
         this.enemySideOfPlayingField = new CardCollection();
     }
+
+    public void turnMachine() {
+        //TODO fix this
+        /*Timer timer = new Timer();
+        TimerTask set;
+        timer.schedule(set, 50);*/
+    }
+
+
 }
