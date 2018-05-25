@@ -209,7 +209,7 @@ public class SetupDatabase {
         System.out.println("\nCreating standard decks...");
         for(String heroName : HEROES) {
             if(!heroName.equals(NEUTRAL)) {
-                createRandomDeck("Standard" + heroName, getHeroId(heroName));
+                createRandomDeck("Standard " + heroName, getHeroId(heroName));
             }
         }
         System.out.println(ColorFormats.blue("standard decks have been created!"));
