@@ -145,7 +145,7 @@ public class Game {
         this.turnTime = turnTime;
     }
 
-    public void startAutoplayer() {
+    public void startTurnAutoplayer() {
         enemy.getCardsInHand().addCard(enemy.getDeck().drawCard());
 
         List<Card> cardsInHand = enemy.getCardsInHand().getCards();
@@ -177,6 +177,13 @@ public class Game {
         }
         //TODO zijn er end turn battlecries?
         setActivePlayer("you");
+        startTurnYou();
+
+    }
+
+    private void startTurnYou() {
+        //TODO zorg dat kaarten kan gebruiken, targetten,  aanvallen, heropower gebruiken, ...
+        //TODO zorg dat startTurnAutoPlayer() runt wanneer de 50 seconden om zijn
     }
 
     public Player activePlayerToPlayer() {
@@ -220,7 +227,14 @@ public class Game {
         timer.schedule(set, 50);*/
     }
 
-
+    public void startGame() {
+        //TODO zorg dat bij replacecard de beginner de activeplayer wordt
+        if (activePlayer.equals("enemy")) {
+            startTurnAutoplayer();
+        } else {
+            startTurnYou();
+        }
+    }
 
     public List<String> getDeckNames() {
         List<String> deckNamesForChosenHero = new ArrayList<>();
