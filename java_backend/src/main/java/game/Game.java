@@ -1,17 +1,16 @@
 package game;
 
 import cards.Card;
+import cards.CardCollection;
 import cards.Minion;
 import hero.Hero;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import java.util.*;
 public class Game {
-    // TODO: MOCKERS
-    protected static final String[] MOCKED_HEROES = {"Mage", "Paladin"};
+    private CardCollection beginCards = new CardCollection();
 
+    public List<String> heroNames = new ArrayList<>();
+    public Map<String , CardCollection> deckNames = new HashMap<>();
     // TODO: actual fields
     private Player you;
     private Player enemy;
@@ -23,12 +22,55 @@ public class Game {
     private CardCollection deck;*/
 
     public void generateEnemy(){
-        final List<String> HEROES = new ArrayList<>(Arrays.asList(this.getHeroNames()));
-        int randomHeroIndex = (int)Math.round(Math.random())*(HEROES.size()-1);
+        int randomHeroIndex = (int)Math.round(Math.random())*(heroNames.size()-1);
         Player enemy = new Player();
-        enemy.setHero(HEROES.get(randomHeroIndex));
-        enemy.setDeck("Standard");
+        enemy.setHero(heroNames.get(randomHeroIndex));
+        enemy.setDeck(deckNames.get(enemy.getHero().getHeroName()));
+        // TODO check if this works above
         this.addEnemy(enemy);
+    }
+
+    public CardCollection getPlayerBeginCards() {
+        beginCards = new CardCollection();
+
+        if (this.getActivePlayer().equals("enemy")) {
+            beginCards.addCard(this.getYou().getDeck().drawCard());
+        }
+        beginCards.addCard(this.getYou().getDeck().drawCard());
+        beginCards.addCard(this.getYou().getDeck().drawCard());
+        beginCards.addCard(this.getYou().getDeck().drawCard());
+
+        return beginCards;
+    }
+
+    public Boolean setPlayerCardsInHand(List<Integer> cardIdsInHand, List<Integer> cardIdsToReplace) {
+        boolean isValidData = true;
+        CardCollection cardsInHand = new CardCollection();
+        CardCollection cardsToReplace = new CardCollection();
+
+        for(int gottenCardID : cardIdsInHand) {
+            if(!beginCards.hasCard(gottenCardID)) {
+                isValidData = false;
+            }
+        }
+
+        if(isValidData) {
+            for(int cardId : cardIdsInHand) {
+                cardsInHand.addCard(beginCards.getCard(cardId));
+            }
+
+            for(int cardIdToReplace : cardIdsToReplace) {
+                Card card = beginCards.getCard(cardIdToReplace);
+                cardsInHand.addCard(this.getYou().getDeck().drawCard());
+                this.getYou().getDeck().addCard(card);
+            }
+
+            System.out.println("Cards in hand:\n" + cardsInHand);
+
+            this.getYou().setCardsInHand(cardsInHand);
+        }
+
+        return isValidData;
     }
 
     public Hero getYourHero() {
@@ -39,19 +81,8 @@ public class Game {
         return enemy.getHero();
     }
 
-    // TODO change to multiple Heroes
-    public String[] getHeroNames() {
-        return MOCKED_HEROES;
-    }
-
-    // TODO change to multiple Decks
-    public String getDecks() {
-        return "Standard";
-    }
-
-    public void setYourDeck(String deckName) {
-        // TODO check if deck exist
-        you.setDeck(deckName);
+    public List<String> getHeroNames() {
+        return heroNames;
     }
 
     public int getManaYou() {
@@ -111,6 +142,12 @@ public class Game {
         this.turnTime = turnTime;
     }
 
+    public List<String> getDeckNames() {
+        List<String> deckNamesForChosenHero = new ArrayList<>();
+        deckNamesForChosenHero.add(deckNames.get(you.getHero().getHeroName()).getNameOfCardCollection());
+        return deckNamesForChosenHero;
+    }
+    
     public void attackMinion(Minion attacker, Minion target) {
         int attackValueAttacker = attacker.getAttack();
         int healthValueAttacker = attacker.getHealth();

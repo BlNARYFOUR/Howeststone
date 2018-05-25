@@ -1,5 +1,13 @@
 package cards;
 
+import db.SqlDatabase;
+import db.SqlStatements;
+import hero.Hero;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,14 +23,6 @@ public class CardCollection {
     public CardCollection(String name) {
         this.cards = new ArrayList<>();
         this.name = name;
-        if (name.equals("Standard")){
-            for(int i = 1; i <= 30; i ++){
-                Card card = new Card();
-                cards.add(card);
-            }
-            // underneath or function in game shuffleDecks() or both?
-            shuffle();
-        }
     }
 
     private void shuffle(){
@@ -34,38 +34,53 @@ public class CardCollection {
         cards.remove(1);
         return DRAW;
     }
-    
-    public void addCards(List<String> replace) {
-        for (String cardID : replace) {
-            addCard(Integer.parseInt(cardID));
-        }
-    }
 
-    public void addCard(int cardID) {
-        Card card = new Card(cardID);
+    public void addCard(Card card) {
         cards.add(card);
         shuffle();
     }
 
-    public void removeCard(int cardID) {
-        Card card = new Card(cardID);
-        cards.remove(card);
+    public boolean hasCard(int cardId) {
+        for(Card card : cards) {
+            if(card.getCardID() == cardId) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
+    public void removeCard(int cardID) {
+        //Card card = new Card(cardID);
+        //cards.remove(card);
+    }
 
     @Override
     public String toString() {
-        final StringBuilder RES = new StringBuilder();
-        RES.append(name);
-        for (Card card : cards) {
-            RES.append("\nID: ").append(card);
+        String str = "";
+
+        for(Card card : cards) {
+            str += "\n" + card;
         }
-        RES.append("\n").append(cards.size());
-        return String.valueOf(RES);
+
+        return "CardCollection{" +
+                "name='" + name + '\'' +
+                ", cards=" + str +
+                '}';
     }
 
     public String getNameOfCardCollection() {
         return name;
+    }
+
+    public Card getCard(int cardId) {
+        for(Card card : cards) {
+            if(card.getCardID() == cardId) {
+                return card;
+            }
+        }
+
+        throw new IllegalArgumentException("Card not found.");
     }
 
     public List<Card> getCards() {

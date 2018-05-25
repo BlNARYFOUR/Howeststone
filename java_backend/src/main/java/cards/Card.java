@@ -1,49 +1,54 @@
 package cards;
 
-import java.util.ArrayList;
 import java.util.List;
+
 // Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt. (er zijn uitzonderingen)
-public class Card {
-    private static int mockID;
+public abstract class Card {
 
     private int maxAmountOfAttacks;
     private boolean exhausted;
+    private int amountAttacked;
+
     private int cardID;
     private String cardName;
     private String urlOfImg;
     private String rarity;
     private int manaCost;
-    private int health;
-    private List<Abilities> cardAbilities;
-    private int amountAttacked;
-    // TODO: private List<Mechanics> cardMechanics;
+    protected int health;
+    private String race;
+    protected int attack;
+    protected int durability;
+    private int heroId;
 
-    public Card(){
-        // cannot be all cards
-        this.cardID = mockID;
-        mockID ++;
-        getOtherInfo(cardID);
+    /* TODO private List<Abilities> cardAbilities;
+    private List<Mechanics> cardMechanics;
+    */
+
+    public Card(int cardId, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
+        this.cardID = cardId;
+        this.cardName = cardName;
+        this.race = race;
+        this.urlOfImg = urlOfImg;
+        this.rarity = rarity;
+        this.health = health;
+        this.attack = attack;
+        this.manaCost = manaCost;
+        this.durability = durability;
+        this.heroId = heroId;
+
+        // PREDEFINED
         this.exhausted = true;
         this.amountAttacked = 0;
         this.maxAmountOfAttacks = 1;
-    }
-
-    private void getOtherInfo(int mockID) {
-        this.cardName = "mock";
-        this.urlOfImg = "http://wow.zamimg.com/images/hearthstone/cards/enus/original/GAME_002.png";
-        this.rarity = "epic";
-        this.manaCost = 0;
-        this.cardAbilities = new ArrayList<>();
-        cardAbilities.add(new Abilities());
     }
 
     public int getManaCost() {
         return manaCost;
     }
 
-    public List<Abilities> getCardAbilities() {
+    /* TODO public List<Abilities> getCardAbilities() {
         return cardAbilities;
-    }
+    }*/
 
     public int getMaxAmountOfAttacks() {
         return maxAmountOfAttacks;
@@ -57,16 +62,24 @@ public class Card {
         this.exhausted = exhausted;
     }
 
-    public Card(int cardID){
-        this.cardID = cardID;
-        getOtherInfo(cardID);
-        // TODO get other cardSpecifications
-    }
     public int getCardID() {
         return cardID;
     }
+
+    @Override
     public String toString() {
-        return String.valueOf(cardID);
+        return "Card{" +
+                "cardID=" + cardID +
+                ", cardName='" + cardName  +
+                ", urlOfImg='" + urlOfImg  +
+                ", rarity='" + rarity  +
+                ", manaCost=" + manaCost +
+                ", health=" + health +
+                ", race='" + race  +
+                ", attack=" + attack +
+                ", durability=" + durability +
+                ", heroId=" + heroId +
+                '}';
     }
 
     // method attack
@@ -97,6 +110,9 @@ public class Card {
         this.health += health;
     }
 
+    public String getUrlOfImg() {
+        return urlOfImg;
+    }
 
     // list with all abilities and mechanics?
     // method playCard
