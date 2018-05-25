@@ -1,12 +1,18 @@
 package game;
 
-import cards.Card;
-import cards.CardCollection;
-import cards.Minion;
+import cards.*;
+import db.SqlDatabase;
+import db.SqlStatements;
 import hero.Hero;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 public class Game {
+
+    private static SqlDatabase db = null;
     private CardCollection beginCards = new CardCollection();
 
     // TODO change
@@ -162,12 +168,8 @@ public class Game {
     }
 
     public CardCollection filterCards(List<String> filterArray) {
-        // filter // All -1 no filters
-        // Mage All Paladin Neutral
-        // Minions
-        // 2_Mana splice [0]
-        // Common
-        // getOrDefault LIKE '?%'
+        CardCollection cards = new CardCollection("filterCards");
+
         String filterHeroName = "";
         String filterType = "";
         int filterManaCost = -1;
@@ -184,8 +186,58 @@ public class Game {
         if (!filterArray.get(3).equals("-1")){
             filterRarity = filterArray.get(3);
         }
-        
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.FILTER_CARDS)
+        ) {
+            stmt.setString(1, filterHeroName);
+            stmt.setString(2, filterType);
+            stmt.setInt(3, filterManaCost);
+            stmt.setString(4, filterRarity);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Card card;
+                int cardId = rs.getInt("cardId");
+                String cardType = rs.getString("cardType");
+                String cardName = rs.getString("cardName");
+                String race = rs.getString("race");
+                String img = rs.getString("img");
+                String rarity = rs.getString("rarity");
+                int health = rs.getInt("health");
+                int attack = rs.getInt("attack");
+                int manaCost = rs.getInt("manaCost");
+                int durability = rs.getInt("durability");
+                int heroId = rs.getInt("heroId");
+                switch (cardType) {
+                    case "Weapon":
+                        card = new Weapon(cardId, cardName, race,
+                                img, rarity, health, attack, manaCost,
+                                durability, heroId);
+                        break;
+                    case "Spell":
+                        card = new Spell(cardId, cardName, race,
+                                img, rarity, health, attack, manaCost,
+                                durability, heroId);
+                        break;
+                    case "Minion":
+                        card = new Minion(cardId, cardName, race,
+                                img, rarity, health, attack, manaCost,
+                                durability, heroId);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("database not setup correctly");
+                }
+                cards.addCard(card);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println(filterHeroName + filterType + filterManaCost + filterRarity);
         return new CardCollection();
+    }
+
+    public void setDataBase(SqlDatabase db) {
+        this.db = db;
     }
 }

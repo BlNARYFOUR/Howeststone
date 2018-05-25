@@ -44,6 +44,7 @@ public class Server {
     }
 
     private Server init() {
+        HOWESTSTONE.setDataBase(DB);
         // getting all heroes from db
         try (
                 Connection conn = DB.getConnection();

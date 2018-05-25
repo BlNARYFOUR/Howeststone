@@ -92,4 +92,8 @@ public class SqlStatements {
             " WHERE cardId = ?";
     public static final String GET_CARDS = "SELECT *" +
             " FROM cards";
+    public static final String FILTER_CARDS = "SELECT *" +
+            " FROM  cards" +
+            " JOIN heroes ON cards.heroId = heroes.heroId" +
+            " WHERE  heroes.heroName LIKE '?%' AND cards.cardType LIKE '?%' AND cards.manaCost LIKE '?%' AND cards.rarity LIKE '?%'";
 }
