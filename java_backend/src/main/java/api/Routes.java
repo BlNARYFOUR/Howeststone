@@ -89,6 +89,7 @@ class Routes {
         }
         HOWESTSTONE.generateEnemy();
         HOWESTSTONE.setTurnTime(50);
+        HOWESTSTONE.createPlayingField();
 
         Random rand = new Random();
         boolean doYouBegin = rand.nextBoolean();

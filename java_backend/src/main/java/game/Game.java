@@ -17,6 +17,9 @@ public class Game {
     private int manaEnemy;
     private int turnTime;
     private String activePlayer;
+    private CardCollection yourSideOfPlayingField;
+    private CardCollection enemySideOfPlayingField;
+
     /*private Hero you;
     private CardCollection deck;*/
 
@@ -146,5 +149,10 @@ public class Game {
         List<String> deckNamesForChosenHero = new ArrayList<>();
         deckNamesForChosenHero.add(deckNames.get(you.getHero().getHeroName()).getNameOfCardCollection());
         return deckNamesForChosenHero;
+    }
+
+    public void createPlayingField() {
+        this.yourSideOfPlayingField = new CardCollection();
+        this.enemySideOfPlayingField = new CardCollection();
     }
 }

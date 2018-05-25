@@ -217,7 +217,6 @@ function getHTMLForReplaceCardScreen(cards) {
     for (let i = 0; i < cards["cards"].length; i++) {
         html += '<li class="card_' + cards["cards"][i]["cardID"] + '"></li>';
     }
-
     html += '</ul><span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Continue</a></span>';
     document.querySelector("#replaceCardScreen").innerHTML = html;
 
@@ -296,6 +295,7 @@ function enemyTurn() {
     yourTurn();
 }
 function yourTurn() {
+
     // TODO fetch
     heroAttack = true;
     console.log("You're turn");
