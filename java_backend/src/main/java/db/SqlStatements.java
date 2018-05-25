@@ -71,6 +71,26 @@ public class SqlStatements {
     public static final String GET_TOTAL_AMOUNT_OF_CARDS =
             "SELECT MAX(cardId) AS amountOfCards FROM howeststone.cards";
 
+    public static final String GET_HEROES =
+            "SELECT * FROM heroes WHERE heroName != \"Neutral\"";
+
+    public static final String GET_DECKS =
+            "SELECT * FROM decks JOIN heroes ON decks.heroId = heroes.heroId WHERE heroName = ?";
+
+    public static final String GET_CARD_IN_DECK = "SELECT cards.*, cardsindecks.amount" +
+            " FROM decks" +
+            " JOIN cardsindecks ON cardsindecks.deckId=decks.deckId" +
+            " JOIN cards ON cards.cardId=  cardsindecks.cardId" +
+            " WHERE deckName = ?";
+
+
+    public static final String GET_ABILITIES_OF_CARD = "SELECT cardabilities.abilityId, cardabilities.cardMechId, abilities.abilityName, cardmechanics.target, cardmechanics.mechValue, mechanics.mechanicType" +
+            " FROM cardabilities" +
+            " JOIN abilities ON cardabilities.abilityId=abilities.abilityId" +
+            " JOIN cardmechanics ON cardmechanics.cardMechId=cardabilities.cardMechId" +
+            " JOIN mechanics ON mechanics.mechanicId=cardmechanics.mechanicId" +
+            " WHERE cardId = ?";
+
     public static final String DROP_DB =
             "DROP DATABASE howeststone;";
 
