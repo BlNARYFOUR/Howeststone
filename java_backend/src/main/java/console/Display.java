@@ -50,7 +50,8 @@ public class Display {
 
         System.out.println("Select one of the following decks:");
         String selectedDeck = askInputUntilFoundInList(DECKS);
-        howeststone.setYourDeck(selectedDeck);
+
+        //howeststone.setYourDeck(selectedDeck);
     }
 
     private void startGame(Game howeststone) {

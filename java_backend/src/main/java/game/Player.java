@@ -1,6 +1,5 @@
 package game;
 
-import cards.Card;
 import cards.CardCollection;
 import hero.Hero;
 
@@ -58,8 +57,8 @@ public class Player {
         return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
     }
 
-    public void setDeck(String deckName) {
-        //TODO cardsInDeck = new CardCollection(deckName, hero);
+    public void setDeck(CardCollection deckName) {
+        cardsInDeck = deckName;
     }
 
     public CardCollection getDeck() {

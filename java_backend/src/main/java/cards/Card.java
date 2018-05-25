@@ -22,7 +22,8 @@ public abstract class Card {
 
     /* TODO private List<Abilities> cardAbilities;
     private List<Mechanics> cardMechanics;
-*/
+    */
+
     public Card(int cardId, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
         this.cardID = cardId;
         this.cardName = cardName;

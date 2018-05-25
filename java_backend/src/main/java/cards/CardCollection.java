@@ -45,16 +45,12 @@ public class CardCollection {
         //cards.remove(card);
     }
 
-
     @Override
     public String toString() {
-        final StringBuilder RES = new StringBuilder();
-        RES.append(name);
-        for (Card card : cards) {
-            RES.append("\nID: ").append(card);
-        }
-        RES.append("\n").append(cards.size());
-        return String.valueOf(RES);
+        return "CardCollection{" +
+                "name='" + name + '\'' +
+                ", cards=" + cards +
+                '}';
     }
 
     public String getNameOfCardCollection() {
