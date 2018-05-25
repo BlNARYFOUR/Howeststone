@@ -70,11 +70,12 @@ public class Hero {
     }
 
     public List<String> getDeckNames() {
+        // TODO other hero other decks
         List<String> mocked = new ArrayList<String>();
 
         mocked.add("Standard");
         mocked.add("Deck 1");
-        mocked.add("Deck 2");
+        mocked.add("Deck 3");
 
         return mocked;
     }

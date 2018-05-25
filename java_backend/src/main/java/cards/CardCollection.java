@@ -13,10 +13,10 @@ public class CardCollection {
     }
 
     public CardCollection(String name) {
-        this.cards = new ArrayList<Card>();
+        this.cards = new ArrayList<>();
         this.name = name;
         if (name.equals("Standard")){
-            for(int i = 0; i < 30; i ++){
+            for(int i = 1; i <= 30; i ++){
                 Card card = new Card();
                 cards.add(card);
             }
