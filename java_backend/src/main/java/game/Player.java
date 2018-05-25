@@ -1,5 +1,6 @@
 package game;
 
+import cards.Card;
 import cards.CardCollection;
 import hero.Hero;
 
@@ -89,7 +90,7 @@ public class Player {
             case "minion":
                 if (this.cardsOnPlayingField.getCards().size() < 7) {
                     this.cardsInHand.removeCard(card.getCardID());
-                    this.cardsOnPlayingField.addCard(card.getCardID());
+                    this.cardsOnPlayingField.addCard(card);
                     //TODO execute ability;
                 }
                 break;

@@ -146,7 +146,7 @@ public class Game {
     }
 
     public void startAutoplayer() {
-        enemy.getCardsInHand().addCard(enemy.getDeck().drawCard().getCardID());
+        enemy.getCardsInHand().addCard(enemy.getDeck().drawCard());
 
         List<Card> cardsInHand = enemy.getCardsInHand().getCards();
         cardsInHand.sort(new manaCardCollectionComparator());
