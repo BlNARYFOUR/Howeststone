@@ -54,7 +54,6 @@ class Routes {
 
     private static final String SUCCES = "SUCCES";
     private static final String ERROR = "ERROR";
-    private CardCollection beginCards = new CardCollection();
     // HERO AND DECK SELECTOR
 
     private void getAllHeroes(Context context) {
@@ -102,16 +101,8 @@ class Routes {
     }
 
     private void getBeginCards(Context context) {
-        beginCards = new CardCollection();
-
-        if (HOWESTSTONE.getActivePlayer().equals("enemy")) {
-            beginCards.addCard(HOWESTSTONE.getYou().getDeck().drawCard());
-        }
-        beginCards.addCard(HOWESTSTONE.getYou().getDeck().drawCard());
-        beginCards.addCard(HOWESTSTONE.getYou().getDeck().drawCard());
-        beginCards.addCard(HOWESTSTONE.getYou().getDeck().drawCard());
         // TODO can beginCards change this way
-        context.json(beginCards);
+        context.json(HOWESTSTONE.getPlayerBeginCards());
         // TODO give cards ipv id's
     }
 
@@ -119,39 +110,19 @@ class Routes {
         String body = context.body();
         System.out.println(body);
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<String>>>() {
+        Map<String, List<Integer>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() {
         });
 
-        List<String> cardsInHand = temp.get("CardsInHand");
-        List<String> cardsToReplace = temp.get("CardsToDeck");
+        List<Integer> cardsInHand = temp.get("CardsInHand");
+        List<Integer> cardsToReplace = temp.get("CardsToDeck");
 
-
-
-        /*
-        boolean hasFalseData = false;
-
-        for(String gottenCardID : cardsInHand) {
-            // TODO: check if cards are valid
-        }
-
-        if(!hasFalseData) {
-            for (String cardToReplace : cardsToReplace) {
-                cardsInHand.add(Integer.toString(HOWESTSTONE.getYou().getDeck().drawCard().getCardID()));
-                HOWESTSTONE.getYou().getDeck().addCard(cardToReplace);
-            }
-
-            System.out.println("Cards + replaced: " + cardsInHand);
-
-            HOWESTSTONE.getYou().setCardsInHand(cardsInHand);
-
+        if(HOWESTSTONE.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
             context.json(SUCCES);
         }
         else {
             context.json(ERROR);
-        }*/
-        // HOWESTSTONE.getYou().setCardsInHand(null);
+        }
     }
-
 
     private void getAllCards(Context context) {
         context.result("Cards");

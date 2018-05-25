@@ -40,6 +40,16 @@ public class CardCollection {
         shuffle();
     }
 
+    public boolean hasCard(int cardId) {
+        for(Card card : cards) {
+            if(card.getCardID() == cardId) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void removeCard(int cardID) {
         //Card card = new Card(cardID);
         //cards.remove(card);
@@ -47,14 +57,30 @@ public class CardCollection {
 
     @Override
     public String toString() {
+        String str = "";
+
+        for(Card card : cards) {
+            str += "\n" + card;
+        }
+
         return "CardCollection{" +
                 "name='" + name + '\'' +
-                ", cards=" + cards +
+                ", cards=" + str +
                 '}';
     }
 
     public String getNameOfCardCollection() {
         return name;
+    }
+
+    public Card getCard(int cardId) {
+        for(Card card : cards) {
+            if(card.getCardID() == cardId) {
+                return card;
+            }
+        }
+
+        throw new IllegalArgumentException("Card not found.");
     }
 
     public List<Card> getCards() {

@@ -54,6 +54,10 @@ public class SetupDatabase {
         createStandardDecks();
     }
 
+    public void initDatabase() {
+
+    }
+
     private void addAbilitiesToDb() {
         Set<String> abilities = new HashSet<>();
 

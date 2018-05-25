@@ -8,6 +8,7 @@ import game.Game;
 import io.javalin.Javalin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import setupDb.SetupDatabase;
 
 import javax.print.DocFlavor;
 import java.sql.Connection;

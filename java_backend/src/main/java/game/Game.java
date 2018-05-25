@@ -1,10 +1,13 @@
 package game;
 
+import cards.Card;
 import cards.CardCollection;
 import hero.Hero;
 
 import java.util.*;
 public class Game {
+    private CardCollection beginCards = new CardCollection();
+
     public List<String> heroNames = new ArrayList<>();
     public Map<String , CardCollection> deckNames = new HashMap<>();
     // TODO: actual fields
@@ -24,6 +27,49 @@ public class Game {
         enemy.setDeck(deckNames.get(enemy.getHero().getHeroName()));
         // TODO check if this works above
         this.addEnemy(enemy);
+    }
+
+    public CardCollection getPlayerBeginCards() {
+        beginCards = new CardCollection();
+
+        if (this.getActivePlayer().equals("enemy")) {
+            beginCards.addCard(this.getYou().getDeck().drawCard());
+        }
+        beginCards.addCard(this.getYou().getDeck().drawCard());
+        beginCards.addCard(this.getYou().getDeck().drawCard());
+        beginCards.addCard(this.getYou().getDeck().drawCard());
+
+        return beginCards;
+    }
+
+    public Boolean setPlayerCardsInHand(List<Integer> cardIdsInHand, List<Integer> cardIdsToReplace) {
+        boolean isValidData = true;
+        CardCollection cardsInHand = new CardCollection();
+        CardCollection cardsToReplace = new CardCollection();
+
+        for(int gottenCardID : cardIdsInHand) {
+            if(!beginCards.hasCard(gottenCardID)) {
+                isValidData = false;
+            }
+        }
+
+        if(isValidData) {
+            for(int cardId : cardIdsInHand) {
+                cardsInHand.addCard(beginCards.getCard(cardId));
+            }
+
+            for(int cardIdToReplace : cardIdsToReplace) {
+                Card card = beginCards.getCard(cardIdToReplace);
+                cardsInHand.addCard(this.getYou().getDeck().drawCard());
+                this.getYou().getDeck().addCard(card);
+            }
+
+            System.out.println("Cards in hand:\n" + cardsInHand);
+
+            this.getYou().setCardsInHand(cardsInHand);
+        }
+
+        return isValidData;
     }
 
     public Hero getYourHero() {
