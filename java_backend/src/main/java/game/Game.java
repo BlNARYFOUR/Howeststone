@@ -4,7 +4,6 @@ import cards.CardCollection;
 import hero.Hero;
 
 import java.util.*;
-
 public class Game {
     public List<String> heroNames = new ArrayList<>();
     public Map<String , CardCollection> deckNames = new HashMap<>();
@@ -18,6 +17,14 @@ public class Game {
     /*private Hero you;
     private CardCollection deck;*/
 
+    public void generateEnemy(){
+        final List<String> HEROES = new ArrayList<>(Arrays.asList(this.getHeroNames()));
+        int randomHeroIndex = (int)Math.round(Math.random())*(HEROES.size()-1);
+        Player enemy = new Player();
+        enemy.setHero(HEROES.get(randomHeroIndex));
+        enemy.setDeck("Standard");
+        this.addEnemy(enemy);
+    }
 
     public Hero getYourHero() {
         return you.getHero();

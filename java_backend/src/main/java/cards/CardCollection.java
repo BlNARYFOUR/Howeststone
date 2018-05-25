@@ -21,7 +21,7 @@ public class CardCollection {
     }
 
     public CardCollection(String name) {
-        this.cards = new ArrayList<Card>();
+        this.cards = new ArrayList<>();
         this.name = name;
     }
 
