@@ -196,7 +196,7 @@
     top: 10vh;
     right: 0;
 }
-#deckbuilder fieldset{
+#deckbuilder #deckBuilderForm div{
     height: 60vh;
     width: 22.5vw;
     position: absolute;

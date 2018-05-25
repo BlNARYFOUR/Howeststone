@@ -50,7 +50,7 @@ class Routes {
         server.post("/threebeesandme/post/deckbuilder/newdeck", this::newDeck);
         server.post("threebeesandme/post/deckbuilder/deleteDeck", this::deleteDeck);
         //TODO sort server.post("threebeesandme/post/deckbuilder/sort?by=", null);
-        server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
+        server.post("/threebeesandme/howeststone/post/deckbuilder/filterCards", this::filterCards);
     }
 
     private static final String SUCCES = "SUCCES";
@@ -177,7 +177,13 @@ class Routes {
         context.result("Your deck has been deleted");
     }
 
-    private void filterCards(Context context) {
-        context.result("Your deck has been filtered");
+    private void filterCards(Context context) throws IOException {
+        String body = context.body();
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<String>>>() {
+        });
+        List<String> filterArray = temp.get("filterArray");
+        System.out.println(filterArray);
+        context.json(HOWESTSTONE.filterCards(filterArray));
     }
 }

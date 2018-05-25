@@ -160,4 +160,32 @@ public class Game {
         target.setHealth(healthValueTarget - attackValueAttacker);
         attacker.setHealth(healthValueAttacker - attackValueTarget);
     }
+
+    public CardCollection filterCards(List<String> filterArray) {
+        // filter // All -1 no filters
+        // Mage All Paladin Neutral
+        // Minions
+        // 2_Mana splice [0]
+        // Common
+        // getOrDefault LIKE '?%'
+        String filterHeroName = "";
+        String filterType = "";
+        int filterManaCost = -1;
+        String filterRarity = "";
+        if (!filterArray.get(0).equals("All")){
+            filterHeroName = filterArray.get(0);
+        }
+        if (!filterArray.get(1).equals("-1")){
+            filterType = filterArray.get(1);
+        }
+        if (!filterArray.get(2).equals("-1")){
+            filterManaCost = Integer.parseInt(filterArray.get(2).split("_")[0]);
+        }
+        if (!filterArray.get(3).equals("-1")){
+            filterRarity = filterArray.get(3);
+        }
+        
+        System.out.println(filterHeroName + filterType + filterManaCost + filterRarity);
+        return new CardCollection();
+    }
 }
