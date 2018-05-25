@@ -8,6 +8,7 @@ public abstract class Card {
     private int amountAttacked;
 
     private int cardID;
+    private String type;
     private String cardName;
     private String img;
     private String rarity;
@@ -22,8 +23,9 @@ public abstract class Card {
     private List<Mechanics> cardMechanics;
     */
 
-    public Card(int cardId, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
+    public Card(int cardId, String type, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
         this.cardID = cardId;
+        this.type = type;
         this.cardName = cardName;
         this.race = race;
         this.img = urlOfImg;
@@ -64,10 +66,19 @@ public abstract class Card {
         return cardID;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public String getRarity() {
+        return rarity;
+    }
+
     @Override
     public String toString() {
         return "Card{" +
                 "cardID=" + cardID +
+                ", type=" + type +
                 ", cardName='" + cardName  +
                 ", img='" + img +
                 ", rarity='" + rarity  +

@@ -90,7 +90,7 @@ public class Server {
                 int amount = rs.getInt("amount");
                 Card card;
                 int cardId = rs.getInt("cardId");
-                String cardType = rs.getString("cardType").toLowerCase();
+                String cardType = rs.getString("cardType");
                 String cardName = rs.getString("cardName");
                 String race = rs.getString("race");
                 String urlOfImg = rs.getString("img");
@@ -101,18 +101,18 @@ public class Server {
                 int durability = rs.getInt("durability");
                 int heroId = rs.getInt("heroId");
                 switch (cardType) {
-                    case "weapon":
-                        card = new Weapon(cardId, cardName, race,
+                    case "Weapon":
+                        card = new Weapon(cardId, cardType, cardName, race,
                                 urlOfImg, rarity, health, attack, manaCost,
                                 durability, heroId);
                         break;
-                    case "spell":
-                        card = new Spell(cardId, cardName, race,
+                    case "Spell":
+                        card = new Spell(cardId, cardType, cardName, race,
                                 urlOfImg, rarity, health, attack, manaCost,
                                 durability, heroId);
                         break;
-                    case "minion":
-                        card = new Minion(cardId, cardName, race,
+                    case "Minion":
+                        card = new Minion(cardId, cardType, cardName, race,
                                 urlOfImg, rarity, health, attack, manaCost,
                                 durability, heroId);
                         break;

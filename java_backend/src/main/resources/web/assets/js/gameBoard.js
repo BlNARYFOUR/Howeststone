@@ -224,9 +224,12 @@ function getHTMLForReplaceCardScreen(cards) {
 
 function getBackgroundImagesForCardScreen(cards) {
     for (let i = 0; i <cards["cards"].length; i++){
-        let cardClass = document.querySelector("#replaceCardScreen ul li.card_" + cards["cards"][i]["cardID"]);
-        cardClass.style.background = 'no-repeat url("' + cards["cards"][i]["img"] + '") center -5vh';
-        cardClass.style.backgroundSize = "115%";
+        let cardClass = document.querySelectorAll("#replaceCardScreen ul li.card_" + cards["cards"][i]["cardID"]);
+
+        for(let j=0; j<cardClass.length; j++) {
+            cardClass[j].style.background = 'no-repeat url("' + cards["cards"][i]["img"] + '") center -5vh';
+            cardClass[j].style.backgroundSize = "115%";
+        }
     }
 }
 
@@ -1031,8 +1034,8 @@ function layCardOnFieldEnd(e) {
 function returnTypeOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].type;
+        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["type"];
         }
     }
     return null;
@@ -1041,8 +1044,8 @@ function returnTypeOfMyCard(liWithClass) {
 function returnDurabilityOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].durability;
+        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["durability"];
         }
     }
     return null;
@@ -1051,8 +1054,8 @@ function returnDurabilityOfMyCard(liWithClass) {
 function returnHealthOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].health;
+        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["health"];
         }
     }
     return null;
@@ -1061,8 +1064,8 @@ function returnHealthOfMyCard(liWithClass) {
 function returnAttackOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].attack;
+        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["attack"];
         }
     }
     return null;
@@ -1071,8 +1074,8 @@ function returnAttackOfMyCard(liWithClass) {
 function returnCostOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].cost;
+        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["manaCost"];
         }
     }
     return null;
