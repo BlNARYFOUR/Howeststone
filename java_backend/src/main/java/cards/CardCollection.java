@@ -42,7 +42,7 @@ public class CardCollection {
 
     public boolean hasCard(int cardId) {
         for(Card card : cards) {
-            if(card.getCardID() == cardId) {
+            if(card.getcardId() == cardId) {
                 return true;
             }
         }
@@ -50,8 +50,8 @@ public class CardCollection {
         return false;
     }
 
-    public void removeCard(int cardID) {
-        //Card card = new Card(cardID);
+    public void removeCard(int cardId) {
+        //Card card = new Card(cardId);
         //cards.remove(card);
     }
 
@@ -75,7 +75,7 @@ public class CardCollection {
 
     public Card getCard(int cardId) {
         for(Card card : cards) {
-            if(card.getCardID() == cardId) {
+            if(card.getcardId() == cardId) {
                 return card;
             }
         }

@@ -135,8 +135,7 @@ function init() {
     document.getElementById('fourthFilter').addEventListener('change',filterCards);
     document.querySelector('#firstAdd').addEventListener('click', firstAdd);
 
-    let myCards = MOCKMYCARDS() ;
-    MockCardsToDeckBuilder(myCards);
+    getAllCards();
     checkAllCards();
 
     let inputs = document.querySelectorAll('#secondFilter input');
@@ -165,12 +164,29 @@ function init() {
     }
 }
 
-function MockCardsToDeckBuilder(cards) {
-    // TODO fetch
-    for (let i = 0; i < cards.length; i++) {
-        let imgUrl = cards[i]["img"];
-        let imgID = cards[i]["name"];
+function getAllCards() {
+    fetch("/threebeesandme/get/deckbuilder/cards", {
+        method: 'get',
 
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+        })
+        .then(function (text) {
+            let result = text;
+            showCards(result);
+        })
+        .catch(function (err) {
+            console.log("Error: Could not get cards");
+        });
+}
+
+function showCards(cards) {
+    for (let i=0; i < cards["cards"].length; i++){
+        console.log(cards["cards"][i]);
+        let imgUrl = cards["cards"][i]["img"];
+        let imgID = cards["cards"][i]["cardId"];
         document.getElementById('cards').innerHTML += '<li class ="cardInDeck"><figure><img src="'+imgUrl+'" alt="'+imgID+'" title="'+imgID+'" id="'+imgID+'">'+'</figure></li>';
     }
 }

@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Timer;
 
 public class Server {
     static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/HOWESTSTONE", "root", "");
@@ -70,6 +72,48 @@ public class Server {
             }
         }
 
+        try (
+                Connection conn = DB.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_CARDS)
+        ) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Card card;
+                int cardId = rs.getInt("cardId");
+                String cardType = rs.getString("cardType");
+                String cardName = rs.getString("cardName");
+                String race = rs.getString("race");
+                String img = rs.getString("img");
+                String rarity = rs.getString("rarity");
+                int health = rs.getInt("health");
+                int attack = rs.getInt("attack");
+                int manaCost = rs.getInt("manaCost");
+                int durability = rs.getInt("durability");
+                int heroId = rs.getInt("heroId");
+                switch (cardType) {
+                    case "Weapon":
+                        card = new Weapon(cardId, cardName, race,
+                                img, rarity, health, attack, manaCost,
+                                durability, heroId);
+                        break;
+                    case "Spell":
+                        card = new Spell(cardId, cardName, race,
+                                img, rarity, health, attack, manaCost,
+                                durability, heroId);
+                        break;
+                    case "Minion":
+                        card = new Minion(cardId, cardName, race,
+                                img, rarity, health, attack, manaCost,
+                                durability, heroId);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("database not setup correctly");
+                }
+                HOWESTSTONE.allCards.addCard(card);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         // all cards
         // more?
 
@@ -93,7 +137,7 @@ public class Server {
                 String cardType = rs.getString("cardType").toLowerCase();
                 String cardName = rs.getString("cardName");
                 String race = rs.getString("race");
-                String urlOfImg = rs.getString("img");
+                String img = rs.getString("img");
                 String rarity = rs.getString("rarity");
                 int health = rs.getInt("health");
                 int attack = rs.getInt("attack");
@@ -103,17 +147,17 @@ public class Server {
                 switch (cardType) {
                     case "weapon":
                         card = new Weapon(cardId, cardName, race,
-                                urlOfImg, rarity, health, attack, manaCost,
+                                img, rarity, health, attack, manaCost,
                                 durability, heroId);
                         break;
                     case "spell":
                         card = new Spell(cardId, cardName, race,
-                                urlOfImg, rarity, health, attack, manaCost,
+                                img, rarity, health, attack, manaCost,
                                 durability, heroId);
                         break;
                     case "minion":
                         card = new Minion(cardId, cardName, race,
-                                urlOfImg, rarity, health, attack, manaCost,
+                                img, rarity, health, attack, manaCost,
                                 durability, heroId);
                         break;
                     default:
@@ -135,7 +179,7 @@ public class Server {
                 Connection conn = DB.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_ABILITIES_OF_CARD)
         ) {
-            stmt.setInt(1, card.getCardID());
+            stmt.setInt(1, card.getcardId());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()){
                 int abilityId = rs.getInt("abilityId");

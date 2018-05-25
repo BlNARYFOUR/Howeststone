@@ -9,9 +9,9 @@ public abstract class Card {
     private boolean exhausted;
     private int amountAttacked;
 
-    private int cardID;
+    private int cardId;
     private String cardName;
-    private String urlOfImg;
+    private String img;
     private String rarity;
     private int manaCost;
     protected int health;
@@ -24,11 +24,11 @@ public abstract class Card {
     private List<Mechanics> cardMechanics;
     */
 
-    public Card(int cardId, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
-        this.cardID = cardId;
+    public Card(int cardId, String cardName, String race, String img, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
+        this.cardId = cardId;
         this.cardName = cardName;
         this.race = race;
-        this.urlOfImg = urlOfImg;
+        this.img = img;
         this.rarity = rarity;
         this.health = health;
         this.attack = attack;
@@ -62,16 +62,16 @@ public abstract class Card {
         this.exhausted = exhausted;
     }
 
-    public int getCardID() {
-        return cardID;
+    public int getcardId() {
+        return cardId;
     }
 
     @Override
     public String toString() {
         return "Card{" +
-                "cardID=" + cardID +
+                "cardId=" + cardId +
                 ", cardName='" + cardName  +
-                ", urlOfImg='" + urlOfImg  +
+                ", img='" + img  +
                 ", rarity='" + rarity  +
                 ", manaCost=" + manaCost +
                 ", health=" + health +
@@ -110,8 +110,8 @@ public abstract class Card {
         this.health += health;
     }
 
-    public String getUrlOfImg() {
-        return urlOfImg;
+    public String getImg() {
+        return img;
     }
 
     // list with all abilities and mechanics?

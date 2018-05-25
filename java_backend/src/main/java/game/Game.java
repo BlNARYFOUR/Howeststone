@@ -9,6 +9,9 @@ import java.util.*;
 public class Game {
     private CardCollection beginCards = new CardCollection();
 
+    // TODO change
+
+    public CardCollection allCards = new CardCollection("cards");
     public List<String> heroNames = new ArrayList<>();
     public Map<String , CardCollection> deckNames = new HashMap<>();
     // TODO: actual fields

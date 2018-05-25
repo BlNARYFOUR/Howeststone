@@ -90,4 +90,6 @@ public class SqlStatements {
             " JOIN cardmechanics ON cardmechanics.cardMechId=cardabilities.cardMechId" +
             " JOIN mechanics ON mechanics.mechanicId=cardmechanics.mechanicId" +
             " WHERE cardId = ?";
+    public static final String GET_CARDS = "SELECT *" +
+            " FROM cards";
 }

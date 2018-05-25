@@ -22,8 +22,6 @@ class Routes {
     Routes(final Javalin server, Game game) {
         HOWESTSTONE = game;
         // case sensitive
-        server.get("/API/getAllCards", this::getAllCards);
-        //server.get("/API/getAllCards", this::getAllCards);
 
         // GAME BOARD
         server.get("/threebeesandme/get/gameboard/begincards", this::getBeginCards);
@@ -44,6 +42,7 @@ class Routes {
         server.post("/threebeesandme/post/heroanddeckselector/deck", this::handleDeckSelection);
 
         // DECKBUILDER
+        server.get("/threebeesandme/get/deckbuilder/cards", this::getAllCards);
         server.post("threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
         server.post("threebeesandme/post/deckbuilder/newdeck", this::newDeck);
         server.post("threebeesandme/post/deckbuilder/deleteDeck", this::deleteDeck);
@@ -125,7 +124,7 @@ class Routes {
     }
 
     private void getAllCards(Context context) {
-        context.result("Cards");
+        context.json(HOWESTSTONE.allCards);
     }
 
     private void getBattleLog(Context context) {
