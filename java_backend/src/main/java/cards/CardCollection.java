@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CardCollection {
+public class CardCollection  {
     private String name;
     private List<Card> cards;
 
@@ -82,7 +82,7 @@ public class CardCollection {
         return cheapestCard;
     }*/
 
-    public Card getMostExpensiveCard() {
+    /*public Card getMostExpensiveCard() {
         Card mostExpensiveCard = this.cards.get(0);
         for(Card x : this.cards ){
             if (x.getManaCost() > mostExpensiveCard.getManaCost()) {
@@ -90,5 +90,5 @@ public class CardCollection {
             }
         }
         return mostExpensiveCard;
-    }
+    }*/
 }

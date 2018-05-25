@@ -97,6 +97,9 @@ public class Card {
         this.health += health;
     }
 
+    public String getCardType () {
+        return "-1";
+    }
 
     // list with all abilities and mechanics?
     // method playCard

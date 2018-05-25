@@ -20,6 +20,10 @@ public class Weapon extends Card {
         this.durability = durability;
     }
 
+    public String getCardType (Card card) {
+        return  "weapon";
+    }
+
 
     // method attack
 }

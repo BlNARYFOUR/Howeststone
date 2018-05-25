@@ -12,6 +12,7 @@ public class Player {
     private CardCollection cardsOnPlayingField;
     private CardCollection cardsInDeck;
     private int mana = 0;
+    private Card weapon;
 
     public Hero getHero() {
         return hero;
@@ -39,6 +40,14 @@ public class Player {
 
     public void setMana(int mana) {
         this.mana = mana;
+    }
+
+    public Card getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Card weapon) {
+        this.weapon = weapon;
     }
 
     public Player() {
@@ -73,6 +82,27 @@ public class Player {
     public void setCardsInHand(List<String> cardsInHandList) {
         cardsInHand = new CardCollection();
         cardsInHand.addCards(cardsInHandList);
+    }
+
+    public void playCard(Card card) {
+        String cardType = card.getCardType();
+        switch (cardType) {
+            case "minion":
+                if (this.cardsOnPlayingField.getCards().size() < 7) {
+                    this.cardsInHand.removeCard(card.getCardID());
+                    this.cardsOnPlayingField.addCard(card.getCardID());
+                    //TODO execute ability;
+                }
+                break;
+            case "spell":
+                //TODO this.executeSpell(card);
+                this.cardsInHand.removeCard(card.getCardID());
+                break;
+            case "weapon":
+                this.cardsInHand.removeCard(card.getCardID());
+                this.setWeapon(card);
+                break;
+        }
     }
 
     /*public Card getRandomTarget() {

@@ -20,4 +20,8 @@ public class Minion extends Card {
         this.health = health;
     }
 
+    public String getCardType (Card card) {
+        return "minion";
+    }
+
 }

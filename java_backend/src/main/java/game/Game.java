@@ -1,9 +1,13 @@
 package game;
 
+import cards.Card;
+import cards.CardCollection;
+import cards.manaCardCollectionComparator;
 import hero.Hero;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Game {
@@ -107,5 +111,21 @@ public class Game {
 
     public void setTurnTime(int turnTime) {
         this.turnTime = turnTime;
+    }
+
+    public void startAutoplayer () {
+        // behalve als het turn 1 is en de enemy niet als eerste begint
+
+        enemy.getCardsInHand().addCard(enemy.getDeck().drawCard().getCardID());
+
+        List<Card> cardsInHand = enemy.getCardsInHand().getCards();
+        cardsInHand.sort(new manaCardCollectionComparator());
+
+        for (Card card : cardsInHand) {
+            if (card.getManaCost() <= manaEnemy) {
+                enemy.playCard(card);
+            }
+        }
+        setActivePlayer("you");
     }
 }
