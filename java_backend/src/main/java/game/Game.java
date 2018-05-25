@@ -114,14 +114,17 @@ public class Game {
     }
 
     public void startAutoplayer () {
-        // behalve als het turn 1 is en de enemy niet als eerste begint
-
         enemy.getCardsInHand().addCard(enemy.getDeck().drawCard().getCardID());
 
         List<Card> cardsInHand = enemy.getCardsInHand().getCards();
         cardsInHand.sort(new manaCardCollectionComparator());
 
-        for (Card card : cardsInHand) {
+        double enemyBrain = (Math.random());;
+        if (enemyBrain <= 0.25) {
+            enemy.getHero().executeHeroPower(enemy.getHero().getHeroPowerID());
+        }
+
+        for (Card card : cardsInHand) {                                 //speel duurste kaarten eerst zolang je mana hebt
             if (card.getManaCost() <= manaEnemy) {
                 enemy.playCard(card);
             }
@@ -129,6 +132,8 @@ public class Game {
 
         for (Card card : enemy.getCardsOnPlayingField().getCards()) {
             //TODO check if card can attack
+
+
             if (you.getCardsOnPlayingField().getCards().isEmpty()) {
                 card.attackHero(getYourHero());
             } else {

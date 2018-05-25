@@ -112,4 +112,5 @@ public class Player {
         return this.getCardsOnPlayingField().getCards().get(resultIndex);
 
     }
+
 }
