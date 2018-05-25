@@ -1,7 +1,5 @@
 package cards;
 
-import java.util.List;
-
 // Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt. (er zijn uitzonderingen)
 public abstract class Card {
 
@@ -11,7 +9,7 @@ public abstract class Card {
 
     private int cardID;
     private String cardName;
-    private String urlOfImg;
+    private String img;
     private String rarity;
     private int manaCost;
     protected int health;
@@ -28,7 +26,7 @@ public abstract class Card {
         this.cardID = cardId;
         this.cardName = cardName;
         this.race = race;
-        this.urlOfImg = urlOfImg;
+        this.img = urlOfImg;
         this.rarity = rarity;
         this.health = health;
         this.attack = attack;
@@ -71,7 +69,7 @@ public abstract class Card {
         return "Card{" +
                 "cardID=" + cardID +
                 ", cardName='" + cardName  +
-                ", urlOfImg='" + urlOfImg  +
+                ", img='" + img +
                 ", rarity='" + rarity  +
                 ", manaCost=" + manaCost +
                 ", health=" + health +
@@ -110,8 +108,8 @@ public abstract class Card {
         this.health += health;
     }
 
-    public String getUrlOfImg() {
-        return urlOfImg;
+    public String getImg() {
+        return img;
     }
 
     // list with all abilities and mechanics?

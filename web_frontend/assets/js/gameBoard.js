@@ -267,13 +267,30 @@ function updateEnemyCards() {
 }
 
 function updateMyCards() {
-    // TODO fetch for cardsInMyHand and other info
-    myCards = MOCKMYCARDS();
 
-    updateCards(myCards.length, "you", 1);
-    setMyCards(myCards);
-    giveClassNameEqualToCardID();
-    setupMovingOfCards();
+    fetch('/threebeesandme/get/gameboard/mycardsinhand', {
+        method: 'GET'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("my cards in hand updated");
+
+            myCards = result;
+            updateCards(myCards.length, "you", 1);
+            setMyCards(myCards);
+            giveClassNameEqualToCardID();
+            setupMovingOfCards();
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });
+
+
+
 }
 
 function giveClassNameEqualToCardID() {

@@ -225,7 +225,7 @@ function getHTMLForReplaceCardScreen(cards) {
 function getBackgroundImagesForCardScreen(cards) {
     for (let i = 0; i <cards["cards"].length; i++){
         let cardClass = document.querySelector("#replaceCardScreen ul li.card_" + cards["cards"][i]["cardID"]);
-        cardClass.style.background = 'no-repeat url("' + cards["cards"][i]["urlOfImg"] + '") center -5vh';
+        cardClass.style.background = 'no-repeat url("' + cards["cards"][i]["img"] + '") center -5vh';
         cardClass.style.backgroundSize = "115%";
     }
 }
@@ -362,13 +362,26 @@ function updateEnemyCards() {
 }
 
 function updateMyCards() {
-    // TODO fetch for cardsInMyHand and other info
-    myCards = MOCKMYCARDS();
+    fetch('/threebeesandme/get/gameboard/mycardsinhand', {
+        method: 'GET'
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+        .then(function(text) {
+            let result = text;
+            console.log("my cards in hand updated");
 
-    updateCards(myCards.length, "you", 1);
-    setMyCards(myCards);
-    giveClassNameEqualToCardID();
-    setupMovingOfCards();
+            myCards = result;
+            updateCards(myCards.length, "you", 1);
+            setMyCards(myCards);
+            giveClassNameEqualToCardID();
+            setupMovingOfCards();
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });
 }
 
 function giveClassNameEqualToCardID() {

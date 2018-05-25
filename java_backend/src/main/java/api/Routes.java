@@ -33,6 +33,7 @@ class Routes {
         server.get("threebeesandme/get/useheropower", this::useHeroPower);
         server.get("/threebeesandme/get/hero", this::getHeroName);
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
+        server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
         server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
         server.post("/threebeesandme/post/gameboard/cardsinhand", this::getCardsInHand);
         server.post("threebeesandme/post/gameboard/endturn", this::handleEndUrn);
@@ -55,6 +56,10 @@ class Routes {
     private static final String SUCCES = "SUCCES";
     private static final String ERROR = "ERROR";
     // HERO AND DECK SELECTOR
+
+    private void getMyCardsInHand(Context context) {
+        context.json(HOWESTSTONE.getYou().getCardsInHand().getCards());
+    }
 
     private void getAllHeroes(Context context) {
         context.json(HOWESTSTONE.getHeroNames());
