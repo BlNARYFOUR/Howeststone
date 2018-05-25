@@ -110,6 +110,9 @@ public abstract class Card {
         this.health += health;
     }
 
+    public String getUrlOfImg() {
+        return urlOfImg;
+    }
 
     // list with all abilities and mechanics?
     // method playCard
