@@ -163,13 +163,13 @@
 
 #gameBoard .you .hero {
     bottom: 16.1vh;
-    /*background: no-repeat url("../media/mage.png") center center;*/
+    /*background: no-repeat url("../media/Mage.png") center center;*/
     background-size: contain;
 }
 
 #gameBoard .enemy .hero {
     top: 10.55vh;
-    /*background: no-repeat url("../media/mage.png") center center;*/
+    /*background: no-repeat url("../media/Mage.png") center center;*/
     background-size: contain;
 }
 

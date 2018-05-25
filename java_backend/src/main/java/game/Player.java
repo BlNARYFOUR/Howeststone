@@ -1,6 +1,5 @@
 package game;
 
-import cards.Card;
 import cards.CardCollection;
 import hero.Hero;
 
@@ -58,8 +57,8 @@ public class Player {
         return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
     }
 
-    public void setDeck(String deckName) {
-        cardsInDeck = new CardCollection(deckName);
+    public void setDeck(CardCollection deckName) {
+        cardsInDeck = deckName;
     }
 
     public CardCollection getDeck() {
@@ -72,7 +71,7 @@ public class Player {
 
     public void setCardsInHand(List<String> cardsInHandList) {
         cardsInHand = new CardCollection();
-        cardsInHand.addCards(cardsInHandList);
+        // TODO cardsInHand.addCards(cardsInHandList);
     }
 
     /*public Card getRandomTarget() {

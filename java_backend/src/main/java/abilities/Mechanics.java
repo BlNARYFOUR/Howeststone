@@ -1,7 +1,7 @@
 package abilities;
 
 /**
- * Created by Bram Vermeulen on 23/05/2018.
+ * This is a group effort Bram
  */
 public enum Mechanics {
     ADDABILITY,
