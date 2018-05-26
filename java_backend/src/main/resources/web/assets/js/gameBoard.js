@@ -930,7 +930,6 @@ function addMinionToPlayingField(cardPlayed) {
     // mockData
     moved = true;
     sendPlayedCard(itemThatIsBeingMoved);
-    updateMyMana(remainingCrystals - cost, document.querySelectorAll("#gameBoard .you .manaHolder ul li").length);
     let cardAttack = returnAttackOfMyCard(itemThatIsBeingMoved);
     let cardHealth = returnHealthOfMyCard(itemThatIsBeingMoved);
     cardPlayed.innerHTML += `<span class="health">${cardHealth}</span><span class="attack">${cardAttack}</span>`;
@@ -1115,6 +1114,7 @@ function sendPlayedCard(liWithClass) {
             if(text === "SUCCES") {
                 console.log("Card played");
                 updateMyCards();
+                updateMyMana();
             }
             else {
                 console.log("You cannot play this card!");
