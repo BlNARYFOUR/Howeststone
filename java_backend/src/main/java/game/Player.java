@@ -8,6 +8,7 @@ import hero.Hero;
 import java.util.List;
 
 public class Player {
+    private int heroDamageOnEmptyDeck;
     private Hero hero;
     private CardCollection cardsInHand;
     private CardCollection cardsOnPlayingField;
@@ -17,6 +18,7 @@ public class Player {
     private Card weapon;
 
     public Player() {
+        heroDamageOnEmptyDeck = 1;
         hero = new Hero("Mage");
         cardsInHand = new CardCollection();
         cardsOnPlayingField = new CardCollection();
@@ -67,7 +69,14 @@ public class Player {
         }
 
         activeMana = totalMana;
-        cardsInHand.addCard(cardsInDeck.drawCard());
+
+        Card card = cardsInDeck.drawCard();
+
+        if(card != null) {
+            cardsInHand.addCard(card);
+        } else {
+            hero.addHealth(-heroDamageOnEmptyDeck++);
+        }
     }
 
     public void setDeck(CardCollection deckName) {
