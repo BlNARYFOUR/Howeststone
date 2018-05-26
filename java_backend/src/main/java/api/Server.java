@@ -15,9 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Timer;
+import java.util.*;
 
 public class Server {
     static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/HOWESTSTONE", "root", "");
@@ -65,9 +63,11 @@ public class Server {
             ) {
                 stmt.setString(1, HOWESTSTONE.heroNames.get(i));
                 ResultSet rs = stmt.executeQuery();
+                List<CardCollection> decksForChosenHero = new ArrayList<>();
                 while (rs.next()) {
-                    HOWESTSTONE.deckNames.put(HOWESTSTONE.heroNames.get(i), nameToCardCollection(rs.getString("deckName")));
+                    decksForChosenHero.add(nameToCardCollection(rs.getString("deckName")));
                 }
+                HOWESTSTONE.deckNames.put(HOWESTSTONE.heroNames.get(i), decksForChosenHero);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

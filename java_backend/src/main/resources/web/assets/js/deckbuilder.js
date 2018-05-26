@@ -79,6 +79,18 @@ function checkIfCardIsGoingToBeRemoved() {
 
 function clickOnCardInCards(e) {
     // TODO fetch
+    let cardId = e.target.classList[1].split("_")[1];
+
+    fetch('/threebeesandme/post/deckbuilder/deck/addcard',{
+        method: 'POST',
+        body: cardId
+    }).then(function (res) {
+        console.log(res);
+    })
+        .catch(function (err) {
+        console.log(err);
+    });
+/*
     itemThatIsBeingMoved = e.target;
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
@@ -98,6 +110,7 @@ function clickOnCardInCards(e) {
     document.addEventListener("mousemove", movingOfDragElement, false);
     document.addEventListener("mouseup", checkIfCardIsGoingToBeAdded, false);
     document.addEventListener("touchend", checkIfCardIsGoingToBeAdded, false);
+    */
 }
 
 function clickOnCardInDeck(e) {
@@ -125,7 +138,41 @@ function clickOnCardInDeck(e) {
 
 function init() {
     /*tutorial();*/
+    document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck);
     document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
+    document.getElementById('newDeck').addEventListener('click', deckBuilderInit);
+}
+
+function deckBuilderInit() {
+    document.querySelector('#deckbuilder .new').classList.toggle('hidden');
+    let newDeckName = document.querySelector('#newDeckName').value;
+    // TODO extra check for other shizzles
+    if(newDeckName.indexOf("_") !== -1){
+        // TODO change to say that take another name
+        newDeckName = newDeckName.split("_")[0];
+    }
+    if (document.querySelector('#newDeckName').value === ""){
+        newDeckName = document.querySelector('#newDeckName').getAttribute('placeholder');
+        let nextDefaultDeck = "Deck_" + (parseInt(newDeckName.split("_")[1]) +1);
+        document.querySelector('#newDeckName').setAttribute('placeholder', nextDefaultDeck);
+    }
+
+    // make a new deck
+    fetch("/threebeesandme/post/deckbuilder/newdeck", {
+        method: 'post',
+        body: newDeckName
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+        })
+        .then(function (text) {
+            let result = text;
+            // TODO
+        })
+        .catch(function (err) {
+            console.log("Error: Could not get new deck");
+        });
 
     document.querySelector('#deckbuilder aside form').addEventListener('submit', donNotSubmit);
     document.getElementById('search').addEventListener('input', searchTest);
@@ -133,9 +180,9 @@ function init() {
     document.getElementById('search').addEventListener('input', search);
     document.getElementById('sort').addEventListener('change', sort);
     document.querySelector('#firstAdd').addEventListener('click', firstAdd);
+    document.getElementById('gotoRechooseDeck').addEventListener('click', saveDeckFirst);
 
     getAllCards();
-    checkAllCards();
 
     let inputs = document.querySelectorAll('#secondFilter input');
     for (let i = 0; i < inputs.length; i++) {
@@ -161,6 +208,32 @@ function init() {
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('click', unselectFilter)
     }
+}
+// TODO eventlisteners
+// pre new functions
+function gotoRechooseDeck() {
+    document.getElementById('heroChooser').className = "";
+    document.getElementById('deckbuilder').className = "hidden";
+
+}
+function gotoChooseDeck() {
+    document.getElementById('gotoChooseDeck').removeEventListener('click', gotoChooseDeck);
+    document.getElementById('gotoChooseDeck').setAttribute("id", "gotoRechooseDeck");
+    document.getElementById('deckSelector').className = "";
+    document.getElementById('deckbuilder').className = "hidden";
+    document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck);
+}
+// other
+function saveDeckFirst() {
+    document.querySelector('.main').classList.toggle('hidden');
+    document.querySelector('.save').classList.toggle('hidden');
+}
+function addDeck() {
+    document.getElementById('deckSelector').className = "hidden";
+    document.getElementById('deckbuilder').className = "";
+    document.getElementById('gotoRechooseDeck').removeEventListener('click', gotoRechooseDeck);
+    document.getElementById('gotoRechooseDeck').setAttribute("id", "gotoChooseDeck");
+    document.getElementById('gotoChooseDeck').addEventListener('click', gotoChooseDeck);
 }
 
 function getAllCards() {
@@ -190,6 +263,7 @@ function showCards(cards) {
         document.querySelector("#deckbuilder #cards .card_" + imgID).style.background = 'no-repeat url("' + imgUrl + '") center -5vh';
         document.querySelector("#deckbuilder #cards .card_" + imgID).style.backgroundSize = "115%";
     }
+    checkAllCards();
 }
 
 
@@ -198,39 +272,22 @@ function checkAllCards() {
     for (let i = 0; i < cardsInDeck.length; i++) {
         cardsInDeck[i].addEventListener("mousedown", clickOnCardInCards);
         cardsInDeck[i].addEventListener("touchstart", clickOnCardInCards);
-        cardsInDeck[i].addEventListener('dblclick', addCardToDeckDblClick);
+        // cardsInDeck[i].addEventListener('dblclick', addCardToDeckDblClick);
     }
-    let chosenCards = document.querySelectorAll(".chosenCards");
+    /*let chosenCards = document.querySelectorAll(".chosenCards");
     let lengthAllCards = document.querySelectorAll(".two").length + chosenCards.length;
     document.getElementById('cardAmount').innerHTML = lengthAllCards + '/30';
     for (let i = 0; i < chosenCards.length; i++) {
         chosenCards[i].addEventListener('dblclick', removeCardFromDeckDblClick);
-    }
+    }*/
 }
 
-function otherHero(e) {
-    // TODO check if deck needs to be saved
-    let heroName = e.target.innerText;
-    fetch('/threebeesandme/post/deckbuilder/hero', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: heroName
-    })
-        .then(function (res) {
-            if (res.ok === true)
-                return res.json();
-            else
-                return "ERROR";
-        })
-        .then(function (text) {
-            selectedHero = text;
-            deckBuilderSelectHero();
-        })
-        .catch(function (err) {
-            console.log(err + "Error: Could not send the selected hero");
-        });
+function dbHandleSelectedHero(e) {
+    document.querySelector('.main').classList.toggle('hidden');
+    document.querySelector('.save').classList.toggle('hidden');
+    // scherm wil je saven of niet
+    // needed or not handleSelectedHero(e);
+    // handleHeroSelection(selectedHero);
 }
 
 function gotoDeckBuilder() {
@@ -249,8 +306,7 @@ function gotoDeckBuilder() {
                 return "ERROR";
         })
         .then(function (text) {
-            selectedHero = text;
-            deckBuilderSelectHero();
+            getAllDecks();
             document.getElementById('heroChooser').className = "hidden";
             document.getElementById('deckbuilder').className = "";
         })
@@ -259,24 +315,6 @@ function gotoDeckBuilder() {
         });
 
     // .then do this
-}
-
-function deckBuilderSelectHero() {
-    let heroes = document.querySelectorAll("#deckbuilder #hero a");
-
-    resetDeckBuilderForm();
-    document.querySelector('#all').checked = true;
-    filterCards();
-    // sort();
-
-    for (let i = 0; i < heroes.length; i++) {
-        if (heroes[i].innerText === selectedHero) {
-            heroes[i].style.backgroundColor = "grey";
-        }
-        else {
-            heroes[i].style.backgroundColor = "white";
-        }
-    }
 }
 
 function resetDeckBuilderForm() {
@@ -450,7 +488,6 @@ function filterCards() {
 
     for (let i = 0; i < cardTypesFilter.length; i++) {
         if (cardTypesFilter[i].checked) {
-            console.log('y');
             filterArray.push(cardTypesFilter[i].value);
             cardTypeFilterChecked = true;
         }

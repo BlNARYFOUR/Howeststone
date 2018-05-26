@@ -17,20 +17,13 @@ function init() {
 
 }
 
-function addDeck() {
-    deckBuilderSelectHero();
-    document.getElementById('deckSelector').className = "hidden";
-    document.getElementById('deckbuilder').className = "";
-    document.getElementById('gotoRechooseDeck').removeEventListener('click', gotoRechooseDeck);
-    document.getElementById('gotoRechooseDeck').setAttribute("id", "gotoChooseDeck");
-    document.getElementById('gotoChooseDeck').addEventListener('click', gotoChooseDeck);
-}
-
 function showDecks(decks) {
     document.querySelector("#deckSelector .decks").innerHTML = "";
+    document.querySelector("#deckbuilder .decks").innerHTML = "";
+
     for (let i = 0; i < decks.length; i++) {
         document.querySelector("#deckSelector .decks").innerHTML += '<li><a href="#">' + decks[i] + '</a></li>';
-
+        document.querySelector("#deckbuilder .decks").innerHTML += '<li><a href="#">' + decks[i] + '</a></li>';
         if (i === 0) {
             selectedDeck = decks[i];
         }
@@ -71,8 +64,6 @@ function getAllDecks() {
             console.log("Error: Could not load the heroes :'(");
         });
 
-
-    //showDecks(["Some Deck :)", "Deck 1", "Deck 2", "OP 1 shot", "Noob deck"]);
 }
 
 function showHeroes(heroes) {
@@ -80,14 +71,14 @@ function showHeroes(heroes) {
 
     for (let i = 0; i < heroes.length; i++) {
         if (i === 0) {
-            selectedHero = heroes[i]
+            selectedHero = heroes[i];
         }
 
         for (let j = 0; j < heroesHtml.length; j++) {
             heroesHtml[j].innerHTML += '<li><a href="#" class="' + heroes[i] + '"><h2>' + heroes[i] + '</h2></a></li>';
         }
 
-        document.querySelector("#deckbuilder #hero").innerHTML += '<a href="#">' + heroes[i] + '</a>';
+        document.querySelector("#deckbuilder #hero").innerHTML += '<a href="#" class="' + heroes[i] + '">' + heroes[i] + '</a>';
 
         let heroHtmlObj = document.querySelectorAll('.heroes .' + heroes[i]);
 
@@ -95,10 +86,11 @@ function showHeroes(heroes) {
             heroHtmlObj[j].style.background = 'url("assets/media/' + heroes[i] + '.png") center center no-repeat';
             heroHtmlObj[j].style.backgroundSize = "145%";
         }
+        document.querySelectorAll("#deckbuilder #hero a")[0].style.backgroundColor = "grey";
     }
     let deckBuilderHeroes = document.querySelectorAll('#deckbuilder #hero a');
     for (let i = 0; i < deckBuilderHeroes.length; i++) {
-        deckBuilderHeroes[i].addEventListener("click", otherHero);
+        deckBuilderHeroes[i].addEventListener("click", dbHandleSelectedHero);
     }
     let selectableHeroes = document.querySelectorAll('.heroes li a');
     for (let i = 0; i < selectableHeroes.length; i++) {
@@ -138,6 +130,22 @@ function handleSelectedHero(e) {
     for (let i = 0; i < selectedHeroName.length; i++) {
         selectedHeroName[i].innerHTML = heroName;
         backgroundHolders[i].style.backgroundImage = `url('assets/media/${heroName}.png')`;
+    }
+
+    let heroes = document.querySelectorAll("#deckbuilder #hero a");
+
+    resetDeckBuilderForm();
+    document.querySelector('#all').checked = true;
+    filterCards();
+    // TODO sort();
+
+    for (let i = 0; i < heroes.length; i++) {
+        if (heroes[i].innerText === selectedHero) {
+            heroes[i].style.backgroundColor = "grey";
+        }
+        else {
+            heroes[i].style.backgroundColor = "white";
+        }
     }
 }
 

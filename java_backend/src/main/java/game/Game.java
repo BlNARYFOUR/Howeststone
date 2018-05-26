@@ -19,7 +19,7 @@ public class Game {
 
     public CardCollection allCards = new CardCollection("cards");
     public List<String> heroNames = new ArrayList<>();
-    public Map<String , CardCollection> deckNames = new HashMap<>();
+    public Map<String , List<CardCollection>> deckNames = new HashMap<>();
     // TODO: actual fields
     private Player you;
     private Player enemy;
@@ -34,8 +34,7 @@ public class Game {
         int randomHeroIndex = (int)Math.round(Math.random())*(heroNames.size()-1);
         Player enemy = new Player();
         enemy.setHero(heroNames.get(randomHeroIndex));
-        enemy.setDeck(deckNames.get(enemy.getHero().getHeroName()));
-        // TODO check if this works above
+        enemy.setDeck(deckNames.get(enemy.getHero().getHeroName()).get(0));
         this.addEnemy(enemy);
     }
 
@@ -153,7 +152,10 @@ public class Game {
 
     public List<String> getDeckNames() {
         List<String> deckNamesForChosenHero = new ArrayList<>();
-        deckNamesForChosenHero.add(deckNames.get(you.getHero().getHeroName()).getNameOfCardCollection());
+        List<CardCollection> decksForChosenHero = deckNames.get(you.getHero().getHeroName());
+        for (int i= 0; i < decksForChosenHero.size(); i++){
+            deckNamesForChosenHero.add(decksForChosenHero.get(i).getNameOfCardCollection());
+        }
         return deckNamesForChosenHero;
     }
     
@@ -208,5 +210,20 @@ public class Game {
 
     public void setDataBase(SqlDatabase db) {
         this.db = db;
+    }
+
+    public void createDeckIfNotExist(String body) {
+        checkIfDeckNotExist(body);
+    }
+
+    public boolean checkIfDeckNotExist(String body) {
+        List<CardCollection> decksForChosenHero = deckNames.get(you.getHero().getHeroName());
+        for (int i= 0; i < decksForChosenHero.size(); i++){
+            if (decksForChosenHero.get(1)
+                    .getNameOfCardCollection().equals(body)){
+                return false;
+            }
+        }
+        return true;
     }
 }

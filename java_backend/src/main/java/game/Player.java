@@ -57,8 +57,8 @@ public class Player {
         return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
     }
 
-    public void setDeck(CardCollection deckName) {
-        cardsInDeck = deckName;
+    public void setDeck(CardCollection cardsInDeck) {
+        this.cardsInDeck = cardsInDeck;
     }
 
     public CardCollection getDeck() {

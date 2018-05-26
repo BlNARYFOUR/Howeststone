@@ -1,36 +1,40 @@
-#deckbuilder body{
+#deckbuilder body {
     position: relative;
     font-family: sans-serif;
     font-size: 1rem !important;
     color: black;
     background-color: white;
 }
-#deckbuilder a{
+
+#deckbuilder a {
     text-decoration: none;
     color: black;
 }
+
 #deckbuilder .main {
     width: 77vw;
     position: absolute;
     top: 35vh;
     right: 0;
 }
-#deckbuilder header{
+
+#deckbuilder header {
     height: 33.5vh;
     width: 77vw;
     right: 0;
     position: absolute;
 }
-#deckbuilder aside{
+
+#deckbuilder aside {
     position: absolute;
     width: 22.5vw;
 }
-#deckbuilder form{
+
+#deckbuilder form {
     width: 22.5vw;
     position: absolute;
     top: 10vh;
 }
-
 
 #deckbuilder #firstAdd {
     text-align: center;
@@ -43,6 +47,7 @@
     height: 5vh;
     width: 5vh;
 }
+
 #deckbuilder #save {
     text-align: center;
     line-height: 20vh;
@@ -53,7 +58,7 @@
     border: 1px black solid;
 }
 
-#deckbuilder #hero{
+#deckbuilder #hero {
     position: absolute;
     width: 30vw;
     left: 20vw;
@@ -62,28 +67,30 @@
     text-align: center;
     word-spacing: 10vh;
 }
-#deckbuilder #hero a{
+
+#deckbuilder #hero a {
     font-size: 2rem !important;
     border: 1px black solid;
     border-radius: 100%;
     padding: 1%;
     text-transform: capitalize;
 }
-#deckbuilder #quickfilter{
+
+#deckbuilder #quickfilter {
     position: absolute;
     top: 8vh;
     padding-top: 2vh;
     padding-bottom: 1vh;
 }
 
-#deckbuilder #quickfilter a, #deckbuilder #cardAmount{
+#deckbuilder #quickfilter a, #deckbuilder #cardAmount {
     display: inline-block;
     padding: 5px;
     font-size: 0.7rem !important;
     border: 1px black solid;
 }
 
-#deckbuilder #deck{
+#deckbuilder #deck {
     overflow-y: scroll;
     position: absolute;
     top: 14vh;
@@ -97,65 +104,76 @@
     height: 54vh;
 }
 
-#deckbuilder #decks{
+#deckbuilder .decks {
     height: 9.5vh;
     border: 1px black solid;
     display: flex;
     line-height: 9.5vh;
 }
 
-#deckbuilder #decks li{
+#deckbuilder .decks li {
     line-height: 4vh;
     border: 1px black solid;
     width: 11vw;
     text-align: center;
 }
-#deckbuilder #search{
+
+#deckbuilder #search {
     width: 11vw;
 }
+
 /* Hero specific cards*/
-#deckbuilder #firstFilter{
+#deckbuilder #firstFilter {
     position: absolute;
     left: 0;
     width: 17vw;
 }
-#deckbuilder #firstFilter>label{
+
+#deckbuilder #firstFilter > label {
     display: block;
 }
-#deckbuilder #all, #deckbuilder #mage, #deckbuilder #paladin, #deckbuilder #neutral{
+
+#deckbuilder #all, #deckbuilder #mage, #deckbuilder #paladin, #deckbuilder #neutral {
     display: inline-block;
     width: 1vw;
 }
-#deckbuilder #all+label, #deckbuilder #mage+label, #deckbuilder #paladin+label, #deckbuilder #neutral+label{
+
+#deckbuilder #all + label, #deckbuilder #mage + label, #deckbuilder #paladin + label, #deckbuilder #neutral + label {
     display: inline-block;
     width: 14vw;
 }
+
 /* Card Types */
-#deckbuilder #secondFilter{
+#deckbuilder #secondFilter {
     position: absolute;
     top: 13vh;
     right: 0;
     width: 10vw;
 }
-#deckbuilder #secondFilter>label{
+
+#deckbuilder #secondFilter > label {
     display: block;
 }
-#deckbuilder #minion, #deckbuilder #weapon, #deckbuilder #spell{
+
+#deckbuilder #minion, #deckbuilder #weapon, #deckbuilder #spell {
     display: inline-block;
     width: 1vw;
 }
-#deckbuilder #minion+label, #deckbuilder #weapon+label, #deckbuilder #spell+label{
+
+#deckbuilder #minion + label, #deckbuilder #weapon + label, #deckbuilder #spell + label {
     display: inline-block;
     width: 7vw;
 }
+
 /* Mana */
-#deckbuilder #thirdFilter{
+#deckbuilder #thirdFilter {
     position: absolute;
     top: 21vh;
     left: 0;
     width: 14vw;
 }
-#deckbuilder #thirdFilter>label{
+
+#deckbuilder #thirdFilter > label {
     display: block;
 }
 
@@ -169,62 +187,70 @@
     width: 1vw;
 }
 /* Card Rarity */
-#deckbuilder #fourthFilter{
+#deckbuilder #fourthFilter {
     position: absolute;
     right: 0;
     top: 26vh;
     width: 10vw;
 }
-#deckbuilder #fourthFilter>label{
+
+#deckbuilder #fourthFilter > label {
     display: block;
 }
-#deckbuilder #free, #deckbuilder #common, #deckbuilder #rare, #deckbuilder #epic, #deckbuilder #legendary{
+
+#deckbuilder #free, #deckbuilder #common, #deckbuilder #rare, #deckbuilder #epic, #deckbuilder #legendary {
     display: inline-block;
     width: 1vw;
 }
-#deckbuilder #free+label, #deckbuilder #common+label, #deckbuilder #rare+label, #deckbuilder #epic+label, #deckbuilder #legendary+label{
+
+#deckbuilder #free + label, #deckbuilder #common + label, #deckbuilder #rare + label, #deckbuilder #epic + label, #deckbuilder #legendary + label {
     display: inline-block;
     width: 7vw;
 }
 
-#deckbuilder #sortlabel{
+#deckbuilder #sortlabel {
     position: absolute;
     top: 10vh;
     left: 0;
 }
-#deckbuilder #sort{
+
+#deckbuilder #sort {
     width: 14vw;
     position: absolute;
     top: 10vh;
     right: 0;
 }
-#deckbuilder #deckBuilderForm div{
+
+#deckbuilder #deckBuilderForm div {
     height: 60vh;
     width: 22.5vw;
     position: absolute;
     top: 25vh;
 }
 
-#deckbuilder .save{
+#deckbuilder .save {
     width: 77vw;
     position: absolute;
     top: 35vh;
     right: 0;
 }
-#deckbuilder .save>label{
+
+#deckbuilder .save > label {
     text-align: center;
     width: 30vw;
     left: 20vw;
     position: absolute;
     top: 20vh;
 }
-#deckbuilder .save input{
+
+#deckbuilder .save input {
     width: 30vw;
     left: 20vw;
     position: absolute;
     top: 25vh;
 }
-#deckbuilder .save ul{
+
+#deckbuilder .save ul {
     display: flex;
     width: 30vw;
     left: 20vw;
@@ -232,14 +258,15 @@
     justify-content: space-between;
     top: 30vh;
 }
-#deckbuilder .save li{
+
+#deckbuilder .save li {
     padding: 5px;
     border: 1px solid black;
 }
 
 #deckbuilder #gotoRechooseDeck, #deckbuilder #gotoChooseDeck {
     position: absolute;
-    bottom: 5vh;
+    bottom: 4.5vh;
     left: 5.5vw;
 }
 
@@ -253,7 +280,7 @@
 }
 
 #cards {
-    overflow-y:scroll;
+    overflow-y: scroll;
 }
 
 #cards li.cardInDeck {
@@ -262,15 +289,54 @@
     width: 23vh;
     display: inline-block;
 }
-#cards li.chosenCards{
+
+#cards li.chosenCards {
     margin-left: 1vw;
     height: 20vh;
     width: 11vh;
     display: inline-block;
 }
 
-.two{
+.two {
     background-color: blue;
+}
+
+#deckbuilder .new {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    height: 89.5vh;
+    width: 100vw;
+    line-height: 100vh;
+}
+
+#deckbuilder .new label{
+    font-size: 5vh !important;
+    position: absolute;
+    top: -10vh;
+}
+#deckbuilder .new #newDeckName{
+    width: 30vw;
+}
+
+#deckbuilder .new #newDeck{
+    position: absolute;
+    top: 55vh;
+    left: 48vw;
+    border: 1px solid #af8829;
+    height: 2vh;
+    line-height: 2vh;
+    color: #af8829;
+    padding: 2vh;
+}
+#deckbuilder .new span{
+    font-size: 5vh !important;
+    position: absolute;
+    height: 3vh;
+    line-height: 3vh;
+    left: 24vw;
+    bottom: 2vh;
 }
 /*
 .cardInDeck, .chosenCards {

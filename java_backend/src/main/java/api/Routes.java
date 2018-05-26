@@ -42,7 +42,7 @@ class Routes {
         // DECKBUILDER
         server.get("/threebeesandme/get/deckbuilder/cards", this::getAllCards);
         server.post("/threebeesandme/post/deckbuilder/hero", this::handleHeroSelection);
-
+        server.post("/threebeesandme/post/deckbuilder/deck/addcard", this::addCardToDeck);
 
         server.post("threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
         server.post("/threebeesandme/post/deckbuilder/newdeck", this::newDeck);
@@ -50,7 +50,6 @@ class Routes {
         server.post("/threebeesandme/howeststone/post/deckbuilder/sort", this::sortDeck);
         server.post("/threebeesandme/howeststone/post/deckbuilder/filterCards", this::filterCards);
     }
-
 
     private static final String SUCCES = "SUCCES";
     private static final String ERROR = "ERROR";
@@ -72,12 +71,13 @@ class Routes {
     }
 
     private void handleDeckSelection(Context context) {
-        // System.out.println(HOWESTSTONE.deckNames);
-        HOWESTSTONE.getYou().setDeck(
-                HOWESTSTONE.deckNames.get(
-                        HOWESTSTONE.getYou().getHero().getHeroName()
-                )
-        );
+        String yourHeroName = HOWESTSTONE.getYou().getHero().getHeroName();
+
+        for (int i = 0; i < HOWESTSTONE.deckNames.get(yourHeroName).size(); i++) {
+            if (HOWESTSTONE.deckNames.get(yourHeroName).get(i).getNameOfCardCollection().equals(context.body())) {
+                HOWESTSTONE.getYou().setDeck(HOWESTSTONE.deckNames.get(yourHeroName).get(i));
+            }
+        }
         context.json(HOWESTSTONE.getYou().getDeck().getNameOfCardCollection());
     }
     // GAME BOARD
@@ -168,7 +168,9 @@ class Routes {
     }
 
     private void newDeck(Context context) {
-        context.result("A new deck has been created");
+        HOWESTSTONE.createDeckIfNotExist(context.body());
+        CardCollection deck = new CardCollection(context.body());
+
     }
 
     private void deleteDeck(Context context) {
@@ -192,9 +194,14 @@ class Routes {
     private void sortDeck(Context context) {
         System.out.println(context.body());
         // alfaz
-        //alfza
-        //mana07
-        //mana70
+        // alfza
+        // mana07
+        // mana70
         // Collections.sort(filterCollection.getCards());
+    }
+
+    private void addCardToDeck(Context context) {
+        int cardId = Integer.parseInt(context.body());
+
     }
 }
