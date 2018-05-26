@@ -194,7 +194,7 @@ class Routes {
     private void sortDeck(Context context) {
         System.out.println(context.body());
 
-        switch (context.toString()) {
+        switch (context.body()) {
             case "alfaz" :
                 filterCollection.getCards().sort(new alfazCardCollectionComparator());
                 break;
