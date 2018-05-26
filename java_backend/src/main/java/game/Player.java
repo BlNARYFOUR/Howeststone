@@ -75,7 +75,7 @@ public class Player {
         if(card != null) {
             cardsInHand.addCard(card);
         } else {
-            hero.addHealth(-++heroDamageOnEmptyDeck);
+            hero.addHealth(-heroDamageOnEmptyDeck++);
         }
     }
 

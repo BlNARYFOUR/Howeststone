@@ -291,15 +291,24 @@ function enemyTurn() {
     startMyTurn();
 }
 function startMyTurn() {
-
     // TODO fetch
-    heroAttack = true;
     console.log("You're turn");
+    updateEnemyStuff();
+    updateMyStuff();
     startTimeLeftCheck();
-    updateEnemyCards(5);
-    updateMyCards(3);
+    heroAttack = true;
+}
+
+function updateMyStuff() {
+    updateMyCards();
     updateMyMana(1, 1);
-    updateMyCards(4);
+    updateMyHeroInGame();
+}
+
+function updateEnemyStuff() {
+    updateEnemyCards(5);
+    updateEnemyMana();
+    updateEnemyHeroInGame();
 }
 
 function burnFuse() {
@@ -353,6 +362,14 @@ function updateHeroInGame(parent) {
     .catch(function (err) {
         console.log("Error: Could not get hero");
     });
+}
+
+function updateMyHeroInGame() {
+    updateHeroInGame("you");
+}
+
+function updateEnemyHeroInGame() {
+    updateHeroInGame("enemy");
 }
 
 function showHeroHealth(parent, currentHealth) {
@@ -643,10 +660,25 @@ function updateCards(amountOfCards, parent, gradDirectionIndex) {
 }
 
 function updateEnemyMana(activeMana, totalMana) {
-    document.querySelector("#gameBoard .enemy .manaTotal").innerText = activeMana + "/" + totalMana;
+    fetch('/threebeesandme/get/gameboard/enemymana', {
+        method: 'GET'
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            console.log("Enemy mana updated");
+            document.querySelector("#gameBoard .enemy .manaTotal").innerText = text[0] + "/" + text[1];
+        })
+        .catch(function (err) {
+            console.log("Error: Could not update my mana");
+        });
 }
 
-function updateMyMana(activeMana, totalMana) {
+function updateMyMana() {
     fetch('/threebeesandme/get/gameboard/mymana', {
         method: 'GET'
     })
@@ -1134,8 +1166,8 @@ function sendPlayedCard(liWithClass) {
         .then(function (text) {
             if(text === "SUCCES") {
                 console.log("Card played");
-                updateMyCards();
-                updateMyMana();
+                updateMyStuff();
+                updateEnemyStuff();
             }
             else {
                 console.log("You cannot play this card!");

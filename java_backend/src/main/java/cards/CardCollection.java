@@ -103,12 +103,16 @@ public class CardCollection  {
     }*/
 
     public Card getMostExpensiveCard() {
-        Card mostExpensiveCard = this.cards.get(0);
-        for(Card x : this.cards ){
-            if (x.getManaCost() > mostExpensiveCard.getManaCost()) {
-                mostExpensiveCard = x;
+        if(0 < this.cards.size()) {
+            Card mostExpensiveCard = this.cards.get(0);
+            for (Card x : this.cards) {
+                if (x.getManaCost() > mostExpensiveCard.getManaCost()) {
+                    mostExpensiveCard = x;
+                }
             }
+            return mostExpensiveCard;
+        } else {
+            return null;
         }
-        return mostExpensiveCard;
     }
 }
