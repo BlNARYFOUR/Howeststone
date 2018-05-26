@@ -255,8 +255,7 @@ public class Game {
 
     public void startYourTurn () {
         //TODO voer abilities uit aan begin turn
-        you.getCardsInHand().addCard(you.getDeck().drawCard());
-        you.setMana(you.getMana()+1);
+        you.beginTurn();
 
         while (turnTime <= 50) {
             // playCard(card)
@@ -264,6 +263,6 @@ public class Game {
             // useHeroPower()
         }
         setActivePlayer("enemy");
-        startAutoplayer();
+        //startAutoplayer();
     }
 }
