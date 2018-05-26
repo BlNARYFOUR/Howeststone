@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CardCollection {
+public class CardCollection  {
     private String name;
     private List<Card> cards;
 

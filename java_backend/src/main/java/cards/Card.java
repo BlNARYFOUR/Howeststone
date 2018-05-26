@@ -1,5 +1,8 @@
 package cards;
 
+import abilities.Abilities;
+import hero.Hero;
+import java.util.ArrayList;
 import java.util.List;
 
 // Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt. (er zijn uitzonderingen)
@@ -14,11 +17,13 @@ public abstract class Card {
     private String urlOfImg;
     private String rarity;
     private int manaCost;
-    protected int health;
-    private String race;
     protected int attack;
+    protected int health;
     protected int durability;
     private int heroId;
+    private String race;
+    private List<Abilities> cardAbilities;
+    // TODO: private List<Mechanics> cardMechanics;
 
     /* TODO private List<Abilities> cardAbilities;
     private List<Mechanics> cardMechanics;
@@ -62,6 +67,18 @@ public abstract class Card {
         this.exhausted = exhausted;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public Card(int cardID){
+        this.cardID = cardID;
+        // TODO get other cardSpecifications
+    }
     public int getCardID() {
         return cardID;
     }
@@ -82,12 +99,15 @@ public abstract class Card {
                 '}';
     }
 
-    // method attack
-    // boolean returns whether you can attack
-    public boolean attack(Card card) {
-        // TODO: card.doDamage();
+    public void attack(Card card) {
+        if (!this.isExhausted()) {
+            this.doDamage(card);
+        }
+    }
 
-        return false;
+    public void doDamage(Card target) {
+        target.setHealth(target.health-this.attack);
+        this.setHealth(this.health-target.attack);
     }
 
     public void awaken() {
@@ -110,8 +130,15 @@ public abstract class Card {
         this.health += health;
     }
 
+    public String getCardType () {
+        return "-1";
+    }
     public String getUrlOfImg() {
         return urlOfImg;
+    }
+
+    public void attackHero(Hero target) {
+        target.setHealth(target.getHealth()-this.attack);
     }
 
     // list with all abilities and mechanics?

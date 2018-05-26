@@ -2,6 +2,7 @@ package game;
 
 import cards.Card;
 import cards.CardCollection;
+import cards.manaCardCollectionComparator;
 import cards.Minion;
 import hero.Hero;
 
@@ -18,6 +19,8 @@ public class Game {
     private int manaEnemy;
     private int turnTime;
     private String activePlayer;
+    private CardCollection yourSideOfPlayingField;
+    private CardCollection enemySideOfPlayingField;
     /*private Hero you;
     private CardCollection deck;*/
 
@@ -111,7 +114,7 @@ public class Game {
         return you;
     }
 
-    public Player getEnemy(){
+    public Player getEnemy() {
         return enemy;
     }
 
@@ -140,6 +143,97 @@ public class Game {
 
     public void setTurnTime(int turnTime) {
         this.turnTime = turnTime;
+    }
+
+    public void startTurnAutoplayer() {
+        enemy.getCardsInHand().addCard(enemy.getDeck().drawCard());
+
+        List<Card> cardsInHand = enemy.getCardsInHand().getCards();
+        cardsInHand.sort(new manaCardCollectionComparator());
+
+
+        double enemyBrain = (Math.random());
+        ;
+        if (enemyBrain <= 0.25) {
+
+            enemy.getHero().executeHeroPower(enemy.getHero().getHeroPowerID(), getRandomTarget());
+        }
+
+        for (Card card : cardsInHand) {                                 //speel duurste kaarten eerst zolang je mana hebt
+            if (card.getManaCost() <= manaEnemy) {
+                enemy.playCard(card);
+            }
+        }
+
+        for (Card card : enemy.getCardsOnPlayingField().getCards()) {
+            //TODO check if card can attack
+
+
+            if (you.getCardsOnPlayingField().getCards().isEmpty()) {
+                card.attackHero(getYourHero());
+            } else {
+                card.attack(enemy.getRandomTargetMinion());
+            }
+        }
+        //TODO zijn er end turn battlecries?
+        setActivePlayer("you");
+        startTurnYou();
+
+    }
+
+    private void startTurnYou() {
+        //TODO zorg dat kaarten kan gebruiken, targetten,  aanvallen, heropower gebruiken, ...
+        //TODO zorg dat startTurnAutoPlayer() runt wanneer de 50 seconden om zijn
+    }
+
+    public Player activePlayerToPlayer() {
+        if (activePlayer.equals("you")) {
+            return you;
+        } else {
+            return enemy;
+        }
+    }
+
+    public Object getRandomTarget() {
+        int i;
+        if (activePlayer.equals("enemy")) {
+            i = yourSideOfPlayingField.getCards().size();
+            int randomIndex = (int) (Math.round(Math.random()) * (i));
+            if (randomIndex == i) {
+                return you.getHero();
+            }else {
+                return yourSideOfPlayingField.getCards().get(i);
+            }
+        } else {
+            i = enemySideOfPlayingField.getCards().size();
+            int randomIndex = (int) (Math.round(Math.random()) * (i));
+            if (randomIndex == i) {
+                return enemy.getHero();
+            }else {
+                return enemySideOfPlayingField.getCards().get(i);
+            }
+        }
+    }
+
+    public void createPlayingField() {
+        this.yourSideOfPlayingField = new CardCollection();
+        this.enemySideOfPlayingField = new CardCollection();
+    }
+
+    public void turnMachine() {
+        //TODO fix this
+        /*Timer timer = new Timer();
+        TimerTask set;
+        timer.schedule(set, 50);*/
+    }
+
+    public void startGame() {
+        //TODO zorg dat bij replacecard de beginner de activeplayer wordt
+        if (activePlayer.equals("enemy")) {
+            startTurnAutoplayer();
+        } else {
+            startTurnYou();
+        }
     }
 
     public List<String> getDeckNames() {
