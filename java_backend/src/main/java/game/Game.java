@@ -239,7 +239,7 @@ public class Game {
 
     public List<String> getDeckNames() {
         List<String> deckNamesForChosenHero = new ArrayList<>();
-        deckNamesForChosenHero.add(deckNames.get(you.getHero().getHeroName()).getNameOfCardCollection());
+        deckNamesForChosenHero.add(deckNames.get(you.getHero().getHeroName()).getName());
         return deckNamesForChosenHero;
     }
     

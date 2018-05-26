@@ -62,16 +62,16 @@ public class Player {
     }
 
     public void beginTurn() {
-        // +1 totalMana until 10
-        // draw card
-        totalMana++;
+        if(totalMana < 10) {
+            totalMana++;
+        }
+
         activeMana = totalMana;
         cardsInHand.addCard(cardsInDeck.drawCard());
-        System.out.println("Did it do this?");
     }
 
     public void setDeck(CardCollection deckName) {
-        cardsInDeck = deckName;
+        cardsInDeck = new CardCollection(deckName);
     }
 
     public CardCollection getDeck() {
@@ -90,9 +90,17 @@ public class Player {
     public boolean playCard(int cardId) {
         try {
             int manaCost = cardsInHand.getCard(cardId).getManaCost();
+            String type = cardsInHand.getCard(cardId).getType();
 
             if (manaCost <= getActiveMana()) {
-                cardsOnPlayingField.addCard(cardsInHand.getCard(cardId));
+                if(type.equals("Minion")) {
+                    cardsOnPlayingField.addCard(cardsInHand.getCard(cardId));
+                } else if(type.equals("Weapon")) {
+                    // TODO
+                } else {
+                    // TODO
+                }
+
                 cardsInHand.removeCard(cardId);
                 activeMana -= manaCost;
 
@@ -119,7 +127,7 @@ public class Player {
     public String toString() {
         // deck hero
         // mss nog extra zoals health totalMana
-        return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
+        return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getName();
     }
 
     public int getActiveMana() {

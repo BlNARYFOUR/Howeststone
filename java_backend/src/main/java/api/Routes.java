@@ -82,7 +82,7 @@ class Routes {
                         HOWESTSTONE.getYou().getHero().getHeroName()
                 )
         );
-        context.json(HOWESTSTONE.getYou().getDeck().getNameOfCardCollection());
+        context.json(HOWESTSTONE.getYou().getDeck().getName());
     }
 
     // GAME BOARD

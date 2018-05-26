@@ -81,6 +81,7 @@ public abstract class Card {
         this.cardID = cardID;
         // TODO get other cardSpecifications
     }
+
     public int getCardID() {
         return cardID;
     }
@@ -141,9 +142,6 @@ public abstract class Card {
         this.health += health;
     }
 
-    public String getCardType () {
-        return "-1";
-    }
     public String getImg() {
         return img;
     }

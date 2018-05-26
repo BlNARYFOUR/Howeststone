@@ -919,7 +919,7 @@ function deactivateHeroAttack() {
 
 function addWeaponToPlayingField(cardPlayed) {
     moved = true;
-    updateMyMana(remainingCrystals - cost, document.querySelectorAll("#gameBoard .you .manaHolder ul li").length);
+    sendPlayedCard(itemThatIsBeingMoved);
     let cardAttack = returnAttackOfMyCard(itemThatIsBeingMoved);
     let cardDurability = returnDurabilityOfMyCard(itemThatIsBeingMoved);
     cardPlayed.innerHTML += `<span class="attack">${cardAttack}</span><span class="durability">${cardDurability}</span>`;
