@@ -186,7 +186,9 @@ function showCards(cards) {
     for (let i = 0; i < cards["cards"].length; i++) {
         let imgUrl = cards["cards"][i]["img"];
         let imgID = cards["cards"][i]["cardId"];
-        document.getElementById('cards').innerHTML += '<li class ="cardInDeck"><figure><img src="' + imgUrl + '" alt="' + imgID + '" title="' + imgID + '" id="' + imgID + '">' + '</figure></li>';
+        document.getElementById('cards').innerHTML += '<li class ="cardInDeck card_'+ imgID + '"></li>';
+        document.querySelector("#deckbuilder #cards .card_" + imgID).style.background = 'no-repeat url("' + imgUrl + '") center -5vh';
+        document.querySelector("#deckbuilder #cards .card_" + imgID).style.backgroundSize = "115%";
     }
 }
 

@@ -256,36 +256,34 @@
     overflow-y:scroll;
 }
 
-.cardInDeck figure{
+#cards li.cardInDeck {
+    margin-left: 2vw;
+    height: 35vh;
     width: 23vh;
     display: inline-block;
 }
-.chosenCards figure{
+#cards li.chosenCards{
+    margin-left: 1vw;
+    height: 20vh;
     width: 11vh;
     display: inline-block;
 }
-/*.cardInDeck figure img:last-child{
-    z-index: 1;
-    position: absolute;
-    display: none;
-    top: 0;
-    left: -23vw;
-    width: 45vh;
-}*/
+
 .two{
     background-color: blue;
 }
-
+/*
 .cardInDeck, .chosenCards {
     margin-left: 1vw;
     display: inline;
 }
+
 .cardInDeck img {
     width: 23vh;
 }
 .chosenCards img{
     width: 5vw;
-}
+}*/
 
 
 
