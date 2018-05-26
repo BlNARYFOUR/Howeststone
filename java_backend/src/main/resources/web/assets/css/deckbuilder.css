@@ -291,14 +291,16 @@
 }
 
 #deck li.chosenCards {
+    margin-top: 1vh;
     margin-left: 1vw;
-    height: 19vh;
-    width: 5vw;
+    height: 15vh;
+
+    width: 4vw;
     display: inline-block;
 }
 
 .two {
-    background-color: blue;
+    border: 1px solid;
 }
 
 #deckbuilder .new {

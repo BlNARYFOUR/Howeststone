@@ -132,7 +132,7 @@ public class CardCollection {
         if (amount >= 2) {
             return "cannot add more";
         }
-        System.out.println(cards.size());
+
         if (cards.size() > 29) {
             return "too much cards";
         }

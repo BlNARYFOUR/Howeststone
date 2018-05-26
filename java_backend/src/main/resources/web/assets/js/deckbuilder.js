@@ -411,7 +411,6 @@ function addCardToDeck(card) {
         })
         .then(function (text) {
             let result = text;
-            console.log(result);
             showCardsInDeck(result);
         })
         .catch(function (err) {
@@ -423,12 +422,19 @@ function showCardsInDeck(cards) {
     document.getElementById('cardAmount').innerHTML = cards["cards"].length + '/30';
     document.getElementById('deck').innerHTML = "";
     // TODO 2 of the same cards
+    let cardIds = [];
     for (let i = 0; i < cards["cards"].length; i++) {
         let imgUrl = cards["cards"][i]["img"];
         let imgID = cards["cards"][i]["cardId"];
-        document.getElementById('deck').innerHTML += '<li class ="chosenCards card_'+ imgID + '"></li>';
-        document.querySelector("#deckbuilder #deck .card_" + imgID).style.background = 'no-repeat url("' + imgUrl + '") center center';
-        document.querySelector("#deckbuilder #deck .card_" + imgID).style.backgroundSize = "115%";
+        if (cardIds.indexOf(imgID) === -1){
+            cardIds.push(imgID);
+            document.getElementById('deck').innerHTML += '<li class ="chosenCards card_'+ imgID + '"></li>';
+            document.querySelector("#deckbuilder #deck .card_" + imgID).style.background = 'no-repeat url("' + imgUrl + '") center center';
+            document.querySelector("#deckbuilder #deck .card_" + imgID).style.backgroundSize = "115%";
+        }else {
+            document.querySelector("#deckbuilder #deck .card_" + imgID).classList.add('two');
+        }
+
     }
     checkAllCards();
 
@@ -445,28 +451,6 @@ function removeCardFromDeck(card) { //remove eventlistener niet vergeten (nu nog
         card.parentNode.remove();
     }
     checkAllCards();
-}
-
-function search(e) {
-    e.preventDefault();
-    console.log(document.getElementById('search').value);
-
-    // Declare variables
-    let input, filter, ul, li, img, i;
-    input = document.getElementById('search');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("cards");
-    li = ul.getElementsByTagName('li');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        img = li[i].getElementsByTagName("img")[0];
-        if (img.getAttribute('id').toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
 }
 
 function sort() {
