@@ -272,9 +272,9 @@ function toggleReplaceCard(e) {
 
 function gameBoardSetup() {
     setBackground();
-    updateEnemyHero();
+    updateEnemyHeroBeforeGame();
     updateEnemyMana(0, 0);
-    updateMyHero();
+    updateMyHeroBeforeGame();
     updateMyMana(0, 0);
     playGame();
 }
@@ -310,32 +310,53 @@ function stopBurnFuse() {
     document.getElementById("fuse").classList.remove("burn");
 }
 
-function updateEnemyHero() {
-    updateHero("enemy");
+function updateEnemyHeroBeforeGame() {
+    updateHeroBeforeGame("enemy");
 }
 
-function updateMyHero() {
-    updateHero("you");
+function updateMyHeroBeforeGame() {
+    updateHeroBeforeGame("you");
 }
 
-function updateHero(parent) {
+function updateHeroBeforeGame(parent) {
     let url = '/threebeesandme/get/hero?parent=' + parent;
     fetch(url, {
-        method: 'get',
-
+        method: 'get'
     })
-        .then(function (res) {
-            if (res.ok === true)
-                return res.json();
-        })
-        .then(function (text) {
-            let result = text;
-            showHero(parent, result);
-        })
-        .catch(function (err) {
-            console.log("Error: Could not get hero");
-        });
+    .then(function (res) {
+        if (res.ok === true)
+            return res.json();
+    })
+    .then(function (text) {
+        let result = text;
+        showHero(parent, result);
+    })
+    .catch(function (err) {
+        console.log("Error: Could not get hero");
+    });
+}
 
+function updateHeroInGame(parent) {
+    let url = '/threebeesandme/get/gameboard/herohealth?parent=' + parent;
+    fetch(url, {
+        method: 'get'
+    })
+    .then(function (res) {
+        if (res.ok === true)
+            return res.json();
+    })
+    .then(function (text) {
+        let result = text;
+        console.log(`${parent} hero-health has been updated`);
+        showHeroHealth(parent, result);
+    })
+    .catch(function (err) {
+        console.log("Error: Could not get hero");
+    });
+}
+
+function showHeroHealth(parent, currentHealth) {
+    document.querySelector(`#gameBoard .${parent} .hero .health`).innerText = currentHealth;
 }
 
 function showHero(parent, heroName) {
