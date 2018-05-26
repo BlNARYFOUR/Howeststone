@@ -1,6 +1,5 @@
 package api;
 
-import cards.Card;
 import cards.CardCollection;
 import cards.alfazCardCollectionComparator;
 import cards.manaCardCollectionComparator;
@@ -197,28 +196,26 @@ class Routes {
     }
 
     private void sortDeck(Context context) {
-        System.out.println(context.body());
-
         switch (context.body()) {
             case "alfaz" :
-                filterCollection.getCards().sort(new alfazCardCollectionComparator());
+                HOWESTSTONE.filterCollection.getCards().sort(new alfazCardCollectionComparator());
                 break;
 
             case "alfza" :
-                filterCollection.getCards().sort(new alfazCardCollectionComparator());
-                Collections.reverse(filterCollection.getCards());
+                HOWESTSTONE.filterCollection.getCards().sort(new alfazCardCollectionComparator());
+                Collections.reverse(HOWESTSTONE.filterCollection.getCards());
                 break;
 
             case "mana07" :
-                filterCollection.getCards().sort(new manaCardCollectionComparator());
-                Collections.reverse(filterCollection.getCards());
+                HOWESTSTONE.filterCollection.getCards().sort(new manaCardCollectionComparator());
+                Collections.reverse(HOWESTSTONE.filterCollection.getCards());
                 break;
 
             case "mana70" :
-                filterCollection.getCards().sort(new manaCardCollectionComparator());
+                HOWESTSTONE.filterCollection.getCards().sort(new manaCardCollectionComparator());
                 break;
         }
-        context.json(filterCollection);
+        context.json(HOWESTSTONE.filterCollection);
     }
 
     private void canCardBeAdded(Context context) {

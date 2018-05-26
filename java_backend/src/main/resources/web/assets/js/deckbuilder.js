@@ -135,6 +135,7 @@ function startDeckBuilder() {
     document.getElementById('gotoRechooseDeck').addEventListener('click', saveDeckFirst);
 
     getAllCards();
+    filterCards();
 
     let inputs = document.querySelectorAll('#secondFilter input');
     for (let i = 0; i < inputs.length; i++) {
@@ -260,6 +261,7 @@ function clickOnCardInCards(e) {
             console.log(err);
         });
 }
+
 function beginAddingCards(e) {
 
     itemThatIsBeingMoved = e.target;
