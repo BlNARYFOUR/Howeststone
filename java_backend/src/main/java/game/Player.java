@@ -67,7 +67,14 @@ public class Player {
         }
 
         activeMana = totalMana;
-        cardsInHand.addCard(cardsInDeck.drawCard());
+
+        Card card = cardsInDeck.drawCard();
+
+        if(card != null) {
+            cardsInHand.addCard(card);
+        } else {
+            
+        }
     }
 
     public void setDeck(CardCollection deckName) {

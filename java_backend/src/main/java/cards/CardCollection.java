@@ -27,9 +27,13 @@ public class CardCollection  {
     }
 
     public Card drawCard() {
-        final Card DRAW = cards.get(0);
-        cards.remove(0);
-        return DRAW;
+        if(0 < cards.size()) {
+            final Card DRAW = cards.get(0);
+            cards.remove(0);
+            return DRAW;
+        }
+
+        return null;
     }
 
     public void addCard(Card card) {
