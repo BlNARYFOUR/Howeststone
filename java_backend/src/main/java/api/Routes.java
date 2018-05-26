@@ -213,5 +213,6 @@ class Routes {
                 filterCollection.getCards().sort(new manaCardCollectionComparator());
                 break;
         }
+        context.json(filterCollection);
     }
 }
