@@ -65,7 +65,7 @@ class Routes {
     }
 
     private void handleHeroSelection(Context context) {
-        Player you = new Player();
+        final Player you = new Player();
         you.setHero(context.body());
         howeststone.addYou(you);
         context.json(howeststone.getYou().getHero().getHeroName());
@@ -96,8 +96,8 @@ class Routes {
         howeststone.setTurnTime(50);
         howeststone.createPlayingField();
 
-        Random rand = new Random();
-        boolean doYouBegin = rand.nextBoolean();
+        final Random rand = new Random();
+        final boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
             howeststone.setActivePlayer("you");
         } else {
@@ -114,44 +114,45 @@ class Routes {
     }
 
     private void getMyMana(Context context) {
-        int[] manaInfo = {howeststone.getYou().getActiveMana(), howeststone.getYou().getTotalMana()};
+        final int[] manaInfo = {howeststone.getYou().getActiveMana(), howeststone.getYou().getTotalMana()};
         context.json(manaInfo);
     }
 
     private void replaceCards(Context context) throws IOException {
-        String body = context.body();
+        final String body = context.body();
         System.out.println(body);
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, List<Integer>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>(){});
+        final ObjectMapper mapper = new ObjectMapper();
+        final Map<String, List<Integer>> temp =
+                mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() { });
 
-        List<Integer> cardsInHand = temp.get("CardsInHand");
-        List<Integer> cardsToReplace = temp.get("CardsToDeck");
+        final List<Integer> cardsInHand = temp.get("CardsInHand");
+        final List<Integer> cardsToReplace = temp.get("CardsToDeck");
 
-        if(howeststone.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
+        if (howeststone.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
             context.json(SUCCES);
 
-            if(howeststone.getActivePlayer().equals("you")) {
+            if (howeststone.getActivePlayer().equals("you")) {
                 howeststone.getYou().beginTurn();
             }
-        }
-        else {
+        } else {
             System.out.println(ColorFormats.red("you shall not hack"));
             context.json(ERROR);
         }
     }
 
     private void playMyCard(Context context) throws IOException {
-        boolean succeeded;
-        String body = context.body();
+        final boolean succeeded;
+        final String body = context.body();
 
         System.out.println(body);
 
-        ObjectMapper mapper = new ObjectMapper();
-        int cardId = mapper.readValue(body, new TypeReference<Integer>(){});
+        final ObjectMapper mapper = new ObjectMapper();
+        final int cardId = mapper.readValue(body, new TypeReference<Integer>() {
+        });
 
         succeeded = howeststone.getYou().playCard(cardId);
 
-        if(succeeded) {
+        if (succeeded) {
             context.json(SUCCES);
         } else {
             context.json(ERROR);
@@ -179,8 +180,8 @@ class Routes {
     }
 
     private void getHeroName(Context context) {
-        String hero = context.queryParamMap().get("parent")[0];
-        if (hero.equals("enemy")) {
+        final String hero = context.queryParamMap().get("parent")[0];
+        if ("enemy".equals(hero)) {
             context.json(howeststone.getEnemy().getHero().getHeroName());
         } else {
             context.json(howeststone.getYou().getHero().getHeroName());
