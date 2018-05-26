@@ -169,8 +169,8 @@ class Routes {
         context.result("Time Left");
     }
 
-    private void handleEndTurn(Context context) {
-        context.result("Turn has ended");
+    private void handleEndUrn(Context context) {
+        context.result("TurnTimer has ended");
     }
 
     private void useHeroPower(Context context) {

@@ -1,5 +1,6 @@
 package game;
 
+import cards.Card;
 import cards.CardCollection;
 import formatters.ColorFormats;
 import hero.Hero;
@@ -13,6 +14,7 @@ public class Player {
     private CardCollection cardsInDeck;
     private int activeMana;
     private int totalMana;
+    private Card weapon;
 
     public Player() {
         hero = new Hero("Mage");
@@ -49,6 +51,18 @@ public class Player {
 
     public void setTotalMana(int totalMana) {
         this.totalMana = totalMana;
+    }
+
+    public Card getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Card weapon) {
+        this.weapon = weapon;
+    }
+
+    public Player() {
+
     }
 
     public void beginTurn() {
@@ -95,19 +109,14 @@ public class Player {
         }
     }
 
-    /*public Card getRandomTarget() {
-        //TODO hoe zorg ik dat ik een kaart OF de hero kan teruggeven?
 
+    public Card getRandomTargetMinion() {
         List<Card> targetCards = this.getCardsOnPlayingField().getCards();
-        int resultIndex = (int)Math.round(Math.random())*(targetCards.size());
+        int resultIndex = (int)Math.round(Math.random())*(targetCards.size()-1);
 
-        if (resultIndex == targetCards.size()) {
-            //dan is het de Hero
-        } else {
-            return this.getCardsOnPlayingField().getCards().get(resultIndex);
-        }
+        return this.getCardsOnPlayingField().getCards().get(resultIndex);
 
-    }*/
+    }
 
     @Override
     public String toString() {
