@@ -1,13 +1,11 @@
 package hero;
 
-import cards.CardCollection;
 import cards.Weapon;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 public class Hero {
+    private final String paladinStr = "Paladin";
+    private final String mageStr = "Mage";
+
     private int mageAttack;
     private int health;
     private String heroName;
@@ -15,17 +13,17 @@ public class Hero {
     private int heroPowerID;
     private Weapon weapon;
 
-    public Hero(String heroName){
+    public Hero(String heroName) {
         this.health = 30;
         switch (heroName) {
-            case "Mage":
-                this.heroName = "Mage";
+            case mageStr:
+                this.heroName = mageStr;
                 this.heroId = 1;
                 this.heroPowerID = 0;
                 this.mageAttack = 1;
                 break;
-            case "Paladin":
-                this.heroName = "Paladin";
+            case paladinStr:
+                this.heroName = paladinStr;
                 this.heroId = 3;
                 this.heroPowerID = 1;
                 break;
@@ -87,8 +85,10 @@ public class Hero {
     }*/
 
     public void executeHeroPower(int heroPowerId, Object randomTarget) {
-        if (heroPowerId == 0) {                     // dan is het mage
-            
+        if (heroPowerId == 0) {
+            // dan is het mage
+            // TODO
+            final boolean getErrorAway = true;
         }
         // heroIdPower  = Paladin ==> check field is full ==> add 1/1 minion to field
         // heroIdPower = Mage ==> frontend activeren om target te selecteren ==> levens target in backend -1
