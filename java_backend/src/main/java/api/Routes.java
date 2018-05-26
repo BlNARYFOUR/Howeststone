@@ -4,6 +4,7 @@ import cards.Card;
 import cards.CardCollection;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import formatters.ColorFormats;
 import game.*;
 import io.javalin.Context;
 import io.javalin.Javalin;
@@ -126,6 +127,7 @@ class Routes {
             context.json(SUCCES);
         }
         else {
+            System.out.println(ColorFormats.red("you shall not hack"));
             context.json(ERROR);
         }
     }

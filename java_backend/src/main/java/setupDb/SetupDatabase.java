@@ -29,7 +29,7 @@ public class SetupDatabase {
     private static final String[] HEROES = {NEUTRAL, "Mage", "Paladin"};
     private static final String[] ABILITIES_WITH_MECHANICS = {"Aura", "Battlecry", "Deathrattle", "DestroyedDivineShield", "Enrage", "On Attack", "On Death", "On Heal", "On Hit", "Turn Begin", "Turn End", "Untargetable", "Update In Hand"};
 
-    private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306/HOWESTSTONE", "root", "");
+    private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306", "root", "");
     private JSONArray spellList;
     private JSONArray minionList;
     private JSONArray weaponList;
@@ -45,6 +45,7 @@ public class SetupDatabase {
     }
 
     private void run() {
+        initDatabase();
         addAbilitiesToDb();
         addHeroesToDb();
         addMechanicsToDb();
@@ -52,10 +53,6 @@ public class SetupDatabase {
         listAllMechanicValues();
         addCardsToDb();
         createStandardDecks();
-    }
-
-    public void initDatabase() {
-
     }
 
     private void addAbilitiesToDb() {
@@ -209,7 +206,7 @@ public class SetupDatabase {
         System.out.println("\nCreating standard decks...");
         for(String heroName : HEROES) {
             if(!heroName.equals(NEUTRAL)) {
-                createRandomDeck("Standard" + heroName, getHeroId(heroName));
+                createRandomDeck("Standard " + heroName, getHeroId(heroName));
             }
         }
         System.out.println(ColorFormats.blue("standard decks have been created!"));
@@ -235,6 +232,40 @@ public class SetupDatabase {
 
         System.out.println("\nValues:");
         outputSet(mechanics);
+    }
+
+    public void initDatabase() {
+        executeStatement(SqlStatements.DROP_DB, "Old DB drop");
+        executeStatement(SqlStatements.CREATE_DB, "Creating new DB");
+        executeStatement(SqlStatements.CREATE_MECHANICS, "Creating Mechanics");
+        executeStatement(SqlStatements.CREATE_ABILITIES, "Creating Abilities");
+        executeStatement(SqlStatements.CREATE_HEROES, "Creating Heroes");
+        executeStatement(SqlStatements.CREATE_CARDS, "Creating Cards");
+        executeStatement(SqlStatements.CREATE_CARD_MECHANICS, "Creating CardMechanics");
+        executeStatement(SqlStatements.CREATE_CARD_ABILITIES, "Creating CardAbilities");
+        executeStatement(SqlStatements.CREATE_DECKS, "Creating Decks");
+        executeStatement(SqlStatements.CREATE_CARDS_IN_DECKS, "Creating CardsInDecks");
+        executeStatement(SqlStatements.INSERT_NONE_MECHANIC, "Inserting none mechanic");
+        executeStatement(SqlStatements.INSERT_NONE_CARD_MECHANIC, "Inserting none cardMechanic");
+    }
+
+    public void executeStatement(String statement, String name) {
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(statement,
+                        Statement.RETURN_GENERATED_KEYS)
+        ) {
+            final int AFFECTED_ROWS = stmt.executeUpdate();
+
+            if (AFFECTED_ROWS < 0) {
+                throw new SQLException(name + " failed :'(");
+            } else {
+                System.out.println(name + " succeeded!");
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private void insertMechanic(String mechanic) {

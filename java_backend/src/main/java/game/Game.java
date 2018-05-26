@@ -2,6 +2,7 @@ package game;
 
 import cards.Card;
 import cards.CardCollection;
+import cards.Minion;
 import hero.Hero;
 
 import java.util.*;
@@ -126,7 +127,6 @@ public class Game {
     }
 
     public void shuffleDecks() {
-
     }
 
     public void setActivePlayer(String activePlayer) {
@@ -154,5 +154,15 @@ public class Game {
     public void createPlayingField() {
         this.yourSideOfPlayingField = new CardCollection();
         this.enemySideOfPlayingField = new CardCollection();
+    }
+    
+    public void attackMinion(Minion attacker, Minion target) {
+        int attackValueAttacker = attacker.getAttack();
+        int healthValueAttacker = attacker.getHealth();
+        int attackValueTarget = target.getAttack();
+        int healthValueTarget = target.getAttack();
+
+        target.setHealth(healthValueTarget - attackValueAttacker);
+        attacker.setHealth(healthValueAttacker - attackValueTarget);
     }
 }
