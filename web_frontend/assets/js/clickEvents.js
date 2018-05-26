@@ -14,7 +14,7 @@ function gotoCardsReplaced() {
     }
     document.getElementById('replaceCardScreen').className = "hidden";
     deactivateReplaceCards();
-    setTimeout(yourTurn, 1000);
+    setTimeout(startMyTurn, 1000);
 
 }
 

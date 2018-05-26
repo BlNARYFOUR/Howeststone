@@ -2,8 +2,8 @@ package cards;
 
 public class Minion extends Card {
 
-    public Minion(int cardId, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
-        super(cardId, cardName, race, urlOfImg, rarity, health, attack, manaCost, durability, heroId);
+    public Minion(int cardId, String type, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
+        super(cardId, type, cardName, race, urlOfImg, rarity, health, attack, manaCost, durability, heroId);
     }
 
     public int getAttack() {

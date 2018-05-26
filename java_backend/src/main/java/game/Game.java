@@ -21,6 +21,7 @@ public class Game {
     private String activePlayer;
     private CardCollection yourSideOfPlayingField;
     private CardCollection enemySideOfPlayingField;
+
     /*private Hero you;
     private CardCollection deck;*/
 
@@ -161,7 +162,7 @@ public class Game {
 
         for (Card card : cardsInHand) {                                 //speel duurste kaarten eerst zolang je mana hebt
             if (card.getManaCost() <= manaEnemy) {
-                enemy.playCard(card);
+                enemy.playCard(card.getCardID());
             }
         }
 

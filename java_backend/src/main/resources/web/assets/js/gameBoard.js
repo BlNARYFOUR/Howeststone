@@ -83,13 +83,6 @@ function showBattleLog(logArr) {
     }
 }
 
-function startMyTurn() {
-    startTimeLeftCheck();
-    console.log("You're turn");
-    updateMyMana(1, 1);
-    updateMyCards();
-}
-
 function startTimeLeftCheck() {
     // TODO: timeLeftObj = setInterval(timeLeft, 1000);
 
@@ -160,10 +153,7 @@ function endMyTurn(e) {
 }
 
 function gotoCardsReplaced() {
-    // HOW TO DO THIS ??
     let beginCards = document.querySelectorAll('#replaceCardScreen ul li');
-
-
     let CardsInHand = [];
     let CardsToDeck = [];
 
@@ -184,7 +174,7 @@ function gotoCardsReplaced() {
 }
 
 function replaceCards(countReplaceCards) {
-    fetch('/threebeesandme/post/gameboard/cardsinhand', {
+    fetch('/threebeesandme/post/gameboard/replacecards', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -198,8 +188,12 @@ function replaceCards(countReplaceCards) {
                 return "ERROR";
         })
         .then(function (text) {
-            console.log(text);
-            yourTurn();
+            console.log(activePlayer);
+            if(activePlayer === "enemy"){
+                enemyTurn();
+            }else {
+                startMyTurn();
+            }
         })
         .catch(function (err) {
             console.log("Error: Could not get the cards in hand");
@@ -216,17 +210,19 @@ function getHTMLForReplaceCardScreen(cards) {
     for (let i = 0; i < cards["cards"].length; i++) {
         html += '<li class="card_' + cards["cards"][i]["cardID"] + '"></li>';
     }
-
-    html += '</ul><span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Replace</a></span>';
+    html += '</ul><span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Continue</a></span>';
     document.querySelector("#replaceCardScreen").innerHTML = html;
 
 }
 
 function getBackgroundImagesForCardScreen(cards) {
     for (let i = 0; i <cards["cards"].length; i++){
-        let cardClass = document.querySelector("#replaceCardScreen ul li.card_" + cards["cards"][i]["cardID"]);
-        cardClass.style.background = 'no-repeat url("' + cards["cards"][i]["urlOfImg"] + '") center -5vh';
-        cardClass.style.backgroundSize = "115%";
+        let cardClass = document.querySelectorAll("#replaceCardScreen ul li.card_" + cards["cards"][i]["cardID"]);
+
+        for(let j=0; j<cardClass.length; j++) {
+            cardClass[j].style.background = 'no-repeat url("' + cards["cards"][i]["img"] + '") center -5vh';
+            cardClass[j].style.backgroundSize = "115%";
+        }
     }
 }
 
@@ -284,11 +280,22 @@ function gameBoardSetup() {
 }
 
 let heroAttack;
+function enemyTurn() {
+    // TODO fetch
+    // get amount of card in hand
+    // get max mana
+    // get playing field
+    // get heroes health
+    // weapon yes no
 
-function yourTurn() {
+    startMyTurn();
+}
+function startMyTurn() {
+
     // TODO fetch
     heroAttack = true;
     console.log("You're turn");
+    startTimeLeftCheck();
     updateEnemyCards(5);
     updateMyCards(3);
     updateMyMana(1, 1);
@@ -352,19 +359,32 @@ function updateEnemyCards() {
 }
 
 function updateMyCards() {
-    // TODO fetch for cardsInMyHand and other info
-    myCards = MOCKMYCARDS();
+    fetch('/threebeesandme/get/gameboard/mycardsinhand', {
+        method: 'GET'
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+        .then(function(text) {
+            let result = text;
+            console.log("my cards in hand updated");
 
-    updateCards(myCards.length, "you", 1);
-    setMyCards(myCards);
-    giveClassNameEqualToCardID();
-    setupMovingOfCards();
+            myCards = result;
+            updateCards(myCards.length, "you", 1);
+            setMyCards(myCards);
+            giveClassNameEqualToCardID();
+            setupMovingOfCards();
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });
 }
 
 function giveClassNameEqualToCardID() {
     let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
     for (let i = 0; i < myCards.length; i++) {
-        cardHtmlObjects[i].classList.add(myCards[i].cardId);
+        cardHtmlObjects[i].classList.add(myCards[i]["cardID"]);
     }
 }
 
@@ -606,6 +626,25 @@ function updateEnemyMana(activeMana, totalMana) {
 }
 
 function updateMyMana(activeMana, totalMana) {
+    fetch('/threebeesandme/get/gameboard/mymana', {
+        method: 'GET'
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            console.log("My mana updated");
+            visualizeMyMana(text[0], text[1]);
+        })
+        .catch(function (err) {
+            console.log("Error: Could not update my mana");
+        });
+}
+
+function visualizeMyMana(activeMana, totalMana) {
     let manaList = document.querySelector("#gameBoard .you .manaHolder ul");
     document.querySelector("#gameBoard .you .manaTotal").innerText = activeMana + "/" + totalMana;
 
@@ -890,7 +929,7 @@ function addWeaponToPlayingField(cardPlayed) {
 function addMinionToPlayingField(cardPlayed) {
     // mockData
     moved = true;
-    updateMyMana(remainingCrystals - cost, document.querySelectorAll("#gameBoard .you .manaHolder ul li").length);
+    sendPlayedCard(itemThatIsBeingMoved);
     let cardAttack = returnAttackOfMyCard(itemThatIsBeingMoved);
     let cardHealth = returnHealthOfMyCard(itemThatIsBeingMoved);
     cardPlayed.innerHTML += `<span class="health">${cardHealth}</span><span class="attack">${cardAttack}</span>`;
@@ -1008,8 +1047,8 @@ function layCardOnFieldEnd(e) {
 function returnTypeOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].type;
+        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["type"];
         }
     }
     return null;
@@ -1018,8 +1057,8 @@ function returnTypeOfMyCard(liWithClass) {
 function returnDurabilityOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].durability;
+        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["durability"];
         }
     }
     return null;
@@ -1028,8 +1067,8 @@ function returnDurabilityOfMyCard(liWithClass) {
 function returnHealthOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].health;
+        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["health"];
         }
     }
     return null;
@@ -1038,8 +1077,8 @@ function returnHealthOfMyCard(liWithClass) {
 function returnAttackOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].attack;
+        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["attack"];
         }
     }
     return null;
@@ -1048,11 +1087,42 @@ function returnAttackOfMyCard(liWithClass) {
 function returnCostOfMyCard(liWithClass) {
     let cardId = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].cost;
+        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["manaCost"];
         }
     }
     return null;
+}
+
+function sendPlayedCard(liWithClass) {
+    let cardId = liWithClass.getAttribute('class');
+
+    fetch('/threebeesandme/post/gameboard/playcard', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cardId.split(' ')[0])
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            if(text === "SUCCES") {
+                console.log("Card played");
+                updateMyCards();
+                updateMyMana();
+            }
+            else {
+                console.log("You cannot play this card!");
+            }
+        })
+        .catch(function (err) {
+            console.log("Error: Could not play the card");
+        });
 }
 
 /* give minion class nonAttack

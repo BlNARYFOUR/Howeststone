@@ -1,23 +1,19 @@
 package api;
 
-import cards.Card;
-import cards.CardCollection;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import formatters.ColorFormats;
 import game.*;
 import io.javalin.Context;
 import io.javalin.Javalin;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 class Routes {
+
     private final Game HOWESTSTONE;
 
     Routes(final Javalin server, Game game) {
@@ -29,14 +25,16 @@ class Routes {
         // GAME BOARD
         server.get("/threebeesandme/get/gameboard/begincards", this::getBeginCards);
         server.get("/threebeesandme/get/gameboard/begin", this::beginGame);
+        server.get("/threebeesandme/get/gameboard/mymana", this::getMyMana);
         server.get("threebeesandme/get/gameboard/battlelog", this::getBattleLog);
         server.get("threebeesandme/get/gameboard/timeleft", this::getTimeLeft);
         server.get("threebeesandme/get/useheropower", this::useHeroPower);
         server.get("/threebeesandme/get/hero", this::getHeroName);
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
+        server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
         server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
-        server.post("/threebeesandme/post/gameboard/cardsinhand", this::getCardsInHand);
-        server.post("threebeesandme/post/gameboard/endturn", this::handleEndUrn);
+        server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
+        server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
 
         // HERO AND DECK SELECTOR
         server.get("/threebeesandme/get/heroanddeckselector/decks", this::getAllDecks);
@@ -55,7 +53,12 @@ class Routes {
 
     private static final String SUCCES = "SUCCES";
     private static final String ERROR = "ERROR";
+
     // HERO AND DECK SELECTOR
+
+    private void getMyCardsInHand(Context context) {
+        context.json(HOWESTSTONE.getYou().getCardsInHand().getCards());
+    }
 
     private void getAllHeroes(Context context) {
         context.json(HOWESTSTONE.getHeroNames());
@@ -81,6 +84,7 @@ class Routes {
         );
         context.json(HOWESTSTONE.getYou().getDeck().getNameOfCardCollection());
     }
+
     // GAME BOARD
 
     private void beginGame(Context context) {
@@ -90,6 +94,7 @@ class Routes {
         }
         HOWESTSTONE.generateEnemy();
         HOWESTSTONE.setTurnTime(50);
+        HOWESTSTONE.createPlayingField();
 
         Random rand = new Random();
         boolean doYouBegin = rand.nextBoolean();
@@ -97,31 +102,58 @@ class Routes {
             HOWESTSTONE.setActivePlayer("you");
         } else {
             HOWESTSTONE.setActivePlayer("enemy");
+            HOWESTSTONE.getEnemy().beginTurn();
+            // do auto player
+
         }
         context.json(HOWESTSTONE.getActivePlayer());
     }
 
     private void getBeginCards(Context context) {
-        // TODO can beginCards change this way
         context.json(HOWESTSTONE.getPlayerBeginCards());
-        // TODO give cards ipv id's
     }
 
-    private void getCardsInHand(Context context) throws IOException {
+    private void getMyMana(Context context) {
+        int[] manaInfo = {HOWESTSTONE.getYou().getActiveMana(), HOWESTSTONE.getYou().getTotalMana()};
+        context.json(manaInfo);
+    }
+
+    private void replaceCards(Context context) throws IOException {
         String body = context.body();
         System.out.println(body);
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, List<Integer>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() {
-        });
+        Map<String, List<Integer>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>(){});
 
         List<Integer> cardsInHand = temp.get("CardsInHand");
         List<Integer> cardsToReplace = temp.get("CardsToDeck");
 
         if(HOWESTSTONE.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
             context.json(SUCCES);
+
+            if(HOWESTSTONE.getActivePlayer().equals("you")) {
+                HOWESTSTONE.getYou().beginTurn();
+            }
         }
         else {
             System.out.println(ColorFormats.red("you shall not hack"));
+            context.json(ERROR);
+        }
+    }
+
+    private void playMyCard(Context context) throws IOException {
+        boolean succeeded;
+        String body = context.body();
+
+        System.out.println(body);
+
+        ObjectMapper mapper = new ObjectMapper();
+        int cardId = mapper.readValue(body, new TypeReference<Integer>(){});
+
+        succeeded = HOWESTSTONE.getYou().playCard(cardId);
+
+        if(succeeded) {
+            context.json(SUCCES);
+        } else {
             context.json(ERROR);
         }
     }

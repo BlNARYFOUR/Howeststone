@@ -2,6 +2,7 @@ package game;
 
 import cards.Card;
 import cards.CardCollection;
+import formatters.ColorFormats;
 import hero.Hero;
 
 import java.util.List;
@@ -11,8 +12,18 @@ public class Player {
     private CardCollection cardsInHand;
     private CardCollection cardsOnPlayingField;
     private CardCollection cardsInDeck;
-    private int mana = 0;
+    private int activeMana;
+    private int totalMana;
     private Card weapon;
+
+    public Player() {
+        hero = new Hero("Mage");
+        cardsInHand = new CardCollection();
+        cardsOnPlayingField = new CardCollection();
+        cardsInDeck = new CardCollection();
+        activeMana = 0;
+        totalMana = 0;
+    }
 
     public Hero getHero() {
         return hero;
@@ -34,12 +45,12 @@ public class Player {
         return cardsOnPlayingField;
     }
 
-    public int getMana() {
-        return mana;
+    public int getTotalMana() {
+        return totalMana;
     }
 
-    public void setMana(int mana) {
-        this.mana = mana;
+    public void setTotalMana(int totalMana) {
+        this.totalMana = totalMana;
     }
 
     public Card getWeapon() {
@@ -50,21 +61,13 @@ public class Player {
         this.weapon = weapon;
     }
 
-    public Player() {
-
-    }
-
     public void beginTurn() {
-
-        // +1 mana until 10
+        // +1 totalMana until 10
         // draw card
-    }
-
-    @Override
-    public String toString() {
-        // deck hero
-        // mss nog extra zoals health mana
-        return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
+        totalMana++;
+        activeMana = totalMana;
+        cardsInHand.addCard(cardsInDeck.drawCard());
+        System.out.println("Did it do this?");
     }
 
     public void setDeck(CardCollection deckName) {
@@ -84,26 +87,25 @@ public class Player {
         // TODO cardsInHand.addCards(cardsInHandList);
     }
 
-    public void playCard(Card card) {
-        String cardType = card.getCardType();
-        switch (cardType) {
-            case "minion":
-                if (this.cardsOnPlayingField.getCards().size() < 7) {
-                    this.cardsInHand.removeCard(card.getCardID());
-                    this.cardsOnPlayingField.addCard(card);
-                    //TODO execute ability;
-                }
-                break;
-            case "spell":
-                //TODO this.executeSpell(card);
-                this.cardsInHand.removeCard(card.getCardID());
-                break;
-            case "weapon":
-                this.cardsInHand.removeCard(card.getCardID());
-                this.setWeapon(card);
-                break;
+    public boolean playCard(int cardId) {
+        try {
+            int manaCost = cardsInHand.getCard(cardId).getManaCost();
+
+            if (manaCost <= getActiveMana()) {
+                cardsOnPlayingField.addCard(cardsInHand.getCard(cardId));
+                cardsInHand.removeCard(cardId);
+                activeMana -= manaCost;
+
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IllegalArgumentException error) {
+            System.out.println(ColorFormats.red("Thou shall not hack!"));
+            return false;
         }
     }
+
 
     public Card getRandomTargetMinion() {
         List<Card> targetCards = this.getCardsOnPlayingField().getCards();
@@ -113,4 +115,14 @@ public class Player {
 
     }
 
+    @Override
+    public String toString() {
+        // deck hero
+        // mss nog extra zoals health totalMana
+        return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
+    }
+
+    public int getActiveMana() {
+        return activeMana;
+    }
 }
