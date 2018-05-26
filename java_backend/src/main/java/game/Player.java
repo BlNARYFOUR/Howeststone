@@ -33,7 +33,7 @@ public class Player {
         this.hero = hero;
     }
 
-    public void setHero(String heroName){
+    public void setHero(String heroName) {
         this.hero = new Hero(heroName);
     }
 
@@ -62,7 +62,7 @@ public class Player {
     }
 
     public void beginTurn() {
-        if(totalMana < 10) {
+        if (totalMana < 10) {
             totalMana++;
         }
 
@@ -88,36 +88,44 @@ public class Player {
     }
 
     public boolean playCard(int cardId) {
+        boolean succeeded = false;
+
         try {
-            int manaCost = cardsInHand.getCard(cardId).getManaCost();
-            String type = cardsInHand.getCard(cardId).getType();
+            final int manaCost = cardsInHand.getCard(cardId).getManaCost();
+            final String type = cardsInHand.getCard(cardId).getType();
 
             if (manaCost <= getActiveMana()) {
-                if(type.equals("Minion")) {
-                    cardsOnPlayingField.addCard(cardsInHand.getCard(cardId));
-                } else if(type.equals("Weapon")) {
-                    // TODO
-                } else {
-                    // TODO
+                switch (type) {
+                    case "Minion":
+                        cardsOnPlayingField.addCard(cardsInHand.getCard(cardId));
+                        break;
+                    case "Weapon":
+                        // TODO
+                        final boolean fixError = true;
+                        break;
+                    default:
+                        // TODO
+                        final boolean fixError2 = true;
+                        break;
                 }
 
                 cardsInHand.removeCard(cardId);
                 activeMana -= manaCost;
 
-                return true;
-            } else {
-                return false;
+                succeeded = true;
             }
         } catch (IllegalArgumentException error) {
             System.out.println(ColorFormats.red("Thou shall not hack!"));
             return false;
         }
+
+        return succeeded;
     }
 
 
     public Card getRandomTargetMinion() {
-        List<Card> targetCards = this.getCardsOnPlayingField().getCards();
-        int resultIndex = (int)Math.round(Math.random())*(targetCards.size()-1);
+        final List<Card> targetCards = this.getCardsOnPlayingField().getCards();
+        final int resultIndex = (int) Math.round(Math.random()) * (targetCards.size() - 1);
 
         return this.getCardsOnPlayingField().getCards().get(resultIndex);
 
@@ -127,7 +135,7 @@ public class Player {
     public String toString() {
         // deck hero
         // mss nog extra zoals health totalMana
-        return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getName();
+        return "Hero: " + hero.getHeroName() + "\nDeck: " + cardsInDeck.getName();
     }
 
     public int getActiveMana() {
