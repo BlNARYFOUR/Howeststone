@@ -252,4 +252,17 @@ public class Game {
         target.setHealth(healthValueTarget - attackValueAttacker);
         attacker.setHealth(healthValueAttacker - attackValueTarget);
     }
+
+    public void startYourTurn () {
+        //TODO voer abilities uit aan begin turn
+        you.beginTurn();
+
+        while (turnTime <= 50) {
+            // playCard(card)
+            // attackMinion(..., ...);
+            // useHeroPower()
+        }
+        setActivePlayer("enemy");
+        //startAutoplayer();
+    }
 }

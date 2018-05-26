@@ -148,6 +148,10 @@ public abstract class Card {
 
     public void attackHero(Hero target) {
         target.setHealth(target.getHealth()-this.attack);
+        if (target.getWeapon() != null) {
+            this.setHealth(this.getHealth()-target.getWeapon().attack);
+        }
+        //TODO voer abilities uit bv enrage
     }
 
     // list with all abilities and mechanics?
