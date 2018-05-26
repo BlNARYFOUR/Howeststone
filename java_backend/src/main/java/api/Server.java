@@ -1,6 +1,5 @@
 package api;
 
-import abilities.Ability;
 import cards.*;
 import db.SqlDatabase;
 import db.SqlStatements;
@@ -8,14 +7,11 @@ import game.Game;
 import io.javalin.Javalin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import setupDb.SetupDatabase;
 
-import javax.print.DocFlavor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 public class Server {
     private static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/HOWESTSTONE", "root", "");
