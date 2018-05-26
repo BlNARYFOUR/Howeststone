@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 public class Server {
-    static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/HOWESTSTONE", "root", "");
+    private static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/HOWESTSTONE", "root", "");
     private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
     private final Game HOWESTSTONE = new Game();
     private final int port;

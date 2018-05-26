@@ -1,6 +1,7 @@
 package game;
 
 import cards.CardCollection;
+import formatters.ColorFormats;
 import hero.Hero;
 
 import java.util.List;
@@ -10,7 +11,17 @@ public class Player {
     private CardCollection cardsInHand;
     private CardCollection cardsOnPlayingField;
     private CardCollection cardsInDeck;
-    private int mana = 0;
+    private int activeMana;
+    private int totalMana;
+
+    public Player() {
+        hero = new Hero("Mage");
+        cardsInHand = new CardCollection();
+        cardsOnPlayingField = new CardCollection();
+        cardsInDeck = new CardCollection();
+        activeMana = 0;
+        totalMana = 0;
+    }
 
     public Hero getHero() {
         return hero;
@@ -32,29 +43,20 @@ public class Player {
         return cardsOnPlayingField;
     }
 
-    public int getMana() {
-        return mana;
+    public int getTotalMana() {
+        return totalMana;
     }
 
-    public void setMana(int mana) {
-        this.mana = mana;
-    }
-
-    public Player() {
-
+    public void setTotalMana(int totalMana) {
+        this.totalMana = totalMana;
     }
 
     public void beginTurn() {
-
-        // +1 mana until 10
+        // +1 totalMana until 10
         // draw card
-    }
-
-    @Override
-    public String toString() {
-        // deck hero
-        // mss nog extra zoals health mana
-        return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
+        totalMana++;
+        activeMana = totalMana;
+        cardsInHand.addCard(cardsInDeck.drawCard());
     }
 
     public void setDeck(CardCollection deckName) {
@@ -74,6 +76,25 @@ public class Player {
         // TODO cardsInHand.addCards(cardsInHandList);
     }
 
+    public boolean playCard(int cardId) {
+        try {
+            int manaCost = cardsInHand.getCard(cardId).getManaCost();
+
+            if (manaCost <= getActiveMana()) {
+                cardsOnPlayingField.addCard(cardsInHand.getCard(cardId));
+                cardsInHand.removeCard(cardId);
+                activeMana -= manaCost;
+
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IllegalArgumentException error) {
+            System.out.println(ColorFormats.red("Thou shall not hack!"));
+            return false;
+        }
+    }
+
     /*public Card getRandomTarget() {
         //TODO hoe zorg ik dat ik een kaart OF de hero kan teruggeven?
 
@@ -87,4 +108,15 @@ public class Player {
         }
 
     }*/
+
+    @Override
+    public String toString() {
+        // deck hero
+        // mss nog extra zoals health totalMana
+        return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
+    }
+
+    public int getActiveMana() {
+        return activeMana;
+    }
 }

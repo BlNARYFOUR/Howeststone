@@ -83,13 +83,6 @@ function showBattleLog(logArr) {
     }
 }
 
-function startMyTurn() {
-    startTimeLeftCheck();
-    console.log("You're turn");
-    updateMyMana(1, 1);
-    updateMyCards();
-}
-
 function startTimeLeftCheck() {
     // TODO: timeLeftObj = setInterval(timeLeft, 1000);
 
@@ -199,7 +192,7 @@ function replaceCards(countReplaceCards) {
             if(activePlayer === "enemy"){
                 enemyTurn();
             }else {
-                yourTurn();
+                startMyTurn();
             }
         })
         .catch(function (err) {
@@ -295,13 +288,14 @@ function enemyTurn() {
     // get heroes health
     // weapon yes no
 
-    yourTurn();
+    startMyTurn();
 }
-function yourTurn() {
+function startMyTurn() {
 
     // TODO fetch
     heroAttack = true;
     console.log("You're turn");
+    startTimeLeftCheck();
     updateEnemyCards(5);
     updateMyCards(3);
     updateMyMana(1, 1);
@@ -632,6 +626,25 @@ function updateEnemyMana(activeMana, totalMana) {
 }
 
 function updateMyMana(activeMana, totalMana) {
+    fetch('/threebeesandme/get/gameboard/mymana', {
+        method: 'GET'
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            console.log("My mana updated");
+            visualizeMyMana(text[0], text[1]);
+        })
+        .catch(function (err) {
+            console.log("Error: Could not update my mana");
+        });
+}
+
+function visualizeMyMana(activeMana, totalMana) {
     let manaList = document.querySelector("#gameBoard .you .manaHolder ul");
     document.querySelector("#gameBoard .you .manaTotal").innerText = activeMana + "/" + totalMana;
 
@@ -916,6 +929,7 @@ function addWeaponToPlayingField(cardPlayed) {
 function addMinionToPlayingField(cardPlayed) {
     // mockData
     moved = true;
+    sendPlayedCard(itemThatIsBeingMoved);
     updateMyMana(remainingCrystals - cost, document.querySelectorAll("#gameBoard .you .manaHolder ul li").length);
     let cardAttack = returnAttackOfMyCard(itemThatIsBeingMoved);
     let cardHealth = returnHealthOfMyCard(itemThatIsBeingMoved);
@@ -1079,6 +1093,36 @@ function returnCostOfMyCard(liWithClass) {
         }
     }
     return null;
+}
+
+function sendPlayedCard(liWithClass) {
+    let cardId = liWithClass.getAttribute('class');
+
+    fetch('/threebeesandme/post/gameboard/playcard', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cardId.split(' ')[0])
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            if(text === "SUCCES") {
+                console.log("Card played");
+                updateMyCards();
+            }
+            else {
+                console.log("You cannot play this card!");
+            }
+        })
+        .catch(function (err) {
+            console.log("Error: Could not play the card");
+        });
 }
 
 /* give minion class nonAttack

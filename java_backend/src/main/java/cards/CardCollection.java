@@ -51,8 +51,12 @@ public class CardCollection {
     }
 
     public void removeCard(int cardID) {
-        //Card card = new Card(cardID);
-        //cards.remove(card);
+        for(int i=0; i<cards.size(); i++) {
+            if(cards.get(i).getCardID() == cardID) {
+                cards.remove(i);
+                break;              // if card is 2 times in cards, it will only be deleted once
+            }
+        }
     }
 
     @Override

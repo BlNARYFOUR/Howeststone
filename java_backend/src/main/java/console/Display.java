@@ -129,7 +129,7 @@ public class Display {
     private void enemyTurn(Game howeststone) {
         // check deze code zeker
         howeststone.getEnemy().getCardsInHand().addCard((howeststone.getYou().getDeck().drawCard()));
-        howeststone.getEnemy().setMana(howeststone.getEnemy().getMana()+1);
+        howeststone.getEnemy().setTotalMana(howeststone.getEnemy().getTotalMana()+1);
 
         // enemy speelt altijd duurste kaarten eerst:
         Card mostExpensiveCard = howeststone.getEnemy().getCardsInHand().getMostExpensiveCard();
