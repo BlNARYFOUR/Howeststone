@@ -265,7 +265,6 @@ function deckBuilderSelectHero() {
     resetDeckBuilderForm();
     document.querySelector('#all').checked = true;
     filterCards();
-    // sort();
 
     for (let i = 0; i < heroes.length; i++) {
         if (heroes[i].innerText === selectedHero) {
@@ -502,8 +501,7 @@ function filterCards() {
             if (text === "ERROR") {
                 document.getElementById('cards').innerHTML = "";
             } else {
-                let result = text;
-                showCards(result);
+                sort();
             }
         })
         .catch(function (err) {
