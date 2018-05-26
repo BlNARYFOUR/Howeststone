@@ -162,7 +162,7 @@ public class Game {
 
         for (Card card : cardsInHand) {                                 //speel duurste kaarten eerst zolang je mana hebt
             if (card.getManaCost() <= manaEnemy) {
-                enemy.playCard(card);
+                enemy.playCard(card.getCardID());
             }
         }
 
@@ -241,11 +241,6 @@ public class Game {
         List<String> deckNamesForChosenHero = new ArrayList<>();
         deckNamesForChosenHero.add(deckNames.get(you.getHero().getHeroName()).getNameOfCardCollection());
         return deckNamesForChosenHero;
-    }
-
-    public void createPlayingField() {
-        this.yourSideOfPlayingField = new CardCollection();
-        this.enemySideOfPlayingField = new CardCollection();
     }
     
     public void attackMinion(Minion attacker, Minion target) {

@@ -33,9 +33,8 @@ class Routes {
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
         server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
-        server.post("/threebeesandme/post/gameboard/cardsinhand", this::getCardsInHand);
+        server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
         server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
-        server.post("threebeesandme/post/gameboard/endturn", this::handleEndTurn);
 
         // HERO AND DECK SELECTOR
         server.get("/threebeesandme/get/heroanddeckselector/decks", this::getAllDecks);
@@ -101,8 +100,6 @@ class Routes {
         boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
             HOWESTSTONE.setActivePlayer("you");
-            HOWESTSTONE.getYou().beginTurn();
-
         } else {
             HOWESTSTONE.setActivePlayer("enemy");
             HOWESTSTONE.getEnemy().beginTurn();
@@ -121,7 +118,7 @@ class Routes {
         context.json(manaInfo);
     }
 
-    private void getCardsInHand(Context context) throws IOException {
+    private void replaceCards(Context context) throws IOException {
         String body = context.body();
         System.out.println(body);
         ObjectMapper mapper = new ObjectMapper();
@@ -132,6 +129,10 @@ class Routes {
 
         if(HOWESTSTONE.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
             context.json(SUCCES);
+
+            if(HOWESTSTONE.getActivePlayer().equals("you")) {
+                HOWESTSTONE.getYou().beginTurn();
+            }
         }
         else {
             System.out.println(ColorFormats.red("you shall not hack"));

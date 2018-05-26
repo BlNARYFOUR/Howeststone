@@ -61,16 +61,13 @@ public class Player {
         this.weapon = weapon;
     }
 
-    public Player() {
-
-    }
-
     public void beginTurn() {
         // +1 totalMana until 10
         // draw card
         totalMana++;
         activeMana = totalMana;
         cardsInHand.addCard(cardsInDeck.drawCard());
+        System.out.println("Did it do this?");
     }
 
     public void setDeck(CardCollection deckName) {
