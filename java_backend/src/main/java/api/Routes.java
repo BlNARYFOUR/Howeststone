@@ -2,6 +2,8 @@ package api;
 
 import cards.Card;
 import cards.CardCollection;
+import cards.alfazCardCollectionComparator;
+import cards.manaCardCollectionComparator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import game.*;
@@ -196,11 +198,27 @@ class Routes {
 
     private void sortDeck(Context context) {
         System.out.println(context.body());
-        // alfaz
-        // alfza
-        // mana07
-        // mana70
-        // Collections.sort(filterCollection.getCards());
+
+        switch (context.body()) {
+            case "alfaz" :
+                filterCollection.getCards().sort(new alfazCardCollectionComparator());
+                break;
+
+            case "alfza" :
+                filterCollection.getCards().sort(new alfazCardCollectionComparator());
+                Collections.reverse(filterCollection.getCards());
+                break;
+
+            case "mana07" :
+                filterCollection.getCards().sort(new manaCardCollectionComparator());
+                Collections.reverse(filterCollection.getCards());
+                break;
+
+            case "mana70" :
+                filterCollection.getCards().sort(new manaCardCollectionComparator());
+                break;
+        }
+        context.json(filterCollection);
     }
 
     private void canCardBeAdded(Context context) {

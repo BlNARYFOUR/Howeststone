@@ -551,8 +551,7 @@ function filterCards() {
             if (text === "ERROR") {
                 document.getElementById('cards').innerHTML = "";
             } else {
-                let result = text;
-                showCards(result);
+                sort();
             }
         })
         .catch(function (err) {

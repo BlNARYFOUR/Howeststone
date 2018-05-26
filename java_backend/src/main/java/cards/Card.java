@@ -70,6 +70,14 @@ public abstract class Card {
         return cardId;
     }
 
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
     @Override
     public String toString() {
         return "Card{" +
@@ -128,6 +136,5 @@ public abstract class Card {
 
     // list with all abilities and mechanics?
     // method playCard
-
 
 }
