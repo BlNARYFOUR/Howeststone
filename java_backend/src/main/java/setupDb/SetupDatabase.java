@@ -293,8 +293,8 @@ public class SetupDatabase {
             stmt.setString(3, race);
             stmt.setString(4, img);
             stmt.setString(5, rarity);
-            stmt.setInt(6, attack);
-            stmt.setInt(7, health);
+            stmt.setInt(6, health);
+            stmt.setInt(7, attack);
             stmt.setInt(8, manaCost);
             stmt.setInt(9, durability);
             stmt.setInt(10, heroId);
@@ -408,7 +408,7 @@ public class SetupDatabase {
 
         for(int i=0; i<MAX_DECK_SIZE; i++) {
             do {
-                cardId = 1 + (int) Math.round(Math.random() * amountOfCards);
+                cardId = 1 + (int) Math.round(Math.random() * (amountOfCards-1));
             } while (!addCardToDeck(deckId, cardId));
         }
     }

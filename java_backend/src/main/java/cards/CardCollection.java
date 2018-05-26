@@ -1,13 +1,5 @@
 package cards;
 
-import db.SqlDatabase;
-import db.SqlStatements;
-import hero.Hero;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,13 +17,18 @@ public class CardCollection  {
         this.name = name;
     }
 
+    public CardCollection(CardCollection cardCollection) {
+        this(cardCollection.getName());
+        this.cards = new ArrayList<>(cardCollection.getCards());
+    }
+
     private void shuffle(){
         Collections.shuffle(cards);
     }
 
     public Card drawCard() {
-        final Card DRAW = cards.get(1);
-        cards.remove(1);
+        final Card DRAW = cards.get(0);
+        cards.remove(0);
         return DRAW;
     }
 
@@ -73,7 +70,7 @@ public class CardCollection  {
                 '}';
     }
 
-    public String getNameOfCardCollection() {
+    public String getName() {
         return name;
     }
 
