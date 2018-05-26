@@ -1,5 +1,6 @@
 package cards;
 
+import abilities.Abilities;
 import hero.Hero;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,6 @@ public abstract class Card {
     private int heroId;
     private String race;
     private List<Abilities> cardAbilities;
-    private int amountAttacked;
     // TODO: private List<Mechanics> cardMechanics;
 
     /* TODO private List<Abilities> cardAbilities;
@@ -77,7 +77,6 @@ public abstract class Card {
 
     public Card(int cardID){
         this.cardID = cardID;
-        getOtherInfo(cardID);
         // TODO get other cardSpecifications
     }
     public int getCardID() {
@@ -140,6 +139,10 @@ public abstract class Card {
 
     public void attackHero(Hero target) {
         target.setHealth(target.getHealth()-this.attack);
+        if (target.getWeapon() != null) {
+            this.setHealth(this.getHealth()-target.getWeapon().attack);
+        }
+        //TODO voer abilities uit bv enrage
     }
 
     // list with all abilities and mechanics?

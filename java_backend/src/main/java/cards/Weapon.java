@@ -1,7 +1,7 @@
 package cards;
 
 public class Weapon extends Card {
-    private int attack;
+    protected int attack;
     private int durability;
 
     public Weapon(int cardId, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
