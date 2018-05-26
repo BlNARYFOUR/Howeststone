@@ -224,7 +224,7 @@ function otherHero(e) {
         })
         .then(function (text) {
             selectedHero = text;
-            deckbuilderSelectAndDeselectHero();
+            deckBuilderSelectHero();
         })
         .catch(function (err) {
             console.log(err + "Error: Could not send the selected hero");
@@ -248,7 +248,7 @@ function gotoDeckBuilder() {
         })
         .then(function (text) {
             selectedHero = text;
-            deckbuilderSelectAndDeselectHero();
+            deckBuilderSelectHero();
             document.getElementById('heroChooser').className = "hidden";
             document.getElementById('deckbuilder').className = "";
         })
@@ -259,13 +259,13 @@ function gotoDeckBuilder() {
     // .then do this
 }
 
-function deckbuilderSelectAndDeselectHero() {
+function deckBuilderSelectHero() {
     let heroes = document.querySelectorAll("#deckbuilder #hero a");
 
     resetDeckBuilderForm();
     document.querySelector('#all').checked = true;
     filterCards();
-    sort();
+    // sort();
 
     for (let i = 0; i < heroes.length; i++) {
         if (heroes[i].innerText === selectedHero) {
@@ -408,18 +408,27 @@ function sort() {
     let sortValue = sort.options[sort.selectedIndex].value;
 
     console.log(sortValue);
-
-    /*fetch('threebeesandme/howeststone/post/deckbuilder/sort?by='+sortValue, {
-            method: 'post',
-        })
-        .then(function(res) {
-            if(res.ok === true)
+    fetch('/threebeesandme/howeststone/post/deckbuilder/sort', {
+        method: 'post',
+        body: sortValue
+    })
+        .then(function (res) {
+            if (res.ok === true)
                 return res.json();
+            else
+                return "ERROR";
         })
-
-        .catch(function(err) {
-            console.log("Error 404: Could not connect to the server");
-        });*/
+        .then(function (text) {
+            if (text === "ERROR"){
+                document.getElementById('cards').innerHTML = "";
+            }else {
+                let result = text;
+                showCards(result);
+            }
+        })
+        .catch(function (err) {
+            console.log(err +"Error: Could not get cards");
+        });
 }
 
 function filterCards() {

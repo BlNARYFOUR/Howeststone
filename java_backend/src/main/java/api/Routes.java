@@ -11,13 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 class Routes {
     private final Game HOWESTSTONE;
+    private CardCollection filterCollection;
 
     Routes(final Javalin server, Game game) {
         HOWESTSTONE = game;
@@ -49,9 +47,10 @@ class Routes {
         server.post("threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
         server.post("/threebeesandme/post/deckbuilder/newdeck", this::newDeck);
         server.post("threebeesandme/post/deckbuilder/deleteDeck", this::deleteDeck);
-        //TODO sort server.post("threebeesandme/post/deckbuilder/sort?by=", null);
+        server.post("/threebeesandme/howeststone/post/deckbuilder/sort", this::sortDeck);
         server.post("/threebeesandme/howeststone/post/deckbuilder/filterCards", this::filterCards);
     }
+
 
     private static final String SUCCES = "SUCCES";
     private static final String ERROR = "ERROR";
@@ -117,10 +116,9 @@ class Routes {
         List<Integer> cardsInHand = temp.get("CardsInHand");
         List<Integer> cardsToReplace = temp.get("CardsToDeck");
 
-        if(HOWESTSTONE.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
+        if (HOWESTSTONE.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
             context.json(SUCCES);
-        }
-        else {
+        } else {
             context.json(ERROR);
         }
     }
@@ -183,11 +181,20 @@ class Routes {
         Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<String>>>() {
         });
         List<String> filterArray = temp.get("filterArray");
-        CardCollection filterCollection = HOWESTSTONE.filterCards(filterArray);
-        if (filterCollection.getCards().size() >= 1){
+        filterCollection = HOWESTSTONE.filterCards(filterArray);
+        if (filterCollection.getCards().size() >= 1) {
             context.json(filterCollection);
         } else {
             context.json("ERROR");
         }
+    }
+
+    private void sortDeck(Context context) {
+        System.out.println(context.body());
+        // alfaz
+        //alfza
+        //mana07
+        //mana70
+        // Collections.sort(filterCollection.getCards());
     }
 }

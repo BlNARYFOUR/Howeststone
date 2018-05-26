@@ -18,7 +18,7 @@ function init() {
 }
 
 function addDeck() {
-    deckbuilderSelectAndDeselectHero();
+    deckBuilderSelectHero();
     document.getElementById('deckSelector').className = "hidden";
     document.getElementById('deckbuilder').className = "";
     document.getElementById('gotoRechooseDeck').removeEventListener('click', gotoRechooseDeck);
