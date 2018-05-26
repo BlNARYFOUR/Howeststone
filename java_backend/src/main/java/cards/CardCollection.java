@@ -109,9 +109,9 @@ public class CardCollection {
 
     public CardCollection getSubCollection(List<Integer> cardIds) {
         CardCollection subCardCollection = new CardCollection();
-        for (int i = 0; i < cards.size(); i++){
-            if (cardIds.contains(cards.get(i).getcardId())){
-                subCardCollection.addCard(cards.get(i));
+        for (Card card : cards) {
+            if (cardIds.contains(card.getcardId())) {
+                subCardCollection.addCard(card);
             }
         }
         return subCardCollection;

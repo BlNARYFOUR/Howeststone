@@ -8,10 +8,10 @@ let ManaFilterChecked = false;
 let cardRarityFilterChecked = false;
 
 function nextTutorial() {
-    document.querySelector('#tutorials li:nth-child(' +tutorialLi+ ')').className = "hidden";
+    document.querySelector('#tutorials li:nth-child(' + tutorialLi + ')').className = "hidden";
     tutorialLi += 1;
     document.querySelector('#tutorials li:nth-child(' + tutorialLi + ')').className = "";
-    if (tutorialLi > 11){
+    if (tutorialLi > 11) {
         document.getElementById('next').removeEventListener('click', nextTutorial);
         document.querySelector('#tutorials').className = "hidden";
     }
@@ -49,12 +49,12 @@ function donNotSubmit(e) {
 function checkIfCardIsGoingToBeAdded() {
     let rectDrag = dragSrcElement.getBoundingClientRect();
     let deckRect = document.querySelector("#deck").getBoundingClientRect();
-    if ((rectDrag.right < deckRect.right) && (rectDrag.left > deckRect.left) && (rectDrag.bottom < deckRect.bottom+62) && (rectDrag.top > deckRect.top-103)){
+    if ((rectDrag.right < deckRect.right) && (rectDrag.left > deckRect.left) && (rectDrag.bottom < deckRect.bottom + 62) && (rectDrag.top > deckRect.top - 103)) {
         addCardToDeck(itemThatIsBeingMoved);
     }
-    try{
+    try {
         dragSrcElement.parentElement.removeChild(dragSrcElement);
-    } catch (err){
+    } catch (err) {
         console.log('nothing can be removed' + err);
     }
     document.removeEventListener("touchmove", movingOfDragElement, false);
@@ -63,10 +63,11 @@ function checkIfCardIsGoingToBeAdded() {
     document.removeEventListener("mouseup", checkIfCardIsGoingToBeAdded, false);
 
 }
+
 function checkIfCardIsGoingToBeRemoved() {
-    try{
+    try {
         dragSrcElement.parentElement.removeChild(dragSrcElement);
-    } catch (err){
+    } catch (err) {
         console.log('nothing can be removed' + err);
     }
     document.removeEventListener("touchmove", movingOfDragElement, false);
@@ -88,7 +89,7 @@ function clickOnCardInCards(e) {
     movingOfDragElement(e);
     dragSrcElement.style.zIndex = '1';
     dragSrcElement.style.width = '23vh';
-    dragSrcElement.style.height= '34.83713356vh';
+    dragSrcElement.style.height = '34.83713356vh';
     dragSrcElement.style.position = 'absolute';
     dragSrcElement.style.background = e.target.style.background;
     document.removeEventListener("mousedown", clickOnCardInCards);
@@ -111,7 +112,7 @@ function clickOnCardInDeck(e) {
     movingOfDragElement(e);
     dragSrcElement.style.zIndex = '1';
     dragSrcElement.style.width = '5vh';
-    dragSrcElement.style.height= '7.573289904vh';
+    dragSrcElement.style.height = '7.573289904vh';
     dragSrcElement.style.position = 'absolute';
     dragSrcElement.style.background = e.target.style.background;
     document.removeEventListener("mousedown", clickOnCardInCards);
@@ -128,6 +129,7 @@ function init() {
 
     document.querySelector('#deckbuilder aside form').addEventListener('submit', donNotSubmit);
     document.getElementById('search').addEventListener('input', searchTest);
+    document.getElementById('firstFilter').addEventListener('change', filterCards);
     document.getElementById('search').addEventListener('input', search);
     document.getElementById('sort').addEventListener('change', sort);
     document.querySelector('#firstAdd').addEventListener('click', firstAdd);
@@ -136,27 +138,27 @@ function init() {
     checkAllCards();
 
     let inputs = document.querySelectorAll('#secondFilter input');
-    for (let i = 0 ; i < inputs.length; i++){
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('click', disableFilter)
     }
     inputs = document.querySelectorAll('#thirdFilter input');
-    for (let i = 0 ; i < inputs.length; i++){
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('click', disableFilter)
     }
     inputs = document.querySelectorAll('#fourthFilter input');
-    for (let i = 0 ; i < inputs.length; i++){
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('click', disableFilter)
     }
     inputs = document.querySelectorAll('#secondFilter input+label');
-    for (let i = 0 ; i < inputs.length; i++){
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('click', unselectFilter)
     }
     inputs = document.querySelectorAll('#thirdFilter input+label');
-    for (let i = 0 ; i < inputs.length; i++){
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('click', unselectFilter)
     }
     inputs = document.querySelectorAll('#fourthFilter input+label');
-    for (let i = 0 ; i < inputs.length; i++){
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('click', unselectFilter)
     }
 }
@@ -180,17 +182,18 @@ function getAllCards() {
 }
 
 function showCards(cards) {
-    for (let i=0; i < cards["cards"].length; i++){
+    document.getElementById('cards').innerHTML = "";
+    for (let i = 0; i < cards["cards"].length; i++) {
         let imgUrl = cards["cards"][i]["img"];
         let imgID = cards["cards"][i]["cardId"];
-        document.getElementById('cards').innerHTML += '<li class ="cardInDeck"><figure><img src="'+imgUrl+'" alt="'+imgID+'" title="'+imgID+'" id="'+imgID+'">'+'</figure></li>';
+        document.getElementById('cards').innerHTML += '<li class ="cardInDeck"><figure><img src="' + imgUrl + '" alt="' + imgID + '" title="' + imgID + '" id="' + imgID + '">' + '</figure></li>';
     }
 }
 
 
 function checkAllCards() {
     let cardsInDeck = document.querySelectorAll('#cards li');
-    for (let i = 0; i < cardsInDeck.length; i++){
+    for (let i = 0; i < cardsInDeck.length; i++) {
         cardsInDeck[i].addEventListener("mousedown", clickOnCardInCards);
         cardsInDeck[i].addEventListener("touchstart", clickOnCardInCards);
         cardsInDeck[i].addEventListener('dblclick', addCardToDeckDblClick);
@@ -198,7 +201,7 @@ function checkAllCards() {
     let chosenCards = document.querySelectorAll(".chosenCards");
     let lengthAllCards = document.querySelectorAll(".two").length + chosenCards.length;
     document.getElementById('cardAmount').innerHTML = lengthAllCards + '/30';
-    for (let i = 0; i < chosenCards.length; i++){
+    for (let i = 0; i < chosenCards.length; i++) {
         chosenCards[i].addEventListener('dblclick', removeCardFromDeckDblClick);
     }
 }
@@ -213,20 +216,21 @@ function otherHero(e) {
         },
         body: heroName
     })
-        .then(function(res) {
-            if(res.ok === true)
+        .then(function (res) {
+            if (res.ok === true)
                 return res.json();
             else
                 return "ERROR";
         })
-        .then(function(text) {
+        .then(function (text) {
             selectedHero = text;
             deckbuilderSelectAndDeselectHero();
         })
         .catch(function (err) {
-            console.log("Error: Could not send the selected hero");
+            console.log(err + "Error: Could not send the selected hero");
         });
 }
+
 function gotoDeckBuilder() {
     let heroName = document.querySelector("#heroChooser .selectedHeroName").innerText;
     fetch('/threebeesandme/post/deckbuilder/hero', {
@@ -236,13 +240,13 @@ function gotoDeckBuilder() {
         },
         body: heroName
     })
-        .then(function(res) {
-            if(res.ok === true)
+        .then(function (res) {
+            if (res.ok === true)
                 return res.json();
             else
                 return "ERROR";
         })
-        .then(function(text) {
+        .then(function (text) {
             selectedHero = text;
             deckbuilderSelectAndDeselectHero();
             document.getElementById('heroChooser').className = "hidden";
@@ -259,9 +263,9 @@ function deckbuilderSelectAndDeselectHero() {
     let heroes = document.querySelectorAll("#deckbuilder #hero a");
 
     resetDeckBuilderForm();
-    document.querySelector('#' + selectedHero.toLowerCase()).checked = true;
+    document.querySelector('#all').checked = true;
     filterCards();
-    // TODO filter cards sort
+    sort();
 
     for (let i = 0; i < heroes.length; i++) {
         if (heroes[i].innerText === selectedHero) {
@@ -275,15 +279,15 @@ function deckbuilderSelectAndDeselectHero() {
 
 function resetDeckBuilderForm() {
     let inputs = document.querySelectorAll('#secondFilter input');
-    for (let i = 0 ; i < inputs.length; i++){
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].checked = false;
     }
     inputs = document.querySelectorAll('#thirdFilter input');
-    for (let i = 0 ; i < inputs.length; i++){
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].checked = false;
     }
     inputs = document.querySelectorAll('#fourthFilter input');
-    for (let i = 0 ; i < inputs.length; i++){
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].checked = false;
     }
 }
@@ -293,9 +297,11 @@ function unselectFilter(e) {
     document.getElementById(e.target.getAttribute('for')).checked = document.getElementById(e.target.getAttribute('for')).checked !== true;
     filterCards();
 }
+
 function disableFilter(e) {
     e.preventDefault();
 }
+
 function firstAdd(deck) {
     // TODO
     fetch("/threebeesandme/post/deckbuilder/newdeck", {
@@ -314,7 +320,7 @@ function firstAdd(deck) {
             console.log("Error: Could not get new deck");
         });
     let chosenCards = document.querySelectorAll(".chosenCards");
-    if (chosenCards.length === 30){
+    if (chosenCards.length === 30) {
         document.querySelector('.save').innerHTML = 'full deck';
     }
     document.querySelector('.main').classList.toggle('hidden');
@@ -325,20 +331,21 @@ function addCardToDeckDblClick(e) {
     addCardToDeck(e.target);
     console.log('does this work?')
 }
+
 function addCardToDeck(card) {
     let chosenCards = document.querySelectorAll(".chosenCards");
     let images = document.querySelectorAll(".chosenCards img");
     let sameCard = 0;
-    for(let i = 0; i < images.length; i++){
-        if (card.getAttribute('id') === images[i].getAttribute('id')){
+    for (let i = 0; i < images.length; i++) {
+        if (card.getAttribute('id') === images[i].getAttribute('id')) {
             sameCard += 1;
         }
     }
-    if (chosenCards.length >= 30){
+    if (chosenCards.length >= 30) {
         console.error('to much cards');
     }
     else {
-        if (sameCard === 0){
+        if (sameCard === 0) {
             let cloneCard = card.cloneNode(true);
             let cardHolder = document.createElement("li");
             cardHolder.classList.add('chosenCards');
@@ -346,9 +353,9 @@ function addCardToDeck(card) {
             checkAllCards();
         } else {
             let cardType = 'normal';
-            if (sameCard === 1 && cardType !== "legendary"){
-                for(let i = 0; i < images.length; i++){
-                    if (card.getAttribute('id') === images[i].getAttribute('id')){
+            if (sameCard === 1 && cardType !== "legendary") {
+                for (let i = 0; i < images.length; i++) {
+                    if (card.getAttribute('id') === images[i].getAttribute('id')) {
                         images[i].classList.add("two");
                     }
                 }
@@ -360,12 +367,13 @@ function addCardToDeck(card) {
         }
     }
 }
+
 function removeCardFromDeckDblClick(e) {
     removeCardFromDeck(e.target)
 }
 
 function removeCardFromDeck(card) { //remove eventlistener niet vergeten (nu nog zonder)
-    if (card.classList.contains('two')){
+    if (card.classList.contains('two')) {
         card.classList.remove('two');
     } else {
         card.parentNode.remove();
@@ -382,7 +390,7 @@ function search(e) {
     input = document.getElementById('search');
     filter = input.value.toUpperCase();
     ul = document.getElementById("cards");
-    li =ul.getElementsByTagName('li');
+    li = ul.getElementsByTagName('li');
 
     // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
@@ -396,26 +404,27 @@ function search(e) {
 }
 
 function sort() {
-    let sort =  document.getElementById('sort');
+    let sort = document.getElementById('sort');
     let sortValue = sort.options[sort.selectedIndex].value;
 
-        console.log(sortValue);
+    console.log(sortValue);
 
-        /*fetch('threebeesandme/howeststone/post/deckbuilder/sort?by='+sortValue, {
-                method: 'post',
-            })
-            .then(function(res) {
-                if(res.ok === true)
-                    return res.json();
-            })
+    /*fetch('threebeesandme/howeststone/post/deckbuilder/sort?by='+sortValue, {
+            method: 'post',
+        })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
 
-            .catch(function(err) {
-                console.log("Error 404: Could not connect to the server");
-            });*/
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });*/
 }
 
 function filterCards() {
-    let specificCardsFilter =  document.getElementsByName('specificCards');
+
+    let specificCardsFilter = document.getElementsByName('specificCards');
     let cardTypesFilter = document.getElementsByName('cardTypes');
     let ManaFilter = document.getElementsByName('Mana');
     let cardRarityFilter = document.getElementsByName('cardRarity');
@@ -423,13 +432,14 @@ function filterCards() {
     let filterArray = [];
 
     for (let i = 0; i < specificCardsFilter.length; i++) {
-        if (specificCardsFilter[i].checked){
+        if (specificCardsFilter[i].checked) {
             filterArray.push(specificCardsFilter[i].value);
         }
     }
 
     for (let i = 0; i < cardTypesFilter.length; i++) {
-        if (cardTypesFilter[i].checked){
+        if (cardTypesFilter[i].checked) {
+            console.log('y');
             filterArray.push(cardTypesFilter[i].value);
             cardTypeFilterChecked = true;
         }
@@ -439,7 +449,7 @@ function filterCards() {
     }
 
     for (let i = 0; i < ManaFilter.length; i++) {
-        if (ManaFilter[i].checked){
+        if (ManaFilter[i].checked) {
             filterArray.push(ManaFilter[i].value);
             ManaFilterChecked = true;
         }
@@ -449,7 +459,7 @@ function filterCards() {
     }
 
     for (let i = 0; i < cardRarityFilter.length; i++) {
-        if (cardRarityFilter[i].checked){
+        if (cardRarityFilter[i].checked) {
             filterArray.push(cardRarityFilter[i].value);
             cardRarityFilterChecked = true;
         }
@@ -457,7 +467,17 @@ function filterCards() {
     if (cardRarityFilterChecked === false) {
         filterArray.push(-1);
     }
+
+    if (filterArray.length !== 4) {
+        throw new RangeError;
+    }
+
     let filterArrayJSON = {"filterArray": filterArray};
+
+
+    cardTypeFilterChecked = false;
+    ManaFilterChecked = false;
+    cardRarityFilterChecked = false;
 
     fetch('/threebeesandme/howeststone/post/deckbuilder/filterCards', {
         method: 'post',
@@ -466,14 +486,19 @@ function filterCards() {
         .then(function (res) {
             if (res.ok === true)
                 return res.json();
+            else
+                return "ERROR";
         })
         .then(function (text) {
-            console.log(text);
-            // TODO let result = text;
-            //showCards(result);
+            if (text === "ERROR") {
+                document.getElementById('cards').innerHTML = "";
+            } else {
+                let result = text;
+                showCards(result);
+            }
         })
         .catch(function (err) {
-            console.log(err +"Error: Could not get cards");
+            console.log(err + "Error: Could not get cards");
         });
 
 }

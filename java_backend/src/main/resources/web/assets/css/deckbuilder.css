@@ -140,11 +140,11 @@
 #deckbuilder #secondFilter>label{
     display: block;
 }
-#deckbuilder #minions, #deckbuilder #weapons, #deckbuilder #spells{
+#deckbuilder #minion, #deckbuilder #weapon, #deckbuilder #spell{
     display: inline-block;
     width: 1vw;
 }
-#deckbuilder #minions+label, #deckbuilder #weapons+label, #deckbuilder #spells+label{
+#deckbuilder #minion+label, #deckbuilder #weapon+label, #deckbuilder #spell+label{
     display: inline-block;
     width: 7vw;
 }
@@ -158,11 +158,13 @@
 #deckbuilder #thirdFilter>label{
     display: block;
 }
-#deckbuilder #zero+label , #deckbuilder #one+label, #deckbuilder #two+label ,#deckbuilder #three+label ,#deckbuilder #four+label ,#deckbuilder #five+label ,#deckbuilder #six+label , #deckbuilder #seven+label{
+
+/* THIS DOESN'T WORK
+#deckbuilder #0_Mana+label , #deckbuilder #1_Mana+label, #deckbuilder #2_Mana+label ,#deckbuilder #3_Mana+label ,#deckbuilder #4_Mana+label ,#deckbuilder #5_Mana+label ,#deckbuilder #6_Mana+label , #deckbuilder #7_Mana+label{
     display: inline-block;
     width: 11vw;
 }
-#deckbuilder #zero , #deckbuilder #one, #deckbuilder #two ,#deckbuilder #three ,#deckbuilder #four ,#deckbuilder #five ,#deckbuilder #six , #deckbuilder #seven{
+#deckbuilder #0_Mana , #deckbuilder #1_Mana, #deckbuilder #2_Mana ,#deckbuilder #3_Mana ,#deckbuilder #4_Mana ,#deckbuilder #5_Mana ,#deckbuilder #6_Mana , #deckbuilder #7_Mana{
     display: inline-block;
     width: 1vw;
 }

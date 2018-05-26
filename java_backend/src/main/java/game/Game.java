@@ -170,21 +170,22 @@ public class Game {
     public CardCollection filterCards(List<String> filterArray) {
         List<Integer> cardIds = new ArrayList<>();
 
-        String filterHeroName = "";
-        String filterType = "";
-        int filterManaCost = -1;
-        String filterRarity = "";
+        String filterHeroName = "%";
+        String filterType = "%";
+        String filterManaCost = "%";
+        String filterRarity = "%";
+
         if (!filterArray.get(0).equals("All")){
-            filterHeroName = filterArray.get(0);
+            filterHeroName = filterArray.get(0) + filterHeroName;
         }
         if (!filterArray.get(1).equals("-1")){
-            filterType = filterArray.get(1);
+            filterType = filterArray.get(1) + filterType ;
         }
         if (!filterArray.get(2).equals("-1")){
-            filterManaCost = Integer.parseInt(filterArray.get(2).split("_")[0]);
+            filterManaCost = filterArray.get(2).split("_")[0]  + filterManaCost;
         }
         if (!filterArray.get(3).equals("-1")){
-            filterRarity = filterArray.get(3);
+            filterRarity = filterArray.get(3)  + filterRarity;
         }
         try (
                 Connection conn = db.getConnection();
@@ -192,7 +193,7 @@ public class Game {
         ) {
             stmt.setString(1, filterHeroName);
             stmt.setString(2, filterType);
-            stmt.setInt(3, filterManaCost);
+            stmt.setString(3, filterManaCost);
             stmt.setString(4, filterRarity);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()){
@@ -202,7 +203,6 @@ public class Game {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(filterHeroName + filterType + filterManaCost + filterRarity);
         return allCards.getSubCollection(cardIds);
     }
 

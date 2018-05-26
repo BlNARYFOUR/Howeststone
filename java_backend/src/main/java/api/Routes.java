@@ -183,7 +183,11 @@ class Routes {
         Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<String>>>() {
         });
         List<String> filterArray = temp.get("filterArray");
-        System.out.println(filterArray);
-        context.json(HOWESTSTONE.filterCards(filterArray));
+        CardCollection filterCollection = HOWESTSTONE.filterCards(filterArray);
+        if (filterCollection.getCards().size() >= 1){
+            context.json(filterCollection);
+        } else {
+            context.json("ERROR");
+        }
     }
 }
