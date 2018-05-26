@@ -2,6 +2,7 @@ package cards;
 
 import db.SqlDatabase;
 import db.SqlStatements;
+import formatters.ColorFormats;
 import hero.Hero;
 
 import java.sql.Connection;
@@ -25,7 +26,7 @@ public class CardCollection {
         this.name = name;
     }
 
-    private void shuffle(){
+    private void shuffle() {
         Collections.shuffle(cards);
     }
 
@@ -41,8 +42,8 @@ public class CardCollection {
     }
 
     public boolean hasCard(int cardId) {
-        for(Card card : cards) {
-            if(card.getcardId() == cardId) {
+        for (Card card : cards) {
+            if (card.getcardId() == cardId) {
                 return true;
             }
         }
@@ -59,7 +60,7 @@ public class CardCollection {
     public String toString() {
         String str = "";
 
-        for(Card card : cards) {
+        for (Card card : cards) {
             str += "\n" + card;
         }
 
@@ -74,8 +75,8 @@ public class CardCollection {
     }
 
     public Card getCard(int cardId) {
-        for(Card card : cards) {
-            if(card.getcardId() == cardId) {
+        for (Card card : cards) {
+            if (card.getcardId() == cardId) {
                 return card;
             }
         }
@@ -99,7 +100,7 @@ public class CardCollection {
 
     public Card getMostExpensiveCard() {
         Card mostExpensiveCard = this.cards.get(0);
-        for(Card x : this.cards ){
+        for (Card x : this.cards) {
             if (x.getManaCost() > mostExpensiveCard.getManaCost()) {
                 mostExpensiveCard = x;
             }
@@ -115,5 +116,29 @@ public class CardCollection {
             }
         }
         return subCardCollection;
+    }
+
+    public String checkIfCardCanBeAddedToDeck(String body) {
+        int cardId = Integer.parseInt(body);
+        int amount = 0;
+        String rarity = "";
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getcardId() == cardId) {
+                amount++;
+                rarity = cards.get(i).getRarity();
+                // TODO uncollectable
+            }
+        }
+        if (amount >= 2) {
+            return "cannot add more";
+        }
+        System.out.println(cards.size());
+        if (cards.size() > 29) {
+            return "too much cards";
+        }
+        if (amount >= 1 && rarity.equals("Legendary")) {
+            return "cannot add more";
+        }
+        return "SUCCES";
     }
 }

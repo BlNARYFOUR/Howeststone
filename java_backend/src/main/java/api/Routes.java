@@ -15,7 +15,6 @@ import java.util.*;
 
 class Routes {
     private final Game HOWESTSTONE;
-    private CardCollection filterCollection;
 
     Routes(final Javalin server, Game game) {
         HOWESTSTONE = game;
@@ -42,6 +41,7 @@ class Routes {
         // DECKBUILDER
         server.get("/threebeesandme/get/deckbuilder/cards", this::getAllCards);
         server.post("/threebeesandme/post/deckbuilder/hero", this::handleHeroSelection);
+        server.post("/threebeesandme/post/deckbuilder/deck/cancardbeadded", this::canCardBeAdded);
         server.post("/threebeesandme/post/deckbuilder/deck/addcard", this::addCardToDeck);
 
         server.post("threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
@@ -168,9 +168,12 @@ class Routes {
     }
 
     private void newDeck(Context context) {
-        HOWESTSTONE.createDeckIfNotExist(context.body());
-        CardCollection deck = new CardCollection(context.body());
-
+        if (HOWESTSTONE.checkIfDeckNotExist(context.body())){
+            HOWESTSTONE.deckInDeckBuilder = new CardCollection();
+            context.json("OK");
+        } else {
+            context.json("ERROR");
+        }
     }
 
     private void deleteDeck(Context context) {
@@ -183,9 +186,9 @@ class Routes {
         Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<String>>>() {
         });
         List<String> filterArray = temp.get("filterArray");
-        filterCollection = HOWESTSTONE.filterCards(filterArray);
-        if (filterCollection.getCards().size() >= 1) {
-            context.json(filterCollection);
+        HOWESTSTONE.filterCollection = HOWESTSTONE.filterCards(filterArray);
+        if (HOWESTSTONE.filterCollection.getCards().size() >= 1) {
+            context.json(HOWESTSTONE.filterCollection);
         } else {
             context.json("ERROR");
         }
@@ -200,8 +203,17 @@ class Routes {
         // Collections.sort(filterCollection.getCards());
     }
 
+    private void canCardBeAdded(Context context) {
+        // check if hero can add card
+        context.json(
+                HOWESTSTONE.checkIfCardCanBeAddedToDeck(
+                        context.body()));
+    }
+
     private void addCardToDeck(Context context) {
         int cardId = Integer.parseInt(context.body());
-
+        HOWESTSTONE.deckInDeckBuilder.addCard(HOWESTSTONE.allCards.getCard(cardId));
+        context.json(HOWESTSTONE.deckInDeckBuilder);
     }
+
 }

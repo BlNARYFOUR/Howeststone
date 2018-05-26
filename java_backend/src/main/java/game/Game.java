@@ -14,7 +14,8 @@ public class Game {
 
     private static SqlDatabase db = null;
     private CardCollection beginCards = new CardCollection();
-
+    public CardCollection deckInDeckBuilder = new CardCollection();
+    public CardCollection filterCollection = new CardCollection();
     // TODO change
 
     public CardCollection allCards = new CardCollection("cards");
@@ -212,18 +213,28 @@ public class Game {
         this.db = db;
     }
 
-    public void createDeckIfNotExist(String body) {
-        checkIfDeckNotExist(body);
-    }
-
     public boolean checkIfDeckNotExist(String body) {
         List<CardCollection> decksForChosenHero = deckNames.get(you.getHero().getHeroName());
         for (int i= 0; i < decksForChosenHero.size(); i++){
-            if (decksForChosenHero.get(1)
+            if (decksForChosenHero.get(i)
                     .getNameOfCardCollection().equals(body)){
                 return false;
             }
         }
         return true;
+    }
+
+    public String checkIfCardCanBeAddedToDeck(String body) {
+        int cardId = Integer.parseInt(body);
+        for (int i= 0; i < this.allCards.getCards().size(); i++) {
+            if(this.allCards.getCards().get(i).getcardId() == cardId) {
+                int heroId = this.allCards.getCards().get(i).getHeroId();
+                int yourHeroId = this.getYou().getHero().getHeroId();
+                if (heroId != yourHeroId && heroId != 2){
+                    return "not the right hero";
+                }
+            }
+        }
+        return this.deckInDeckBuilder.checkIfCardCanBeAddedToDeck(body);
     }
 }

@@ -118,6 +118,14 @@ public abstract class Card {
         return img;
     }
 
+    public String getRarity() {
+        return rarity;
+    }
+
+    public int getHeroId() {
+        return heroId;
+    }
+
     // list with all abilities and mechanics?
     // method playCard
 
