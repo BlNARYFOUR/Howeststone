@@ -1,6 +1,7 @@
 package hero;
 
 import cards.CardCollection;
+import cards.Weapon;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +13,7 @@ public class Hero {
     private String heroName;
     private int heroId;
     private int heroPowerID;
+    private Weapon weapon;
 
     public Hero(String heroName){
         this.health = 30;
@@ -55,6 +57,14 @@ public class Hero {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 
     @Override
