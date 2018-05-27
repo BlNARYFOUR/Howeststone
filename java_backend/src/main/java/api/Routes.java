@@ -100,7 +100,7 @@ class Routes {
             throw new NullPointerException();
         }
         howeststone.generateEnemy();
-        howeststone.setTurnTime(50);
+        //howeststone.setTurnTime(50);
         howeststone.createPlayingField();
 
         final Random rand = new Random();
@@ -110,7 +110,7 @@ class Routes {
         } else {
             howeststone.setActivePlayer(ENEMY_STR);
             howeststone.getEnemy().beginTurn();
-            // do auto player
+            howeststone.startTurnAutoplayer();
         }
         context.json(howeststone.getActivePlayer());
     }

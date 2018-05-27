@@ -26,7 +26,6 @@ public class Game {
     private Player enemy;
     private int manaYou;
     private int manaEnemy;
-    private int turnTime;
     private String activePlayer;
     private CardCollection yourSideOfPlayingField;
     private CardCollection enemySideOfPlayingField;
@@ -184,13 +183,13 @@ public class Game {
         return activePlayer;
     }
 
-    public int getTurnTime() {
+    /*public int getTurnTime() {
         return turnTime;
     }
 
     public void setTurnTime(int turnTime) {
         this.turnTime = turnTime;
-    }
+    }*/
 
     public void setDeckInDeckBuilder(String body) {
         deckInDeckBuilder = new CardCollection(body);
@@ -205,43 +204,34 @@ public class Game {
     }
 
     public void startTurnAutoplayer() {
-        enemy.getCardsInHand().addCard(enemy.getDeck().drawCard());
 
         final List<Card> cardsInHand = enemy.getCardsInHand().getCards();
         cardsInHand.sort(new CardCollectionManaComparator());
 
         final double enemyBrain = Math.random();
         if (enemyBrain <= 0.25) {
-
             enemy.getHero().executeHeroPower(enemy.getHero().getHeroPowerID(), getRandomTarget());
         }
-
         //speel duurste kaarten eerst zolang je mana hebt
         for (Card card : cardsInHand) {
             if (card.getManaCost() <= manaEnemy) {
                 enemy.playCard(card.getCardID());
             }
         }
-
         for (Card card : enemy.getCardsOnPlayingField().getCards()) {
-            //TODO check if card can attack
-
-
-            if (you.getCardsOnPlayingField().getCards().isEmpty()) {
-                card.attackHero(getYourHero());
-            } else {
-                card.attack(enemy.getRandomTargetMinion());
+            if (!card.isExhausted()) {
+                if (you.getCardsOnPlayingField().getCards().isEmpty()) {
+                    card.attackHero(getYourHero());
+                } else {
+                    card.attack(enemy.getRandomTargetMinion());
+                }
             }
         }
         //TODO zijn er end turn battlecries?
         setActivePlayer(YOU_STR);
-        startTurnYou();
+        you.beginTurn();
+        //turnTimer.startTurnTimer();
 
-    }
-
-    private void startTurnYou() {
-        //TODO zorg dat kaarten kan gebruiken, targetten,  aanvallen, heropower gebruiken, ...
-        //TODO zorg dat startTurnAutoPlayer() runt wanneer de 50 seconden om zijn
     }
 
     public Player activePlayerToPlayer() {
@@ -286,15 +276,6 @@ public class Game {
         /*Timer timer = new Timer();
         TimerTask set;
         timer.schedule(set, 50);*/
-    }
-
-    public void startGame() {
-        //TODO zorg dat bij replacecard de beginner de activeplayer wordt
-        if (ENEMY_STR.equals(activePlayer)) {
-            startTurnAutoplayer();
-        } else {
-            startTurnYou();
-        }
     }
 
     public List<CardCollection> getDecks() {
@@ -517,7 +498,7 @@ public class Game {
         return (int) deckId;
     }
 
-    public void startYourTurn() {
+    /*public void startYourTurn() {
         //TODO voer abilities uit aan begin turn
         you.beginTurn();
 
@@ -529,5 +510,5 @@ public class Game {
         }
         setActivePlayer(ENEMY_STR);
         //startAutoplayer();
-    }
+    }*/
 }
