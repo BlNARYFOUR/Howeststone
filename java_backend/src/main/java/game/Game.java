@@ -1,6 +1,9 @@
 package game;
 
 
+import abilities.Abilities;
+import abilities.Ability;
+import abilities.Uncollectable;
 import cards.*;
 import db.SqlDatabase;
 import db.SqlStatements;
@@ -407,7 +410,10 @@ public class Game {
         newDeck.getCards().sort(new CardCollectionAlphabeticalComparator());
         final List<Card> newDeckCards = newDeck.getCards();
         for (int i = 0; i < newDeckCards.size(); i++) {
-            // TODO check on uncollectable
+            Ability Uncollectable = new Uncollectable(Abilities.UNCOLLECTABLE);
+            if (newDeckCards.get(i).getCardAbilities().contains(Uncollectable)) {
+                check++;
+            }
             if (i + 1 < newDeckCards.size()) {
                 if (newDeckCards.get(i).getCardID() == newDeckCards.get(i + 1).getCardID()
                         && newDeckCards.get(i).getRarity().equals("Legendary")) {
