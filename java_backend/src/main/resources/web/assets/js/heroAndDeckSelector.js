@@ -134,11 +134,6 @@ function handleSelectedHero(e) {
 
     let heroes = document.querySelectorAll("#deckbuilder #hero a");
 
-    resetDeckBuilderForm();
-    document.querySelector('#all').checked = true;
-    filterCards();
-    // TODO sort();
-
     for (let i = 0; i < heroes.length; i++) {
         if (heroes[i].innerText === selectedHero) {
             heroes[i].style.backgroundColor = "grey";

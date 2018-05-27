@@ -29,9 +29,11 @@ public class CardCollection {
 
     public void addCard(Card card) {
         cards.add(card);
-        //TODO shuffle();
     }
 
+    public void removeCard(Card card) {
+        cards.remove(card);
+    }
 
     public boolean hasCard(int cardId) {
         for (Card card : cards) {
@@ -39,13 +41,7 @@ public class CardCollection {
                 return true;
             }
         }
-
         return false;
-    }
-
-    public void removeCard(int cardId) {
-        //Card card = new Card(cardId);
-        //cards.remove(card);
     }
 
     @Override
@@ -79,16 +75,6 @@ public class CardCollection {
     public List<Card> getCards() {
         return cards;
     }
-    /*
-    public Card getCheapestCard() {
-        Card cheapestCard = this.cards.get(0);
-        for(Card x : this.cards ) {
-            if (x.getManaCost() < cheapestCard.getManaCost()) {
-                cheapestCard = x;
-            }
-        }
-        return cheapestCard;
-    }*/
 
     public Card getMostExpensiveCard() {
         Card mostExpensiveCard = this.cards.get(0);

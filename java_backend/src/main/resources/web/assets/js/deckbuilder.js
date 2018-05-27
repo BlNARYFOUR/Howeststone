@@ -100,6 +100,8 @@ function getAllCards() {
 }
 
 function showCards(cards) {
+    console.log("why do you show");
+
     document.getElementById('cards').innerHTML = "";
     for (let i = 0; i < cards["cards"].length; i++) {
         let imgUrl = cards["cards"][i]["img"];
@@ -113,20 +115,17 @@ function showCards(cards) {
 
 
 function checkAllCards() {
+    console.log('event');
     let cardsInDeck = document.querySelectorAll('#cards li');
     for (let i = 0; i < cardsInDeck.length; i++) {
         cardsInDeck[i].addEventListener("mousedown", clickOnCardInCards);
         cardsInDeck[i].addEventListener("touchstart", clickOnCardInCards);
-        // cardsInDeck[i].addEventListener('dblclick', addCardToDeckDblClick);
     }
-    // TODO fetch? cardAmount
-
-    /*let chosenCards = document.querySelectorAll(".chosenCards");
-    let lengthAllCards = document.querySelectorAll(".two").length + chosenCards.length;
-    document.getElementById('cardAmount').innerHTML = lengthAllCards + '/30';
+    let chosenCards = document.querySelectorAll('#deck li');
     for (let i = 0; i < chosenCards.length; i++) {
-        chosenCards[i].addEventListener('dblclick', removeCardFromDeckDblClick);
-    }*/
+        chosenCards[i].addEventListener("mousedown", clickOnCardInDeck);
+        chosenCards[i].addEventListener("touchstart", clickOnCardInDeck);
+    }
 }
 
 function startDeckBuilder(NYIDeck) {
@@ -232,6 +231,11 @@ function checkIfCardIsGoingToBeAdded() {
 }
 
 function checkIfCardIsGoingToBeRemoved() {
+    let rectDrag = dragSrcElement.getBoundingClientRect();
+    let cardsRect = document.querySelector("#cards").getBoundingClientRect();
+    if ((rectDrag.right < cardsRect.right) && (rectDrag.left > cardsRect.left) && (rectDrag.bottom < cardsRect.bottom) && (rectDrag.top > cardsRect.top)) {
+        removeCardFromDeck(itemThatIsBeingMoved);
+    }
     try {
         dragSrcElement.parentElement.removeChild(dragSrcElement);
     } catch (err) {
@@ -241,11 +245,10 @@ function checkIfCardIsGoingToBeRemoved() {
     document.removeEventListener("touchend", checkIfCardIsGoingToBeRemoved, false);
     document.removeEventListener("mousemove", movingOfDragElement, false);
     document.removeEventListener("mouseup", checkIfCardIsGoingToBeRemoved, false);
-    removeCardFromDeck(itemThatIsBeingMoved);
+
 }
 
 function clickOnCardInCards(e) {
-    // TODO fetch
     let cardId = e.target.classList[1].split("_")[1];
 
     fetch('/threebeesandme/post/deckbuilder/deck/cancardbeadded', {
@@ -298,7 +301,10 @@ function beginAddingCards(e) {
 }
 
 function clickOnCardInDeck(e) {
-    // TODO fetch
+    beginDeletinCard(e);
+}
+
+function beginDeletinCard(e) {
     itemThatIsBeingMoved = e.target;
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
@@ -312,8 +318,8 @@ function clickOnCardInDeck(e) {
     dragSrcElement.style.height = '7.573289904vh';
     dragSrcElement.style.position = 'absolute';
     dragSrcElement.style.background = e.target.style.background;
-    document.removeEventListener("mousedown", clickOnCardInCards);
-    document.removeEventListener("touchstart", clickOnCardInCards);
+    document.removeEventListener("mousedown", clickOnCardInDeck);
+    document.removeEventListener("touchstart", clickOnCardInDeck);
     document.addEventListener("touchmove", movingOfDragElement, false);
     document.addEventListener("mousemove", movingOfDragElement, false);
     document.addEventListener("mouseup", checkIfCardIsGoingToBeRemoved, false);
@@ -405,14 +411,8 @@ function firstAdd(deck) {
     document.querySelector('.save').classList.toggle('hidden');
 }
 
-function addCardToDeckDblClick(e) {
-    addCardToDeck(e.target);
-    console.log('does this work?')
-}
 
 function addCardToDeck(card) {
-
-    // fetch post
     let cardId = card.classList[1].split("_")[1];
     fetch("/threebeesandme/post/deckbuilder/deck/addcard", {
         method: 'post',
@@ -431,10 +431,15 @@ function addCardToDeck(card) {
         });
 }
 
+function emptyDeck() {
+    document.getElementById('cardAmount').innerHTML = "0/30";
+    document.getElementById('deck').innerHTML = "";
+    checkAllCards();
+}
+
 function showCardsInDeck(cards) {
     document.getElementById('cardAmount').innerHTML = cards["cards"].length + '/30';
     document.getElementById('deck').innerHTML = "";
-    // TODO 2 of the same cards
     let cardIds = [];
     for (let i = 0; i < cards["cards"].length; i++) {
         let imgUrl = cards["cards"][i]["img"];
@@ -453,17 +458,27 @@ function showCardsInDeck(cards) {
 
 }
 
-function removeCardFromDeckDblClick(e) {
-    removeCardFromDeck(e.target)
-}
-
-function removeCardFromDeck(card) { //remove eventlistener niet vergeten (nu nog zonder)
-    if (card.classList.contains('two')) {
-        card.classList.remove('two');
-    } else {
-        card.parentNode.remove();
-    }
-    checkAllCards();
+function removeCardFromDeck(card) {
+    let cardId = card.classList[1].split("_")[1];
+    fetch("/threebeesandme/post/deckbuilder/deck/deletecard", {
+        method: 'post',
+        body: cardId
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+        })
+        .then(function (text) {
+            if (text === "EMPTY") {
+                emptyDeck();
+            } else {
+                let result = text;
+                showCardsInDeck(result);
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 }
 
 function sort() {

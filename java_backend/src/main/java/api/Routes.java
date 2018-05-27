@@ -45,6 +45,7 @@ class Routes {
         server.post("/threebeesandme/post/deckbuilder/deck/cancardbeadded", this::canCardBeAdded);
         server.post("/threebeesandme/post/deckbuilder/deck/addcard", this::addCardToDeck);
 
+        server.post("/threebeesandme/post/deckbuilder/deck/deletecard", this::deleteCardFromDeck);
         server.post("/threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
         server.post("/threebeesandme/post/deckbuilder/newdeck", this::newDeck);
         server.post("threebeesandme/post/deckbuilder/deleteDeck", this::deleteDeck);
@@ -164,10 +165,8 @@ class Routes {
 
     // DECK BUILDER
 
-    private void saveDeck(Context context) throws IOException {
+    private void saveDeck(Context context) {
         context.json(HOWESTSTONE.createDeck(HOWESTSTONE.deckInDeckBuilder));
-        // TODO end empty
-        // load deck
     }
 
     private void newDeck(Context context) {
@@ -212,6 +211,15 @@ class Routes {
         int cardId = Integer.parseInt(context.body());
         HOWESTSTONE.deckInDeckBuilder.addCard(HOWESTSTONE.allCards.getCard(cardId));
         context.json(HOWESTSTONE.deckInDeckBuilder);
+    }
+    private void deleteCardFromDeck(Context context) {
+        int cardId = Integer.parseInt(context.body());
+        HOWESTSTONE.deckInDeckBuilder.removeCard(HOWESTSTONE.allCards.getCard(cardId));
+        if (HOWESTSTONE.deckInDeckBuilder.getCards().size() == 0){
+            context.json("EMPTY");
+        }else {
+            context.json(HOWESTSTONE.deckInDeckBuilder);
+        }
     }
 
 }
