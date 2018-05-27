@@ -1188,11 +1188,28 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 ![alt text](documents/Java/javaUML.png "modelJavaClasses")
 
 <h4>Progress</h4>
-<h5>Frontend</h5>
+<h5>Front-end</h5>
 <h6>Implemented</h5>
-<h6>Not Yet Implemented</h5>
+* Playingfield
+* Deckbuilder (fundamentals)
+* Menu's:
+    * Main menu
+    * Options
+    * Menubar
+    * Hero selection menu
+    * Deck Chooser menu
+* Credits screen
+* Background music
 
-<h5>Backend</h5>
+<h6>Not Yet Implemented</h5>
+* The search function deckbuilder
+* The current game can be saved from the front-end side
+* Battlelog
+* Extra features:
+    * Sign up screen
+    * Login/Logout screen
+    * Background selection screen
+<h5>Back-end</h5>
 <h6>Implemented</h5>
 <h6>Not Yet Implemented</h5>
 
