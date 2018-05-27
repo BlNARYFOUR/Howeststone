@@ -11,14 +11,22 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class Display {
-    private Scanner scanner = new Scanner( System.in );
+    private final String listItemStr = "\t- ";
+    private final String selectWhatYouWantToDoStr = "Select what you want to do:";
+    private final String selectedStr = "Selected: ";
+    private final String inputHereStr = "Input here: ";
+    private final String nyiStr = "NYI";
+    private final String stopStr = "stop";
+    private final String youStr = "you";
+
+    private Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         new Display().run();
     }
 
     private void run() {
-        Game howeststone = new Game();
+        final Game howeststone = new Game();
         chooseHero(howeststone);
         chooseDeck(howeststone);
         startGame(howeststone);
@@ -31,25 +39,25 @@ public class Display {
     }
 
     private void chooseHero(Game howeststone) {
-        Player you = new Player();
-        final List<String> HEROES = new ArrayList<>(howeststone.getHeroNames());
+        final Player you = new Player();
+        final List<String> heroes = new ArrayList<>(howeststone.getHeroNames());
 
         System.out.println("Select one of the following heroes:");
-        String selectedHero = askInputUntilFoundInList(HEROES);
+        final String selectedHero = askInputUntilFoundInList(heroes);
         you.setHero(selectedHero);
         howeststone.addYou(you);
     }
 
     private void chooseDeck(Game howeststone) {
         newLine();
-        if (howeststone.getYou().getHero() == null){
+        if (howeststone.getYou().getHero() == null) {
             throw new NullPointerException();
         }
 
-        final List<String> DECKS = new ArrayList<>(howeststone.getDeckNames());
+        final List<String> decks = new ArrayList<>(howeststone.getDeckNames());
 
         System.out.println("Select one of the following decks:");
-        String selectedDeck = askInputUntilFoundInList(DECKS);
+        final String selectedDeck = askInputUntilFoundInList(decks);
 
         //howeststone.setYourDeck(selectedDeck);
     }
@@ -72,10 +80,10 @@ public class Display {
         // TODO change cannot be strings
 
         // change to boolean
-        Random rand = new Random();
-        boolean doYouBegin = rand.nextBoolean();
+        final Random rand = new Random();
+        final boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
-            howeststone.setActivePlayer("you");
+            howeststone.setActivePlayer(youStr);
             System.out.println(ColorFormats.magenta("You begin the game!"));
         } else {
             howeststone.setActivePlayer("enemy");
@@ -86,39 +94,40 @@ public class Display {
     }
 
     private void replaceCards(Game howeststone) {
-        List<String> yourCardsInHandList = new ArrayList<>();
-        List<String> enemyCardsInHandList = new ArrayList<>();
-        for (int i = 0; i < 3 ; i++){
+        final List<String> yourCardsInHandList = new ArrayList<>();
+        final List<String> enemyCardsInHandList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
             enemyCardsInHandList.add(String.valueOf(howeststone.getEnemy().getDeck().drawCard()));
         }
-        if (howeststone.getActivePlayer().equals("You")){
+        if (howeststone.getActivePlayer().equals(youStr)) {
             enemyCardsInHandList.add(String.valueOf(howeststone.getEnemy().getDeck().drawCard()));
-        }else {
+        } else {
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
 
 
         // - cardInfo // on one line
-        List<String> replaceCardList = askInputUntilStop(yourCardsInHandList);
+        final List<String> replaceCardList = askInputUntilStop(yourCardsInHandList);
 
         // TODO howeststone.getYou().getDeck().addCards(replaceCardList);
         for (String cardID: replaceCardList) {
             yourCardsInHandList.remove(cardID);
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
-        replaceCardList.remove("stop");
+        replaceCardList.remove(stopStr);
         System.out.println("replaceCardList" + replaceCardList);
         System.out.println(howeststone.getYou().getDeck());
 
         // HOWESTSTONE.getYou().setCardsInHand(replace);
 
-        if (howeststone.getActivePlayer().equals("You")){
+        if (howeststone.getActivePlayer().equals(youStr)) {
             // add 3/4 cards to hand
             howeststone.setTurnTime(50);
-        }else {
+        } else {
             for (String card: replaceCardList) {
                 //TODO add card to hand enemy
+                final boolean fixError = true;
             }
             // replace cards ?
             System.out.println(howeststone.getEnemy().getCardsInHand());
@@ -128,8 +137,7 @@ public class Display {
 
     private void enemyTurn(Game howeststone) {
         // check deze code zeker
-        howeststone.getEnemy().getCardsInHand().addCard((howeststone.getYou().getDeck().drawCard()));
-        howeststone.getEnemy().setTotalMana(howeststone.getEnemy().getTotalMana()+1);
+        howeststone.getEnemy().beginTurn();
 
         // enemy speelt altijd duurste kaarten eerst:
         Card mostExpensiveCard = howeststone.getEnemy().getCardsInHand().getMostExpensiveCard();
@@ -145,14 +153,16 @@ public class Display {
 
         // endTurn();
         // setCanAttack of all minions of enemy to true
-        howeststone.setActivePlayer("You");
+        howeststone.setActivePlayer(youStr);
         System.out.println(howeststone.getEnemy().getCardsOnPlayingField());
     }
 
     private void enemyMinionsAttack(Game howeststone) {
         for (Card card: howeststone.getEnemy().getCardsOnPlayingField().getCards()) {
-            int windfuryCounter = 1;
+            // currently final because not yet used, may be changed
+            final int windfuryCounter = 1;
             while (!card.isExhausted() && card.getAmountAttacked() < card.getMaxAmountOfAttacks()) {
+                final boolean fixError = true;
 
                 //HOWESTSTONE.getYou().getRandomTarget();
 
@@ -169,7 +179,8 @@ public class Display {
                 // update health
                 // health - attack (- eventuele abilitydamage)
 
-                // HOWESTSTONE.getEnemy().getCardsOnPlayingField()...setHealth(card.getHealth - target.getDamage (- eventuele ability))
+                // HOWESTSTONE.getEnemy().getCardsOnPlayingField()...
+                // setHealth(card.getHealth - target.getDamage (- eventuele ability))
 
                 // voer dode kaarten af
 
@@ -203,10 +214,10 @@ public class Display {
         // draw a card
         // mana up by 1
 
-        List<String> action = new ArrayList<>();
+        final List<String> action = new ArrayList<>();
         action.add("Use hero power");
         // all values of these list
-        List<Card> cardsInHand = howeststone.getYou().getCardsInHand().getCards();
+        final List<Card> cardsInHand = howeststone.getYou().getCardsInHand().getCards();
         for (Card card : cardsInHand) {
             action.add(String.valueOf(card));
         }
@@ -238,42 +249,50 @@ public class Display {
         if (Objects.equals(player.getHero().getHeroName(), "Paladin")) {
             //TODO replace silver hand recruit id
             //player.getCardsOnPlayingField().addCard("Silver Hand Recruit");
+            final boolean fixError = true;
         } else {
             // TODO choose if target is selected before or in this function
             if (player == howeststone.getEnemy()) {
                 // HOWESTSTONE.getYou().getRandomTarget();
+                final boolean fixError = true;
             } else {
                 // select target
+                final boolean fixError = true;
             }
-            int damage = howeststone.getYou().getHero().getMageAttack(); //ofwel 2
+            final int damage = howeststone.getYou().getHero().getMageAttack();
+            //ofwel 2
             //TODO target health -damage
         }
     }
 
     private void printGame(Game howeststone) {
-        System.out.println(ColorFormats.red("weapon/hero/mana/hand Enemy: ") + ColorFormats.green("NYI"));
-        System.out.println(ColorFormats.red("Playing Field Enemy: ") + ColorFormats.green(howeststone.getEnemy().getCardsOnPlayingField().toString()));
-        System.out.println(ColorFormats.red("Playing Field Player: ") + ColorFormats.green(howeststone.getYou().getCardsOnPlayingField().toString()));
-        System.out.println(ColorFormats.red("weapon/hero/mana/hand Player: ") + ColorFormats.green("NYI"));
+        System.out.println(ColorFormats.red("weapon/hero/mana/hand Enemy: ")
+                + ColorFormats.green(nyiStr));
+        System.out.println(ColorFormats.red("Playing Field Enemy: ")
+                + ColorFormats.green(howeststone.getEnemy().getCardsOnPlayingField().toString()));
+        System.out.println(ColorFormats.red("Playing Field Player: ")
+                + ColorFormats.green(howeststone.getYou().getCardsOnPlayingField().toString()));
+        System.out.println(ColorFormats.red("weapon/hero/mana/hand Player: ")
+                + ColorFormats.green(nyiStr));
     }
 
     private String askInputUntilFoundInList(List<String> list) {
         String input;
         System.out.println(formatList(list));
         do {
-            System.out.print("Input here: ");
+            System.out.print(inputHereStr);
             input = scanner.nextLine();
 
-            if(!list.contains(input)) {
+            if (!list.contains(input)) {
                 System.out.println(ColorFormats.red("This is not an option!"));
                 System.out.println("The available options are:");
 
                 System.out.println(formatList(list));
             }
         }
-        while(!list.contains(input));
+        while (!list.contains(input));
 
-        System.out.println(ColorFormats.red("Selected: ") + ColorFormats.green(input));
+        System.out.println(ColorFormats.red(selectedStr) + ColorFormats.green(input));
 
         return input;
     }
@@ -281,16 +300,16 @@ public class Display {
 
     private List<String> askInputUntilStop(List<String> list) {
         String input;
-        list.add("stop");
-        List<String> replace = new ArrayList<>();
-        System.out.println("Select what you want to do:");
+        list.add(stopStr);
+        final List<String> replace = new ArrayList<>();
+        System.out.println(selectWhatYouWantToDoStr);
         System.out.println(formatList(list));
         do {
-            System.out.print("Input here: ");
+            System.out.print(inputHereStr);
             input = scanner.nextLine();
 
-            if(list.contains(input)) {
-                if (replace.contains(input)){
+            if (list.contains(input)) {
+                if (replace.contains(input)) {
                     // TODO how to say that this cannot be done always
                     // for example actions
                     replace.remove(input);
@@ -299,43 +318,43 @@ public class Display {
                 }
                 // change ? remove and add ?
 
-                System.out.println("Select what you want to do:");
+                System.out.println(selectWhatYouWantToDoStr);
                 System.out.println(formatList(list));
                 System.out.println("Select what you want to undo:");
                 System.out.println(formatList(replace));
             }
         }
-        while(!input.equals("stop"));
-        replace.remove("stop");
-        list.remove("stop");
-        System.out.println(ColorFormats.red("Selected: ") + formatList(replace));
+        while (!stopStr.equals(input));
+        replace.remove(stopStr);
+        list.remove(stopStr);
+        System.out.println(ColorFormats.red(selectedStr) + formatList(replace));
         return replace;
     }
     @NotNull
     private String formatCardList(@NotNull List<Card> list) {
-        StringBuilder strBuilder = new StringBuilder();
+        final StringBuilder strBuilder = new StringBuilder();
 
-        for(Card str : list) {
-            strBuilder.append("\t- ");
+        for (Card str : list) {
+            strBuilder.append(listItemStr);
             strBuilder.append(str);
             strBuilder.append('\n');
         }
 
-        return  strBuilder.toString();
+        return strBuilder.toString();
     }
     @NotNull
     private String formatList(@NotNull List<String> list) {
-        StringBuilder strBuilder = new StringBuilder();
+        final StringBuilder strBuilder = new StringBuilder();
 
-        for(String str : list) {
-            strBuilder.append("\t- ");
+        for (String str : list) {
+            strBuilder.append(listItemStr);
             strBuilder.append(str);
             strBuilder.append('\n');
         }
 
-        return  strBuilder.toString();
+        return strBuilder.toString();
     }
-    private void newLine(){
+    private void newLine() {
         System.out.println();
     }
 }
