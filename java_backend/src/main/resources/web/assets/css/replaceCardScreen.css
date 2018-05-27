@@ -13,6 +13,11 @@
     margin-bottom: 2vh;
     display: inline-block;
 }
+
+#replaceCardScreen h1::first-letter {
+    text-transform: uppercase;
+}
+
 #replaceCardScreen h2 {
     color: white;
     font-size: 3vh !important;
@@ -70,6 +75,7 @@
     line-height: 5.5vh;
     border-radius: 10% / 50%;
 }
+
 
 
 

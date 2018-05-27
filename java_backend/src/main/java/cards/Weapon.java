@@ -1,11 +1,9 @@
 package cards;
 
 public class Weapon extends Card {
-    private int attack;
-    private int durability;
 
-    public Weapon(int cardId, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
-        super(cardId, cardName, race, urlOfImg, rarity, health, attack, manaCost, durability, heroId);
+    public Weapon(int cardId, String[] strArgs, int[] intArgs) {
+        super(cardId, strArgs, intArgs);
     }
 
     public int getAttack() {
@@ -23,11 +21,6 @@ public class Weapon extends Card {
     public void setDurability(int durability) {
         this.durability = durability;
     }
-
-    public String getCardType (Card card) {
-        return  "weapon";
-    }
-
 
     // method attack
 }

@@ -1,0 +1,8 @@
+:) threebeesandme/get/gameboard/battlelog
+threebeesandme/get/gameboard/timeleft
+threebeesandme/post/gameboard/endturn
+
+threebeesandme/get/heroanddeckselector/decks
+threebeesandme/get/heroanddeckselector/heroes
+threebeesandme/post/heroanddeckselector/hero
+threebeesandme/post/heroanddeckselector/deck

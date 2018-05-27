@@ -83,13 +83,6 @@ function showBattleLog(logArr) {
     }
 }
 
-function startMyTurn() {
-    startTimeLeftCheck();
-    console.log("You're turn");
-    updateMyMana(1, 1);
-    updateMyCards();
-}
-
 function startTimeLeftCheck() {
     // TODO: timeLeftObj = setInterval(timeLeft, 1000);
 
@@ -160,10 +153,7 @@ function endMyTurn(e) {
 }
 
 function gotoCardsReplaced() {
-    // HOW TO DO THIS ??
     let beginCards = document.querySelectorAll('#replaceCardScreen ul li');
-
-
     let CardsInHand = [];
     let CardsToDeck = [];
 
@@ -184,7 +174,7 @@ function gotoCardsReplaced() {
 }
 
 function replaceCards(countReplaceCards) {
-    fetch('/threebeesandme/post/gameboard/cardsinhand', {
+    fetch('/threebeesandme/post/gameboard/replacecards', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -198,8 +188,12 @@ function replaceCards(countReplaceCards) {
                 return "ERROR";
         })
         .then(function (text) {
-            console.log(text);
-            yourTurn();
+            console.log(activePlayer);
+            if(activePlayer === "enemy"){
+                enemyTurn();
+            }else {
+                startMyTurn();
+            }
         })
         .catch(function (err) {
             console.log("Error: Could not get the cards in hand");
@@ -216,17 +210,19 @@ function getHTMLForReplaceCardScreen(cards) {
     for (let i = 0; i < cards["cards"].length; i++) {
         html += '<li class="card_' + cards["cards"][i]["cardID"] + '"></li>';
     }
-
-    html += '</ul><span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Replace</a></span>';
+    html += '</ul><span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Continue</a></span>';
     document.querySelector("#replaceCardScreen").innerHTML = html;
 
 }
 
 function getBackgroundImagesForCardScreen(cards) {
     for (let i = 0; i <cards["cards"].length; i++){
-        let cardClass = document.querySelector("#replaceCardScreen ul li.card_" + cards["cards"][i]["cardID"]);
-        cardClass.style.background = 'no-repeat url("' + cards["cards"][i]["urlOfImg"] + '") center -5vh';
-        cardClass.style.backgroundSize = "115%";
+        let cardClass = document.querySelectorAll("#replaceCardScreen ul li.card_" + cards["cards"][i]["cardID"]);
+
+        for(let j=0; j<cardClass.length; j++) {
+            cardClass[j].style.background = 'no-repeat url("' + cards["cards"][i]["img"] + '") center -5vh';
+            cardClass[j].style.backgroundSize = "115%";
+        }
     }
 }
 
@@ -276,23 +272,43 @@ function toggleReplaceCard(e) {
 
 function gameBoardSetup() {
     setBackground();
-    updateEnemyHero();
+    updateEnemyHeroBeforeGame();
     updateEnemyMana(0, 0);
-    updateMyHero();
+    updateMyHeroBeforeGame();
     updateMyMana(0, 0);
     playGame();
 }
 
 let heroAttack;
-
-function yourTurn() {
+function enemyTurn() {
     // TODO fetch
-    heroAttack = true;
+    // get amount of card in hand
+    // get max mana
+    // get playing field
+    // get heroes health
+    // weapon yes no
+
+    startMyTurn();
+}
+function startMyTurn() {
+    // TODO fetch
     console.log("You're turn");
-    updateEnemyCards(5);
-    updateMyCards(3);
+    updateEnemyStuff();
+    updateMyStuff();
+    startTimeLeftCheck();
+    heroAttack = true;
+}
+
+function updateMyStuff() {
+    updateMyCards();
     updateMyMana(1, 1);
-    updateMyCards(4);
+    updateMyHeroInGame();
+}
+
+function updateEnemyStuff() {
+    updateEnemyCards(5);
+    updateEnemyMana();
+    updateEnemyHeroInGame();
 }
 
 function burnFuse() {
@@ -303,32 +319,61 @@ function stopBurnFuse() {
     document.getElementById("fuse").classList.remove("burn");
 }
 
-function updateEnemyHero() {
-    updateHero("enemy");
+function updateEnemyHeroBeforeGame() {
+    updateHeroBeforeGame("enemy");
 }
 
-function updateMyHero() {
-    updateHero("you");
+function updateMyHeroBeforeGame() {
+    updateHeroBeforeGame("you");
 }
 
-function updateHero(parent) {
+function updateHeroBeforeGame(parent) {
     let url = '/threebeesandme/get/hero?parent=' + parent;
     fetch(url, {
-        method: 'get',
-
+        method: 'get'
     })
-        .then(function (res) {
-            if (res.ok === true)
-                return res.json();
-        })
-        .then(function (text) {
-            let result = text;
-            showHero(parent, result);
-        })
-        .catch(function (err) {
-            console.log("Error: Could not get hero");
-        });
+    .then(function (res) {
+        if (res.ok === true)
+            return res.json();
+    })
+    .then(function (text) {
+        let result = text;
+        showHero(parent, result);
+    })
+    .catch(function (err) {
+        console.log("Error: Could not get hero");
+    });
+}
 
+function updateHeroInGame(parent) {
+    let url = '/threebeesandme/get/gameboard/herohealth?parent=' + parent;
+    fetch(url, {
+        method: 'get'
+    })
+    .then(function (res) {
+        if (res.ok === true)
+            return res.json();
+    })
+    .then(function (text) {
+        let result = text;
+        console.log(`${parent} hero-health has been updated`);
+        showHeroHealth(parent, result);
+    })
+    .catch(function (err) {
+        console.log("Error: Could not get hero");
+    });
+}
+
+function updateMyHeroInGame() {
+    updateHeroInGame("you");
+}
+
+function updateEnemyHeroInGame() {
+    updateHeroInGame("enemy");
+}
+
+function showHeroHealth(parent, currentHealth) {
+    document.querySelector(`#gameBoard .${parent} .hero .health`).innerText = currentHealth;
 }
 
 function showHero(parent, heroName) {
@@ -352,26 +397,39 @@ function updateEnemyCards() {
 }
 
 function updateMyCards() {
-    // TODO fetch for cardsInMyHand and other info
-    myCards = MOCKMYCARDS();
+    fetch('/threebeesandme/get/gameboard/mycardsinhand', {
+        method: 'GET'
+    })
+    .then(function(res) {
+        if(res.ok === true)
+            return res.json();
+    })
+        .then(function(text) {
+            let result = text;
+            console.log("my cards in hand updated");
 
-    updateCards(myCards.length, "you", 1);
-    setMyCards(myCards);
-    giveClassNameEqualToCardID();
-    setupMovingOfCards();
+            myCards = result;
+            updateCards(myCards.length, "you", 1);
+            setMyCards(myCards);
+            giveClassNameEqualTocardID();
+            setupMovingOfCards();
+        })
+        .catch(function(err) {
+            console.log("Error 404: Could not connect to the server");
+        });
 }
 
-function giveClassNameEqualToCardID() {
+function giveClassNameEqualTocardID() {
     let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
     for (let i = 0; i < myCards.length; i++) {
-        cardHtmlObjects[i].classList.add(myCards[i].cardId);
+        cardHtmlObjects[i].classList.add(myCards[i]["cardID"]);
     }
 }
 
 function MOCKMYCARDS() {
     return [
         {
-            "cardId": "CS2_188",
+            "cardID": "CS2_188",
             "dbfId": "242",
             "name": "Abusive Sergeant",
             "cardSet": "Classic",
@@ -396,7 +454,7 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "EX1_009",
+            "cardID": "EX1_009",
             "dbfId": "1688",
             "name": "Angry Chicken",
             "cardSet": "Classic",
@@ -416,7 +474,7 @@ function MOCKMYCARDS() {
             "locale": "enUS"
         },
         {
-            "cardId": "EX1_398t",
+            "cardID": "EX1_398t",
             "dbfId": "1707",
             "name": "Battle Axe",
             "cardSet": "Classic",
@@ -430,7 +488,7 @@ function MOCKMYCARDS() {
             "locale": "enUS"
         },
         {
-            "cardId": "EX1_409t",
+            "cardID": "EX1_409t",
             "dbfId": "1661",
             "name": "Heavy Axe",
             "cardSet": "Classic",
@@ -444,7 +502,7 @@ function MOCKMYCARDS() {
             "locale": "enUS"
         },
         {
-            "cardId": "EX1_008",
+            "cardID": "EX1_008",
             "dbfId": "757",
             "name": "Argent Squire",
             "cardSet": "Classic",
@@ -469,7 +527,7 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "EX1_410",
+            "cardID": "EX1_410",
             "dbfId": "546",
             "name": "Shield Slam",
             "cardSet": "Classic",
@@ -492,7 +550,7 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "EX1_392",
+            "cardID": "EX1_392",
             "dbfId": "400",
             "name": "Battle Rage",
             "cardSet": "Classic",
@@ -510,7 +568,7 @@ function MOCKMYCARDS() {
             "locale": "enUS"
         },
         {
-            "cardId": "EX1_319",
+            "cardID": "EX1_319",
             "dbfId": "1090",
             "name": "Flame Imp",
             "cardSet": "Classic",
@@ -536,7 +594,7 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "NEW1_017",
+            "cardID": "NEW1_017",
             "dbfId": "443",
             "name": "Hungry Crab",
             "cardSet": "Classic",
@@ -561,7 +619,7 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "EX1_012",
+            "cardID": "EX1_012",
             "dbfId": "749",
             "name": "Bloodmage Thalnos",
             "cardSet": "Classic",
@@ -602,10 +660,44 @@ function updateCards(amountOfCards, parent, gradDirectionIndex) {
 }
 
 function updateEnemyMana(activeMana, totalMana) {
-    document.querySelector("#gameBoard .enemy .manaTotal").innerText = activeMana + "/" + totalMana;
+    fetch('/threebeesandme/get/gameboard/enemymana', {
+        method: 'GET'
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            console.log("Enemy mana updated");
+            document.querySelector("#gameBoard .enemy .manaTotal").innerText = text[0] + "/" + text[1];
+        })
+        .catch(function (err) {
+            console.log("Error: Could not update my mana");
+        });
 }
 
-function updateMyMana(activeMana, totalMana) {
+function updateMyMana() {
+    fetch('/threebeesandme/get/gameboard/mymana', {
+        method: 'GET'
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            console.log("My mana updated");
+            visualizeMyMana(text[0], text[1]);
+        })
+        .catch(function (err) {
+            console.log("Error: Could not update my mana");
+        });
+}
+
+function visualizeMyMana(activeMana, totalMana) {
     let manaList = document.querySelector("#gameBoard .you .manaHolder ul");
     document.querySelector("#gameBoard .you .manaTotal").innerText = activeMana + "/" + totalMana;
 
@@ -880,7 +972,7 @@ function deactivateHeroAttack() {
 
 function addWeaponToPlayingField(cardPlayed) {
     moved = true;
-    updateMyMana(remainingCrystals - cost, document.querySelectorAll("#gameBoard .you .manaHolder ul li").length);
+    sendPlayedCard(itemThatIsBeingMoved);
     let cardAttack = returnAttackOfMyCard(itemThatIsBeingMoved);
     let cardDurability = returnDurabilityOfMyCard(itemThatIsBeingMoved);
     cardPlayed.innerHTML += `<span class="attack">${cardAttack}</span><span class="durability">${cardDurability}</span>`;
@@ -890,7 +982,7 @@ function addWeaponToPlayingField(cardPlayed) {
 function addMinionToPlayingField(cardPlayed) {
     // mockData
     moved = true;
-    updateMyMana(remainingCrystals - cost, document.querySelectorAll("#gameBoard .you .manaHolder ul li").length);
+    sendPlayedCard(itemThatIsBeingMoved);
     let cardAttack = returnAttackOfMyCard(itemThatIsBeingMoved);
     let cardHealth = returnHealthOfMyCard(itemThatIsBeingMoved);
     cardPlayed.innerHTML += `<span class="health">${cardHealth}</span><span class="attack">${cardAttack}</span>`;
@@ -1006,53 +1098,84 @@ function layCardOnFieldEnd(e) {
 }
 
 function returnTypeOfMyCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].type;
+        if (cardID.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["type"];
         }
     }
     return null;
 }
 
 function returnDurabilityOfMyCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].durability;
+        if (cardID.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["durability"];
         }
     }
     return null;
 }
 
 function returnHealthOfMyCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].health;
+        if (cardID.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["health"];
         }
     }
     return null;
 }
 
 function returnAttackOfMyCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].attack;
+        if (cardID.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["attack"];
         }
     }
     return null;
 }
 
 function returnCostOfMyCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i].cardId) !== -1) {
-            return myCards[i].cost;
+        if (cardID.indexOf(myCards[i]["cardID"]) !== -1) {
+            return myCards[i]["manaCost"];
         }
     }
     return null;
+}
+
+function sendPlayedCard(liWithClass) {
+    let cardID = liWithClass.getAttribute('class');
+
+    fetch('/threebeesandme/post/gameboard/playcard', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cardID.split(' ')[0])
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            if(text === "SUCCES") {
+                console.log("Card played");
+                updateMyStuff();
+                updateEnemyStuff();
+            }
+            else {
+                console.log("You cannot play this card!");
+            }
+        })
+        .catch(function (err) {
+            console.log("Error: Could not play the card");
+        });
 }
 
 /* give minion class nonAttack

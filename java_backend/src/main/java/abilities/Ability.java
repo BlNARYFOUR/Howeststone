@@ -4,16 +4,16 @@ import cards.Card;
 import events.Events;
 
 public abstract class Ability {
-    private final Abilities ABILITY_TYPE;
+    private final Abilities abilityType;
     private boolean used;
 
-    public Ability(Abilities ABILITY_TYPE) {
-        this.ABILITY_TYPE = ABILITY_TYPE;
+    public Ability(Abilities abilityType) {
+        this.abilityType = abilityType;
         this.used = false;
     }
 
-    public Abilities getABILITY_TYPE() {
-        return ABILITY_TYPE;
+    public Abilities getAbilityType() {
+        return abilityType;
     }
 
     public void use() {
