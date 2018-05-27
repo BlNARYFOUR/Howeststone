@@ -314,8 +314,8 @@ function beginDeletinCard(e) {
     dragSrcElement.removeAttribute('style');
     movingOfDragElement(e);
     dragSrcElement.style.zIndex = '1';
-    dragSrcElement.style.width = '5vh';
-    dragSrcElement.style.height = '7.573289904vh';
+    dragSrcElement.style.width = '10vh';
+    dragSrcElement.style.height = '15.146579808vh';
     dragSrcElement.style.position = 'absolute';
     dragSrcElement.style.background = e.target.style.background;
     document.removeEventListener("mousedown", clickOnCardInDeck);
