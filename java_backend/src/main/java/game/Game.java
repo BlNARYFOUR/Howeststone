@@ -1,24 +1,25 @@
 package game;
 
+
 import cards.*;
 import db.SqlDatabase;
 import db.SqlStatements;
 import hero.Hero;
-
 import java.sql.*;
 import java.util.*;
 
 public class Game {
+    private static SqlDatabase db;
+    private static final String YOU_STR = "you";
+    private static final String ENEMY_STR = "enemy";
+    private CardCollection beginCards;
+    private CardCollection deckInDeckBuilder;
+    private CardCollection filterCollection;
 
-    private static SqlDatabase db = null;
-    private CardCollection beginCards = new CardCollection();
-    public CardCollection deckInDeckBuilder = new CardCollection();
-    public CardCollection filterCollection = new CardCollection();
-    // TODO change
+    private CardCollection allCards = new CardCollection("cards");
+    private List<String> heroNames;
+    private Map<String, List<CardCollection>> deckNames;
 
-    public CardCollection allCards = new CardCollection("cards");
-    public List<String> heroNames = new ArrayList<>();
-    public Map<String, List<CardCollection>> deckNames = new HashMap<>();
     // TODO: actual fields
     private Player you;
     private Player enemy;
@@ -26,22 +27,26 @@ public class Game {
     private int manaEnemy;
     private int turnTime;
     private String activePlayer;
+    private CardCollection yourSideOfPlayingField;
+    private CardCollection enemySideOfPlayingField;
+
     /*private Hero you;
     private CardCollection deck;*/
 
     public CardCollection getDeck(String deckName) {
-        List<CardCollection> decks = deckNames.get(you.getHero().getHeroName());
-        for (CardCollection deck: decks){
-            if (deck.getNameOfCardCollection().equals(deckName)){
+        final List<CardCollection> decks = deckNames.get(you.getHero().getHeroName());
+        for (CardCollection deck: decks) {
+            if (deck.getName().equals(deckName)) {
                 return deck;
             }
         }
         return null;
     }
 
+
     public void generateEnemy() {
-        int randomHeroIndex = (int) Math.round(Math.random()) * (heroNames.size() - 1);
-        Player enemy = new Player();
+        final int randomHeroIndex = (int) Math.round(Math.random()) * (heroNames.size() - 1);
+        final Player enemy = new Player();
         enemy.setHero(heroNames.get(randomHeroIndex));
         enemy.setDeck(deckNames.get(enemy.getHero().getHeroName()).get(0));
         this.addEnemy(enemy);
@@ -50,7 +55,7 @@ public class Game {
     public CardCollection getPlayerBeginCards() {
         beginCards = new CardCollection();
 
-        if (this.getActivePlayer().equals("enemy")) {
+        if (this.getActivePlayer().equals(ENEMY_STR)) {
             beginCards.addCard(this.getYou().getDeck().drawCard());
         }
         beginCards.addCard(this.getYou().getDeck().drawCard());
@@ -62,8 +67,7 @@ public class Game {
 
     public Boolean setPlayerCardsInHand(List<Integer> cardIdsInHand, List<Integer> cardIdsToReplace) {
         boolean isValidData = true;
-        CardCollection cardsInHand = new CardCollection();
-        CardCollection cardsToReplace = new CardCollection();
+        final CardCollection cardsInHand = new CardCollection();
 
         for (int gottenCardID : cardIdsInHand) {
             if (!beginCards.hasCard(gottenCardID)) {
@@ -75,19 +79,43 @@ public class Game {
             for (int cardId : cardIdsInHand) {
                 cardsInHand.addCard(beginCards.getCard(cardId));
             }
-
             for (int cardIdToReplace : cardIdsToReplace) {
-                Card card = beginCards.getCard(cardIdToReplace);
+                final Card card = beginCards.getCard(cardIdToReplace);
                 cardsInHand.addCard(this.getYou().getDeck().drawCard());
                 this.getYou().getDeck().addCard(card);
             }
-
             System.out.println("Cards in hand:\n" + cardsInHand);
-
             this.getYou().setCardsInHand(cardsInHand);
         }
-
         return isValidData;
+    }
+
+    public CardCollection getBeginCards() {
+        return beginCards;
+    }
+
+    public CardCollection getDeckInDeckBuilder() {
+        return deckInDeckBuilder;
+    }
+
+    public CardCollection getFilterCollection() {
+        return filterCollection;
+    }
+
+    public CardCollection getAllCards() {
+        return allCards;
+    }
+
+    public CardCollection getYourSideOfPlayingField() {
+        return yourSideOfPlayingField;
+    }
+
+    public void setHeroNames(List<String> heroNames) {
+        this.heroNames = heroNames;
+    }
+
+    public CardCollection getEnemySideOfPlayingField() {
+        return enemySideOfPlayingField;
     }
 
     public Hero getYourHero() {
@@ -104,6 +132,10 @@ public class Game {
 
     public int getManaYou() {
         return manaYou;
+    }
+
+    public void setDeckNames(Map<String, List<CardCollection>> deckNames) {
+        this.deckNames = deckNames;
     }
 
     public void setManaYou(int manaYou) {
@@ -159,51 +191,170 @@ public class Game {
         this.turnTime = turnTime;
     }
 
+    public void setDeckInDeckBuilder(String body) {
+        deckInDeckBuilder = new CardCollection(body);
+    }
+
+    public void setFilterCollection(CardCollection cardCollection) {
+        filterCollection = cardCollection;
+    }
+
+    public void setAllCards(CardCollection allCards) {
+        this.allCards = allCards;
+    }
+
+    public void startTurnAutoplayer() {
+        enemy.getCardsInHand().addCard(enemy.getDeck().drawCard());
+
+        final List<Card> cardsInHand = enemy.getCardsInHand().getCards();
+        cardsInHand.sort(new CardCollectionManaComparator());
+
+        final double enemyBrain = Math.random();
+        if (enemyBrain <= 0.25) {
+
+            enemy.getHero().executeHeroPower(enemy.getHero().getHeroPowerID(), getRandomTarget());
+        }
+
+        //speel duurste kaarten eerst zolang je mana hebt
+        for (Card card : cardsInHand) {
+            if (card.getManaCost() <= manaEnemy) {
+                enemy.playCard(card.getCardID());
+            }
+        }
+
+        for (Card card : enemy.getCardsOnPlayingField().getCards()) {
+            //TODO check if card can attack
+
+
+            if (you.getCardsOnPlayingField().getCards().isEmpty()) {
+                card.attackHero(getYourHero());
+            } else {
+                card.attack(enemy.getRandomTargetMinion());
+            }
+        }
+        //TODO zijn er end turn battlecries?
+        setActivePlayer(YOU_STR);
+        startTurnYou();
+
+    }
+
+    private void startTurnYou() {
+        //TODO zorg dat kaarten kan gebruiken, targetten,  aanvallen, heropower gebruiken, ...
+        //TODO zorg dat startTurnAutoPlayer() runt wanneer de 50 seconden om zijn
+    }
+
+    public Player activePlayerToPlayer() {
+        if (YOU_STR.equals(activePlayer)) {
+            return you;
+        } else {
+            return enemy;
+        }
+    }
+
+    public Object getRandomTarget() {
+        final Object target;
+        final int i;
+        if (ENEMY_STR.equals(activePlayer)) {
+            i = yourSideOfPlayingField.getCards().size() - 1;
+            final int randomIndex = (int) (Math.round(Math.random()) * i);
+            if (randomIndex == i) {
+                target = you.getHero();
+            } else {
+                target = yourSideOfPlayingField.getCards().get(i);
+            }
+        } else {
+            i = enemySideOfPlayingField.getCards().size() - 1;
+            final int randomIndex = (int) (Math.round(Math.random()) * i);
+            if (randomIndex == i) {
+                target = enemy.getHero();
+            } else {
+                target = enemySideOfPlayingField.getCards().get(i);
+            }
+        }
+
+        return target;
+    }
+
+    public void createPlayingField() {
+        this.yourSideOfPlayingField = new CardCollection();
+        this.enemySideOfPlayingField = new CardCollection();
+    }
+
+    public void turnMachine() {
+        //TODO fix this
+        /*Timer timer = new Timer();
+        TimerTask set;
+        timer.schedule(set, 50);*/
+    }
+
+    public void startGame() {
+        //TODO zorg dat bij replacecard de beginner de activeplayer wordt
+        if (ENEMY_STR.equals(activePlayer)) {
+            startTurnAutoplayer();
+        } else {
+            startTurnYou();
+        }
+    }
+
+    public List<CardCollection> getDecks() {
+        return deckNames.get(you.getHero().getHeroName());
+    }
+
     public List<String> getDeckNames() {
-        List<String> deckNamesForChosenHero = new ArrayList<>();
-        List<CardCollection> decksForChosenHero = deckNames.get(you.getHero().getHeroName());
-        for (int i = 0; i < decksForChosenHero.size(); i++) {
-            deckNamesForChosenHero.add(decksForChosenHero.get(i).getNameOfCardCollection());
+        final List<String> deckNamesForChosenHero = new ArrayList<>();
+        final List<CardCollection> decksForChosenHero = deckNames.get(you.getHero().getHeroName());
+        for (CardCollection deck : decksForChosenHero) {
+            deckNamesForChosenHero.add(deck.getName());
         }
         return deckNamesForChosenHero;
     }
 
     public void attackMinion(Minion attacker, Minion target) {
-        int attackValueAttacker = attacker.getAttack();
-        int healthValueAttacker = attacker.getHealth();
-        int attackValueTarget = target.getAttack();
-        int healthValueTarget = target.getAttack();
+        final int attackValueAttacker = attacker.getAttack();
+        final int healthValueAttacker = attacker.getHealth();
+        final int attackValueTarget = target.getAttack();
+        final int healthValueTarget = target.getAttack();
 
         target.setHealth(healthValueTarget - attackValueAttacker);
         attacker.setHealth(healthValueAttacker - attackValueTarget);
     }
 
     public CardCollection filterCards(List<String> filterArray) {
-        List<Integer> cardIds = new ArrayList<>();
+        final List<Integer> cardIds = new ArrayList<>();
 
-        String filterHeroName = "%";
-        String filterType = "%";
+        final String everything = "%";
+        final String notInArray = "-1";
         int filterManaCostMin = 0;
         int filterManaCostMax = 10;
-        String filterRarity = "%";
+        final String filterHeroName;
+        final String filterType;
+        final String filterRarity;
 
         if (!filterArray.get(0).equals("All")) {
-            filterHeroName = filterArray.get(0) + filterHeroName;
+            filterHeroName = filterArray.get(0) + everything;
+        } else {
+            filterHeroName = everything;
         }
-        if (!filterArray.get(1).equals("-1")) {
-            filterType = filterArray.get(1) + filterType;
+        if (!filterArray.get(1).equals(notInArray)) {
+            filterType = filterArray.get(1) + everything;
+        } else {
+            filterType = everything;
         }
-        if (!filterArray.get(2).equals("-1")) {
+
+        if (!filterArray.get(2).equals(notInArray)) {
             filterManaCostMin = Integer.parseInt(filterArray.get(2).split("_")[0]);
-            if (filterManaCostMin== 7){
+            if (filterManaCostMin == 7) {
                 filterManaCostMax = 10;
             } else {
                 filterManaCostMax = filterManaCostMin;
             }
         }
-        if (!filterArray.get(3).equals("-1")) {
-            filterRarity = filterArray.get(3) + filterRarity;
+        if (!filterArray.get(3).equals(notInArray)) {
+            filterRarity = filterArray.get(3) + everything;
+        } else {
+            filterRarity = everything;
         }
+
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.FILTER_CARDS)
@@ -213,7 +364,7 @@ public class Game {
             stmt.setInt(3, filterManaCostMin);
             stmt.setInt(4, filterManaCostMax);
             stmt.setString(5, filterRarity);
-            ResultSet rs = stmt.executeQuery();
+            final ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 cardIds.add(rs.getInt("cardId"));
             }
@@ -229,10 +380,10 @@ public class Game {
     }
 
     public boolean checkIfDeckNotExist(String body) {
-        List<CardCollection> decksForChosenHero = deckNames.get(you.getHero().getHeroName());
+        final List<CardCollection> decksForChosenHero = deckNames.get(you.getHero().getHeroName());
         for (int i = 0; i < decksForChosenHero.size(); i++) {
             if (decksForChosenHero.get(i)
-                    .getNameOfCardCollection().equals(body)) {
+                    .getName().equals(body)) {
                 return false;
             }
         }
@@ -240,11 +391,11 @@ public class Game {
     }
 
     public String checkIfCardCanBeAddedToDeck(String body) {
-        int cardId = Integer.parseInt(body);
+        final int cardId = Integer.parseInt(body);
         for (int i = 0; i < this.allCards.getCards().size(); i++) {
-            if (this.allCards.getCards().get(i).getcardId() == cardId) {
-                int heroId = this.allCards.getCards().get(i).getHeroId();
-                int yourHeroId = this.getYou().getHero().getHeroId();
+            if (this.allCards.getCards().get(i).getCardID() == cardId) {
+                final int heroId = this.allCards.getCards().get(i).getHeroId();
+                final int yourHeroId = this.getYou().getHero().getHeroId();
                 if (heroId != yourHeroId && heroId != 2) {
                     return "not the right hero";
                 }
@@ -254,10 +405,7 @@ public class Game {
     }
 
     public boolean createDeck(CardCollection deck) {
-        if (deck.getCards().size() != 30) {
-            return false;
-        }
-        if (!checkIfNewDeckIsCorrect(deck)) {
+        if (deck.getCards().size() != 30 || !checkIfNewDeckIsCorrect(deck)) {
             return false;
         }
         setDeckInDatabase(deck);
@@ -266,50 +414,56 @@ public class Game {
     }
 
     private boolean checkIfNewDeckIsCorrect(CardCollection newDeck) {
-        newDeck.getCards().sort(new alfazCardCollectionComparator());
-        List<Card> newDeckCards = newDeck.getCards();
+        int check = 0;
+        newDeck.getCards().sort(new AlfazCardCollectionComparator());
+        final List<Card> newDeckCards = newDeck.getCards();
         for (int i = 0; i < newDeckCards.size(); i++) {
             // TODO check on uncollectable
             if (i + 1 < newDeckCards.size()) {
-                if (newDeckCards.get(i).getcardId() == newDeckCards.get(i + 1).getcardId()
+                if (newDeckCards.get(i).getCardID() == newDeckCards.get(i + 1).getCardID()
                         && newDeckCards.get(i).getRarity().equals("Legendary")) {
-                    return false;
+                    check++;
                 }
             }
 
             if (i + 2 < newDeckCards.size()) {
-                if (newDeckCards.get(i).getcardId() == newDeckCards.get(i + 2).getcardId()) {
-                    return false;
+                if (newDeckCards.get(i).getCardID() == newDeckCards.get(i + 2).getCardID()) {
+                    check++;
                 }
             }
             if (newDeckCards.get(i).getHeroId() != you.getHero().getHeroId()
                     && newDeckCards.get(i).getHeroId() != 2) {
-                return false;
+                check++;
             }
         }
-        return true;
+        return check == 0;
     }
 
     private void setDeckInDatabase(CardCollection newDeck) {
-        String yourHeroName = this.getYou().getHero().getHeroName();
-        List<CardCollection> decks = deckNames.get(yourHeroName);
+        final String yourHeroName = this.getYou().getHero().getHeroName();
+        final List<CardCollection> decks = deckNames.get(yourHeroName);
         decks.add(newDeck);
         deckNames.put(yourHeroName, decks);
-        int deckId = insertDeck(newDeck.getNameOfCardCollection(), this.getYou().getHero().getHeroId());
+        final int deckId = insertDeck(newDeck.getName(), this.getYou().getHero().getHeroId());
         setCardsInDatabase(newDeck, deckId);
     }
 
     private void setCardsInDatabase(CardCollection newDeck, int deckId) {
+        int amountcheck = 0;
         for (int i = 0; i < newDeck.getCards().size(); i++) {
             if (i + 1 < newDeck.getCards().size()) {
-                if (newDeck.getCards().get(i).getcardId() == newDeck.getCards().get(i + 1).getcardId()) {
-                    insertCardToDeck(deckId, newDeck.getCards().get(i).getcardId(), 2);
-                    i++;
+                if (newDeck.getCards().get(i).getCardID() == newDeck.getCards().get(i + 1).getCardID()) {
+                    insertCardToDeck(deckId, newDeck.getCards().get(i).getCardID(), 2);
+                    amountcheck = 1;
                 } else {
-                    insertCardToDeck(deckId, newDeck.getCards().get(i).getcardId(), 1);
+                    if (amountcheck == 0) {
+                        insertCardToDeck(deckId, newDeck.getCards().get(i).getCardID(), 1);
+                    }
+                    amountcheck = 0;
                 }
             } else {
-                insertCardToDeck(deckId, newDeck.getCards().get(i).getcardId(), 1);     }
+                insertCardToDeck(deckId, newDeck.getCards().get(i).getCardID(), 1);
+            }
         }
     }
 
@@ -322,9 +476,9 @@ public class Game {
             stmt.setInt(1, deckId);
             stmt.setInt(2, cardId);
             stmt.setInt(3, amount);
-            final int AFFECTED_ROWS = stmt.executeUpdate();
+            final int affectedRows = stmt.executeUpdate();
 
-            if (AFFECTED_ROWS == 0) {
+            if (affectedRows == 0) {
                 throw new SQLException("No card added to deck: no rows affected.");
             }
 
@@ -342,9 +496,9 @@ public class Game {
         ) {
             stmt.setString(1, name);
             stmt.setInt(2, heroId);
-            final int AFFECTED_ROWS = stmt.executeUpdate();
+            final int affectedRows = stmt.executeUpdate();
 
-            if (AFFECTED_ROWS == 0) {
+            if (affectedRows == 0) {
                 throw new SQLException("No deck created: no rows affected.");
             }
 
@@ -361,5 +515,19 @@ public class Game {
         }
 
         return (int) deckId;
+    }
+
+    public void startYourTurn() {
+        //TODO voer abilities uit aan begin turn
+        you.beginTurn();
+
+        while (turnTime <= 50) {
+            // playCard(card)
+            // attackMinion(..., ...);
+            // useHeroPower()
+            final boolean fixError = true;
+        }
+        setActivePlayer(ENEMY_STR);
+        //startAutoplayer();
     }
 }

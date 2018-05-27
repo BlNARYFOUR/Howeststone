@@ -1,16 +1,31 @@
 package game;
 
+import cards.Card;
 import cards.CardCollection;
+import formatters.ColorFormats;
 import hero.Hero;
 
 import java.util.List;
 
 public class Player {
+    private int heroDamageOnEmptyDeck;
     private Hero hero;
     private CardCollection cardsInHand;
     private CardCollection cardsOnPlayingField;
     private CardCollection cardsInDeck;
-    private int mana = 0;
+    private int activeMana;
+    private int totalMana;
+    private Card weapon;
+
+    public Player() {
+        heroDamageOnEmptyDeck = 1;
+        hero = new Hero("Mage");
+        cardsInHand = new CardCollection();
+        cardsOnPlayingField = new CardCollection();
+        cardsInDeck = new CardCollection();
+        activeMana = 0;
+        totalMana = 0;
+    }
 
     public Hero getHero() {
         return hero;
@@ -20,7 +35,7 @@ public class Player {
         this.hero = hero;
     }
 
-    public void setHero(String heroName){
+    public void setHero(String heroName) {
         this.hero = new Hero(heroName);
     }
 
@@ -32,33 +47,41 @@ public class Player {
         return cardsOnPlayingField;
     }
 
-    public int getMana() {
-        return mana;
+    public int getTotalMana() {
+        return totalMana;
     }
 
-    public void setMana(int mana) {
-        this.mana = mana;
+    public void setTotalMana(int totalMana) {
+        this.totalMana = totalMana;
     }
 
-    public Player() {
+    public Card getWeapon() {
+        return weapon;
+    }
 
+    public void setWeapon(Card weapon) {
+        this.weapon = weapon;
     }
 
     public void beginTurn() {
+        if (totalMana < 10) {
+            totalMana++;
+        }
 
-        // +1 mana until 10
-        // draw card
+        activeMana = totalMana;
+
+        final Card card = cardsInDeck.drawCard();
+
+        if (card != null) {
+            cardsInHand.addCard(card);
+        } else {
+            hero.addHealth(-heroDamageOnEmptyDeck++);
+        }
     }
 
-    @Override
-    public String toString() {
-        // deck hero
-        // mss nog extra zoals health mana
-        return "Hero: " + hero.getHeroName() + "\nDeck: " +cardsInDeck.getNameOfCardCollection();
-    }
+    public void setDeck(CardCollection deckName) {
+        cardsInDeck = new CardCollection(deckName);
 
-    public void setDeck(CardCollection cardsInDeck) {
-        this.cardsInDeck = cardsInDeck;
     }
 
     public CardCollection getDeck() {
@@ -74,17 +97,58 @@ public class Player {
         // TODO cardsInHand.addCards(cardsInHandList);
     }
 
-    /*public Card getRandomTarget() {
-        //TODO hoe zorg ik dat ik een kaart OF de hero kan teruggeven?
+    public boolean playCard(int cardId) {
+        boolean succeeded = false;
 
-        List<Card> targetCards = this.getCardsOnPlayingField().getCards();
-        int resultIndex = (int)Math.round(Math.random())*(targetCards.size());
+        try {
+            final int manaCost = cardsInHand.getCard(cardId).getManaCost();
+            final String type = cardsInHand.getCard(cardId).getType();
 
-        if (resultIndex == targetCards.size()) {
-            //dan is het de Hero
-        } else {
-            return this.getCardsOnPlayingField().getCards().get(resultIndex);
+            if (manaCost <= getActiveMana()) {
+                switch (type) {
+                    case "Minion":
+                        cardsOnPlayingField.addCard(cardsInHand.getCard(cardId));
+                        break;
+                    case "Weapon":
+                        // TODO
+                        final boolean fixError = true;
+                        break;
+                    default:
+                        // TODO
+                        final boolean fixError2 = true;
+                        break;
+                }
+
+                cardsInHand.removeCard(cardsInHand.getCard(cardId));
+                activeMana -= manaCost;
+
+                succeeded = true;
+            }
+        } catch (IllegalArgumentException error) {
+            System.out.println(ColorFormats.red("Thou shall not hack!"));
+            return false;
         }
 
-    }*/
+        return succeeded;
+    }
+
+
+    public Card getRandomTargetMinion() {
+        final List<Card> targetCards = this.getCardsOnPlayingField().getCards();
+        final int resultIndex = (int) Math.round(Math.random()) * (targetCards.size() - 1);
+
+        return this.getCardsOnPlayingField().getCards().get(resultIndex);
+
+    }
+
+    @Override
+    public String toString() {
+        // deck hero
+        // mss nog extra zoals health totalMana
+        return "Hero: " + hero.getHeroName() + "\nDeck: " + cardsInDeck.getName();
+    }
+
+    public int getActiveMana() {
+        return activeMana;
+    }
 }

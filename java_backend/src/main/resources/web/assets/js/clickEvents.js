@@ -45,6 +45,7 @@ function toggleFullScreen() {
 function gotoMainMenu(e) {
     //console.log(this.parentElement.parentElement.parentElement);
     document.getElementById('mainMenu').className = "";
+    document.getElementById('saveGame').classList.add("hidden");
     this.parentElement.parentElement.parentElement.className = "hidden";
 }
 
@@ -74,6 +75,7 @@ function gotoHeroSelector() {
         stopLoadingScreen();
         document.getElementById('mainMenu').className = "hidden";
         document.getElementById('heroSelector').className = "";
+        document.getElementById('saveGame').classList.remove("hidden");
     }
 }
 
