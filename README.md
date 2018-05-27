@@ -1,10 +1,10 @@
 <h1>Howeststone</h1>
-<h4>Inleiding</h4>
+<h2>Inleiding</h2>
 
 Wij hebben naar aanleiding van de module Project I <br/>
 onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 
-<h5>Three Bees and Me (groep 31)</h5>
+<h3>Three Bees and Me (groep 31)</h3>
 
 * Mattijs Step (Oranje) I'm gonna catch them all.
 * Bert Van Mulders (Geel) I am one with the force and the force is with me.
@@ -13,8 +13,11 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 
 ![alt text](PMDOC/groepsfoto.jpg "Groepsfoto 3BEES&ME")
 
-<h4>Diagrammen</h4>
-<h5>Database</h5>
+<h2>Diagrammen</h2>
+<h3>Java</h3>
+![alt text](documents/Java/javaUML.png "modelJavaClasses")
+
+<h3>Database</h3>
 ![alt text](documents/Database/modelDatabase.PNG "modelDatabase")
 
 <html>
@@ -1183,9 +1186,6 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 <a href="#header"><p class="normal">Back</a>
 <h1 width="100%"></body>
 </html>
-
-<h5>Java</h5>
-![alt text](documents/Java/javaUML.png "modelJavaClasses")
 
 <h4>Progress</h4>
 <h5>Front-end</h5>
