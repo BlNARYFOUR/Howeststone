@@ -18,8 +18,7 @@ function init() {
     for(let i =0; i< mainMenugoers.length; i++){
         mainMenugoers[i].addEventListener('click', gotoMainMenu);
     }
-    document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck);
-    /* TODO: document.getElementById('gotoGameOptions').addEventListener('click', gotoGameOptions);*/
+
     document.getElementById('gotoCredits').addEventListener('click', gotoCredits);
     document.getElementById('gotoLeaveOptions').addEventListener('click', gotoLeaveOptions);
     document.getElementById('gotoHeroChooser').addEventListener('click', gotoHeroChooser);
@@ -61,10 +60,7 @@ function gotoGameOptions() {
     document.getElementById('options').className = "";
 }
 
-function gotoRechooseDeck() {
-    document.getElementById('heroChooser').className = "";
-    document.getElementById('deckbuilder').className = "hidden";
-}
+
 
 function gotoHome() {
     document.getElementById('mainMenu').className = "";
@@ -101,12 +97,4 @@ function gotoCredits() {
 function gotoLeaveOptions() {
     document.getElementById('options').className = "";
     document.getElementById('creditsScreen').className = "hidden";
-}
-
-function gotoChooseDeck() {
-    document.getElementById('gotoChooseDeck').removeEventListener('click', gotoChooseDeck);
-    document.getElementById('gotoChooseDeck').setAttribute("id", "gotoRechooseDeck");
-    document.getElementById('deckSelector').className = "";
-    document.getElementById('deckbuilder').className = "hidden";
-    document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck);
 }

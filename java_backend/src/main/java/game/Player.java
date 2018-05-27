@@ -81,6 +81,7 @@ public class Player {
 
     public void setDeck(CardCollection deckName) {
         cardsInDeck = new CardCollection(deckName);
+
     }
 
     public CardCollection getDeck() {
@@ -96,17 +97,17 @@ public class Player {
         // TODO cardsInHand.addCards(cardsInHandList);
     }
 
-    public boolean playCard(int cardId) {
+    public boolean playCard(int cardID) {
         boolean succeeded = false;
 
         try {
-            final int manaCost = cardsInHand.getCard(cardId).getManaCost();
-            final String type = cardsInHand.getCard(cardId).getType();
+            final int manaCost = cardsInHand.getCard(cardID).getManaCost();
+            final String type = cardsInHand.getCard(cardID).getType();
 
             if (manaCost <= getActiveMana()) {
                 switch (type) {
                     case "Minion":
-                        cardsOnPlayingField.addCard(cardsInHand.getCard(cardId));
+                        cardsOnPlayingField.addCard(cardsInHand.getCard(cardID));
                         break;
                     case "Weapon":
                         // TODO
@@ -118,7 +119,7 @@ public class Player {
                         break;
                 }
 
-                cardsInHand.removeCard(cardId);
+                cardsInHand.removeCard(cardsInHand.getCard(cardID));
                 activeMana -= manaCost;
 
                 succeeded = true;
