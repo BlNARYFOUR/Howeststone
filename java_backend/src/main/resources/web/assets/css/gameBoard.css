@@ -1,0 +1,488 @@
+#gameBoard {
+    background: url(../media/board_01.jpg) no-repeat center center;
+    background-size: 177.77vh 100vh;
+    height: 100vh;
+    position: absolute;
+    width: 100vw;
+}
+
+#gameBoard .main {
+    display: block;
+    position: relative;
+    width: 126vh;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#gameBoard .you {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 53.25vh;
+    /*background-color: rgba(0,0,255,0.4);*/
+}
+
+#gameBoard .enemy {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 46.75vh;
+    vertical-align: middle;
+    /*background-color: rgba(255,0,0,0.4);*/
+}
+
+#gameBoard .cards {
+    position: relative;
+    overflow: hidden;
+    /*padding-left: 36vh;*/
+}
+
+#gameBoard .cards ul {
+    text-align: center;
+    margin-left: -0.5vh;
+    width: 100%;
+}
+
+#gameBoard .you .cards {
+    display: block;
+    height: 16vh;
+    padding-top: 37.25vh;
+    /*background-color: rgba(0,255,0,0.4);*/
+}
+
+#gameBoard .enemy .cards {
+    display: block;
+    height: 8vh;
+    padding-bottom: 38.75vh;
+    /*background-color: rgba(0,255,255,0.4);*/
+}
+
+#gameBoard .cards li {
+    position: absolute;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 9.9032258064516129032258064516131vh;
+    height: 15vh;
+    line-height: 15vh;
+    transition: transform 0.25s;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    border: whitesmoke thin solid;
+    z-index: 1 !important;
+}
+
+#gameBoard .you .cards li {
+    bottom: -0.5vh;
+}
+
+#gameBoard .you .cards li:hover {
+    transform-origin: left center !important;
+    transform: scale(2.5, 2.5) translate(-0.5vh, -5vh) !important;
+    z-index: 2 !important;
+}
+
+#gameBoard .you .cards li.notFanned:hover {
+    transform-origin: left center !important;
+    transform: scale(2.5, 2.5) translate(-0.5vh, -5.25vh) !important;
+}
+
+/*#gameBoard .main .you .cards li.dragging {
+    transition: none !important;
+    transform: none !important;
+    width: 14.85483870967741935483870967742vh;
+    height: 22.5vh;
+    line-height: 22.5vh;
+}*/
+
+#gameBoard .main .you .cards li.hide {
+    opacity: 0;
+}
+
+#gameBoard .enemy .cards li {
+    top: -5vh;
+}
+
+#gameBoard .manaTotal {
+    position: absolute;
+    height: 4.5vh;
+    line-height: 4.5vh;
+    width: 8vh;
+    z-index: 0;
+    text-align: center;
+    color: white;
+}
+
+#gameBoard .you .manaTotal {
+    bottom: 5.7vh;
+    right: 32.25vh;
+}
+
+#gameBoard .enemy .manaTotal {
+    top: 4.95vh;
+    right: 35.7vh;
+}
+
+#gameBoard .you .manaHolder {
+    position: absolute;
+    /*background-color: rgba(255,255,0,0.5);*/
+    width: 30.5vh;
+    height: 5vh;
+    line-height: 5vh;
+    bottom: 5.5vh;
+    right: 1vh;
+}
+
+#gameBoard .you .manaHolder li {
+    display: inline-block;
+    vertical-align: middle;
+    width: 3vh;
+    height: 3.5vh;
+    margin-right: -0.6vh;
+    /*background-color: rgba(255,0,255,0.5);*/
+}
+
+#gameBoard .you .manaHolder li.mana {
+    background: no-repeat url("../media/manaSprite.png") left top;
+    background-size: 120% 205%;
+}
+
+#gameBoard .you .manaHolder li.usedMana {
+    background: no-repeat url("../media/manaSprite.png") -0.25vh bottom;
+    margin-top: 0.2vh;
+    background-size: 120% 205%;
+}
+
+#gameBoard .hero {
+    position: absolute;
+    /*background-color: rgba(0,255,255,0.5);*/
+    width: 14.85vh;
+    height: 16.25vh;
+    left: 55.2vh;
+}
+
+#gameBoard .you .hero {
+    bottom: 16.1vh;
+    background-size: contain;
+}
+
+#gameBoard .enemy .hero {
+    top: 10.55vh;
+    background-size: contain;
+}
+
+#gameBoard .you .playingField {
+    position: absolute;
+    width: 100%;
+    height: 52.5%;
+    top: 1vh;
+}
+
+#gameBoard .you .playingField .dropZone {
+    display: block;
+    height: 100%;
+    border-radius: 0 0 40% 40% / 0 0 100% 100%;
+    text-align: center;
+    z-index: 3;
+}
+
+/* weapon has yet to be change to a circle*/
+#gameBoard .you .weapon ul li{
+    position: absolute;
+    top: 23vh;
+    left: 43vh;
+    width: 10vh;
+    height: 10vh;
+    line-height: 10vh;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    border: whitesmoke thin solid;
+    border-radius: 50%;
+    background-position: center 27% !important;
+}
+
+#gameBoard .you .weapon ul li .attack{
+    background-image: url(../media/attack_placeHolder.png);
+    position: absolute;
+    left: -1vh;
+    bottom: -5vh;
+    background-size: 5vh;
+    width: 5vh;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: -0.5vh 1.7vh;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+}
+#gameBoard .you .weapon ul li .durability{
+    background-image: url(../media/durability_placeHolder.png);
+    position: absolute;
+    right: -1vh;
+    bottom: -5vh;
+    background-size: 5vh;
+    width: 5vh;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: 0 1.9vh;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+}
+
+#gameBoard .you .playingField .dropZone li {
+    text-align: center;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 9.9032258064516129032258064516131vh;
+    height: 13.5vh;
+    line-height: 13.5vh;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    margin: 1vh;
+    border-radius: 50%;
+    background-clip: padding-box;
+    position: relative;
+}
+#gameBoard .you .playingField .dropZone li .attack, #gameBoard .enemy .playingField ul li .attack{
+    background-image: url(../media/attack_placeHolder.png);
+    position: absolute;
+    left: -1vh;
+    bottom: -5vh;
+    background-size: 5vh;
+    width: 5vh;
+    background-repeat: no-repeat;
+    background-position: -0.5vh 3.5vh;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+}
+#gameBoard .you .hero .heroAttack{
+    background-image: url(../media/attack_placeHolder.png);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 0;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+    bottom: -2vh;
+    width: 6vh;
+    background-size: 5vh;
+    height: 6vh;
+    left: -1vh;
+    line-height: 7vh;
+    text-align: center;
+}
+
+#gameBoard .enemy .hero .health,
+#gameBoard .you .hero .health{
+    background-image: url(../media/health_placeHolder.png);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: 0;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+    bottom: -2vh;
+    width: 5vh;
+    background-size: 5vh;
+    height: 6vh;
+    right: -1vh;
+    line-height: 7vh;
+    text-align: center;
+}
+
+#gameBoard .you .playingField .dropZone li .health, #gameBoard .enemy .playingField ul li .health{
+    background-image: url(../media/health_placeHolder.png);
+    position: absolute;
+    right: -1vh;
+    bottom: -5vh;
+    background-size: 4vh;
+    width: 4vh;
+    background-repeat: no-repeat;
+    background-position: 0 3.4vh;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+}
+#gameBoard .you .playingField .dropZone li .legendary, #gameBoard .enemy .playingField ul li .legendary {
+    display: block;
+    height: 120%;
+    width: 144%;
+    margin-left: -22%;
+    margin-top: -10%;
+    background: no-repeat url("../media/legendary.png") center 20%;
+    background-size: 110%;
+}
+#gameBoard .enemy .playingField{
+    position: absolute;
+    width: 100%;
+    height: 52.5%;
+    bottom: 1vh;
+}
+#gameBoard .enemy .playingField ul {
+    display: block;
+    height: 100%;
+    border-radius: 0 0 40% 40% / 0 0 100% 100%;
+    text-align: center;
+    z-index: 3;
+}
+
+#gameBoard .enemy .heroPower span{
+    width: 10vh;
+    height: 10vh;
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    top: 18vh;
+    right: 43vh;
+    border-radius: 50%;
+    border: whitesmoke thin solid;
+}
+
+#gameBoard .you .heroPower span{
+    width: 10vh;
+    height: 10vh;
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    top: 23vh;
+    right: 43vh;
+    border-radius: 50%;
+    border: whitesmoke thin solid;
+}
+
+#gameBoard .enemy .weapon ul li{
+    position: absolute;
+    top: 18vh;
+    left: 43vh;
+    width: 10vh;
+    height: 10vh;
+    line-height: 10vh;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    border: whitesmoke thin solid;
+    border-radius: 50%;
+    background-position: center 27% !important;
+}
+
+#gameBoard .enemy .playingField ul li {
+    text-align: center;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 9.9032258064516129032258064516131vh;
+    height: 13.5vh;
+    line-height: 13.5vh;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,0.7);
+    margin-right: 1vh;
+    margin-top: 10vh;
+    margin-left: 1vh;
+    border-radius: 50%;
+    background-clip: padding-box;
+    position: relative;
+}
+
+#gameBoard #tempButtonAddCard {
+    position: absolute;
+    bottom: 4vh;
+    line-height: 4vh;
+    width: 10vh;
+    text-align: center;
+    vertical-align: middle;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#gameBoard #fuse {
+    position: absolute;
+    right: 18vh;
+    width: 100vh;
+    height: 10vh;
+    top: 42vh;
+    opacity: 0;
+}
+
+#gameBoard #fuse.burn {
+    opacity: 1;
+    -webkit-transition: ease-in opacity 20s; /* Safari */
+    transition: ease-in opacity 200ms;
+}
+
+#gameBoard #rope {
+    position: absolute;
+    display: block;
+    right: 0;
+    width: 92.5%;
+    height: 100%;
+    background: repeat-x url("../media/rope.png") center right;
+    background-size: 89.1vh 38.2vh;
+}
+
+#gameBoard #spark {
+    position: absolute;
+    display: block;
+    right: 0;
+    height: 95%;
+    width: 100%;
+    background: no-repeat url("../media/sparkles.gif") center left;
+    background-size: 14vh;
+}
+
+#gameBoard #fuse.burn #rope {
+    width: 4%;
+    -webkit-transition: ease-in width 20s; /* Safari */
+    transition: ease-in width 20s;
+}
+
+#gameBoard #fuse.burn #spark {
+    width: 10%;
+    -webkit-transition: ease-in width 20s; /* Safari */
+    transition: ease-in width 20s;
+}
+
+#endTurn {
+    position: absolute;
+    top: 43vh;
+    right: 2.5vh;
+    width: 12vh;
+    height: 5.5vh;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+    cursor: pointer;
+    text-align: center;
+    line-height: 4vh;
+}
+
+#gameBoard .buttonHolder {
+    position: absolute;
+    display: inline-block;
+    font-weight: bold;
+    background: no-repeat url("../media/button.png") center center;
+    background-size: 100% 100%;
+    width: 20vh;
+    height: 7vh;
+    line-height: 7.5vh;
+    text-align: center;
+}
+
+#gameBoard .buttonHolder .insideButton {
+    display: inline-block;
+    width: 11vh;
+    line-height: 5.5vh;
+    border-radius: 10% / 50%;
+}
+
+#gameBoard #battleLogHolder {
+    bottom: 49vh;
+    left: -5.9vh;
+    height: 5vh;
+    line-height: 5.5vh;
+    transform: rotate(90deg);
+}
+
+#gameBoard #showBattleLog {
+    color: transparent !important;
+    background: no-repeat url("../media/battleLog.png") center center / 33%;
+}

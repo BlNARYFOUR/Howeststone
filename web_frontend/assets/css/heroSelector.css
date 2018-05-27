@@ -1,0 +1,120 @@
+#heroSelector {
+    background: url(../media/backgroundAnnieOrigin.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+}
+
+#heroSelector .SelectorBox {
+    position: relative;
+    height: 100vh;
+    width: 132vh;
+    margin-left: auto;
+    margin-right: auto;
+    background: url(../media/heroSelector.png) no-repeat center center;
+    background-size: 177.77vh 100vh;
+}
+
+#heroSelector .heroes {
+    position: absolute;
+    left: 10.5vh;
+    top: 14.5vh;
+    width: 66.25vh;
+    height: 66vh;
+}
+
+#heroSelector .heroes li{
+    display: inline-block;
+    width: 21.58vh;
+    height: 17.5vh;
+    line-height: 17.5vh;
+    text-align: center;
+    padding-top: 4vh;
+    margin-right: 0.5vh;
+}
+
+#heroSelector .heroes li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    border: thin hidden;
+    border-radius: 50% 50% 10% 10% / 22% 22% 10% 10%;
+    text-align: center;
+}
+
+#heroSelector .heroes li a h2 {
+    display: inline-block;
+    border-radius: 0 0 6% 6% / 50%;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 3vh;
+    line-height: 3vh;
+    vertical-align: bottom;
+}
+
+#heroSelector .selectedHero {
+    display: block;
+    position: absolute;
+    bottom: 40.5vh;
+    right: 11vh;
+    width: 28.25vh;
+    height: 32vh;
+    background: no-repeat url("../media/Mage.png") center right;
+    background-size: 100% 100%;
+    border: thin hidden;
+    border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+}
+
+#heroSelector .selectedHeroName {
+    display: block;
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    font-size: 1.15rem;
+    bottom: 34vh;
+    right: 11vh;
+    width: 28.25vh;
+    height: 4.5vh;
+    line-height: 4.5vh;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+#heroSelector .buttonHolder {
+    position: absolute;
+    display: inline-block;
+    font-weight: bold;
+    background: no-repeat url("../media/button.png") center center;
+    background-size: 100% 100%;
+    width: 20vh;
+    height: 7vh;
+    line-height: 7.5vh;
+    text-align: center;
+}
+
+#heroSelector .buttonHolder .insideButton {
+    display: inline-block;
+    width: 11vh;
+    line-height: 5.5vh;
+    border-radius: 10% / 50%;
+}
+
+#heroSelector #gotoDeckHolder {
+    bottom: 20vh;
+    right: 15.5vh;
+}
+
+#heroSelector #gotoHomeHolder {
+    bottom: 4.75vh;
+    right: -0.5vh;
+    height: 6vh;
+    line-height: 6.2vh;
+    width: 16vh;
+}
+
+#heroSelector #gotoHomeHolder .insideButton {
+    width: 9.4vh;
+    line-height: 5vh;
+}

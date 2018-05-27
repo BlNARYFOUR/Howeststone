@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#000000">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#000000">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- The iOS apple-mobile-web-app-status-bar-style attribute only supports black, black-translucent or default` - you cannot use a custom color apparently. -->
+
+    <link rel="icon" type="image/png" href="assets/media/icon.png"/>
+    <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/replaceCardScreen.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/mainMenu.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/deckSelector.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/heroSelector.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/deckchooser.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/deckbuilder.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/optionsMenu.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/gameBoard.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
+
+    <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
+    <!--<link href="assets/css/playingField.css" rel="stylesheet" type="text/css">-->
+    <meta name="author" content="3BEESANDME">
+    <title>Howeststone</title>
+</head>
+<body>
+
+<audio id="mainMenuMusic" autoplay loop>
+    <source src="assets/media/menu_howeststone.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<div id="mainMenu" class="">
+    <div class="menuBox">
+        <ul>
+            <li id="gotoHeroSelector"><a href="#" class="navItem MainMenu">Play</a></li>
+            <li id="gotoDeckChooser"><a href="#" class="navItem MainMenu">Deck Builder</a></li>
+            <li id="gotoOptions"><a href="#" class="navitem MainMenu">Options</a></li>
+            <li id="gotoLogOut"><a href="#" class="navitem MainMenu">Log out</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="loginAndRegistrationScreen" class="hidden">
+    <div class="menuBox">
+        <form id="login">
+            <input type="text" id="loginUser" name="loginUser" placeholder="Enter username" required="required"/>
+            <input type="password" id="loginPass" name="loginPass" placeholder="Enter password" required="required"/>
+            <input type="submit" value="Login" id="submitLogin" name="submitLogin"/>
+        </form>
+        <form id="register" class="hidden">
+            <input type="text" id="registerUser" name="registerUser" placeholder="Enter username" required="required"/>
+            <input type="password" id="registerPass" name="registerPass" placeholder="Enter password"
+                   required="required"/>
+            <input type="password" id="confirmPass" name="confirmPass" placeholder="Confirm password"
+                   required="required"/>
+            <input type="submit" value="Login" id="submitRegister" name="submitRegister"/>
+        </form>
+    </div>
+</div>
+
+<div id="heroSelector" class="hidden">
+    <div class="SelectorBox">
+        <ul class="heroes">
+        </ul>
+
+        <span class="selectedHero"></span>
+        <h1 class="selectedHeroName">Mage</h1>
+
+        <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton"
+                                                          id="gotoDeckSelector">Continue</a></span>
+        <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
+    </div>
+</div>
+
+<div id="deckSelector" class="hidden">
+    <div class="SelectorBox">
+        <ul class="decks">
+            <!--
+            <li id="deck_0"><a href="#">Some Deck :)</a></li>
+            <li id="deck_1"><a href="#">Deck 2</a></li>
+            <li id="deck_2"><a href="#">Deck 3</a></li>
+            <li id="deck_3"><a href="#">Deck 4</a></li>
+            <li id="deck_4"><a href="#">Deck 5</a></li>
+            <li id="deck_5"><a href="#">Deck 6</a></li>
+            <li id="deck_6"><a href="#">Deck 7</a></li>
+            <li id="deck_7"><a href="#">Deck 8</a></li>
+            <li id="deck_9"><a href="#">Deck 9</a></li>
+            -->
+        </ul>
+
+        <span id="addDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="addDeck">Add deck</a></span>
+
+        <div class="selectedHero"></div>
+        <h1 class="selectedHeroName">Mage</h1>
+
+        <a href="#" id="playGame"></a>
+        <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton"
+                                                          id="gotoHeroChooser">Back</a></span>
+    </div>
+</div>
+
+<div id="heroChooser" class="hidden">
+    <div class="SelectorBox">
+        <ul class="heroes">
+        </ul>
+
+        <span class="selectedHero"></span>
+        <h1 class="selectedHeroName">Mage</h1>
+
+        <span id="gotoDeckBuilderHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckBuilder">Continue</a></span>
+        <span id="gotoMainMenuHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
+
+        <!--<div id="XXDitMoetOverAlles"><span><a class="gotoMainMenu" href="#" >Back</a></span></div>-->
+    </div>
+
+
+</div>
+
+<div id="deckbuilder" class="hidden">
+    <ul id="tutorials" class="hidden">
+        <li>Sort, filter your card and search for cards here.</li>
+        <li class="hidden">After filtering, sorting or searching your cards, the results apear here.</li>
+        <li class="hidden">Filter on cards in your deck here.</li>
+        <li class="hidden">The filtered cards apear here.</li>
+        <li class="hidden">Here's your selected hero.</li>
+        <li class="hidden">Here's your deck.</li>
+        <li class="hidden">Click here to create a new deck.</li>
+        <li class="hidden">Click here to save your deck.</li>
+<<<<<<< HEAD
+        <li class="hidden">Card info; mana in the left upper corner, attack in the left bottom corner and health in the
+            right bottom
+            corner.
+        </li>
+=======
+        <li class="hidden">Card info; totalMana in the left upper corner, attack in the left bottom corner and health in the right bottom
+            corner. </li>
+>>>>>>> development
+        <li class="hidden">Add and remove a card by double clicking or dragging.</li>
+        <li class="hidden">Decks of your selected hero apear here, click 'add deck' to make a new one</li>
+        <li><a href="#" id="next">Next</a></li>
+    </ul>
+    <header>
+        <div id="hero">
+            <!--
+            <a href="#">Mage</a>
+            <a href="#">Paladin</a>
+            -->
+        </div>
+        <div id="quickfilter">
+            <!--
+            <a href="#">Full Deck</a>
+            <a href="#">Minions</a>
+            <a href="#">Spells</a>
+            <a href="#">Weapons</a>
+            -->
+            <p id="cardAmount">30/30</p>
+        </div>
+        <ul id="deck"></ul>
+        <a id="newDeckBuilder" href="#">CLEAR DECK BUILDER</a>
+        <a class="saveDeck" href="#">SAVE</a>
+    </header>
+    <div class="main">
+        <span class="hidden error"></span>
+        <ul id="cards"></ul>
+        <ul class="decks">
+            <li>Alle decks</li>
+            <li>Mage standard deck</li>
+            <li><a href="#">+</a></li>
+        </ul>
+    </div>
+    <div class="new">
+        <label for="newDeckName">Choose a name for your new deck</label>
+        <input type="text" name="newDeckName" id="newDeckName" placeholder="Deck_1">
+        <a href="#" id="newDeck">Continue</a>
+        <span>Or choose one of these decks</span>
+    </div>
+    <div class="save hidden">
+        <label for="deckName">You're deck is not yet complete<br/> would you like to save it?</label>
+        <input type="text" name="deckName" id="deckName" placeholder="Deck 01">
+        <ul>
+            <li><a class="saveDeck" href="#">save</a></li>
+            <li><a class="deleteDeck" href="#">delete</a></li>
+            <li><a class="backToWherever" href="#">back</a></li>
+        </ul>
+    </div>
+    <aside>
+        <form id="deckBuilderForm">
+            <!--input id="search" type="text" placeholder="search"/-->
+            <label id="sortlabel" for="sort">sort</label>
+            <select id="sort">
+                <option value="alfaz">Alfabetic (a->z)</option>
+                <option value="alfza">Alfabetic (z->a)</option>
+                <option value="mana07">Mana cost (0->7+)</option>
+                <option value="mana70">Mana cost (7+->0)</option>
+            </select>
+            <div>
+                <label>filter</label>
+                <fieldset id="firstFilter">
+                    <legend>Hero specific cards</legend>
+                    <input type="radio" name="specificCards" value="All" id="all" checked/>
+                    <label for="all">All Cards</label>
+                    <input type="radio" name="specificCards" value="Mage" id="mage"/>
+                    <label for="mage">Mage</label>
+                    <input type="radio" name="specificCards" value="Paladin" id="paladin"/>
+                    <label for="paladin">Paladin</label>
+                    <input type="radio" name="specificCards" value="Neutral" id="neutral"/>
+                    <label for="neutral">Neutral</label>
+                </fieldset>
+                <fieldset id="secondFilter">
+                    <legend>Card Types</legend>
+                    <input type="radio" name="cardTypes" value="Minion" id="minion"/>
+                    <label for="minion">Minion</label>
+                    <input type="radio" name="cardTypes" value="Weapon" id="weapon"/>
+                    <label for="weapon">Weapon</label>
+                    <input type="radio" name="cardTypes" value="Spell" id="spell"/>
+                    <label for="spell">Spell</label>
+                </fieldset>
+                <fieldset id="thirdFilter">
+                    <fieldset>Mana</fieldset>
+                    <input type="radio" name="Mana" value="0_Mana" id="0_Mana"/>
+                    <label for="0_Mana">0 Mana</label>
+                    <input type="radio" name="Mana" value="1_Mana" id="1_Mana"/>
+                    <label for="1_Mana">1 Mana</label>
+                    <input type="radio" name="Mana" value="2_Mana" id="2_Mana"/>
+                    <label for="2_Mana">2 Mana</label>
+                    <input type="radio" name="Mana" value="3_Mana" id="3_Mana"/>
+                    <label for="3_Mana">3 Mana</label>
+                    <input type="radio" name="Mana" value="4_Mana" id="4_Mana"/>
+                    <label for="4_Mana">4 Mana</label>
+                    <input type="radio" name="Mana" value="5_Mana" id="5_Mana"/>
+                    <label for="5_Mana">5 Mana</label>
+                    <input type="radio" name="Mana" value="6_Mana" id="6_Mana"/>
+                    <label for="6_Mana">6 Mana</label>
+                    <input type="radio" name="Mana" value="7_Mana" id="7_Mana"/>
+                    <label for="7_Mana">7+ Mana</label>
+                </fieldset>
+                <fieldset id="fourthFilter">
+                    <legend>Card Rarity</legend>
+                    <input type="radio" name="cardRarity" value="Free" id="free"/>
+                    <label for="free">Free</label>
+                    <input type="radio" name="cardRarity" value="Common" id="common"/>
+                    <label for="common">Common</label>
+                    <input type="radio" name="cardRarity" value="Rare" id="rare"/>
+                    <label for="rare">Rare</label>
+                    <input type="radio" name="cardRarity" value="Epic" id="epic"/>
+                    <label for="epic">Epic</label>
+                    <input type="radio" name="cardRarity" value="Legendary" id="legendary"/>
+                    <label for="legendary">Legendary</label>
+                </fieldset>
+            </div>
+        </form>
+    </aside>
+    <span><a class="buttonHolder" id="gotoRechooseDeck" href="#">Back</a></span>
+</div>
+<div id="gameBoard" class="hidden">
+    <div class="main">
+        <!--<a href="#" id="tempButtonAddCard">Add card</a>-->
+
+        <ul class="enemy">
+            <li class="cards">
+                <ul>
+                    <!-- must be generated in JS -->
+                </ul>
+            </li>
+
+            <li class="manaTotal">
+                <!-- leave empty -->
+            </li>
+
+            <li class="hero">
+                <!-- leave empty -->
+            </li>
+
+            <li class="weapon">
+                <ul>
+                    <li class="EX1_409t"
+                        style="background: url('http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_409t.png') center 23% / 176% no-repeat;">
+                        <span class="attack">1</span><span class="durability">3</span>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="heroPower">
+                <span style="background-color: rgba(0,0,0,0.7)"></span>
+            </li>
+
+            <li class="deck">
+                <!-- leave empty -->
+            </li>
+
+            <li class="playingField">
+                <ul>
+                    <li class="CS2_059"
+                        style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png") center 23% / 176% no-repeat;'>
+                        <span class="health">2</span><span class="attack">1</span></li>
+                    <li class="EX1_319"
+                        style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png") center 23% / 176% no-repeat;'>
+                        <span class="health">2</span><span class="attack">1</span></li>
+                    <li class="CS2_188"
+                        style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png") center 23% / 176% no-repeat;'>
+                        <span class="health">2</span><span class="attack">1</span></li>
+                    <li class="EX1_012"
+                        style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png") center 23% / 176% no-repeat;'>
+                        <span class="health">2</span><span class="attack">1</span><span class="legendary"></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul class="you">
+            <li class="cards">
+                <ul>
+                    <!-- must be generated in JS -->
+                    <!--
+                    -->
+                </ul>
+            </li>
+
+            <li class="manaTotal">
+                <!-- leave empty -->
+            </li>
+
+            <li class="manaHolder">
+                <ul>
+                    <!-- must be generated in JS -->
+                </ul>
+            </li>
+
+            <li class="hero">
+                <!-- leave empty -->
+            </li>
+
+            <li class="weapon">
+                <ul>
+                    <!-- leave empty -->
+                </ul>
+            </li>
+
+            <li class="heroPower">
+                <span style="background-color: rgba(0,0,0,0.7)"></span>
+            </li>
+
+            <li class="deck">
+                <!-- leave empty -->
+            </li>
+
+            <li class="playingField">
+                <ul class="dropZone">
+                    <!-- must be generated in JS -->
+                    <!-- background etc. included! -->
+                </ul>
+            </li>
+        </ul>
+
+        <span id="battleLogHolder" class="buttonHolder"><a href="#" class="insideButton"
+                                                           id="showBattleLog">Battle log</a></span>
+        <ul id="battleLog" class="hidden">
+            <!-- must be generated in JS -->
+            <!--
+            <li>Step attacked Brem</li>
+            <li>Log 2</li>
+            <li>Log 3</li>
+            -->
+        </ul>
+
+        <div id="fuse">
+            <span id="rope"></span>
+            <span id="spark"></span>
+        </div>
+
+        <a href="#" class="button" id="endTurn"></a>
+    </div>
+</div>
+
+<div id="replaceCardScreen" class="hidden">
+    <span></span>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Continue</a></span>
+</div>
+
+<div id="vsScreen" class="hidden">
+    <div class="enemy">
+
+    </div>
+    <img src="assets/media/vs.png" alt="VS" title="VS" id="vs">
+    <div class="you">
+
+    </div>
+
+</div>
+
+<div id="options" class="hidden">
+    <div class="optionsBox">
+        <ul>
+            <li id="toggleFullScreen"><a href="#" class="navItem optionMenu">Toggle full screen</a></li>
+            <li id="gotoSound"><a href="#" class="navItem optionsMenu">Sound</a></li>
+            <li id="gotoCredits"><a href="#" class="navItem optionsMenu">Credits</a></li>
+            <li class="gotoMainMenu"><a href="#" class="navItem optionsMenu">Back</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="creditsScreen" class="hidden">
+    <div class="menuBox">
+        <header>
+            <h1>Credits</h1>
+            <p>Thank you for playing our game!</p>
+        </header>
+        <div class="main">
+            <h2>Coach</h2>
+            <ul>
+                <li>Koen Cornelis</li>
+            </ul>
+            <h2>Composer</h2>
+            <ul>
+                <li>Michiel Van Mulders</li>
+            </ul>
+            <div id="developerTeamAndFunctions">
+                <section>
+                    <h2>Developer Team</h2>
+                    <ul>
+                        <li>Brend Lambert</li>
+                        <li>Mattijs Step</li>
+                        <li>Bert Van Mulders</li>
+                        <li>Bram Vermeulen</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Function</h2>
+                    <ul>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                        <li>Programmer</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+        <span class="buttonHolder"><a href="#" class="insideButton" id="gotoLeaveOptions">Back</a></span>
+    </div>
+</div>
+
+<footer>
+    <ul>
+        <li class="buttonHolder hidden" id="saveGame">Save</li>
+        <li class="" id="playMainMenuMusic"></li>
+    </ul>
+</footer>
+
+<!-- LET LOADING SCREEN BE THE LAST DIV!!! -->
+<div id="loadingScreen" class="hidden">
+    <figure>
+        <img src="images/loadingScreen.gif" alt="loadingScreenIcon" title="loadingScreenIcon"/>
+    </figure>
+</div>
+<script src="assets/js/footer.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/loadingScreen.js"></script>
+<script src="assets/js/deckbuilder.js"></script>
+<script src="assets/js/heroAndDeckSelector.js"></script>
+<script src="assets/js/deckChooser.js"></script>
+<script src="assets/js/clickEvents.js"></script>
+<script src="assets/js/gameBoard.js"></script>
+
+</body>
+</html>
