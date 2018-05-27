@@ -1224,7 +1224,7 @@ function visualiseAttack(e) {
     attack();
 }
 
-function attackStart() {
+function attackStart(e) {
     let target = e.target;
     if (e.path[0].tagName === 'SPAN') {
         target = e.target.parentElement;
@@ -1256,6 +1256,7 @@ function attackStart() {
 
 function loadAttackStart(e) {
     let cardID = e.target.classList[0].split("_")[1];
+
     fetch('/threebeesandme/get/gameboard/attackpermission?cardID=' + cardID , {
         method: 'get'
     })
@@ -1266,7 +1267,7 @@ function loadAttackStart(e) {
         .then(function (text) {
             console.log(text);
             let result = text;
-            attackStart(result);
+            attackStart(e);
             console.log("asking for attack permission has been send to server");
         })
         .catch(function (err) {
@@ -1322,6 +1323,24 @@ function heroAttackStart(e) {
     }
 }
 
+function attackToBackend(enemy) {
+    let cardID = enemy.classList[0].split("_")[1];
+    let yourID = itemThatIsBeingMoved.classList[0].split("_")[1];
+    let attackJSON = {"destination": cardID, "source": yourID};
+
+    fetch("/threebeesandme/post/gameboard/playingfield/attack", {
+        method: "POST",
+        body: JSON.stringify(attackJSON)
+    }).then(function (res) {
+        if (res.ok)
+            return res.json();
+    }).then(function (text) {
+        console.log(text);
+    }).catch(function (err) {
+        console.log(err);
+    });
+}
+
 function attackEnd() {
     let enemies = document.querySelectorAll('.enemy .playingField ul li');
     let rectDrag = dragSrcElement.getBoundingClientRect();
@@ -1333,8 +1352,7 @@ function attackEnd() {
     for (let i = 0; i < enemies.length; i++) {
         let enemy = enemies[i].getBoundingClientRect();
         if ((rectDrag.right < enemy.right + 13) && (rectDrag.left > enemy.left - 13) && (rectDrag.bottom < enemy.bottom + 26) && (rectDrag.top > enemy.top - 18)) {
-            console.log('attack');
-            console.log(enemies[i]);
+            attackToBackend(enemies[i]);
         }
     }
     dragSrcElement.parentElement.removeChild(dragSrcElement);

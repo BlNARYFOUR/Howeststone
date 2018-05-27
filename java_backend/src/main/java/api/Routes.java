@@ -39,7 +39,6 @@ class Routes {
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
         server.get("/threebeesandme/get/gameboard/herohealth", this::getHeroHealth);
-        server.post("/threebeesandme/post/gameboard/playingfield/cancardbeadded", this::canCardBeAddedToPlayingField);
 
         // HERO AND DECK SELECTOR
         server.get("/threebeesandme/get/hero", this::getHeroName);
@@ -57,6 +56,8 @@ class Routes {
         server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
         server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
         server.post("/threebeesandme/post/gameboard/endturn", this::handleEndTurn);
+        server.post("/threebeesandme/post/gameboard/playingfield/cancardbeadded", this::canCardBeAddedToPlayingField);
+        server.post("/threebeesandme/post/gameboard/playingfield/attack", this::attackMinion);
 
         // HERO AND DECK SELECTOR
         server.post("/threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
@@ -73,6 +74,8 @@ class Routes {
         server.post("/threebeesandme/howeststone/post/deckbuilder/sort", this::sortDeck);
         server.post("/threebeesandme/howeststone/post/deckbuilder/filterCards", this::filterCards);
     }
+
+
 
     // HERO AND DECK SELECTOR
 
@@ -244,11 +247,24 @@ class Routes {
     }
 
     private void canThisMinionAttack(Context context) {
-        final int cardID = Integer.parseInt(context.queryParamMap().get("cardID")[0]);
-        context.json(howeststone.getYou().getCardsOnPlayingField().checkIfCardCanAttack(cardID));
+        if ("".equals(context.body())){
+            context.json(ERROR);
+        } else {
+            final int cardID = Integer.parseInt(context.queryParamMap().get("cardID")[0]);
+            context.json(howeststone.getYou().getCardsOnPlayingField().checkIfCardCanAttack(cardID));
+        }
 
     }
-
+    private void attackMinion(Context context) throws IOException {
+        final String body = context.body();
+        final ObjectMapper mapper = new ObjectMapper();
+        final Map<String, List<Integer>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() {
+        });
+        final List<Integer> destination = temp.get("destination");
+        final List<Integer> source = temp.get("source");
+        System.out.println(destination);
+        System.out.println(source);
+    }
 
     // DECK BUILDER
 
