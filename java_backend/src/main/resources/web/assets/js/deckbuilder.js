@@ -82,7 +82,7 @@ function deckBuilderInit() {
                 return res.json();
         })
         .then(function (text) {
-            if (text === "OK") {
+            if (text === "SUCCES") {
                 startDeckBuilder(newDeckName);
             } else {
                 errorWithName();
@@ -462,7 +462,6 @@ function showCardsInDeck(cards) {
 
     }
     checkAllCards();
-
 }
 
 function removeCardFromDeck(card) {
@@ -476,7 +475,8 @@ function removeCardFromDeck(card) {
                 return res.json();
         })
         .then(function (text) {
-            if (text === "EMPTY") {
+            console.log(text);
+            if (text === "ERROR") {
                 emptyDeck();
             } else {
                 let result = text;

@@ -273,10 +273,12 @@ class Routes {
     }
     private void deleteCardFromDeck(Context context) {
         final int cardID = Integer.parseInt(context.body());
-        howeststone.getDeckInDeckBuilder().removeCard(howeststone.getAllCards().getCard(cardID));
-        if (howeststone.getDeckInDeckBuilder().getCards().size() == 0) {
-            context.json("EMPTY");
+        if (howeststone.getDeckInDeckBuilder() == null) {
+            context.json(ERROR);
+        } else if (howeststone.getDeckInDeckBuilder().getCards().size() == 0) {
+            context.json(ERROR);
         } else {
+            howeststone.getDeckInDeckBuilder().removeCard(howeststone.getAllCards().getCard(cardID));
             context.json(howeststone.getDeckInDeckBuilder());
         }
     }
