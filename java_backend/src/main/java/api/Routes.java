@@ -101,22 +101,26 @@ class Routes {
             throw new NullPointerException();
         }
         howeststone.generateEnemy();
+        howeststone.getYou().resetMana();
         //howeststone.setTurnTime(50);
         howeststone.createPlayingField();
 
         final Random rand = new Random();
         final boolean doYouBegin = rand.nextBoolean();
+        System.out.println("I begin: " + doYouBegin);
         if (doYouBegin) {
             howeststone.setActivePlayer(YOU_STR);
+            context.json(YOU_STR);
         } else {
             howeststone.setActivePlayer(ENEMY_STR);
-            howeststone.getEnemy().beginTurn();
-            howeststone.startTurnAutoplayer();
+            System.out.println("Active player set: " + howeststone.getActivePlayer());
+            System.out.println("gets here?");
+            context.json(ENEMY_STR);
         }
-        context.json(howeststone.getActivePlayer());
     }
 
     private void getBeginCards(Context context) {
+        System.out.println(howeststone.getActivePlayer());
         context.json(howeststone.getPlayerBeginCards());
     }
 
@@ -144,6 +148,9 @@ class Routes {
             context.json(SUCCES);
             if (howeststone.getActivePlayer().equals(YOU_STR)) {
                 howeststone.getYou().beginTurn();
+            } else {
+                howeststone.getEnemy().beginTurn();
+                howeststone.startTurnAutoplayer();
             }
         } else {
             System.out.println(ColorFormats.red("you shall not hack"));

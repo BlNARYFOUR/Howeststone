@@ -235,6 +235,7 @@ public class Game {
         //TODO zijn er end turn battlecries?
         setActivePlayer(YOU_STR);
         you.beginTurn();
+        System.out.println("does this");
         //turnTimer.startTurnTimer();
 
     }
@@ -252,16 +253,16 @@ public class Game {
         final int i;
         if (ENEMY_STR.equals(activePlayer)) {
             i = yourSideOfPlayingField.getCards().size() - 1;
-            final int randomIndex = (int) (Math.round(Math.random()) * i);
-            if (randomIndex == i) {
+            final int randomIndex = (int) Math.round(Math.random() * i);
+            if (randomIndex == i || i < 0) {
                 target = you.getHero();
             } else {
                 target = yourSideOfPlayingField.getCards().get(i);
             }
         } else {
             i = enemySideOfPlayingField.getCards().size() - 1;
-            final int randomIndex = (int) (Math.round(Math.random()) * i);
-            if (randomIndex == i) {
+            final int randomIndex = (int) Math.round(Math.random() * i);
+            if (randomIndex == i || i < 0) {
                 target = enemy.getHero();
             } else {
                 target = enemySideOfPlayingField.getCards().get(i);
