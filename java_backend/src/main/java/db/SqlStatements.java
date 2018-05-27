@@ -44,7 +44,8 @@ public final class SqlStatements {
                     + " fk_CardsInDecks2 FOREIGN KEY(cardId) REFERENCES Cards(cardId))ENGINE = INNODB;";
 
     public static final String TEST_DECK_AND_CARD_MATCH =
-            "SELECT TRUE FROM cards JOIN decks ON cards.heroId = decks.heroId OR cards.heroId = 2"
+            "SELECT TRUE FROM howeststone.cards JOIN howeststone.decks ON howeststone.cards.heroId ="
+                    + " howeststone.decks.heroId OR howeststone.cards.heroId = 2"
                     + " WHERE cards.cardId = ? AND decks.deckId = ?";
 
     public static final String DROP_DB =
