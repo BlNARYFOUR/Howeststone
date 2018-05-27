@@ -17,8 +17,6 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 <h5>Database</h5>
 ![alt text](documents/Database/modelDatabase.PNG "modelDatabase")
 
-{::nomarkdown}
-
 <html>
 <head>
 <title>Schema for database 'howeststone'</title>
@@ -1182,19 +1180,17 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 </tr>
 </table>
 
-
 <a href="#header"><p class="normal">Back</a>
 <h1 width="100%"></body>
 </html>
-
-
-{:/}
 
 <h5>Java</h5>
 ![alt text](documents/Java/javaUML.png "modelJavaClasses")
 
 <h4>Progress</h4>
 <h5>Frontend</h5>
+
+
 <h5>Backend</h5>
 
 
