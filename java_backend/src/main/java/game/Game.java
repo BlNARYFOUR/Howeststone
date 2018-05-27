@@ -9,12 +9,13 @@ import java.sql.*;
 import java.util.*;
 
 public class Game {
-    private static SqlDatabase db;
     private static final String YOU_STR = "you";
     private static final String ENEMY_STR = "enemy";
     private CardCollection beginCards;
     private CardCollection deckInDeckBuilder;
     private CardCollection filterCollection;
+
+    private SqlDatabase db;
 
     private CardCollection allCards = new CardCollection("cards");
     private List<String> heroNames;
@@ -368,7 +369,6 @@ public class Game {
             while (rs.next()) {
                 cardIDs.add(rs.getInt("cardID"));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

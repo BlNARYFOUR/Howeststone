@@ -82,7 +82,7 @@ class Routes {
     }
 
     private void handleDeckSelection(Context context) {
-        final String yourHeroName = howeststone.getYou().getHero().getHeroName();
+        //final String yourHeroName = howeststone.getYou().getHero().getHeroName();
 
         for (int i = 0; i < howeststone.getDecks().size(); i++) {
             if (howeststone.getDecks().get(i).getName().equals(context.body())) {
