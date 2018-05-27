@@ -188,9 +188,9 @@ public class Game {
         return turnTimer.getSecondsLeftThisTurn();
     }
 
-    public void setTurnTime(int turnTime) {
-        this.turnTime = turnTime;
-    }*/
+    public void setTurnTime(int seconds) {
+        this.turnTimer.setCountDownTurnTimer(seconds);
+    }
 
     public void setDeckInDeckBuilder(String body) {
         deckInDeckBuilder = new CardCollection(body);
