@@ -23,9 +23,9 @@ function errorWithName() {
 function deckBuilderInit() {
     let newDeckName = document.querySelector('#newDeckName').value;
     if (newDeckName.indexOf("Deck_") !== -1) {
-        newDeckName = "Deck ";
+        newDeckName = "";
     }
-    if (document.querySelector('#newDeckName').value === "") {
+    if (newDeckName === "") {
         newDeckName = document.querySelector('#newDeckName').getAttribute('placeholder');
         let nextDefaultDeck = "Deck_" + (parseInt(newDeckName.split("_")[1]) + 1);
         document.querySelector('#newDeckName').setAttribute('placeholder', nextDefaultDeck);
