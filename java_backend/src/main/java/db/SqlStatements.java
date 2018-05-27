@@ -43,6 +43,10 @@ public final class SqlStatements {
                     + " fk_CardsInDecks FOREIGN KEY(deckId) REFERENCES Decks(deckId), CONSTRAINT"
                     + " fk_CardsInDecks2 FOREIGN KEY(cardId) REFERENCES Cards(cardId))ENGINE = INNODB;";
 
+    public static final String TEST_DECK_AND_CARD_MATCH =
+            "SELECT TRUE FROM cards JOIN decks ON cards.heroId = decks.heroId OR cards.heroId = 2"
+                    + " WHERE cards.cardId = ? AND decks.deckId = ?";
+
     public static final String DROP_DB =
             "DROP DATABASE howeststone;";
 
