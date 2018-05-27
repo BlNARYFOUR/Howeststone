@@ -728,6 +728,7 @@ public final class SetupDatabase {
         final ClassLoader classLoader = getClass().getClassLoader();
         //noinspection ConstantConditions
         final File file = new File(classLoader.getResource(resourceLocation).getFile());
+        // BugError: Did not find a way to solve.
         final Object obj = parser.parse(new FileReader(file));
 
         return (JSONArray) obj;

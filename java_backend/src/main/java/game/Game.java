@@ -356,6 +356,8 @@ public class Game {
             while (rs.next()) {
                 cardIDs.add(rs.getInt("cardID"));
             }
+            // Without:  bugError, with, error because to much lines...
+            // rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
