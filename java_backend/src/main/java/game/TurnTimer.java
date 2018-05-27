@@ -31,7 +31,7 @@ public class TurnTimer {
     }
 
     public void startTurnTimer(Method method) {
-        final Object paramsObj[] = {};
+        final Object[] paramsObj = {};
 
         secondsLeftThisTurn = countDownTurnTimer;
         turnTimer.schedule(new TimerTask() {
@@ -42,7 +42,7 @@ public class TurnTimer {
                     turnTimer.cancel();
                     setFlag();
                     try {
-                        Object iClass = method.getClass().newInstance();
+                        final Object iClass = method.getClass().newInstance();
                         method.invoke(iClass, paramsObj);
                     } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
                         e.printStackTrace();
