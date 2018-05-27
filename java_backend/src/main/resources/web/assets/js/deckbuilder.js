@@ -368,7 +368,6 @@ function beginDeletinCard(e) {
 }
 
 function gotoDeckBuilder() {
-    newDeckBuilder();
     let heroName = document.querySelector("#heroChooser .selectedHeroName").innerText;
     fetch('/threebeesandme/post/deckbuilder/hero', {
         method: 'POST',
@@ -387,13 +386,11 @@ function gotoDeckBuilder() {
             getAllDecks();
             document.getElementById('heroChooser').className = "hidden";
             document.getElementById('deckbuilder').className = "";
-            document.querySelector('#deckbuilder .new').classList.remove('hidden');
+            newDeckBuilder();
         })
         .catch(function (err) {
             console.log("Error: Could not send the selected hero");
         });
-
-    // .then do this
 }
 
 function resetDeckBuilderForm() {
