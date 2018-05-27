@@ -13,7 +13,7 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 
 ![alt text](PMDOC/groepsfoto.jpg "Groepsfoto 3BEES&ME")
 
-<h2>Diagrammen</h2>
+<h2>Diagrams</h2>
 <h3>Java</h3>
 ![alt text](documents/Java/javaUML.png "modelJavaClasses")
 
