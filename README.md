@@ -1193,7 +1193,7 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 * Playingfield:
     * Hero health
     * Basic mana
-    * Attack/Health/Durability/Manac cost for the cards
+    * Attack/Health/Durability/Mana cost for the cards
     * Playing cards
     * Replace cards
     * Fan cards
