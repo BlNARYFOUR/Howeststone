@@ -1187,10 +1187,16 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 <h1 width="100%"></body>
 </html>
 
-<h4>Progress</h4>
-<h5>Front-end</h5>
-<h6>Implemented</h5>
-* Playingfield
+<h2>Progress</h2>
+<h3>Front-end</h3>
+<h4>Implemented</h4>
+* Playingfield:
+    * Hero health
+    * Basic mana
+    * Attack/Health/Durability/Manac cost for the cards
+    * Playing cards
+    * Replace cards
+    * Fan cards
 * Deckbuilder (fundamentals)
 * Menu's:
     * Main menu
@@ -1200,18 +1206,25 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
     * Deck Chooser menu
 * Credits screen
 * Background music
+* Toggle fullscreen
 
-<h6>Not Yet Implemented</h5>
-* The search function deckbuilder
-* The current game can be saved from the front-end side
+<h4>Not Yet Implemented</h4>
+* Search function deckbuilder
+* Current game can be saved from the front-end side
 * Battlelog
+* Basic mana
+* 
 * Extra features:
     * Sign up screen
     * Login/Logout screen
     * Background selection screen
-<h5>Back-end</h5>
-<h6>Implemented</h5>
-<h6>Not Yet Implemented</h5>
+    
+<h3>Back-end</h3>
+<h4>Implemented</h4>
+* 
+
+<h4>Not Yet Implemented</h4>
+* 
 
 
 
