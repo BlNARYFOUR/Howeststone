@@ -23,26 +23,24 @@ footer ul li{
     z-index: 2;
     cursor: pointer;
     width: 7vh;
-    margin: 0.5vh;
     height: 4.5vh;
     line-height: 4.25vh;
-}
-
-footer ul li:last-of-type{
-    background: no-repeat url("../media/soundButtonSprite.png") center top;
-    background-size: 100% 200%;
-    margin-right: 1.5vh;
 }
 
 footer ul li:first-of-type {
     background: no-repeat url(../media/buttonStone.png) center top;
     background-size: 100%;
-    margin-right: 0;
+}
+
+footer ul li:last-of-type{
+    background: no-repeat url("../media/soundButtonSprite.png") center top;
+    background-size: 100% 200%;
 }
 
 footer ul li.muted{
     background-position: center bottom;
 }
+
 
 
 .hidden {
@@ -70,6 +68,3 @@ footer ul li.muted{
 .buttonHolder .insideButton {
     color: #513d1f !important;
 }
-
-
-

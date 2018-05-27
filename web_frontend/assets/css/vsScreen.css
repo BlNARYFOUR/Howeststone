@@ -11,13 +11,13 @@
     position: absolute;
 }
 
-#vsScreen .player {
+#vsScreen .you {
     position: absolute;
     left: 15vw;
     bottom: 10vh;
 }
 
-#vsScreen .enemy img, #vsScreen .player img {
+#vsScreen .enemy img, #vsScreen .you img {
     width: 36vh;
 }
 
