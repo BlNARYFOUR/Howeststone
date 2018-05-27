@@ -1,5 +1,7 @@
 package game;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,6 +30,28 @@ public class TurnTimer {
         }, 0, 1000);
     }
 
+    public void startTurnTimer(Method method) {
+        final Object paramsObj[] = {};
+
+        secondsLeftThisTurn = countDownTurnTimer;
+        turnTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                secondsLeftThisTurn--;
+                if (secondsLeftThisTurn == 0) {
+                    turnTimer.cancel();
+                    setFlag();
+                    try {
+                        Object iClass = method.getClass().newInstance();
+                        method.invoke(iClass, paramsObj);
+                    } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, 0, 1000);
+    }
+
     private void setFlag() {
         countdownTurnTimerFinished = true;
     }
@@ -42,5 +66,9 @@ public class TurnTimer {
 
     public boolean done() {
         return countdownTurnTimerFinished;
+    }
+
+    public void stop() {
+        turnTimer.cancel();
     }
 }

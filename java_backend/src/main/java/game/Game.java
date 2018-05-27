@@ -20,7 +20,7 @@ public class Game {
     private Player enemy;
     private int manaYou;
     private int manaEnemy;
-    private int turnTime;
+    private TurnTimer turnTimer = new TurnTimer();
     private String activePlayer;
     private CardCollection yourSideOfPlayingField;
     private CardCollection enemySideOfPlayingField;
@@ -140,12 +140,16 @@ public class Game {
         return activePlayer;
     }
 
-    public int getTurnTime() {
-        return turnTime;
+    public int getTurnTimeLeft() {
+        return turnTimer.getSecondsLeftThisTurn();
     }
 
-    public void setTurnTime(int turnTime) {
-        this.turnTime = turnTime;
+    public void setTurnTime(int seconds) {
+        this.turnTimer.setCountDownTurnTimer(seconds);
+    }
+
+    public void resetTurnTimer() {
+        turnTimer.stop();
     }
 
     public void startTurnAutoplayer() {
@@ -269,7 +273,7 @@ public class Game {
         //TODO voer abilities uit aan begin turn
         you.beginTurn();
 
-        while (turnTime <= 50) {
+        while (turnTimer.getSecondsLeftThisTurn() <= 50) {
             // playCard(card)
             // attackMinion(..., ...);
             // useHeroPower()

@@ -42,6 +42,7 @@ class Routes {
         server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
         server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
         server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
+        server.post("/threebeesandme/post/gameboard/endturn", this::handleEndTurn);
 
         // HERO AND DECK SELECTOR
         server.get("/threebeesandme/get/hero", this::getHeroName);
@@ -179,8 +180,10 @@ class Routes {
         context.result("Time Left");
     }
 
-    private void handleEndUrn(Context context) {
-        context.result("TurnTimer has ended");
+    private void handleEndTurn(Context context) {
+        howeststone.resetTurnTimer();
+
+        context.json("TurnTimer has ended");
     }
 
     private void useHeroPower(Context context) {
