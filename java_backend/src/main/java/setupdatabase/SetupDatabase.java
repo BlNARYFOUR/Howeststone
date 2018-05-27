@@ -431,7 +431,7 @@ public final class SetupDatabase {
         final int amount = getAmountOfCardInDeck(deckId, cardId);
         boolean succeeded = false;
 
-        if (0 <= amount && amount <= 1 && !isLegendary(cardId) && !isUncollectable(cardId)) {
+        if (isLegalCard(cardId, deckId, amount)) {
             updateAmountOfCardInDeck(deckId, cardId, amount + 1);
             succeeded = true;
         } else if (amount < 0 && !isUncollectable(cardId)) {
@@ -440,6 +440,36 @@ public final class SetupDatabase {
         }
 
         return succeeded;
+    }
+
+    private boolean isLegalCard(int cardId, int deckId, int amount) {
+        boolean result = 0 <= amount && amount <= 1;
+        result = result && !isLegendary(cardId) && !isUncollectable(cardId) && doCardAndDeckHeroMatch(cardId, deckId);
+
+        return result;
+    }
+
+    private boolean doCardAndDeckHeroMatch(int cardId, int deckId) {
+        boolean result = false;
+
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.TEST_DECK_AND_CARD_MATCH);
+        ) {
+            stmt.setInt(1, cardId);
+            stmt.setInt(2, deckId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    result = rs.getBoolean("TRUE");
+                } else {
+                    System.out.println(ColorFormats.red("\t* Could not test heroIds for deck and card!"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     private boolean isUncollectable(int cardId) {
