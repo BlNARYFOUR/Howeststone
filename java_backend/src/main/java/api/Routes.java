@@ -121,7 +121,7 @@ class Routes {
     }
 
     private void getEnemyMana(Context context) {
-        int[] manaInfo = {HOWESTSTONE.getEnemy().getActiveMana(), HOWESTSTONE.getEnemy().getTotalMana()};
+        int[] manaInfo = {howeststone.getEnemy().getActiveMana(), howeststone.getEnemy().getTotalMana()};
         context.json(manaInfo);
     }
 
@@ -198,9 +198,9 @@ class Routes {
     private void getHeroHealth(Context context) {
         String hero = context.queryParamMap().get("parent")[0];
         if (hero.equals("enemy")) {
-            context.json(HOWESTSTONE.getEnemy().getHero().getHealth());
+            context.json(howeststone.getEnemy().getHero().getHealth());
         } else {
-            context.json(HOWESTSTONE.getYou().getHero().getHealth());
+            context.json(howeststone.getYou().getHero().getHealth());
         }
     }
 
