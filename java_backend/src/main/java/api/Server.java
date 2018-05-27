@@ -142,6 +142,9 @@ public class Server {
                 List<Ability> abilities = new ArrayList<>();
                 Ability ability;
                 switch (abilityName) {
+                    case "Uncollectable":
+                        ability = new Uncollectable(Abilities.UNCOLLECTABLE);
+                        abilities.add(ability);
                     case "Charge":
                         ability = new Charge(Abilities.CHARGE);
                         abilities.add(ability);
@@ -173,5 +176,4 @@ public class Server {
             e.printStackTrace();
         }
     }
-
 }
