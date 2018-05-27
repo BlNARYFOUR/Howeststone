@@ -121,13 +121,14 @@ public class CardCollection {
     }
 
     public boolean checkIfCardCanAttack(int cardID) {
+        boolean check = true;
         for (int i = 0; i < cards.size(); i++) {
             if (cards.get(i).getCardID() == cardID) {
-                List<Ability> abilities = cards.get(i).getCardAbilities();
-                if (abilities != null){
-                    for (int j = 0; j < abilities.size(); i++){
-                        System.out.println(abilities.get(i));
-                    }
+                if (!cards.get(i).isExhausted()) {
+                    check = false;
+                }
+                if ((cards.get(i).getAmountAttacked() < cards.get(i).getMaxAmountOfAttacks())) {
+                    check = false;
                 }
             }
         }
