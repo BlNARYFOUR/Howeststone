@@ -45,21 +45,21 @@ public class Server {
         ) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                HOWESTSTONE.heroNames.add(rs.getString("heroName"));
+                HOWESTSTONE.addHeroName(rs.getString("heroName"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         // getting all decks from db
-        for (int i = 0; i < HOWESTSTONE.heroNames.size(); i++) {
+        for (int i = 0; i < HOWESTSTONE.getHeroNames().size(); i++) {
             try (
                     Connection conn = DB.getConnection();
                     PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_DECKS)
             ) {
-                stmt.setString(1, HOWESTSTONE.heroNames.get(i));
+                stmt.setString(1, HOWESTSTONE.getHeroNames().get(i));
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    HOWESTSTONE.deckNames.put(HOWESTSTONE.heroNames.get(i), nameToCardCollection(rs.getString("deckName")));
+                    HOWESTSTONE.addDeckNames(HOWESTSTONE.getHeroNames().get(i), nameToCardCollection(rs.getString("deckName")));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

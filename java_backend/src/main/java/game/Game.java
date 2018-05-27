@@ -8,10 +8,13 @@ import hero.Hero;
 
 import java.util.*;
 public class Game {
+    private final String youStr = "you";
+    private final String enemyStr = "enemy";
+
     private CardCollection beginCards = new CardCollection();
 
-    public List<String> heroNames = new ArrayList<>();
-    public Map<String , CardCollection> deckNames = new HashMap<>();
+    private List<String> heroNames = new ArrayList<>();
+    private Map<String, CardCollection> deckNames = new HashMap<>();
     // TODO: actual fields
     private Player you;
     private Player enemy;
@@ -25,9 +28,9 @@ public class Game {
     /*private Hero you;
     private CardCollection deck;*/
 
-    public void generateEnemy(){
-        int randomHeroIndex = (int)Math.round(Math.random())*(heroNames.size()-1);
-        Player enemy = new Player();
+    public void generateEnemy() {
+        final int randomHeroIndex = (int) Math.round(Math.random()) * (heroNames.size() - 1);
+        final Player enemy = new Player();
         enemy.setHero(heroNames.get(randomHeroIndex));
         enemy.setDeck(deckNames.get(enemy.getHero().getHeroName()));
         // TODO check if this works above
@@ -37,7 +40,7 @@ public class Game {
     public CardCollection getPlayerBeginCards() {
         beginCards = new CardCollection();
 
-        if (this.getActivePlayer().equals("enemy")) {
+        if (this.getActivePlayer().equals(enemyStr)) {
             beginCards.addCard(this.getYou().getDeck().drawCard());
         }
         beginCards.addCard(this.getYou().getDeck().drawCard());
@@ -49,22 +52,21 @@ public class Game {
 
     public Boolean setPlayerCardsInHand(List<Integer> cardIdsInHand, List<Integer> cardIdsToReplace) {
         boolean isValidData = true;
-        CardCollection cardsInHand = new CardCollection();
-        CardCollection cardsToReplace = new CardCollection();
+        final CardCollection cardsInHand = new CardCollection();
 
-        for(int gottenCardID : cardIdsInHand) {
-            if(!beginCards.hasCard(gottenCardID)) {
+        for (int gottenCardID : cardIdsInHand) {
+            if (!beginCards.hasCard(gottenCardID)) {
                 isValidData = false;
             }
         }
 
-        if(isValidData) {
-            for(int cardId : cardIdsInHand) {
+        if (isValidData) {
+            for (int cardId : cardIdsInHand) {
                 cardsInHand.addCard(beginCards.getCard(cardId));
             }
 
-            for(int cardIdToReplace : cardIdsToReplace) {
-                Card card = beginCards.getCard(cardIdToReplace);
+            for (int cardIdToReplace : cardIdsToReplace) {
+                final Card card = beginCards.getCard(cardIdToReplace);
                 cardsInHand.addCard(this.getYou().getDeck().drawCard());
                 this.getYou().getDeck().addCard(card);
             }
@@ -149,18 +151,17 @@ public class Game {
     public void startTurnAutoplayer() {
         enemy.getCardsInHand().addCard(enemy.getDeck().drawCard());
 
-        List<Card> cardsInHand = enemy.getCardsInHand().getCards();
+        final List<Card> cardsInHand = enemy.getCardsInHand().getCards();
         cardsInHand.sort(new manaCardCollectionComparator());
 
-
-        double enemyBrain = (Math.random());
-        ;
+        final double enemyBrain = Math.random();
         if (enemyBrain <= 0.25) {
 
             enemy.getHero().executeHeroPower(enemy.getHero().getHeroPowerID(), getRandomTarget());
         }
 
-        for (Card card : cardsInHand) {                                 //speel duurste kaarten eerst zolang je mana hebt
+        //speel duurste kaarten eerst zolang je mana hebt
+        for (Card card : cardsInHand) {
             if (card.getManaCost() <= manaEnemy) {
                 enemy.playCard(card.getCardID());
             }
@@ -177,7 +178,7 @@ public class Game {
             }
         }
         //TODO zijn er end turn battlecries?
-        setActivePlayer("you");
+        setActivePlayer(youStr);
         startTurnYou();
 
     }
@@ -188,7 +189,7 @@ public class Game {
     }
 
     public Player activePlayerToPlayer() {
-        if (activePlayer.equals("you")) {
+        if (youStr.equals(activePlayer)) {
             return you;
         } else {
             return enemy;
@@ -196,24 +197,27 @@ public class Game {
     }
 
     public Object getRandomTarget() {
-        int i;
-        if (activePlayer.equals("enemy")) {
-            i = yourSideOfPlayingField.getCards().size();
-            int randomIndex = (int) (Math.round(Math.random()) * (i));
+        final Object target;
+        final int i;
+        if (enemyStr.equals(activePlayer)) {
+            i = yourSideOfPlayingField.getCards().size() - 1;
+            final int randomIndex = (int) (Math.round(Math.random()) * i);
             if (randomIndex == i) {
-                return you.getHero();
-            }else {
-                return yourSideOfPlayingField.getCards().get(i);
+                target = you.getHero();
+            } else {
+                target = yourSideOfPlayingField.getCards().get(i);
             }
         } else {
-            i = enemySideOfPlayingField.getCards().size();
-            int randomIndex = (int) (Math.round(Math.random()) * (i));
+            i = enemySideOfPlayingField.getCards().size() - 1;
+            final int randomIndex = (int) (Math.round(Math.random()) * i);
             if (randomIndex == i) {
-                return enemy.getHero();
-            }else {
-                return enemySideOfPlayingField.getCards().get(i);
+                target = enemy.getHero();
+            } else {
+                target = enemySideOfPlayingField.getCards().get(i);
             }
         }
+
+        return target;
     }
 
     public void createPlayingField() {
@@ -230,7 +234,7 @@ public class Game {
 
     public void startGame() {
         //TODO zorg dat bij replacecard de beginner de activeplayer wordt
-        if (activePlayer.equals("enemy")) {
+        if (enemyStr.equals(activePlayer)) {
             startTurnAutoplayer();
         } else {
             startTurnYou();
@@ -238,22 +242,30 @@ public class Game {
     }
 
     public List<String> getDeckNames() {
-        List<String> deckNamesForChosenHero = new ArrayList<>();
+        final List<String> deckNamesForChosenHero = new ArrayList<>();
         deckNamesForChosenHero.add(deckNames.get(you.getHero().getHeroName()).getName());
         return deckNamesForChosenHero;
     }
+
+    public CardCollection getDeckByHeroName(String heroName) {
+        return deckNames.get(heroName);
+    }
+
+    public void addDeckNames(String heroName, CardCollection cardCollection) {
+        deckNames.put(heroName, cardCollection);
+    }
     
     public void attackMinion(Minion attacker, Minion target) {
-        int attackValueAttacker = attacker.getAttack();
-        int healthValueAttacker = attacker.getHealth();
-        int attackValueTarget = target.getAttack();
-        int healthValueTarget = target.getAttack();
+        final int attackValueAttacker = attacker.getAttack();
+        final int healthValueAttacker = attacker.getHealth();
+        final int attackValueTarget = target.getAttack();
+        final int healthValueTarget = target.getAttack();
 
         target.setHealth(healthValueTarget - attackValueAttacker);
         attacker.setHealth(healthValueAttacker - attackValueTarget);
     }
 
-    public void startYourTurn () {
+    public void startYourTurn() {
         //TODO voer abilities uit aan begin turn
         you.beginTurn();
 
@@ -261,8 +273,13 @@ public class Game {
             // playCard(card)
             // attackMinion(..., ...);
             // useHeroPower()
+            final boolean fixError = true;
         }
-        setActivePlayer("enemy");
+        setActivePlayer(enemyStr);
         //startAutoplayer();
+    }
+
+    public void addHeroName(String heroName) {
+        heroNames.add(heroName);
     }
 }
