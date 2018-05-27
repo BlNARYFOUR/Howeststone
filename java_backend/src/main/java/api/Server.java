@@ -1,6 +1,5 @@
 package api;
 
-import abilities.Ability;
 import cards.*;
 import db.SqlDatabase;
 import db.SqlStatements;
@@ -8,19 +7,16 @@ import game.Game;
 import io.javalin.Javalin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import setupDb.SetupDatabase;
 
-import javax.print.DocFlavor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 public class Server {
-    private static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/HOWESTSTONE", "root", "");
+    private static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
     private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
-    private final Game HOWESTSTONE = new Game();
+    private final Game howeststone = new Game();
     private final int port;
 
     Server(final int port) {
@@ -32,7 +28,7 @@ public class Server {
                 .port(port)
                 .enableStaticFiles("web")
                 .start();
-        new Routes(server, HOWESTSTONE);
+        new Routes(server, howeststone);
     }
 
     public static void main(final String[] args) {
@@ -47,23 +43,24 @@ public class Server {
                 Connection conn = DB.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_HEROES)
         ) {
-            ResultSet rs = stmt.executeQuery();
+            final ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                HOWESTSTONE.heroNames.add(rs.getString("heroName"));
+                howeststone.heroNames.add(rs.getString("heroName"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         // getting all decks from db
-        for (int i = 0; i < HOWESTSTONE.heroNames.size(); i++) {
+        for (int i = 0; i < howeststone.heroNames.size(); i++) {
             try (
                     Connection conn = DB.getConnection();
                     PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_DECKS)
             ) {
-                stmt.setString(1, HOWESTSTONE.heroNames.get(i));
-                ResultSet rs = stmt.executeQuery();
+                stmt.setString(1, howeststone.heroNames.get(i));
+                final ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    HOWESTSTONE.deckNames.put(HOWESTSTONE.heroNames.get(i), nameToCardCollection(rs.getString("deckName")));
+                    howeststone.deckNames.put(howeststone.heroNames.get(i),
+                            nameToCardCollection(rs.getString("deckName")));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -78,48 +75,45 @@ public class Server {
 
     private CardCollection nameToCardCollection(String deckName) {
         // TODO return CardCollection
-        CardCollection cards = new CardCollection(deckName);
+        final CardCollection cards = new CardCollection(deckName);
 
         try (
                 Connection conn = DB.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_CARD_IN_DECK)
         ) {
             stmt.setString(1, deckName);
-            ResultSet rs = stmt.executeQuery();
+            final ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                int amount = rs.getInt("amount");
-                Card card;
-                int cardId = rs.getInt("cardId");
-                String cardType = rs.getString("cardType");
-                String cardName = rs.getString("cardName");
-                String race = rs.getString("race");
-                String urlOfImg = rs.getString("img");
-                String rarity = rs.getString("rarity");
-                int health = rs.getInt("health");
-                int attack = rs.getInt("attack");
-                int manaCost = rs.getInt("manaCost");
-                int durability = rs.getInt("durability");
-                int heroId = rs.getInt("heroId");
-                switch (cardType) {
+                final int amount = rs.getInt("amount");
+                final Card card;
+                final String[] strArgs = new String[5];
+                final int[] intArgs = new int[5];
+                final int cardId = rs.getInt("cardId");
+                strArgs[0] = rs.getString("cardType");
+                strArgs[1] = rs.getString("cardName");
+                strArgs[2] = rs.getString("race");
+                strArgs[3] = rs.getString("img");
+                strArgs[4] = rs.getString("rarity");
+                intArgs[0] = rs.getInt("health");
+                intArgs[1] = rs.getInt("attack");
+                intArgs[2] = rs.getInt("manaCost");
+                intArgs[3] = rs.getInt("durability");
+                intArgs[4] = rs.getInt("heroId");
+                switch (strArgs[0]) {
+
                     case "Weapon":
-                        card = new Weapon(cardId, cardType, cardName, race,
-                                urlOfImg, rarity, health, attack, manaCost,
-                                durability, heroId);
+                        card = new Weapon(cardId, strArgs, intArgs);
                         break;
                     case "Spell":
-                        card = new Spell(cardId, cardType, cardName, race,
-                                urlOfImg, rarity, health, attack, manaCost,
-                                durability, heroId);
+                        card = new Spell(cardId, strArgs, intArgs);
                         break;
                     case "Minion":
-                        card = new Minion(cardId, cardType, cardName, race,
-                                urlOfImg, rarity, health, attack, manaCost,
-                                durability, heroId);
+                        card = new Minion(cardId, strArgs, intArgs);
                         break;
                     default:
                         throw new IllegalArgumentException("database not setup correctly");
                 }
-                for (int i = 0; i < amount ; i++) {
+                for (int i = 0; i < amount; i++) {
                     System.out.println("NYI" + card);
                     cards.addCard(card);
                 }
@@ -136,17 +130,17 @@ public class Server {
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_ABILITIES_OF_CARD)
         ) {
             stmt.setInt(1, card.getCardID());
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()){
-                int abilityId = rs.getInt("abilityId");
-                String abilityName = rs.getString("abilityName");
+            final ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                final int abilityId = rs.getInt("abilityId");
+                final String abilityName = rs.getString("abilityName");
                 // new ability
                 // check if ability already exist (card)
                 // add mechanics
-                int cardMechId = rs.getInt("cardMechId");
-                String target= rs.getString("target");
-                String mechValue = rs.getString("mechValue");
-                String mechanicType = rs.getString("mechanicType");
+                final int cardMechId = rs.getInt("cardMechId");
+                final String target = rs.getString("target");
+                final String mechValue = rs.getString("mechValue");
+                final String mechanicType = rs.getString("mechanicType");
 
             }
         } catch (SQLException e) {

@@ -5,8 +5,8 @@ import events.Events;
 
 public class Charge extends Ability {
 
-    public Charge(Abilities ABILITY_TYPE) {
-        super(ABILITY_TYPE);
+    public Charge(Abilities abilityType) {
+        super(abilityType);
     }
 
     @Override

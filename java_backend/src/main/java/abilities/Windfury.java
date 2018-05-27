@@ -5,8 +5,8 @@ import events.Events;
 
 public class Windfury extends Ability {
 
-    public Windfury(Abilities ABILITY_TYPE) {
-        super(ABILITY_TYPE);
+    public Windfury(Abilities abilityType) {
+        super(abilityType);
     }
 
     @Override
