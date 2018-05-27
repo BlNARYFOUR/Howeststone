@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CardCollection  {
+public class CardCollection {
     private String name;
     private List<Card> cards;
 
@@ -22,15 +22,15 @@ public class CardCollection  {
         this.cards = new ArrayList<>(cardCollection.getCards());
     }
 
-    private void shuffle(){
+    private void shuffle() {
         Collections.shuffle(cards);
     }
 
     public Card drawCard() {
-        if(0 < cards.size()) {
-            final Card DRAW = cards.get(0);
+        if (0 < cards.size()) {
+            final Card draw = cards.get(0);
             cards.remove(0);
-            return DRAW;
+            return draw;
         }
 
         return null;
@@ -42,8 +42,8 @@ public class CardCollection  {
     }
 
     public boolean hasCard(int cardId) {
-        for(Card card : cards) {
-            if(card.getCardID() == cardId) {
+        for (Card card : cards) {
+            if (card.getCardID() == cardId) {
                 return true;
             }
         }
@@ -52,26 +52,28 @@ public class CardCollection  {
     }
 
     public void removeCard(int cardID) {
-        for(int i=0; i<cards.size(); i++) {
-            if(cards.get(i).getCardID() == cardID) {
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getCardID() == cardID) {
                 cards.remove(i);
-                break;              // if card is 2 times in cards, it will only be deleted once
+                break;
+                // if card is 2 times in cards, it will only be deleted once
             }
         }
     }
 
     @Override
     public String toString() {
-        String str = "";
+        final StringBuilder stringBuilder = new StringBuilder();
 
-        for(Card card : cards) {
-            str += "\n" + card;
+        for (Card card : cards) {
+            stringBuilder.append('\n');
+            stringBuilder.append(card);
         }
 
-        return "CardCollection{" +
-                "name='" + name + '\'' +
-                ", cards=" + str +
-                '}';
+        return "CardCollection{"
+                + "name='" + name + '\''
+                + ", cards=" + stringBuilder.toString()
+                + '}';
     }
 
     public String getName() {
@@ -79,8 +81,8 @@ public class CardCollection  {
     }
 
     public Card getCard(int cardId) {
-        for(Card card : cards) {
-            if(card.getCardID() == cardId) {
+        for (Card card : cards) {
+            if (card.getCardID() == cardId) {
                 return card;
             }
         }
@@ -103,7 +105,7 @@ public class CardCollection  {
     }*/
 
     public Card getMostExpensiveCard() {
-        if(0 < this.cards.size()) {
+        if (0 < this.cards.size()) {
             Card mostExpensiveCard = this.cards.get(0);
             for (Card x : this.cards) {
                 if (x.getManaCost() > mostExpensiveCard.getManaCost()) {

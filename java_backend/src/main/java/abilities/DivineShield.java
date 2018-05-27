@@ -5,8 +5,8 @@ import events.Events;
 
 public class DivineShield extends Ability {
 
-    public DivineShield(Abilities ABILITY_TYPE) {
-        super(ABILITY_TYPE);
+    public DivineShield(Abilities abilityType) {
+        super(abilityType);
     }
 
     // In value comes the damage the card would 've taken.

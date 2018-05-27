@@ -1,8 +1,5 @@
 package abilities;
 
-/**
- * This is a group effort Bram
- */
 public enum Mechanics {
     ADDABILITY,
     ARMOR,
