@@ -2,7 +2,7 @@ package game;
 
 import cards.Card;
 import cards.CardCollection;
-import cards.ManaCardCollectionComparator;
+import cards.CardCollectionManaComparator;
 import cards.Minion;
 import hero.Hero;
 
@@ -152,7 +152,7 @@ public class Game {
         enemy.getCardsInHand().addCard(enemy.getDeck().drawCard());
 
         final List<Card> cardsInHand = enemy.getCardsInHand().getCards();
-        cardsInHand.sort(new ManaCardCollectionComparator());
+        cardsInHand.sort(new CardCollectionManaComparator());
 
         final double enemyBrain = Math.random();
         if (enemyBrain <= 0.25) {
