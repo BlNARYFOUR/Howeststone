@@ -258,11 +258,11 @@ class Routes {
     private void attackMinion(Context context) throws IOException {
         final String body = context.body();
         final ObjectMapper mapper = new ObjectMapper();
-        final Map<String, List<Integer>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() {
+        final Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() {
         });
-        final List<Integer> destination = temp.get("destination");
-        final List<Integer> source = temp.get("source");
-        System.out.println(destination);
+        final List<String> destinationFucked = temp.get("destination");
+        final List<String> source = temp.get("source");
+        System.out.println(destinationFucked);
         System.out.println(source);
     }
 
