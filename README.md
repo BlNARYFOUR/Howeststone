@@ -1212,8 +1212,6 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 * Search function deckbuilder
 * Current game can be saved from the front-end side
 * Battlelog
-* Basic mana
-* 
 * Extra features:
     * Sign up screen
     * Login/Logout screen
@@ -1221,10 +1219,20 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
     
 <h3>Back-end</h3>
 <h4>Implemented</h4>
-* 
+* Deckbuilder
+* Database
+* Minion
+* Spell
+* Weapon
+* Abilities:
+    * Charge
+    * Divine Shield
+    * Windfury
 
 <h4>Not Yet Implemented</h4>
-* 
+* CLI
+* Other abilities
+* Mechanics
 
 
 
