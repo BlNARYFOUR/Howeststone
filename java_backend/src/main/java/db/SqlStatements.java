@@ -4,8 +4,8 @@ public final class SqlStatements {
 
     public static final String CREATE_ABILITIES =
             "CREATE TABLE howeststone.Abilities ( abilityId INT(3) AUTO_INCREMENT NOT"
-            + "NULL, abilityName VARCHAR(45) NOT NULL, CONSTRAINT pk_Abilities PRIMARY"
-                    + " KEY(AbilityId))ENGINE = INNODB;";
+                    + " NULL, abilityName VARCHAR(45) NOT NULL, CONSTRAINT"
+                    + " pk_Abilities PRIMARY KEY(AbilityId))ENGINE = INNODB;";
 
     public static final String CREATE_HEROES =
             "CREATE TABLE howeststone.Heroes ( heroId INT(2) AUTO_INCREMENT NOT NULL, heroName VARCHAR(45) NOT NULL,"

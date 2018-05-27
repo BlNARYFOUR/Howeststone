@@ -1,16 +1,14 @@
 package db;
 
-import cards.Card;
-
 import java.sql.*;
 
 public class DoThingsWithDatabase {
 
+    private SqlDatabase db;
+
     public static void main(String[] args) {
         new DoThingsWithDatabase().run();
     }
-
-    private SqlDatabase db;
 
     private void run() {
         db = new SqlDatabase("localhost:88", "root", "");
@@ -24,16 +22,16 @@ public class DoThingsWithDatabase {
         ) {
             stmt.setString(1, deckName);
             stmt.setInt(2, heroId);
-            final int AFFECTED_ROWS = stmt.executeUpdate();
+            final int affectedRows = stmt.executeUpdate();
 
-            if (AFFECTED_ROWS == 0) {
+            if (affectedRows == 0) {
                 throw new SQLException("No deck created: no rows affected.");
             }
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    final long ID = rs.getLong(1);
-                    System.out.printf("%s now has ID %d", deckName, ID);
+                    final long id = rs.getLong(1);
+                    System.out.printf("%s now has ID %d", deckName, id);
                 } else {
                     throw new SQLException("No deck created: no ID obtained.");
                 }
