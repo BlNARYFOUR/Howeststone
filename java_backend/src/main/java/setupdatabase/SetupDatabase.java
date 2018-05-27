@@ -24,21 +24,9 @@ public final class SetupDatabase {
 
     private static final String NEUTRAL = "Neutral";
     private static final String[] HEROES = {NEUTRAL, "Mage", "Paladin"};
-    private static final String[] ABILITIES_WITH_MECHANICS = {
-            "Aura",
-            "Battlecry",
-            "Deathrattle",
-            "DestroyedDivineShield",
-            "Enrage",
-            "On Attack",
-            "On Death",
-            "On Heal",
-            "On Hit",
-            "TurnTimer Begin",
-            "TurnTimer End",
-            "Untargetable",
-            "Update In Hand",
-    };
+    private static final String[] ABILITIES_WITH_MECHANICS = {"Aura", "Battlecry", "Deathrattle",
+        "DestroyedDivineShield", "Enrage", "On Attack", "On Death", "On Heal", "On Hit",
+        "TurnTimer Begin", "TurnTimer End", "Untargetable", "Update In Hand", };
 
     // STRING REPETITION SOLVERS
     private final String exclamationStr = "!";
