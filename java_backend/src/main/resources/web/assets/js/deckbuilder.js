@@ -23,7 +23,7 @@ function errorWithName() {
 function deckBuilderInit() {
     let newDeckName = document.querySelector('#newDeckName').value;
     if (newDeckName.indexOf("Deck_") !== -1) {
-        newDeckName = "";
+        newDeckName = "Deck ";
     }
     if (document.querySelector('#newDeckName').value === "") {
         newDeckName = document.querySelector('#newDeckName').getAttribute('placeholder');
