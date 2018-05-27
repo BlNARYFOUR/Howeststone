@@ -49,6 +49,11 @@ public abstract class Card {
         this.maxAmountOfAttacks = 1;
     }
 
+    public Card(int cardID) {
+        this.cardID = cardID;
+        // TODO get other cardSpecifications
+    }
+
     public int getManaCost() {
         return manaCost;
     }
@@ -56,7 +61,6 @@ public abstract class Card {
     /* TODO public List<Abilities> getCardAbilities() {
         return cardAbilities;
     }*/
-
     public int getMaxAmountOfAttacks() {
         return maxAmountOfAttacks;
     }
@@ -77,11 +81,6 @@ public abstract class Card {
         this.health = health;
     }
 
-    public Card(int cardID){
-        this.cardID = cardID;
-        // TODO get other cardSpecifications
-    }
-
     public int getCardID() {
         return cardID;
     }
@@ -96,19 +95,19 @@ public abstract class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "cardID=" + cardID +
-                ", type=" + type +
-                ", cardName='" + cardName  +
-                ", img='" + img +
-                ", rarity='" + rarity  +
-                ", manaCost=" + manaCost +
-                ", health=" + health +
-                ", race='" + race  +
-                ", attack=" + attack +
-                ", durability=" + durability +
-                ", heroId=" + heroId +
-                '}';
+        return "Card{"
+                + "cardID=" + cardID
+                + ", type=" + type
+                + ", cardName='" + cardName
+                + ", img='" + img
+                + ", rarity='" + rarity
+                + ", manaCost=" + manaCost
+                + ", health=" + health
+                + ", race='" + race
+                + ", attack=" + attack
+                + ", durability=" + durability
+                + ", heroId=" + heroId
+                + '}';
     }
 
     public void attack(Card card) {
@@ -118,8 +117,8 @@ public abstract class Card {
     }
 
     public void doDamage(Card target) {
-        target.setHealth(target.health-this.attack);
-        this.setHealth(this.health-target.attack);
+        target.setHealth(target.health - this.attack);
+        this.setHealth(this.health - target.attack);
     }
 
     public void awaken() {
@@ -147,9 +146,9 @@ public abstract class Card {
     }
 
     public void attackHero(Hero target) {
-        target.setHealth(target.getHealth()-this.attack);
+        target.setHealth(target.getHealth() - this.attack);
         if (target.getWeapon() != null) {
-            this.setHealth(this.getHealth()-target.getWeapon().attack);
+            this.setHealth(this.getHealth() - target.getWeapon().attack);
         }
         //TODO voer abilities uit bv enrage
     }
