@@ -86,32 +86,29 @@ public class Server {
             while (rs.next()) {
                 final int amount = rs.getInt("amount");
                 final Card card;
+                final String[] strArgs = new String[5];
+                final int[] intArgs = new int[5];
                 final int cardId = rs.getInt("cardId");
-                final String cardType = rs.getString("cardType");
-                final String cardName = rs.getString("cardName");
-                final String race = rs.getString("race");
-                final String urlOfImg = rs.getString("img");
-                final String rarity = rs.getString("rarity");
-                final int health = rs.getInt("health");
-                final int attack = rs.getInt("attack");
-                final int manaCost = rs.getInt("manaCost");
-                final int durability = rs.getInt("durability");
-                final int heroId = rs.getInt("heroId");
-                switch (cardType) {
+                strArgs[0] = rs.getString("cardType");
+                strArgs[1] = rs.getString("cardName");
+                strArgs[2] = rs.getString("race");
+                strArgs[3] = rs.getString("img");
+                strArgs[4] = rs.getString("rarity");
+                intArgs[0] = rs.getInt("health");
+                intArgs[1] = rs.getInt("attack");
+                intArgs[2] = rs.getInt("manaCost");
+                intArgs[3] = rs.getInt("durability");
+                intArgs[4] = rs.getInt("heroId");
+                switch (strArgs[0]) {
+
                     case "Weapon":
-                        card = new Weapon(cardId, cardType, cardName, race,
-                                urlOfImg, rarity, health, attack, manaCost,
-                                durability, heroId);
+                        card = new Weapon(cardId, strArgs, intArgs);
                         break;
                     case "Spell":
-                        card = new Spell(cardId, cardType, cardName, race,
-                                urlOfImg, rarity, health, attack, manaCost,
-                                durability, heroId);
+                        card = new Spell(cardId, strArgs, intArgs);
                         break;
                     case "Minion":
-                        card = new Minion(cardId, cardType, cardName, race,
-                                urlOfImg, rarity, health, attack, manaCost,
-                                durability, heroId);
+                        card = new Minion(cardId, strArgs, intArgs);
                         break;
                     default:
                         throw new IllegalArgumentException("database not setup correctly");
