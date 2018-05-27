@@ -33,6 +33,10 @@ function showDecks(decks) {
     for (let i = 0; i < selectableDecks.length; i++) {
         selectableDecks[i].addEventListener("click", handleSelectedDeck);
     }
+    selectableDecks = document.querySelectorAll('#deckbuilder .decks li a');
+    for (let i= 0; i < selectableDecks.length; i++){
+        selectableDecks[i].addEventListener('click', loadDeck);
+    }
 }
 
 function handleSelectedDeck(e) {
@@ -88,10 +92,7 @@ function showHeroes(heroes) {
         }
         document.querySelectorAll("#deckbuilder #hero a")[0].style.backgroundColor = "grey";
     }
-    let deckBuilderHeroes = document.querySelectorAll('#deckbuilder #hero a');
-    for (let i = 0; i < deckBuilderHeroes.length; i++) {
-        deckBuilderHeroes[i].addEventListener("click", dbHandleSelectedHero);
-    }
+
     let selectableHeroes = document.querySelectorAll('.heroes li a');
     for (let i = 0; i < selectableHeroes.length; i++) {
         selectableHeroes[i].addEventListener("click", handleSelectedHero);

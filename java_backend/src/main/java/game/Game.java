@@ -29,6 +29,16 @@ public class Game {
     /*private Hero you;
     private CardCollection deck;*/
 
+    public CardCollection getDeck(String deckName) {
+        List<CardCollection> decks = deckNames.get(you.getHero().getHeroName());
+        for (CardCollection deck: decks){
+            if (deck.getNameOfCardCollection().equals(deckName)){
+                return deck;
+            }
+        }
+        return null;
+    }
+
     public void generateEnemy() {
         int randomHeroIndex = (int) Math.round(Math.random()) * (heroNames.size() - 1);
         Player enemy = new Player();

@@ -8,18 +8,60 @@ let ManaFilterChecked = false;
 let cardRarityFilterChecked = false;
 
 
+function loadDeck(e) {
+    let deckName = e.target.innerText;
+    let url = '/threebeesandme/get/deckbuilder/deck/cards?deckname=' + deckName;
+    fetch(url, {
+        method: 'get'
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+        })
+        .then(function (text) {
+            document.querySelector('#deckbuilder .new').classList.add('hidden');
+            showCardsInDeck(text);
+        })
+        .catch(function (err) {
+            console.log(err +"Error: Could not get cards");
+        });
+}
+
+function gotoMainDeckBuilder() {
+    document.querySelector('.main').classList.toggle('hidden');
+    document.querySelector('.save').classList.toggle('hidden');
+}
+
 function init() {
     /*tutorial();*/
+    document.querySelector('#newDeckBuilder').addEventListener('click', newDeckBuilder);
     document.getElementById('cardAmount').innerHTML = '0/30';
     document.getElementById('gotoRechooseDeck').addEventListener('click', gotoRechooseDeck);
     document.getElementById('gotoDeckBuilder').addEventListener('click', gotoDeckBuilder);
     document.getElementById('newDeck').addEventListener('click', deckBuilderInit);
+    document.querySelector(".backToWherever").addEventListener('click', gotoMainDeckBuilder);
 }
 
 function errorWithName() {
     document.querySelector('#deckbuilder .new label').innerHTML = "Choose a different name";
 }
 
+function disableDeckBuilder() {
+    document.querySelector('#deckbuilder #cards').innerHTML = "";
+}
+
+function deleteCurrentDeck() {
+    getAllDecks();
+}
+
+function newDeckBuilder() {
+    resetDeckBuilderForm();
+    document.querySelector('#all').checked = true;
+    deleteCurrentDeck();
+    disableDeckBuilder();
+    document.querySelector('#deckbuilder .new').classList.remove('hidden');
+    emptyDeck();
+}
 function deckBuilderInit() {
     let newDeckName = document.querySelector('#newDeckName').value;
     if (newDeckName.indexOf("Deck_") !== -1) {
@@ -100,8 +142,6 @@ function getAllCards() {
 }
 
 function showCards(cards) {
-    console.log("why do you show");
-
     document.getElementById('cards').innerHTML = "";
     for (let i = 0; i < cards["cards"].length; i++) {
         let imgUrl = cards["cards"][i]["img"];
@@ -115,7 +155,6 @@ function showCards(cards) {
 
 
 function checkAllCards() {
-    console.log('event');
     let cardsInDeck = document.querySelectorAll('#cards li');
     for (let i = 0; i < cardsInDeck.length; i++) {
         cardsInDeck[i].addEventListener("mousedown", clickOnCardInCards);
@@ -126,25 +165,27 @@ function checkAllCards() {
         chosenCards[i].addEventListener("mousedown", clickOnCardInDeck);
         chosenCards[i].addEventListener("touchstart", clickOnCardInDeck);
     }
+    if (document.getElementById('cardAmount').innerHTML === "0/30"){
+        // new deck builder
+        // Back
+        // Deck
+    }
 }
 
 function startDeckBuilder(NYIDeck) {
-    document.querySelector('#deckbuilder .new').classList.toggle('hidden');
+    document.querySelector('#deckbuilder .new').classList.add('hidden');
     document.querySelector('#deckbuilder .main ul.decks').innerHTML += '<li class="' + NYIDeck + '">' + NYIDeck + '</li>';
 
     document.querySelector('#deckbuilder aside form').addEventListener('submit', donNotSubmit);
-    document.getElementById('search').addEventListener('input', searchTest);
     document.getElementById('firstFilter').addEventListener('change', filterCards);
-    document.getElementById('search').addEventListener('input', search);
+    //document.getElementById('search').addEventListener('input', searchTest);
+    // document.getElementById('search').addEventListener('input', search);
     document.getElementById('sort').addEventListener('change', sort);
-    document.querySelector('#firstAdd').addEventListener('click', firstAdd);
+
     let saveButtons = document.querySelectorAll('.saveDeck');
     for (let i = 0; i < saveButtons.length; i++) {
         saveButtons[i].addEventListener('click', saveThisDeck);
     }
-    // TODO bind
-    document.getElementById('gotoRechooseDeck').addEventListener('click', saveDeckFirst);
-
     getAllCards();
     filterCards();
 
@@ -326,15 +367,8 @@ function beginDeletinCard(e) {
     document.addEventListener("touchend", checkIfCardIsGoingToBeRemoved, false);
 }
 
-function dbHandleSelectedHero(e) {
-    document.querySelector('.main').classList.toggle('hidden');
-    document.querySelector('.save').classList.toggle('hidden');
-    // scherm wil je saven of niet
-    // needed or not handleSelectedHero(e);
-    // handleHeroSelection(selectedHero);
-}
-
 function gotoDeckBuilder() {
+    newDeckBuilder();
     let heroName = document.querySelector("#heroChooser .selectedHeroName").innerText;
     fetch('/threebeesandme/post/deckbuilder/hero', {
         method: 'POST',
@@ -353,6 +387,7 @@ function gotoDeckBuilder() {
             getAllDecks();
             document.getElementById('heroChooser').className = "hidden";
             document.getElementById('deckbuilder').className = "";
+            document.querySelector('#deckbuilder .new').classList.remove('hidden');
         })
         .catch(function (err) {
             console.log("Error: Could not send the selected hero");
@@ -384,31 +419,6 @@ function unselectFilter(e) {
 
 function disableFilter(e) {
     e.preventDefault();
-}
-
-function firstAdd(deck) {
-    // TODO
-    fetch("/threebeesandme/post/deckbuilder/newdeck", {
-        method: 'post',
-        body: deck
-    })
-        .then(function (res) {
-            if (res.ok === true)
-                return res.json();
-        })
-        .then(function (text) {
-            let result = text;
-            // TODO
-        })
-        .catch(function (err) {
-            console.log("Error: Could not get new deck");
-        });
-    let chosenCards = document.querySelectorAll(".chosenCards");
-    if (chosenCards.length === 30) {
-        document.querySelector('.save').innerHTML = 'full deck';
-    }
-    document.querySelector('.main').classList.toggle('hidden');
-    document.querySelector('.save').classList.toggle('hidden');
 }
 
 
@@ -596,6 +606,7 @@ function saveThisDeck() {
         if (text) {
             alert("SAVE SUCCEEDED");
             getAllDecks();
+            newDeckBuilder();
         } else {
             let cardsRemaining = 30
                 - parseInt(document.getElementById('cardAmount').innerText.split("/")[0]);

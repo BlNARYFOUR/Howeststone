@@ -41,10 +41,10 @@ class Routes {
 
         // DECKBUILDER
         server.get("/threebeesandme/get/deckbuilder/cards", this::getAllCards);
+        server.get("/threebeesandme/get/deckbuilder/deck/cards", this::getCardsFromDeck);
         server.post("/threebeesandme/post/deckbuilder/hero", this::handleHeroSelection);
         server.post("/threebeesandme/post/deckbuilder/deck/cancardbeadded", this::canCardBeAdded);
         server.post("/threebeesandme/post/deckbuilder/deck/addcard", this::addCardToDeck);
-
         server.post("/threebeesandme/post/deckbuilder/deck/deletecard", this::deleteCardFromDeck);
         server.post("/threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
         server.post("/threebeesandme/post/deckbuilder/newdeck", this::newDeck);
@@ -165,6 +165,13 @@ class Routes {
 
     // DECK BUILDER
 
+    private void getCardsFromDeck(Context context) {
+        String deckName = context.queryParamMap().get("deckname")[0];
+        if (!HOWESTSTONE.checkIfDeckNotExist(deckName)){
+            context.json(HOWESTSTONE.getDeck(deckName));
+        }
+    }
+
     private void saveDeck(Context context) {
         context.json(HOWESTSTONE.createDeck(HOWESTSTONE.deckInDeckBuilder));
     }
@@ -201,7 +208,6 @@ class Routes {
     }
 
     private void canCardBeAdded(Context context) {
-        // check if hero can add card
         context.json(
                 HOWESTSTONE.checkIfCardCanBeAddedToDeck(
                         context.body()));
