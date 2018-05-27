@@ -256,14 +256,14 @@ class Routes {
 
     }
     private void attackMinion(Context context) throws IOException {
-        final String body = context.body();
+        /*final String body = context.body();
         final ObjectMapper mapper = new ObjectMapper();
         final Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() {
         });
         final List<String> destinationFucked = temp.get("destination");
         final List<String> source = temp.get("source");
         System.out.println(destinationFucked);
-        System.out.println(source);
+        System.out.println(source);*/
     }
 
     // DECK BUILDER
