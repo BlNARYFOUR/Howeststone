@@ -24,15 +24,7 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 <title>Schema for database 'howeststone'</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <style type="text/css">
-<!--
-.toptext {font-family: verdana; color: #000000; font-size: 20px; font-weight: 600; width:550;  background-color:#999999; }
-.normal {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: normal; color: #000000}
-.fieldheader {font-family: verdana; color: #000000; font-size: 12px; font-weight: 600; width:550;  background-color:#c0c0c0; }
-.fieldcolumn {font-family: verdana; color: #000000; font-size: 10px; font-weight: 600; width:550;  background-color:#ffffff; }
-.header {background-color: #ECE9D8;}
-.headtext {font-family: verdana; color: #000000; font-size: 12; font-weight: 600; width:550;  background-color:#999999; }
-BR.page {page-break-after: always}
-//-->
+
 </style>
 </head>
 <body bgcolor='#ffffff' topmargin="0">
@@ -41,7 +33,7 @@ BR.page {page-break-after: always}
 <td class="toptext"><p align="center">howeststone</td>
 </tr>
 </table>
-<a name="header">&nbsp</a><ul>
+<a name="header"></a><ul>
 	<li><a href="#abilities"><p class="normal">abilities</a></li>
 	<li><a href="#cardabilities"><p class="normal">cardabilities</a></li>
 	<li><a href="#cardmechanics"><p class="normal">cardmechanics</a></li>
@@ -52,11 +44,11 @@ BR.page {page-break-after: always}
 	<li><a href="#mechanics"><p class="normal">mechanics</a></li>
 </ul>
 <br class=page>
-<p><a name='abilities'>&nbsp</a>
+<p><a name='abilities'></a>
 <table width="100%" border="0" cellspacing="0" cellpadding="3">
 <tr>
 	<td class="headtext" width="30%" align="left" valign="top">abilities</td>
-	<td>&nbsp</td>
+	<td></td>
 <tr>
 </table>
 
@@ -86,18 +78,18 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">auto_increment</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">abilityName</td>
 	<td align="left" valign="top"><p class="normal">varchar(45)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">NO</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -133,20 +125,20 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">3</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
 
 <a href="#header"><p class="normal">Back</a><br class=page>
-<p><a name='cardabilities'>&nbsp</a>
+<p><a name='cardabilities'></a>
 <table width="100%" border="0" cellspacing="0" cellpadding="3">
 <tr>
 	<td class="headtext" width="30%" align="left" valign="top">cardabilities</td>
-	<td>&nbsp</td>
+	<td></td>
 <tr>
 </table>
 
@@ -174,9 +166,9 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">NO</td>
 	<td align="left" valign="top"><p class="normal">PRI</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardId</td>
@@ -185,9 +177,9 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">NO</td>
 	<td align="left" valign="top"><p class="normal">PRI</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardMechId</td>
@@ -196,9 +188,9 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">NO</td>
 	<td align="left" valign="top"><p class="normal">PRI</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -234,10 +226,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">30</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardabilities</td>
@@ -249,10 +241,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">117</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardabilities</td>
@@ -264,10 +256,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">158</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardabilities</td>
@@ -279,10 +271,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">105</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardabilities</td>
@@ -294,10 +286,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">132</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -339,11 +331,11 @@ BR.page {page-break-after: always}
 
 
 <a href="#header"><p class="normal">Back</a><br class=page>
-<p><a name='cardmechanics'>&nbsp</a>
+<p><a name='cardmechanics'></a>
 <table width="100%" border="0" cellspacing="0" cellpadding="3">
 <tr>
 	<td class="headtext" width="30%" align="left" valign="top">cardmechanics</td>
-	<td>&nbsp</td>
+	<td></td>
 <tr>
 </table>
 
@@ -373,7 +365,7 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">auto_increment</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">mechanicId</td>
@@ -382,31 +374,31 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">NO</td>
 	<td align="left" valign="top"><p class="normal">MUL</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">target</td>
 	<td align="left" valign="top"><p class="normal">varchar(45)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">YES</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">mechValue</td>
 	<td align="left" valign="top"><p class="normal">varchar(45)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">YES</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -442,10 +434,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">118</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardmechanics</td>
@@ -457,10 +449,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">24</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -488,11 +480,11 @@ BR.page {page-break-after: always}
 
 
 <a href="#header"><p class="normal">Back</a><br class=page>
-<p><a name='cards'>&nbsp</a>
+<p><a name='cards'></a>
 <table width="100%" border="0" cellspacing="0" cellpadding="3">
 <tr>
 	<td class="headtext" width="30%" align="left" valign="top">cards</td>
-	<td>&nbsp</td>
+	<td></td>
 <tr>
 </table>
 
@@ -522,106 +514,106 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">auto_increment</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardName</td>
 	<td align="left" valign="top"><p class="normal">varchar(45)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">NO</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardType</td>
 	<td align="left" valign="top"><p class="normal">varchar(45)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">NO</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">race</td>
 	<td align="left" valign="top"><p class="normal">varchar(45)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">YES</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">img</td>
 	<td align="left" valign="top"><p class="normal">varchar(100)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">NO</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">rarity</td>
 	<td align="left" valign="top"><p class="normal">varchar(45)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">NO</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">health</td>
 	<td align="left" valign="top"><p class="normal">int(2)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">YES</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">attack</td>
 	<td align="left" valign="top"><p class="normal">int(2)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">YES</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">manaCost</td>
 	<td align="left" valign="top"><p class="normal">int(2)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">NO</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">durability</td>
 	<td align="left" valign="top"><p class="normal">int(2)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">YES</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">heroId</td>
@@ -630,9 +622,9 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">YES</td>
 	<td align="left" valign="top"><p class="normal">MUL</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -668,10 +660,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">2</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cards</td>
@@ -685,8 +677,8 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">YES</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -714,11 +706,11 @@ BR.page {page-break-after: always}
 
 
 <a href="#header"><p class="normal">Back</a><br class=page>
-<p><a name='cardsindecks'>&nbsp</a>
+<p><a name='cardsindecks'></a>
 <table width="100%" border="0" cellspacing="0" cellpadding="3">
 <tr>
 	<td class="headtext" width="30%" align="left" valign="top">cardsindecks</td>
-	<td>&nbsp</td>
+	<td></td>
 <tr>
 </table>
 
@@ -746,9 +738,9 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">NO</td>
 	<td align="left" valign="top"><p class="normal">PRI</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardId</td>
@@ -757,20 +749,20 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">NO</td>
 	<td align="left" valign="top"><p class="normal">PRI</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">amount</td>
 	<td align="left" valign="top"><p class="normal">int(1)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">NO</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -806,10 +798,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">6</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardsindecks</td>
@@ -821,10 +813,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">6</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">cardsindecks</td>
@@ -836,10 +828,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">6</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -874,11 +866,11 @@ BR.page {page-break-after: always}
 
 
 <a href="#header"><p class="normal">Back</a><br class=page>
-<p><a name='decks'>&nbsp</a>
+<p><a name='decks'></a>
 <table width="100%" border="0" cellspacing="0" cellpadding="3">
 <tr>
 	<td class="headtext" width="30%" align="left" valign="top">decks</td>
-	<td>&nbsp</td>
+	<td></td>
 <tr>
 </table>
 
@@ -908,18 +900,18 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">auto_increment</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">deckName</td>
 	<td align="left" valign="top"><p class="normal">varchar(45)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">NO</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">heroId</td>
@@ -928,9 +920,9 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">NO</td>
 	<td align="left" valign="top"><p class="normal">MUL</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -966,10 +958,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">2</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">decks</td>
@@ -981,10 +973,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">2</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -1012,11 +1004,11 @@ BR.page {page-break-after: always}
 
 
 <a href="#header"><p class="normal">Back</a><br class=page>
-<p><a name='heroes'>&nbsp</a>
+<p><a name='heroes'></a>
 <table width="100%" border="0" cellspacing="0" cellpadding="3">
 <tr>
 	<td class="headtext" width="30%" align="left" valign="top">heroes</td>
-	<td>&nbsp</td>
+	<td></td>
 <tr>
 </table>
 
@@ -1046,18 +1038,18 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">auto_increment</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">heroName</td>
 	<td align="left" valign="top"><p class="normal">varchar(45)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">NO</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -1093,20 +1085,20 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">3</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
 
 <a href="#header"><p class="normal">Back</a><br class=page>
-<p><a name='mechanics'>&nbsp</a>
+<p><a name='mechanics'></a>
 <table width="100%" border="0" cellspacing="0" cellpadding="3">
 <tr>
 	<td class="headtext" width="30%" align="left" valign="top">mechanics</td>
-	<td>&nbsp</td>
+	<td></td>
 <tr>
 </table>
 
@@ -1136,18 +1128,18 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">auto_increment</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 <tr>
 	<td align="left" valign="top"><p class="normal">mechanicType</td>
 	<td align="left" valign="top"><p class="normal">varchar(45)</td>
 	<td align="left" valign="top"><p class="normal">latin1_swedish_ci</td>
 	<td align="left" valign="top"><p class="normal">NO</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">select,insert,update,references</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
@@ -1183,10 +1175,10 @@ BR.page {page-break-after: always}
 	<td align="left" valign="top"><p class="normal">2</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
 	<td align="left" valign="top"><p class="normal">(NULL)</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 	<td align="left" valign="top"><p class="normal">BTREE</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
-	<td align="left" valign="top"><p class="normal">&nbsp;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
+	<td align="left" valign="top"><p class="normal">;</td>
 </tr>
 </table>
 
