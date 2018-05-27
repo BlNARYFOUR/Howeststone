@@ -68,7 +68,7 @@ public class Display {
             throw new NullPointerException();
         }
         howeststone.generateEnemy();
-        howeststone.setTurnTime(50);
+        //howeststone.setTurnTime(50);
         System.out.println(howeststone);
         howeststone.shuffleDecks();
         flipCoin(howeststone);
@@ -124,7 +124,7 @@ public class Display {
 
         if (howeststone.getActivePlayer().equals(YOU_STR)) {
             // add 3/4 cards to hand
-            howeststone.setTurnTime(50);
+            //howeststone.setTurnTime(50);
         } else {
             for (String card: replaceCardList) {
                 //TODO add card to hand enemy
