@@ -1,4 +1,4 @@
-package setupdb;
+package setupdatabase;
 
 import db.SqlDatabase;
 import db.SqlStatements;
