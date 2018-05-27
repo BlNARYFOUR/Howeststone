@@ -44,9 +44,9 @@ public class CardCollection {
         cards.remove(card);
     }
 
-    public boolean hasCard(int cardId) {
+    public boolean hasCard(int cardID) {
         for (Card card : cards) {
-            if (card.getCardID() == cardId) {
+            if (card.getCardID() == cardID) {
                 return true;
             }
         }
@@ -56,7 +56,7 @@ public class CardCollection {
     /* TODO blublublu
     public void removeCard(int cardID) {
         for (int i = 0; i < cards.size(); i++) {
-            if (cards.get(i).getCardID() == cardID) {
+            if (cards.get(i).getCardID()() == cardID) {
                 cards.remove(i);
                 break;
                 // if card is 2 times in cards, it will only be deleted once
@@ -86,9 +86,9 @@ public class CardCollection {
         this.name = name;
     }
 
-    public Card getCard(int cardId) {
+    public Card getCard(int cardID) {
         for (Card card : cards) {
-            if (card.getCardID() == cardId) {
+            if (card.getCardID() == cardID) {
                 return card;
             }
         }
@@ -114,10 +114,10 @@ public class CardCollection {
         }
     }
 
-    public CardCollection getSubCollection(List<Integer> cardIds) {
+    public CardCollection getSubCollection(List<Integer> cardIDs) {
         final CardCollection subCardCollection = new CardCollection();
         for (Card card : cards) {
-            for (int i : cardIds) {
+            for (int i : cardIDs) {
                 if (card.getCardID() == i) {
                     subCardCollection.addCard(card);
                 }

@@ -43,7 +43,7 @@ public class Server {
         howeststone.setDataBase(DB);
         // getting all heroes from db
 
-        List<String> heroNames = new ArrayList<>();
+        final List<String> heroNames = new ArrayList<>();
         try (
                 Connection conn = DB.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_HEROES)
@@ -96,7 +96,7 @@ public class Server {
         final Card card;
         final String[] strArgs = new String[5];
         final int[] intArgs = new int[5];
-        final int cardId = rs.getInt("cardId");
+        final int cardID = rs.getInt("cardID");
         strArgs[0] = rs.getString("cardType");
         strArgs[1] = rs.getString("cardName");
         strArgs[2] = rs.getString("race");
@@ -109,13 +109,13 @@ public class Server {
         intArgs[4] = rs.getInt("heroId");
         switch (strArgs[0]) {
             case "Weapon":
-                card = new Weapon(cardId, strArgs, intArgs);
+                card = new Weapon(cardID, strArgs, intArgs);
                 break;
             case "Spell":
-                card = new Spell(cardId, strArgs, intArgs);
+                card = new Spell(cardID, strArgs, intArgs);
                 break;
             case "Minion":
-                card = new Minion(cardId, strArgs, intArgs);
+                card = new Minion(cardID, strArgs, intArgs);
                 break;
             default:
                 throw new IllegalArgumentException("database not setup correctly");

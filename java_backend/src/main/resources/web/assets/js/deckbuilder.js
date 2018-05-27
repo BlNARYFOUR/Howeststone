@@ -145,7 +145,7 @@ function showCards(cards) {
     document.getElementById('cards').innerHTML = "";
     for (let i = 0; i < cards["cards"].length; i++) {
         let imgUrl = cards["cards"][i]["img"];
-        let imgID = cards["cards"][i]["cardId"];
+        let imgID = cards["cards"][i]["cardID"];
         document.getElementById('cards').innerHTML += '<li class ="cardInDeck card_' + imgID + '"></li>';
         document.querySelector("#deckbuilder #cards .card_" + imgID).style.background = 'no-repeat url("' + imgUrl + '") center -4vh';
         document.querySelector("#deckbuilder #cards .card_" + imgID).style.backgroundSize = "110%";
@@ -290,11 +290,11 @@ function checkIfCardIsGoingToBeRemoved() {
 }
 
 function clickOnCardInCards(e) {
-    let cardId = e.target.classList[1].split("_")[1];
+    let cardID = e.target.classList[1].split("_")[1];
 
     fetch('/threebeesandme/post/deckbuilder/deck/cancardbeadded', {
         method: 'POST',
-        body: cardId
+        body: cardID
     }).then(function (res) {
         if (res.ok)
             return res.json();
@@ -420,10 +420,10 @@ function disableFilter(e) {
 
 
 function addCardToDeck(card) {
-    let cardId = card.classList[1].split("_")[1];
+    let cardID = card.classList[1].split("_")[1];
     fetch("/threebeesandme/post/deckbuilder/deck/addcard", {
         method: 'post',
-        body: cardId
+        body: cardID
     })
         .then(function (res) {
             if (res.ok === true)
@@ -447,12 +447,12 @@ function emptyDeck() {
 function showCardsInDeck(cards) {
     document.getElementById('cardAmount').innerHTML = cards["cards"].length + '/30';
     document.getElementById('deck').innerHTML = "";
-    let cardIds = [];
+    let cardIDs = [];
     for (let i = 0; i < cards["cards"].length; i++) {
         let imgUrl = cards["cards"][i]["img"];
-        let imgID = cards["cards"][i]["cardId"];
-        if (cardIds.indexOf(imgID) === -1) {
-            cardIds.push(imgID);
+        let imgID = cards["cards"][i]["cardID"];
+        if (cardIDs.indexOf(imgID) === -1) {
+            cardIDs.push(imgID);
             document.getElementById('deck').innerHTML += '<li class ="chosenCards card_' + imgID + '"></li>';
             document.querySelector("#deckbuilder #deck .card_" + imgID).style.background = 'no-repeat url("' + imgUrl + '") center center';
             document.querySelector("#deckbuilder #deck .card_" + imgID).style.backgroundSize = "115%";
@@ -466,10 +466,10 @@ function showCardsInDeck(cards) {
 }
 
 function removeCardFromDeck(card) {
-    let cardId = card.classList[1].split("_")[1];
+    let cardID = card.classList[1].split("_")[1];
     fetch("/threebeesandme/post/deckbuilder/deck/deletecard", {
         method: 'post',
-        body: cardId
+        body: cardID
     })
         .then(function (res) {
             if (res.ok === true)

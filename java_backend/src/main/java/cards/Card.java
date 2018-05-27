@@ -27,8 +27,8 @@ public abstract class Card {
     private List<Abilities> cardAbilities;
     // TODO: private List<Mechanics> cardMechanics;
 
-    public Card(int cardId, String[] strArgs, int[] intArgs) {
-        this.cardID = cardId;
+    public Card(int cardID, String[] strArgs, int[] intArgs) {
+        this.cardID = cardID;
         this.type = strArgs[0];
         this.cardName = strArgs[1];
         this.race = strArgs[2];

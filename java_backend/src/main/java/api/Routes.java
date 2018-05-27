@@ -157,10 +157,10 @@ class Routes {
         System.out.println(body);
 
         final ObjectMapper mapper = new ObjectMapper();
-        final int cardId = mapper.readValue(body, new TypeReference<Integer>() {
+        final int cardID = mapper.readValue(body, new TypeReference<Integer>() {
         });
 
-        succeeded = howeststone.getYou().playCard(cardId);
+        succeeded = howeststone.getYou().playCard(cardID);
 
         if (succeeded) {
             context.json(SUCCES);
@@ -267,13 +267,13 @@ class Routes {
     }
 
     private void addCardToDeck(Context context) {
-        final int cardId = Integer.parseInt(context.body());
-        howeststone.getDeckInDeckBuilder().addCard(howeststone.getAllCards().getCard(cardId));
+        final int cardID = Integer.parseInt(context.body());
+        howeststone.getDeckInDeckBuilder().addCard(howeststone.getAllCards().getCard(cardID));
         context.json(howeststone.getDeckInDeckBuilder());
     }
     private void deleteCardFromDeck(Context context) {
-        final int cardId = Integer.parseInt(context.body());
-        howeststone.getDeckInDeckBuilder().removeCard(howeststone.getAllCards().getCard(cardId));
+        final int cardID = Integer.parseInt(context.body());
+        howeststone.getDeckInDeckBuilder().removeCard(howeststone.getAllCards().getCard(cardID));
         if (howeststone.getDeckInDeckBuilder().getCards().size() == 0) {
             context.json("EMPTY");
         } else {

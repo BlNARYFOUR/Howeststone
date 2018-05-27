@@ -65,22 +65,22 @@ public class Game {
         return beginCards;
     }
 
-    public Boolean setPlayerCardsInHand(List<Integer> cardIdsInHand, List<Integer> cardIdsToReplace) {
+    public Boolean setPlayerCardsInHand(List<Integer> cardIDsInHand, List<Integer> cardIDsToReplace) {
         boolean isValidData = true;
         final CardCollection cardsInHand = new CardCollection();
 
-        for (int gottenCardID : cardIdsInHand) {
-            if (!beginCards.hasCard(gottenCardID)) {
+        for (int gottencardID : cardIDsInHand) {
+            if (!beginCards.hasCard(gottencardID)) {
                 isValidData = false;
             }
         }
 
         if (isValidData) {
-            for (int cardId : cardIdsInHand) {
-                cardsInHand.addCard(beginCards.getCard(cardId));
+            for (int cardID : cardIDsInHand) {
+                cardsInHand.addCard(beginCards.getCard(cardID));
             }
-            for (int cardIdToReplace : cardIdsToReplace) {
-                final Card card = beginCards.getCard(cardIdToReplace);
+            for (int cardIDToReplace : cardIDsToReplace) {
+                final Card card = beginCards.getCard(cardIDToReplace);
                 cardsInHand.addCard(this.getYou().getDeck().drawCard());
                 this.getYou().getDeck().addCard(card);
             }
@@ -320,7 +320,7 @@ public class Game {
     }
 
     public CardCollection filterCards(List<String> filterArray) {
-        final List<Integer> cardIds = new ArrayList<>();
+        final List<Integer> cardIDs = new ArrayList<>();
 
         final String everything = "%";
         final String notInArray = "-1";
@@ -366,13 +366,13 @@ public class Game {
             stmt.setString(5, filterRarity);
             final ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                cardIds.add(rs.getInt("cardId"));
+                cardIDs.add(rs.getInt("cardID"));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return allCards.getSubCollection(cardIds);
+        return allCards.getSubCollection(cardIDs);
     }
 
     public void setDataBase(SqlDatabase db) {
@@ -391,9 +391,9 @@ public class Game {
     }
 
     public String checkIfCardCanBeAddedToDeck(String body) {
-        final int cardId = Integer.parseInt(body);
+        final int cardID = Integer.parseInt(body);
         for (int i = 0; i < this.allCards.getCards().size(); i++) {
-            if (this.allCards.getCards().get(i).getCardID() == cardId) {
+            if (this.allCards.getCards().get(i).getCardID() == cardID) {
                 final int heroId = this.allCards.getCards().get(i).getHeroId();
                 final int yourHeroId = this.getYou().getHero().getHeroId();
                 if (heroId != yourHeroId && heroId != 2) {
@@ -467,14 +467,14 @@ public class Game {
         }
     }
 
-    private void insertCardToDeck(int deckId, int cardId, int amount) {
+    private void insertCardToDeck(int deckId, int cardID, int amount) {
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_CARD_TO_DECK,
                         Statement.RETURN_GENERATED_KEYS)
         ) {
             stmt.setInt(1, deckId);
-            stmt.setInt(2, cardId);
+            stmt.setInt(2, cardID);
             stmt.setInt(3, amount);
             final int affectedRows = stmt.executeUpdate();
 
