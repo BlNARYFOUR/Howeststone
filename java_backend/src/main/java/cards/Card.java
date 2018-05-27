@@ -153,6 +153,10 @@ public abstract class Card {
         //TODO voer abilities uit bv enrage
     }
 
+    public boolean isDead() {
+        return health <= 0;
+    }
+
     // list with all abilities and mechanics?
     // method playCard
 

@@ -31,17 +31,19 @@ class Routes {
         server.get("/threebeesandme/get/gameboard/begincards", this::getBeginCards);
         server.get("/threebeesandme/get/gameboard/begin", this::beginGame);
         server.get("/threebeesandme/get/gameboard/mymana", this::getMyMana);
+        server.get("/threebeesandme/get/gameboard/enemymana", this::getEnemyMana);
         server.get("threebeesandme/get/gameboard/battlelog", this::getBattleLog);
         server.get("threebeesandme/get/gameboard/timeleft", this::getTimeLeft);
         server.get("threebeesandme/get/useheropower", this::useHeroPower);
-        server.get("/threebeesandme/get/hero", this::getHeroName);
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
+        server.get("/threebeesandme/get/gameboard/herohealth", this::getHeroHealth);
         server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
         server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
         server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
 
         // HERO AND DECK SELECTOR
+        server.get("/threebeesandme/get/hero", this::getHeroName);
         server.get("/threebeesandme/get/heroanddeckselector/decks", this::getAllDecks);
         server.get("/threebeesandme/get/heroanddeckselector/heroes", this::getAllHeroes);
         server.post("/threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
@@ -118,6 +120,11 @@ class Routes {
         context.json(manaInfo);
     }
 
+    private void getEnemyMana(Context context) {
+        int[] manaInfo = {HOWESTSTONE.getEnemy().getActiveMana(), HOWESTSTONE.getEnemy().getTotalMana()};
+        context.json(manaInfo);
+    }
+
     private void replaceCards(Context context) throws IOException {
         final String body = context.body();
         System.out.println(body);
@@ -185,6 +192,15 @@ class Routes {
             context.json(howeststone.getEnemy().getHero().getHeroName());
         } else {
             context.json(howeststone.getYou().getHero().getHeroName());
+        }
+    }
+
+    private void getHeroHealth(Context context) {
+        String hero = context.queryParamMap().get("parent")[0];
+        if (hero.equals("enemy")) {
+            context.json(HOWESTSTONE.getEnemy().getHero().getHealth());
+        } else {
+            context.json(HOWESTSTONE.getYou().getHero().getHealth());
         }
     }
 

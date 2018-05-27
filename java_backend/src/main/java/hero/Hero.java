@@ -57,6 +57,14 @@ public class Hero {
         this.health = health;
     }
 
+    public void addHealth(int health) {
+        this.health += health;
+    }
+
+    public boolean isDead() {
+        return health <= 0;
+    }
+
     public Weapon getWeapon() {
         return weapon;
     }

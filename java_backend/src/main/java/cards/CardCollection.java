@@ -27,9 +27,13 @@ public class CardCollection {
     }
 
     public Card drawCard() {
-        final Card draw = cards.get(0);
-        cards.remove(0);
-        return draw;
+        if(0 < cards.size()) {
+            final Card DRAW = cards.get(0);
+            cards.remove(0);
+            return DRAW;
+        }
+
+        return null;
     }
 
     public void addCard(Card card) {
@@ -101,12 +105,16 @@ public class CardCollection {
     }*/
 
     public Card getMostExpensiveCard() {
-        Card mostExpensiveCard = this.cards.get(0);
-        for (Card x : this.cards) {
-            if (x.getManaCost() > mostExpensiveCard.getManaCost()) {
-                mostExpensiveCard = x;
+        if(0 < this.cards.size()) {
+            Card mostExpensiveCard = this.cards.get(0);
+            for (Card x : this.cards) {
+                if (x.getManaCost() > mostExpensiveCard.getManaCost()) {
+                    mostExpensiveCard = x;
+                }
             }
+            return mostExpensiveCard;
+        } else {
+            return null;
         }
-        return mostExpensiveCard;
     }
 }
