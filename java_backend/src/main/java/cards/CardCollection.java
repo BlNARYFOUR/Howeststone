@@ -59,15 +59,16 @@ public class CardCollection {
 
     @Override
     public String toString() {
-        String str = "";
+        final StringBuilder stringBuilder = new StringBuilder();
 
         for (Card card : cards) {
-            str += "\n" + card;
+            stringBuilder.append('\n');
+            stringBuilder.append(card);
         }
 
         return "CardCollection{"
                 + "name='" + name + '\''
-                + ", cards=" + str
+                + ", cards=" + stringBuilder.toString()
                 + '}';
     }
 

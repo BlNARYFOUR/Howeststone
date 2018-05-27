@@ -11,13 +11,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class Display {
-    private final String listItemStr = "\t- ";
-    private final String selectWhatYouWantToDoStr = "Select what you want to do:";
-    private final String selectedStr = "Selected: ";
-    private final String inputHereStr = "Input here: ";
-    private final String nyiStr = "NYI";
-    private final String stopStr = "stop";
-    private final String youStr = "you";
+    private static final String LIST_ITEM_STR = "\t- ";
+    private static final String SELECT_WHAT_YOU_WANT_TO_DO_STR = "Select what you want to do:";
+    private static final String SELECTED_STR = "Selected: ";
+    private static final String INPUT_HERE_STR = "Input here: ";
+    private static final String NYI_STR = "NYI";
+    private static final String STOP_STR = "stop";
+    private static final String YOU_STR = "you";
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -55,9 +55,9 @@ public class Display {
         }
 
         final List<String> decks = new ArrayList<>(howeststone.getDeckNames());
-
+        System.out.println(ColorFormats.magenta("Check this: " + decks));
         System.out.println("Select one of the following decks:");
-        final String selectedDeck = askInputUntilFoundInList(decks);
+        //final String selectedDeck = askInputUntilFoundInList(decks);
 
         //howeststone.setYourDeck(selectedDeck);
     }
@@ -83,7 +83,7 @@ public class Display {
         final Random rand = new Random();
         final boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
-            howeststone.setActivePlayer(youStr);
+            howeststone.setActivePlayer(YOU_STR);
             System.out.println(ColorFormats.magenta("You begin the game!"));
         } else {
             howeststone.setActivePlayer("enemy");
@@ -100,8 +100,9 @@ public class Display {
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
             enemyCardsInHandList.add(String.valueOf(howeststone.getEnemy().getDeck().drawCard()));
         }
-        if (howeststone.getActivePlayer().equals(youStr)) {
+        if (howeststone.getActivePlayer().equals(YOU_STR)) {
             enemyCardsInHandList.add(String.valueOf(howeststone.getEnemy().getDeck().drawCard()));
+            System.out.println("Enemy gets a card" + enemyCardsInHandList);
         } else {
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
@@ -115,13 +116,13 @@ public class Display {
             yourCardsInHandList.remove(cardID);
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
-        replaceCardList.remove(stopStr);
+        replaceCardList.remove(STOP_STR);
         System.out.println("replaceCardList" + replaceCardList);
         System.out.println(howeststone.getYou().getDeck());
 
         // HOWESTSTONE.getYou().setCardsInHand(replace);
 
-        if (howeststone.getActivePlayer().equals(youStr)) {
+        if (howeststone.getActivePlayer().equals(YOU_STR)) {
             // add 3/4 cards to hand
             howeststone.setTurnTime(50);
         } else {
@@ -147,16 +148,17 @@ public class Display {
             printGame(howeststone);
         }
 
-        enemyMinionsAttack(howeststone);
+        //enemyMinionsAttack(howeststone);
         // TODO check of je genoeg mana hebt voor de heropower + als het mage is: of er een target is
-        useHeroPower(howeststone, howeststone.getEnemy());
+        //useHeroPower(howeststone, howeststone.getEnemy());
 
         // endTurn();
         // setCanAttack of all minions of enemy to true
-        howeststone.setActivePlayer(youStr);
+        howeststone.setActivePlayer(YOU_STR);
         System.out.println(howeststone.getEnemy().getCardsOnPlayingField());
     }
 
+    /*
     private void enemyMinionsAttack(Game howeststone) {
         for (Card card: howeststone.getEnemy().getCardsOnPlayingField().getCards()) {
             // currently final because not yet used, may be changed
@@ -186,15 +188,16 @@ public class Display {
 
                 // update battlelog
 
-                /*if (!card.getCardAbilities().contains(Abilities.WINDFURY)) {
+                if (!card.getCardAbilities().contains(Abilities.WINDFURY)) {
                     card.setExhausted(true);
                 } else {
                      card.increaseAmountAttacked();
-                }*/
+                }
 
             }
         }
     }
+    */
 
     private void yourTurn(Game howeststone) {
         // TODO change because cannot be defined here
@@ -245,42 +248,44 @@ public class Display {
         }
     }
 
+    /*
     private void useHeroPower(Game howeststone, Player player) {
         if (Objects.equals(player.getHero().getHeroName(), "Paladin")) {
             //TODO replace silver hand recruit id
             //player.getCardsOnPlayingField().addCard("Silver Hand Recruit");
-            final boolean fixError = true;
         } else {
             // TODO choose if target is selected before or in this function
+
             if (player == howeststone.getEnemy()) {
                 // HOWESTSTONE.getYou().getRandomTarget();
-                final boolean fixError = true;
             } else {
                 // select target
-                final boolean fixError = true;
             }
+
             final int damage = howeststone.getYou().getHero().getMageAttack();
+
             //ofwel 2
             //TODO target health -damage
         }
     }
+    */
 
     private void printGame(Game howeststone) {
         System.out.println(ColorFormats.red("weapon/hero/mana/hand Enemy: ")
-                + ColorFormats.green(nyiStr));
+                + ColorFormats.green(NYI_STR));
         System.out.println(ColorFormats.red("Playing Field Enemy: ")
                 + ColorFormats.green(howeststone.getEnemy().getCardsOnPlayingField().toString()));
         System.out.println(ColorFormats.red("Playing Field Player: ")
                 + ColorFormats.green(howeststone.getYou().getCardsOnPlayingField().toString()));
         System.out.println(ColorFormats.red("weapon/hero/mana/hand Player: ")
-                + ColorFormats.green(nyiStr));
+                + ColorFormats.green(NYI_STR));
     }
 
     private String askInputUntilFoundInList(List<String> list) {
         String input;
         System.out.println(formatList(list));
         do {
-            System.out.print(inputHereStr);
+            System.out.print(INPUT_HERE_STR);
             input = scanner.nextLine();
 
             if (!list.contains(input)) {
@@ -292,7 +297,7 @@ public class Display {
         }
         while (!list.contains(input));
 
-        System.out.println(ColorFormats.red(selectedStr) + ColorFormats.green(input));
+        System.out.println(ColorFormats.red(SELECTED_STR) + ColorFormats.green(input));
 
         return input;
     }
@@ -300,12 +305,12 @@ public class Display {
 
     private List<String> askInputUntilStop(List<String> list) {
         String input;
-        list.add(stopStr);
+        list.add(STOP_STR);
         final List<String> replace = new ArrayList<>();
-        System.out.println(selectWhatYouWantToDoStr);
+        System.out.println(SELECT_WHAT_YOU_WANT_TO_DO_STR);
         System.out.println(formatList(list));
         do {
-            System.out.print(inputHereStr);
+            System.out.print(INPUT_HERE_STR);
             input = scanner.nextLine();
 
             if (list.contains(input)) {
@@ -318,16 +323,16 @@ public class Display {
                 }
                 // change ? remove and add ?
 
-                System.out.println(selectWhatYouWantToDoStr);
+                System.out.println(SELECT_WHAT_YOU_WANT_TO_DO_STR);
                 System.out.println(formatList(list));
                 System.out.println("Select what you want to undo:");
                 System.out.println(formatList(replace));
             }
         }
-        while (!stopStr.equals(input));
-        replace.remove(stopStr);
-        list.remove(stopStr);
-        System.out.println(ColorFormats.red(selectedStr) + formatList(replace));
+        while (!STOP_STR.equals(input));
+        replace.remove(STOP_STR);
+        list.remove(STOP_STR);
+        System.out.println(ColorFormats.red(SELECTED_STR) + formatList(replace));
         return replace;
     }
     @NotNull
@@ -335,7 +340,7 @@ public class Display {
         final StringBuilder strBuilder = new StringBuilder();
 
         for (Card str : list) {
-            strBuilder.append(listItemStr);
+            strBuilder.append(LIST_ITEM_STR);
             strBuilder.append(str);
             strBuilder.append('\n');
         }
@@ -347,7 +352,7 @@ public class Display {
         final StringBuilder strBuilder = new StringBuilder();
 
         for (String str : list) {
-            strBuilder.append(listItemStr);
+            strBuilder.append(LIST_ITEM_STR);
             strBuilder.append(str);
             strBuilder.append('\n');
         }

@@ -8,8 +8,8 @@ import hero.Hero;
 
 import java.util.*;
 public class Game {
-    private final String youStr = "you";
-    private final String enemyStr = "enemy";
+    private static final String YOU_STR = "you";
+    private static final String ENEMY_STR = "enemy";
 
     private CardCollection beginCards = new CardCollection();
 
@@ -40,7 +40,7 @@ public class Game {
     public CardCollection getPlayerBeginCards() {
         beginCards = new CardCollection();
 
-        if (this.getActivePlayer().equals(enemyStr)) {
+        if (this.getActivePlayer().equals(ENEMY_STR)) {
             beginCards.addCard(this.getYou().getDeck().drawCard());
         }
         beginCards.addCard(this.getYou().getDeck().drawCard());
@@ -178,7 +178,7 @@ public class Game {
             }
         }
         //TODO zijn er end turn battlecries?
-        setActivePlayer(youStr);
+        setActivePlayer(YOU_STR);
         startTurnYou();
 
     }
@@ -189,7 +189,7 @@ public class Game {
     }
 
     public Player activePlayerToPlayer() {
-        if (youStr.equals(activePlayer)) {
+        if (YOU_STR.equals(activePlayer)) {
             return you;
         } else {
             return enemy;
@@ -199,7 +199,7 @@ public class Game {
     public Object getRandomTarget() {
         final Object target;
         final int i;
-        if (enemyStr.equals(activePlayer)) {
+        if (ENEMY_STR.equals(activePlayer)) {
             i = yourSideOfPlayingField.getCards().size() - 1;
             final int randomIndex = (int) (Math.round(Math.random()) * i);
             if (randomIndex == i) {
@@ -234,7 +234,7 @@ public class Game {
 
     public void startGame() {
         //TODO zorg dat bij replacecard de beginner de activeplayer wordt
-        if (enemyStr.equals(activePlayer)) {
+        if (ENEMY_STR.equals(activePlayer)) {
             startTurnAutoplayer();
         } else {
             startTurnYou();
@@ -275,7 +275,7 @@ public class Game {
             // useHeroPower()
             final boolean fixError = true;
         }
-        setActivePlayer(enemyStr);
+        setActivePlayer(ENEMY_STR);
         //startAutoplayer();
     }
 

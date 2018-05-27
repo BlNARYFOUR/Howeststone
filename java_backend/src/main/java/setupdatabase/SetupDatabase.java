@@ -29,22 +29,22 @@ public final class SetupDatabase {
         "TurnTimer Begin", "TurnTimer End", "Untargetable", "Update In Hand", };
 
     // STRING REPETITION SOLVERS
-    private final String exclamationStr = "!";
-    private final String noStr = "No ";
-    private final String nowHasIdStr = "\t* '%s' now has ID %d\n";
-    private final String valueStr = "value";
-    private final String targetStr = "target";
-    private final String mechanicsStr = "mechanics";
-    private final String abilitiesStr = "abilities";
-    private final String typeStr = "type";
-    private final String nullStr = "NULL";
-    private final String nameStr = "name";
-    private final String listItemStr = "\t* ";
-    private String deckCreatedStr = "deck created: ";
-    private String cardMechanicCreatedStr = "cardMechanic created: ";
-    private String idObtainedStr = "ID obtained.";
-    private String rowsAffectedStr = "rows affected.";
-    private String cardCreatedStr = "card created: ";
+    private static final String EXCLAMATION_STR = "!";
+    private static final String NO_STR = "No ";
+    private static final String NOW_HAS_ID_STR = "\t* '%s' now has ID %d%n";
+    private static final String VALUE_STR = "value";
+    private static final String TARGET_STR = "target";
+    private static final String MECHANICS_STR = "mechanics";
+    private static final String ABILITIES_STR = "abilities";
+    private static final String TYPE_STR = "type";
+    private static final String NULL_STR = "NULL";
+    private static final String NAME_STR = "name";
+    private static final String LIST_ITEM_STR = "\t* ";
+    private static final String DECK_CREATED_STR = "deck created: ";
+    private static final String CARD_MECHANIC_CREATED_STR = "cardMechanic created: ";
+    private static final String ID_OBTAINED_STR = "ID obtained.";
+    private static final String ROWS_AFFECTED_STR = "rows affected.";
+    private static final String CARD_CREATED_STR = "card created: ";
 
     private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306", "root", "");
     private JSONArray spellList;
@@ -141,15 +141,15 @@ public final class SetupDatabase {
             final int[] intArgs = new int[5];
 
             //noinspection unchecked
-            strArgs[0] = jsonCard.getOrDefault(nameStr, nullStr).toString();
+            strArgs[0] = jsonCard.getOrDefault(NAME_STR, NULL_STR).toString();
             //noinspection unchecked
-            strArgs[1] = jsonCard.getOrDefault(typeStr, nullStr).toString();
+            strArgs[1] = jsonCard.getOrDefault(TYPE_STR, NULL_STR).toString();
             //noinspection unchecked
-            strArgs[2] = jsonCard.getOrDefault("race", nullStr).toString();
+            strArgs[2] = jsonCard.getOrDefault("race", NULL_STR).toString();
             //noinspection unchecked
-            strArgs[3] = jsonCard.getOrDefault("img", nullStr).toString();
+            strArgs[3] = jsonCard.getOrDefault("img", NULL_STR).toString();
             //noinspection unchecked
-            strArgs[4] = jsonCard.getOrDefault("rarity", nullStr).toString();
+            strArgs[4] = jsonCard.getOrDefault("rarity", NULL_STR).toString();
             //noinspection unchecked
             intArgs[0] = Integer.parseInt(jsonCard.getOrDefault("health", 0).toString());
             //noinspection unchecked
@@ -159,7 +159,7 @@ public final class SetupDatabase {
             //noinspection unchecked
             intArgs[3] = Integer.parseInt(jsonCard.getOrDefault("durability", 0).toString());
             //noinspection unchecked
-            intArgs[4] = getHeroId(jsonCard.getOrDefault("playerClass", nullStr).toString());
+            intArgs[4] = getHeroId(jsonCard.getOrDefault("playerClass", NULL_STR).toString());
 
             if (0 <= intArgs[4]) {
                 final int cardId = insertCard(strArgs, intArgs);
@@ -170,13 +170,13 @@ public final class SetupDatabase {
 
     private void addCardAbilityToDb(JSONObject card, int cardId) {
         //noinspection unchecked
-        final JSONArray jsonAbilities = (JSONArray) card.getOrDefault(abilitiesStr, null);
+        final JSONArray jsonAbilities = (JSONArray) card.getOrDefault(ABILITIES_STR, null);
 
         if (jsonAbilities != null) {
             for (Object subItemObj : jsonAbilities) {
                 final JSONObject jsonAbility = (JSONObject) subItemObj;
                 //noinspection unchecked
-                final String abilityName = jsonAbility.get(nameStr).toString();
+                final String abilityName = jsonAbility.get(NAME_STR).toString();
 
                 final int abilityId = getAbilityId(abilityName);
 
@@ -185,7 +185,7 @@ public final class SetupDatabase {
 
                     if (Arrays.asList(ABILITIES_WITH_MECHANICS).contains(abilityName)) {
                         //noinspection unchecked
-                        final JSONArray jsonMechanics = (JSONArray) card.getOrDefault(mechanicsStr, null);
+                        final JSONArray jsonMechanics = (JSONArray) card.getOrDefault(MECHANICS_STR, null);
                         //noinspection unchecked
                         final int mechNeeded = Integer.parseInt(jsonAbility.getOrDefault(
                                 "mechNeeded", jsonMechanics.size()).toString());
@@ -195,11 +195,11 @@ public final class SetupDatabase {
 
                             final JSONObject jsonMechanic = (JSONObject) obj;
                             //noinspection unchecked
-                            final String mechanicType = jsonMechanic.get(typeStr).toString();
+                            final String mechanicType = jsonMechanic.get(TYPE_STR).toString();
                             //noinspection unchecked
-                            final String target = jsonMechanic.getOrDefault(targetStr, nullStr).toString();
+                            final String target = jsonMechanic.getOrDefault(TARGET_STR, NULL_STR).toString();
                             //noinspection unchecked
-                            final String value = jsonMechanic.getOrDefault(valueStr, nullStr).toString();
+                            final String value = jsonMechanic.getOrDefault(VALUE_STR, NULL_STR).toString();
 
                             final int mechanicId = getMechanicId(mechanicType);
 
@@ -315,15 +315,15 @@ public final class SetupDatabase {
             final int affectedRows = stmt.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException(noStr + cardCreatedStr + noStr + rowsAffectedStr);
+                throw new SQLException(NO_STR + CARD_CREATED_STR + NO_STR + ROWS_AFFECTED_STR);
             }
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     id = rs.getLong(1);
-                    System.out.printf(nowHasIdStr, strArgs[0], id);
+                    System.out.printf(NOW_HAS_ID_STR, strArgs[0], id);
                 } else {
-                    throw new SQLException(noStr + cardCreatedStr + noStr + idObtainedStr);
+                    throw new SQLException(NO_STR + CARD_CREATED_STR + NO_STR + ID_OBTAINED_STR);
                 }
             }
 
@@ -344,15 +344,15 @@ public final class SetupDatabase {
             final int affectedRows = stmt.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException(noStr + name + " created: noStr rows affected.");
+                throw new SQLException(NO_STR + name + " created: NO_STR rows affected.");
             }
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     final long id = rs.getLong(1);
-                    System.out.printf(nowHasIdStr, value, id);
+                    System.out.printf(NOW_HAS_ID_STR, value, id);
                 } else {
-                    throw new SQLException(noStr + name + " created: noStr ID obtained.");
+                    throw new SQLException(NO_STR + name + " created: NO_STR ID obtained.");
                 }
             }
 
@@ -375,15 +375,15 @@ public final class SetupDatabase {
             final int affectedRows = stmt.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException(noStr + cardMechanicCreatedStr + noStr + rowsAffectedStr);
+                throw new SQLException(NO_STR + CARD_MECHANIC_CREATED_STR + NO_STR + ROWS_AFFECTED_STR);
             }
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     cardMechId = rs.getLong(1);
-                    System.out.printf("\t* new cardMechanic now has ID %d\n", cardMechId);
+                    System.out.printf("\t* new cardMechanic now has ID %d%n", cardMechId);
                 } else {
-                    throw new SQLException(noStr + cardMechanicCreatedStr + noStr + idObtainedStr);
+                    throw new SQLException(NO_STR + CARD_MECHANIC_CREATED_STR + NO_STR + ID_OBTAINED_STR);
                 }
             }
 
@@ -405,7 +405,7 @@ public final class SetupDatabase {
             final int affectedRows = stmt.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException(noStr + "cardAbility created: " + noStr + rowsAffectedStr);
+                throw new SQLException(NO_STR + "cardAbility created: " + NO_STR + ROWS_AFFECTED_STR);
             } else {
                 System.out.println("\t* new cardAbility has been added");
             }
@@ -498,7 +498,7 @@ public final class SetupDatabase {
             final int affectedRows = stmt.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException(noStr + "amount of cards has been updated: " + noStr + rowsAffectedStr);
+                throw new SQLException(NO_STR + "amount of cards has been updated: " + NO_STR + ROWS_AFFECTED_STR);
             } else {
                 System.out.println("Card amount has been updated in deck!");
             }
@@ -520,7 +520,7 @@ public final class SetupDatabase {
             final int affectedRows = stmt.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException(noStr + "card added to deck: " + noStr + rowsAffectedStr);
+                throw new SQLException(NO_STR + "card added to deck: " + NO_STR + ROWS_AFFECTED_STR);
             } else {
                 System.out.println("Card has been added to deck!");
             }
@@ -542,15 +542,15 @@ public final class SetupDatabase {
             final int affectedRows = stmt.executeUpdate();
 
             if (affectedRows == 0) {
-                throw new SQLException(noStr + deckCreatedStr + noStr + rowsAffectedStr);
+                throw new SQLException(NO_STR + DECK_CREATED_STR + NO_STR + ROWS_AFFECTED_STR);
             }
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     deckId = rs.getLong(1);
-                    System.out.printf("\t* new deck now has ID %d\n", deckId);
+                    System.out.printf("\t* new deck now has ID %d%n", deckId);
                 } else {
-                    throw new SQLException(noStr + deckCreatedStr + noStr + idObtainedStr);
+                    throw new SQLException(NO_STR + DECK_CREATED_STR + NO_STR + ID_OBTAINED_STR);
                 }
             }
 
@@ -595,8 +595,8 @@ public final class SetupDatabase {
                 if (rs.next()) {
                     num = rs.getInt("amount");
                 } else {
-                    System.out.println(ColorFormats.red(listItemStr + noStr + "amount found for cardId "
-                            + cardId + " in deck " + deckId + exclamationStr));
+                    System.out.println(ColorFormats.red(LIST_ITEM_STR + NO_STR + "amount found for cardId "
+                            + cardId + " in deck " + deckId + EXCLAMATION_STR));
                 }
             }
         } catch (SQLException e) {
@@ -634,8 +634,8 @@ public final class SetupDatabase {
                 if (rs.next()) {
                     num = rs.getInt(name);
                 } else {
-                    System.out.println(ColorFormats.red(listItemStr + noStr + name
-                            + " found for " + value + exclamationStr));
+                    System.out.println(ColorFormats.red(LIST_ITEM_STR + NO_STR + name
+                            + " found for " + value + EXCLAMATION_STR));
                 }
             }
         } catch (SQLException e) {
@@ -646,19 +646,19 @@ public final class SetupDatabase {
     }
 
     private Set<String> addAbilitiesToSet(JSONArray jsonArray, Set<String> prevFoundAbilities) {
-        return addSubItemsToSet(jsonArray, prevFoundAbilities, abilitiesStr, nameStr);
+        return addSubItemsToSet(jsonArray, prevFoundAbilities, ABILITIES_STR, NAME_STR);
     }
 
     private Set<String> addMechanicTypeToSet(JSONArray jsonArray, Set<String> prevFoundMechanicTypes) {
-        return addSubItemsToSet(jsonArray, prevFoundMechanicTypes, mechanicsStr, typeStr);
+        return addSubItemsToSet(jsonArray, prevFoundMechanicTypes, MECHANICS_STR, TYPE_STR);
     }
 
     private Set<String> addMechanicTargetToSet(JSONArray jsonArray, Set<String> prevFoundMechanicTargets) {
-        return addSubItemsToSet(jsonArray, prevFoundMechanicTargets, mechanicsStr, targetStr);
+        return addSubItemsToSet(jsonArray, prevFoundMechanicTargets, MECHANICS_STR, TARGET_STR);
     }
 
     private Set<String> addMechanicValueToSet(JSONArray jsonArray, Set<String> prevFoundMechanicValues) {
-        return addSubItemsToSet(jsonArray, prevFoundMechanicValues, mechanicsStr, valueStr);
+        return addSubItemsToSet(jsonArray, prevFoundMechanicValues, MECHANICS_STR, VALUE_STR);
     }
 
     private Set<String> addSubItemsToSet(JSONArray jsonArray, Set<String> prevFound, String item, String subItem) {
@@ -671,7 +671,7 @@ public final class SetupDatabase {
                 for (Object subItemObj : itemList) {
                     final JSONObject jsonAbility = (JSONObject) subItemObj;
                     //noinspection unchecked
-                    prevFound.add(jsonAbility.getOrDefault(subItem, nullStr).toString());
+                    prevFound.add(jsonAbility.getOrDefault(subItem, NULL_STR).toString());
                 }
             }
         }

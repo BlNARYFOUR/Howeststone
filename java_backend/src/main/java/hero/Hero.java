@@ -3,8 +3,8 @@ package hero;
 import cards.Weapon;
 
 public class Hero {
-    private final String paladinStr = "Paladin";
-    private final String mageStr = "Mage";
+    private static final String PALADIN_STR = "Paladin";
+    private static final String MAGE_STR = "Mage";
 
     private int mageAttack;
     private int health;
@@ -16,14 +16,14 @@ public class Hero {
     public Hero(String heroName) {
         this.health = 30;
         switch (heroName) {
-            case mageStr:
-                this.heroName = mageStr;
+            case MAGE_STR:
+                this.heroName = MAGE_STR;
                 this.heroId = 1;
                 this.heroPowerID = 0;
                 this.mageAttack = 1;
                 break;
-            case paladinStr:
-                this.heroName = paladinStr;
+            case PALADIN_STR:
+                this.heroName = PALADIN_STR;
                 this.heroId = 3;
                 this.heroPowerID = 1;
                 break;

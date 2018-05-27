@@ -118,6 +118,7 @@ public class Server {
                     cards.addCard(card);
                 }
             }
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -143,6 +144,8 @@ public class Server {
                 final String mechanicType = rs.getString("mechanicType");
 
             }
+
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
