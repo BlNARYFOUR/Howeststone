@@ -409,7 +409,7 @@ function updateMyCards() {
             myCards = result;
             updateCards(myCards.length, "you", 1);
             setMyCards(myCards);
-            giveClassNameEqualToCardID();
+            giveClassNameEqualTocardID();
             setupMovingOfCards();
         })
         .catch(function(err) {
@@ -417,7 +417,7 @@ function updateMyCards() {
         });
 }
 
-function giveClassNameEqualToCardID() {
+function giveClassNameEqualTocardID() {
     let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
     for (let i = 0; i < myCards.length; i++) {
         cardHtmlObjects[i].classList.add(myCards[i]["cardID"]);
@@ -427,7 +427,7 @@ function giveClassNameEqualToCardID() {
 function MOCKMYCARDS() {
     return [
         {
-            "cardId": "CS2_188",
+            "cardID": "CS2_188",
             "dbfId": "242",
             "name": "Abusive Sergeant",
             "cardSet": "Classic",
@@ -452,7 +452,7 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "EX1_009",
+            "cardID": "EX1_009",
             "dbfId": "1688",
             "name": "Angry Chicken",
             "cardSet": "Classic",
@@ -472,7 +472,7 @@ function MOCKMYCARDS() {
             "locale": "enUS"
         },
         {
-            "cardId": "EX1_398t",
+            "cardID": "EX1_398t",
             "dbfId": "1707",
             "name": "Battle Axe",
             "cardSet": "Classic",
@@ -486,7 +486,7 @@ function MOCKMYCARDS() {
             "locale": "enUS"
         },
         {
-            "cardId": "EX1_409t",
+            "cardID": "EX1_409t",
             "dbfId": "1661",
             "name": "Heavy Axe",
             "cardSet": "Classic",
@@ -500,7 +500,7 @@ function MOCKMYCARDS() {
             "locale": "enUS"
         },
         {
-            "cardId": "EX1_008",
+            "cardID": "EX1_008",
             "dbfId": "757",
             "name": "Argent Squire",
             "cardSet": "Classic",
@@ -525,7 +525,7 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "EX1_410",
+            "cardID": "EX1_410",
             "dbfId": "546",
             "name": "Shield Slam",
             "cardSet": "Classic",
@@ -548,7 +548,7 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "EX1_392",
+            "cardID": "EX1_392",
             "dbfId": "400",
             "name": "Battle Rage",
             "cardSet": "Classic",
@@ -566,7 +566,7 @@ function MOCKMYCARDS() {
             "locale": "enUS"
         },
         {
-            "cardId": "EX1_319",
+            "cardID": "EX1_319",
             "dbfId": "1090",
             "name": "Flame Imp",
             "cardSet": "Classic",
@@ -592,7 +592,7 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "NEW1_017",
+            "cardID": "NEW1_017",
             "dbfId": "443",
             "name": "Hungry Crab",
             "cardSet": "Classic",
@@ -617,7 +617,7 @@ function MOCKMYCARDS() {
             ]
         },
         {
-            "cardId": "EX1_012",
+            "cardID": "EX1_012",
             "dbfId": "749",
             "name": "Bloodmage Thalnos",
             "cardSet": "Classic",
@@ -1096,9 +1096,9 @@ function layCardOnFieldEnd(e) {
 }
 
 function returnTypeOfMyCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+        if (cardID.indexOf(myCards[i]["cardID"]) !== -1) {
             return myCards[i]["type"];
         }
     }
@@ -1106,9 +1106,9 @@ function returnTypeOfMyCard(liWithClass) {
 }
 
 function returnDurabilityOfMyCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+        if (cardID.indexOf(myCards[i]["cardID"]) !== -1) {
             return myCards[i]["durability"];
         }
     }
@@ -1116,9 +1116,9 @@ function returnDurabilityOfMyCard(liWithClass) {
 }
 
 function returnHealthOfMyCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+        if (cardID.indexOf(myCards[i]["cardID"]) !== -1) {
             return myCards[i]["health"];
         }
     }
@@ -1126,9 +1126,9 @@ function returnHealthOfMyCard(liWithClass) {
 }
 
 function returnAttackOfMyCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+        if (cardID.indexOf(myCards[i]["cardID"]) !== -1) {
             return myCards[i]["attack"];
         }
     }
@@ -1136,9 +1136,9 @@ function returnAttackOfMyCard(liWithClass) {
 }
 
 function returnCostOfMyCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
     for (let i = 0; i < myCards.length; i++) {
-        if (cardId.indexOf(myCards[i]["cardID"]) !== -1) {
+        if (cardID.indexOf(myCards[i]["cardID"]) !== -1) {
             return myCards[i]["manaCost"];
         }
     }
@@ -1146,14 +1146,14 @@ function returnCostOfMyCard(liWithClass) {
 }
 
 function sendPlayedCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
+    let cardID = liWithClass.getAttribute('class');
 
     fetch('/threebeesandme/post/gameboard/playcard', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(cardId.split(' ')[0])
+        body: JSON.stringify(cardID.split(' ')[0])
     })
         .then(function (res) {
             if (res.ok === true)

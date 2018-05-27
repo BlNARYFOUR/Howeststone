@@ -153,5 +153,15 @@ public final class SqlStatements {
             + " JOIN cardmechanics ON cardmechanics.cardMechId=cardabilities.cardMechId JOIN mechanics ON"
             + " mechanics.mechanicId=cardmechanics.mechanicId WHERE cardId = ?";
 
-    private SqlStatements() { }
+    public static final String FILTER_CARDS = "SELECT *"
+            + " FROM  cards"
+            + " JOIN heroes ON cards.heroId = heroes.heroId"
+            + " WHERE  heroes.heroName LIKE ?"
+            + " AND cards.cardType LIKE ?"
+            + " AND cards.manaCost >= ? AND cards.manaCost <= ?"
+            + " AND cards.rarity LIKE ?";
+
+    private SqlStatements() {
+    }
+
 }
