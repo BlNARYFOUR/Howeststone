@@ -27,6 +27,7 @@ public class CardCollection {
     }
 
     public Card drawCard() {
+        shuffle();
         if (0 < cards.size()) {
             final Card draw = cards.get(0);
             cards.remove(0);
