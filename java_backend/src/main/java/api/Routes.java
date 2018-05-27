@@ -16,6 +16,8 @@ class Routes {
 
     private static final String SUCCES = "SUCCES";
     private static final String ERROR = "ERROR";
+    private static final String ENEMY_STR = "enemy";
+    private static final String YOU_STR = "you";
 
     private final Game howeststone;
 
@@ -78,9 +80,7 @@ class Routes {
     private void handleDeckSelection(Context context) {
         // System.out.println(howeststone.deckNames);
         howeststone.getYou().setDeck(
-                howeststone.deckNames.get(
-                        howeststone.getYou().getHero().getHeroName()
-                )
+                howeststone.getDeckByHeroName(howeststone.getYou().getHero().getHeroName())
         );
         context.json(howeststone.getYou().getDeck().getName());
     }
@@ -99,9 +99,9 @@ class Routes {
         final Random rand = new Random();
         final boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
-            howeststone.setActivePlayer("you");
+            howeststone.setActivePlayer(YOU_STR);
         } else {
-            howeststone.setActivePlayer("enemy");
+            howeststone.setActivePlayer(ENEMY_STR);
             howeststone.getEnemy().beginTurn();
             // do auto player
 
@@ -131,7 +131,7 @@ class Routes {
         if (howeststone.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
             context.json(SUCCES);
 
-            if (howeststone.getActivePlayer().equals("you")) {
+            if (howeststone.getActivePlayer().equals(YOU_STR)) {
                 howeststone.getYou().beginTurn();
             }
         } else {
@@ -181,7 +181,7 @@ class Routes {
 
     private void getHeroName(Context context) {
         final String hero = context.queryParamMap().get("parent")[0];
-        if ("enemy".equals(hero)) {
+        if (ENEMY_STR.equals(hero)) {
             context.json(howeststone.getEnemy().getHero().getHeroName());
         } else {
             context.json(howeststone.getYou().getHero().getHeroName());
@@ -189,7 +189,7 @@ class Routes {
     }
 
     private void canHeroAttack(Context context) {
-        context.result("no :p");
+        context.result("no :P");
     }
 
     private void canThisMinionAttack(Context context) {

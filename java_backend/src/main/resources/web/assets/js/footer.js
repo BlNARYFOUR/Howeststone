@@ -2,8 +2,15 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
+    document.querySelector('#saveGame').addEventListener('click', saveGame);
     document.querySelector('#playMainMenuMusic').addEventListener('click',playPauseMusic)
 
+}
+
+
+function saveGame() {
+    // TODO fetch
+    alert("NYI");
 }
 
 function playPauseMusic(e) {
