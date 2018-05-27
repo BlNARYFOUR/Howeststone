@@ -578,8 +578,19 @@ function saveThisDeck() {
         else
             return "ERROR";
     }).then(function (text) {
-        if (text){
+        if (text) {
+            alert("SAVE SUCCEEDED");
             getAllDecks();
+        } else {
+            let cardsRemaining = 30
+                - parseInt(document.getElementById('cardAmount').innerText.split("/")[0]);
+            if (cardsRemaining === 1) {
+                alert("DECK NEEDS TO HAVE 30 CARDS\n YOU NEED TO ADD "
+                    + cardsRemaining + " CARD");
+            } else {
+                alert("DECK NEEDS TO HAVE 30 CARDS\n YOU NEED TO ADD "
+                    + cardsRemaining + " CARDS");
+            }
         }
     }).catch(function (err) {
         console.log(err + "Error: Could not save deck");

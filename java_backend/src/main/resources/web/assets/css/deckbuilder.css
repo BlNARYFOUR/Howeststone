@@ -129,16 +129,16 @@
     width: 17vw;
 }
 
-#deckbuilder #firstFilter > label {
+#deckbuilder #firstFilter fieldset{
     display: block;
 }
 
-#deckbuilder #all, #deckbuilder #mage, #deckbuilder #paladin, #deckbuilder #neutral {
+#deckbuilder #firstFilter input {
     display: inline-block;
     width: 1vw;
 }
 
-#deckbuilder #all + label, #deckbuilder #mage + label, #deckbuilder #paladin + label, #deckbuilder #neutral + label {
+#deckbuilder #firstFilter label {
     display: inline-block;
     width: 14vw;
 }
@@ -151,16 +151,16 @@
     width: 10vw;
 }
 
-#deckbuilder #secondFilter > label {
+#deckbuilder #secondFilter fieldset {
     display: block;
 }
 
-#deckbuilder #minion, #deckbuilder #weapon, #deckbuilder #spell {
+#deckbuilder #secondFilter input {
     display: inline-block;
     width: 1vw;
 }
 
-#deckbuilder #minion + label, #deckbuilder #weapon + label, #deckbuilder #spell + label {
+#deckbuilder #secondFilter label {
     display: inline-block;
     width: 7vw;
 }
@@ -173,19 +173,19 @@
     width: 14vw;
 }
 
-#deckbuilder #thirdFilter > label {
+#deckbuilder #thirdFilter fieldset {
     display: block;
 }
 
-/* THIS DOESN'T WORK
-#deckbuilder #0_Mana+label , #deckbuilder #1_Mana+label, #deckbuilder #2_Mana+label ,#deckbuilder #3_Mana+label ,#deckbuilder #4_Mana+label ,#deckbuilder #5_Mana+label ,#deckbuilder #6_Mana+label , #deckbuilder #7_Mana+label{
+#deckbuilder #thirdFilter label{
     display: inline-block;
     width: 11vw;
 }
-#deckbuilder #0_Mana , #deckbuilder #1_Mana, #deckbuilder #2_Mana ,#deckbuilder #3_Mana ,#deckbuilder #4_Mana ,#deckbuilder #5_Mana ,#deckbuilder #6_Mana , #deckbuilder #7_Mana{
+#deckbuilder #thirdFilter input{
     display: inline-block;
     width: 1vw;
 }
+
 /* Card Rarity */
 #deckbuilder #fourthFilter {
     position: absolute;
@@ -194,16 +194,16 @@
     width: 10vw;
 }
 
-#deckbuilder #fourthFilter > label {
+#deckbuilder #fourthFilter fieldset {
     display: block;
 }
 
-#deckbuilder #free, #deckbuilder #common, #deckbuilder #rare, #deckbuilder #epic, #deckbuilder #legendary {
+#deckbuilder #fourthFilter input{
     display: inline-block;
     width: 1vw;
 }
 
-#deckbuilder #free + label, #deckbuilder #common + label, #deckbuilder #rare + label, #deckbuilder #epic + label, #deckbuilder #legendary + label {
+#deckbuilder #fourthFilter label {
     display: inline-block;
     width: 7vw;
 }

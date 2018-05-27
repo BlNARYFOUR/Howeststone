@@ -173,7 +173,8 @@ public class Game {
 
         String filterHeroName = "%";
         String filterType = "%";
-        String filterManaCost = "%";
+        int filterManaCostMin = 0;
+        int filterManaCostMax = 10;
         String filterRarity = "%";
 
         if (!filterArray.get(0).equals("All")) {
@@ -183,7 +184,12 @@ public class Game {
             filterType = filterArray.get(1) + filterType;
         }
         if (!filterArray.get(2).equals("-1")) {
-            filterManaCost = filterArray.get(2).split("_")[0] + filterManaCost;
+            filterManaCostMin = Integer.parseInt(filterArray.get(2).split("_")[0]);
+            if (filterManaCostMin== 7){
+                filterManaCostMax = 10;
+            } else {
+                filterManaCostMax = filterManaCostMin;
+            }
         }
         if (!filterArray.get(3).equals("-1")) {
             filterRarity = filterArray.get(3) + filterRarity;
@@ -194,8 +200,9 @@ public class Game {
         ) {
             stmt.setString(1, filterHeroName);
             stmt.setString(2, filterType);
-            stmt.setString(3, filterManaCost);
-            stmt.setString(4, filterRarity);
+            stmt.setInt(3, filterManaCostMin);
+            stmt.setInt(4, filterManaCostMax);
+            stmt.setString(5, filterRarity);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 cardIds.add(rs.getInt("cardId"));
