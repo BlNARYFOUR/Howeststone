@@ -415,7 +415,7 @@ public class Game {
 
     private boolean checkIfNewDeckIsCorrect(CardCollection newDeck) {
         int check = 0;
-        newDeck.getCards().sort(new AlfazCardCollectionComparator());
+        newDeck.getCards().sort(new CardCollectionAlphabeticalComparator());
         final List<Card> newDeckCards = newDeck.getCards();
         for (int i = 0; i < newDeckCards.size(); i++) {
             // TODO check on uncollectable

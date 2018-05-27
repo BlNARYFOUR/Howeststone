@@ -151,21 +151,21 @@ public class CardCollection {
     public CardCollection sortDeck(String body) {
         switch (body) {
             case "alfaz":
-                this.getCards().sort(new AlfazCardCollectionComparator());
+                this.getCards().sort(new CardCollectionAlphabeticalComparator());
                 break;
 
             case "alfza":
-                this.getCards().sort(new AlfazCardCollectionComparator());
+                this.getCards().sort(new CardCollectionAlphabeticalComparator());
                 Collections.reverse(this.getCards());
                 break;
 
             case "mana07":
-                this.getCards().sort(new ManaCardCollectionComparator());
+                this.getCards().sort(new CardCollectionManaComparator());
                 Collections.reverse(this.getCards());
                 break;
 
             case "mana70":
-                this.getCards().sort(new ManaCardCollectionComparator());
+                this.getCards().sort(new CardCollectionManaComparator());
                 break;
             default:
                 throw new IllegalArgumentException("no sort methods where found");
