@@ -422,7 +422,7 @@ function updateMyCards() {
 function giveClassNameEqualToCardID() {
     let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
     for (let i = 0; i < myCards.length; i++) {
-        cardHtmlObjects[i].classList.add(myCards[i]["cardID"]);
+        cardHtmlObjects[i].classList.add("card_" +myCards[i]["cardID"]);
     }
 }
 
@@ -883,7 +883,30 @@ let itemThatIsBeingMoved;
 let moved;
 
 function layCardOnFieldStart(e) {
-    // TODO fetch
+    let cardID = e.target.classList[0].split("_")[1];
+    fetch('/threebeesandme/post/gameboard/playingfield/cancardbeadded', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: cardID
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            if (text = "SUCCES"){
+                beginAddingCard(e);
+            }
+        })
+        .catch(function (err) {
+            console.log(err +"Error: Could not send the selected deck :'(");
+        });
+}
+function beginAddingCard(e) {
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
     itemThatIsBeingMoved = e.target;
@@ -1148,8 +1171,8 @@ function returnCostOfMyCard(liWithClass) {
 }
 
 function sendPlayedCard(liWithClass) {
-    let cardId = liWithClass.getAttribute('class');
-
+    let cardID = liWithClass.classList[0].split("_")[1];
+    
     fetch('/threebeesandme/post/gameboard/playcard', {
         method: 'POST',
         headers: {

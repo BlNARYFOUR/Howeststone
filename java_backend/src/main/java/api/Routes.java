@@ -39,6 +39,7 @@ class Routes {
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
         server.get("/threebeesandme/get/gameboard/herohealth", this::getHeroHealth);
+        server.post("/threebeesandme/post/gameboard/playingfield/cancardbeadded", this::canCardBeAddedToPlayingField);
         server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
         server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
         server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
@@ -145,6 +146,16 @@ class Routes {
         } else {
             System.out.println(ColorFormats.red("you shall not hack"));
             context.json(ERROR);
+        }
+    }
+
+    private void canCardBeAddedToPlayingField(Context context) {
+        if ("enemy".equals(howeststone.getActivePlayer())) {
+            context.json(ERROR);
+        } else if (howeststone.getYou().getCardsOnPlayingField().getCards().size() >= 7){
+            context.json(ERROR);
+        } else {
+            context.json(SUCCES);
         }
     }
 
