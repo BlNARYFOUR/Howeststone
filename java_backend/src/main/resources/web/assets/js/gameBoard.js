@@ -898,7 +898,7 @@ function layCardOnFieldStart(e) {
                 return "ERROR";
         })
         .then(function (text) {
-            if (text = "SUCCES"){
+            if (text === "SUCCES"){
                 beginAddingCard(e);
             }
         })
@@ -1178,7 +1178,7 @@ function sendPlayedCard(liWithClass) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(cardId.split(' ')[0])
+        body: JSON.stringify(cardID)
     })
         .then(function (res) {
             if (res.ok === true)

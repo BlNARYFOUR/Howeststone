@@ -82,7 +82,6 @@ class Routes {
     }
 
     private void handleDeckSelection(Context context) {
-        // System.out.println(howeststone.deckNames);
         howeststone.getYou().setDeck(
                 howeststone.getDeckByHeroName(howeststone.getYou().getHero().getHeroName())
         );
@@ -129,7 +128,6 @@ class Routes {
 
     private void replaceCards(Context context) throws IOException {
         final String body = context.body();
-        System.out.println(body);
         final ObjectMapper mapper = new ObjectMapper();
         final Map<String, List<Integer>> temp =
                 mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() { });
@@ -150,9 +148,11 @@ class Routes {
     }
 
     private void canCardBeAddedToPlayingField(Context context) {
-        if ("enemy".equals(howeststone.getActivePlayer())) {
+        if (!howeststone.getYou().canIPlayCard(context.body())) {
             context.json(ERROR);
-        } else if (howeststone.getYou().getCardsOnPlayingField().getCards().size() >= 7){
+        } else if (ENEMY_STR.equals(howeststone.getActivePlayer())) {
+            context.json(ERROR);
+        } else if (howeststone.getYou().getCardsOnPlayingField().getCards().size() >= 7) {
             context.json(ERROR);
         } else {
             context.json(SUCCES);
