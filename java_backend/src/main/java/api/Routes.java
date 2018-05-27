@@ -78,9 +78,7 @@ class Routes {
     private void handleDeckSelection(Context context) {
         // System.out.println(howeststone.deckNames);
         howeststone.getYou().setDeck(
-                howeststone.deckNames.get(
-                        howeststone.getYou().getHero().getHeroName()
-                )
+                howeststone.getDeckByHeroName(howeststone.getYou().getHero().getHeroName())
         );
         context.json(howeststone.getYou().getDeck().getName());
     }

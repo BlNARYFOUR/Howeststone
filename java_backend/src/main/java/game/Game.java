@@ -152,7 +152,7 @@ public class Game {
         enemy.getCardsInHand().addCard(enemy.getDeck().drawCard());
 
         final List<Card> cardsInHand = enemy.getCardsInHand().getCards();
-        cardsInHand.sort(new manaCardCollectionComparator());
+        cardsInHand.sort(new ManaCardCollectionComparator());
 
         final double enemyBrain = Math.random();
         if (enemyBrain <= 0.25) {
