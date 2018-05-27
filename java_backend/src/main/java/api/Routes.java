@@ -22,8 +22,12 @@ class Routes {
 
     Routes(final Javalin server, Game game) {
         howeststone = game;
-        // case sensitive
 
+        setGetRequests(server);
+        setPostRequests(server);
+    }
+
+    private void setGetRequests(Javalin server) {
         // GAME BOARD
         server.get("/threebeesandme/get/gameboard/begincards", this::getBeginCards);
         server.get("/threebeesandme/get/gameboard/begin", this::beginGame);
@@ -35,21 +39,29 @@ class Routes {
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
         server.get("/threebeesandme/get/gameboard/herohealth", this::getHeroHealth);
+
+        // HERO AND DECK SELECTOR
+        server.get("/threebeesandme/get/hero", this::getHeroName);
+        server.get("/threebeesandme/get/heroanddeckselector/decks", this::getAllDecks);
+        server.get("/threebeesandme/get/heroanddeckselector/heroes", this::getAllHeroes);
+
+        // DECKBUILDER
+        server.get("/threebeesandme/get/deckbuilder/cards", this::getAllCards);
+        server.get("/threebeesandme/get/deckbuilder/deck/cards", this::getCardsFromDeck);
+    }
+
+    private void setPostRequests(Javalin server) {
+        // GAME BOARD
         server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
         server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
         server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
         server.post("/threebeesandme/post/gameboard/endturn", this::handleEndTurn);
 
         // HERO AND DECK SELECTOR
-        server.get("/threebeesandme/get/hero", this::getHeroName);
-        server.get("/threebeesandme/get/heroanddeckselector/decks", this::getAllDecks);
-        server.get("/threebeesandme/get/heroanddeckselector/heroes", this::getAllHeroes);
         server.post("/threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
         server.post("/threebeesandme/post/heroanddeckselector/deck", this::handleDeckSelection);
 
         // DECKBUILDER
-        server.get("/threebeesandme/get/deckbuilder/cards", this::getAllCards);
-        server.get("/threebeesandme/get/deckbuilder/deck/cards", this::getCardsFromDeck);
         server.post("/threebeesandme/post/deckbuilder/hero", this::handleHeroSelection);
         server.post("/threebeesandme/post/deckbuilder/deck/cancardbeadded", this::canCardBeAdded);
         server.post("/threebeesandme/post/deckbuilder/deck/addcard", this::addCardToDeck);
