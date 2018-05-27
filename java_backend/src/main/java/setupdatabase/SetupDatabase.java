@@ -431,18 +431,18 @@ public final class SetupDatabase {
         final int amount = getAmountOfCardInDeck(deckId, cardID);
         boolean succeeded = false;
 
-        if (isLegalCard(cardID, deckId, amount)) {
-            updateAmountOfCardInDeck(deckId, cardID, amount + 1);
+        if (deckCanContainMoreThenOneOfCard(cardId, deckId, amount)) {
+            updateAmountOfCardInDeck(deckId, cardId, amount + 1);
             succeeded = true;
-        } else if (amount < 0 && !isUncollectable(cardID)) {
-            insertCardToDeck(deckId, cardID, 1);
+        } else if (amount < 0 && !isUncollectable(cardId) && doCardAndDeckHeroMatch(cardId, deckId)) {
+            insertCardToDeck(deckId, cardId, 1);
             succeeded = true;
         }
 
         return succeeded;
     }
 
-    private boolean isLegalCard(int cardID, int deckId, int amount) {
+    private boolean deckCanContainMoreThenOneOfCard(int cardId, int deckId, int amount) {
         boolean result = 0 <= amount && amount <= 1;
         result = result && !isLegendary(cardID) && !isUncollectable(cardID) && doCardAndDeckHeroMatch(cardID, deckId);
 
