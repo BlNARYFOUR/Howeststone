@@ -2,7 +2,7 @@ package game;
 
 import cards.Card;
 import cards.CardCollection;
-import cards.manaCardCollectionComparator;
+import cards.ManaCardCollectionComparator;
 import cards.Minion;
 import hero.Hero;
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CardCollection  {
+public class CardCollection {
     private String name;
     private List<Card> cards;
 
@@ -22,14 +22,14 @@ public class CardCollection  {
         this.cards = new ArrayList<>(cardCollection.getCards());
     }
 
-    private void shuffle(){
+    private void shuffle() {
         Collections.shuffle(cards);
     }
 
     public Card drawCard() {
-        final Card DRAW = cards.get(0);
+        final Card draw = cards.get(0);
         cards.remove(0);
-        return DRAW;
+        return draw;
     }
 
     public void addCard(Card card) {
@@ -38,8 +38,8 @@ public class CardCollection  {
     }
 
     public boolean hasCard(int cardId) {
-        for(Card card : cards) {
-            if(card.getCardID() == cardId) {
+        for (Card card : cards) {
+            if (card.getCardID() == cardId) {
                 return true;
             }
         }
@@ -48,10 +48,11 @@ public class CardCollection  {
     }
 
     public void removeCard(int cardID) {
-        for(int i=0; i<cards.size(); i++) {
-            if(cards.get(i).getCardID() == cardID) {
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getCardID() == cardID) {
                 cards.remove(i);
-                break;              // if card is 2 times in cards, it will only be deleted once
+                break;
+                // if card is 2 times in cards, it will only be deleted once
             }
         }
     }
@@ -60,14 +61,14 @@ public class CardCollection  {
     public String toString() {
         String str = "";
 
-        for(Card card : cards) {
+        for (Card card : cards) {
             str += "\n" + card;
         }
 
-        return "CardCollection{" +
-                "name='" + name + '\'' +
-                ", cards=" + str +
-                '}';
+        return "CardCollection{"
+                + "name='" + name + '\''
+                + ", cards=" + str
+                + '}';
     }
 
     public String getName() {
@@ -75,8 +76,8 @@ public class CardCollection  {
     }
 
     public Card getCard(int cardId) {
-        for(Card card : cards) {
-            if(card.getCardID() == cardId) {
+        for (Card card : cards) {
+            if (card.getCardID() == cardId) {
                 return card;
             }
         }
@@ -100,7 +101,7 @@ public class CardCollection  {
 
     public Card getMostExpensiveCard() {
         Card mostExpensiveCard = this.cards.get(0);
-        for(Card x : this.cards ){
+        for (Card x : this.cards) {
             if (x.getManaCost() > mostExpensiveCard.getManaCost()) {
                 mostExpensiveCard = x;
             }

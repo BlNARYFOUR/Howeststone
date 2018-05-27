@@ -14,10 +14,13 @@ import java.util.Random;
 
 class Routes {
 
-    private final Game HOWESTSTONE;
+    private static final String SUCCES = "SUCCES";
+    private static final String ERROR = "ERROR";
+
+    private final Game howeststone;
 
     Routes(final Javalin server, Game game) {
-        HOWESTSTONE = game;
+        howeststone = game;
         // case sensitive
         server.get("/API/getAllCards", this::getAllCards);
         //server.get("/API/getAllCards", this::getAllCards);
@@ -51,107 +54,105 @@ class Routes {
         server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
     }
 
-    private static final String SUCCES = "SUCCES";
-    private static final String ERROR = "ERROR";
-
     // HERO AND DECK SELECTOR
 
     private void getMyCardsInHand(Context context) {
-        context.json(HOWESTSTONE.getYou().getCardsInHand().getCards());
+        context.json(howeststone.getYou().getCardsInHand().getCards());
     }
 
     private void getAllHeroes(Context context) {
-        context.json(HOWESTSTONE.getHeroNames());
+        context.json(howeststone.getHeroNames());
     }
 
     private void handleHeroSelection(Context context) {
-        Player you = new Player();
+        final Player you = new Player();
         you.setHero(context.body());
-        HOWESTSTONE.addYou(you);
-        context.json(HOWESTSTONE.getYou().getHero().getHeroName());
+        howeststone.addYou(you);
+        context.json(howeststone.getYou().getHero().getHeroName());
     }
 
     private void getAllDecks(Context context) {
-        context.json(HOWESTSTONE.getDeckNames());
+        context.json(howeststone.getDeckNames());
     }
 
     private void handleDeckSelection(Context context) {
-        // System.out.println(HOWESTSTONE.deckNames);
-        HOWESTSTONE.getYou().setDeck(
-                HOWESTSTONE.getDeckByHeroName(
-                        HOWESTSTONE.getYou().getHero().getHeroName()
+        // System.out.println(howeststone.deckNames);
+        howeststone.getYou().setDeck(
+                howeststone.deckNames.get(
+                        howeststone.getYou().getHero().getHeroName()
                 )
         );
-        context.json(HOWESTSTONE.getYou().getDeck().getName());
+        context.json(howeststone.getYou().getDeck().getName());
     }
 
     // GAME BOARD
 
     private void beginGame(Context context) {
-        if (HOWESTSTONE.getYou().getHero() == null || HOWESTSTONE.getYou().getDeck() == null) {
+        if (howeststone.getYou().getHero() == null || howeststone.getYou().getDeck() == null) {
             //TODO get out of this method not exception
             throw new NullPointerException();
         }
-        HOWESTSTONE.generateEnemy();
-        HOWESTSTONE.setTurnTime(50);
-        HOWESTSTONE.createPlayingField();
+        howeststone.generateEnemy();
+        howeststone.setTurnTime(50);
+        howeststone.createPlayingField();
 
-        Random rand = new Random();
-        boolean doYouBegin = rand.nextBoolean();
+        final Random rand = new Random();
+        final boolean doYouBegin = rand.nextBoolean();
         if (doYouBegin) {
-            HOWESTSTONE.setActivePlayer("you");
+            howeststone.setActivePlayer("you");
         } else {
-            HOWESTSTONE.setActivePlayer("enemy");
-            HOWESTSTONE.getEnemy().beginTurn();
+            howeststone.setActivePlayer("enemy");
+            howeststone.getEnemy().beginTurn();
             // do auto player
 
         }
-        context.json(HOWESTSTONE.getActivePlayer());
+        context.json(howeststone.getActivePlayer());
     }
 
     private void getBeginCards(Context context) {
-        context.json(HOWESTSTONE.getPlayerBeginCards());
+        context.json(howeststone.getPlayerBeginCards());
     }
 
     private void getMyMana(Context context) {
-        int[] manaInfo = {HOWESTSTONE.getYou().getActiveMana(), HOWESTSTONE.getYou().getTotalMana()};
+        final int[] manaInfo = {howeststone.getYou().getActiveMana(), howeststone.getYou().getTotalMana()};
         context.json(manaInfo);
     }
 
     private void replaceCards(Context context) throws IOException {
-        String body = context.body();
+        final String body = context.body();
         System.out.println(body);
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, List<Integer>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>(){});
+        final ObjectMapper mapper = new ObjectMapper();
+        final Map<String, List<Integer>> temp =
+                mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() { });
 
-        List<Integer> cardsInHand = temp.get("CardsInHand");
-        List<Integer> cardsToReplace = temp.get("CardsToDeck");
+        final List<Integer> cardsInHand = temp.get("CardsInHand");
+        final List<Integer> cardsToReplace = temp.get("CardsToDeck");
 
-        if(HOWESTSTONE.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
+        if (howeststone.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
             context.json(SUCCES);
 
-            if(HOWESTSTONE.getActivePlayer().equals("you")) {
-                HOWESTSTONE.getYou().beginTurn();
+            if (howeststone.getActivePlayer().equals("you")) {
+                howeststone.getYou().beginTurn();
             }
-        }
-        else {
+        } else {
             System.out.println(ColorFormats.red("you shall not hack"));
             context.json(ERROR);
         }
     }
 
     private void playMyCard(Context context) throws IOException {
-        boolean succeeded;
-        String body = context.body();
+        final boolean succeeded;
+        final String body = context.body();
 
         System.out.println(body);
 
-        ObjectMapper mapper = new ObjectMapper();
-        int cardId = mapper.readValue(body, new TypeReference<Integer>(){});
+        final ObjectMapper mapper = new ObjectMapper();
+        final int cardId = mapper.readValue(body, new TypeReference<Integer>() {
+        });
 
-        succeeded = HOWESTSTONE.getYou().playCard(cardId);
+        succeeded = howeststone.getYou().playCard(cardId);
 
-        if(succeeded) {
+        if (succeeded) {
             context.json(SUCCES);
         } else {
             context.json(ERROR);
@@ -179,11 +180,11 @@ class Routes {
     }
 
     private void getHeroName(Context context) {
-        String hero = context.queryParamMap().get("parent")[0];
-        if (hero.equals("enemy")) {
-            context.json(HOWESTSTONE.getEnemy().getHero().getHeroName());
+        final String hero = context.queryParamMap().get("parent")[0];
+        if ("enemy".equals(hero)) {
+            context.json(howeststone.getEnemy().getHero().getHeroName());
         } else {
-            context.json(HOWESTSTONE.getYou().getHero().getHeroName());
+            context.json(howeststone.getYou().getHero().getHeroName());
         }
     }
 
