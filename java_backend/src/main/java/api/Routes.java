@@ -96,7 +96,7 @@ class Routes {
             throw new NullPointerException();
         }
         howeststone.generateEnemy();
-        howeststone.setTurnTime(50);
+        //howeststone.setTurnTime(50);
         howeststone.createPlayingField();
 
         final Random rand = new Random();

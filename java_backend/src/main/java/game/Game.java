@@ -20,7 +20,6 @@ public class Game {
     private Player enemy;
     private int manaYou;
     private int manaEnemy;
-    private int turnTime;
     private String activePlayer;
     private CardCollection yourSideOfPlayingField;
     private CardCollection enemySideOfPlayingField;
@@ -140,14 +139,6 @@ public class Game {
         return activePlayer;
     }
 
-    public int getTurnTime() {
-        return turnTime;
-    }
-
-    public void setTurnTime(int turnTime) {
-        this.turnTime = turnTime;
-    }
-
     public void startTurnAutoplayer() {
 
         final List<Card> cardsInHand = enemy.getCardsInHand().getCards();
@@ -174,7 +165,8 @@ public class Game {
         }
         //TODO zijn er end turn battlecries?
         setActivePlayer(YOU_STR);
-        //TurnTimer.startTurnTimer();
+        you.beginTurn();
+        //turnTimer.startTurnTimer();
 
     }
 
@@ -237,20 +229,6 @@ public class Game {
 
         target.setHealth(healthValueTarget - attackValueAttacker);
         attacker.setHealth(healthValueAttacker - attackValueTarget);
-    }
-
-    public void startYourTurn() {
-        //TODO voer abilities uit aan begin turn
-        you.beginTurn();
-
-        while (turnTime <= 50) {
-            // playCard(card)
-            // attackMinion(..., ...);
-            // useHeroPower()
-            final boolean fixError = true;
-        }
-        setActivePlayer(ENEMY_STR);
-        //startAutoplayer();
     }
 
     public void addHeroName(String heroName) {
