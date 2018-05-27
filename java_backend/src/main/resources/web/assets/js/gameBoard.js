@@ -1257,7 +1257,8 @@ function attackStart() {
 }
 
 function loadAttackStart(e) {
-    fetch('http://localhost:4242/threebeesandme/get/gameboard/attackpermission', {
+    let cardID = e.target.classList[0].split("_")[1];
+    fetch('/threebeesandme/get/gameboard/attackpermission?cardID=' + cardID , {
         method: 'get'
     })
         .then(function (res) {
@@ -1265,8 +1266,9 @@ function loadAttackStart(e) {
                 return res.json();
         })
         .then(function (text) {
+            console.log(text);
             let result = text;
-            attackStart(result)
+            attackStart(result);
             console.log("asking for attack permission has been send to server");
         })
         .catch(function (err) {

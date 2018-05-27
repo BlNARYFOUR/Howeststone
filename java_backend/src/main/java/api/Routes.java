@@ -163,8 +163,6 @@ class Routes {
         final boolean succeeded;
         final String body = context.body();
 
-        System.out.println(body);
-
         final ObjectMapper mapper = new ObjectMapper();
         final int cardId = mapper.readValue(body, new TypeReference<Integer>() {
         });
@@ -221,7 +219,9 @@ class Routes {
     }
 
     private void canThisMinionAttack(Context context) {
-        context.result("no :p");
+        final int cardID = Integer.parseInt(context.queryParamMap().get("cardID")[0]);
+        context.json(howeststone.getYou().getCardsOnPlayingField().checkIfCardCanAttack(cardID));
+
     }
 
 

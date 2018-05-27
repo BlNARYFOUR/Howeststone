@@ -1,8 +1,10 @@
 package api;
 
+import abilities.*;
 import cards.*;
 import db.SqlDatabase;
 import db.SqlStatements;
+import events.Events;
 import game.Game;
 import io.javalin.Javalin;
 import org.slf4j.Logger;
@@ -12,6 +14,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
     private static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
@@ -135,6 +139,25 @@ public class Server {
             while (rs.next()) {
                 final int abilityId = rs.getInt("abilityId");
                 final String abilityName = rs.getString("abilityName");
+                List<Ability> abilities = new ArrayList<>();
+                Ability ability;
+                switch (abilityName) {
+                    case "Charge":
+                        ability = new Charge(Abilities.CHARGE);
+                        abilities.add(ability);
+                        break;
+                    case "Divine Shield":
+                        ability = new DivineShield(Abilities.DIVINE_SHIELD);
+                        abilities.add(ability);
+                        break;
+                    case "Windfury":
+                        ability = new Windfury(Abilities.WINDFURY);
+                        abilities.add(ability);
+                        break;
+                    default:
+                        break;
+                }
+                card.setAbilities(abilities);
                 // new ability
                 // check if ability already exist (card)
                 // add mechanics

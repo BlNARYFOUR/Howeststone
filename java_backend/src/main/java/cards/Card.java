@@ -1,6 +1,7 @@
 package cards;
 
 import abilities.Abilities;
+import abilities.Ability;
 import hero.Hero;
 import java.util.List;
 
@@ -23,12 +24,7 @@ public abstract class Card {
     private int manaCost;
     private int heroId;
     private String race;
-    private List<Abilities> cardAbilities;
-    // TODO: private List<Mechanics> cardMechanics;
-
-    /* TODO private List<Abilities> cardAbilities;
-    private List<Mechanics> cardMechanics;
-    */
+    private List<Ability> cardAbilities;
 
     public Card(int cardId, String[] strArgs, int[] intArgs) {
         this.cardID = cardId;
@@ -49,18 +45,14 @@ public abstract class Card {
         this.maxAmountOfAttacks = 1;
     }
 
-    public Card(int cardID) {
-        this.cardID = cardID;
-        // TODO get other cardSpecifications
-    }
-
     public int getManaCost() {
         return manaCost;
     }
 
-    /* TODO public List<Abilities> getCardAbilities() {
+    public List<Ability> getCardAbilities() {
         return cardAbilities;
-    }*/
+    }
+
     public int getMaxAmountOfAttacks() {
         return maxAmountOfAttacks;
     }
@@ -91,6 +83,10 @@ public abstract class Card {
 
     public String getRarity() {
         return rarity;
+    }
+
+    public void setAbilities(List<Ability> abilities) {
+        this.cardAbilities = abilities;
     }
 
     @Override
@@ -156,6 +152,7 @@ public abstract class Card {
     public boolean isDead() {
         return health <= 0;
     }
+
 
     // list with all abilities and mechanics?
     // method playCard

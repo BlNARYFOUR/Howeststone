@@ -71,8 +71,6 @@ public class Game {
                 this.getYou().getDeck().addCard(card);
             }
 
-            System.out.println("Cards in hand:\n" + cardsInHand);
-
             this.getYou().setCardsInHand(cardsInHand);
         }
 
