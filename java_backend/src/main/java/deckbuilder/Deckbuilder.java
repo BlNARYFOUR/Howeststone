@@ -1,7 +1,4 @@
-package deckbuilder; /*
-  Created by Bert on 16/05/2018.
-  Have a nice day!
- */
+package deckbuilder;
 
 import hero.Hero;
 
@@ -47,6 +44,7 @@ public class Deckbuilder {
     public void switchDeck() {
         if (deckIsSaved()) {
             //TODO
+            final boolean fixError = true;
         } else {
             throw new IllegalArgumentException("Your current deck hasn't been saved yet!");
         }
