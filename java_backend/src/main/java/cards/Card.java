@@ -2,11 +2,14 @@ package cards;
 
 import abilities.Abilities;
 import hero.Hero;
-import java.util.ArrayList;
 import java.util.List;
 
-// Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt. (er zijn uitzonderingen)
+// Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt.
 public abstract class Card {
+
+    protected int attack;
+    protected int health;
+    protected int durability;
 
     private int maxAmountOfAttacks;
     private boolean exhausted;
@@ -18,9 +21,6 @@ public abstract class Card {
     private String img;
     private String rarity;
     private int manaCost;
-    protected int attack;
-    protected int health;
-    protected int durability;
     private int heroId;
     private String race;
     private List<Abilities> cardAbilities;
@@ -30,18 +30,18 @@ public abstract class Card {
     private List<Mechanics> cardMechanics;
     */
 
-    public Card(int cardId, String type, String cardName, String race, String urlOfImg, String rarity, int health, int attack, int manaCost, int durability, int heroId) {
+    public Card(int cardId, String[] strArgs, int[] intArgs) {
         this.cardID = cardId;
-        this.type = type;
-        this.cardName = cardName;
-        this.race = race;
-        this.img = urlOfImg;
-        this.rarity = rarity;
-        this.health = health;
-        this.attack = attack;
-        this.manaCost = manaCost;
-        this.durability = durability;
-        this.heroId = heroId;
+        this.type = strArgs[0];
+        this.cardName = strArgs[1];
+        this.race = strArgs[2];
+        this.img = strArgs[3];
+        this.rarity = strArgs[4];
+        this.health = intArgs[0];
+        this.attack = intArgs[1];
+        this.manaCost = intArgs[2];
+        this.durability = intArgs[3];
+        this.heroId = intArgs[4];
 
         // PREDEFINED
         this.exhausted = true;
