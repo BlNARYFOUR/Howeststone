@@ -29,6 +29,7 @@ public class CardCollection {
     }
 
     public Card drawCard() {
+        shuffle();
         if (0 < cards.size()) {
             final Card draw = cards.get(0);
             cards.remove(0);
@@ -40,38 +41,40 @@ public class CardCollection {
 
     public void addCard(Card card) {
         cards.add(card);
-        shuffle();
     }
 
-    public boolean hasCard(int cardId) {
+    public void removeCard(Card card) {
+        cards.remove(card);
+    }
+
+    public boolean hasCard(int cardID) {
         for (Card card : cards) {
-            if (card.getCardID() == cardId) {
+            if (card.getCardID() == cardID) {
                 return true;
             }
         }
-
         return false;
     }
 
+    /* TODO blublublu
     public void removeCard(int cardID) {
         for (int i = 0; i < cards.size(); i++) {
-            if (cards.get(i).getCardID() == cardID) {
+            if (cards.get(i).getCardID()() == cardID) {
                 cards.remove(i);
                 break;
                 // if card is 2 times in cards, it will only be deleted once
             }
         }
-    }
+    }*/
 
     @Override
     public String toString() {
         final StringBuilder stringBuilder = new StringBuilder();
-
         for (Card card : cards) {
             stringBuilder.append('\n');
             stringBuilder.append(card);
-        }
 
+        }
         return "CardCollection{"
                 + "name='" + name + '\''
                 + ", cards=" + stringBuilder.toString()
@@ -82,31 +85,25 @@ public class CardCollection {
         return name;
     }
 
-    public Card getCard(int cardId) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Card getCard(int cardID) {
         for (Card card : cards) {
-            if (card.getCardID() == cardId) {
+            if (card.getCardID() == cardID) {
                 return card;
             }
         }
-
         throw new IllegalArgumentException("Card not found.");
     }
 
     public List<Card> getCards() {
         return cards;
     }
-    /*
-    public Card getCheapestCard() {
-        Card cheapestCard = this.cards.get(0);
-        for(Card x : this.cards ){
-            if (x.getManaCost() < cheapestCard.getManaCost()) {
-                cheapestCard = x;
-            }
-        }
-        return cheapestCard;
-    }*/
 
     public Card getMostExpensiveCard() {
+
         if (0 < this.cards.size()) {
             Card mostExpensiveCard = this.cards.get(0);
             for (Card x : this.cards) {
@@ -118,6 +115,65 @@ public class CardCollection {
         } else {
             return null;
         }
+    }
+
+    public CardCollection getSubCollection(List<Integer> cardIDs) {
+        final CardCollection subCardCollection = new CardCollection();
+        for (Card card : cards) {
+            for (int i : cardIDs) {
+                if (card.getCardID() == i) {
+                    subCardCollection.addCard(card);
+                }
+            }
+        }
+        return subCardCollection;
+    }
+
+    public String checkIfCardCanBeAddedToDeck(String body) {
+        final String result;
+        final int cardID = Integer.parseInt(body);
+        int amount = 0;
+        String rarity = "";
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getCardID() == cardID) {
+                amount++;
+                rarity = cards.get(i).getRarity();
+                // TODO uncollectable
+            }
+        }
+        if (("Legendary".equals(rarity) && amount >= 1) || amount >= 2) {
+            result = "too much cards";
+        } else if (cards.size() > 29) {
+            result = "cannot add more";
+        } else {
+            result = "SUCCES";
+        }
+        return result;
+    }
+
+    public CardCollection sortDeck(String body) {
+        switch (body) {
+            case "alfaz":
+                this.getCards().sort(new CardCollectionAlphabeticalComparator());
+                break;
+
+            case "alfza":
+                this.getCards().sort(new CardCollectionAlphabeticalComparator());
+                Collections.reverse(this.getCards());
+                break;
+
+            case "mana07":
+                this.getCards().sort(new CardCollectionManaComparator());
+                Collections.reverse(this.getCards());
+                break;
+
+            case "mana70":
+                this.getCards().sort(new CardCollectionManaComparator());
+                break;
+            default:
+                throw new IllegalArgumentException("no sort methods where found");
+        }
+        return this;
     }
 
     public boolean checkIfCardCanAttack(int cardID) {

@@ -10,7 +10,7 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <!-- The iOS apple-mobile-web-app-status-bar-style attribute only supports black, black-translucent or default` - you cannot use a custom color apparently. -->
-    
+
     <link rel="icon" type="image/png" href="assets/media/icon.png"/>
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/screen.css" rel="stylesheet" type="text/css"/>
@@ -25,7 +25,7 @@
     <link href="assets/css/gameBoard.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/creditsScreen.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/loadingScreen.css" rel="stylesheet" type="text/css"/>
-    
+
     <link href="assets/css/vsScreen.css" rel="stylesheet" type="text/css"/>
     <!--<link href="assets/css/playingField.css" rel="stylesheet" type="text/css">-->
     <meta name="author" content="3BEESANDME">
@@ -52,15 +52,17 @@
 <div id="loginAndRegistrationScreen" class="hidden">
     <div class="menuBox">
         <form id="login">
-            <input type="text" id="loginUser" name="loginUser"  placeholder="Enter username" required="required" />
-            <input type="password" id="loginPass" name="loginPass" placeholder="Enter password" required="required" />
-            <input type="submit" value="Login" id="submitLogin" name="submitLogin" />
+            <input type="text" id="loginUser" name="loginUser" placeholder="Enter username" required="required"/>
+            <input type="password" id="loginPass" name="loginPass" placeholder="Enter password" required="required"/>
+            <input type="submit" value="Login" id="submitLogin" name="submitLogin"/>
         </form>
         <form id="register" class="hidden">
-            <input type="text" id="registerUser" name="registerUser"  placeholder="Enter username" required="required" />
-            <input type="password" id="registerPass" name="registerPass" placeholder="Enter password" required="required" />
-            <input type="password" id="confirmPass" name="confirmPass" placeholder="Confirm password" required="required" />
-            <input type="submit" value="Login" id="submitRegister" name="submitRegister" />
+            <input type="text" id="registerUser" name="registerUser" placeholder="Enter username" required="required"/>
+            <input type="password" id="registerPass" name="registerPass" placeholder="Enter password"
+                   required="required"/>
+            <input type="password" id="confirmPass" name="confirmPass" placeholder="Confirm password"
+                   required="required"/>
+            <input type="submit" value="Login" id="submitRegister" name="submitRegister"/>
         </form>
     </div>
 </div>
@@ -73,7 +75,8 @@
         <span class="selectedHero"></span>
         <h1 class="selectedHeroName">Mage</h1>
 
-        <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoDeckSelector">Continue</a></span>
+        <span id="gotoDeckHolder" class="buttonHolder"><a href="#" class="insideButton"
+                                                          id="gotoDeckSelector">Continue</a></span>
         <span id="gotoHomeHolder" class="buttonHolder"><a href="#" class="insideButton gotoMainMenu">Back</a></span>
     </div>
 </div>
@@ -100,7 +103,8 @@
         <h1 class="selectedHeroName">Mage</h1>
 
         <a href="#" id="playGame"></a>
-        <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton" id="gotoHeroChooser">Back</a></span>
+        <span id="gotoHeroHolder" class="buttonHolder"><a href="#" class="insideButton"
+                                                          id="gotoHeroChooser">Back</a></span>
     </div>
 </div>
 
@@ -119,7 +123,6 @@
     </div>
 
 
-
 </div>
 
 <div id="deckbuilder" class="hidden">
@@ -132,7 +135,11 @@
         <li class="hidden">Here's your deck.</li>
         <li class="hidden">Click here to create a new deck.</li>
         <li class="hidden">Click here to save your deck.</li>
-        <li class="hidden">Card info; mana in the left upper corner, attack in the left bottom corner and health in the right bottom
+        <li class="hidden">Card info; mana in the left upper corner, attack in the left bottom corner and health in the
+            right bottom
+            corner.
+        </li>
+        <li class="hidden">Card info; totalMana in the left upper corner, attack in the left bottom corner and health in the right bottom
             corner. </li>
         <li class="hidden">Add and remove a card by double clicking or dragging.</li>
         <li class="hidden">Decks of your selected hero apear here, click 'add deck' to make a new one</li>
@@ -146,85 +153,95 @@
             -->
         </div>
         <div id="quickfilter">
+            <!--
             <a href="#">Full Deck</a>
             <a href="#">Minions</a>
             <a href="#">Spells</a>
             <a href="#">Weapons</a>
+            -->
             <p id="cardAmount">30/30</p>
         </div>
         <ul id="deck"></ul>
-        <a id="firstAdd" href="#">+</a>
-        <a class="saveButton" id="save" href="#">SAVE</a>
+        <a id="newDeckBuilder" href="#">CLEAR DECK BUILDER</a>
+        <a class="saveDeck" href="#">SAVE</a>
     </header>
     <div class="main">
+        <span class="hidden error"></span>
         <ul id="cards"></ul>
-        <ul id="decks"><li>Alle decks</li> <li>Mage standard deck</li> <li><a href="#" id="newDeck">+</a></li></ul>
+        <ul class="decks">
+            <li>Alle decks</li>
+            <li>Mage standard deck</li>
+            <li><a href="#">+</a></li>
+        </ul>
+    </div>
+    <div class="new">
+        <label for="newDeckName">Choose a name for your new deck</label>
+        <input type="text" name="newDeckName" id="newDeckName" placeholder="Deck_1">
+        <a href="#" id="newDeck">Continue</a>
+        <span>Or choose one of these decks</span>
     </div>
     <div class="save hidden">
         <label for="deckName">You're deck is not yet complete<br/> would you like to save it?</label>
         <input type="text" name="deckName" id="deckName" placeholder="Deck 01">
-        <ul><li><a href="#" class="saveButton">save</a></li>
-            <li><a href="#" id="deleteDeck">delete</a></li>
-            <li><a href="#">back</a></li></ul>
+        <ul>
+            <li><a class="saveDeck" href="#">save</a></li>
+            <li><a class="deleteDeck" href="#">delete</a></li>
+            <li><a class="backToWherever" href="#">back</a></li>
+        </ul>
     </div>
     <aside>
-        <input id="search" type="text" placeholder="search"/>
-        <label id="sortlabel" for="sort">sort</label>
-        <form>
+        <form id="deckBuilderForm">
+            <!--input id="search" type="text" placeholder="search"/-->
+            <label id="sortlabel" for="sort">sort</label>
             <select id="sort">
                 <option value="alfaz">Alfabetic (a->z)</option>
                 <option value="alfza">Alfabetic (z->a)</option>
                 <option value="mana07">Mana cost (0->7+)</option>
                 <option value="mana70">Mana cost (7+->0)</option>
             </select>
-            <fieldset>
-                <legend>filter</legend>
-
-                <div id="firstFilter">
-                    <label>Hero specific cards</label>
+            <div>
+                <label>filter</label>
+                <fieldset id="firstFilter">
+                    <legend>Hero specific cards</legend>
                     <input type="radio" name="specificCards" value="All" id="all" checked/>
-                    <label for="all">All Useable Cards</label>
+                    <label for="all">All Cards</label>
                     <input type="radio" name="specificCards" value="Mage" id="mage"/>
                     <label for="mage">Mage</label>
                     <input type="radio" name="specificCards" value="Paladin" id="paladin"/>
                     <label for="paladin">Paladin</label>
                     <input type="radio" name="specificCards" value="Neutral" id="neutral"/>
                     <label for="neutral">Neutral</label>
-                </div>
-
-                <div id="secondFilter">
-                    <label>Card Types</label>
-                    <input type="radio" name="cardTypes" value="Minions" id="minions"/>
-                    <label for="minions">Minions</label>
-                    <input type="radio" name="cardTypes" value="Weapons" id="weapons"/>
-                    <label for="weapons">Weapons</label>
-                    <input type="radio" name="cardTypes" value="Spells" id="spells"/>
-                    <label for="spells">Spells</label>
-                </div>
-
-                <div id="thirdFilter">
-                    <label>Mana</label>
-                    <input type="radio" name="Mana" value="zero" id="zero"/>
-                    <label for="zero">0 Mana</label>
-                    <input type="radio" name="Mana" value="one" id="one"/>
-                    <label for="one">1 Mana</label>
-                    <input type="radio" name="Mana" value="two" id="two"/>
-                    <label for="two">2 Mana</label>
-                    <input type="radio" name="Mana" value="three" id="three"/>
-                    <label for="three">3 Mana</label>
-                    <input type="radio" name="Mana" value="four" id="four" />
-                    <label for="four">4 Mana</label>
-                    <input type="radio" name="Mana" value="five" id="five" />
-                    <label for="five">5 Mana</label>
-                    <input type="radio" name="Mana" value="six" id="six"/>
-                    <label for="six">6 Mana</label>
-                    <input type="radio" name="Mana" value="seven" id="seven"/>
-                    <label for="seven">7+ Mana</label>
-                </div>
-
-
-                <div id="fourthFilter">
-                    <label>Card Rarity</label>
+                </fieldset>
+                <fieldset id="secondFilter">
+                    <legend>Card Types</legend>
+                    <input type="radio" name="cardTypes" value="Minion" id="minion"/>
+                    <label for="minion">Minion</label>
+                    <input type="radio" name="cardTypes" value="Weapon" id="weapon"/>
+                    <label for="weapon">Weapon</label>
+                    <input type="radio" name="cardTypes" value="Spell" id="spell"/>
+                    <label for="spell">Spell</label>
+                </fieldset>
+                <fieldset id="thirdFilter">
+                    <fieldset>Mana</fieldset>
+                    <input type="radio" name="Mana" value="0_Mana" id="0_Mana"/>
+                    <label for="0_Mana">0 Mana</label>
+                    <input type="radio" name="Mana" value="1_Mana" id="1_Mana"/>
+                    <label for="1_Mana">1 Mana</label>
+                    <input type="radio" name="Mana" value="2_Mana" id="2_Mana"/>
+                    <label for="2_Mana">2 Mana</label>
+                    <input type="radio" name="Mana" value="3_Mana" id="3_Mana"/>
+                    <label for="3_Mana">3 Mana</label>
+                    <input type="radio" name="Mana" value="4_Mana" id="4_Mana"/>
+                    <label for="4_Mana">4 Mana</label>
+                    <input type="radio" name="Mana" value="5_Mana" id="5_Mana"/>
+                    <label for="5_Mana">5 Mana</label>
+                    <input type="radio" name="Mana" value="6_Mana" id="6_Mana"/>
+                    <label for="6_Mana">6 Mana</label>
+                    <input type="radio" name="Mana" value="7_Mana" id="7_Mana"/>
+                    <label for="7_Mana">7+ Mana</label>
+                </fieldset>
+                <fieldset id="fourthFilter">
+                    <legend>Card Rarity</legend>
                     <input type="radio" name="cardRarity" value="Free" id="free"/>
                     <label for="free">Free</label>
                     <input type="radio" name="cardRarity" value="Common" id="common"/>
@@ -235,13 +252,12 @@
                     <label for="epic">Epic</label>
                     <input type="radio" name="cardRarity" value="Legendary" id="legendary"/>
                     <label for="legendary">Legendary</label>
-                </div>
-            </fieldset>
+                </fieldset>
+            </div>
         </form>
     </aside>
     <span><a class="buttonHolder" id="gotoRechooseDeck" href="#">Back</a></span>
 </div>
-
 <div id="gameBoard" class="hidden">
     <div class="main">
         <!--<a href="#" id="tempButtonAddCard">Add card</a>-->
@@ -263,7 +279,9 @@
 
             <li class="weapon">
                 <ul>
-                    <li class="EX1_409t" style="background: url('http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_409t.png') center 23% / 176% no-repeat;"><span class="attack">1</span><span class="durability">3</span>
+                    <li class="EX1_409t"
+                        style="background: url('http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_409t.png') center 23% / 176% no-repeat;">
+                        <span class="attack">1</span><span class="durability">3</span>
                     </li>
                 </ul>
             </li>
@@ -278,7 +296,19 @@
 
             <li class="playingField">
                 <ul>
-                    <li class="CS2_059" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span></li><li class="EX1_319" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span></li><li class="CS2_188" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span></li><li class="EX1_012" style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png") center 23% / 176% no-repeat;'><span class="health">2</span><span class="attack">1</span><span class="legendary"></span></li>
+                    <li class="CS2_059"
+                        style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_059.png") center 23% / 176% no-repeat;'>
+                        <span class="health">2</span><span class="attack">1</span></li>
+                    <li class="EX1_319"
+                        style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png") center 23% / 176% no-repeat;'>
+                        <span class="health">2</span><span class="attack">1</span></li>
+                    <li class="CS2_188"
+                        style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png") center 23% / 176% no-repeat;'>
+                        <span class="health">2</span><span class="attack">1</span></li>
+                    <li class="EX1_012"
+                        style='background: url("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png") center 23% / 176% no-repeat;'>
+                        <span class="health">2</span><span class="attack">1</span><span class="legendary"></span>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -328,7 +358,8 @@
             </li>
         </ul>
 
-        <span id="battleLogHolder" class="buttonHolder"><a href="#" class="insideButton" id="showBattleLog">Battle log</a></span>
+        <span id="battleLogHolder" class="buttonHolder"><a href="#" class="insideButton"
+                                                           id="showBattleLog">Battle log</a></span>
         <ul id="battleLog" class="hidden">
             <!-- must be generated in JS -->
             <!--
@@ -348,11 +379,11 @@
 </div>
 
 <div id="replaceCardScreen" class="hidden">
-    <h1>Keep or replace cards</h1>
+    <span></span>
     <ul>
-        <li><span class="hidden">Replaced!</span></li>
-        <li><span class="hidden">Replaced!</span></li>
-        <li><span class="hidden">Replaced!</span></li>
+        <li></li>
+        <li></li>
+        <li></li>
     </ul>
 
     <span class="buttonHolder"><a href="#" class="insideButton" id="gotoCardsReplaced">Continue</a></span>
@@ -360,11 +391,11 @@
 
 <div id="vsScreen" class="hidden">
     <div class="enemy">
-        <img src="assets/media/mage.png" alt="enemyHero" title="enemyHero">
+
     </div>
     <img src="assets/media/vs.png" alt="VS" title="VS" id="vs">
-    <div class="player">
-        <img src="assets/media/mage.png" alt="playerHero" title="playerHero">
+    <div class="you">
+
     </div>
 
 </div>

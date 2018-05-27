@@ -1,9 +1,8 @@
 package cards;
 
-import abilities.Abilities;
-import abilities.Ability;
+import abilities.*;
+import java.util.*;
 import hero.Hero;
-import java.util.List;
 
 // Een kaart exhausted = true altijd enkel false als het op het speelveld ligt aan het begin van de beurt.
 public abstract class Card {
@@ -16,6 +15,7 @@ public abstract class Card {
     private boolean exhausted;
     private int amountAttacked;
 
+    // TODO blublublu
     private int cardID;
     private String type;
     private String cardName;
@@ -26,8 +26,8 @@ public abstract class Card {
     private String race;
     private List<Ability> cardAbilities;
 
-    public Card(int cardId, String[] strArgs, int[] intArgs) {
-        this.cardID = cardId;
+    public Card(int cardID, String[] strArgs, int[] intArgs) {
+        this.cardID = cardID;
         this.type = strArgs[0];
         this.cardName = strArgs[1];
         this.race = strArgs[2];
@@ -63,6 +63,14 @@ public abstract class Card {
 
     public void setExhausted(boolean exhausted) {
         this.exhausted = exhausted;
+    }
+
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
     }
 
     public int getHealth() {
@@ -141,6 +149,10 @@ public abstract class Card {
         return img;
     }
 
+    public int getHeroId() {
+        return heroId;
+    }
+
     public void attackHero(Hero target) {
         target.setHealth(target.getHealth() - this.attack);
         if (target.getWeapon() != null) {
@@ -156,6 +168,5 @@ public abstract class Card {
 
     // list with all abilities and mechanics?
     // method playCard
-
 
 }

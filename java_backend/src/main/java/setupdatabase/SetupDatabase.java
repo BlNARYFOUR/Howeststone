@@ -26,7 +26,7 @@ public final class SetupDatabase {
     private static final String[] HEROES = {NEUTRAL, "Mage", "Paladin"};
     private static final String[] ABILITIES_WITH_MECHANICS = {"Aura", "Battlecry", "Deathrattle",
         "DestroyedDivineShield", "Enrage", "On Attack", "On Death", "On Heal", "On Hit",
-        "TurnTimer Begin", "TurnTimer End", "Untargetable", "Update In Hand", };
+        "TurnTimer Begin", "TurnTimer End", "Untargetable", "Update In Hand"};
 
     // STRING REPETITION SOLVERS
     private static final String EXCLAMATION_STR = "!";
@@ -162,13 +162,13 @@ public final class SetupDatabase {
             intArgs[4] = getHeroId(jsonCard.getOrDefault("playerClass", NULL_STR).toString());
 
             if (0 <= intArgs[4]) {
-                final int cardId = insertCard(strArgs, intArgs);
-                addCardAbilityToDb(jsonCard, cardId);
+                final int cardID = insertCard(strArgs, intArgs);
+                addCardAbilityToDb(jsonCard, cardID);
             }
         }
     }
 
-    private void addCardAbilityToDb(JSONObject card, int cardId) {
+    private void addCardAbilityToDb(JSONObject card, int cardID) {
         //noinspection unchecked
         final JSONArray jsonAbilities = (JSONArray) card.getOrDefault(ABILITIES_STR, null);
 
@@ -205,11 +205,11 @@ public final class SetupDatabase {
 
                             if (0 <= mechanicId) {
                                 cardMechId = insertCardMechanic(mechanicId, target, value);
-                                insertCardAbility(abilityId, cardId, cardMechId);
+                                insertCardAbility(abilityId, cardID, cardMechId);
                             }
                         }
                     } else {
-                        insertCardAbility(abilityId, cardId, cardMechId);
+                        insertCardAbility(abilityId, cardID, cardMechId);
                     }
                 }
             }
@@ -394,13 +394,13 @@ public final class SetupDatabase {
         return (int) cardMechId;
     }
 
-    private void insertCardAbility(int abilityId, int cardId, int cardMechId) {
+    private void insertCardAbility(int abilityId, int cardID, int cardMechId) {
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_CARD_ABILITY)
         ) {
             stmt.setInt(1, abilityId);
-            stmt.setInt(2, cardId);
+            stmt.setInt(2, cardID);
             stmt.setInt(3, cardMechId);
             final int affectedRows = stmt.executeUpdate();
 
@@ -418,24 +418,24 @@ public final class SetupDatabase {
     private void createRandomDeck(String name, int heroId) {
         final int deckId = insertDeck(name, heroId);
         final int amountOfCards = getTotalAmountOfCards();
-        int cardId;
+        int cardID;
 
         for (int i = 0; i < MAX_DECK_SIZE; i++) {
             do {
-                cardId = 1 + (int) Math.round(Math.random() * (amountOfCards - 1));
-            } while (!addCardToDeck(deckId, cardId));
+                cardID = 1 + (int) Math.round(Math.random() * (amountOfCards - 1));
+            } while (!addCardToDeck(deckId, cardID));
         }
     }
 
-    private boolean addCardToDeck(int deckId, int cardId) {
-        final int amount = getAmountOfCardInDeck(deckId, cardId);
+    private boolean addCardToDeck(int deckId, int cardID) {
+        final int amount = getAmountOfCardInDeck(deckId, cardID);
         boolean succeeded = false;
 
-        if (deckCanContainMoreThenOneOfCard(cardId, deckId, amount)) {
-            updateAmountOfCardInDeck(deckId, cardId, amount + 1);
+        if (deckCanContainMoreThenOneOfCard(cardID, deckId, amount)) {
+            updateAmountOfCardInDeck(deckId, cardID, amount + 1);
             succeeded = true;
-        } else if (amount < 0 && !isUncollectable(cardId) && doCardAndDeckHeroMatch(cardId, deckId)) {
-            insertCardToDeck(deckId, cardId, 1);
+        } else if (amount < 0 && !isUncollectable(cardID) && doCardAndDeckHeroMatch(cardID, deckId)) {
+            insertCardToDeck(deckId, cardID, 1);
             succeeded = true;
         }
 
@@ -449,14 +449,14 @@ public final class SetupDatabase {
         return result;
     }
 
-    private boolean doCardAndDeckHeroMatch(int cardId, int deckId) {
+    private boolean doCardAndDeckHeroMatch(int cardID, int deckId) {
         boolean result = false;
 
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.TEST_DECK_AND_CARD_MATCH);
         ) {
-            stmt.setInt(1, cardId);
+            stmt.setInt(1, cardID);
             stmt.setInt(2, deckId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -472,14 +472,14 @@ public final class SetupDatabase {
         return result;
     }
 
-    private boolean isUncollectable(int cardId) {
+    private boolean isUncollectable(int cardID) {
         boolean result = false;
 
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.IS_UNCOLLECTABLE);
         ) {
-            stmt.setInt(1, cardId);
+            stmt.setInt(1, cardID);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     result = rs.getBoolean("isUncollectable");
@@ -494,14 +494,14 @@ public final class SetupDatabase {
         return result;
     }
 
-    private boolean isLegendary(int cardId) {
+    private boolean isLegendary(int cardID) {
         boolean result = false;
 
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.IS_LEGENDARY);
         ) {
-            stmt.setInt(1, cardId);
+            stmt.setInt(1, cardID);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     result = rs.getBoolean("isLegendary");
@@ -516,7 +516,7 @@ public final class SetupDatabase {
         return result;
     }
 
-    private void updateAmountOfCardInDeck(int deckId, int cardId, int amount) {
+    private void updateAmountOfCardInDeck(int deckId, int cardID, int amount) {
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.UPDATE_AMOUNT_OF_CARD_IN_DECK,
@@ -524,7 +524,7 @@ public final class SetupDatabase {
         ) {
             stmt.setInt(1, amount);
             stmt.setInt(2, deckId);
-            stmt.setInt(3, cardId);
+            stmt.setInt(3, cardID);
             final int affectedRows = stmt.executeUpdate();
 
             if (affectedRows == 0) {
@@ -538,14 +538,14 @@ public final class SetupDatabase {
         }
     }
 
-    public void insertCardToDeck(int deckId, int cardId, int amount) {
+    public void insertCardToDeck(int deckId, int cardID, int amount) {
         try (
                 Connection conn = db.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.INSERT_CARD_TO_DECK,
                         Statement.RETURN_GENERATED_KEYS)
         ) {
             stmt.setInt(1, deckId);
-            stmt.setInt(2, cardId);
+            stmt.setInt(2, cardID);
             stmt.setInt(3, amount);
             final int affectedRows = stmt.executeUpdate();
 
@@ -612,7 +612,7 @@ public final class SetupDatabase {
         return num;
     }
 
-    private int getAmountOfCardInDeck(int deckId, int cardId) {
+    private int getAmountOfCardInDeck(int deckId, int cardID) {
         int num = -1;
 
         try (
@@ -620,13 +620,13 @@ public final class SetupDatabase {
                 PreparedStatement stmt = conn.prepareStatement(SqlStatements.SELECT_AMOUNT_OF_CARDS_IN_DECK);
         ) {
             stmt.setInt(1, deckId);
-            stmt.setInt(2, cardId);
+            stmt.setInt(2, cardID);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     num = rs.getInt("amount");
                 } else {
-                    System.out.println(ColorFormats.red(LIST_ITEM_STR + NO_STR + "amount found for cardId "
-                            + cardId + " in deck " + deckId + EXCLAMATION_STR));
+                    System.out.println(ColorFormats.red(LIST_ITEM_STR + NO_STR + "amount found for cardID "
+                            + cardID + " in deck " + deckId + EXCLAMATION_STR));
                 }
             }
         } catch (SQLException e) {
@@ -728,6 +728,7 @@ public final class SetupDatabase {
         final ClassLoader classLoader = getClass().getClassLoader();
         //noinspection ConstantConditions
         final File file = new File(classLoader.getResource(resourceLocation).getFile());
+        // BugError: Did not find a way to solve.
         final Object obj = parser.parse(new FileReader(file));
 
         return (JSONArray) obj;

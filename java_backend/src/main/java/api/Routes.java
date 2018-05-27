@@ -6,11 +6,9 @@ import formatters.ColorFormats;
 import game.*;
 import io.javalin.Context;
 import io.javalin.Javalin;
-
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+
 
 class Routes {
 
@@ -24,10 +22,12 @@ class Routes {
 
     Routes(final Javalin server, Game game) {
         howeststone = game;
-        // case sensitive
-        server.get("/API/getAllCards", this::getAllCards);
-        //server.get("/API/getAllCards", this::getAllCards);
 
+        setGetRequests(server);
+        setPostRequests(server);
+    }
+
+    private void setGetRequests(Javalin server) {
         // GAME BOARD
         server.get("/threebeesandme/get/gameboard/begincards", this::getBeginCards);
         server.get("/threebeesandme/get/gameboard/begin", this::beginGame);
@@ -40,24 +40,38 @@ class Routes {
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
         server.get("/threebeesandme/get/gameboard/herohealth", this::getHeroHealth);
         server.post("/threebeesandme/post/gameboard/playingfield/cancardbeadded", this::canCardBeAddedToPlayingField);
-        server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
-        server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
-        server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
 
         // HERO AND DECK SELECTOR
         server.get("/threebeesandme/get/hero", this::getHeroName);
         server.get("/threebeesandme/get/heroanddeckselector/decks", this::getAllDecks);
         server.get("/threebeesandme/get/heroanddeckselector/heroes", this::getAllHeroes);
+
+        // DECKBUILDER
+        server.get("/threebeesandme/get/deckbuilder/cards", this::getAllCards);
+        server.get("/threebeesandme/get/deckbuilder/deck/cards", this::getCardsFromDeck);
+    }
+
+    private void setPostRequests(Javalin server) {
+        // GAME BOARD
+        server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
+        server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
+        server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
+        server.post("/threebeesandme/post/gameboard/endturn", this::handleEndTurn);
+
+        // HERO AND DECK SELECTOR
         server.post("/threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
         server.post("/threebeesandme/post/heroanddeckselector/deck", this::handleDeckSelection);
 
         // DECKBUILDER
-        server.post("threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
-        server.post("threebeesandme/post/deckbuilder/newdeck", this::newDeck);
+        server.post("/threebeesandme/post/deckbuilder/hero", this::handleHeroSelection);
+        server.post("/threebeesandme/post/deckbuilder/deck/cancardbeadded", this::canCardBeAdded);
+        server.post("/threebeesandme/post/deckbuilder/deck/addcard", this::addCardToDeck);
+        server.post("/threebeesandme/post/deckbuilder/deck/deletecard", this::deleteCardFromDeck);
+        server.post("/threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
+        server.post("/threebeesandme/post/deckbuilder/newdeck", this::newDeck);
         server.post("threebeesandme/post/deckbuilder/deleteDeck", this::deleteDeck);
-        server.post("threebeesandme/post/deckbuilder/selecthero", this::handleHeroSelection);
-        //TODO sort server.post("threebeesandme/post/deckbuilder/sort?by=", null);
-        server.post("threebeesandme/post/deckbuilder/filterCards", this::filterCards);
+        server.post("/threebeesandme/howeststone/post/deckbuilder/sort", this::sortDeck);
+        server.post("/threebeesandme/howeststone/post/deckbuilder/filterCards", this::filterCards);
     }
 
     // HERO AND DECK SELECTOR
@@ -82,9 +96,13 @@ class Routes {
     }
 
     private void handleDeckSelection(Context context) {
-        howeststone.getYou().setDeck(
-                howeststone.getDeckByHeroName(howeststone.getYou().getHero().getHeroName())
-        );
+        //final String yourHeroName = howeststone.getYou().getHero().getHeroName();
+
+        for (int i = 0; i < howeststone.getDecks().size(); i++) {
+            if (howeststone.getDecks().get(i).getName().equals(context.body())) {
+                howeststone.getYou().setDeck(howeststone.getDecks().get(i));
+            }
+        }
         context.json(howeststone.getYou().getDeck().getName());
     }
 
@@ -96,23 +114,26 @@ class Routes {
             throw new NullPointerException();
         }
         howeststone.generateEnemy();
-        howeststone.setTurnTime(50);
+        howeststone.getYou().resetMana();
+        //howeststone.setTurnTime(50);
         howeststone.createPlayingField();
 
         final Random rand = new Random();
         final boolean doYouBegin = rand.nextBoolean();
+        System.out.println("I begin: " + doYouBegin);
         if (doYouBegin) {
             howeststone.setActivePlayer(YOU_STR);
+            context.json(YOU_STR);
         } else {
             howeststone.setActivePlayer(ENEMY_STR);
-            howeststone.getEnemy().beginTurn();
-            // do auto player
-
+            System.out.println("Active player set: " + howeststone.getActivePlayer());
+            System.out.println("gets here?");
+            context.json(ENEMY_STR);
         }
-        context.json(howeststone.getActivePlayer());
     }
 
     private void getBeginCards(Context context) {
+        System.out.println(howeststone.getActivePlayer());
         context.json(howeststone.getPlayerBeginCards());
     }
 
@@ -137,9 +158,11 @@ class Routes {
 
         if (howeststone.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
             context.json(SUCCES);
-
             if (howeststone.getActivePlayer().equals(YOU_STR)) {
                 howeststone.getYou().beginTurn();
+            } else {
+                howeststone.getEnemy().beginTurn();
+                howeststone.startTurnAutoplayer();
             }
         } else {
             System.out.println(ColorFormats.red("you shall not hack"));
@@ -164,10 +187,10 @@ class Routes {
         final String body = context.body();
 
         final ObjectMapper mapper = new ObjectMapper();
-        final int cardId = mapper.readValue(body, new TypeReference<Integer>() {
+        final int cardID = mapper.readValue(body, new TypeReference<Integer>() {
         });
 
-        succeeded = howeststone.getYou().playCard(cardId);
+        succeeded = howeststone.getYou().playCard(cardID);
 
         if (succeeded) {
             context.json(SUCCES);
@@ -177,7 +200,7 @@ class Routes {
     }
 
     private void getAllCards(Context context) {
-        context.result("Cards");
+        context.json(howeststone.getAllCards());
     }
 
     private void getBattleLog(Context context) {
@@ -188,8 +211,10 @@ class Routes {
         context.result("Time Left");
     }
 
-    private void handleEndUrn(Context context) {
-        context.result("TurnTimer has ended");
+    private void handleEndTurn(Context context) {
+        howeststone.resetTurnTimer();
+
+        context.json("TurnTimer has ended");
     }
 
     private void useHeroPower(Context context) {
@@ -227,19 +252,69 @@ class Routes {
 
     // DECK BUILDER
 
+    private void getCardsFromDeck(Context context) {
+        final String deckName = context.queryParamMap().get("deckname")[0];
+        if (!howeststone.checkIfDeckNotExist(deckName)) {
+            context.json(howeststone.getDeck(deckName));
+        }
+    }
+
     private void saveDeck(Context context) {
-        context.result("Deck has been saved");
+        context.json(howeststone.createDeck(howeststone.getDeckInDeckBuilder()));
     }
 
     private void newDeck(Context context) {
-        context.result("A new deck has been created");
+        if (howeststone.checkIfDeckNotExist(context.body())) {
+            howeststone.setDeckInDeckBuilder(context.body());
+            context.json(SUCCES);
+        } else {
+            context.json(ERROR);
+        }
     }
 
     private void deleteDeck(Context context) {
         context.result("Your deck has been deleted");
     }
 
-    private void filterCards(Context context) {
-        context.result("Your deck has been filtered");
+    private void filterCards(Context context) throws IOException {
+        final String body = context.body();
+        final ObjectMapper mapper = new ObjectMapper();
+        final Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<String>>>() {
+        });
+        final List<String> filterArray = temp.get("filterArray");
+        howeststone.setFilterCollection(howeststone.filterCards(filterArray));
+        if (howeststone.getFilterCollection().getCards().size() >= 1) {
+            context.json(howeststone.getFilterCollection());
+        } else {
+            context.json(ERROR);
+        }
     }
+
+    private void sortDeck(Context context) {
+        context.json(howeststone.getFilterCollection().sortDeck(context.body()));
+    }
+
+    private void canCardBeAdded(Context context) {
+        context.json(
+                howeststone.checkIfCardCanBeAddedToDeck(
+                        context.body()));
+    }
+
+    private void addCardToDeck(Context context) {
+        final int cardID = Integer.parseInt(context.body());
+        howeststone.getDeckInDeckBuilder().addCard(howeststone.getAllCards().getCard(cardID));
+        context.json(howeststone.getDeckInDeckBuilder());
+    }
+    private void deleteCardFromDeck(Context context) {
+        final int cardID = Integer.parseInt(context.body());
+        if (howeststone.getDeckInDeckBuilder() == null) {
+            context.json(ERROR);
+        } else if (howeststone.getDeckInDeckBuilder().getCards().size() == 0) {
+            context.json(ERROR);
+        } else {
+            howeststone.getDeckInDeckBuilder().removeCard(howeststone.getAllCards().getCard(cardID));
+            context.json(howeststone.getDeckInDeckBuilder());
+        }
+    }
+
 }
