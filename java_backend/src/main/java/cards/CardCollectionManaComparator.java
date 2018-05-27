@@ -1,6 +1,5 @@
 package cards;
 
-import java.io.Serializable;
 import java.util.Comparator;
 
 public class CardCollectionManaComparator implements Comparator<Card> {

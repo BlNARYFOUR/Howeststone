@@ -18,6 +18,7 @@ class Routes {
     private static final String ERROR = "ERROR";
     private static final String ENEMY_STR = "enemy";
     private static final String YOU_STR = "you";
+    private static final String PARENT_STR = "parent";
 
     private final Game howeststone;
 
@@ -121,7 +122,7 @@ class Routes {
     }
 
     private void getEnemyMana(Context context) {
-        int[] manaInfo = {howeststone.getEnemy().getActiveMana(), howeststone.getEnemy().getTotalMana()};
+        final int[] manaInfo = {howeststone.getEnemy().getActiveMana(), howeststone.getEnemy().getTotalMana()};
         context.json(manaInfo);
     }
 
@@ -187,7 +188,7 @@ class Routes {
     }
 
     private void getHeroName(Context context) {
-        final String hero = context.queryParamMap().get("parent")[0];
+        final String hero = context.queryParamMap().get(PARENT_STR)[0];
         if (ENEMY_STR.equals(hero)) {
             context.json(howeststone.getEnemy().getHero().getHeroName());
         } else {
@@ -196,8 +197,8 @@ class Routes {
     }
 
     private void getHeroHealth(Context context) {
-        String hero = context.queryParamMap().get("parent")[0];
-        if (hero.equals("enemy")) {
+        final String hero = context.queryParamMap().get(PARENT_STR)[0];
+        if (ENEMY_STR.equals(hero)) {
             context.json(howeststone.getEnemy().getHero().getHealth());
         } else {
             context.json(howeststone.getYou().getHero().getHealth());

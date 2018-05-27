@@ -70,9 +70,9 @@ public class Player {
 
         activeMana = totalMana;
 
-        Card card = cardsInDeck.drawCard();
+        final Card card = cardsInDeck.drawCard();
 
-        if(card != null) {
+        if (card != null) {
             cardsInHand.addCard(card);
         } else {
             hero.addHealth(-heroDamageOnEmptyDeck++);

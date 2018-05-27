@@ -27,10 +27,10 @@ public class CardCollection {
     }
 
     public Card drawCard() {
-        if(0 < cards.size()) {
-            final Card DRAW = cards.get(0);
+        if (0 < cards.size()) {
+            final Card draw = cards.get(0);
             cards.remove(0);
-            return DRAW;
+            return draw;
         }
 
         return null;
@@ -105,7 +105,7 @@ public class CardCollection {
     }*/
 
     public Card getMostExpensiveCard() {
-        if(0 < this.cards.size()) {
+        if (0 < this.cards.size()) {
             Card mostExpensiveCard = this.cards.get(0);
             for (Card x : this.cards) {
                 if (x.getManaCost() > mostExpensiveCard.getManaCost()) {
