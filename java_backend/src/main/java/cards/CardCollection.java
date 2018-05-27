@@ -1,14 +1,5 @@
 package cards;
 
-import db.SqlDatabase;
-import db.SqlStatements;
-import formatters.ColorFormats;
-import hero.Hero;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,8 +29,9 @@ public class CardCollection {
 
     public void addCard(Card card) {
         cards.add(card);
-        shuffle();
+        //TODO shuffle();
     }
+
 
     public boolean hasCard(int cardId) {
         for (Card card : cards) {
@@ -90,7 +82,7 @@ public class CardCollection {
     /*
     public Card getCheapestCard() {
         Card cheapestCard = this.cards.get(0);
-        for(Card x : this.cards ){
+        for(Card x : this.cards ) {
             if (x.getManaCost() < cheapestCard.getManaCost()) {
                 cheapestCard = x;
             }
@@ -109,10 +101,13 @@ public class CardCollection {
     }
 
     public CardCollection getSubCollection(List<Integer> cardIds) {
+
         CardCollection subCardCollection = new CardCollection();
         for (Card card : cards) {
-            if (cardIds.contains(card.getcardId())) {
-                subCardCollection.addCard(card);
+            for (int i : cardIds) {
+                if (card.getcardId() == i) {
+                    subCardCollection.addCard(card);
+                }
             }
         }
         return subCardCollection;
@@ -129,16 +124,39 @@ public class CardCollection {
                 // TODO uncollectable
             }
         }
-        if (amount >= 2) {
-            return "cannot add more";
-        }
 
         if (cards.size() > 29) {
             return "too much cards";
+        }
+        if (amount >= 2) {
+            return "cannot add more";
         }
         if (amount >= 1 && rarity.equals("Legendary")) {
             return "cannot add more";
         }
         return "SUCCES";
+    }
+
+    public CardCollection sortDeck(String body) {
+        switch (body) {
+            case "alfaz" :
+                this.getCards().sort(new alfazCardCollectionComparator());
+                break;
+
+            case "alfza" :
+                this.getCards().sort(new alfazCardCollectionComparator());
+                Collections.reverse(this.getCards());
+                break;
+
+            case "mana07" :
+                this.getCards().sort(new manaCardCollectionComparator());
+                Collections.reverse(this.getCards());
+                break;
+
+            case "mana70" :
+                this.getCards().sort(new manaCardCollectionComparator());
+                break;
+        }
+        return this;
     }
 }

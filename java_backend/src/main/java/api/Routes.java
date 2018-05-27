@@ -45,7 +45,7 @@ class Routes {
         server.post("/threebeesandme/post/deckbuilder/deck/cancardbeadded", this::canCardBeAdded);
         server.post("/threebeesandme/post/deckbuilder/deck/addcard", this::addCardToDeck);
 
-        server.post("threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
+        server.post("/threebeesandme/post/deckbuilder/savedeck", this::saveDeck);
         server.post("/threebeesandme/post/deckbuilder/newdeck", this::newDeck);
         server.post("threebeesandme/post/deckbuilder/deleteDeck", this::deleteDeck);
         server.post("/threebeesandme/howeststone/post/deckbuilder/sort", this::sortDeck);
@@ -164,13 +164,15 @@ class Routes {
 
     // DECK BUILDER
 
-    private void saveDeck(Context context) {
-        context.result("Deck has been saved");
+    private void saveDeck(Context context) throws IOException {
+        context.json(HOWESTSTONE.createDeck(HOWESTSTONE.deckInDeckBuilder));
+        // TODO end empty
+        // load deck
     }
 
     private void newDeck(Context context) {
         if (HOWESTSTONE.checkIfDeckNotExist(context.body())){
-            HOWESTSTONE.deckInDeckBuilder = new CardCollection();
+            HOWESTSTONE.deckInDeckBuilder = new CardCollection(context.body());
             context.json("OK");
         } else {
             context.json("ERROR");
@@ -196,26 +198,7 @@ class Routes {
     }
 
     private void sortDeck(Context context) {
-        switch (context.body()) {
-            case "alfaz" :
-                HOWESTSTONE.filterCollection.getCards().sort(new alfazCardCollectionComparator());
-                break;
-
-            case "alfza" :
-                HOWESTSTONE.filterCollection.getCards().sort(new alfazCardCollectionComparator());
-                Collections.reverse(HOWESTSTONE.filterCollection.getCards());
-                break;
-
-            case "mana07" :
-                HOWESTSTONE.filterCollection.getCards().sort(new manaCardCollectionComparator());
-                Collections.reverse(HOWESTSTONE.filterCollection.getCards());
-                break;
-
-            case "mana70" :
-                HOWESTSTONE.filterCollection.getCards().sort(new manaCardCollectionComparator());
-                break;
-        }
-        context.json(HOWESTSTONE.filterCollection);
+        context.json(HOWESTSTONE.filterCollection.sortDeck(context.body()));
     }
 
     private void canCardBeAdded(Context context) {

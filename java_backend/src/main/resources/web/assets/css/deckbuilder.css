@@ -48,7 +48,7 @@
     width: 5vh;
 }
 
-#deckbuilder #save {
+#deckbuilder header .saveDeck {
     text-align: center;
     line-height: 20vh;
     position: absolute;
