@@ -1189,9 +1189,12 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 
 <h4>Progress</h4>
 <h5>Frontend</h5>
-
+<h6>Implemented</h5>
+<h6>Not Yet Implemented</h5>
 
 <h5>Backend</h5>
+<h6>Implemented</h5>
+<h6>Not Yet Implemented</h5>
 
 
 
