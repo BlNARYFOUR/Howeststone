@@ -106,7 +106,7 @@ class Routes {
         } else {
             howeststone.setActivePlayer(ENEMY_STR);
             howeststone.getEnemy().beginTurn();
-            // do auto player
+            howeststone.startTurnAutoplayer();
 
         }
         context.json(howeststone.getActivePlayer());
