@@ -183,13 +183,13 @@ public class Game {
         return activePlayer;
     }
 
-    public int getTurnTime() {
+    /*public int getTurnTime() {
         return turnTime;
     }
 
     public void setTurnTime(int turnTime) {
         this.turnTime = turnTime;
-    }
+    }*/
 
     public void setDeckInDeckBuilder(String body) {
         deckInDeckBuilder = new CardCollection(body);
@@ -276,15 +276,6 @@ public class Game {
         /*Timer timer = new Timer();
         TimerTask set;
         timer.schedule(set, 50);*/
-    }
-
-    public void startGame() {
-        //TODO zorg dat bij replacecard de beginner de activeplayer wordt
-        if (ENEMY_STR.equals(activePlayer)) {
-            startTurnAutoplayer();
-        } else {
-            startTurnYou();
-        }
     }
 
     public List<CardCollection> getDecks() {
@@ -507,7 +498,7 @@ public class Game {
         return (int) deckId;
     }
 
-    public void startYourTurn() {
+    /*public void startYourTurn() {
         //TODO voer abilities uit aan begin turn
         you.beginTurn();
 
@@ -519,5 +510,5 @@ public class Game {
         }
         setActivePlayer(ENEMY_STR);
         //startAutoplayer();
-    }
+    }*/
 }
