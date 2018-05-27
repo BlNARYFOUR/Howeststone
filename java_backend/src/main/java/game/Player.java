@@ -151,4 +151,9 @@ public class Player {
     public int getActiveMana() {
         return activeMana;
     }
+
+    public void resetMana() {
+        activeMana = 0;
+        totalMana = 0;
+    }
 }

@@ -16,6 +16,7 @@ function init() {
     getRandomCardBack();
     //makeCardsFan("you", 1);
     document.querySelector(".you .heroPower span").addEventListener('click', useHeroPower);
+    setupGameBoard();
 }
 
 function setupGameBoard() {
@@ -130,11 +131,7 @@ function timeLeft() {
 }
 
 function endMyTurn(e) {
-    stopTimeLeftCheck();
-    stopBurnFuse();
-
-    /*
-    fetch('http://localhost:4242/threebeesandme/post/endturn',{
+    fetch('/threebeesandme/post/gameboard/endturn',{
         method: 'POST'
     })
         .then(function(res) {
@@ -144,11 +141,12 @@ function endMyTurn(e) {
         .then(function(text) {
             let result = text;
             console.log("turn end has been send to server");
+            stopTimeLeftCheck();
+            stopBurnFuse();
         })
         .catch(function(err) {
             console.log("Error: Could not end turn");
         });
-        */
     console.log("turn end has been send to server");
 }
 

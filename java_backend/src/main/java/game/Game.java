@@ -26,6 +26,7 @@ public class Game {
     private Player enemy;
     private int manaYou;
     private int manaEnemy;
+    private TurnTimer turnTimer = new TurnTimer();
     private String activePlayer;
     private CardCollection yourSideOfPlayingField;
     private CardCollection enemySideOfPlayingField;
@@ -183,16 +184,20 @@ public class Game {
         return activePlayer;
     }
 
-    /*public int getTurnTime() {
-        return turnTime;
+    public int getTurnTimeLeft() {
+        return turnTimer.getSecondsLeftThisTurn();
     }
 
-    public void setTurnTime(int turnTime) {
-        this.turnTime = turnTime;
-    }*/
+    public void setTurnTime(int seconds) {
+        this.turnTimer.setCountDownTurnTimer(seconds);
+    }
 
     public void setDeckInDeckBuilder(String body) {
         deckInDeckBuilder = new CardCollection(body);
+    }
+
+    public void resetTurnTimer() {
+        turnTimer.stop();
     }
 
     public void setFilterCollection(CardCollection cardCollection) {
@@ -230,6 +235,7 @@ public class Game {
         //TODO zijn er end turn battlecries?
         setActivePlayer(YOU_STR);
         you.beginTurn();
+        System.out.println("does this");
         //turnTimer.startTurnTimer();
 
     }
@@ -247,16 +253,16 @@ public class Game {
         final int i;
         if (ENEMY_STR.equals(activePlayer)) {
             i = yourSideOfPlayingField.getCards().size() - 1;
-            final int randomIndex = (int) (Math.round(Math.random()) * i);
-            if (randomIndex == i) {
+            final int randomIndex = (int) Math.round(Math.random() * i);
+            if (randomIndex == i || i < 0) {
                 target = you.getHero();
             } else {
                 target = yourSideOfPlayingField.getCards().get(i);
             }
         } else {
             i = enemySideOfPlayingField.getCards().size() - 1;
-            final int randomIndex = (int) (Math.round(Math.random()) * i);
-            if (randomIndex == i) {
+            final int randomIndex = (int) Math.round(Math.random() * i);
+            if (randomIndex == i || i < 0) {
                 target = enemy.getHero();
             } else {
                 target = enemySideOfPlayingField.getCards().get(i);
@@ -502,7 +508,7 @@ public class Game {
         //TODO voer abilities uit aan begin turn
         you.beginTurn();
 
-        while (turnTime <= 50) {
+        while (turnTimer.getSecondsLeftThisTurn() <= 50) {
             // playCard(card)
             // attackMinion(..., ...);
             // useHeroPower()

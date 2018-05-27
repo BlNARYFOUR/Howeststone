@@ -22,8 +22,12 @@ class Routes {
 
     Routes(final Javalin server, Game game) {
         howeststone = game;
-        // case sensitive
 
+        setGetRequests(server);
+        setPostRequests(server);
+    }
+
+    private void setGetRequests(Javalin server) {
         // GAME BOARD
         server.get("/threebeesandme/get/gameboard/begincards", this::getBeginCards);
         server.get("/threebeesandme/get/gameboard/begin", this::beginGame);
@@ -35,20 +39,29 @@ class Routes {
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
         server.get("/threebeesandme/get/gameboard/herohealth", this::getHeroHealth);
-        server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
-        server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
-        server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
 
         // HERO AND DECK SELECTOR
         server.get("/threebeesandme/get/hero", this::getHeroName);
         server.get("/threebeesandme/get/heroanddeckselector/decks", this::getAllDecks);
         server.get("/threebeesandme/get/heroanddeckselector/heroes", this::getAllHeroes);
-        server.post("/threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
-        server.post("/threebeesandme/post/heroanddeckselector/deck", this::handleDeckSelection);
 
         // DECKBUILDER
         server.get("/threebeesandme/get/deckbuilder/cards", this::getAllCards);
         server.get("/threebeesandme/get/deckbuilder/deck/cards", this::getCardsFromDeck);
+    }
+
+    private void setPostRequests(Javalin server) {
+        // GAME BOARD
+        server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
+        server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
+        server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
+        server.post("/threebeesandme/post/gameboard/endturn", this::handleEndTurn);
+
+        // HERO AND DECK SELECTOR
+        server.post("/threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
+        server.post("/threebeesandme/post/heroanddeckselector/deck", this::handleDeckSelection);
+
+        // DECKBUILDER
         server.post("/threebeesandme/post/deckbuilder/hero", this::handleHeroSelection);
         server.post("/threebeesandme/post/deckbuilder/deck/cancardbeadded", this::canCardBeAdded);
         server.post("/threebeesandme/post/deckbuilder/deck/addcard", this::addCardToDeck);
@@ -100,22 +113,26 @@ class Routes {
             throw new NullPointerException();
         }
         howeststone.generateEnemy();
+        howeststone.getYou().resetMana();
         //howeststone.setTurnTime(50);
         howeststone.createPlayingField();
 
         final Random rand = new Random();
         final boolean doYouBegin = rand.nextBoolean();
+        System.out.println("I begin: " + doYouBegin);
         if (doYouBegin) {
             howeststone.setActivePlayer(YOU_STR);
+            context.json(YOU_STR);
         } else {
             howeststone.setActivePlayer(ENEMY_STR);
-            howeststone.getEnemy().beginTurn();
-            howeststone.startTurnAutoplayer();
+            System.out.println("Active player set: " + howeststone.getActivePlayer());
+            System.out.println("gets here?");
+            context.json(ENEMY_STR);
         }
-        context.json(howeststone.getActivePlayer());
     }
 
     private void getBeginCards(Context context) {
+        System.out.println(howeststone.getActivePlayer());
         context.json(howeststone.getPlayerBeginCards());
     }
 
@@ -143,6 +160,9 @@ class Routes {
             context.json(SUCCES);
             if (howeststone.getActivePlayer().equals(YOU_STR)) {
                 howeststone.getYou().beginTurn();
+            } else {
+                howeststone.getEnemy().beginTurn();
+                howeststone.startTurnAutoplayer();
             }
         } else {
             System.out.println(ColorFormats.red("you shall not hack"));
@@ -181,8 +201,10 @@ class Routes {
         context.result("Time Left");
     }
 
-    private void handleEndUrn(Context context) {
-        context.result("TurnTimer has ended");
+    private void handleEndTurn(Context context) {
+        howeststone.resetTurnTimer();
+
+        context.json("TurnTimer has ended");
     }
 
     private void useHeroPower(Context context) {
