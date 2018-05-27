@@ -122,18 +122,18 @@ public class Display {
 
         // HOWESTSTONE.getYou().setCardsInHand(replace);
 
-        if (howeststone.getActivePlayer().equals(YOU_STR)) {
+        /*if (howeststone.getActivePlayer().equals(YOU_STR)) {
             // add 3/4 cards to hand
             //howeststone.setTurnTime(50);
         } else {
             for (String card: replaceCardList) {
                 //TODO add card to hand enemy
                 final boolean fixError = true;
-            }
+        }
             // replace cards ?
             System.out.println(howeststone.getEnemy().getCardsInHand());
             enemyTurn(howeststone);
-        }
+        }*/
     }
 
     private void enemyTurn(Game howeststone) {
