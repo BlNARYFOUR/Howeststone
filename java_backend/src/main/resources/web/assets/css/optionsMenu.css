@@ -53,9 +53,15 @@
     border-radius: 8% 8% 0 0 / 100% 100% 0 0;
 }
 
+/*
 #options ul li:nth-of-type(2):hover {
     background: url("../media/button2Hover.png") center 40% no-repeat;
     background-size: 97% 66%;
+}
+*/
+
+#gotoSound {
+    color: red;
 }
 
 #options li:nth-of-type(3) {
