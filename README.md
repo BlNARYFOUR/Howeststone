@@ -1,8 +1,8 @@
 <h1>Howeststone</h1>
-<h2>Inleiding</h2>
+<h2>Introduction</h2>
 
-Wij hebben naar aanleiding van de module Project I <br/>
-onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
+We have created our own version of Hearthstone for the module Project I.<br/>
+We call it 'HowestStone'.
 
 <h3>Three Bees and Me (groep 31)</h3>
 
@@ -12,6 +12,27 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 * Bram Vermeulen (Roze) That's what i do. I drink and I know things.
 
 ![alt text](PMDOC/groepsfoto.jpg "Groepsfoto 3BEES&ME")
+
+<h2>How to play</h2>
+<h3>How to create the database</h3>
+* Start your WAMP server
+* In java, open the class SetupDatabase in the package setupdatabase
+* Now click run
+
+<h3>How to start the server</h3>
+* Open the package api
+* Open the class Server.java
+* Now click run
+
+<h3>How to view the webpage</h3>
+* First follow the steps above to start the server
+* Then click "localhost:4242" in the commandprompt, or enter this in your browser
+* Now enjoy the game!
+
+<h3>How to save and open the CLI</h3>
+* Saving of the game is NYI
+* Run the java console version by running console/Display.java
+* This console application is not yet fully implemented
 
 <h2>Diagrams</h2>
 <h3>Java</h3>
@@ -1190,13 +1211,16 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 <h2>Progress</h2>
 <h3>Front-end</h3>
 <h4>Implemented</h4>
-* Playingfield:
+* Gameboard:
     * Hero health
     * Basic mana
     * Attack/Health/Durability/Mana cost for the cards
     * Playing cards
     * Replace cards
     * Fan cards
+    * End turn
+    * Replace cards
+    * enemy mana
 * Deckbuilder (fundamentals)
 * Menu's:
     * Main menu
@@ -1212,6 +1236,9 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
 * Search function deckbuilder
 * Current game can be saved from the front-end side
 * Battlelog
+* tutorial
+* Update of enemy cards in hand
+* update of enemy played cards
 * Extra features:
     * Sign up screen
     * Login/Logout screen
@@ -1219,6 +1246,7 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
     
 <h3>Back-end</h3>
 <h4>Implemented</h4>
+* replacing begin cards
 * Deckbuilder
 * Database
 * Minion
@@ -1228,12 +1256,15 @@ onze eigen versie gemaakt van het bestaande spel Hearthstone, Howeststone.
     * Charge
     * Divine Shield
     * Windfury
+* Auto create database
+* Turn end
+* Event listener for time
+* Very basics of auto-player
 
 <h4>Not Yet Implemented</h4>
 * CLI
+* actual execution of abilities
 * Other abilities
 * Mechanics
-
-
-
-
+* using the event listener
+* Starting your turn after auto-players turn
