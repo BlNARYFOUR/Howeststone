@@ -355,7 +355,7 @@ function updateMyStuff() {
 }
 
 function updateEnemyStuff() {
-    updateEnemyCards(5);
+    updateEnemyCards();
     updateEnemyMana();
     updateEnemyHeroInGame();
 }
@@ -436,13 +436,22 @@ function showHero(parent, heroName) {
 }
 
 function updateEnemyCards() {
-    let amountOfCards = 0;
-
-    // TODO fetch for cardInEnemyHand and other info
-    amountOfCards = 7;      // MOCK DATA
-
-    updateCards(amountOfCards, "enemy", -1);
-    setEnemyCardBacks("enemy", cardBackUrl);
+    fetch("/threebeesandme/get/gameboard/enemycardsinhand", {
+        method: 'get'
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+        })
+        .then(function (text) {
+            let amountOfCards = text;
+            console.log("Enemy cards in hand updated");
+            updateCards(amountOfCards, "enemy", -1);
+            setEnemyCardBacks("enemy", cardBackUrl);
+        })
+        .catch(function (err) {
+            console.log("Error: Could not get enemy cards in hand");
+        });
 }
 
 function updateMyCards() {
