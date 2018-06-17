@@ -73,7 +73,8 @@ public class Player {
         final Card card = cardsInDeck.drawCard();
 
         if (card != null) {
-            cardsInHand.addCard(card);
+            if(cardsInHand.size() < 10)
+                cardsInHand.addCard(card);
         } else {
             hero.addHealth(-heroDamageOnEmptyDeck++);
         }

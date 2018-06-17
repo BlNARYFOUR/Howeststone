@@ -22,6 +22,10 @@ public class CardCollection {
         this.cards = new ArrayList<>(cardCollection.getCards());
     }
 
+    public int size() {
+        return cards.size();
+    }
+
     private void shuffle() {
         Collections.shuffle(cards);
     }
@@ -144,7 +148,7 @@ public class CardCollection {
         } else if (cards.size() > 29) {
             result = "cannot add more";
         } else {
-            result = "SUCCES";
+            result = "SUCCESS";
         }
         return result;
     }
