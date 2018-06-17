@@ -70,7 +70,7 @@ public class Display {
         howeststone.generateEnemy();
         //howeststone.setTurnTime(50);
         System.out.println(howeststone);
-        howeststone.shuffleDecks();
+        //howeststone.shuffleDecks();
         flipCoin(howeststone);
     }
 
