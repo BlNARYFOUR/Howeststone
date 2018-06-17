@@ -47,6 +47,7 @@ public class Game {
 
     public String beginGame() {
         setActive();
+        System.out.println(ColorFormats.green("Game currently active"));
 
         if (getYou().getHero() == null || getYou().getDeck() == null) {
             //TODO get out of this method not exception
