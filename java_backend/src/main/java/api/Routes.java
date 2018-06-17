@@ -51,6 +51,9 @@ class Routes {
     }
 
     private void setPostRequests(Javalin server) {
+        // Loading og the page
+        server.post("/threebeesandme/post/reset", this::reset);
+
         // GAME BOARD
         server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
         server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
@@ -71,6 +74,13 @@ class Routes {
         server.post("threebeesandme/post/deckbuilder/deleteDeck", this::deleteDeck);
         server.post("/threebeesandme/howeststone/post/deckbuilder/sort", this::sortDeck);
         server.post("/threebeesandme/howeststone/post/deckbuilder/filterCards", this::filterCards);
+    }
+
+    private void reset(Context context) {
+        howeststone.setInactive();
+        howeststone.resetTurnTimer();
+        System.out.println(ColorFormats.red("Game currently inactive"));
+        context.json("done");
     }
 
     // HERO AND DECK SELECTOR
@@ -108,27 +118,9 @@ class Routes {
     // GAME BOARD
 
     private void beginGame(Context context) {
-        if (howeststone.getYou().getHero() == null || howeststone.getYou().getDeck() == null) {
-            //TODO get out of this method not exception
-            throw new NullPointerException();
-        }
-        howeststone.generateEnemy();
-        howeststone.getYou().resetMana();
-        //howeststone.setTurnTime(50);
-        howeststone.createPlayingField();
-
-        final Random rand = new Random();
-        final boolean doYouBegin = rand.nextBoolean();
-        System.out.println("I begin: " + doYouBegin);
-        if (doYouBegin) {
-            howeststone.setActivePlayer(YOU_STR);
-            context.json(YOU_STR);
-        } else {
-            howeststone.setActivePlayer(ENEMY_STR);
-            System.out.println("Active player set: " + howeststone.getActivePlayer());
-            System.out.println("gets here?");
-            context.json(ENEMY_STR);
-        }
+        String result = howeststone.beginGame();
+        System.out.println("Active player set: " + result);
+        context.json(result);
     }
 
     private void getBeginCards(Context context) {
@@ -203,6 +195,7 @@ class Routes {
 
     private void handleEndTurn(Context context) {
         howeststone.resetTurnTimer();
+        System.out.println("Timer cancel in routes");
         howeststone.startTurnAutoplayer();
 
         context.json("TurnTimer has ended");

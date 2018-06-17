@@ -10,6 +10,7 @@ let timeLeftObj = null;
 let MOCKTIME = 50;
 
 function init() {
+    stopPreviousGame();
     setupMovingOfCards();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
@@ -85,10 +86,7 @@ function showBattleLog(logArr) {
 }
 
 function startTimeLeftCheck() {
-    // TODO: timeLeftObj = setInterval(timeLeft, 1000);
-
-    MOCKTIME = 50;
-    timeLeftObj = setInterval(MOCKTIMELEFT, 1000);
+    timeLeftObj = setInterval(timeLeft, 500);
 }
 
 function MOCKTIMELEFT() {
@@ -107,6 +105,28 @@ function stopTimeLeftCheck() {
     clearInterval(timeLeftObj);
 }
 
+function stopThisGame() {
+    stopTimeLeftCheck();
+    stopPreviousGame();
+}
+
+function stopPreviousGame() {
+    fetch('/threebeesandme/post/reset',{
+        method: 'POST'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Previous game has been stopped.");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not stop the previous game");
+        });
+}
+
 function timeLeft() {
     fetch('/threebeesandme/get/gameboard/timeleft', {
         method: 'GET'
@@ -117,12 +137,14 @@ function timeLeft() {
         })
         .then(function (text) {
             let result = text;
-            console.log("Time left was retrieved from the server");
+            if(result%10 === 0)
+                console.log("Time left: ", result);
+
             if (result <= 20) {
                 burnFuse();
             }
-            else if (result <= 0) {
-                endMyTurn();
+            if (result <= 0) {
+                endTurnClientSided();
             }
         })
         .catch(function (err) {
@@ -141,13 +163,18 @@ function endMyTurn(e) {
         .then(function(text) {
             let result = text;
             console.log("turn end has been send to server");
-            stopTimeLeftCheck();
-            stopBurnFuse();
+            endTurnClientSided();
         })
         .catch(function(err) {
             console.log("Error: Could not end turn");
         });
     console.log("turn end has been send to server");
+}
+
+function endTurnClientSided() {
+    stopTimeLeftCheck();
+    stopBurnFuse();
+    enemyTurn();
 }
 
 function gotoCardsReplaced() {
@@ -279,6 +306,7 @@ function gameBoardSetup() {
 
 let heroAttack;
 function enemyTurn() {
+    console.log("Enemy turn");
     // TODO fetch
     // get amount of card in hand
     // get max mana
@@ -288,12 +316,31 @@ function enemyTurn() {
 
     startMyTurn();
 }
+
+function enemyTurnFetch() {
+    fetch('/threebeesandme/get/gameboard/enemyturn', {
+        method: 'GET',
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            activateReplaceCards(text);
+        })
+        .catch(function (err) {
+            console.log(err +"Error: cannot get starting cards");
+        });
+}
+
 function startMyTurn() {
     // TODO fetch
-    console.log("You're turn");
+    startTimeLeftCheck();
+    console.log("Your turn");
     updateEnemyStuff();
     updateMyStuff();
-    startTimeLeftCheck();
     heroAttack = true;
 }
 

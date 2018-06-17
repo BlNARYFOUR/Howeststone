@@ -8,6 +8,7 @@ import formatters.ColorFormats;
 import hero.Hero;
 import java.sql.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Game {
     private static final String YOU_STR = "you";
@@ -15,6 +16,7 @@ public class Game {
     private CardCollection beginCards;
     private CardCollection deckInDeckBuilder;
     private CardCollection filterCollection;
+    private boolean isGameActive = false;
 
     private SqlDatabase db;
 
@@ -35,8 +37,36 @@ public class Game {
     /*private Hero you;
     private CardCollection deck;*/
 
-    public Game() {
-        turnTimer.setCountDownTurnTimer(50);
+    public void setInactive() {
+        isGameActive = false;
+    }
+
+    public void setActive() {
+        isGameActive = true;
+    }
+
+    public String beginGame() {
+        setActive();
+
+        if (getYou().getHero() == null || getYou().getDeck() == null) {
+            //TODO get out of this method not exception
+            throw new NullPointerException();
+        }
+        generateEnemy();
+        getYou().resetMana();
+        setTurnTime(50);
+        createPlayingField();
+
+        final Random rand = new Random();
+        final boolean doYouBegin = rand.nextBoolean();
+        System.out.println("I begin: " + doYouBegin);
+        if (doYouBegin) {
+            setActivePlayer(YOU_STR);
+            return YOU_STR;
+        } else {
+            setActivePlayer(ENEMY_STR);
+            return ENEMY_STR;
+        }
     }
 
     public CardCollection getDeck(String deckName) {
@@ -217,6 +247,7 @@ public class Game {
         setActivePlayer(ENEMY_STR);
         getEnemy().beginTurn();
         System.out.println("Begins Enemy turn :)");
+        //turnTimer.startTurnTimer(this::onEnemyTurnEnd);
 
         final List<Card> cardsInHand = enemy.getCardsInHand().getCards();
         cardsInHand.sort(new CardCollectionManaComparator());
@@ -241,7 +272,8 @@ public class Game {
             }
         }
         //TODO zijn er end turn battlecries?
-        startTurnYou();
+        if(isGameActive)
+            startTurnYou();
     }
 
     public void startTurnYou() {
@@ -251,9 +283,19 @@ public class Game {
         turnTimer.startTurnTimer(this::onYourTurnEnd);
     }
 
+    private void onEnemyTurnEnd() {
+        System.out.println(ColorFormats.green("Enemy time is up :)"));
+
+        startTurnYou();
+    }
+
     private void onYourTurnEnd() {
         System.out.println(ColorFormats.green("Your time is up :'("));
-
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         startTurnAutoplayer();
     }
 

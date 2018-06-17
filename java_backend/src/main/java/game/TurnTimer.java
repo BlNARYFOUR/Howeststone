@@ -33,8 +33,6 @@ public class TurnTimer {
 
     public void startTurnTimer(Runnable runnable) {
         secondsLeftThisTurn = countDownTurnTimer;
-        isRunning = true;
-        turnTimer = new Timer();
         turnTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -44,10 +42,10 @@ public class TurnTimer {
                     System.out.println(ColorFormats.magenta(Integer.toString(secondsLeftThisTurn)));
 
                 if (secondsLeftThisTurn == 0) {
-                    turnTimer.cancel();
                     setFlag();
-
+                    stop();
                     runnable.run();
+                    System.out.println("Timer cancel because time's up");
                 }
             }
         }, 0, 1000);
@@ -70,9 +68,7 @@ public class TurnTimer {
     }
 
     public void stop() {
-        if(isRunning)
-            turnTimer.cancel();
-
-        isRunning = false;
+        turnTimer.cancel();
+        turnTimer = new Timer();
     }
 }
