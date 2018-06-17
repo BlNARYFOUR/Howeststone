@@ -259,7 +259,10 @@ public class Game {
         }
         //speel duurste kaarten eerst zolang je mana hebt
         for (Card card : cardsInHand) {
-            if (card.getManaCost() <= manaEnemy) {
+            if(7 <= enemy.getCardsOnPlayingField().size())
+                break;
+
+            if (card.getManaCost() <= enemy.getActiveMana()) {
                 enemy.playCard(card.getCardID());
             }
         }
