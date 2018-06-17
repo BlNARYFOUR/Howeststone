@@ -108,7 +108,7 @@ function stopTimeLeftCheck() {
 }
 
 function timeLeft() {
-    fetch('http://localhost:4242/threebeesandme/get/timeleft', {
+    fetch('/threebeesandme/get/gameboard/timeleft', {
         method: 'GET'
     })
         .then(function (res) {

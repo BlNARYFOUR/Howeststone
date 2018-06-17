@@ -159,9 +159,8 @@ class Routes {
         if (howeststone.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
             context.json(SUCCES);
             if (howeststone.getActivePlayer().equals(YOU_STR)) {
-                howeststone.getYou().beginTurn();
+                howeststone.startTurnYou();
             } else {
-                howeststone.getEnemy().beginTurn();
                 howeststone.startTurnAutoplayer();
             }
         } else {
@@ -198,11 +197,13 @@ class Routes {
     }
 
     private void getTimeLeft(Context context) {
-        context.result("Time Left");
+        int timeLeft = howeststone.getTurnTimeLeft();
+        context.json(timeLeft);
     }
 
     private void handleEndTurn(Context context) {
         howeststone.resetTurnTimer();
+        howeststone.startTurnAutoplayer();
 
         context.json("TurnTimer has ended");
     }

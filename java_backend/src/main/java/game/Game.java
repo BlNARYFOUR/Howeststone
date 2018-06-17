@@ -4,6 +4,7 @@ package game;
 import cards.*;
 import db.SqlDatabase;
 import db.SqlStatements;
+import formatters.ColorFormats;
 import hero.Hero;
 import java.sql.*;
 import java.util.*;
@@ -33,6 +34,10 @@ public class Game {
 
     /*private Hero you;
     private CardCollection deck;*/
+
+    public Game() {
+        turnTimer.setCountDownTurnTimer(50);
+    }
 
     public CardCollection getDeck(String deckName) {
         final List<CardCollection> decks = deckNames.get(you.getHero().getHeroName());
@@ -209,6 +214,9 @@ public class Game {
     }
 
     public void startTurnAutoplayer() {
+        setActivePlayer(ENEMY_STR);
+        getEnemy().beginTurn();
+        System.out.println("Begins Enemy turn :)");
 
         final List<Card> cardsInHand = enemy.getCardsInHand().getCards();
         cardsInHand.sort(new CardCollectionManaComparator());
@@ -233,11 +241,18 @@ public class Game {
             }
         }
         //TODO zijn er end turn battlecries?
+        startTurnYou();
+    }
+
+    public void startTurnYou() {
         setActivePlayer(YOU_STR);
         you.beginTurn();
-        System.out.println("does this");
-        //turnTimer.startTurnTimer();
+        System.out.println("Begins your turn :)");
+        turnTimer.startTurnTimer(this::test);
+    }
 
+    private void test() {
+        System.out.println(ColorFormats.green("Yeeeeey"));
     }
 
     public Player activePlayerToPlayer() {
