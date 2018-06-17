@@ -248,11 +248,13 @@ public class Game {
         setActivePlayer(YOU_STR);
         you.beginTurn();
         System.out.println("Begins your turn :)");
-        turnTimer.startTurnTimer(this::test);
+        turnTimer.startTurnTimer(this::onYourTurnEnd);
     }
 
-    private void test() {
-        System.out.println(ColorFormats.green("Yeeeeey"));
+    private void onYourTurnEnd() {
+        System.out.println(ColorFormats.green("Your time is up :'("));
+
+        startTurnAutoplayer();
     }
 
     public Player activePlayerToPlayer() {

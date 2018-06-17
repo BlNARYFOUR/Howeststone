@@ -42,7 +42,7 @@ public class TurnTimer {
 
                 if(secondsLeftThisTurn%10 == 0)
                     System.out.println(ColorFormats.magenta(Integer.toString(secondsLeftThisTurn)));
-                
+
                 if (secondsLeftThisTurn == 0) {
                     turnTimer.cancel();
                     setFlag();
