@@ -339,6 +339,10 @@ function startMyTurn() {
     // TODO fetch
     startTimeLeftCheck();
     console.log("Your turn");
+    setTimeout(updateTurnStart, 100);
+}
+
+function updateTurnStart() {
     updateEnemyStuff();
     updateMyStuff();
     heroAttack = true;
