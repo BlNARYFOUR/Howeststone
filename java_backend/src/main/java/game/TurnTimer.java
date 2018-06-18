@@ -11,7 +11,6 @@ public class TurnTimer {
     private int countDownTurnTimer;
     private int secondsLeftThisTurn;
     private boolean countdownTurnTimerFinished;
-    private boolean isRunning = false;
 
     public TurnTimer() {
         turnTimer = new Timer();
