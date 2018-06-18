@@ -60,6 +60,8 @@ class Routes {
         server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
         server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
         server.post("/threebeesandme/post/gameboard/endturn", this::handleEndTurn);
+        server.post("/threebeesandme/post/gameboard/playingfield/cancardbeadded", this::canCardBeAddedToPlayingField);
+        server.post("/threebeesandme/post/gameboard/playingfield/attack", this::attackMinion);
 
         // HERO AND DECK SELECTOR
         server.post("/threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
@@ -145,7 +147,6 @@ class Routes {
 
     private void replaceCards(Context context) throws IOException {
         final String body = context.body();
-        System.out.println(body);
         final ObjectMapper mapper = new ObjectMapper();
         final Map<String, List<Integer>> temp =
                 mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() { });
@@ -166,11 +167,21 @@ class Routes {
         }
     }
 
+    private void canCardBeAddedToPlayingField(Context context) {
+        if (!howeststone.getYou().canIPlayCard(context.body())) {
+            context.json(ERROR);
+        } else if (ENEMY_STR.equals(howeststone.getActivePlayer())) {
+            context.json(ERROR);
+        } else if (howeststone.getYou().getCardsOnPlayingField().getCards().size() >= 7) {
+            context.json(ERROR);
+        } else {
+            context.json(SUCCES);
+        }
+    }
+
     private void playMyCard(Context context) throws IOException {
         final boolean succeeded;
         final String body = context.body();
-
-        System.out.println(body);
 
         final ObjectMapper mapper = new ObjectMapper();
         final int cardID = mapper.readValue(body, new TypeReference<Integer>() {
@@ -235,9 +246,24 @@ class Routes {
     }
 
     private void canThisMinionAttack(Context context) {
-        context.result("no :p");
-    }
+        if ("".equals(context.body())){
+            context.json(ERROR);
+        } else {
+            final int cardID = Integer.parseInt(context.queryParamMap().get("cardID")[0]);
+            context.json(howeststone.getYou().getCardsOnPlayingField().checkIfCardCanAttack(cardID));
+        }
 
+    }
+    private void attackMinion(Context context) throws IOException {
+        /*final String body = context.body();
+        final ObjectMapper mapper = new ObjectMapper();
+        final Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() {
+        });
+        final List<String> destinationFucked = temp.get("destination");
+        final List<String> source = temp.get("source");
+        System.out.println(destinationFucked);
+        System.out.println(source);*/
+    }
 
     // DECK BUILDER
 

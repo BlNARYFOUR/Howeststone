@@ -480,7 +480,7 @@ function updateMyCards() {
 function giveClassNameEqualTocardID() {
     let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
     for (let i = 0; i < myCards.length; i++) {
-        cardHtmlObjects[i].classList.add(myCards[i]["cardID"]);
+        cardHtmlObjects[i].classList.add("card_" +myCards[i]["cardID"]);
     }
 }
 
@@ -941,7 +941,30 @@ let itemThatIsBeingMoved;
 let moved;
 
 function layCardOnFieldStart(e) {
-    // TODO fetch
+    let cardID = e.target.classList[0].split("_")[1];
+    fetch('/threebeesandme/post/gameboard/playingfield/cancardbeadded', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: cardID
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            if (text === "SUCCES"){
+                beginAddingCard(e);
+            }
+        })
+        .catch(function (err) {
+            console.log(err +"Error: Could not send the selected deck :'(");
+        });
+}
+function beginAddingCard(e) {
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
     itemThatIsBeingMoved = e.target;
@@ -1206,14 +1229,14 @@ function returnCostOfMyCard(liWithClass) {
 }
 
 function sendPlayedCard(liWithClass) {
-    let cardID = liWithClass.getAttribute('class');
-
+    let cardID = liWithClass.classList[0].split("_")[1];
+    
     fetch('/threebeesandme/post/gameboard/playcard', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(cardID.split(' ')[0])
+        body: JSON.stringify(cardID)
     })
         .then(function (res) {
             if (res.ok === true)
@@ -1261,7 +1284,7 @@ function visualiseAttack(e) {
     attack();
 }
 
-function attackStart() {
+function attackStart(e) {
     let target = e.target;
     if (e.path[0].tagName === 'SPAN') {
         target = e.target.parentElement;
@@ -1292,7 +1315,9 @@ function attackStart() {
 }
 
 function loadAttackStart(e) {
-    fetch('http://localhost:4242/threebeesandme/get/gameboard/attackpermission', {
+    let cardID = e.target.classList[0].split("_")[1];
+
+    fetch('/threebeesandme/get/gameboard/attackpermission?cardID=' + cardID , {
         method: 'get'
     })
         .then(function (res) {
@@ -1300,8 +1325,9 @@ function loadAttackStart(e) {
                 return res.json();
         })
         .then(function (text) {
+            console.log(text);
             let result = text;
-            attackStart(result)
+            attackStart(e);
             console.log("asking for attack permission has been send to server");
         })
         .catch(function (err) {
@@ -1357,6 +1383,24 @@ function heroAttackStart(e) {
     }
 }
 
+function attackToBackend(enemy) {
+    let cardID = enemy.classList[0].split("_")[1];
+    let yourID = itemThatIsBeingMoved.classList[0].split("_")[1];
+    let attackJSON = {"destination": cardID, "source": yourID};
+
+    fetch("/threebeesandme/post/gameboard/playingfield/attack", {
+        method: "POST",
+        body: JSON.stringify(attackJSON)
+    }).then(function (res) {
+        if (res.ok)
+            return res.json();
+    }).then(function (text) {
+        console.log(text);
+    }).catch(function (err) {
+        console.log(err);
+    });
+}
+
 function attackEnd() {
     let enemies = document.querySelectorAll('.enemy .playingField ul li');
     let rectDrag = dragSrcElement.getBoundingClientRect();
@@ -1368,8 +1412,7 @@ function attackEnd() {
     for (let i = 0; i < enemies.length; i++) {
         let enemy = enemies[i].getBoundingClientRect();
         if ((rectDrag.right < enemy.right + 13) && (rectDrag.left > enemy.left - 13) && (rectDrag.bottom < enemy.bottom + 26) && (rectDrag.top > enemy.top - 18)) {
-            console.log('attack');
-            console.log(enemies[i]);
+            attackToBackend(enemies[i]);
         }
     }
     dragSrcElement.parentElement.removeChild(dragSrcElement);

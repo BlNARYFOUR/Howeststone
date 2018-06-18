@@ -158,4 +158,15 @@ public class Player {
         activeMana = 0;
         totalMana = 0;
     }
+
+    public boolean canIPlayCard(String body) {
+        boolean check = false;
+        for (int i = 0; i < cardsInHand.getCards().size(); i++) {
+            if (cardsInHand.getCards().get(i).getCardID() == Integer.parseInt(body)) {
+                check = cardsInHand.getCards().get(i).getManaCost() <= activeMana;
+            }
+        }
+        return check;
+
+    }
 }

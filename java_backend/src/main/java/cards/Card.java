@@ -24,8 +24,7 @@ public abstract class Card {
     private int manaCost;
     private int heroId;
     private String race;
-    private List<Abilities> cardAbilities;
-    // TODO: private List<Mechanics> cardMechanics;
+    private List<Ability> cardAbilities;
 
     public Card(int cardID, String[] strArgs, int[] intArgs) {
         this.cardID = cardID;
@@ -50,9 +49,9 @@ public abstract class Card {
         return manaCost;
     }
 
-    /* TODO public List<Abilities> getCardAbilities() {
+    public List<Ability> getCardAbilities() {
         return cardAbilities;
-    }*/
+    }
 
     public int getMaxAmountOfAttacks() {
         return maxAmountOfAttacks;
@@ -92,6 +91,10 @@ public abstract class Card {
 
     public String getRarity() {
         return rarity;
+    }
+
+    public void setAbilities(List<Ability> abilities) {
+        this.cardAbilities = abilities;
     }
 
     @Override
@@ -161,6 +164,7 @@ public abstract class Card {
     public boolean isDead() {
         return health <= 0;
     }
+
 
     // list with all abilities and mechanics?
     // method playCard

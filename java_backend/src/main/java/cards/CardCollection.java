@@ -1,5 +1,7 @@
 package cards;
 
+import abilities.Ability;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -176,5 +178,20 @@ public class CardCollection {
                 throw new IllegalArgumentException("no sort methods where found");
         }
         return this;
+    }
+
+    public boolean checkIfCardCanAttack(int cardID) {
+        boolean check = true;
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getCardID() == cardID) {
+                if (!cards.get(i).isExhausted()) {
+                    check = false;
+                }
+                if ((cards.get(i).getAmountAttacked() < cards.get(i).getMaxAmountOfAttacks())) {
+                    check = false;
+                }
+            }
+        }
+        return true;
     }
 }
