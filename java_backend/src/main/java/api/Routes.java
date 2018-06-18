@@ -201,7 +201,7 @@ class Routes {
     private void handleEndTurn(Context context) {
         howeststone.resetTurnTimer();
         System.out.println("Timer cancel in routes");
-        if(howeststone.getActivePlayer().equals(YOU_STR)) {
+        if (howeststone.getActivePlayer().equals(YOU_STR)) {
             howeststone.startTurnAutoplayer();
         }
 

@@ -38,8 +38,9 @@ public class TurnTimer {
             public void run() {
                 secondsLeftThisTurn--;
 
-                if(secondsLeftThisTurn%10 == 0)
+                if (secondsLeftThisTurn % 10 == 0) {
                     System.out.println(ColorFormats.magenta(Integer.toString(secondsLeftThisTurn)));
+                }
 
                 if (secondsLeftThisTurn == 0) {
                     setFlag();

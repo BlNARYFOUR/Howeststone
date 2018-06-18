@@ -265,8 +265,9 @@ public class Game {
         }
         //speel duurste kaarten eerst zolang je mana hebt
         for (Card card : cardsInHand) {
-            if(7 <= enemy.getCardsOnPlayingField().size())
+            if (7 <= enemy.getCardsOnPlayingField().size()) {
                 break;
+            }
 
             if (card.getManaCost() <= enemy.getActiveMana()) {
                 enemy.playCard(card.getCardID());
@@ -282,8 +283,9 @@ public class Game {
             }
         }
         //TODO zijn er end turn battlecries?
-        if(isGameActive)
+        if (isGameActive) {
             startTurnYou();
+        }
     }
 
     public void startTurnYou() {
