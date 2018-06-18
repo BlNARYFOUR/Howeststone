@@ -123,7 +123,7 @@ class Routes {
     // GAME BOARD
 
     private void beginGame(Context context) {
-        String result = howeststone.beginGame();
+        final String result = howeststone.beginGame();
         System.out.println("Active player set: " + result);
         context.json(result);
     }
@@ -194,15 +194,16 @@ class Routes {
     }
 
     private void getTimeLeft(Context context) {
-        int timeLeft = howeststone.getTurnTimeLeft();
+        final int timeLeft = howeststone.getTurnTimeLeft();
         context.json(timeLeft);
     }
 
     private void handleEndTurn(Context context) {
         howeststone.resetTurnTimer();
         System.out.println("Timer cancel in routes");
-        if(howeststone.getActivePlayer().equals(YOU_STR))
+        if(howeststone.getActivePlayer().equals(YOU_STR)) {
             howeststone.startTurnAutoplayer();
+        }
 
         context.json("TurnTimer has ended");
     }

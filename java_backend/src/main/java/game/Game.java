@@ -16,11 +16,11 @@ public class Game {
     private CardCollection beginCards;
     private CardCollection deckInDeckBuilder;
     private CardCollection filterCollection;
-    private boolean isGameActive = false;
+    private boolean isGameActive;
 
     private SqlDatabase db;
 
-    private CardCollection allCards = new CardCollection("cards");
+    private CardCollection allCards;
     private List<String> heroNames;
     private Map<String, List<CardCollection>> deckNames;
 
@@ -29,13 +29,19 @@ public class Game {
     private Player enemy;
     private int manaYou;
     private int manaEnemy;
-    private TurnTimer turnTimer = new TurnTimer();
+    private TurnTimer turnTimer;
     private String activePlayer;
     private CardCollection yourSideOfPlayingField;
     private CardCollection enemySideOfPlayingField;
 
     /*private Hero you;
     private CardCollection deck;*/
+
+    public Game() {
+        allCards = new CardCollection("cards");
+        isGameActive = false;
+        turnTimer = new TurnTimer();
+    }
 
     public void setInactive() {
         isGameActive = false;
