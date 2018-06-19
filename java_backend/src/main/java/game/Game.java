@@ -1,9 +1,7 @@
 package game;
 
 
-import abilities.Abilities;
-import abilities.Ability;
-import abilities.Uncollectable;
+import abilities.*;
 import cards.*;
 import db.SqlDatabase;
 import db.SqlStatements;
@@ -21,7 +19,7 @@ public class Game {
     private CardCollection filterCollection;
     private boolean isGameActive;
 
-    private SqlDatabase db;
+    private final SqlDatabase db;
 
     private CardCollection allCards;
     private List<String> heroNames;
@@ -37,13 +35,162 @@ public class Game {
     private CardCollection yourSideOfPlayingField;
     private CardCollection enemySideOfPlayingField;
 
-    /*private Hero you;
-    private CardCollection deck;*/
-
-    public Game() {
-        allCards = new CardCollection("cards");
+    public Game(SqlDatabase db) {
+        this.db = db;
+        this.setHeroNames(this.getHeroNamesOutOfDb());
+        this.setDeckNames(this.getDecksOutOfDb());
+        this.setAllCards(this.getAllCardsOutOfDb());
         isGameActive = false;
         turnTimer = new TurnTimer();
+    }
+
+    private List<String> getHeroNamesOutOfDb() {
+        // getting all heroes from db
+        final List<String> heroNames = new ArrayList<>();
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_HEROES)
+        ) {
+            final ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                heroNames.add(rs.getString("heroName"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return heroNames;
+    }
+
+    private Map<String, List<CardCollection>> getDecksOutOfDb() {
+        // getting all decks from db
+        final Map<String, List<CardCollection>> deckNames = new HashMap<>();
+        for (int i = 0; i < this.getHeroNames().size(); i++) {
+            try (
+                    Connection conn = db.getConnection();
+                    PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_DECKS)
+            ) {
+                stmt.setString(1, this.getHeroNames().get(i));
+                final ResultSet rs = stmt.executeQuery();
+                final List<CardCollection> decksForChosenHero = new ArrayList<>();
+                while (rs.next()) {
+                    decksForChosenHero.add(nameToCardCollection(rs.getString("deckName")));
+
+                }
+                deckNames.put(this.getHeroNames().get(i), decksForChosenHero);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return deckNames;
+    }
+
+    private CardCollection nameToCardCollection(String deckName) {
+        final CardCollection cards = new CardCollection(deckName);
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_CARD_IN_DECK)
+        ) {
+            stmt.setString(1, deckName);
+            final ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                final int amount = rs.getInt("amount");
+                for (int i = 0; i < amount; i++) {
+                    cards.addCard(getCardOutOfRs(rs));
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cards;
+    }
+
+    private Card getCardOutOfRs(ResultSet rs) throws SQLException {
+        final Card card;
+        final String[] strArgs = new String[5];
+        final int[] intArgs = new int[5];
+        final int cardID = rs.getInt("cardID");
+        strArgs[0] = rs.getString("cardType");
+        strArgs[1] = rs.getString("cardName");
+        strArgs[2] = rs.getString("race");
+        strArgs[3] = rs.getString("img");
+        strArgs[4] = rs.getString("rarity");
+        intArgs[0] = rs.getInt("health");
+        intArgs[1] = rs.getInt("attack");
+        intArgs[2] = rs.getInt("manaCost");
+        intArgs[3] = rs.getInt("durability");
+        intArgs[4] = rs.getInt("heroId");
+        switch (strArgs[0]) {
+            case "Weapon":
+                card = new Weapon(cardID, strArgs, intArgs);
+                break;
+            case "Spell":
+                card = new Spell(cardID, strArgs, intArgs);
+                break;
+            case "Minion":
+                card = new Minion(cardID, strArgs, intArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("database not setup correctly");
+        }
+        addAbilitiesToCard(card);
+        return card;
+    }
+
+    private CardCollection getAllCardsOutOfDb() {
+        final CardCollection allCards = new CardCollection();
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.SELECT_CARDS)
+        ) {
+            final ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                allCards.addCard(getCardOutOfRs(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allCards;
+    }
+
+    private void addAbilitiesToCard(Card card) {
+        try (
+                Connection conn = db.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(SqlStatements.GET_ABILITIES_OF_CARD)
+        ) {
+
+            stmt.setInt(1, card.getCardID());
+            final ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                final int abilityId = rs.getInt("abilityId");
+                final String abilityName = rs.getString("abilityName");
+                List<Ability> abilities = new ArrayList<>();
+                Ability ability;
+                switch (abilityName) {
+                    case "Uncollectable":
+                        ability = new Uncollectable(Abilities.UNCOLLECTABLE);
+                        abilities.add(ability);
+                    case "Charge":
+                        ability = new Charge(Abilities.CHARGE);
+                        abilities.add(ability);
+                        break;
+                    case "Divine Shield":
+                        ability = new DivineShield(Abilities.DIVINE_SHIELD);
+                        abilities.add(ability);
+                        break;
+                    case "Windfury":
+                        ability = new Windfury(Abilities.WINDFURY);
+                        abilities.add(ability);
+                        break;
+                    default:
+                        break;
+                }
+                card.setAbilities(abilities);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setInactive() {
@@ -88,7 +235,6 @@ public class Game {
         }
         return null;
     }
-
 
     public void generateEnemy() {
         final int randomHeroIndex = (int) Math.round(Math.random()) * (heroNames.size() - 1);
@@ -156,7 +302,7 @@ public class Game {
         return yourSideOfPlayingField;
     }
 
-    public void setHeroNames(List<String> heroNames) {
+    private void setHeroNames(List<String> heroNames) {
         this.heroNames = heroNames;
     }
 
@@ -180,7 +326,7 @@ public class Game {
         return manaYou;
     }
 
-    public void setDeckNames(Map<String, List<CardCollection>> deckNames) {
+    private void setDeckNames(Map<String, List<CardCollection>> deckNames) {
         this.deckNames = deckNames;
     }
 
@@ -214,11 +360,8 @@ public class Game {
         this.you = you;
     }
 
-    public void addEnemy(Player enemy) {
+    private void addEnemy(Player enemy) {
         this.enemy = enemy;
-    }
-
-    public void shuffleDecks() {
     }
 
     public void setActivePlayer(String activePlayer) {
@@ -249,7 +392,7 @@ public class Game {
         filterCollection = cardCollection;
     }
 
-    public void setAllCards(CardCollection allCards) {
+    private void setAllCards(CardCollection allCards) {
         this.allCards = allCards;
     }
 
@@ -359,10 +502,16 @@ public class Game {
     }
 
     public List<CardCollection> getDecks() {
+        if (you.getHero() == null) {
+            throw new NullPointerException();
+        }
         return deckNames.get(you.getHero().getHeroName());
     }
 
-    public List<String> getDeckNames() {
+    public List<String> getDeckNamesForChosenHero() {
+        if (you.getHero() == null) {
+            throw new NullPointerException();
+        }
         final List<String> deckNamesForChosenHero = new ArrayList<>();
         final List<CardCollection> decksForChosenHero = deckNames.get(you.getHero().getHeroName());
         for (CardCollection deck : decksForChosenHero) {
@@ -436,10 +585,6 @@ public class Game {
             e.printStackTrace();
         }
         return allCards.getSubCollection(cardIDs);
-    }
-
-    public void setDataBase(SqlDatabase db) {
-        this.db = db;
     }
 
     public boolean checkIfDeckNotExist(String body) {

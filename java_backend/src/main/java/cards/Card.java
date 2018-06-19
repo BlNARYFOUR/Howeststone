@@ -100,17 +100,18 @@ public abstract class Card {
     @Override
     public String toString() {
         return "Card{"
-                + "cardID=" + cardID
-                + ", type=" + type
-                + ", cardName='" + cardName
-                + ", img='" + img
-                + ", rarity='" + rarity
-                + ", manaCost=" + manaCost
-                + ", health=" + health
-                + ", race='" + race
-                + ", attack=" + attack
-                + ", durability=" + durability
-                + ", heroId=" + heroId
+                + "cardID= " + cardID
+                + ", type= " + type
+                + ", cardName= " + cardName
+                + ", img= " + img
+                + ", rarity= " + rarity
+                + ", manaCost= " + manaCost
+                + ", health= " + health
+                + ", race= " + race
+                + ", attack= " + attack
+                + ", durability= " + durability
+                + ", heroId= " + heroId
+                + ", cardAbilities= " + cardAbilities
                 + '}';
     }
 

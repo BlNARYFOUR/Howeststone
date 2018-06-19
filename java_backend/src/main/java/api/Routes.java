@@ -108,7 +108,7 @@ class Routes {
     }
 
     private void getAllDecks(Context context) {
-        context.json(howeststone.getDeckNames());
+        context.json(howeststone.getDeckNamesForChosenHero());
     }
 
     private void handleDeckSelection(Context context) {
