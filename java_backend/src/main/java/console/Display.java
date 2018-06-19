@@ -34,7 +34,8 @@ public class Display {
         newLine();
         chooseDeck(howeststone);
         newLine();
-        startGame(howeststone);
+        System.out.println(howeststone.getYou().getDeck());
+        // startGame(howeststone);
     }
 
     private void chooseHero(Game howeststone) {

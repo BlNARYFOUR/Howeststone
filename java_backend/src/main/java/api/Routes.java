@@ -12,7 +12,7 @@ import java.util.*;
 
 class Routes {
 
-    private static final String SUCCES = "SUCCES";
+    private static final String SUCCESS = "SUCCESS";
     private static final String ERROR = "ERROR";
     private static final String ENEMY_STR = "enemy";
     private static final String YOU_STR = "you";
@@ -155,7 +155,7 @@ class Routes {
         final List<Integer> cardsToReplace = temp.get("CardsToDeck");
 
         if (howeststone.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
-            context.json(SUCCES);
+            context.json(SUCCESS);
             if (howeststone.getActivePlayer().equals(YOU_STR)) {
                 howeststone.startTurnYou();
             } else {
@@ -175,7 +175,7 @@ class Routes {
         } else if (howeststone.getYou().getCardsOnPlayingField().getCards().size() >= 7) {
             context.json(ERROR);
         } else {
-            context.json(SUCCES);
+            context.json(SUCCESS);
         }
     }
 
@@ -190,7 +190,7 @@ class Routes {
         succeeded = howeststone.getYou().playCard(cardID);
 
         if (succeeded) {
-            context.json(SUCCES);
+            context.json(SUCCESS);
         } else {
             context.json(ERROR);
         }
@@ -281,7 +281,7 @@ class Routes {
     private void newDeck(Context context) {
         if (howeststone.checkIfDeckNotExist(context.body())) {
             howeststone.setDeckInDeckBuilder(context.body());
-            context.json(SUCCES);
+            context.json(SUCCESS);
         } else {
             context.json(ERROR);
         }

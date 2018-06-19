@@ -956,7 +956,7 @@ function layCardOnFieldStart(e) {
                 return "ERROR";
         })
         .then(function (text) {
-            if (text === "SUCCES"){
+            if (text === "SUCCESS"){
                 beginAddingCard(e);
             }
         })
@@ -1245,7 +1245,7 @@ function sendPlayedCard(liWithClass) {
                 return "ERROR";
         })
         .then(function (text) {
-            if(text === "SUCCES") {
+            if(text === "SUCCESS") {
                 console.log("Card played");
                 updateMyStuff();
                 updateEnemyStuff();
