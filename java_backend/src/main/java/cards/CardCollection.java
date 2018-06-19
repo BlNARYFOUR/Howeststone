@@ -1,6 +1,5 @@
 package cards;
 
-import abilities.Ability;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -141,7 +140,6 @@ public class CardCollection {
             if (cards.get(i).getCardID() == cardID) {
                 amount++;
                 rarity = cards.get(i).getRarity();
-                // TODO uncollectable
             }
         }
         if (("Legendary".equals(rarity) && amount >= 1) || amount >= 2) {

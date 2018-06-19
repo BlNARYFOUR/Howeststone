@@ -246,7 +246,7 @@ class Routes {
     }
 
     private void canThisMinionAttack(Context context) {
-        if ("".equals(context.body())){
+        if ("".equals(context.body())) {
             context.json(ERROR);
         } else {
             final int cardID = Integer.parseInt(context.queryParamMap().get("cardID")[0]);

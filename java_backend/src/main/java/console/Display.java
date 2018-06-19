@@ -29,7 +29,7 @@ public class Display {
     }
 
     private void run() {
-        Game howeststone = new Game(DB);
+        final Game howeststone = new Game(DB);
         chooseHero(howeststone);
         newLine();
         chooseDeck(howeststone);

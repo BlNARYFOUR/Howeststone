@@ -165,12 +165,13 @@ public class Game {
             while (rs.next()) {
                 final int abilityId = rs.getInt("abilityId");
                 final String abilityName = rs.getString("abilityName");
-                List<Ability> abilities = new ArrayList<>();
+                final List<Ability> abilities = new ArrayList<>();
                 Ability ability;
                 switch (abilityName) {
                     case "Uncollectable":
                         ability = new Uncollectable(Abilities.UNCOLLECTABLE);
                         abilities.add(ability);
+                        break;
                     case "Charge":
                         ability = new Charge(Abilities.CHARGE);
                         abilities.add(ability);
@@ -410,7 +411,7 @@ public class Game {
             enemy.getHero().executeHeroPower(enemy.getHero().getHeroPowerID(), getRandomTarget());
         }
         //speel duurste kaarten eerst zolang je mana hebt
-        CardCollection copy = new CardCollection(enemy.getCardsInHand());
+        final CardCollection copy = new CardCollection(enemy.getCardsInHand());
         copy.getCards().sort(new CardCollectionManaComparator());
         for (Card card : copy.getCards()) {
             System.out.println(card);
@@ -602,17 +603,24 @@ public class Game {
     }
 
     public String checkIfCardCanBeAddedToDeck(String body) {
+        String result = "";
         final int cardID = Integer.parseInt(body);
         for (int i = 0; i < this.allCards.getCards().size(); i++) {
             if (this.allCards.getCards().get(i).getCardID() == cardID) {
                 final int heroId = this.allCards.getCards().get(i).getHeroId();
                 final int yourHeroId = this.getYou().getHero().getHeroId();
+                if (this.allCards.getCards().get(i).getCardAbilities().contains(new Uncollectable(Abilities.UNCOLLECTABLE))) {
+                    result = "card cannot be used in game";
+                }
                 if (heroId != yourHeroId && heroId != 2) {
-                    return "not the right hero";
+                    result = "not the right hero";
                 }
             }
         }
-        return this.deckInDeckBuilder.checkIfCardCanBeAddedToDeck(body);
+        if ("".equals(result)) {
+            result = this.deckInDeckBuilder.checkIfCardCanBeAddedToDeck(body);
+        }
+        return result;
     }
 
     public boolean createDeck(CardCollection deck) {
@@ -629,8 +637,8 @@ public class Game {
         newDeck.getCards().sort(new CardCollectionAlphabeticalComparator());
         final List<Card> newDeckCards = newDeck.getCards();
         for (int i = 0; i < newDeckCards.size(); i++) {
-            Ability Uncollectable = new Uncollectable(Abilities.UNCOLLECTABLE);
-            if (newDeckCards.get(i).getCardAbilities().contains(Uncollectable)) {
+            final Ability uncollectable = new Uncollectable(Abilities.UNCOLLECTABLE);
+            if (newDeckCards.get(i).getCardAbilities().contains(uncollectable)) {
                 check++;
             }
             if (i + 1 < newDeckCards.size()) {
