@@ -7,6 +7,7 @@ import db.SqlDatabase;
 import db.SqlStatements;
 import formatters.ColorFormats;
 import hero.Hero;
+
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -202,13 +203,12 @@ public class Game {
     }
 
     public String beginGame() {
+        if (getYou().getHero() == null || getYou().getDeck() == null) {
+            throw new NullPointerException();
+        }
         setActive();
         System.out.println(ColorFormats.green("Game currently active"));
 
-        if (getYou().getHero() == null || getYou().getDeck() == null) {
-            //TODO get out of this method not exception
-            throw new NullPointerException();
-        }
         generateEnemy();
         getYou().resetMana();
         setTurnTime(50);
@@ -228,7 +228,7 @@ public class Game {
 
     public CardCollection getDeck(String deckName) {
         final List<CardCollection> decks = deckNames.get(you.getHero().getHeroName());
-        for (CardCollection deck: decks) {
+        for (CardCollection deck : decks) {
             if (deck.getName().equals(deckName)) {
                 return deck;
             }

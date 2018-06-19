@@ -52,27 +52,15 @@ public class Display {
     }
 
     private void startGame(Game howeststone) {
-        if (howeststone.getYou().getHero() == null || howeststone.getYou().getDeck() == null) {
-            throw new NullPointerException();
-        }
-        howeststone.generateEnemy();
-        //howeststone.setTurnTime(50);
+        final String result = howeststone.beginGame();
         System.out.println(howeststone);
         newLine();
-        flipCoin(howeststone);
-    }
-
-    private void flipCoin(Game howeststone) {
-        // change to boolean
-        final Random rand = new Random();
-        final boolean doYouBegin = rand.nextBoolean();
-        if (doYouBegin) {
-            howeststone.setActivePlayer(YOU_STR);
+        if (result.equals(YOU_STR)) {
             System.out.println(ColorFormats.magenta("You begin the game!"));
         } else {
-            howeststone.setActivePlayer("enemy");
             System.out.println(ColorFormats.yellow("Enemy begins the game!"));
         }
+        newLine();
         replaceCards(howeststone);
     }
 

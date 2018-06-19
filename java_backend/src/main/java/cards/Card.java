@@ -38,7 +38,7 @@ public abstract class Card {
         this.manaCost = intArgs[2];
         this.durability = intArgs[3];
         this.heroId = intArgs[4];
-
+        this.cardAbilities = new ArrayList<>();
         // PREDEFINED
         this.exhausted = true;
         this.amountAttacked = 0;
