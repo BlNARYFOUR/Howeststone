@@ -402,15 +402,18 @@ public class Game {
         System.out.println("Begins Enemy turn :)");
         //turnTimer.startTurnTimer(this::onEnemyTurnEnd);
 
-        final List<Card> cardsInHand = enemy.getCardsInHand().getCards();
-        cardsInHand.sort(new CardCollectionManaComparator());
+        // final List<Card> cardsInHand = enemy.getCardsInHand().getCards();
+        // cardsInHand.sort(new CardCollectionManaComparator());
 
         final double enemyBrain = Math.random();
         if (enemyBrain <= 0.25) {
             enemy.getHero().executeHeroPower(enemy.getHero().getHeroPowerID(), getRandomTarget());
         }
         //speel duurste kaarten eerst zolang je mana hebt
-        for (Card card : cardsInHand) {
+        CardCollection copy = new CardCollection(enemy.getCardsInHand());
+        copy.getCards().sort(new CardCollectionManaComparator());
+        for (Card card : copy.getCards()) {
+            System.out.println(card);
             if (7 <= enemy.getCardsOnPlayingField().size()) {
                 break;
             }
