@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", init);
 let cardCounter = 0;
 let cardBackUrl = "";
 let myCards = null;
+let amountOfEnemyCards = null;
 let timeLeftObj = null;
 
 let MOCKTIME = 50;
@@ -387,11 +388,32 @@ function showHero(parent, heroName) {
 function updateEnemyCards() {
     let amountOfCards = 0;
 
-    // TODO fetch for cardInEnemyHand and other info
-    amountOfCards = 7;      // MOCK DATA
+    // TODO fetch for enemycardsinhand and other info
+    fetch('/threebeesandme/get/gameboard/enemycardsinhand', {
+            method: 'GET'
+        })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+            .then(function(text) {
+                let result = text;
+                console.log("enemy cards in hand updated");
 
-    updateCards(amountOfCards, "enemy", -1);
-    setEnemyCardBacks("enemy", cardBackUrl);
+                amountOfEnemyCards = result;
+                //TODO Mattijs says so
+                updateCards(amountOfEnemyCards, "enemy", -1);
+                setEnemyCardBacks(amountOfEnemyCards);
+                giveClassNameEqualTocardID();
+            })
+            .catch(function(err) {
+                console.log("Error 404: Could not connect to the server");
+            });
+
+    //amountOfCards = 7;      // MOCK DATA
+
+    //updateCards(amountOfCards, "enemy", -1);
+    //setEnemyCardBacks("enemy", cardBackUrl);
 }
 
 function updateMyCards() {
@@ -422,230 +444,6 @@ function giveClassNameEqualTocardID() {
     for (let i = 0; i < myCards.length; i++) {
         cardHtmlObjects[i].classList.add(myCards[i]["cardID"]);
     }
-}
-
-function MOCKMYCARDS() {
-    return [
-        {
-            "cardID": "CS2_188",
-            "dbfId": "242",
-            "name": "Abusive Sergeant",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "faction": "Alliance",
-            "rarity": "Common",
-            "cost": 1,
-            "attack": 1,
-            "health": 1,
-            "text": "Battlecry: Give a minion +2_Attack this turn.",
-            "flavor": "ADD ME TO YOUR DECK, MAGGOT!",
-            "artist": "Luca Zontini",
-            "collectible": true,
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_188_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Battlecry"
-                }
-            ]
-        },
-        {
-            "cardID": "EX1_009",
-            "dbfId": "1688",
-            "name": "Angry Chicken",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "rarity": "Rare",
-            "cost": 1,
-            "attack": 1,
-            "health": 1,
-            "text": "Has +5 Attack while damaged.",
-            "flavor": "There is no beast more frightening (or ridiculous) than a fully enraged chicken.",
-            "artist": "Mike Sass",
-            "collectible": true,
-            "race": "Beast",
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_009.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_009_premium.gif",
-            "locale": "enUS"
-        },
-        {
-            "cardID": "EX1_398t",
-            "dbfId": "1707",
-            "name": "Battle Axe",
-            "cardSet": "Classic",
-            "type": "Weapon",
-            "cost": 1,
-            "attack": 2,
-            "durability": 2,
-            "playerClass": "Warrior",
-            "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_398t.png",
-            "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_398t_premium.gif",
-            "locale": "enUS"
-        },
-        {
-            "cardID": "EX1_409t",
-            "dbfId": "1661",
-            "name": "Heavy Axe",
-            "cardSet": "Classic",
-            "type": "Weapon",
-            "cost": 1,
-            "attack": 1,
-            "durability": 3,
-            "playerClass": "Warrior",
-            "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_409t.png",
-            "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_409t_premium.gif",
-            "locale": "enUS"
-        },
-        {
-            "cardID": "EX1_008",
-            "dbfId": "757",
-            "name": "Argent Squire",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "faction": "Alliance",
-            "rarity": "Common",
-            "cost": 1,
-            "attack": 1,
-            "health": 1,
-            "text": "Divine Shield",
-            "flavor": "\"I solemnly swear to uphold the Light, purge the world of darkness, and to eat only burritos.\" - The Argent Dawn Oath",
-            "artist": "Zoltan & Gabor",
-            "collectible": true,
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_008.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_008_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Divine Shield"
-                }
-            ]
-        },
-        {
-            "cardID": "EX1_410",
-            "dbfId": "546",
-            "name": "Shield Slam",
-            "cardSet": "Classic",
-            "type": "Spell",
-            "faction": "Neutral",
-            "rarity": "Epic",
-            "cost": 1,
-            "text": "Deal 1 damage to a minion for each Armor you have.",
-            "flavor": "\"What is a better weapon? The sharp one your enemies expect, or the blunt one they ignore?\" - The Art of Warrior, Chapter 9",
-            "artist": "Raymond Swanland",
-            "collectible": true,
-            "playerClass": "Warrior",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_410.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_410_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "AffectedBySpellPower"
-                }
-            ]
-        },
-        {
-            "cardID": "EX1_392",
-            "dbfId": "400",
-            "name": "Battle Rage",
-            "cardSet": "Classic",
-            "type": "Spell",
-            "faction": "Neutral",
-            "rarity": "Common",
-            "cost": 2,
-            "text": "Draw a card for each damaged friendly character.",
-            "flavor": "\"You won't like me when I'm angry.\"",
-            "artist": "Alex Horley Orlandelli",
-            "collectible": true,
-            "playerClass": "Warrior",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_392.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_392_premium.gif",
-            "locale": "enUS"
-        },
-        {
-            "cardID": "EX1_319",
-            "dbfId": "1090",
-            "name": "Flame Imp",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "faction": "Neutral",
-            "rarity": "Common",
-            "cost": 1,
-            "attack": 3,
-            "health": 2,
-            "text": "Battlecry: Deal 3 damage to your hero.",
-            "flavor": "Imps like being on fire. They just do.",
-            "artist": "Alex Horley Orlandelli",
-            "collectible": true,
-            "race": "Demon",
-            "playerClass": "Warlock",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_319_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Battlecry"
-                }
-            ]
-        },
-        {
-            "cardID": "NEW1_017",
-            "dbfId": "443",
-            "name": "Hungry Crab",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "rarity": "Epic",
-            "cost": 1,
-            "attack": 1,
-            "health": 2,
-            "text": "Battlecry: Destroy a Murloc and gain +2/+2.",
-            "flavor": "Murloc. It's what's for dinner.",
-            "artist": "Jaemin Kim",
-            "collectible": true,
-            "race": "Beast",
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_017.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_017_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Battlecry"
-                }
-            ]
-        },
-        {
-            "cardID": "EX1_012",
-            "dbfId": "749",
-            "name": "Bloodmage Thalnos",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "faction": "Neutral",
-            "rarity": "Legendary",
-            "cost": 2,
-            "attack": 1,
-            "health": 1,
-            "text": "Spell Damage +1\\nDeathrattle: Draw a card.",
-            "flavor": "He's in charge of the Annual Scarlet Monastery Blood Drive!",
-            "artist": "Alex Horley Orlandelli",
-            "collectible": true,
-            "elite": true,
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_012_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Deathrattle"
-                },
-                {
-                    "name": "Spell Damage"
-                }
-            ]
-        }
-    ];
 }
 
 function updateCards(amountOfCards, parent, gradDirectionIndex) {
@@ -1250,7 +1048,7 @@ function loadAttackStart(e) {
 }
 
 function heroAttackStart(e) {
-    // TODO Their is no need for two functions
+    // TODO There is no need for two functions
 
     fetch('http://localhost:4242/threebeesandme/post/gameboard/heroattackStart', {
         method: 'GET'

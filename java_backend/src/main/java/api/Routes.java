@@ -38,6 +38,7 @@ class Routes {
         server.get("threebeesandme/get/useheropower", this::useHeroPower);
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
+        server.get("/threebeesandme/get/gameboard/amountofenemycardsinhand", this::getAmountOfEnemyCardsInHand);
         server.get("/threebeesandme/get/gameboard/herohealth", this::getHeroHealth);
 
         // HERO AND DECK SELECTOR
@@ -74,10 +75,6 @@ class Routes {
     }
 
     // HERO AND DECK SELECTOR
-
-    private void getMyCardsInHand(Context context) {
-        context.json(howeststone.getYou().getCardsInHand().getCards());
-    }
 
     private void getAllHeroes(Context context) {
         context.json(howeststone.getHeroNames());
@@ -168,6 +165,14 @@ class Routes {
             System.out.println(ColorFormats.red("you shall not hack"));
             context.json(ERROR);
         }
+    }
+
+    private void getAmountOfEnemyCardsInHand(Context context) {
+        context.json(howeststone.getEnemy().getCardsInHand().getCards().size());
+    }
+
+    private void getMyCardsInHand(Context context) {
+        context.json(howeststone.getYou().getCardsInHand().getCards());
     }
 
     private void playMyCard(Context context) throws IOException {
