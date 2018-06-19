@@ -609,7 +609,8 @@ public class Game {
             if (this.allCards.getCards().get(i).getCardID() == cardID) {
                 final int heroId = this.allCards.getCards().get(i).getHeroId();
                 final int yourHeroId = this.getYou().getHero().getHeroId();
-                if (this.allCards.getCards().get(i).getCardAbilities().contains(new Uncollectable(Abilities.UNCOLLECTABLE))) {
+                Ability uncollectable = new Uncollectable(Abilities.UNCOLLECTABLE);
+                if (this.allCards.getCards().get(i).getCardAbilities().contains(uncollectable)) {
                     result = "card cannot be used in game";
                 }
                 if (heroId != yourHeroId && heroId != 2) {
