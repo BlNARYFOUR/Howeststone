@@ -189,6 +189,6 @@ public class CardCollection {
                 }
             }
         }
-        return true;
+        return check;
     }
 }
