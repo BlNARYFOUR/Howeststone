@@ -404,7 +404,6 @@ function updateEnemyCards() {
                 //TODO Mattijs says so
                 updateCards(amountOfEnemyCards, "enemy", -1);
                 setEnemyCardBacks(amountOfEnemyCards);
-                giveClassNameEqualTocardID();
             })
             .catch(function(err) {
                 console.log("Error 404: Could not connect to the server");
