@@ -38,7 +38,7 @@ class Routes {
         server.get("threebeesandme/get/useheropower", this::useHeroPower);
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
-        server.get("/threebeesandme/get/gameboard/amountofenemycardsinhand", this::getAmountOfEnemyCardsInHand);
+        server.get("/threebeesandme/get/gameboard/amountofenemycardsinhand", this::getEnemyCardsInHand);
         server.get("/threebeesandme/get/gameboard/herohealth", this::getHeroHealth);
 
         // HERO AND DECK SELECTOR
@@ -159,8 +159,8 @@ class Routes {
         }
     }
 
-    private void getAmountOfEnemyCardsInHand(Context context) {
-        context.json(howeststone.getEnemy().getCardsInHand().getCards().size());
+    private void getEnemyCardsInHand(Context context) {
+        context.json(howeststone.getEnemy().getCardsInHand().size());
     }
 
     private void getMyCardsInHand(Context context) {
