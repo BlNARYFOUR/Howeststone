@@ -258,12 +258,13 @@ class Routes {
 
     }
     private void attackMinion(Context context) throws IOException {
-        System.out.println(context.body());
+        // TODO howeststone.attackMinion(context.body());
     }
 
     private void attackHero(Context context) {
         // TODO check if card on playing field
         howeststone.attackEnemyHero(context.body());
+        context.json(SUCCESS);
     }
 
     // DECK BUILDER

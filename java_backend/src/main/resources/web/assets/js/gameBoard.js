@@ -406,6 +406,17 @@ function updateHeroInGame(parent) {
     })
     .then(function (text) {
         let result = text;
+        if (result <= 0) {
+            stopThisGame();
+            if (parent === "enemy") {
+                alert("you have won");
+            } else {
+                alert("enemy has won");
+            }
+            document.getElementById('gameBoard').className = "hidden";
+            document.getElementById('mainMenu').className = "";
+            // TODO reset gameboard
+        }
         console.log(`${parent} hero-health has been updated`);
         showHeroHealth(parent, result);
     })
@@ -1170,6 +1181,7 @@ function attackHeroToBackend() {
             return res.json();
     }).then(function (text) {
         console.log(text);
+        updateEnemyHeroInGame();
     }).catch(function (err) {
         console.log(err);
     });

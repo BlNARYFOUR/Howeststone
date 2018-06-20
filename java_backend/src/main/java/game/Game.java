@@ -523,7 +523,10 @@ public class Game {
         }
         return deckNamesForChosenHero;
     }
-
+    public void attackMinion(String yourId, String targetId) {
+        // TODO check if cards exist
+        // TODO attack
+    }
     public void attackMinion(Minion attacker, Minion target) {
         final int attackValueAttacker = attacker.getAttack();
         final int healthValueAttacker = attacker.getHealth();
@@ -745,6 +748,8 @@ public class Game {
         // TODO check if card can attack
         allCards.getCard(Integer.parseInt(body)).attackHero(enemy.getHero());
     }
+
+
 
     /*public void startYourTurn() {
         //TODO voer abilities uit aan begin turn
