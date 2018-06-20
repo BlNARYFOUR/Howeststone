@@ -389,7 +389,7 @@ function updateEnemyCards() {
     let amountOfCards = 0;
 
     // TODO fetch for enemycardsinhand and other info
-    fetch('/threebeesandme/get/gameboard/enemycardsinhand', {
+    fetch('/threebeesandme/get/gameboard/amountofenemycardsinhand', {
             method: 'GET'
         })
         .then(function(res) {
