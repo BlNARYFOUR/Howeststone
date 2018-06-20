@@ -350,12 +350,14 @@ function updateTurnStart() {
 }
 
 function updateMyStuff() {
+    updateMyDeck();
     updateMyCards();
     updateMyMana(1, 1);
     updateMyHeroInGame();
 }
 
 function updateEnemyStuff() {
+    updateEnemyDeck();
     updateEnemyCards();
     updateEnemyMana();
     updateEnemyHeroInGame();
@@ -434,6 +436,69 @@ function showHero(parent, heroName) {
 
     hero.style.background = `no-repeat url("assets/media/${heroName}.png") center center`;
     hero.style.backgroundSize = "contain";
+}
+
+function updateMyDeck() {
+    fetch('/threebeesandme/get/gameboard/mydecksize', {
+        method: 'get'
+    })
+    .then(function (res) {
+        if (res.ok === true)
+            return res.json();
+    })
+    .then(function (text) {
+        let remaining = text[0];
+        let totalSize = text[1];
+        console.log("My decksize updated");
+        visualizeMyDeck(remaining, totalSize);
+    })
+    .catch(function (err) {
+        console.log("Error: Could not get enemy cards in hand");
+    });
+}
+
+function updateEnemyDeck() {
+    fetch('/threebeesandme/get/gameboard/enemydecksize', {
+        method: 'get'
+    })
+    .then(function (res) {
+        if (res.ok === true)
+            return res.json();
+    })
+    .then(function (text) {
+        let remaining = text[0];
+        let totalSize = text[1];
+        console.log("Enemy decksize updated");
+        visualizeEnemyDeck(remaining, totalSize);
+    })
+    .catch(function (err) {
+        console.log("Error: Could not get enemy cards in hand");
+    });
+}
+
+function visualizeMyDeck(size, maxSize) {
+    visualizeDeck(size, maxSize, "you");
+}
+
+function visualizeEnemyDeck(size, maxSize) {
+    visualizeDeck(size, maxSize, "enemy");
+}
+
+function visualizeDeck(size, maxSize, parent) {
+    let deckObj = document.querySelector(`#gameBoard .${parent} .deck`);
+    let boxSize = deckObj.offsetWidth;
+
+    if(size !== 0) {
+        let sizePerCard = (boxSize / 2) / maxSize;
+        let sizeForAllCards = sizePerCard * size;
+        let currentSize = (boxSize / 2) - sizeForAllCards;          // in px
+        currentSize = currentSize / window.innerHeight * 100;       // in vh
+
+        deckObj.style.backgroundPosition = currentSize + "vh";
+        deckObj.style.right = currentSize + "vh";
+    } else {
+        deckObj.style.backgroundPosition = boxSize + "vh";
+    }
 }
 
 function updateEnemyCards() {

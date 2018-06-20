@@ -486,3 +486,21 @@
     color: transparent !important;
     background: no-repeat url("../media/battleLog.png") center center / 33%;
 }
+
+#gameBoard .deck {
+    position: absolute;
+    display: block;
+    width: 6.1vh;
+    height: 14.5vh;
+    right: 0;
+    background: no-repeat url("../media/inGameDeck.png") 0 / 100% 100%;
+}
+
+#gameBoard .you .deck {
+    bottom: 33vh;
+}
+
+#gameBoard .enemy .deck {
+    width: 6.6vh;
+    top: 26vh;
+}

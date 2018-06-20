@@ -40,6 +40,8 @@ class Routes {
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
         server.get("/threebeesandme/get/gameboard/amountofenemycardsinhand", this::getEnemyCardsInHand);
         server.get("/threebeesandme/get/gameboard/herohealth", this::getHeroHealth);
+        server.get("/threebeesandme/get/gameboard/enemydecksize", this::getEnemyDeckSize);
+        server.get("/threebeesandme/get/gameboard/mydecksize", this::getMyDeckSize);
 
         // HERO AND DECK SELECTOR
         server.get("/threebeesandme/get/hero", this::getHeroName);
@@ -84,6 +86,18 @@ class Routes {
         howeststone.resetTurnTimer();
         System.out.println(ColorFormats.red("Game currently inactive"));
         context.json("done");
+    }
+
+    private void getEnemyDeckSize(Context context) {
+        int[] properties = {howeststone.getEnemy().getDeck().size(), 30};
+
+        context.json(properties);
+    }
+
+    private void getMyDeckSize(Context context) {
+        int[] properties = {howeststone.getYou().getDeck().size(), 30};
+
+        context.json(properties);
     }
 
     // HERO AND DECK SELECTOR
