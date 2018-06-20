@@ -350,12 +350,14 @@ function updateTurnStart() {
 }
 
 function updateMyStuff() {
+    updateMyDeck();
     updateMyCards();
     updateMyMana(1, 1);
     updateMyHeroInGame();
 }
 
 function updateEnemyStuff() {
+    updateEnemyDeck();
     updateEnemyCards();
     updateEnemyMana();
     updateEnemyHeroInGame();
@@ -437,11 +439,41 @@ function showHero(parent, heroName) {
 }
 
 function updateMyDeck() {
-    // TODO
+    fetch('/threebeesandme/get/gameboard/mydecksize', {
+        method: 'get'
+    })
+    .then(function (res) {
+        if (res.ok === true)
+            return res.json();
+    })
+    .then(function (text) {
+        let remaining = text[0];
+        let totalSize = text[1];
+        console.log("My decksize updated");
+        visualizeMyDeck(remaining, totalSize);
+    })
+    .catch(function (err) {
+        console.log("Error: Could not get enemy cards in hand");
+    });
 }
 
 function updateEnemyDeck() {
-    // TODO
+    fetch('/threebeesandme/get/gameboard/enemydecksize', {
+        method: 'get'
+    })
+    .then(function (res) {
+        if (res.ok === true)
+            return res.json();
+    })
+    .then(function (text) {
+        let remaining = text[0];
+        let totalSize = text[1];
+        console.log("Enemy decksize updated");
+        visualizeEnemyDeck(remaining, totalSize);
+    })
+    .catch(function (err) {
+        console.log("Error: Could not get enemy cards in hand");
+    });
 }
 
 function visualizeMyDeck(size, maxSize) {
