@@ -82,7 +82,7 @@ function deckBuilderInit() {
                 return res.json();
         })
         .then(function (text) {
-            if (text === "SUCCES") {
+            if (text === "SUCCESS") {
                 startDeckBuilder(newDeckName);
             } else {
                 errorWithName();
@@ -301,7 +301,7 @@ function clickOnCardInCards(e) {
         else
             return "ERROR";
     }).then(function (text) {
-        if (text === "SUCCES")
+        if (text === "SUCCESS")
             beginAddingCards(e);
         else {
             document.querySelector("#deckbuilder .main .error").classList.toggle('hidden');

@@ -12,7 +12,7 @@ import java.util.*;
 
 class Routes {
 
-    private static final String SUCCES = "SUCCES";
+    private static final String SUCCESS = "SUCCESS";
     private static final String ERROR = "ERROR";
     private static final String ENEMY_STR = "enemy";
     private static final String YOU_STR = "you";
@@ -38,6 +38,7 @@ class Routes {
         server.get("threebeesandme/get/useheropower", this::useHeroPower);
         server.get("/threebeesandme/get/gameboard/attackpermission", this::canThisMinionAttack);
         server.get("/threebeesandme/get/gameboard/mycardsinhand", this::getMyCardsInHand);
+        server.get("/threebeesandme/get/gameboard/amountofenemycardsinhand", this::getAmountOfEnemyCardsInHand);
         server.get("/threebeesandme/get/gameboard/herohealth", this::getHeroHealth);
 
         // HERO AND DECK SELECTOR
@@ -51,11 +52,16 @@ class Routes {
     }
 
     private void setPostRequests(Javalin server) {
+        // Loading og the page
+        server.post("/threebeesandme/post/reset", this::reset);
+
         // GAME BOARD
         server.post("/threebeesandme/post/gameboard/heroattackStart", this::canHeroAttack);
         server.post("/threebeesandme/post/gameboard/replacecards", this::replaceCards);
         server.post("/threebeesandme/post/gameboard/playcard", this::playMyCard);
         server.post("/threebeesandme/post/gameboard/endturn", this::handleEndTurn);
+        server.post("/threebeesandme/post/gameboard/playingfield/cancardbeadded", this::canCardBeAddedToPlayingField);
+        server.post("/threebeesandme/post/gameboard/playingfield/attack", this::attackMinion);
 
         // HERO AND DECK SELECTOR
         server.post("/threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
@@ -73,11 +79,14 @@ class Routes {
         server.post("/threebeesandme/howeststone/post/deckbuilder/filterCards", this::filterCards);
     }
 
-    // HERO AND DECK SELECTOR
-
-    private void getMyCardsInHand(Context context) {
-        context.json(howeststone.getYou().getCardsInHand().getCards());
+    private void reset(Context context) {
+        howeststone.setInactive();
+        howeststone.resetTurnTimer();
+        System.out.println(ColorFormats.red("Game currently inactive"));
+        context.json("done");
     }
+
+    // HERO AND DECK SELECTOR
 
     private void getAllHeroes(Context context) {
         context.json(howeststone.getHeroNames());
@@ -91,7 +100,7 @@ class Routes {
     }
 
     private void getAllDecks(Context context) {
-        context.json(howeststone.getDeckNames());
+        context.json(howeststone.getDeckNamesForChosenHero());
     }
 
     private void handleDeckSelection(Context context) {
@@ -108,27 +117,9 @@ class Routes {
     // GAME BOARD
 
     private void beginGame(Context context) {
-        if (howeststone.getYou().getHero() == null || howeststone.getYou().getDeck() == null) {
-            //TODO get out of this method not exception
-            throw new NullPointerException();
-        }
-        howeststone.generateEnemy();
-        howeststone.getYou().resetMana();
-        //howeststone.setTurnTime(50);
-        howeststone.createPlayingField();
-
-        final Random rand = new Random();
-        final boolean doYouBegin = rand.nextBoolean();
-        System.out.println("I begin: " + doYouBegin);
-        if (doYouBegin) {
-            howeststone.setActivePlayer(YOU_STR);
-            context.json(YOU_STR);
-        } else {
-            howeststone.setActivePlayer(ENEMY_STR);
-            System.out.println("Active player set: " + howeststone.getActivePlayer());
-            System.out.println("gets here?");
-            context.json(ENEMY_STR);
-        }
+        final String result = howeststone.beginGame();
+        System.out.println("Active player set: " + result);
+        context.json(result);
     }
 
     private void getBeginCards(Context context) {
@@ -148,7 +139,6 @@ class Routes {
 
     private void replaceCards(Context context) throws IOException {
         final String body = context.body();
-        System.out.println(body);
         final ObjectMapper mapper = new ObjectMapper();
         final Map<String, List<Integer>> temp =
                 mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() { });
@@ -157,11 +147,10 @@ class Routes {
         final List<Integer> cardsToReplace = temp.get("CardsToDeck");
 
         if (howeststone.setPlayerCardsInHand(cardsInHand, cardsToReplace)) {
-            context.json(SUCCES);
+            context.json(SUCCESS);
             if (howeststone.getActivePlayer().equals(YOU_STR)) {
-                howeststone.getYou().beginTurn();
+                howeststone.startTurnYou();
             } else {
-                howeststone.getEnemy().beginTurn();
                 howeststone.startTurnAutoplayer();
             }
         } else {
@@ -170,11 +159,29 @@ class Routes {
         }
     }
 
+    private void getAmountOfEnemyCardsInHand(Context context) {
+        context.json(howeststone.getEnemy().getCardsInHand().getCards().size());
+    }
+
+    private void getMyCardsInHand(Context context) {
+        context.json(howeststone.getYou().getCardsInHand().getCards());
+    }
+
+    private void canCardBeAddedToPlayingField(Context context) {
+        if (!howeststone.getYou().canIPlayCard(context.body())) {
+            context.json(ERROR);
+        } else if (ENEMY_STR.equals(howeststone.getActivePlayer())) {
+            context.json(ERROR);
+        } else if (howeststone.getYou().getCardsOnPlayingField().getCards().size() >= 7) {
+            context.json(ERROR);
+        } else {
+            context.json(SUCCESS);
+        }
+    }
+
     private void playMyCard(Context context) throws IOException {
         final boolean succeeded;
         final String body = context.body();
-
-        System.out.println(body);
 
         final ObjectMapper mapper = new ObjectMapper();
         final int cardID = mapper.readValue(body, new TypeReference<Integer>() {
@@ -183,7 +190,7 @@ class Routes {
         succeeded = howeststone.getYou().playCard(cardID);
 
         if (succeeded) {
-            context.json(SUCCES);
+            context.json(SUCCESS);
         } else {
             context.json(ERROR);
         }
@@ -198,11 +205,16 @@ class Routes {
     }
 
     private void getTimeLeft(Context context) {
-        context.result("Time Left");
+        final int timeLeft = howeststone.getTurnTimeLeft();
+        context.json(timeLeft);
     }
 
     private void handleEndTurn(Context context) {
         howeststone.resetTurnTimer();
+        System.out.println("Timer cancel in routes");
+        if (howeststone.getActivePlayer().equals(YOU_STR)) {
+            howeststone.startTurnAutoplayer();
+        }
 
         context.json("TurnTimer has ended");
     }
@@ -234,9 +246,24 @@ class Routes {
     }
 
     private void canThisMinionAttack(Context context) {
-        context.result("no :p");
-    }
+        if ("".equals(context.body())) {
+            context.json(ERROR);
+        } else {
+            final int cardID = Integer.parseInt(context.queryParamMap().get("cardID")[0]);
+            context.json(howeststone.getYou().getCardsOnPlayingField().checkIfCardCanAttack(cardID));
+        }
 
+    }
+    private void attackMinion(Context context) throws IOException {
+        /*final String body = context.body();
+        final ObjectMapper mapper = new ObjectMapper();
+        final Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() {
+        });
+        final List<String> destinationFucked = temp.get("destination");
+        final List<String> source = temp.get("source");
+        System.out.println(destinationFucked);
+        System.out.println(source);*/
+    }
 
     // DECK BUILDER
 
@@ -254,7 +281,7 @@ class Routes {
     private void newDeck(Context context) {
         if (howeststone.checkIfDeckNotExist(context.body())) {
             howeststone.setDeckInDeckBuilder(context.body());
-            context.json(SUCCES);
+            context.json(SUCCESS);
         } else {
             context.json(ERROR);
         }

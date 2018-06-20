@@ -22,6 +22,10 @@ public class CardCollection {
         this.cards = new ArrayList<>(cardCollection.getCards());
     }
 
+    public int size() {
+        return cards.size();
+    }
+
     private void shuffle() {
         Collections.shuffle(cards);
     }
@@ -136,7 +140,6 @@ public class CardCollection {
             if (cards.get(i).getCardID() == cardID) {
                 amount++;
                 rarity = cards.get(i).getRarity();
-                // TODO uncollectable
             }
         }
         if (("Legendary".equals(rarity) && amount >= 1) || amount >= 2) {
@@ -144,7 +147,7 @@ public class CardCollection {
         } else if (cards.size() > 29) {
             result = "cannot add more";
         } else {
-            result = "SUCCES";
+            result = "SUCCESS";
         }
         return result;
     }
@@ -172,5 +175,20 @@ public class CardCollection {
                 throw new IllegalArgumentException("no sort methods where found");
         }
         return this;
+    }
+
+    public boolean checkIfCardCanAttack(int cardID) {
+        boolean check = true;
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getCardID() == cardID) {
+                if (!cards.get(i).isExhausted()) {
+                    check = false;
+                }
+                if ((cards.get(i).getAmountAttacked() < cards.get(i).getMaxAmountOfAttacks())) {
+                    check = false;
+                }
+            }
+        }
+        return true;
     }
 }

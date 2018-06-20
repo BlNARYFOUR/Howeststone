@@ -24,8 +24,7 @@ public abstract class Card {
     private int manaCost;
     private int heroId;
     private String race;
-    private List<Abilities> cardAbilities;
-    // TODO: private List<Mechanics> cardMechanics;
+    private List<Ability> cardAbilities;
 
     public Card(int cardID, String[] strArgs, int[] intArgs) {
         this.cardID = cardID;
@@ -39,7 +38,7 @@ public abstract class Card {
         this.manaCost = intArgs[2];
         this.durability = intArgs[3];
         this.heroId = intArgs[4];
-
+        this.cardAbilities = new ArrayList<>();
         // PREDEFINED
         this.exhausted = true;
         this.amountAttacked = 0;
@@ -50,9 +49,9 @@ public abstract class Card {
         return manaCost;
     }
 
-    /* TODO public List<Abilities> getCardAbilities() {
+    public List<Ability> getCardAbilities() {
         return cardAbilities;
-    }*/
+    }
 
     public int getMaxAmountOfAttacks() {
         return maxAmountOfAttacks;
@@ -94,20 +93,25 @@ public abstract class Card {
         return rarity;
     }
 
+    public void setAbilities(List<Ability> abilities) {
+        this.cardAbilities = abilities;
+    }
+
     @Override
     public String toString() {
         return "Card{"
-                + "cardID=" + cardID
-                + ", type=" + type
-                + ", cardName='" + cardName
-                + ", img='" + img
-                + ", rarity='" + rarity
-                + ", manaCost=" + manaCost
-                + ", health=" + health
-                + ", race='" + race
-                + ", attack=" + attack
-                + ", durability=" + durability
-                + ", heroId=" + heroId
+                + "cardID= " + cardID
+                + ", type= " + type
+                + ", cardName= " + cardName
+                + ", img= " + img
+                + ", rarity= " + rarity
+                + ", manaCost= " + manaCost
+                + ", health= " + health
+                + ", race= " + race
+                + ", attack= " + attack
+                + ", durability= " + durability
+                + ", heroId= " + heroId
+                + ", cardAbilities= " + cardAbilities
                 + '}';
     }
 
@@ -161,6 +165,7 @@ public abstract class Card {
     public boolean isDead() {
         return health <= 0;
     }
+
 
     // list with all abilities and mechanics?
     // method playCard

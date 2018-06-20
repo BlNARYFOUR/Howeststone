@@ -77,10 +77,16 @@
     border-radius: 0 0 17% 17% / 0 0 100% 100%;
 }
 
+/*
 #mainMenu ul li:last-of-type:hover {
     background: url("../media/button4Hover.png") center 40% no-repeat;
     background-size: 98% 70%;
 }
+*/
+#gotoLogOut {
+    color: red;
+}
+
 
 #mainMenu a{
     text-decoration: none;

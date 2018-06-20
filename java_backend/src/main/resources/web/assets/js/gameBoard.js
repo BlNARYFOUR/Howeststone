@@ -5,11 +5,13 @@ document.addEventListener("DOMContentLoaded", init);
 let cardCounter = 0;
 let cardBackUrl = "";
 let myCards = null;
+let amountOfEnemyCards = null;
 let timeLeftObj = null;
 
 let MOCKTIME = 50;
 
 function init() {
+    stopPreviousGame();
     setupMovingOfCards();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
@@ -85,10 +87,7 @@ function showBattleLog(logArr) {
 }
 
 function startTimeLeftCheck() {
-    // TODO: timeLeftObj = setInterval(timeLeft, 1000);
-
-    MOCKTIME = 50;
-    timeLeftObj = setInterval(MOCKTIMELEFT, 1000);
+    timeLeftObj = setInterval(timeLeft, 500);
 }
 
 function MOCKTIMELEFT() {
@@ -107,8 +106,30 @@ function stopTimeLeftCheck() {
     clearInterval(timeLeftObj);
 }
 
+function stopThisGame() {
+    stopTimeLeftCheck();
+    stopPreviousGame();
+}
+
+function stopPreviousGame() {
+    fetch('/threebeesandme/post/reset',{
+        method: 'POST'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Previous game has been stopped.");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not stop the previous game");
+        });
+}
+
 function timeLeft() {
-    fetch('http://localhost:4242/threebeesandme/get/timeleft', {
+    fetch('/threebeesandme/get/gameboard/timeleft', {
         method: 'GET'
     })
         .then(function (res) {
@@ -117,12 +138,14 @@ function timeLeft() {
         })
         .then(function (text) {
             let result = text;
-            console.log("Time left was retrieved from the server");
+            if(result%10 === 0)
+                console.log("Time left: ", result);
+
             if (result <= 20) {
                 burnFuse();
             }
-            else if (result <= 0) {
-                endMyTurn();
+            if (result <= 0) {
+                endTurnClientSided();
             }
         })
         .catch(function (err) {
@@ -141,13 +164,18 @@ function endMyTurn(e) {
         .then(function(text) {
             let result = text;
             console.log("turn end has been send to server");
-            stopTimeLeftCheck();
-            stopBurnFuse();
+            endTurnClientSided();
         })
         .catch(function(err) {
             console.log("Error: Could not end turn");
         });
     console.log("turn end has been send to server");
+}
+
+function endTurnClientSided() {
+    stopTimeLeftCheck();
+    stopBurnFuse();
+    enemyTurn();
 }
 
 function gotoCardsReplaced() {
@@ -279,6 +307,7 @@ function gameBoardSetup() {
 
 let heroAttack;
 function enemyTurn() {
+    console.log("Enemy turn");
     // TODO fetch
     // get amount of card in hand
     // get max mana
@@ -288,12 +317,35 @@ function enemyTurn() {
 
     startMyTurn();
 }
+
+function enemyTurnFetch() {
+    fetch('/threebeesandme/get/gameboard/enemyturn', {
+        method: 'GET',
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            activateReplaceCards(text);
+        })
+        .catch(function (err) {
+            console.log(err +"Error: cannot get starting cards");
+        });
+}
+
 function startMyTurn() {
     // TODO fetch
-    console.log("You're turn");
+    startTimeLeftCheck();
+    console.log("Your turn");
+    setTimeout(updateTurnStart, 100);
+}
+
+function updateTurnStart() {
     updateEnemyStuff();
     updateMyStuff();
-    startTimeLeftCheck();
     heroAttack = true;
 }
 
@@ -304,7 +356,7 @@ function updateMyStuff() {
 }
 
 function updateEnemyStuff() {
-    updateEnemyCards(5);
+    updateEnemyCards();
     updateEnemyMana();
     updateEnemyHeroInGame();
 }
@@ -385,13 +437,22 @@ function showHero(parent, heroName) {
 }
 
 function updateEnemyCards() {
-    let amountOfCards = 0;
-
-    // TODO fetch for cardInEnemyHand and other info
-    amountOfCards = 7;      // MOCK DATA
-
-    updateCards(amountOfCards, "enemy", -1);
-    setEnemyCardBacks("enemy", cardBackUrl);
+    fetch('/threebeesandme/get/gameboard/amountofenemycardsinhand', {
+        method: 'get'
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+        })
+        .then(function (text) {
+            let amountOfCards = text;
+            console.log("Enemy cards in hand updated");
+            updateCards(amountOfCards, "enemy", -1);
+            setEnemyCardBacks("enemy", cardBackUrl);
+        })
+        .catch(function (err) {
+            console.log("Error: Could not get enemy cards in hand");
+        });
 }
 
 function updateMyCards() {
@@ -420,232 +481,8 @@ function updateMyCards() {
 function giveClassNameEqualTocardID() {
     let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
     for (let i = 0; i < myCards.length; i++) {
-        cardHtmlObjects[i].classList.add(myCards[i]["cardID"]);
+        cardHtmlObjects[i].classList.add("card_" +myCards[i]["cardID"]);
     }
-}
-
-function MOCKMYCARDS() {
-    return [
-        {
-            "cardID": "CS2_188",
-            "dbfId": "242",
-            "name": "Abusive Sergeant",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "faction": "Alliance",
-            "rarity": "Common",
-            "cost": 1,
-            "attack": 1,
-            "health": 1,
-            "text": "Battlecry: Give a minion +2_Attack this turn.",
-            "flavor": "ADD ME TO YOUR DECK, MAGGOT!",
-            "artist": "Luca Zontini",
-            "collectible": true,
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_188_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Battlecry"
-                }
-            ]
-        },
-        {
-            "cardID": "EX1_009",
-            "dbfId": "1688",
-            "name": "Angry Chicken",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "rarity": "Rare",
-            "cost": 1,
-            "attack": 1,
-            "health": 1,
-            "text": "Has +5 Attack while damaged.",
-            "flavor": "There is no beast more frightening (or ridiculous) than a fully enraged chicken.",
-            "artist": "Mike Sass",
-            "collectible": true,
-            "race": "Beast",
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_009.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_009_premium.gif",
-            "locale": "enUS"
-        },
-        {
-            "cardID": "EX1_398t",
-            "dbfId": "1707",
-            "name": "Battle Axe",
-            "cardSet": "Classic",
-            "type": "Weapon",
-            "cost": 1,
-            "attack": 2,
-            "durability": 2,
-            "playerClass": "Warrior",
-            "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_398t.png",
-            "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_398t_premium.gif",
-            "locale": "enUS"
-        },
-        {
-            "cardID": "EX1_409t",
-            "dbfId": "1661",
-            "name": "Heavy Axe",
-            "cardSet": "Classic",
-            "type": "Weapon",
-            "cost": 1,
-            "attack": 1,
-            "durability": 3,
-            "playerClass": "Warrior",
-            "img": "http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_409t.png",
-            "imgGold": "http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_409t_premium.gif",
-            "locale": "enUS"
-        },
-        {
-            "cardID": "EX1_008",
-            "dbfId": "757",
-            "name": "Argent Squire",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "faction": "Alliance",
-            "rarity": "Common",
-            "cost": 1,
-            "attack": 1,
-            "health": 1,
-            "text": "Divine Shield",
-            "flavor": "\"I solemnly swear to uphold the Light, purge the world of darkness, and to eat only burritos.\" - The Argent Dawn Oath",
-            "artist": "Zoltan & Gabor",
-            "collectible": true,
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_008.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_008_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Divine Shield"
-                }
-            ]
-        },
-        {
-            "cardID": "EX1_410",
-            "dbfId": "546",
-            "name": "Shield Slam",
-            "cardSet": "Classic",
-            "type": "Spell",
-            "faction": "Neutral",
-            "rarity": "Epic",
-            "cost": 1,
-            "text": "Deal 1 damage to a minion for each Armor you have.",
-            "flavor": "\"What is a better weapon? The sharp one your enemies expect, or the blunt one they ignore?\" - The Art of Warrior, Chapter 9",
-            "artist": "Raymond Swanland",
-            "collectible": true,
-            "playerClass": "Warrior",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_410.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_410_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "AffectedBySpellPower"
-                }
-            ]
-        },
-        {
-            "cardID": "EX1_392",
-            "dbfId": "400",
-            "name": "Battle Rage",
-            "cardSet": "Classic",
-            "type": "Spell",
-            "faction": "Neutral",
-            "rarity": "Common",
-            "cost": 2,
-            "text": "Draw a card for each damaged friendly character.",
-            "flavor": "\"You won't like me when I'm angry.\"",
-            "artist": "Alex Horley Orlandelli",
-            "collectible": true,
-            "playerClass": "Warrior",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_392.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_392_premium.gif",
-            "locale": "enUS"
-        },
-        {
-            "cardID": "EX1_319",
-            "dbfId": "1090",
-            "name": "Flame Imp",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "faction": "Neutral",
-            "rarity": "Common",
-            "cost": 1,
-            "attack": 3,
-            "health": 2,
-            "text": "Battlecry: Deal 3 damage to your hero.",
-            "flavor": "Imps like being on fire. They just do.",
-            "artist": "Alex Horley Orlandelli",
-            "collectible": true,
-            "race": "Demon",
-            "playerClass": "Warlock",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_319.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_319_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Battlecry"
-                }
-            ]
-        },
-        {
-            "cardID": "NEW1_017",
-            "dbfId": "443",
-            "name": "Hungry Crab",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "rarity": "Epic",
-            "cost": 1,
-            "attack": 1,
-            "health": 2,
-            "text": "Battlecry: Destroy a Murloc and gain +2/+2.",
-            "flavor": "Murloc. It's what's for dinner.",
-            "artist": "Jaemin Kim",
-            "collectible": true,
-            "race": "Beast",
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/NEW1_017.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/NEW1_017_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Battlecry"
-                }
-            ]
-        },
-        {
-            "cardID": "EX1_012",
-            "dbfId": "749",
-            "name": "Bloodmage Thalnos",
-            "cardSet": "Classic",
-            "type": "Minion",
-            "faction": "Neutral",
-            "rarity": "Legendary",
-            "cost": 2,
-            "attack": 1,
-            "health": 1,
-            "text": "Spell Damage +1\\nDeathrattle: Draw a card.",
-            "flavor": "He's in charge of the Annual Scarlet Monastery Blood Drive!",
-            "artist": "Alex Horley Orlandelli",
-            "collectible": true,
-            "elite": true,
-            "playerClass": "Neutral",
-            "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_012.png",
-            "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_012_premium.gif",
-            "locale": "enUS",
-            "mechanics": [
-                {
-                    "name": "Deathrattle"
-                },
-                {
-                    "name": "Spell Damage"
-                }
-            ]
-        }
-    ];
 }
 
 function updateCards(amountOfCards, parent, gradDirectionIndex) {
@@ -881,7 +718,30 @@ let itemThatIsBeingMoved;
 let moved;
 
 function layCardOnFieldStart(e) {
-    // TODO fetch
+    let cardID = e.target.classList[0].split("_")[1];
+    fetch('/threebeesandme/post/gameboard/playingfield/cancardbeadded', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: cardID
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            if (text === "SUCCESS"){
+                beginAddingCard(e);
+            }
+        })
+        .catch(function (err) {
+            console.log(err +"Error: Could not send the selected deck :'(");
+        });
+}
+function beginAddingCard(e) {
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
     itemThatIsBeingMoved = e.target;
@@ -1146,14 +1006,14 @@ function returnCostOfMyCard(liWithClass) {
 }
 
 function sendPlayedCard(liWithClass) {
-    let cardID = liWithClass.getAttribute('class');
-
+    let cardID = liWithClass.classList[0].split("_")[1];
+    
     fetch('/threebeesandme/post/gameboard/playcard', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(cardID.split(' ')[0])
+        body: JSON.stringify(cardID)
     })
         .then(function (res) {
             if (res.ok === true)
@@ -1162,7 +1022,7 @@ function sendPlayedCard(liWithClass) {
                 return "ERROR";
         })
         .then(function (text) {
-            if(text === "SUCCES") {
+            if(text === "SUCCESS") {
                 console.log("Card played");
                 updateMyStuff();
                 updateEnemyStuff();
@@ -1201,7 +1061,7 @@ function visualiseAttack(e) {
     attack();
 }
 
-function attackStart() {
+function attackStart(e) {
     let target = e.target;
     if (e.path[0].tagName === 'SPAN') {
         target = e.target.parentElement;
@@ -1232,7 +1092,9 @@ function attackStart() {
 }
 
 function loadAttackStart(e) {
-    fetch('http://localhost:4242/threebeesandme/get/gameboard/attackpermission', {
+    let cardID = e.target.classList[0].split("_")[1];
+
+    fetch('/threebeesandme/get/gameboard/attackpermission?cardID=' + cardID , {
         method: 'get'
     })
         .then(function (res) {
@@ -1240,8 +1102,9 @@ function loadAttackStart(e) {
                 return res.json();
         })
         .then(function (text) {
+            console.log(text);
             let result = text;
-            attackStart(result)
+            attackStart(e);
             console.log("asking for attack permission has been send to server");
         })
         .catch(function (err) {
@@ -1250,7 +1113,7 @@ function loadAttackStart(e) {
 }
 
 function heroAttackStart(e) {
-    // TODO Their is no need for two functions
+    // TODO There is no need for two functions
 
     fetch('http://localhost:4242/threebeesandme/post/gameboard/heroattackStart', {
         method: 'GET'
@@ -1297,6 +1160,24 @@ function heroAttackStart(e) {
     }
 }
 
+function attackToBackend(enemy) {
+    let cardID = enemy.classList[0].split("_")[1];
+    let yourID = itemThatIsBeingMoved.classList[0].split("_")[1];
+    let attackJSON = {"destination": cardID, "source": yourID};
+
+    fetch("/threebeesandme/post/gameboard/playingfield/attack", {
+        method: "POST",
+        body: JSON.stringify(attackJSON)
+    }).then(function (res) {
+        if (res.ok)
+            return res.json();
+    }).then(function (text) {
+        console.log(text);
+    }).catch(function (err) {
+        console.log(err);
+    });
+}
+
 function attackEnd() {
     let enemies = document.querySelectorAll('.enemy .playingField ul li');
     let rectDrag = dragSrcElement.getBoundingClientRect();
@@ -1308,8 +1189,7 @@ function attackEnd() {
     for (let i = 0; i < enemies.length; i++) {
         let enemy = enemies[i].getBoundingClientRect();
         if ((rectDrag.right < enemy.right + 13) && (rectDrag.left > enemy.left - 13) && (rectDrag.bottom < enemy.bottom + 26) && (rectDrag.top > enemy.top - 18)) {
-            console.log('attack');
-            console.log(enemies[i]);
+            attackToBackend(enemies[i]);
         }
     }
     dragSrcElement.parentElement.removeChild(dragSrcElement);

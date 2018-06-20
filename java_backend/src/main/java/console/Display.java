@@ -3,6 +3,7 @@ package console;
 
 import cards.Card;
 import cards.CardCollection;
+import db.SqlDatabase;
 import formatters.ColorFormats;
 import game.Game;
 import game.Player;
@@ -18,6 +19,8 @@ public class Display {
     private static final String NYI_STR = "NYI";
     private static final String STOP_STR = "stop";
     private static final String YOU_STR = "you";
+    private static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
+
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -26,70 +29,39 @@ public class Display {
     }
 
     private void run() {
-        final Game howeststone = new Game();
+        final Game howeststone = new Game(DB);
         chooseHero(howeststone);
+        newLine();
         chooseDeck(howeststone);
-        startGame(howeststone);
-
-        //HOWESTSTONE.setYourDeck("Standard");
-        //System.out.println(HOWESTSTONE.getDeck());
-        //Player you = new Player(HOWESTSTONE.getYourHero());
-        //GameBoard gb = new GameBoard(you, HOWESTSTONE.getDeck());
-        //System.out.println(gb);
+        newLine();
+        System.out.println(howeststone.getYou().getDeck());
+        // startGame(howeststone);
     }
 
     private void chooseHero(Game howeststone) {
         final Player you = new Player();
-        final List<String> heroes = new ArrayList<>(howeststone.getHeroNames());
-
         System.out.println("Select one of the following heroes:");
-        final String selectedHero = askInputUntilFoundInList(heroes);
+        final String selectedHero = askInputUntilFoundInList(howeststone.getHeroNames());
         you.setHero(selectedHero);
         howeststone.addYou(you);
     }
 
     private void chooseDeck(Game howeststone) {
-        newLine();
-        if (howeststone.getYou().getHero() == null) {
-            throw new NullPointerException();
-        }
-
-        final List<String> decks = new ArrayList<>(howeststone.getDeckNames());
-        System.out.println(ColorFormats.magenta("Check this: " + decks));
         System.out.println("Select one of the following decks:");
-        //final String selectedDeck = askInputUntilFoundInList(decks);
-
-        //howeststone.setYourDeck(selectedDeck);
+        final String selectedDeck = askInputUntilFoundInList(howeststone.getDeckNamesForChosenHero());
+        howeststone.getYou().setDeck(howeststone.getDeck(selectedDeck));
     }
 
     private void startGame(Game howeststone) {
-        if (howeststone.getYou().getHero() == null || howeststone.getYou().getDeck() == null) {
-            //TODO get out of this function not exception
-            throw new NullPointerException();
-        }
-        howeststone.generateEnemy();
-        //howeststone.setTurnTime(50);
+        final String result = howeststone.beginGame();
         System.out.println(howeststone);
-        howeststone.shuffleDecks();
-        flipCoin(howeststone);
-    }
-
-    private void flipCoin(Game howeststone) {
         newLine();
-
-        // TODO change cannot be strings
-
-        // change to boolean
-        final Random rand = new Random();
-        final boolean doYouBegin = rand.nextBoolean();
-        if (doYouBegin) {
-            howeststone.setActivePlayer(YOU_STR);
+        if (result.equals(YOU_STR)) {
             System.out.println(ColorFormats.magenta("You begin the game!"));
         } else {
-            howeststone.setActivePlayer("enemy");
             System.out.println(ColorFormats.yellow("Enemy begins the game!"));
         }
-
+        newLine();
         replaceCards(howeststone);
     }
 
@@ -102,13 +74,11 @@ public class Display {
         }
         if (howeststone.getActivePlayer().equals(YOU_STR)) {
             enemyCardsInHandList.add(String.valueOf(howeststone.getEnemy().getDeck().drawCard()));
-            System.out.println("Enemy gets a card" + enemyCardsInHandList);
+            // System.out.println("Enemy gets a card" + enemyCardsInHandList);
         } else {
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
 
-
-        // - cardInfo // on one line
         final List<String> replaceCardList = askInputUntilStop(yourCardsInHandList);
 
         // TODO howeststone.getYou().getDeck().addCards(replaceCardList);
@@ -117,11 +87,11 @@ public class Display {
             yourCardsInHandList.add(String.valueOf(howeststone.getYou().getDeck().drawCard()));
         }
         replaceCardList.remove(STOP_STR);
-        System.out.println("replaceCardList" + replaceCardList);
-        System.out.println(howeststone.getYou().getDeck());
+        // System.out.println("replaceCardList" + replaceCardList);
+        System.out.println("cards remaining in deck" + howeststone.getYou().getDeck().size());
+        System.out.println("enemy has " + enemyCardsInHandList.size() + " cards in hand");
 
         // HOWESTSTONE.getYou().setCardsInHand(replace);
-
         /*if (howeststone.getActivePlayer().equals(YOU_STR)) {
             // add 3/4 cards to hand
             //howeststone.setTurnTime(50);

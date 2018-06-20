@@ -73,7 +73,9 @@ public class Player {
         final Card card = cardsInDeck.drawCard();
 
         if (card != null) {
-            cardsInHand.addCard(card);
+            if (cardsInHand.size() < 10) {
+                cardsInHand.addCard(card);
+            }
         } else {
             hero.addHealth(-heroDamageOnEmptyDeck++);
         }
@@ -155,5 +157,16 @@ public class Player {
     public void resetMana() {
         activeMana = 0;
         totalMana = 0;
+    }
+
+    public boolean canIPlayCard(String body) {
+        boolean check = false;
+        for (int i = 0; i < cardsInHand.getCards().size(); i++) {
+            if (cardsInHand.getCards().get(i).getCardID() == Integer.parseInt(body)) {
+                check = cardsInHand.getCards().get(i).getManaCost() <= activeMana;
+            }
+        }
+        return check;
+
     }
 }

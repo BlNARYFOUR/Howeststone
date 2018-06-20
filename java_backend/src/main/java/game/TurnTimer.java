@@ -1,7 +1,7 @@
 package game;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import formatters.ColorFormats;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,23 +30,22 @@ public class TurnTimer {
         }, 0, 1000);
     }
 
-    public void startTurnTimer(Method method) {
-        final Object[] paramsObj = {};
-
+    public void startTurnTimer(Runnable runnable) {
         secondsLeftThisTurn = countDownTurnTimer;
         turnTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 secondsLeftThisTurn--;
+
+                if (secondsLeftThisTurn % 10 == 0) {
+                    System.out.println(ColorFormats.magenta(Integer.toString(secondsLeftThisTurn)));
+                }
+
                 if (secondsLeftThisTurn == 0) {
-                    turnTimer.cancel();
                     setFlag();
-                    try {
-                        final Object iClass = method.getClass().newInstance();
-                        method.invoke(iClass, paramsObj);
-                    } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
-                        e.printStackTrace();
-                    }
+                    stop();
+                    runnable.run();
+                    System.out.println("Timer cancel because time's up");
                 }
             }
         }, 0, 1000);
@@ -70,5 +69,6 @@ public class TurnTimer {
 
     public void stop() {
         turnTimer.cancel();
+        turnTimer = new Timer();
     }
 }
