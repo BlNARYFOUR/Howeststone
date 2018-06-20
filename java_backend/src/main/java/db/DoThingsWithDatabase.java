@@ -3,7 +3,7 @@ package db;
 import java.sql.*;
 
 public class DoThingsWithDatabase {
-
+/*
     private SqlDatabase db;
 
     public static void main(String[] args) {
@@ -40,5 +40,5 @@ public class DoThingsWithDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
