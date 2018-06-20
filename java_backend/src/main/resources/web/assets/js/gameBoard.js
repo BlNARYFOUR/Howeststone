@@ -11,6 +11,7 @@ let timeLeftObj = null;
 let MOCKTIME = 50;
 
 function init() {
+    stopPreviousGame();
     setupMovingOfCards();
     //document.querySelector("#tempButtonAddCard").addEventListener('click', addCard);
     setBackground();
@@ -86,10 +87,7 @@ function showBattleLog(logArr) {
 }
 
 function startTimeLeftCheck() {
-    // TODO: timeLeftObj = setInterval(timeLeft, 1000);
-
-    MOCKTIME = 50;
-    timeLeftObj = setInterval(MOCKTIMELEFT, 1000);
+    timeLeftObj = setInterval(timeLeft, 500);
 }
 
 function MOCKTIMELEFT() {
@@ -108,8 +106,30 @@ function stopTimeLeftCheck() {
     clearInterval(timeLeftObj);
 }
 
+function stopThisGame() {
+    stopTimeLeftCheck();
+    stopPreviousGame();
+}
+
+function stopPreviousGame() {
+    fetch('/threebeesandme/post/reset',{
+        method: 'POST'
+    })
+        .then(function(res) {
+            if(res.ok === true)
+                return res.json();
+        })
+        .then(function(text) {
+            let result = text;
+            console.log("Previous game has been stopped.");
+        })
+        .catch(function(err) {
+            console.log("Error: Could not stop the previous game");
+        });
+}
+
 function timeLeft() {
-    fetch('http://localhost:4242/threebeesandme/get/timeleft', {
+    fetch('/threebeesandme/get/gameboard/timeleft', {
         method: 'GET'
     })
         .then(function (res) {
@@ -118,12 +138,14 @@ function timeLeft() {
         })
         .then(function (text) {
             let result = text;
-            console.log("Time left was retrieved from the server");
+            if(result%10 === 0)
+                console.log("Time left: ", result);
+
             if (result <= 20) {
                 burnFuse();
             }
-            else if (result <= 0) {
-                endMyTurn();
+            if (result <= 0) {
+                endTurnClientSided();
             }
         })
         .catch(function (err) {
@@ -142,13 +164,18 @@ function endMyTurn(e) {
         .then(function(text) {
             let result = text;
             console.log("turn end has been send to server");
-            stopTimeLeftCheck();
-            stopBurnFuse();
+            endTurnClientSided();
         })
         .catch(function(err) {
             console.log("Error: Could not end turn");
         });
     console.log("turn end has been send to server");
+}
+
+function endTurnClientSided() {
+    stopTimeLeftCheck();
+    stopBurnFuse();
+    enemyTurn();
 }
 
 function gotoCardsReplaced() {
@@ -280,6 +307,7 @@ function gameBoardSetup() {
 
 let heroAttack;
 function enemyTurn() {
+    console.log("Enemy turn");
     // TODO fetch
     // get amount of card in hand
     // get max mana
@@ -289,12 +317,35 @@ function enemyTurn() {
 
     startMyTurn();
 }
+
+function enemyTurnFetch() {
+    fetch('/threebeesandme/get/gameboard/enemyturn', {
+        method: 'GET',
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            activateReplaceCards(text);
+        })
+        .catch(function (err) {
+            console.log(err +"Error: cannot get starting cards");
+        });
+}
+
 function startMyTurn() {
     // TODO fetch
-    console.log("You're turn");
+    startTimeLeftCheck();
+    console.log("Your turn");
+    setTimeout(updateTurnStart, 100);
+}
+
+function updateTurnStart() {
     updateEnemyStuff();
     updateMyStuff();
-    startTimeLeftCheck();
     heroAttack = true;
 }
 
@@ -305,7 +356,7 @@ function updateMyStuff() {
 }
 
 function updateEnemyStuff() {
-    updateEnemyCards(5);
+    updateEnemyCards();
     updateEnemyMana();
     updateEnemyHeroInGame();
 }
@@ -386,33 +437,22 @@ function showHero(parent, heroName) {
 }
 
 function updateEnemyCards() {
-    let amountOfCards = 0;
-
-    // TODO fetch for enemycardsinhand and other info
     fetch('/threebeesandme/get/gameboard/amountofenemycardsinhand', {
-            method: 'GET'
-        })
-        .then(function(res) {
-            if(res.ok === true)
+        method: 'get'
+    })
+        .then(function (res) {
+            if (res.ok === true)
                 return res.json();
         })
-            .then(function(text) {
-                let result = text;
-                console.log("enemy cards in hand updated");
-
-                amountOfEnemyCards = result;
-                //TODO Mattijs says so
-                updateCards(amountOfEnemyCards, "enemy", -1);
-                setEnemyCardBacks(amountOfEnemyCards);
-            })
-            .catch(function(err) {
-                console.log("Error 404: Could not connect to the server");
-            });
-
-    //amountOfCards = 7;      // MOCK DATA
-
-    //updateCards(amountOfCards, "enemy", -1);
-    //setEnemyCardBacks("enemy", cardBackUrl);
+        .then(function (text) {
+            let amountOfCards = text;
+            console.log("Enemy cards in hand updated");
+            updateCards(amountOfCards, "enemy", -1);
+            setEnemyCardBacks("enemy", cardBackUrl);
+        })
+        .catch(function (err) {
+            console.log("Error: Could not get enemy cards in hand");
+        });
 }
 
 function updateMyCards() {
@@ -441,7 +481,7 @@ function updateMyCards() {
 function giveClassNameEqualTocardID() {
     let cardHtmlObjects = document.querySelectorAll("#gameBoard .you .cards li");
     for (let i = 0; i < myCards.length; i++) {
-        cardHtmlObjects[i].classList.add(myCards[i]["cardID"]);
+        cardHtmlObjects[i].classList.add("card_" +myCards[i]["cardID"]);
     }
 }
 
@@ -678,7 +718,30 @@ let itemThatIsBeingMoved;
 let moved;
 
 function layCardOnFieldStart(e) {
-    // TODO fetch
+    let cardID = e.target.classList[0].split("_")[1];
+    fetch('/threebeesandme/post/gameboard/playingfield/cancardbeadded', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: cardID
+    })
+        .then(function (res) {
+            if (res.ok === true)
+                return res.json();
+            else
+                return "ERROR";
+        })
+        .then(function (text) {
+            if (text === "SUCCESS"){
+                beginAddingCard(e);
+            }
+        })
+        .catch(function (err) {
+            console.log(err +"Error: Could not send the selected deck :'(");
+        });
+}
+function beginAddingCard(e) {
     dragOffsetX = e.offsetX;
     dragOffsetY = e.offsetY;
     itemThatIsBeingMoved = e.target;
@@ -943,14 +1006,14 @@ function returnCostOfMyCard(liWithClass) {
 }
 
 function sendPlayedCard(liWithClass) {
-    let cardID = liWithClass.getAttribute('class');
-
+    let cardID = liWithClass.classList[0].split("_")[1];
+    
     fetch('/threebeesandme/post/gameboard/playcard', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(cardID.split(' ')[0])
+        body: JSON.stringify(cardID)
     })
         .then(function (res) {
             if (res.ok === true)
@@ -959,7 +1022,7 @@ function sendPlayedCard(liWithClass) {
                 return "ERROR";
         })
         .then(function (text) {
-            if(text === "SUCCES") {
+            if(text === "SUCCESS") {
                 console.log("Card played");
                 updateMyStuff();
                 updateEnemyStuff();
@@ -998,7 +1061,7 @@ function visualiseAttack(e) {
     attack();
 }
 
-function attackStart() {
+function attackStart(e) {
     let target = e.target;
     if (e.path[0].tagName === 'SPAN') {
         target = e.target.parentElement;
@@ -1029,7 +1092,9 @@ function attackStart() {
 }
 
 function loadAttackStart(e) {
-    fetch('http://localhost:4242/threebeesandme/get/gameboard/attackpermission', {
+    let cardID = e.target.classList[0].split("_")[1];
+
+    fetch('/threebeesandme/get/gameboard/attackpermission?cardID=' + cardID , {
         method: 'get'
     })
         .then(function (res) {
@@ -1037,8 +1102,9 @@ function loadAttackStart(e) {
                 return res.json();
         })
         .then(function (text) {
+            console.log(text);
             let result = text;
-            attackStart(result)
+            attackStart(e);
             console.log("asking for attack permission has been send to server");
         })
         .catch(function (err) {
@@ -1094,6 +1160,24 @@ function heroAttackStart(e) {
     }
 }
 
+function attackToBackend(enemy) {
+    let cardID = enemy.classList[0].split("_")[1];
+    let yourID = itemThatIsBeingMoved.classList[0].split("_")[1];
+    let attackJSON = {"destination": cardID, "source": yourID};
+
+    fetch("/threebeesandme/post/gameboard/playingfield/attack", {
+        method: "POST",
+        body: JSON.stringify(attackJSON)
+    }).then(function (res) {
+        if (res.ok)
+            return res.json();
+    }).then(function (text) {
+        console.log(text);
+    }).catch(function (err) {
+        console.log(err);
+    });
+}
+
 function attackEnd() {
     let enemies = document.querySelectorAll('.enemy .playingField ul li');
     let rectDrag = dragSrcElement.getBoundingClientRect();
@@ -1105,8 +1189,7 @@ function attackEnd() {
     for (let i = 0; i < enemies.length; i++) {
         let enemy = enemies[i].getBoundingClientRect();
         if ((rectDrag.right < enemy.right + 13) && (rectDrag.left > enemy.left - 13) && (rectDrag.bottom < enemy.bottom + 26) && (rectDrag.top > enemy.top - 18)) {
-            console.log('attack');
-            console.log(enemies[i]);
+            attackToBackend(enemies[i]);
         }
     }
     dragSrcElement.parentElement.removeChild(dragSrcElement);

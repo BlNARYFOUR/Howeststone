@@ -4,5 +4,6 @@ public enum Abilities {
     CHARGE,
     DIVINE_SHIELD,
     WINDFURY,
-    BATTLECRY
+    BATTLECRY,
+    UNCOLLECTABLE
 }
