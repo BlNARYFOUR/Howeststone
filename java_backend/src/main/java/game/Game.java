@@ -741,6 +741,11 @@ public class Game {
         return (int) deckId;
     }
 
+    public void attackEnemyHero(String body) {
+        // TODO check if card can attack
+        allCards.getCard(Integer.parseInt(body)).attackHero(enemy.getHero());
+    }
+
     /*public void startYourTurn() {
         //TODO voer abilities uit aan begin turn
         you.beginTurn();

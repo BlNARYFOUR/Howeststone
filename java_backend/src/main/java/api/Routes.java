@@ -1,5 +1,6 @@
 package api;
 
+import cards.Minion;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import formatters.ColorFormats;
@@ -62,6 +63,8 @@ class Routes {
         server.post("/threebeesandme/post/gameboard/endturn", this::handleEndTurn);
         server.post("/threebeesandme/post/gameboard/playingfield/cancardbeadded", this::canCardBeAddedToPlayingField);
         server.post("/threebeesandme/post/gameboard/playingfield/attack", this::attackMinion);
+        server.post("/threebeesandme/post/gameboard/playingfield/attack/hero", this::attackHero);
+
 
         // HERO AND DECK SELECTOR
         server.post("/threebeesandme/post/heroanddeckselector/hero", this::handleHeroSelection);
@@ -255,14 +258,12 @@ class Routes {
 
     }
     private void attackMinion(Context context) throws IOException {
-        /*final String body = context.body();
-        final ObjectMapper mapper = new ObjectMapper();
-        final Map<String, List<String>> temp = mapper.readValue(body, new TypeReference<Map<String, List<Integer>>>() {
-        });
-        final List<String> destinationFucked = temp.get("destination");
-        final List<String> source = temp.get("source");
-        System.out.println(destinationFucked);
-        System.out.println(source);*/
+        System.out.println(context.body());
+    }
+
+    private void attackHero(Context context) {
+        // TODO check if card on playing field
+        howeststone.attackEnemyHero(context.body());
     }
 
     // DECK BUILDER
