@@ -23,7 +23,7 @@ function loadDeck(e) {
             showCardsInDeck(text);
         })
         .catch(function (err) {
-            console.log(err +"Error: Could not get cards");
+            console.log(err + "Error: Could not get cards");
         });
 }
 
@@ -62,8 +62,12 @@ function newDeckBuilder() {
     document.querySelector('#deckbuilder .new').classList.remove('hidden');
     emptyDeck();
 }
+
 function deckBuilderInit() {
     let newDeckName = document.querySelector('#newDeckName').value;
+    if (newDeckName.length > 17) {
+        newDeckName = "";
+    }
     if (newDeckName.indexOf("Deck_") !== -1) {
         newDeckName = "";
     }
@@ -165,7 +169,7 @@ function checkAllCards() {
         chosenCards[i].addEventListener("mousedown", clickOnCardInDeck);
         chosenCards[i].addEventListener("touchstart", clickOnCardInDeck);
     }
-    if (document.getElementById('cardAmount').innerHTML === "0/30"){
+    if (document.getElementById('cardAmount').innerHTML === "0/30") {
         // new deck builder
         // Back
         // Deck
@@ -394,6 +398,7 @@ function gotoDeckBuilder() {
 }
 
 function resetDeckBuilderForm() {
+    document.getElementById('sort').removeEventListener('change', sort);
     let inputs = document.querySelectorAll('#secondFilter input');
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].checked = false;
@@ -489,9 +494,13 @@ function removeCardFromDeck(card) {
 }
 
 function sort() {
+    // TODO blublublu
     let sort = document.getElementById('sort');
     let sortValue = sort.options[sort.selectedIndex].value;
 
+    if (document.getElementById('cards').innerHTML === "") {
+        sortValue = "alfaz";
+    }
     fetch('/threebeesandme/howeststone/post/deckbuilder/sort', {
         method: 'post',
         body: sortValue
@@ -513,6 +522,7 @@ function sort() {
         .catch(function (err) {
             console.log(err + "Error: Could not get cards");
         });
+
 }
 
 function filterCards() {

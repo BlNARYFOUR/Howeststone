@@ -523,7 +523,10 @@ public class Game {
         }
         return deckNamesForChosenHero;
     }
-
+    public void attackMinion(String yourId, String targetId) {
+        // TODO check if cards exist
+        // TODO attack
+    }
     public void attackMinion(Minion attacker, Minion target) {
         final int attackValueAttacker = attacker.getAttack();
         final int healthValueAttacker = attacker.getHealth();
@@ -672,20 +675,22 @@ public class Game {
     }
 
     private void setCardsInDatabase(CardCollection newDeck, int deckId) {
-        int amountcheck = 0;
+        boolean previousCardCheck = false;
         for (int i = 0; i < newDeck.getCards().size(); i++) {
             if (i + 1 < newDeck.getCards().size()) {
                 if (newDeck.getCards().get(i).getCardID() == newDeck.getCards().get(i + 1).getCardID()) {
                     insertCardToDeck(deckId, newDeck.getCards().get(i).getCardID(), 2);
-                    amountcheck = 1;
+                    previousCardCheck = true;
                 } else {
-                    if (amountcheck == 0) {
+                    if (!previousCardCheck) {
                         insertCardToDeck(deckId, newDeck.getCards().get(i).getCardID(), 1);
                     }
-                    amountcheck = 0;
+                    previousCardCheck = false;
                 }
             } else {
-                insertCardToDeck(deckId, newDeck.getCards().get(i).getCardID(), 1);
+                if (!previousCardCheck) {
+                    insertCardToDeck(deckId, newDeck.getCards().get(i).getCardID(), 1);
+                }
             }
         }
     }
@@ -700,7 +705,6 @@ public class Game {
             stmt.setInt(2, cardID);
             stmt.setInt(3, amount);
             final int affectedRows = stmt.executeUpdate();
-
             if (affectedRows == 0) {
                 throw new SQLException("No card added to deck: no rows affected.");
             }
@@ -739,6 +743,13 @@ public class Game {
 
         return (int) deckId;
     }
+
+    public void attackEnemyHero(String body) {
+        // TODO check if card can attack
+        allCards.getCard(Integer.parseInt(body)).attackHero(enemy.getHero());
+    }
+
+
 
     /*public void startYourTurn() {
         //TODO voer abilities uit aan begin turn

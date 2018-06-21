@@ -120,6 +120,15 @@ public abstract class Card {
             this.doDamage(card);
         }
     }
+    public void attack(Hero enemy) {
+        if (!this.isExhausted()) {
+            this.doDamage(enemy);
+        }
+    }
+
+    private void doDamage(Hero enemy) {
+        enemy.setHealth(enemy.getHealth() - attack);
+    }
 
     public void doDamage(Card target) {
         target.setHealth(target.health - this.attack);

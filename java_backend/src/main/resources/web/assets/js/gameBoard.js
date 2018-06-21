@@ -408,6 +408,17 @@ function updateHeroInGame(parent) {
     })
     .then(function (text) {
         let result = text;
+        if (result <= 0) {
+            stopThisGame();
+            if (parent === "enemy") {
+                alert("you have won");
+            } else {
+                alert("enemy has won");
+            }
+            document.getElementById('gameBoard').className = "hidden";
+            document.getElementById('mainMenu').className = "";
+            // TODO reset gameboard
+        }
         console.log(`${parent} hero-health has been updated`);
         showHeroHealth(parent, result);
     })
@@ -1224,7 +1235,22 @@ function heroAttackStart(e) {
         document.addEventListener("touchend", heroAttackEnd, false);
     }
 }
-
+function attackHeroToBackend() {
+    let yourID = itemThatIsBeingMoved.classList[0].split("_")[1];
+    
+    fetch("/threebeesandme/post/gameboard/playingfield/attack/hero", {
+        method: "POST",
+        body: yourID
+    }).then(function (res) {
+        if (res.ok)
+            return res.json();
+    }).then(function (text) {
+        console.log(text);
+        updateEnemyHeroInGame();
+    }).catch(function (err) {
+        console.log(err);
+    });
+}
 function attackToBackend(enemy) {
     let cardID = enemy.classList[0].split("_")[1];
     let yourID = itemThatIsBeingMoved.classList[0].split("_")[1];
@@ -1248,6 +1274,7 @@ function attackEnd() {
     let rectDrag = dragSrcElement.getBoundingClientRect();
     let hero = document.querySelector('#gameBoard .enemy .hero').getBoundingClientRect();
     if ((rectDrag.right < hero.right + 29) && (rectDrag.left > hero.left - 35) && (rectDrag.bottom < hero.bottom + 35) && (rectDrag.top > rectDrag.top - 9)) {
+        attackHeroToBackend();
         console.log('attack');
         console.log(document.querySelector('#gameBoard .enemy .hero'));
     }
