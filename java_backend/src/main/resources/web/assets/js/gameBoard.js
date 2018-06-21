@@ -417,7 +417,11 @@ function updateHeroInGame(parent) {
             }
             document.getElementById('gameBoard').className = "hidden";
             document.getElementById('mainMenu').className = "";
-            // TODO reset gameboard
+            document.getElementById('saveGame').classList.add("hidden");
+
+            document.querySelector('#gameBoard .you .playingField .dropZone').innerHTML = "";
+            document.querySelector('#gameBoard .you .cards ul').innerHTML = "";
+            document.querySelector('#gameBoard .enemy .cards ul').innerHTML = "";
         }
         console.log(`${parent} hero-health has been updated`);
         showHeroHealth(parent, result);
