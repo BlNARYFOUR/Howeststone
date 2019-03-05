@@ -46,7 +46,7 @@ public final class SetupDatabase {
     private static final String ROWS_AFFECTED_STR = "rows affected.";
     private static final String CARD_CREATED_STR = "card created: ";
 
-    private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306", "root", "");
+    private SqlDatabase db = new SqlDatabase("jdbc:mysql://localhost:3306", "root", "root");
     private JSONArray spellList;
     private JSONArray minionList;
     private JSONArray weaponList;
