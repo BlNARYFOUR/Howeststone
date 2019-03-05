@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Server {
     private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
-    private static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "");
+    private static final SqlDatabase DB = new SqlDatabase("jdbc:mysql://localhost:3306/howeststone", "root", "root");
     private Game howeststone;
     private final int port;
 
